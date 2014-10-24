@@ -72,7 +72,7 @@ public class TGTableRow {
 		this.painter.addMouseListener(mouseListenerCanvas);
 		this.painter.addPaintListener(paintListenerCanvas);
 		this.table.addRowItem(this.table.getColumnCanvas(),this.painter,false);
-		
+
 		this.row.pack();
 	}
 	

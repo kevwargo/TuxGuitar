@@ -1,6 +1,5 @@
 package org.herac.tuxguitar.gui.table;
 
-import org.eclipse.swt.widgets.Composite;
 import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,16 +8,16 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Spinner;
-import org.herac.tuxguitar.song.models.TGTrack;
 import org.herac.tuxguitar.gui.TuxGuitar;
+import org.herac.tuxguitar.gui.editors.TGRedrawListener;
 import org.herac.tuxguitar.gui.editors.TGUpdateListener;
 import org.herac.tuxguitar.gui.mixer.TGMixer;
-import org.herac.tuxguitar.song.models.TGChannel;
-import org.herac.tuxguitar.gui.editors.TGRedrawListener;
 import org.herac.tuxguitar.gui.undo.undoables.track.UndoableTrackSoloMute;
+import org.herac.tuxguitar.song.models.TGChannel;
+import org.herac.tuxguitar.song.models.TGTrack;
 
 
 public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
@@ -32,14 +31,24 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
         private Button muteCheckbox;
         private Button soloCheckbox;
         private Spinner volumeControl;
+        private Composite painter;
 
-        public MiniTrackMixer(TGTrack track, Button mcb, Button scb, Spinner vc)
+        /* painter is passed because we need to set focus away from checkboxes
+           when they are selected, and painter seems to be the only real good alternative
+           as checkboxes and spinner map spacebar to themselves, causing unwanted behavior
+         */
+        public MiniTrackMixer(TGTrack track,
+                              Button muteCheckbox,
+                              Button soloCheckbox,
+                              Spinner volumeControl,
+                              Composite painter)
         {
             super();
             this.track = track;
-            this.muteCheckbox = mcb;
-            this.soloCheckbox = scb;
-            this.volumeControl = vc;
+            this.muteCheckbox = muteCheckbox;
+            this.soloCheckbox = soloCheckbox;
+            this.volumeControl = volumeControl;
+            this.painter = painter;
             this.muteCheckbox.addSelectionListener(this);
             this.soloCheckbox.addSelectionListener(this);
             this.volumeControl.addModifyListener(this);
@@ -82,7 +91,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
                     this.applySoloMute(TGMixer.MUTE);
                 else if (e.getSource() == this.soloCheckbox)
                     this.applySoloMute(TGMixer.SOLO);
-                ((Button)e.getSource()).getParent().setFocus();
+                this.painter.setFocus();
             }
         }
 
@@ -158,7 +167,8 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
                            TuxGuitar.instance().getSongManager().getSong().getTrack(i),
                            table.getRow(i).getMuteCheckbox(),
                            table.getRow(i).getSoloCheckbox(),
-                           table.getRow(i).getVolumeControl()));
+                           table.getRow(i).getVolumeControl(),
+                           table.getRow(i).getPainter()));
         while (tracks.size() > count)
             tracks.remove(count);
         for (int i = 0; i < count; i++)
