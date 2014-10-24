@@ -1,112 +1,112 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-
-<project name="TuxGuitar" basedir="." default="all">
-	<description>
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="all" basedir="." name="TuxGuitar" >
+	<description >
 		TuxGuitar
 	</description>
 	
-	<property file="build.properties" />
-	<property name="build.src.path" value="src${file.separator}" />
-	<property name="build.lib.path" value="lib${file.separator}" />
-	<property name="build.share.path" value="share${file.separator}" />
-	<property name="build.doc.path" value="doc${file.separator}" />
-	<property name="build.dist.path" value="dist${file.separator}" />
-	<property name="build.path" value="build${file.separator}" />
-	<property name="build.jar" value="tuxguitar.jar" />
+	<property file="build.properties" ></property>
+	<property name="build.src.path" value="src${file.separator}" ></property>
+	<property name="build.lib.path" value="lib${file.separator}" ></property>
+	<property name="build.share.path" value="share${file.separator}" ></property>
+	<property name="build.doc.path" value="doc${file.separator}" ></property>
+	<property name="build.dist.path" value="dist${file.separator}" ></property>
+	<property name="build.path" value="build${file.separator}" ></property>
+	<property name="build.jar" value="tuxguitar.jar" ></property>
 	
-	<property name="dist.dst.path" value="" />
-	<property name="dist.file" value="" />
-	<property name="dist.jar.path" value="." />
-	<property name="dist.share.path" value="${build.share.path}" />
-	<property name="dist.doc.path" value="${build.doc.path}" />
+	<property name="dist.dst.path" value="" ></property>
+	<property name="dist.file" value="" ></property>
+	<property name="dist.jar.path" value="." ></property>
+	<property name="dist.share.path" value="${build.share.path}" ></property>
+	<property name="dist.doc.path" value="${build.doc.path}" ></property>
 	
-	<available file="${dist.file}" type="file" property="dist.available"/>
+	<available property="dist.available" type="file" file="${dist.file}" ></available>
 	
-	<path id="class.path">
-		<pathelement path="${lib.swt.jar}"/>
-	</path >
+	<path id="class.path" >
+		<pathelement location="/usr/share/swt-3.5/lib/swt.jar" ></pathelement>
+	</path>
 	
-	<target name="all">
-		<antcall target="clean" />
-		<antcall target="build" />
-		<antcall target="package" />
+	<target name="all" >
+		<antcall target="clean" ></antcall>
+		<antcall target="build" ></antcall>
+		<antcall target="package" ></antcall>
 	</target>
 	
-	<target name="clean">
-		<delete quiet="true" dir="${build.path}" />
-		<delete quiet="true" file="${build.jar}" />
+	<target name="clean" >
+		<delete quiet="true" dir="${build.path}" ></delete>
+		<delete quiet="true" file="${build.jar}" ></delete>
 		
-		<antcall target="dist-clean" />
+		<antcall target="dist-clean" ></antcall>
 	</target>
 	
-	<target name="build">
-		<echo>+--------------------------------------------------------------------+</echo>
-		<echo>|                B U I L D I N G   T U X G U I T A R                 |</echo>
-		<echo>+--------------------------------------------------------------------+</echo>
+	<target name="build" >
+		<echo >+--------------------------------------------------------------------+</echo>
+		<echo >|                B U I L D I N G   T U X G U I T A R                 |</echo>
+		<echo >+--------------------------------------------------------------------+</echo>
 		
-		<mkdir dir="${build.path}" />
+		<mkdir dir="${build.path}" ></mkdir>
 		
-		<javac srcdir="${build.src.path}" destdir="${build.path}" debug="false" >
-			<classpath refid="class.path"/>
-			<include name="**/*.java"/>
+		<javac debug="false" srcdir="${build.src.path}" destdir="${build.path}" source="1.5" target="1.5" nowarn="yes" >
+			<classpath refid="class.path" ></classpath>
+            <compilerarg value="-Xlint:unchecked"/>
+			<include name="**/*.java" ></include>
 		</javac>
 		
-		<copy todir="${build.path}">
-			<fileset dir="${build.dist.path}"/>
+		<copy todir="${build.path}" >
+			<fileset dir="${build.dist.path}" ></fileset>
 		</copy>
 		
-		<antcall target="dist-build" />
+		<antcall target="dist-build" ></antcall>
 	</target>
 	
-	<target name="package">
-		<echo>+--------------------------------------------------------------------+</echo>
-		<echo>|              P A C K A G I N G   T U X G U I T A R                 |</echo>
-		<echo>+--------------------------------------------------------------------+</echo>
+	<target name="package" >
+		<echo >+--------------------------------------------------------------------+</echo>
+		<echo >|              P A C K A G I N G   T U X G U I T A R                 |</echo>
+		<echo >+--------------------------------------------------------------------+</echo>
 		
-		<jar destfile="${build.jar}">
-			<fileset dir="${build.path}" />
+		<jar destfile="${build.jar}" >
+			<fileset dir="${build.path}" ></fileset>
 		</jar>
 		
-		<antcall target="dist-package" />
+		<antcall target="dist-package" ></antcall>
 	</target>
 	
-	<target name="install">
-		<echo>+--------------------------------------------------------------------+</echo>
-		<echo>|              I N S T A L L I N G   T U X G U I T A R               |</echo>
-		<echo>+--------------------------------------------------------------------+</echo>
+	<target name="install" >
+		<echo >+--------------------------------------------------------------------+</echo>
+		<echo >|              I N S T A L L I N G   T U X G U I T A R               |</echo>
+		<echo >+--------------------------------------------------------------------+</echo>
 		
-		<mkdir dir="${dist.dst.path}${dist.jar.path}" />
-		<copy todir="${dist.dst.path}${dist.jar.path}">
-			<fileset file="${build.jar}"/>
+		<mkdir dir="${dist.dst.path}${dist.jar.path}" ></mkdir>
+		<copy todir="${dist.dst.path}${dist.jar.path}" >
+			<fileset file="${build.jar}" ></fileset>
 		</copy>
 		
-		<mkdir dir="${dist.dst.path}${dist.share.path}" />
-		<copy todir="${dist.dst.path}${dist.share.path}">
-			<fileset dir="${build.share.path}"/>
+		<mkdir dir="${dist.dst.path}${dist.share.path}" ></mkdir>
+		<copy todir="${dist.dst.path}${dist.share.path}" >
+			<fileset dir="${build.share.path}" ></fileset>
 		</copy>
 		
-		<mkdir dir="${dist.dst.path}${dist.doc.path}" />
-		<copy todir="${dist.dst.path}${dist.doc.path}">
-			<fileset dir="${build.doc.path}"/>
+		<mkdir dir="${dist.dst.path}${dist.doc.path}" ></mkdir>
+		<copy todir="${dist.dst.path}${dist.doc.path}" >
+			<fileset dir="${build.doc.path}" ></fileset>
 		</copy>
 		
-		<antcall target="dist-install" />
+		<antcall target="dist-install" ></antcall>
 	</target>
 	
-	<target name="dist-build" if="dist.available">
-		<ant antfile="${dist.file}" target="build"/>
+	<target name="dist-build" if="dist.available" >
+		<ant antfile="${dist.file}" target="build" ></ant>
 	</target>
 	
-	<target name="dist-package" if="dist.available">
-		<ant antfile="${dist.file}" target="package"/>
+	<target name="dist-package" if="dist.available" >
+		<ant antfile="${dist.file}" target="package" ></ant>
 	</target>
 	
-	<target name="dist-clean" if="dist.available">
-		<ant antfile="${dist.file}" target="clean"/>
+	<target name="dist-clean" if="dist.available" >
+		<ant antfile="${dist.file}" target="clean" ></ant>
 	</target>
 	
-	<target name="dist-install" if="dist.available">
-		<ant antfile="${dist.file}" target="install"/>
+	<target name="dist-install" if="dist.available" >
+		<ant antfile="${dist.file}" target="install" ></ant>
 	</target>
 	
 </project>

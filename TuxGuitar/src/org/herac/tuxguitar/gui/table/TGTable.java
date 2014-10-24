@@ -19,6 +19,7 @@ public class TGTable {
 	private TGTableColumn columnNumber;
 	private TGTableColumn columnName;
 	private TGTableColumn columnInstrument;
+    private TGTableColumn columnVolume;
     private TGTableColumn columnSolo;
     private TGTableColumn columnMute;
 	private TGTableColumn columnCanvas;
@@ -48,10 +49,11 @@ public class TGTable {
 		this.columnNumber = new TGTableColumn(this,SWT.LEFT);
 		this.columnName = new TGTableColumn(this,SWT.LEFT);
 		this.columnInstrument = new TGTableColumn(this,SWT.LEFT);
+        this.columnVolume = new TGTableColumn(this, SWT.CENTER);
         this.columnSolo = new TGTableColumn(this, SWT.CENTER);
         this.columnMute = new TGTableColumn(this, SWT.CENTER);
 		this.columnCanvas = new TGTableColumn(this,SWT.CENTER);
-		this.columnControl.setWeights(new int[]{1,12,12,1,1,40});
+		this.columnControl.setWeights(new int[]{1,12,12,2,1,1,40});
 		
 		this.rowControl = new Composite(this.table,SWT.NONE);
 		this.rowControl.setLayout(newGridLayout(1,0,1,0,1));
@@ -117,6 +119,10 @@ public class TGTable {
 		return this.columnNumber;
 	}	
 	
+	public TGTableColumn getColumnVolume() {
+		return this.columnVolume;
+	}
+    
 	public TGTableColumn getColumnSolo() {
 		return this.columnSolo;
 	}
@@ -160,6 +166,7 @@ public class TGTable {
 		this.columnNumber.notifyRemoved();
 		this.columnName.notifyRemoved();
 		this.columnInstrument.notifyRemoved();
+        this.columnVolume.notifyRemoved();
 		this.columnSolo.notifyRemoved();
 		this.columnMute.notifyRemoved();
 		this.columnCanvas.notifyRemoved();
@@ -169,6 +176,7 @@ public class TGTable {
 		this.columnNumber.layout();
 		this.columnName.layout();
 		this.columnInstrument.layout();
+		this.columnVolume.layout();
 		this.columnSolo.layout();
 		this.columnMute.layout();
 		this.columnCanvas.layout();

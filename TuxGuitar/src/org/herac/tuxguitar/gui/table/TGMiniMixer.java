@@ -1,12 +1,17 @@
 package org.herac.tuxguitar.gui.table;
 
 import org.eclipse.swt.widgets.Composite;
+import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Spinner;
 import org.herac.tuxguitar.song.models.TGTrack;
 import org.herac.tuxguitar.gui.TuxGuitar;
 import org.herac.tuxguitar.gui.editors.TGUpdateListener;
@@ -21,20 +26,25 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
     private TGTable table;
     private List<MiniTrackMixer> tracks;
 
-    private class MiniTrackMixer extends SelectionAdapter
+    private class MiniTrackMixer implements SelectionListener, ModifyListener
     {
         private TGTrack track;
         private Button muteCheckbox;
         private Button soloCheckbox;
+        private Spinner volumeControl;
 
-        public MiniTrackMixer(TGTrack track, Button mcb, Button scb)
+        public MiniTrackMixer(TGTrack track, Button mcb, Button scb, Spinner vc)
         {
             super();
             this.track = track;
             this.muteCheckbox = mcb;
             this.soloCheckbox = scb;
+            this.volumeControl = vc;
             this.muteCheckbox.addSelectionListener(this);
             this.soloCheckbox.addSelectionListener(this);
+            this.volumeControl.addModifyListener(this);
+            this.volumeControl.setMinimum(0);
+            this.volumeControl.setMaximum(127);
         }
 
         public Button getMuteCheckbox()
@@ -47,6 +57,11 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
             return this.soloCheckbox;
         }
 
+        public Spinner getVolumeControl()
+        {
+            return this.volumeControl;
+        }
+
         public TGTrack getTrack()
         {
             return this.track;
@@ -57,20 +72,26 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
             this.track = track;
         }
 
-        @Override
+        public void widgetDefaultSelected(SelectionEvent e) { }
+
         public void widgetSelected(SelectionEvent e)
         {
             if (e.getSource() != null)
             {
                 if (e.getSource() == this.muteCheckbox)
-                    this.fireChanges(TGMixer.MUTE);
+                    this.applySoloMute(TGMixer.MUTE);
                 else if (e.getSource() == this.soloCheckbox)
-                    this.fireChanges(TGMixer.SOLO);
+                    this.applySoloMute(TGMixer.SOLO);
                 ((Button)e.getSource()).getParent().setFocus();
             }
         }
+
+        public void modifyText(ModifyEvent e)
+        {
+            applyVolumeChange();
+        }
         
-        private void fireChanges(int type)
+        private void applySoloMute(int type)
         {
             UndoableTrackSoloMute undoable = UndoableTrackSoloMute.startUndo(track);
             if (type == TGMixer.MUTE)
@@ -86,12 +107,27 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
             TuxGuitar.instance().getUndoableManager().addEdit(undoable.endUndo(track));
             TuxGuitar.instance().updateCache(true);
         }
+
+        public void applyVolumeChange()
+        {
+            TGChannel channel = track.getChannel();
+            channel.setVolume((short)Integer.parseInt(volumeControl.getText()));
+            if (! TuxGuitar.instance().getMixer().isDisposed())
+                TuxGuitar.instance().getMixer().fireChanges(channel, TGMixer.CHANNEL);
+            TGMiniMixer.this.applyChannelSettings(channel);
+            TGMiniMixer.this.updateSettings();
+            if (TuxGuitar.instance().getPlayer().isRunning())
+                TuxGuitar.instance().getPlayer().updateControllers();
+        }
     }
     
 
     public TGMiniMixer(TGTable table)
     {
         this.table = table;
+        table.getColumnVolume().setTitle("V");
+        table.getColumnSolo().setTitle("S");
+        table.getColumnMute().setTitle("M");
         this.init();
     }
 
@@ -121,7 +157,8 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
             tracks.add(new MiniTrackMixer(
                            TuxGuitar.instance().getSongManager().getSong().getTrack(i),
                            table.getRow(i).getMuteCheckbox(),
-                           table.getRow(i).getSoloCheckbox()));
+                           table.getRow(i).getSoloCheckbox(),
+                           table.getRow(i).getVolumeControl()));
         while (tracks.size() > count)
             tracks.remove(count);
         for (int i = 0; i < count; i++)
@@ -130,8 +167,8 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
             tracks.get(i).setTrack(track);
             tracks.get(i).getMuteCheckbox().setSelection(track.isMute());
             tracks.get(i).getSoloCheckbox().setSelection(track.isSolo());
+            tracks.get(i).getVolumeControl().setSelection(track.getChannel().getVolume());
         }
-        updateSettings();
     }
 
     public void updateSettings()
@@ -141,7 +178,17 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
             TGTrack track = tracks.get(i).getTrack();
             tracks.get(i).getSoloCheckbox().setSelection(track.isSolo());
             tracks.get(i).getMuteCheckbox().setSelection(track.isMute());
+            tracks.get(i).getVolumeControl().setSelection(track.getChannel().getVolume());
         }
     }
 
+    public void applyChannelSettings(TGChannel channel)
+    {
+        for (int i = 0; i < tracks.size(); i++)
+        {
+            TGTrack track = tracks.get(i).getTrack();
+            if (track.getChannel().getChannel() == channel.getChannel())
+                channel.copy(track.getChannel());
+        }
+    }
 }

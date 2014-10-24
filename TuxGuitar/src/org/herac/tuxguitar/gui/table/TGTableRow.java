@@ -16,6 +16,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Spinner;
 import org.herac.tuxguitar.song.models.TGTrack;
 
 
@@ -25,8 +26,9 @@ public class TGTableRow {
 	private CLabel number;
 	private CLabel name;
 	private CLabel instrument;
-    private Button muteCheckbox;
+    private Spinner volumeControl;
     private Button soloCheckbox;
+    private Button muteCheckbox;
 	private Composite painter;
 	private MouseListener mouseListenerLabel;
 	private MouseListener mouseListenerCanvas;
@@ -56,6 +58,9 @@ public class TGTableRow {
 		this.instrument = new CLabel(this.row,SWT.LEFT);
 		this.instrument.addMouseListener(mouseListenerLabel);
 		this.table.addRowItem(this.table.getColumnInstrument(),this.instrument,true);
+
+        this.volumeControl = new Spinner(this.row, SWT.CENTER);
+        this.table.addRowItem(this.table.getColumnVolume(), this.volumeControl, true);
 
         this.soloCheckbox = new Button(this.row, SWT.CHECK | SWT.NO_FOCUS);
         this.table.addRowItem(this.table.getColumnSolo(), this.soloCheckbox, true);
@@ -98,12 +103,16 @@ public class TGTableRow {
 		return this.number;
 	}
 
-    public Button getMuteCheckbox() {
-        return this.muteCheckbox;
+    public Spinner getVolumeControl() {
+        return this.volumeControl;
     }
     
     public Button getSoloCheckbox() {
         return this.soloCheckbox;
+    }
+
+    public Button getMuteCheckbox() {
+        return this.muteCheckbox;
     }
 	
 	public MouseListener getMouseListenerLabel() {

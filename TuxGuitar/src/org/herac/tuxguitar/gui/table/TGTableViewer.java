@@ -26,7 +26,6 @@ import org.herac.tuxguitar.gui.editors.tab.TGTrackImpl;
 import org.herac.tuxguitar.gui.mixer.TGMixer;
 import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 import org.herac.tuxguitar.gui.system.language.LanguageLoader;
-import org.herac.tuxguitar.gui.undo.undoables.track.UndoableTrackSoloMute;
 import org.herac.tuxguitar.player.base.MidiInstrument;
 import org.herac.tuxguitar.song.models.TGBeat;
 import org.herac.tuxguitar.song.models.TGChannel;
@@ -93,6 +92,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 		this.table.getColumnNumber().getControl().addMouseListener(listener);
 		this.table.getColumnName().getControl().addMouseListener(listener);
 		this.table.getColumnInstrument().getControl().addMouseListener(listener);
+        this.table.getColumnVolume().getControl().addMouseListener(listener);
         this.table.getColumnMute().getControl().addMouseListener(listener);
         this.table.getColumnSolo().getControl().addMouseListener(listener);
 		this.table.getColumnCanvas().getControl().addMouseListener(listener);
@@ -116,8 +116,6 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 		this.table.getColumnNumber().setTitle(TuxGuitar.getProperty("track.number"));
 		this.table.getColumnName().setTitle(TuxGuitar.getProperty("track.name"));
 		this.table.getColumnInstrument().setTitle(TuxGuitar.getProperty("track.instrument"));
-        this.table.getColumnMute().setTitle("M");
-        this.table.getColumnSolo().setTitle("S");
 	}
 	
 	public void fireUpdate(boolean newSong){
