@@ -4,6 +4,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridLayout;
@@ -21,10 +23,13 @@ import org.herac.tuxguitar.gui.editors.TGUpdateListener;
 import org.herac.tuxguitar.gui.editors.TablatureEditor;
 import org.herac.tuxguitar.gui.editors.tab.TGMeasureImpl;
 import org.herac.tuxguitar.gui.editors.tab.TGTrackImpl;
+import org.herac.tuxguitar.gui.mixer.TGMixer;
 import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 import org.herac.tuxguitar.gui.system.language.LanguageLoader;
+import org.herac.tuxguitar.gui.undo.undoables.track.UndoableTrackSoloMute;
 import org.herac.tuxguitar.player.base.MidiInstrument;
 import org.herac.tuxguitar.song.models.TGBeat;
+import org.herac.tuxguitar.song.models.TGChannel;
 import org.herac.tuxguitar.song.models.TGMeasure;
 import org.herac.tuxguitar.song.models.TGTrack;
 
@@ -39,6 +44,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 	private Composite composite;
 	private ScrollBar hSroll;
 	private TGTable table;
+    private TGMiniMixer miniMixer;
 	private int selectedTrack;
 	private int selectedMeasure;
 	private int trackCount = 0;
@@ -56,6 +62,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 		this.composite = new Composite(parent,SWT.H_SCROLL);
 		this.addLayout();
 		this.addTable();
+        this.addMiniMixer();
 		this.addHScroll();
 		this.loadConfig();
 	}
@@ -86,6 +93,8 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 		this.table.getColumnNumber().getControl().addMouseListener(listener);
 		this.table.getColumnName().getControl().addMouseListener(listener);
 		this.table.getColumnInstrument().getControl().addMouseListener(listener);
+        this.table.getColumnMute().getControl().addMouseListener(listener);
+        this.table.getColumnSolo().getControl().addMouseListener(listener);
 		this.table.getColumnCanvas().getControl().addMouseListener(listener);
 		this.table.getColumnCanvas().getControl().addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent e) {
@@ -95,11 +104,20 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 		this.fireUpdate(true);
 		this.loadProperties();
 	}
+
+    public void addMiniMixer()
+    {
+        this.miniMixer = new TGMiniMixer(this.table);
+		TuxGuitar.instance().getEditorManager().addRedrawListener(this.miniMixer);
+		TuxGuitar.instance().getEditorManager().addUpdateListener(this.miniMixer);
+    }
 	
 	public void loadProperties() {
 		this.table.getColumnNumber().setTitle(TuxGuitar.getProperty("track.number"));
 		this.table.getColumnName().setTitle(TuxGuitar.getProperty("track.name"));
 		this.table.getColumnInstrument().setTitle(TuxGuitar.getProperty("track.instrument"));
+        this.table.getColumnMute().setTitle("M");
+        this.table.getColumnSolo().setTitle("S");
 	}
 	
 	public void fireUpdate(boolean newSong){
@@ -146,6 +164,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 	
 	private void updateTable(){
 		if(this.update){
+            // System.out.printf("update table\n");
 			int count = TuxGuitar.instance().getSongManager().getSong().countTracks();
 			this.table.removeRowsAfter(count);
 			for(int i = this.table.getRowCount(); i < count; i ++){
@@ -167,7 +186,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 					//Instrument
 					row.getInstrument().setText(getInstrument(track));
 					row.getInstrument().setData(track);
-					
+
 					row.setMouseListenerLabel(new MouseAdapter() {
 						
 						public void mouseUp(MouseEvent e) {
@@ -350,8 +369,10 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 	
 	public void doUpdate(int type) {
 		if( type == TGUpdateListener.SELECTION ){
+            // System.out.printf("selection update\n");
 			this.updateItems();
 		}else if( type == TGUpdateListener.SONG_UPDATED ){
+            // System.out.printf("song updated\n");
 			this.fireUpdate( false );
 		}else if( type == TGUpdateListener.SONG_LOADED ){
 			this.fireUpdate( true );

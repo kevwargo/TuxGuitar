@@ -2,13 +2,22 @@ package org.herac.tuxguitar.gui.table;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.TraverseEvent;
+import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.herac.tuxguitar.song.models.TGTrack;
+
 
 public class TGTableRow {
 	private TGTable table;
@@ -16,6 +25,8 @@ public class TGTableRow {
 	private CLabel number;
 	private CLabel name;
 	private CLabel instrument;
+    private Button muteCheckbox;
+    private Button soloCheckbox;
 	private Composite painter;
 	private MouseListener mouseListenerLabel;
 	private MouseListener mouseListenerCanvas;
@@ -30,7 +41,7 @@ public class TGTableRow {
 		MouseListener mouseListenerLabel = new MouseListenerLabel();
 		MouseListener mouseListenerCanvas = new MouseListenerCanvas();
 		PaintListener paintListenerCanvas = new PaintListenerCanvas();
-		
+
 		this.row = new Composite(this.table.getRowControl(),SWT.NONE );
 		this.row.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,false));
 		
@@ -45,6 +56,12 @@ public class TGTableRow {
 		this.instrument = new CLabel(this.row,SWT.LEFT);
 		this.instrument.addMouseListener(mouseListenerLabel);
 		this.table.addRowItem(this.table.getColumnInstrument(),this.instrument,true);
+
+        this.soloCheckbox = new Button(this.row, SWT.CHECK | SWT.NO_FOCUS);
+        this.table.addRowItem(this.table.getColumnSolo(), this.soloCheckbox, true);
+        
+        this.muteCheckbox = new Button(this.row, SWT.CHECK | SWT.NO_FOCUS);
+        this.table.addRowItem(this.table.getColumnMute(), this.muteCheckbox, true);
 		
 		this.painter = new Composite(this.row,SWT.DOUBLE_BUFFERED);
 		this.painter.addMouseListener(mouseListenerCanvas);
@@ -58,6 +75,7 @@ public class TGTableRow {
 		this.number.setBackground(background);
 		this.name.setBackground(background);
 		this.instrument.setBackground(background);
+        this.muteCheckbox.setBackground(background);
 	}
 	
 	public void dispose(){
@@ -79,6 +97,14 @@ public class TGTableRow {
 	public CLabel getNumber() {
 		return this.number;
 	}
+
+    public Button getMuteCheckbox() {
+        return this.muteCheckbox;
+    }
+    
+    public Button getSoloCheckbox() {
+        return this.soloCheckbox;
+    }
 	
 	public MouseListener getMouseListenerLabel() {
 		return this.mouseListenerLabel;
