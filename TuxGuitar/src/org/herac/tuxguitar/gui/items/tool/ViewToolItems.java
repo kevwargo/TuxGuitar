@@ -10,6 +10,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.herac.tuxguitar.gui.TuxGuitar;
+import org.herac.tuxguitar.gui.actions.transport.TransportMetronomeAction;
 import org.herac.tuxguitar.gui.actions.view.ShowFretBoardAction;
 import org.herac.tuxguitar.gui.actions.view.ShowMixerAction;
 import org.herac.tuxguitar.gui.actions.view.ShowTransportAction;
@@ -27,6 +28,7 @@ public class ViewToolItems extends ToolItems{
 	private ToolItem showFretBoard;
 	private ToolItem showMixer;
 	private ToolItem showTransport;
+    private ToolItem toggleMetronome;
 	
 	public ViewToolItems(){
 		super(NAME);
@@ -44,6 +46,10 @@ public class ViewToolItems extends ToolItems{
 		//--TRANSPORT--
 		this.showTransport = new ToolItem(toolBar, SWT.CHECK);
 		this.showTransport.addSelectionListener(TuxGuitar.instance().getAction(ShowTransportAction.NAME));
+
+        //--METRONOME--
+        this.toggleMetronome = new ToolItem(toolBar, SWT.CHECK);
+        this.toggleMetronome.addSelectionListener(TuxGuitar.instance().getAction(TransportMetronomeAction.NAME));
 		
 		this.loadIcons();
 		this.loadProperties();
@@ -53,17 +59,20 @@ public class ViewToolItems extends ToolItems{
 		this.showFretBoard.setSelection(TuxGuitar.instance().getFretBoardEditor().isVisible());
 		this.showMixer.setSelection(!TuxGuitar.instance().getMixer().isDisposed());
 		this.showTransport.setSelection(!TuxGuitar.instance().getTransport().isDisposed());
+        this.toggleMetronome.setSelection(TuxGuitar.instance().getPlayer().isMetronomeEnabled());
 	}
 	
 	public void loadProperties(){
 		this.showFretBoard.setToolTipText(TuxGuitar.getProperty("view.show-fretboard"));
 		this.showMixer.setToolTipText(TuxGuitar.getProperty("view.show-mixer"));
 		this.showTransport.setToolTipText(TuxGuitar.getProperty("view.show-transport"));
+        this.toggleMetronome.setToolTipText(TuxGuitar.getProperty("transport.metronome"));
 	}
 	
 	public void loadIcons(){
 		this.showFretBoard.setImage(TuxGuitar.instance().getIconManager().getFretboard());
 		this.showMixer.setImage(TuxGuitar.instance().getIconManager().getMixer());
 		this.showTransport.setImage(TuxGuitar.instance().getIconManager().getTransport());
+        this.toggleMetronome.setImage(TuxGuitar.instance().getIconManager().getTransportMetronome());
 	}
 }
