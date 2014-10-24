@@ -1,5 +1,8 @@
 */build/*
 *.class
+*.jar
 *.o
 *.so
+*~
+\#*
 prj.el
