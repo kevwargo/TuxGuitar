@@ -23,6 +23,7 @@ public abstract class TGTrack {
 	
 	private int number;
 	private int offset;
+    private boolean visibleInMultitrack;
 	private boolean solo;
 	private boolean mute;
 	private String name;
@@ -35,7 +36,8 @@ public abstract class TGTrack {
 	
 	public TGTrack(TGFactory factory) {
 		this.number = 0;
-		this.offset = 0;
+		this.offset = 0; 
+        this.visibleInMultitrack = true;
 		this.solo = false;
 		this.mute = false;
 		this.name = new String();
@@ -122,6 +124,16 @@ public abstract class TGTrack {
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}
+
+    public boolean isVisibleInMultitrack()
+    {
+        return this.visibleInMultitrack;
+    }
+
+    public void setVisibleInMultitrack(boolean vimt)
+    {
+        this.visibleInMultitrack = vimt;
+    }
 	
 	public boolean isSolo() {
 		return this.solo;

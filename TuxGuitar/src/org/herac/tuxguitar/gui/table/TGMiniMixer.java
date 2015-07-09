@@ -28,6 +28,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
     private class MiniTrackMixer implements SelectionListener, ModifyListener
     {
         private TGTrack track;
+        private Button visibleInMultitrackCheckbox;
         private Button muteCheckbox;
         private Button soloCheckbox;
         private Spinner volumeControl;
@@ -38,6 +39,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
            as checkboxes and spinner map spacebar to themselves, causing unwanted behavior
          */
         public MiniTrackMixer(TGTrack track,
+                              Button visibleInMultitrackCheckbox,
                               Button muteCheckbox,
                               Button soloCheckbox,
                               Spinner volumeControl,
@@ -45,15 +47,22 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
         {
             super();
             this.track = track;
+            this.visibleInMultitrackCheckbox = visibleInMultitrackCheckbox;
             this.muteCheckbox = muteCheckbox;
             this.soloCheckbox = soloCheckbox;
             this.volumeControl = volumeControl;
             this.painter = painter;
+            this.visibleInMultitrackCheckbox.addSelectionListener(this);
             this.muteCheckbox.addSelectionListener(this);
             this.soloCheckbox.addSelectionListener(this);
             this.volumeControl.addModifyListener(this);
             this.volumeControl.setMinimum(0);
             this.volumeControl.setMaximum(127);
+        }
+        
+        public Button getVisibleInMultitrackCheckbox()
+        {
+            return this.visibleInMultitrackCheckbox;
         }
 
         public Button getMuteCheckbox()
@@ -91,6 +100,13 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
                     this.applySoloMute(TGMixer.MUTE);
                 else if (e.getSource() == this.soloCheckbox)
                     this.applySoloMute(TGMixer.SOLO);
+                else if (e.getSource() == this.visibleInMultitrackCheckbox)
+                {
+                    this.track.setVisibleInMultitrack(this.visibleInMultitrackCheckbox.getSelection());
+                    // TuxGuitar.instance().fireUpdate();
+                    TuxGuitar.instance().getTablatureEditor().
+                        doRedraw(TGRedrawListener.NORMAL);
+                }
                 this.painter.setFocus();
             }
         }
@@ -134,6 +150,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
     public TGMiniMixer(TGTable table)
     {
         this.table = table;
+        table.getColumnVIMT().setTitle("MT");
         table.getColumnVolume().setTitle("V");
         table.getColumnSolo().setTitle("S");
         table.getColumnMute().setTitle("M");
@@ -165,6 +182,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
         for (int i = tracks.size(); i < count; i++)
             tracks.add(new MiniTrackMixer(
                            TuxGuitar.instance().getSongManager().getSong().getTrack(i),
+                           table.getRow(i).getVisibleInMultitrackCheckbox(),
                            table.getRow(i).getMuteCheckbox(),
                            table.getRow(i).getSoloCheckbox(),
                            table.getRow(i).getVolumeControl(),
@@ -178,6 +196,8 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
             tracks.get(i).getMuteCheckbox().setSelection(track.isMute());
             tracks.get(i).getSoloCheckbox().setSelection(track.isSolo());
             tracks.get(i).getVolumeControl().setSelection(track.getChannel().getVolume());
+            tracks.get(i).getVisibleInMultitrackCheckbox().
+                setSelection(track.isVisibleInMultitrack());
         }
     }
 

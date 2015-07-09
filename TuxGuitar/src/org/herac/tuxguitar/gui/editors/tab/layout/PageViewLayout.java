@@ -65,7 +65,8 @@ public class PageViewLayout extends ViewLayout{
 			Iterator tracks = getSongManager().getSong().getTracks();
 			while(tracks.hasNext()){
 				TGTrackImpl track = (TGTrackImpl) tracks.next();
-				if(number < 0 || track.getNumber() == number){
+				if((number < 0 && track.isVisibleInMultitrack())
+                   || track.getNumber() == number){
 					
 					TGTrackSpacing ts = new TGTrackSpacing(this) ;
 					ts.setSize(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES, ((style & DISPLAY_SCORE) != 0 ?( (getScoreLineSpacing() * 5) ):0));

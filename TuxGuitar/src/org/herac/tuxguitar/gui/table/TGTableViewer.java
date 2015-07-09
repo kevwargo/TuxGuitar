@@ -94,6 +94,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 		this.table.getColumnInstrument().getControl().addMouseListener(listener);
         this.table.getColumnVolume().getControl().addMouseListener(listener);
         this.table.getColumnMute().getControl().addMouseListener(listener);
+        this.table.getColumnVIMT().getControl().addMouseListener(listener);
         this.table.getColumnSolo().getControl().addMouseListener(listener);
 		this.table.getColumnCanvas().getControl().addMouseListener(listener);
 		this.table.getColumnCanvas().getControl().addMouseListener(new MouseAdapter() {

@@ -27,6 +27,7 @@ public class TGTableRow {
 	private CLabel name;
 	private CLabel instrument;
     private Spinner volumeControl;
+    private Button visibleInMultitrackCheckbox;
     private Button soloCheckbox;
     private Button muteCheckbox;
 	private Composite painter;
@@ -50,6 +51,10 @@ public class TGTableRow {
 		this.number = new CLabel(this.row,SWT.LEFT);
 		this.number.addMouseListener(mouseListenerLabel);
 		this.table.addRowItem(this.table.getColumnNumber(),this.number,true);
+
+        this.visibleInMultitrackCheckbox = new Button(this.row, SWT.CHECK | SWT.NO_FOCUS);
+        this.table.addRowItem(this.table.getColumnVIMT(),
+                              this.visibleInMultitrackCheckbox, true);
 		
 		this.name = new CLabel(this.row,SWT.LEFT);
 		this.name.addMouseListener(mouseListenerLabel);
@@ -102,6 +107,11 @@ public class TGTableRow {
 	public CLabel getNumber() {
 		return this.number;
 	}
+
+    public Button getVisibleInMultitrackCheckbox()
+    {
+        return this.visibleInMultitrackCheckbox;
+    }
 
     public Spinner getVolumeControl() {
         return this.volumeControl;

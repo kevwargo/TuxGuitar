@@ -17,6 +17,7 @@ public class TGTable {
 	private SashForm columnControl;
 	private Composite rowControl;
 	private TGTableColumn columnNumber;
+    private TGTableColumn columnVIMT;
 	private TGTableColumn columnName;
 	private TGTableColumn columnInstrument;
     private TGTableColumn columnVolume;
@@ -47,13 +48,14 @@ public class TGTable {
 		this.columnControl.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,false));
 		
 		this.columnNumber = new TGTableColumn(this,SWT.LEFT);
+        this.columnVIMT = new TGTableColumn(this, SWT.CENTER);
 		this.columnName = new TGTableColumn(this,SWT.LEFT);
 		this.columnInstrument = new TGTableColumn(this,SWT.LEFT);
         this.columnVolume = new TGTableColumn(this, SWT.CENTER);
         this.columnSolo = new TGTableColumn(this, SWT.CENTER);
         this.columnMute = new TGTableColumn(this, SWT.CENTER);
 		this.columnCanvas = new TGTableColumn(this,SWT.CENTER);
-		this.columnControl.setWeights(new int[]{1,12,12,2,1,1,40});
+		this.columnControl.setWeights(new int[]{1,1,12,12,2,1,1,40});
 		
 		this.rowControl = new Composite(this.table,SWT.NONE);
 		this.rowControl.setLayout(newGridLayout(1,0,1,0,1));
@@ -117,7 +119,12 @@ public class TGTable {
 	
 	public TGTableColumn getColumnNumber() {
 		return this.columnNumber;
-	}	
+	}
+
+    public TGTableColumn getColumnVIMT()
+    {
+        return this.columnVIMT;
+    }
 	
 	public TGTableColumn getColumnVolume() {
 		return this.columnVolume;
@@ -167,6 +174,7 @@ public class TGTable {
 		this.columnName.notifyRemoved();
 		this.columnInstrument.notifyRemoved();
         this.columnVolume.notifyRemoved();
+        this.columnVIMT.notifyRemoved();
 		this.columnSolo.notifyRemoved();
 		this.columnMute.notifyRemoved();
 		this.columnCanvas.notifyRemoved();
@@ -177,6 +185,7 @@ public class TGTable {
 		this.columnName.layout();
 		this.columnInstrument.layout();
 		this.columnVolume.layout();
+		this.columnVIMT.layout();
 		this.columnSolo.layout();
 		this.columnMute.layout();
 		this.columnCanvas.layout();

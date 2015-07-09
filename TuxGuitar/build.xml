@@ -47,7 +47,7 @@
 		
 		<javac debug="false" srcdir="${build.src.path}" destdir="${build.path}" source="1.5" target="1.5" nowarn="yes" >
 			<classpath refid="class.path" ></classpath>
-            <compilerarg value="-Xlint:unchecked"/>
+            <!-- <compilerarg value="-Xlint:unchecked"/> -->
 			<include name="**/*.java" ></include>
 		</javac>
 		
