@@ -187,13 +187,16 @@ public class TGTableRow {
 		}
 		
 		public void mouseDown(MouseEvent e) {
-			if(getMouseListenerCanvas() != null){
+			if(getMouseListenerCanvas() != null && e.button != 4 && e.button != 5){
+                System.out.println("canvas mouse down " + e.button);
+                
 				getMouseListenerCanvas().mouseDown(e);
 			}
 		}
 		
 		public void mouseUp(MouseEvent e) {
-			if(getMouseListenerCanvas() != null){
+			if(getMouseListenerCanvas() != null && e.button != 4 && e.button != 5){
+                System.out.println("canvas mouse up " + e.button);
 				getMouseListenerCanvas().mouseUp(e);
 			}
 		}

@@ -96,11 +96,11 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
         {
             if (e.getSource() != null)
             {
-                if (e.getSource() == this.muteCheckbox)
+                if (e.getSource().equals(this.muteCheckbox))
                     this.applySoloMute(TGMixer.MUTE);
-                else if (e.getSource() == this.soloCheckbox)
+                else if (e.getSource().equals(this.soloCheckbox))
                     this.applySoloMute(TGMixer.SOLO);
-                else if (e.getSource() == this.visibleInMultitrackCheckbox)
+                else if (e.getSource().equals(this.visibleInMultitrackCheckbox))
                 {
                     this.track.setVisibleInMultitrack(this.visibleInMultitrackCheckbox.getSelection());
                     // TuxGuitar.instance().fireUpdate();
