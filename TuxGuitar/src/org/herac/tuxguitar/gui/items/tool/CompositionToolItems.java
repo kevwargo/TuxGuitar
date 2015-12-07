@@ -9,7 +9,6 @@ package org.herac.tuxguitar.gui.items.tool;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-// import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
@@ -21,6 +20,7 @@ import org.herac.tuxguitar.gui.actions.insert.RepeatCloseAction;
 import org.herac.tuxguitar.gui.actions.insert.RepeatOpenAction;
 import org.herac.tuxguitar.gui.items.ComboToolItem;
 import org.herac.tuxguitar.gui.items.ToolItems;
+import org.herac.tuxguitar.player.base.MidiPlayerListener;
 import org.herac.tuxguitar.player.base.MidiPlayerMode;
 import org.herac.tuxguitar.song.models.TGMeasure;
 
@@ -60,6 +60,20 @@ public class CompositionToolItems extends ToolItems{
             if (mode.getSimplePercent() == DEFAULT_PERCENTS[i])
                 this.tempoPercentage.select(i);
         }
+        TuxGuitar.instance().getPlayer().addListener(new MidiPlayerListener() {
+            public void notifyStarted() {
+                System.out.println(TuxGuitar.instance().getPlayer().getMode().getCurrentPercent());
+            }
+            public void notifyStopped() {}
+            public void notifyLoop() {
+                TuxGuitar.instance().getDisplay().asyncExec(new Runnable() {
+                    public void run() {
+                        int newTempo = TuxGuitar.instance().getPlayer().getMode().getCurrentPercent();
+                        CompositionToolItems.this.tempoPercentage.setText(Integer.toString(newTempo) + "%");
+                    }
+                });
+            }
+        });
 
 		this.timeSignature = new ToolItem(toolBar, SWT.PUSH);
 		this.timeSignature.addSelectionListener(TuxGuitar.instance().getAction(ChangeTimeSignatureAction.NAME));
@@ -99,10 +113,14 @@ public class CompositionToolItems extends ToolItems{
 		TGMeasure measure = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getMeasure();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.tempo.setEnabled( !running );
-        int percent = TuxGuitar.instance().getPlayer().getMode().getSimplePercent();
+        MidiPlayerMode mode = TuxGuitar.instance().getPlayer().getMode();
+        int percent = mode.getSimplePercent();
         for (int i = 0; i < DEFAULT_PERCENTS.length; i++)
             if (percent == DEFAULT_PERCENTS[i])
                 this.tempoPercentage.select(i);
+        if (mode.isLoop() && mode.getType() == MidiPlayerMode.TYPE_CUSTOM) {
+            this.tempoPercentage.setText(Integer.toString(mode.getCurrentPercent()) + "%");
+        }
         this.tempoPercentage.setEnabled( !running );
 		this.timeSignature.setEnabled( !running );
 		this.repeatOpen.setEnabled( !running );

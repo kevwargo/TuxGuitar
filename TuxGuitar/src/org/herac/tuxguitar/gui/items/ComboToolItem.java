@@ -58,7 +58,7 @@ public class ComboToolItem extends SelectionAdapter
 
     public void select(int index)
     {
-        if (index >= this.subItems.size())
+        if (index < 0 || index >= this.subItems.size())
             return;
         this.item.setText(getSubItem(index).getText());
         this.selection = index;
@@ -97,5 +97,9 @@ public class ComboToolItem extends SelectionAdapter
             this.subMenu.setLocation(pt.x, pt.y + rect.height);
             this.subMenu.setVisible(true);
         }
+    }
+
+    public void setText(String text) {
+        this.item.setText(text);
     }
 }
