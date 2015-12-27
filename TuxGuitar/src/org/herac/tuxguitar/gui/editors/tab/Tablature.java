@@ -108,7 +108,7 @@ public class Tablature extends Composite {
 	}
 	
 	public synchronized void paintTablature(TGPainter painter){
-        System.out.printf("painting tablature %d\n", System.currentTimeMillis());
+        // System.out.printf("painting tablature %d\n", System.currentTimeMillis());
 		if(!TuxGuitar.instance().isLocked()){
 			TuxGuitar.instance().lock();
 			this.setPainting(true);

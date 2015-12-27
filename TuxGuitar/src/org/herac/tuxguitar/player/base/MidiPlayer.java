@@ -372,6 +372,7 @@ public class MidiPlayer{
 					this.tickPosition = this.getLoopSPosition();
 				}
 				this.getSequencer().setTickPosition(this.tickPosition);
+                
 			}
 			setChangeTickPosition(false);
 		} catch (MidiPlayerException e) {
@@ -451,7 +452,7 @@ public class MidiPlayer{
 			int reverb = TGChannel.DEFAULT_REVERB;
 			int phaser = TGChannel.DEFAULT_PHASER;
 			int tremolo = TGChannel.DEFAULT_TREMOLO;
-			updateController(9,volume,balance,chorus,reverb,phaser,tremolo,127);
+			updateController(TGChannel.DEFAULT_PERCUSSION_CHANNEL,volume,balance,chorus,reverb,phaser,tremolo,127);
 		}
 		this.afterUpdate();
 	}

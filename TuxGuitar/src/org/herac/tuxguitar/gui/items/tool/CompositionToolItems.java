@@ -61,9 +61,7 @@ public class CompositionToolItems extends ToolItems{
                 this.tempoPercentage.select(i);
         }
         TuxGuitar.instance().getPlayer().addListener(new MidiPlayerListener() {
-            public void notifyStarted() {
-                System.out.println(TuxGuitar.instance().getPlayer().getMode().getCurrentPercent());
-            }
+            public void notifyStarted() {}
             public void notifyStopped() {}
             public void notifyLoop() {
                 TuxGuitar.instance().getDisplay().asyncExec(new Runnable() {

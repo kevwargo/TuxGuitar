@@ -58,6 +58,7 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 	private Label volumeValueTitleLabel;
 	private String volumeTip;
 	private int volumeValue;
+	private Scale metronomeVolumeScale;
 	
 	public TGMixer() {
 		this.tracks = new ArrayList();
@@ -131,6 +132,21 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 		this.loadVolume();
 		this.loadIcons();
 		this.loadProperties(false);
+
+        Composite metronomeVolumeComposite = new Composite(this.dialog, SWT.BORDER);
+        metronomeVolumeComposite.setLayout(new GridLayout());
+        metronomeVolumeComposite.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
+        this.metronomeVolumeScale = new Scale(metronomeVolumeComposite, SWT.VERTICAL);
+        this.metronomeVolumeScale.setMaximum(10);
+		this.metronomeVolumeScale.setMinimum(0);
+		this.metronomeVolumeScale.setIncrement(1);
+		this.metronomeVolumeScale.setPageIncrement(1);
+		this.metronomeVolumeScale.setLayoutData(new GridData(SWT.CENTER,SWT.FILL,true,true));
+        this.metronomeVolumeScale.addListener(SWT.Selection, new Listener() {
+                public void handleEvent(Event event) {
+                    changeMetronomeVolume();
+                }
+            });
 		
 		this.dialog.setLayout(getLayout(this.dialog.getChildren().length));
 		this.dialog.pack();
@@ -152,6 +168,10 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 			this.volumeValue = volume;
 		}
 	}
+
+    protected void changeMetronomeVolume() {
+        System.out.println("change metronome value " + this.metronomeVolumeScale.getSelection());
+    }
 	
 	protected void loadVolume(){
 		int volume = TuxGuitar.instance().getPlayer().getVolume();
