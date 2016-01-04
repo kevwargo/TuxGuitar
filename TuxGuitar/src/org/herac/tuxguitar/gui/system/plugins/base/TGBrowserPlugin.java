@@ -22,7 +22,7 @@ public abstract class TGBrowserPlugin extends TGPluginAdapter {
 	public void setEnabled(boolean enabled) throws TGPluginException {
 		if (enabled) {
 			addPlugin();
-		}else {
+		} else {
 			removePlugin();
 		}
 	}

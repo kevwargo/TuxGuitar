@@ -93,9 +93,9 @@ public class AddMeasureAction extends Action {
 					int count = countSpinner.getSelection();
 					if (beforePosition.getSelection()) {
 						number = (getEditor().getTablature().getCaret().getMeasure().getNumber());
-					}else if (afterPosition.getSelection()) {
+					} else if (afterPosition.getSelection()) {
 						number = (getEditor().getTablature().getCaret().getMeasure().getNumber() + 1);
-					}else if (atEnd.getSelection()) {
+					} else if (atEnd.getSelection()) {
 						number = (getSongManager().getSong().countMeasureHeaders() + 1);
 					}
 					addMeasure(number, count);

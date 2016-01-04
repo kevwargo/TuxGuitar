@@ -539,7 +539,7 @@ public class TrackPropertiesAction extends Action {
 			}
 			if ( oldString != null && newString != null ) {
 				transpositions[ index ] = (oldString.getValue() - newString.getValue());
-			}else {
+			} else {
 				transpositions[ index ] = 0;
 			}
 			

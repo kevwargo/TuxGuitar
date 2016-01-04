@@ -60,7 +60,7 @@ public class TGBeatGroup {
 		//FIRST MIN NOTE
 		if (this.firstMinNote == null || note.getVoice().getBeat().getStart() < this.firstMinNote.getVoice().getBeat().getStart()) {
 			this.firstMinNote = note;
-		}else if (note.getVoice().getBeat().getStart() == this.firstMinNote.getVoice().getBeat().getStart()) {
+		} else if (note.getVoice().getBeat().getStart() == this.firstMinNote.getVoice().getBeat().getStart()) {
 			if (note.getRealValue() < this.firstMinNote.getRealValue()) {
 				this.firstMinNote = note;
 			}
@@ -68,7 +68,7 @@ public class TGBeatGroup {
 		//FIRST MAX NOTE
 		if (this.firstMaxNote == null || note.getVoice().getBeat().getStart() < this.firstMaxNote.getVoice().getBeat().getStart()) {
 			this.firstMaxNote = note;
-		}else if (note.getVoice().getBeat().getStart() == this.firstMaxNote.getVoice().getBeat().getStart()) {
+		} else if (note.getVoice().getBeat().getStart() == this.firstMaxNote.getVoice().getBeat().getStart()) {
 			if (note.getRealValue() > this.firstMaxNote.getRealValue()) {
 				this.firstMaxNote = note;
 			}
@@ -77,7 +77,7 @@ public class TGBeatGroup {
 		//LAST MIN NOTE
 		if (this.lastMinNote == null || note.getVoice().getBeat().getStart() > this.lastMinNote.getVoice().getBeat().getStart()) {
 			this.lastMinNote = note;
-		}else if (note.getVoice().getBeat().getStart() == this.lastMinNote.getVoice().getBeat().getStart()) {
+		} else if (note.getVoice().getBeat().getStart() == this.lastMinNote.getVoice().getBeat().getStart()) {
 			if (note.getRealValue() < this.lastMinNote.getRealValue()) {
 				this.lastMinNote = note;
 			}
@@ -85,7 +85,7 @@ public class TGBeatGroup {
 		//LAST MIN NOTE
 		if (this.lastMaxNote == null || note.getVoice().getBeat().getStart() > this.lastMaxNote.getVoice().getBeat().getStart()) {
 			this.lastMaxNote = note;
-		}else if (note.getVoice().getBeat().getStart() == this.lastMaxNote.getVoice().getBeat().getStart()) {
+		} else if (note.getVoice().getBeat().getStart() == this.lastMaxNote.getVoice().getBeat().getStart()) {
 			if (note.getRealValue() > this.lastMaxNote.getRealValue()) {
 				this.lastMaxNote = note;
 			}
@@ -103,14 +103,14 @@ public class TGBeatGroup {
 		if ( this.direction == DIRECTION_NOT_SETTED ) {
 			if (measure.getNotEmptyVoices() > 1 ) {
 				this.direction = this.voice == 0 ? DIRECTION_UP : DIRECTION_DOWN;
-			}else if ( (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ) {
+			} else if ( (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ) {
 				this.direction = DIRECTION_DOWN;
-			}else {
+			} else {
 				int max = Math.abs(this.minNote.getRealValue() - (SCORE_MIDDLE_KEYS[measure.getClef() - 1] + 100));
 				int min = Math.abs(this.maxNote.getRealValue() - (SCORE_MIDDLE_KEYS[measure.getClef() - 1] - 100));
 				if (max > min) {
 					this.direction = DIRECTION_UP;
-				}else {
+				} else {
 					this.direction = DIRECTION_DOWN;
 				}
 			}
@@ -128,7 +128,7 @@ public class TGBeatGroup {
 		int scoreLineY = 0;
 		if (key <= 7) {
 			scoreLineY = (int)((SCORE_SHARP_POSITIONS[noteValue % 12]) * scale - (7 * (noteValue / 12)) * scale);
-		}else {
+		} else {
 			scoreLineY = (int)((SCORE_FLAT_POSITIONS[noteValue % 12]) * scale - (7 * (noteValue / 12)) * scale);
 		}
 		
@@ -160,9 +160,9 @@ public class TGBeatGroup {
 				y = (int)((((double)y1 -(double)y2) / ((double)x1 - (double)x2)) * ((double)x1 - (double)x));
 			}
 			return y1 - y;
-		}else if (this.maxNote != this.firstMaxNote && this.maxNote != this.lastMaxNote) {
+		} else if (this.maxNote != this.firstMaxNote && this.maxNote != this.lastMaxNote) {
 			return (int)(getY1(layout, this.maxNote, key, clef) - upOffset);
-		}else {
+		} else {
 			int y = 0;
 			int x1 = this.firstMaxNote.getPosX() + this.firstMaxNote.getBeatImpl().getSpacing();
 			int x2 = this.lastMaxNote.getPosX() + this.lastMaxNote.getBeatImpl().getSpacing();

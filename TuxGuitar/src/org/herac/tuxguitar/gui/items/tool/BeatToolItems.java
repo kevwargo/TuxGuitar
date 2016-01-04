@@ -123,7 +123,7 @@ public class BeatToolItems  extends ToolItems {
 				Point pt = item.getParent().toDisplay(new Point(rect.x, rect.y));
 				this.subMenu.setLocation(pt.x, pt.y + rect.height);
 				this.subMenu.setVisible(true);
-			}else {
+			} else {
 				TuxGuitar.instance().getAction(InsertChordAction.NAME).process(event);
 			}
 		}

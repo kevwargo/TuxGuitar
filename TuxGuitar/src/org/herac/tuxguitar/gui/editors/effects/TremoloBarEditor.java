@@ -152,7 +152,7 @@ public class TremoloBarEditor {
 		
 		if (note.getEffect().isTremoloBar()) {
 			setTremoloBar(note.getEffect().getTremoloBar());
-		}else {
+		} else {
 			setTremoloBar(this.defaultTremoloBars[0].getTremoloBar());
 		}
 		
@@ -221,7 +221,7 @@ public class TremoloBarEditor {
 		painter.setLineStyle(SWT.LINE_SOLID);
 		if (i == 0 || i == (X_LENGTH - 1)) {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}else {
+		} else {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLUE));
 			if ((i % 3) > 0) {
 				painter.setLineStyle(SWT.LINE_DOT);
@@ -236,7 +236,7 @@ public class TremoloBarEditor {
 		}
 		else if (i == (TGEffectTremoloBar.MAX_VALUE_LENGTH)) {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}else {
+		} else {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_RED));
 			if ((i % 2) > 0) {
 				painter.setLineStyle(SWT.LINE_DOT);
@@ -300,7 +300,7 @@ public class TremoloBarEditor {
 		for (int i = 0;i < this.x.length;i++) {
 			if (currPointX < 0) {
 				currPointX = this.x[i];
-			}else {
+			} else {
 				int distanceX = Math.abs(pointX - currPointX);
 				int currDistanceX = Math.abs(pointX - this.x[i]);
 				if (currDistanceX < distanceX) {
@@ -316,7 +316,7 @@ public class TremoloBarEditor {
 		for (int i = 0;i < this.y.length;i++) {
 			if (currPointY < 0) {
 				currPointY = this.y[i];
-			}else {
+			} else {
 				int distanceX = Math.abs(pointY - currPointY);
 				int currDistanceX = Math.abs(pointY - this.y[i]);
 				if (currDistanceX < distanceX) {

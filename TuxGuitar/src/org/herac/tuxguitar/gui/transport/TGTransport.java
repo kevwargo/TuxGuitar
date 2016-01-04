@@ -265,9 +265,9 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 			
 			if (TuxGuitar.instance().getPlayer().isRunning()) {
 				setStatus(STATUS_RUNNING);
-			}else if (TuxGuitar.instance().getPlayer().isPaused()) {
+			} else if (TuxGuitar.instance().getPlayer().isPaused()) {
 				setStatus(STATUS_PAUSED);
-			}else {
+			} else {
 				setStatus(STATUS_STOPPED);
 			}
 			
@@ -279,14 +279,14 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 					this.next.setImage(TuxGuitar.instance().getIconManager().getTransportNext2());
 					this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportStop2());
 					this.play.setImage(TuxGuitar.instance().getIconManager().getTransportPause());
-				}else if (getStatus() == STATUS_PAUSED) {
+				} else if (getStatus() == STATUS_PAUSED) {
 					this.first.setImage(TuxGuitar.instance().getIconManager().getTransportFirst2());
 					this.last.setImage(TuxGuitar.instance().getIconManager().getTransportLast2());
 					this.previous.setImage(TuxGuitar.instance().getIconManager().getTransportPrevious2());
 					this.next.setImage(TuxGuitar.instance().getIconManager().getTransportNext2());
 					this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportStop2());
 					this.play.setImage(TuxGuitar.instance().getIconManager().getTransportPlay2());
-				}else if (getStatus() == STATUS_STOPPED) {
+				} else if (getStatus() == STATUS_STOPPED) {
 					this.first.setImage(TuxGuitar.instance().getIconManager().getTransportFirst1());
 					this.last.setImage(TuxGuitar.instance().getIconManager().getTransportLast1());
 					this.previous.setImage(TuxGuitar.instance().getIconManager().getTransportPrevious1());
@@ -428,10 +428,10 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 			try {
 				player.getMode().reset();
 				player.play();
-			}catch(MidiPlayerException exception) {
+			} catch(MidiPlayerException exception) {
 				MessageDialog.errorMessage(exception);
 			}
-		}else {
+		} else {
 			player.pause();
 		}
 	}
@@ -441,7 +441,7 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 		if (!player.isRunning()) {
 			player.reset();
 			this.gotoPlayerPosition();
-		}else {
+		} else {
 			player.reset();
 		}
 	}

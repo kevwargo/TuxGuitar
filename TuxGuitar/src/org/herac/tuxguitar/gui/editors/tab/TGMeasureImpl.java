@@ -287,7 +287,7 @@ public class TGMeasureImpl extends TGMeasure {
 							this.voiceGroups[v].add(groups[v]);
 						}
 						groups[v].check(voice);
-					}else {
+					} else {
 						for ( int v2 = 0; v2 < TGBeat.MAX_VOICES; v2 ++) {
 							if (v2 != voice.getIndex()) {
 								TGVoiceImpl voice2 = beat.getVoiceImpl(v2);
@@ -537,13 +537,13 @@ public class TGMeasureImpl extends TGMeasure {
 		
 		if (direction == TGBeatGroup.DIRECTION_UP && y > this.maxY ) {
 			this.maxY = y;
-		}else if (direction == TGBeatGroup.DIRECTION_DOWN && (y + downOffset) > this.maxY ) {
+		} else if (direction == TGBeatGroup.DIRECTION_DOWN && (y + downOffset) > this.maxY ) {
 			this.maxY = (int)(y + downOffset + 2);
 		}
 		
 		if (direction == TGBeatGroup.DIRECTION_UP && (y - upOffset) < this.minY ) {
 			this.minY = (int)(y - upOffset - 2);
-		}else if (direction == TGBeatGroup.DIRECTION_DOWN && y < this.minY ) {
+		} else if (direction == TGBeatGroup.DIRECTION_DOWN && y < this.minY ) {
 			this.minY = y;
 		}
 	}
@@ -732,7 +732,7 @@ public class TGMeasureImpl extends TGMeasure {
 				painter.addOval(x1 + xMove, y1 + ((y2 - y1) / 2) + (yMove - (size / 2)), size, size);
 				painter.closePath();
 			}
-		}else {
+		} else {
 			painter.initPath();
 			painter.setAntialias(false);
 			painter.setLineWidth(lineWidthSmall);
@@ -775,7 +775,7 @@ public class TGMeasureImpl extends TGMeasure {
 					painter.drawString(repetitions, x2 - numberSize.x + getSpacing() - size,(y1 - numberSize.y) - Math.round(scale));
 				}
 			}
-		}else {
+		} else {
 			painter.initPath();
 			painter.setAntialias(false);
 			painter.setLineWidth(lineWidthSmall);
@@ -886,7 +886,7 @@ public class TGMeasureImpl extends TGMeasure {
 				int y2 = (int)(((y + (layout.getScoreLineSpacing() * 4)) - painter.getStringExtent(denominator).y) + (3f * scale));
 				painter.drawString(numerator, fromX + x, fromY + y1, true);
 				painter.drawString(denominator, fromX + x, fromY + y2, true);
-			}else if ( (style & ViewLayout.DISPLAY_TABLATURE) != 0 ) {
+			} else if ( (style & ViewLayout.DISPLAY_TABLATURE) != 0 ) {
 				int y = getTs().getPosition(TGTrackSpacing.POSITION_TABLATURE);
 				int move = (int)((8f - getTrack().stringCount()) * scale);
 				int y1 = (y - move);
@@ -906,7 +906,7 @@ public class TGMeasureImpl extends TGMeasure {
 			int style = layout.getStyle();
 			if ( (style & ViewLayout.DISPLAY_SCORE) != 0 ) {
 				y += ( getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES) - lineSpacing ) ;
-			}else if ( (style & ViewLayout.DISPLAY_TABLATURE) != 0 ) {
+			} else if ( (style & ViewLayout.DISPLAY_TABLATURE) != 0 ) {
 				y += ( getTs().getPosition(TGTrackSpacing.POSITION_TABLATURE) - lineSpacing ) ;
 			}
 			
@@ -936,7 +936,7 @@ public class TGMeasureImpl extends TGMeasure {
 			int style = layout.getStyle();
 			if ( (style & ViewLayout.DISPLAY_SCORE) != 0 ) {
 				y += ( getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES) - lineSpacing );
-			}else if ( (style & ViewLayout.DISPLAY_TABLATURE) != 0 ) {
+			} else if ( (style & ViewLayout.DISPLAY_TABLATURE) != 0 ) {
 				y += ( getTs().getPosition(TGTrackSpacing.POSITION_TABLATURE) - lineSpacing );
 			}
 			
@@ -1055,7 +1055,7 @@ public class TGMeasureImpl extends TGMeasure {
 			if ( (style & (ViewLayout.DISPLAY_SCORE | ViewLayout.DISPLAY_TABLATURE)) == (ViewLayout.DISPLAY_SCORE | ViewLayout.DISPLAY_TABLATURE) ) {
 				y1 += (getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES) - layout.getScoreLineSpacing());
 				y2 += (getTs().getPosition(TGTrackSpacing.POSITION_TABLATURE) + getTrackImpl().getTabHeight() + layout.getStringSpacing());
-			}else if ( (style & ViewLayout.DISPLAY_SCORE) != 0 ) {
+			} else if ( (style & ViewLayout.DISPLAY_SCORE) != 0 ) {
 				y1 += (getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES) - layout.getScoreLineSpacing());
 				y2 += (getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES) + (layout.getScoreLineSpacing() * 5));
 			} else if ( (style & ViewLayout.DISPLAY_TABLATURE) != 0 ) {
@@ -1102,13 +1102,13 @@ public class TGMeasureImpl extends TGMeasure {
 		if (this.paintKeySignature) {
 			if (this.getKeySignature() <= 7) {
 				spacing += Math.round( ( 6f * layout.getScale() ) * this.getKeySignature() ) ;
-			}else {
+			} else {
 				spacing += Math.round( ( 6f * layout.getScale() ) * (this.getKeySignature() - 7) ) ;
 			}
 			if (this.prevMeasure != null ) {
 				if (this.prevMeasure.getKeySignature() <= 7) {
 					spacing += Math.round( ( 6f * layout.getScale() ) * this.prevMeasure.getKeySignature() ) ;
-				}else {
+				} else {
 					spacing += Math.round( ( 6f * layout.getScale() ) * (this.prevMeasure.getKeySignature() - 7) ) ;
 				}
 			}
@@ -1224,11 +1224,11 @@ public class TGMeasureImpl extends TGMeasure {
 	public void setTs(TGTrackSpacing ts) {
 		if (getTs() == null) {
 			setBufferCreated(false);
-		}else if (getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES) != ts.getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES)) {
+		} else if (getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES) != ts.getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES)) {
 			setBufferCreated(false);
-		}else if (getTs().getPosition(TGTrackSpacing.POSITION_TABLATURE) != ts.getPosition(TGTrackSpacing.POSITION_TABLATURE)) {
+		} else if (getTs().getPosition(TGTrackSpacing.POSITION_TABLATURE) != ts.getPosition(TGTrackSpacing.POSITION_TABLATURE)) {
 			setBufferCreated(false);
-		}else if (getTs().getPosition(TGTrackSpacing.POSITION_EFFECTS) != ts.getPosition(TGTrackSpacing.POSITION_EFFECTS)) {
+		} else if (getTs().getPosition(TGTrackSpacing.POSITION_EFFECTS) != ts.getPosition(TGTrackSpacing.POSITION_EFFECTS)) {
 			setBufferCreated(false);
 		}
 		this.ts = ts;

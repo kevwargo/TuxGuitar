@@ -97,7 +97,7 @@ public class EditPluginsAction extends Action {
 				if (item != null && item.getData() instanceof TGPluginSetup) {
 					try {
 						((TGPluginSetup)item.getData()).setupDialog(dialog);
-					}catch(Throwable throwable) {
+					} catch(Throwable throwable) {
 						MessageDialog.errorMessage(dialog, throwable);
 					}
 				}
@@ -114,7 +114,7 @@ public class EditPluginsAction extends Action {
 				if (item != null && item.getData() instanceof TGPlugin) {
 					try {
 						showInfo(dialog,(TGPlugin)item.getData());
-					}catch(Throwable throwable) {
+					} catch(Throwable throwable) {
 						MessageDialog.errorMessage(dialog, throwable);
 					}
 				}

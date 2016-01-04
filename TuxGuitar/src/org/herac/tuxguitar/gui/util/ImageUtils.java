@@ -48,7 +48,7 @@ public class ImageUtils {
 				RGB rgb = src.palette.getRGB(src.getPixel(x, y));
 				if (rgb.red == alpha.red && rgb.green == alpha.green && rgb.blue == alpha.blue) {
 					maskData.setPixel(x, y, maskData.palette.getPixel(none));
-				}else {
+				} else {
 					maskData.setPixel(x, y, maskData.palette.getPixel(alpha));
 				}
 			}

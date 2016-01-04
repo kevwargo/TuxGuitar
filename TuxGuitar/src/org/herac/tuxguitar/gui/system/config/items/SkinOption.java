@@ -96,7 +96,7 @@ public class SkinOption extends Option {
 							if ( skinInfo != null ) {
 								properties.load( skinInfo );
 							}
-						}catch (Throwable throwable) {
+						} catch (Throwable throwable) {
 							throwable.printStackTrace();
 						}
 						SkinInfo info = new SkinInfo(skinNames[i]);

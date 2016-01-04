@@ -26,7 +26,7 @@ public class ScaleReader {
 				Document doc = getDocument(stream);
 				loadScales(scales, doc.getFirstChild());
 			}
-		}catch(Throwable e) {
+		} catch(Throwable e) {
 			e.printStackTrace();
 		}
 	}

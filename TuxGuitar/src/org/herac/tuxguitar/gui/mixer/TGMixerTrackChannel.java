@@ -54,7 +54,7 @@ public class TGMixerTrackChannel {
 				if (!usedChannels[idx]) {
 					channel.setChannel((short)idx);
 					channel.setEffectChannel(channel.getChannel());
-				}else {
+				} else {
 					TuxGuitar.instance().getSongManager().getUsedChannel(idx).copy(channel);
 				}
 				fireChannelChange(channel);
@@ -103,7 +103,7 @@ public class TGMixerTrackChannel {
 			this.normalChannel.add(Integer.toString(TGChannel.DEFAULT_PERCUSSION_CHANNEL));
 			this.normalChannel.select(0);
 			this.normalChannels.addChannel(0, 0);
-		}else {
+		} else {
 			int itemIndex = 0;
 			for (int i = 0;i < usedChannels.length;i++) {
 				if (!TGChannel.isPercussionChannel(i)) {
@@ -111,7 +111,7 @@ public class TGMixerTrackChannel {
 						String itemName = new String();
 						if (usedChannels[i] && (getChannel().getChannel() != i || TuxGuitar.instance().getSongManager().countTracksForChannel(i) > 1)) {
 							itemName = i + " " + TuxGuitar.getProperty("mixer.channel.link");
-						}else {
+						} else {
 							itemName =  i + " " + TuxGuitar.getProperty("mixer.channel.free");
 						}
 						this.normalChannel.add(itemName);
@@ -137,7 +137,7 @@ public class TGMixerTrackChannel {
 			this.effectChannel.add(Integer.toString(TGChannel.DEFAULT_PERCUSSION_CHANNEL));
 			this.effectChannel.select(0);
 			this.effectChannels.addChannel(0, 0);
-		}else {
+		} else {
 			int itemIndex = 0;
 			for (int i = 0;i < usedEffectChannels.length;i++) {
 				if (!TGChannel.isPercussionChannel(i)) {

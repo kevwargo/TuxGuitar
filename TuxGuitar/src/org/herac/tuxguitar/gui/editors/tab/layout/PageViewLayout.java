@@ -152,7 +152,7 @@ public class PageViewLayout extends ViewLayout {
 			if (isAtX && isAtY) {
 				paintMeasure(currMeasure, painter, measureSpacing);
 				((TGLyricImpl)track.getLyrics()).paintCurrentNoteBeats(painter, this, currMeasure, posX, posY);
-			}else {
+			} else {
 				currMeasure.setOutOfBounds(true);
 			}
 			
@@ -207,7 +207,7 @@ public class PageViewLayout extends ViewLayout {
 				parent = parent.getParent();
 				if ( parent == null ) {
 					marginRight = ( parentArea.width - (marginLeft + tablatureArea.width ) );
-				}else {
+				} else {
 					marginLeft += parentArea.x ;
 				}
 			}

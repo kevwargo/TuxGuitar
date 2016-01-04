@@ -41,7 +41,7 @@ public class ChordXMLWriter {
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			document = builder.newDocument();
-		}catch (ParserConfigurationException pce) {
+		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
 		}
 		return document;

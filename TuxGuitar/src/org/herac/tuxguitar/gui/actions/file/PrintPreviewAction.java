@@ -50,7 +50,7 @@ public class PrintPreviewAction extends Action {
 				
 				this.printPreview(data);
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			MessageDialog.errorMessage(throwable);
 		}
 		return 0;
@@ -65,7 +65,7 @@ public class PrintPreviewAction extends Action {
 					manager.setSong(getSongManager().getSong().clone(manager.getFactory()));
 				
 					printPreview(manager, data);
-				}catch(Throwable throwable) {
+				} catch(Throwable throwable) {
 					MessageDialog.errorMessage(throwable);
 				}
 			}
@@ -82,7 +82,7 @@ public class PrintPreviewAction extends Action {
 					PrinterViewLayout layout = new PrinterViewLayout(tablature, data, 1f);
 					
 					printPreview( layout );
-				}catch(Throwable throwable) {
+				} catch(Throwable throwable) {
 					MessageDialog.errorMessage(throwable);
 				}
 			}
@@ -100,7 +100,7 @@ public class PrintPreviewAction extends Action {
 					//		layout.makeDocument(new PrintDocumentImpl(layout, new Rectangle(0, 0, 850, 1050)));
 					//	}
 					// }).start();
-				}catch(Throwable throwable) {
+				} catch(Throwable throwable) {
 					MessageDialog.errorMessage(throwable);
 				}
 			}

@@ -279,38 +279,38 @@ public class GraceEditor extends SelectionAdapter {
 		//duration
 		if (this.durationButton1.getSelection()) {
 			effect.setDuration(1);
-		}else if (this.durationButton2.getSelection()) {
+		} else if (this.durationButton2.getSelection()) {
 			effect.setDuration(2);
-		}else if (this.durationButton3.getSelection()) {
+		} else if (this.durationButton3.getSelection()) {
 			effect.setDuration(3);
 		}
 		//velocity
 		if (this.pppButton.getSelection()) {
 			effect.setDynamic(TGVelocities.PIANO_PIANISSIMO);
-		}else if (this.ppButton.getSelection()) {
+		} else if (this.ppButton.getSelection()) {
 			effect.setDynamic(TGVelocities.PIANISSIMO);
-		}else if (this.pButton.getSelection()) {
+		} else if (this.pButton.getSelection()) {
 			effect.setDynamic(TGVelocities.PIANO);
-		}else if (this.mpButton.getSelection()) {
+		} else if (this.mpButton.getSelection()) {
 			effect.setDynamic(TGVelocities.MEZZO_PIANO);
-		}else if (this.mfButton.getSelection()) {
+		} else if (this.mfButton.getSelection()) {
 			effect.setDynamic(TGVelocities.MEZZO_FORTE);
-		}else if (this.fButton.getSelection()) {
+		} else if (this.fButton.getSelection()) {
 			effect.setDynamic(TGVelocities.FORTE);
-		}else if (this.ffButton.getSelection()) {
+		} else if (this.ffButton.getSelection()) {
 			effect.setDynamic(TGVelocities.FORTISSIMO);
-		}else if (this.fffButton.getSelection()) {
+		} else if (this.fffButton.getSelection()) {
 			effect.setDynamic(TGVelocities.FORTE_FORTISSIMO);
 		}
 		
 		//transition
 		if (this.noneButton.getSelection()) {
 			effect.setTransition(TGEffectGrace.TRANSITION_NONE);
-		}else if (this.slideButton.getSelection()) {
+		} else if (this.slideButton.getSelection()) {
 			effect.setTransition(TGEffectGrace.TRANSITION_SLIDE);
-		}else if (this.bendButton.getSelection()) {
+		} else if (this.bendButton.getSelection()) {
 			effect.setTransition(TGEffectGrace.TRANSITION_BEND);
-		}else if (this.hammerButton.getSelection()) {
+		} else if (this.hammerButton.getSelection()) {
 			effect.setTransition(TGEffectGrace.TRANSITION_HAMMER);
 		}
 		

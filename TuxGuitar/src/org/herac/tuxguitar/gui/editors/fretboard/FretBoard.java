@@ -274,9 +274,9 @@ public class FretBoard extends Composite {
 		if (isVisible()) {
 			if (TuxGuitar.instance().getPlayer().isRunning()) {
 				this.beat = TuxGuitar.instance().getEditorCache().getPlayBeat();
-			}else if (this.externalBeat != null) {
+			} else if (this.externalBeat != null) {
 				this.beat = this.externalBeat;
-			}else {
+			} else {
 				this.beat = TuxGuitar.instance().getEditorCache().getEditBeat();
 			}
 			
@@ -714,13 +714,13 @@ public class FretBoard extends Composite {
 					ActionLock.lock();
 					if ( getExternalBeat() == null ) {
 						hit(e.x, e.y);
-					}else {
+					} else {
 						setExternalBeat( null );
 					}
 					afterAction();
 					ActionLock.unlock();
 				}
-			}else {
+			} else {
 				TuxGuitar.instance().getAction(GoRightAction.NAME).process(e);
 			}
 		}

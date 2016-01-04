@@ -45,7 +45,7 @@ public abstract class TGConfigManager {
 		try {
 			String property = getProperty(key);
 			return (property == null)?defaultValue:property.trim();
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -59,7 +59,7 @@ public abstract class TGConfigManager {
 		try {
 			String value = getProperty(key);
 			return (value == null)?defaultValue:Integer.parseInt(value.trim());
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -73,7 +73,7 @@ public abstract class TGConfigManager {
 		try {
 			String value = getProperty(key);
 			return (value == null)?defaultValue:Float.parseFloat(value.trim());
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -87,7 +87,7 @@ public abstract class TGConfigManager {
 		try {
 			String value = getProperty(key);
 			return (value == null)?defaultValue:Double.parseDouble(value.trim());
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -101,7 +101,7 @@ public abstract class TGConfigManager {
 		try {
 			String value = getProperty(key);
 			return (value == null)?defaultValue:Boolean.valueOf(value.trim()).booleanValue();
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -122,12 +122,12 @@ public abstract class TGConfigManager {
 						int size = Integer.parseInt(values[1].trim());
 						int style = Integer.parseInt(values[2].trim());
 						return new FontData( (name == null ? "" : name), size, style);
-					}catch(NumberFormatException e) {
+					} catch(NumberFormatException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return new FontData();
@@ -145,12 +145,12 @@ public abstract class TGConfigManager {
 						int blue = Integer.parseInt(values[2].trim());
 						
 						return new RGB(red, green, blue);
-					}catch(NumberFormatException e) {
+					} catch(NumberFormatException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -208,7 +208,7 @@ public abstract class TGConfigManager {
 				InputStream inputStream = new FileInputStream(getFileName());
 				this.properties.clear();
 				this.properties.load(inputStream);
-			}else {
+			} else {
 				this.save();
 			}
 		} catch (Exception e) {

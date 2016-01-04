@@ -213,12 +213,12 @@ public class DurationToolItems  extends ToolItems {
 				Point pt = item.getParent().toDisplay(new Point(rect.x, rect.y));
 				this.subMenu.setLocation(pt.x, pt.y + rect.height);
 				this.subMenu.setVisible(true);
-			}else {
+			} else {
 				TGDuration duration = getEditor().getTablature().getCaret().getDuration();
 				if (duration.getDivision().isEqual(TGDivisionType.NORMAL)) {
 					((TGDivisionType)this.divisionType.getData()).setEnters(3);
 					((TGDivisionType)this.divisionType.getData()).setTimes(2);
-				}else {
+				} else {
 					((TGDivisionType)this.divisionType.getData()).setEnters(1);
 					((TGDivisionType)this.divisionType.getData()).setTimes(1);
 				}

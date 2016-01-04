@@ -111,7 +111,7 @@ public class OpenFileAction extends Action {
 					return file.toURI().toURL();
 				}
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;

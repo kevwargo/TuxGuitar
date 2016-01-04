@@ -34,7 +34,7 @@ public class KeyBindingWriter {
 			Document doc = createDocument();
 			setBindings(list, doc);
 			saveDocument(doc, file);
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}
@@ -45,7 +45,7 @@ public class KeyBindingWriter {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.newDocument();
 			return document;
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -62,7 +62,7 @@ public class KeyBindingWriter {
 			Result output = new StreamResult(fs);
 			idTransform.setOutputProperty(OutputKeys.INDENT, "yes");
 			idTransform.transform(input, output);
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}

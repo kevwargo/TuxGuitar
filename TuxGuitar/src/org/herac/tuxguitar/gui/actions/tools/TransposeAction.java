@@ -181,7 +181,7 @@ public class TransposeAction extends Action {
 			}
 			
 			updateTablature();
-		}else {
+		} else {
 			if ( applyToAllTracks ) {
 				TGSong song = getSongManager().getSong();
 				for ( int i = 0 ; i < song.countTracks() ; i ++ ) {

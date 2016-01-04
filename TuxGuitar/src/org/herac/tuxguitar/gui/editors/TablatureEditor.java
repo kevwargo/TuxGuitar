@@ -70,7 +70,7 @@ public class TablatureEditor implements TGRedrawListener, TGUpdateListener {
 	public void doRedraw(int type) {
 		if ( type == TGRedrawListener.NORMAL ) {
 			getTablature().redraw();
-		}else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
+		} else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
 			getTablature().redrawPlayingMode();
 		}
 	}
@@ -78,7 +78,7 @@ public class TablatureEditor implements TGRedrawListener, TGUpdateListener {
 	public void doUpdate(int type) {
 		if ( type == TGUpdateListener.SONG_UPDATED ) {
 			getTablature().updateTablature();
-		}else if ( type == TGUpdateListener.SONG_LOADED ) {
+		} else if ( type == TGUpdateListener.SONG_LOADED ) {
 			getTablature().updateTablature();
 			getTablature().resetScroll();
 			getTablature().initCaret();

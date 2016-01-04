@@ -90,7 +90,7 @@ public class LanguageManager {
 		try {
 			String property = this.resources.getString(key);
 			return (property == null ? value : property );
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			return value;
 		}
 	}

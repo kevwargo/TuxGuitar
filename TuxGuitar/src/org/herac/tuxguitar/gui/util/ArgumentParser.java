@@ -33,7 +33,7 @@ public class ArgumentParser {
 				checkProperties();
 				checkURL();
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}
@@ -121,10 +121,10 @@ public class ArgumentParser {
 			File file = new File(spec);
 			if (file.exists()) {
 				this.url = file.toURI().toURL();
-			}else {
+			} else {
 				this.url = new URL(spec);
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			this.url = null;
 		}
 		return (this.url != null);

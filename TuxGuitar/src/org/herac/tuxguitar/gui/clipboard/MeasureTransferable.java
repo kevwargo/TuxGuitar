@@ -40,7 +40,7 @@ public class MeasureTransferable implements Transferable {
 	private void getTransfer(int p1, int p2, boolean allTracks) {
 		if (allTracks) {
 			this.segment = new TGSongSegmentHelper(TuxGuitar.instance().getSongManager()).copyMeasures(p1, p2);
-		}else {
+		} else {
 			TGTrack track = this.tablatureEditor.getTablature().getCaret().getTrack();
 			this.segment = new TGSongSegmentHelper(TuxGuitar.instance().getSongManager()).copyMeasures(p1, p2, track);
 		}
@@ -52,7 +52,7 @@ public class MeasureTransferable implements Transferable {
 		TGSongSegment segment = helper.createSegmentCopies(this.segment, this.pasteCount );
 		if (this.transferType == TRANSFER_TYPE_REPLACE) {
 			replaceMeasures(helper, segment);
-		}else if (this.transferType == TRANSFER_TYPE_INSERT) {
+		} else if (this.transferType == TRANSFER_TYPE_INSERT) {
 			insertMeasures(helper, segment);
 		}
 	}

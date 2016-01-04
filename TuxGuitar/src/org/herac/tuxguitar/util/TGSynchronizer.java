@@ -56,7 +56,7 @@ public class TGSynchronizer {
 		public void run() {
 			try {
 				this.runnable.run();
-			}catch(Throwable throwable) {
+			} catch(Throwable throwable) {
 				this.throwable = throwable;
 			}
 		}

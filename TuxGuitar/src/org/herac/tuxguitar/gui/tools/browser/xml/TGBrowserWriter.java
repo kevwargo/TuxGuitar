@@ -37,7 +37,7 @@ public class TGBrowserWriter {
 			Document doc = createDocument();
 			saveCollections(manager, doc);
 			saveDocument(doc, new File(fileName));
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}
@@ -75,7 +75,7 @@ public class TGBrowserWriter {
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			document = builder.newDocument();
-		}catch (ParserConfigurationException pce) {
+		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
 		}
 		return document;

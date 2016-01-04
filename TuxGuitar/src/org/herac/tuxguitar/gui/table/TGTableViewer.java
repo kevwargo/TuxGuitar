@@ -361,7 +361,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 	public void doRedraw(int type) {
 		if ( type == TGRedrawListener.NORMAL ) {
 			this.redraw();
-		}else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
+		} else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
 			this.redrawPlayingMode();
 		}
 	}
@@ -370,10 +370,10 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 		if ( type == TGUpdateListener.SELECTION ) {
             // System.out.printf("selection update\n");
 			this.updateItems();
-		}else if ( type == TGUpdateListener.SONG_UPDATED ) {
+		} else if ( type == TGUpdateListener.SONG_UPDATED ) {
             // System.out.printf("song updated\n");
 			this.fireUpdate( false );
-		}else if ( type == TGUpdateListener.SONG_LOADED ) {
+		} else if ( type == TGUpdateListener.SONG_LOADED ) {
 			this.fireUpdate( true );
 		}
 	}

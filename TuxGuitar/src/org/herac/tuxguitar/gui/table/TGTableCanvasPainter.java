@@ -52,7 +52,7 @@ public class TGTableCanvasPainter implements PaintListener {
 					painter.setAntialias(false);
 					painter.addRectangle(x, y, size - 2, size - 1);
 					painter.closePath();
-				}else {
+				} else {
 					painter.initPath(TGPainter.PATH_FILL);
 					painter.setAntialias(false);
 					painter.addRectangle(x, y, size - 1, size );

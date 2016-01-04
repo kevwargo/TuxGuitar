@@ -33,7 +33,7 @@ public class LyricModifyListener implements ModifyListener {
 				TuxGuitar.instance().getFileHistory().setUnsavedFile();
 				
 				this.lastPosition = position;
-			}else if (e.widget instanceof Spinner) {
+			} else if (e.widget instanceof Spinner) {
 				TGTrack track = this.editor.getTrack();
 				UndoableTrackLyric undoable = UndoableTrackLyric.startUndo(track, this.lastPosition);
 				track.getLyrics().setFrom(((Spinner)e.widget).getSelection());

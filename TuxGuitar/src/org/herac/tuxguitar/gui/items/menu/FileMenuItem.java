@@ -158,7 +158,7 @@ public class FileMenuItem extends MenuItems {
 			TGRawImporter importer = (TGRawImporter)importers.next();
 			if ( importer instanceof TGLocalFileImporter ) {
 				importersFile.add( importer );
-			}else {
+			} else {
 				importersRaw.add( importer );
 			}
 		}
@@ -194,7 +194,7 @@ public class FileMenuItem extends MenuItems {
 			TGRawExporter exporter = (TGRawExporter)exporters.next();
 			if ( exporter instanceof TGLocalFileExporter ) {
 				exportersFile.add( exporter );
-			}else {
+			} else {
 				exportersRaw.add( exporter );
 			}
 		}
@@ -277,7 +277,7 @@ public class FileMenuItem extends MenuItems {
 				MenuItem item = (MenuItem)importItems.next();
 				if ( item.getData() instanceof TGLocalFileImporter ) {
 					item.setText(TuxGuitar.getProperty("file.import") + " " + ((TGRawImporter)item.getData()).getImportName());
-				}else if ( item.getData() instanceof TGRawImporter ) {
+				} else if ( item.getData() instanceof TGRawImporter ) {
 					item.setText(((TGRawImporter)item.getData()).getImportName());
 				}
 			}
@@ -290,7 +290,7 @@ public class FileMenuItem extends MenuItems {
 				MenuItem item = (MenuItem)exportItems.next();
 				if ( item.getData() instanceof TGLocalFileExporter ) {
 					item.setText(TuxGuitar.getProperty("file.export") + " " + ((TGRawExporter)item.getData()).getExportName());
-				}else if ( item.getData() instanceof TGRawExporter ) {
+				} else if ( item.getData() instanceof TGRawExporter ) {
 					item.setText(((TGRawExporter)item.getData()).getExportName());
 				}
 			}

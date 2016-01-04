@@ -137,7 +137,7 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 			this.coolBar.setVisible( !this.coolbarVisible );
 			if ( this.coolbarVisible ) {
 				this.clearCoolBar();
-			}else {
+			} else {
 				this.makeCoolItems();
 			}
 			

@@ -555,10 +555,10 @@ public abstract class ViewLayout {
 		if (note.isTiedNote()) {
 			noteAsString = "L";
 			noteAsString = (note.getEffect().isGhostNote())?"(" + noteAsString + ")":noteAsString;
-		}else if (note.getEffect().isDeadNote()) {
+		} else if (note.getEffect().isDeadNote()) {
 			noteAsString = "X";
 			noteAsString = (note.getEffect().isGhostNote())?"(" + noteAsString + ")":noteAsString;
-		}else {
+		} else {
 			noteAsString = Integer.toString(note.getValue());
 			noteAsString = (note.getEffect().isGhostNote())?"(" + noteAsString + ")":noteAsString;
 		}

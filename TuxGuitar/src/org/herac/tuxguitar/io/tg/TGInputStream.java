@@ -75,7 +75,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		try {
 			readVersion();
 			return isSupportedVersion(this.version);
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			return false;
 		}
 	}
@@ -216,14 +216,14 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		//leo el time signature
 		if (((header & MEASURE_HEADER_TIMESIGNATURE) != 0)) {
 			readTimeSignature(measureHeader.getTimeSignature());
-		}else if (lastMeasureHeader != null) {
+		} else if (lastMeasureHeader != null) {
 			lastMeasureHeader.getTimeSignature().copy(measureHeader.getTimeSignature());
 		}
 		
 		//leo el tempo
 		if (((header & MEASURE_HEADER_TEMPO) != 0)) {
 			readTempo(measureHeader.getTempo());
-		}else if (lastMeasureHeader != null) {
+		} else if (lastMeasureHeader != null) {
 			lastMeasureHeader.getTempo().copy(measureHeader.getTempo());
 		}
 		

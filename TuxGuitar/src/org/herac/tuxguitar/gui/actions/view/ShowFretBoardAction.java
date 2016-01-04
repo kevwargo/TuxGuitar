@@ -28,7 +28,7 @@ public class ShowFretBoardAction extends Action {
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		if (TuxGuitar.instance().getFretBoardEditor().isVisible()) {
 			TuxGuitar.instance().getFretBoardEditor().hideFretBoard();
-		}else {
+		} else {
 			TuxGuitar.instance().getFretBoardEditor().showFretBoard();
 		}
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);

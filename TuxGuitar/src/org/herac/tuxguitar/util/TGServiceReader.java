@@ -26,7 +26,7 @@ public class TGServiceReader {
 				throw new IllegalArgumentException();
 			}
 			return new IteratorImpl(spi, loader, loader.getResources(SERVICE_PATH + spi.getName()));
-		}catch (IOException ioex) {
+		} catch (IOException ioex) {
 			return Collections.EMPTY_LIST.iterator();
 		}
 	}

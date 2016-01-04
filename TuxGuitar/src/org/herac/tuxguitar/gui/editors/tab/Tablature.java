@@ -140,7 +140,7 @@ public class Tablature extends Composite {
 					
 					moveScrollTo(getCaret().getMeasure(), xScroll, yScroll, area);
 				}
-			}catch(Throwable throwable) {
+			} catch(Throwable throwable) {
 				throwable.printStackTrace();
 			}
 			this.setPainting(false);
@@ -257,7 +257,7 @@ public class Tablature extends Composite {
 						this.playedMeasure =  measure;
 					}
 				}
-			}catch(Throwable throwable) {
+			} catch(Throwable throwable) {
 				throwable.printStackTrace();
 			}
 		}

@@ -104,7 +104,7 @@ public class MouseKit {
 						
 						this.lastx = x1;
 						this.lasty = (y1 - topHeight);
-					}else if (e.y > (y2 - 3) && e.y  < y2 + bottomHeight) {
+					} else if (e.y > (y2 - 3) && e.y  < y2 + bottomHeight) {
 						this.back = new Image(TuxGuitar.instance().getDisplay(), width + 1, bottomHeight + 1);
 						TGPainter painter = new TGPainter(new GC(this.kit.getTablature()));
 						painter.copyArea(this.back, x1, y2);	
@@ -218,7 +218,7 @@ public class MouseKit {
 					realValue ++;
 				}
 			}
-		}else if (key > 7 ) {
+		} else if (key > 7 ) {
 			if (TGMeasureImpl.KEY_SIGNATURES[key][TGMeasureImpl.ACCIDENTAL_FLAT_NOTES[realValue % 12]] == TGMeasureImpl.FLAT && this.kit.isNatural()) {
 				realValue --;
 			}

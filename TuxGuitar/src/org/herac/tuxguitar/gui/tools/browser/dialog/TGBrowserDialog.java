@@ -221,7 +221,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler, TGBrowserConnec
 			TGBrowserManager.instance().removeCollection(collection);
 			if ( getCollection() != null && getCollection().equals( collection ) ) {
 				this.getConnection().close(CALL_CLOSE);
-			}else {
+			} else {
 				this.updateCollections( getCollection() );
 			}
 		}
@@ -344,7 +344,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler, TGBrowserConnec
 					try {
 						TGSong song = TGFileFormatManager.instance().getLoader().load(TuxGuitar.instance().getSongManager().getFactory(), stream);
 						TuxGuitar.instance().fireNewSong(song, null);
-					}catch (Throwable throwable) {
+					} catch (Throwable throwable) {
 						TuxGuitar.instance().newSong();
 						MessageDialog.errorMessage(getShell(), new TGFileFormatException(TuxGuitar.getProperty("file.open.error", new String[] {element.getName() }), throwable));
 					}

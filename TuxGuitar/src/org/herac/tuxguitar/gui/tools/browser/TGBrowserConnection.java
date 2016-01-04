@@ -49,7 +49,7 @@ public class TGBrowserConnection {
 						if (getBrowser() != null) {
 							getBrowser().open();
 							notifyOpened(callId);
-						}else {
+						} else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -72,7 +72,7 @@ public class TGBrowserConnection {
 						if (browser != null) {
 							browser.close();
 							notifyClosed(callId);
-						}else {
+						} else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -93,7 +93,7 @@ public class TGBrowserConnection {
 						if (isOpen()) {
 							getBrowser().cdRoot();
 							notifyCd(callId);
-						}else {
+						} else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -114,7 +114,7 @@ public class TGBrowserConnection {
 						if (isOpen()) {
 							getBrowser().cdUp();
 							notifyCd(callId);
-						}else {
+						} else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -135,7 +135,7 @@ public class TGBrowserConnection {
 						if (isOpen()) {
 							getBrowser().cdElement(element);
 							notifyCd(callId);
-						}else {
+						} else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -156,7 +156,7 @@ public class TGBrowserConnection {
 						if (isOpen()) {
 							List elements = getBrowser().listElements();
 							notifyElements(callId, elements);
-						}else {
+						} else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {

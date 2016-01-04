@@ -93,7 +93,7 @@ public class PasteMeasureAction extends Action {
 					int pasteCount = countSpinner.getSelection();
 					if ( replace.getSelection() ) {
 						pasteMode = MeasureTransferable.TRANSFER_TYPE_REPLACE;
-					}else if (insert.getSelection()) {
+					} else if (insert.getSelection()) {
 						pasteMode = MeasureTransferable.TRANSFER_TYPE_INSERT;
 					}
 					pasteMeasures( pasteMode , pasteCount);

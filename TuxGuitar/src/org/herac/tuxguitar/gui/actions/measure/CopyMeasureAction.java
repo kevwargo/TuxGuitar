@@ -88,7 +88,7 @@ public class CopyMeasureAction extends Action {
 					
 					if (fromSelection < minSelection) {
 						fromSpinner.setSelection(minSelection);
-					}else if (fromSelection > toSelection) {
+					} else if (fromSelection > toSelection) {
 						fromSpinner.setSelection(toSelection);
 					}
 				}
@@ -99,7 +99,7 @@ public class CopyMeasureAction extends Action {
 					int fromSelection = fromSpinner.getSelection();
 					if (toSelection < fromSelection) {
 						toSpinner.setSelection(fromSelection);
-					}else if (toSelection > maxSelection) {
+					} else if (toSelection > maxSelection) {
 						toSpinner.setSelection(maxSelection);
 					}
 				}

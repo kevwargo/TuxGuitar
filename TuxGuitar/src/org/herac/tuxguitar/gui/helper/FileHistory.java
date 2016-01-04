@@ -133,7 +133,7 @@ public class FileHistory {
 			if (url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
 				return true;
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return false;
@@ -202,7 +202,7 @@ public class FileHistory {
 					}
 				}
 				setChanged(true);
-			}else {
+			} else {
 				this.saveHistory();
 			}
 		} catch (Exception e) {

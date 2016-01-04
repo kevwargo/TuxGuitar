@@ -128,7 +128,7 @@ public class TGSongManager {
 			TGTrack currTrack = (TGTrack)it.next();
 			if (trackToRemove == null && currTrack.getNumber() == nextNumber) {
 				trackToRemove = currTrack;
-			}else if (currTrack.getNumber() == (nextNumber + 1)) {
+			} else if (currTrack.getNumber() == (nextNumber + 1)) {
 				currTrack.setNumber(nextNumber);
 				nextNumber ++;
 			}
@@ -197,7 +197,7 @@ public class TGSongManager {
 		if (normalChannel < 0 || effectChannel < 0) {
 			if (normalChannel >= 0 ) {
 				effectChannel = normalChannel;
-			}else {
+			} else {
 				TGChannel songChannel = getLastTrack().getChannel();
 				return songChannel.clone(getFactory());
 			}
@@ -432,7 +432,7 @@ public class TGSongManager {
 			TGMeasureHeader nextHeader = (TGMeasureHeader)it.next();
 			if (toEnd || nextHeader.getTempo().getValue() == oldValue) {
 				changeTempo(nextHeader, tempo);
-			}else {
+			} else {
 				break;
 			}
 		}
@@ -482,7 +482,7 @@ public class TGSongManager {
 		TGMeasureHeader header = null;
 		if (number == 1) {
 			header = getMeasureHeader(number).clone(getFactory());
-		}else {
+		} else {
 			header = getMeasureHeader((number - 1)).clone(getFactory());
 			header.setStart(header.getStart() + header.getLength());
 			header.setNumber(header.getNumber() + 1);

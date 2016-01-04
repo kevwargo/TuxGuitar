@@ -33,7 +33,7 @@ public class UndoableManager {
 		}
 		try {
 			edit.undo();
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throw new CannotUndoException(throwable);
 		}
 		this.indexOfNextAdd--;
@@ -46,7 +46,7 @@ public class UndoableManager {
 		}
 		try {
 			edit.redo();
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throw new CannotRedoException();
 		}
 		this.indexOfNextAdd++;

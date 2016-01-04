@@ -102,7 +102,7 @@ public class EditorCache {
 							TGBeat next = manager.getMeasureManager().getNextBeat(this.playMeasure.getBeats(), this.playBeat);
 							if ( next != null ) {
 								this.playBeatEnd = next.getStart();
-							}else {
+							} else {
 								TGDuration duration = manager.getMeasureManager().getMinimumDuration(this.playBeat);
 								this.playBeatEnd = (this.playBeat.getStart() + duration.getTime());
 							}

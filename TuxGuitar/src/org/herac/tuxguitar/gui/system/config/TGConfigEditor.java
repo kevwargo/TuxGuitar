@@ -202,13 +202,13 @@ public class TGConfigEditor {
 		data.minimumHeight = minHeight;
 		if (with > 0) {
 			data.widthHint = with;
-		}else {
+		} else {
 			data.horizontalAlignment = SWT.FILL;
 			data.grabExcessHorizontalSpace = true;
 		}
 		if (height > 0) {
 			data.heightHint = with;
-		}else {
+		} else {
 			data.verticalAlignment = SWT.FILL;
 			data.grabExcessVerticalSpace = true;
 		}

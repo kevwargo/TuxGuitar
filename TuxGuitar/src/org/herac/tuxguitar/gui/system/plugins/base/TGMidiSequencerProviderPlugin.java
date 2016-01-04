@@ -26,7 +26,7 @@ public abstract class TGMidiSequencerProviderPlugin extends TGPluginAdapter {
 	public void setEnabled(boolean enabled) throws TGPluginException {
 		if (enabled) {
 			addPlugin();
-		}else {
+		} else {
 			removePlugin();
 		}
 	}

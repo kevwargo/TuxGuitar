@@ -27,7 +27,7 @@ public class ChordXMLReader {
 				Document doc = getDocument(file);
 				loadChords(doc.getFirstChild(), chords);
 			}
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return chords;
@@ -86,7 +86,7 @@ public class ChordXMLReader {
 					chords.add(chord);
 				}
 			}
-		}catch(Exception e) {
+		} catch(Exception e) {
 			chords.clear();
 			e.printStackTrace();
 		}

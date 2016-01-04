@@ -41,7 +41,7 @@ public class ChangeTiedNoteAction extends Action {
 			
 			//termia el undoable
 			addUndoableEdit(undoable.endUndo());
-		}else {
+		} else {
 			TGNote note = getSongManager().getFactory().newNote();
 			note.setValue(0);
 			note.setVelocity(caret.getVelocity());

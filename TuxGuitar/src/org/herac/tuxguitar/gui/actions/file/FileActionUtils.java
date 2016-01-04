@@ -93,7 +93,7 @@ public class FileActionUtils {
 		try {
 			TGSong song = TGFileFormatManager.instance().getLoader().load(TuxGuitar.instance().getSongManager().getFactory(), new FileInputStream(fileName));
 			TuxGuitar.instance().fireNewSong(song, new File(fileName).toURI().toURL());
-		}catch (Throwable throwable) {
+		} catch (Throwable throwable) {
 			TuxGuitar.instance().newSong();
 			MessageDialog.errorMessage(new TGFileFormatException(TuxGuitar.getProperty("file.open.error", new String[] {fileName }), throwable));
 		}
@@ -114,7 +114,7 @@ public class FileActionUtils {
 			InputStream stream = (isLocalFile(url) ? url.openStream() : getInputStream(url.openStream()));
 			TGSong song = TGFileFormatManager.instance().getLoader().load(TuxGuitar.instance().getSongManager().getFactory(), stream);
 			TuxGuitar.instance().fireNewSong(song, url);
-		}catch (Throwable throwable) {
+		} catch (Throwable throwable) {
 			TuxGuitar.instance().newSong();
 			MessageDialog.errorMessage(new TGFileFormatException(TuxGuitar.getProperty("file.open.error", new String[] {url.toString() }), throwable));
 		}
@@ -144,7 +144,7 @@ public class FileActionUtils {
 		try {
 			TGSong song = importer.importSong();
 			TuxGuitar.instance().fireNewSong(song, null);
-		}catch (Throwable throwable) {
+		} catch (Throwable throwable) {
 			TuxGuitar.instance().newSong();
 			MessageDialog.errorMessage(new TGFileFormatException(TuxGuitar.getProperty("file.import.error"), throwable));
 		}
@@ -156,7 +156,7 @@ public class FileActionUtils {
 			importer.init(TuxGuitar.instance().getSongManager().getFactory(), stream);
 			TGSong song = importer.importSong();
 			TuxGuitar.instance().fireNewSong(song, null);
-		}catch (Throwable throwable) {
+		} catch (Throwable throwable) {
 			TuxGuitar.instance().newSong();
 			MessageDialog.errorMessage(new TGFileFormatException(TuxGuitar.getProperty("file.import.error", new String[] {path }), throwable));
 		}
@@ -167,7 +167,7 @@ public class FileActionUtils {
 			if (url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
 				return true;
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return false;

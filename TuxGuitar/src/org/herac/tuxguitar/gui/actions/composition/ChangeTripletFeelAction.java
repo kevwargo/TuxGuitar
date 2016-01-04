@@ -138,9 +138,9 @@ public class ChangeTripletFeelAction extends Action {
 	protected int getSelectedTripletFeel(Button tripletFeelNone, Button tripletFeelEighth, Button tripletFeelSixteenth) {
 		if (tripletFeelNone.getSelection()) {
 			return TGMeasureHeader.TRIPLET_FEEL_NONE;
-		}else if (tripletFeelEighth.getSelection()) {
+		} else if (tripletFeelEighth.getSelection()) {
 			return TGMeasureHeader.TRIPLET_FEEL_EIGHTH;
-		}else if (tripletFeelSixteenth.getSelection()) {
+		} else if (tripletFeelSixteenth.getSelection()) {
 			return TGMeasureHeader.TRIPLET_FEEL_SIXTEENTH;
 		}
 		return TGMeasureHeader.TRIPLET_FEEL_NONE;

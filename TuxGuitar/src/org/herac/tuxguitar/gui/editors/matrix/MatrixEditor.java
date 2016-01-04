@@ -336,7 +336,7 @@ public class MatrixEditor implements TGRedrawListener, IconLoader, LanguageLoade
 						this.maxNote = Math.max(this.maxNote, PERCUSSIONS[i].getValue());
 						names[i] = PERCUSSIONS[names.length - i -1].getName();
 					}
-				}else {
+				} else {
 					for (int sNumber = 1; sNumber <= measure.getTrack().stringCount();sNumber ++) {
 						TGString string = measure.getTrack().getString(sNumber);
 						this.minNote = Math.min(this.minNote, string.getValue());
@@ -566,7 +566,7 @@ public class MatrixEditor implements TGRedrawListener, IconLoader, LanguageLoade
 							addNote(voice.getBeat(), start, value);
 						}
 					}
-				}else {
+				} else {
 					play(value);
 				}
 			}
@@ -946,7 +946,7 @@ public class MatrixEditor implements TGRedrawListener, IconLoader, LanguageLoade
 	public void doRedraw(int type) {
 		if ( type == TGRedrawListener.NORMAL ) {
 			this.redraw();
-		}else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
+		} else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
 			this.redrawPlayingMode();
 		}
 	}

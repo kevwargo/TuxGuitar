@@ -107,7 +107,7 @@ public class ChordCustomList extends Composite {
 		
 		if (selectionIndex >= 0 && selectionIndex < this.chords.getItemCount()) {
 			this.chords.select(selectionIndex);
-		}else if (selectionIndex > 0 && (selectionIndex - 1) < this.chords.getItemCount()) {
+		} else if (selectionIndex > 0 && (selectionIndex - 1) < this.chords.getItemCount()) {
 			this.chords.select((selectionIndex - 1));
 		}
 	}

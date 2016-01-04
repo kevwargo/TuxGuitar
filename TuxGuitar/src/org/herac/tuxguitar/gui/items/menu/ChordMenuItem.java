@@ -68,7 +68,7 @@ public class ChordMenuItem extends MenuItems {
 			Point pt = item.getParent().toDisplay(new Point(rect.x, rect.y));
 			this.menu.setLocation(pt.x, pt.y + rect.height);
 			this.menu.setVisible(true);
-		}else {
+		} else {
 			TuxGuitar.instance().getAction(InsertChordAction.NAME).process(event);
 		}
 	}

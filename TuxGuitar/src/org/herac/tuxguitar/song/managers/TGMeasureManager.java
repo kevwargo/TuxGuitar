@@ -173,7 +173,7 @@ public class TGMeasureManager {
 				}
 			}
 			realVoice.addNote(note);
-		}else {
+		} else {
 			beat.getVoice( voice ).setEmpty( emptyVoice );
 		}
 	}
@@ -1030,7 +1030,7 @@ public class TGMeasureManager {
 			}
 			if (nextComponent == null) {
 				nextBeatEnd = measureEnd;
-			}else if (!nextComponent.isRestBeat() || nextComponent.isTextBeat()) {
+			} else if (!nextComponent.isRestBeat() || nextComponent.isTextBeat()) {
 				nextBeatEnd = nextComponent.getStart();
 			}
 			if (beatEnd <= (nextBeatEnd + errorMargin)) {
@@ -1062,7 +1062,7 @@ public class TGMeasureManager {
 						if (current.isRestBeat() && !current.isTextBeat()) {
 							requiredLength -= current.getDuration().getTime();
 							removeBeat(current, false);
-						}else if (requiredLength > 0) {
+						} else if (requiredLength > 0) {
 							moveBeat(current, requiredLength);
 						}
 						beats.remove(0);
@@ -1096,7 +1096,7 @@ public class TGMeasureManager {
 			
 			//trato de agregar un silencio similar al lado
 			tryChangeSilenceAfter(measure, beat);
-		}else {
+		} else {
 			oldDuration.copy( beat.getDuration() );
 		}
 	}
@@ -1489,10 +1489,10 @@ public class TGMeasureManager {
 			if (currentDurationTime <= tempTime) {
 				durations.add(tempDuration.clone(factory));
 				tempTime -= currentDurationTime;
-			}else {
+			} else {
 				if (tempDuration.isDotted()) {
 					tempDuration.setDotted(false);
-				}else {
+				} else {
 					tempDuration.setValue(tempDuration.getValue() * 2);
 					tempDuration.setDotted(true);
 				}
@@ -1667,7 +1667,7 @@ public class TGMeasureManager {
 				}
 			}
 			realVoice.setEmpty(false);
-		}else {
+		} else {
 			beat.getVoice( voice ).setEmpty( emptyVoice );
 		}
 	}
@@ -1740,7 +1740,7 @@ public class TGMeasureManager {
 			TGVoice voice = beat.getVoice(index);
 			if (voice.isRestVoice()) {
 				voices.add(voice);
-			}else if (!voice.isEmpty()) {
+			} else if (!voice.isEmpty()) {
 				hasNotes = true;
 				break;
 			}
@@ -1770,7 +1770,7 @@ public class TGMeasureManager {
 			
 			//trato de agregar un silencio similar al lado
 			tryChangeSilenceAfter(measure, beat.getVoice(voice));
-		}else {
+		} else {
 			oldDuration.copy( beat.getVoice(voice).getDuration() );
 		}
 	}
@@ -1889,7 +1889,7 @@ public class TGMeasureManager {
 			}
 			if (nextVoice == null || nextVoice.isEmpty()) {
 				nextBeatEnd = measureEnd;
-			}else if (!nextVoice.isRestVoice() || nextVoice.getBeat().isTextBeat()) {
+			} else if (!nextVoice.isRestVoice() || nextVoice.getBeat().isTextBeat()) {
 				nextBeatEnd = nextVoice.getBeat().getStart();
 			}
 			if (beatEnd <= (nextBeatEnd + errorMargin)) {
@@ -1922,7 +1922,7 @@ public class TGMeasureManager {
 						if (currentVocie.isRestVoice()) {
 							requiredLength -= currentVocie.getDuration().getTime();
 							removeVoice(currentVocie, false);
-						}else if (requiredLength > 0) {
+						} else if (requiredLength > 0) {
 							moveVoice(currentVocie, requiredLength);
 						}
 						voices.remove(0);

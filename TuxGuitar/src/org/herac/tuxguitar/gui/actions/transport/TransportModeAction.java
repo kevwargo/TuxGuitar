@@ -288,13 +288,13 @@ public class TransportModeAction extends Action {
 			if (e.widget.equals(this.from)) {
 				if (this.from.getSelection() < MIN_SELECTION) {
 					this.from.setSelection(MIN_SELECTION);
-				}else if (this.from.getSelection() >= this.to.getSelection()) {
+				} else if (this.from.getSelection() >= this.to.getSelection()) {
 					this.from.setSelection(this.to.getSelection() - 1);
 				}
-			}else if (e.widget.equals(this.to)) {
+			} else if (e.widget.equals(this.to)) {
 				if (this.to.getSelection() <= this.from.getSelection()) {
 					this.to.setSelection(this.from.getSelection() + 1);
-				}else if (this.to.getSelection() > MAX_SELECTION) {
+				} else if (this.to.getSelection() > MAX_SELECTION) {
 					this.to.setSelection(MAX_SELECTION);
 				}
 			}

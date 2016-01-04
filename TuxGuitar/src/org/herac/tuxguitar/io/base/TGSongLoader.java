@@ -43,7 +43,7 @@ public class TGSongLoader {
 				stream.reset();
 			}
 			stream.close();
-		}catch(Throwable t) {
+		} catch(Throwable t) {
 			throw new TGFileFormatException(t);
 		}
 		throw new TGFileFormatException("Unsupported file format");

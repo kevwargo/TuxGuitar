@@ -98,9 +98,9 @@ public class AboutDialog {
 			public void widgetSelected(SelectionEvent e) {
 				if (tabFolder.getSelectionIndex() == 0) {
 					AboutDialog.this.image = TuxGuitar.instance().getIconManager().getAboutDescription();
-				}else if (tabFolder.getSelectionIndex() == 1) {
+				} else if (tabFolder.getSelectionIndex() == 1) {
 					AboutDialog.this.image = TuxGuitar.instance().getIconManager().getAboutAuthors();
-				}else if (tabFolder.getSelectionIndex() == 2) {
+				} else if (tabFolder.getSelectionIndex() == 2) {
 					AboutDialog.this.image = TuxGuitar.instance().getIconManager().getAboutLicense();
 				}
 				AboutDialog.this.imageComposite.redraw();

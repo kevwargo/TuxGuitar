@@ -140,7 +140,7 @@ public class MidiPlayer {
 				this.getSequencer().stop();
 			}
 			this.setRunning(false);
-		}catch (MidiPlayerException e) {
+		} catch (MidiPlayerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -209,7 +209,7 @@ public class MidiPlayer {
 						if (isRunning()) {
 							if (MidiPlayer.this.tickPosition >= (MidiPlayer.this.tickLength - (TGDuration.QUARTER_TIME / 2) )) {
 								finish();
-							}else {
+							} else {
 								stop(isPaused());
 							}
 						}
@@ -217,20 +217,20 @@ public class MidiPlayer {
 						if ( !isRunning() ) {
 							MidiPlayer.this.notifyStopped();
 						}
-					}catch (Throwable throwable) {
+					} catch (Throwable throwable) {
 						setStarting(false);
 						reset();
 						throwable.printStackTrace();
-					}finally {
+					} finally {
 						MidiPlayer.this.lock.unlock();
 					}
 				}
 			}).start();
-		}catch (Throwable throwable) {
+		} catch (Throwable throwable) {
 			this.setStarting(false);
 			this.reset();
 			throw new MidiPlayerException(throwable.getMessage(), throwable);
-		}finally {
+		} finally {
 			this.lock.unlock();
 		}
 	}
@@ -430,7 +430,7 @@ public class MidiPlayer {
 					getOutputTransmitter().sendProgramChange(track.getChannel().getEffectChannel(), track.getChannel().getInstrument());
 				}
 			}
-		}catch (MidiPlayerException e) {
+		} catch (MidiPlayerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -472,7 +472,7 @@ public class MidiPlayer {
 			}
 			getSequencer().setMute(track.getNumber(), track.isMute());
 			getSequencer().setSolo(track.getNumber(), track.isSolo());
-		}catch (MidiPlayerException e) {
+		} catch (MidiPlayerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -486,7 +486,7 @@ public class MidiPlayer {
 			getOutputTransmitter().sendControlChange(channel, MidiControllers.PHASER, phaser);
 			getOutputTransmitter().sendControlChange(channel, MidiControllers.TREMOLO, tremolo);
 			getOutputTransmitter().sendControlChange(channel, MidiControllers.EXPRESSION, expression);
-		}catch (MidiPlayerException e) {
+		} catch (MidiPlayerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -495,7 +495,7 @@ public class MidiPlayer {
 		try {
 			getSequencer().setSolo(this.infoTrack, this.anySolo);
 			getSequencer().setSolo(this.metronomeTrack,(isMetronomeEnabled() && this.anySolo));
-		}catch (MidiPlayerException e) {
+		} catch (MidiPlayerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -509,7 +509,7 @@ public class MidiPlayer {
 			this.metronomeEnabled = metronomeEnabled;
 			this.getSequencer().setMute(this.metronomeTrack,!isMetronomeEnabled());
 			this.getSequencer().setSolo(this.metronomeTrack,(isMetronomeEnabled() && this.anySolo));
-		}catch (MidiPlayerException e) {
+		} catch (MidiPlayerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -599,7 +599,7 @@ public class MidiPlayer {
 			this.sequencer = sequencer;
 			this.sequencer.open();
 			this.sequencer.setTransmitter( getOutputTransmitter() );
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			this.sequencer = null;
 			return false;
 		}
@@ -612,7 +612,7 @@ public class MidiPlayer {
 			this.outputPort = port;
 			this.outputPort.open();
 			this.getOutputTransmitter().addReceiver(this.outputPort.getKey(), this.outputPort.getReceiver() );
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			this.outputPort = null;
 			return false;
 		}
@@ -644,7 +644,7 @@ public class MidiPlayer {
 			if (getOutputPort() == null && !ports.isEmpty() && tryFirst) {
 				this.loadOutputPort( (MidiOutputPort)ports.get(0) );
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}
@@ -657,7 +657,7 @@ public class MidiPlayer {
 		try {
 			this.sequencerKey = key;
 			this.openSequencer(listSequencers(), tryFirst);
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}
@@ -680,7 +680,7 @@ public class MidiPlayer {
 				this.loadSequencer( (MidiSequencer) sequencers.get(0));
 			}
 			
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throw new MidiPlayerException(throwable.getMessage(), throwable);
 		}
 	}
@@ -692,7 +692,7 @@ public class MidiPlayer {
 			try {
 				MidiOutputPortProvider provider = (MidiOutputPortProvider)it.next();
 				ports.addAll(provider.listPorts());
-			}catch(Throwable throwable) {
+			} catch(Throwable throwable) {
 				throwable.printStackTrace();
 			}
 		}
@@ -706,7 +706,7 @@ public class MidiPlayer {
 			try {
 				MidiSequencerProvider provider = (MidiSequencerProvider)it.next();
 				sequencers.addAll(provider.listSequencers());
-			}catch(Throwable throwable) {
+			} catch(Throwable throwable) {
 				throwable.printStackTrace();
 			}
 		}
@@ -724,7 +724,7 @@ public class MidiPlayer {
 				this.sequencer = null;
 			}
 			this.lock.unlock();
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throw new MidiPlayerException(throwable.getMessage(), throwable);
 		}
 	}
@@ -741,7 +741,7 @@ public class MidiPlayer {
 				this.outputPort = null;
 			}
 			this.lock.unlock();
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}

@@ -238,7 +238,7 @@ public class MidiSequenceParser {
 						while (true) {
 							if (tick + 10 >= (start + duration)) {
 								break ;
-							}else if ( (tick + trillLength) >= (start + duration)) {
+							} else if ( (tick + trillLength) >= (start + duration)) {
 								trillLength = (((start + duration) - tick) - 1);
 							}
 							makeNote(sequence, trackId,((realKey)?key:trillKey), tick, trillLength, velocity, channel);
@@ -254,7 +254,7 @@ public class MidiSequenceParser {
 						while (true) {
 							if (tick + 10 >= (start + duration)) {
 								break ;
-							}else if ( (tick + tpLength) >= (start + duration)) {
+							} else if ( (tick + tpLength) >= (start + duration)) {
 								tpLength = (((start + duration) - tick) - 1);
 							}
 							makeNote(sequence, trackId, key, tick, tpLength, velocity, channel);
@@ -457,9 +457,9 @@ public class MidiSequenceParser {
 		//Check for GhostNote effect
 		if (note.getEffect().isGhostNote()) {
 			velocity = Math.max(TGVelocities.MIN_VELOCITY,(velocity - TGVelocities.VELOCITY_INCREMENT));
-		}else if (note.getEffect().isAccentuatedNote()) {
+		} else if (note.getEffect().isAccentuatedNote()) {
 			velocity = Math.max(TGVelocities.MIN_VELOCITY,(velocity + TGVelocities.VELOCITY_INCREMENT));
-		}else if (note.getEffect().isHeavyAccentuatedNote()) {
+		} else if (note.getEffect().isHeavyAccentuatedNote()) {
 			velocity = Math.max(TGVelocities.MIN_VELOCITY,(velocity + (TGVelocities.VELOCITY_INCREMENT * 2)));
 		}
 		
@@ -530,7 +530,7 @@ public class MidiSequenceParser {
 							addBend(sequence, track, bendStart,((value <= 127)?value:127), channel);
 						}
 						//descendente
-					}else if (value > nextValue) {
+					} else if (value > nextValue) {
 						while (value > nextValue) {
 							value --;
 							bendStart +=width;
@@ -566,7 +566,7 @@ public class MidiSequenceParser {
 							addBend(sequence, track, pointStart,((value <= 127)?value:127), channel);
 						}
 					//descendente
-					}else if (value > nextValue) {
+					} else if (value > nextValue) {
 						while (value > nextValue) {
 							value --;
 							pointStart += width;
@@ -617,7 +617,7 @@ public class MidiSequenceParser {
 				for ( int i = 0 ; i < stroke.length ; i ++ ) {
 					stroke[ i ] = 0;
 				}
-			}else {
+			} else {
 				int stringUseds = 0;
 				int stringCount = 0;
 				for ( int vIndex = 0; vIndex < beat.countVoices(); vIndex ++ ) {
@@ -681,7 +681,7 @@ public class MidiSequenceParser {
 					}
 				}
 			}
-		}else if (voice.getBeat().getMeasure().getTripletFeel() == TGMeasureHeader.TRIPLET_FEEL_SIXTEENTH) {
+		} else if (voice.getBeat().getMeasure().getTripletFeel() == TGMeasureHeader.TRIPLET_FEEL_SIXTEENTH) {
 			if (voice.getDuration().isEqual(newDuration(TGDuration.SIXTEENTH))) {
 				//first time
 				if ( (bStart % (TGDuration.QUARTER_TIME / 2)) == 0) {

@@ -108,7 +108,7 @@ public abstract class TGDuration {
 		long time = (long)( QUARTER_TIME * ( 4.0f / this.value ) ) ;
 		if (this.dotted) {
 			time += time / 2;
-		}else if (this.doubleDotted) {
+		} else if (this.doubleDotted) {
 			time += ((time / 4) * 3);
 		}
 		return this.divisionType.convertTime(time);
@@ -144,10 +144,10 @@ public abstract class TGDuration {
 			}
 			if (tmpDuration.isDotted()) {
 				tmpDuration.setDotted(false);
-			}else if (tmpDuration.getDivision().isEqual(TGDivisionType.NORMAL)) {
+			} else if (tmpDuration.getDivision().isEqual(TGDivisionType.NORMAL)) {
 				tmpDuration.getDivision().setEnters(3);
 				tmpDuration.getDivision().setTimes(2);
-			}else {
+			} else {
 				tmpDuration.setValue(tmpDuration.getValue() * 2);
 				tmpDuration.setDotted(true);
 				tmpDuration.getDivision().setEnters(1);

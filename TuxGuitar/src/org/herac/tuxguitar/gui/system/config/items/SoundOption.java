@@ -87,7 +87,7 @@ public class SoundOption extends Option {
 								if (SoundOption.this.msCurrentKey != null && SoundOption.this.msCurrentKey.equals(sequencer.getKey())) {
 									SoundOption.this.msCombo.select(i);
 									loadedSequencer = null;
-								}else if (loadedSequencer != null && loadedSequencer.equals(sequencer.getKey())) {
+								} else if (loadedSequencer != null && loadedSequencer.equals(sequencer.getKey())) {
 									SoundOption.this.msCombo.select(i);
 								}
 							}
@@ -103,7 +103,7 @@ public class SoundOption extends Option {
 								if (SoundOption.this.mpCurrentKey != null && SoundOption.this.mpCurrentKey.equals(port.getKey())) {
 									SoundOption.this.mpCombo.select(i);
 									loadedPort = null;
-								}else if (loadedPort != null && loadedPort.equals(port.getKey())) {
+								} else if (loadedPort != null && loadedPort.equals(port.getKey())) {
 									SoundOption.this.mpCombo.select(i);
 								}
 							}

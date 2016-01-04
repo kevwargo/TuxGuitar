@@ -288,7 +288,7 @@ public class TGTrackManager {
 		if (percussion) {
 			TGChannel.setPercussionChannel(track.getChannel());
 			track.setStrings(TGSongManager.createPercussionStrings(getSongManager().getFactory(), track.getStrings().size()));
-		}else {
+		} else {
 			if (track.getChannel().isPercussionChannel()) {
 				TGChannel tempChannel = this.songManager.getFreeChannel((short)instrument, false);
 				track.getChannel().setChannel(tempChannel.getChannel());

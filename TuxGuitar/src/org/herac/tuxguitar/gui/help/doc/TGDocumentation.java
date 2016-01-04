@@ -52,7 +52,7 @@ public class TGDocumentation {
 				String[] children = TGFileUtils.getFileNames(resource);
 				if ( children != null && children.length > 0 ) {
 					copyTemporalResources( file.getAbsolutePath(), resource , children );
-				}else if ( !file.exists() ) {
+				} else if ( !file.exists() ) {
 					InputStream in = TGFileUtils.getResourceAsStream(resource);
 					if ( in != null ) {
 						OutputStream out = new FileOutputStream( file );

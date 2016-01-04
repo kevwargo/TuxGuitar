@@ -102,9 +102,9 @@ public class TransportToolItems  extends ToolItems {
 		
 		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			this.status = STATUS_RUNNING;
-		}else if (TuxGuitar.instance().getPlayer().isPaused()) {
+		} else if (TuxGuitar.instance().getPlayer().isPaused()) {
 			this.status = STATUS_PAUSED;
-		}else {
+		} else {
 			this.status = STATUS_STOPPED;
 		}
 		
@@ -117,7 +117,7 @@ public class TransportToolItems  extends ToolItems {
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop2());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPause());
 				this.play.setToolTipText(TuxGuitar.getProperty("transport.pause"));
-			}else if (this.status == STATUS_PAUSED) {
+			} else if (this.status == STATUS_PAUSED) {
 				this.first.setImage(TuxGuitar.instance().getIconManager().getTransportIconFirst2());
 				this.last.setImage(TuxGuitar.instance().getIconManager().getTransportIconLast2());
 				this.previous.setImage(TuxGuitar.instance().getIconManager().getTransportIconPrevious2());
@@ -125,7 +125,7 @@ public class TransportToolItems  extends ToolItems {
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop2());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPlay2());
 				this.play.setToolTipText(TuxGuitar.getProperty("transport.start"));
-			}else if (this.status == STATUS_STOPPED) {
+			} else if (this.status == STATUS_STOPPED) {
 				this.first.setImage(TuxGuitar.instance().getIconManager().getTransportIconFirst1());
 				this.last.setImage(TuxGuitar.instance().getIconManager().getTransportIconLast1());
 				this.previous.setImage(TuxGuitar.instance().getIconManager().getTransportIconPrevious1());

@@ -72,7 +72,7 @@ public class PrintStylesDialog {
 				
 				if (fromSelection < minSelection) {
 					fromSpinner.setSelection(minSelection);
-				}else if (fromSelection > toSelection) {
+				} else if (fromSelection > toSelection) {
 					fromSpinner.setSelection(toSelection);
 				}
 			}
@@ -83,7 +83,7 @@ public class PrintStylesDialog {
 				int fromSelection = fromSpinner.getSelection();
 				if (toSelection < fromSelection) {
 					toSpinner.setSelection(fromSelection);
-				}else if (toSelection > maxSelection) {
+				} else if (toSelection > maxSelection) {
 					toSpinner.setSelection(maxSelection);
 				}
 			}

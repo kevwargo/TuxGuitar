@@ -55,7 +55,7 @@ public class PrintAction extends Action {
 					this.print(printerData, data);
 				}
 			}
-		}catch(Throwable throwable ) {
+		} catch(Throwable throwable ) {
 			MessageDialog.errorMessage(throwable);
 		}
 		return 0;
@@ -84,17 +84,17 @@ public class PrintAction extends Action {
 									PrinterViewLayout layout = new PrinterViewLayout(tablature, data, getPrinterScale(printer));
 									
 									print(printer, printerData, layout , bounds);
-								}catch(Throwable throwable ) {
+								} catch(Throwable throwable ) {
 									MessageDialog.errorMessage(throwable);
 								}
 							}
 						}).start();
-					}catch(Throwable throwable ) {
+					} catch(Throwable throwable ) {
 						MessageDialog.errorMessage(throwable);
 					}
 				}
 			}).start();
-		}catch(Throwable throwable ) {
+		} catch(Throwable throwable ) {
 			MessageDialog.errorMessage(throwable);
 		}
 	}
@@ -109,12 +109,12 @@ public class PrintAction extends Action {
 					//	public void run() {
 					//		try {
 					//			layout.makeDocument(new PrintDocumentImpl(layout, printer, bounds));
-					//		}catch(Throwable throwable ) {
+					//		} catch(Throwable throwable ) {
 					//			MessageDialog.errorMessage(throwable);
 					//		}
 					//	}
 					// }).start();
-				}catch(Throwable throwable ) {
+				} catch(Throwable throwable ) {
 					MessageDialog.errorMessage(throwable);
 				}
 			}

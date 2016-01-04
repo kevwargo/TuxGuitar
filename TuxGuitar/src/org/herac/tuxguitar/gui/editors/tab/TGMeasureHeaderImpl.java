@@ -64,7 +64,7 @@ public class TGMeasureHeaderImpl extends TGMeasureHeader {
 			this.paintFlags |= PAINT_TEMPO; 
 			this.paintFlags |= ((this.getTripletFeel() != TGMeasureHeader.TRIPLET_FEEL_NONE)?PAINT_TRIPLET_FEEL:0);
 			this.paintFlags |= PAINT_TIME_SIGNATURE;
-		}else {
+		} else {
 			//Tempo
 			if (this.getTempo().getValue() != previous.getTempo().getValue()) {
 				this.paintFlags |= PAINT_TEMPO; 

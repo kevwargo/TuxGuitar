@@ -125,7 +125,7 @@ public class LinearViewLayout extends ViewLayout {
             if (isAtX && isAtY) {
                 paintMeasure(measure, painter, 0);
                 ((TGLyricImpl)track.getLyrics()).paintCurrentNoteBeats(painter, this, measure, posX, posY);
-            }else {
+            } else {
                 measure.setOutOfBounds(true);
             }
 

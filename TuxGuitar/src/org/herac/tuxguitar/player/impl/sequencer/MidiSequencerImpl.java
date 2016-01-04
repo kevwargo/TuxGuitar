@@ -67,7 +67,7 @@ public class MidiSequencerImpl implements MidiSequencer {
 			this.setTempo(120);
 			this.setTickPosition( this.getTickPosition() );
 			new MidiTimer(this).start();
-		}else {
+		} else {
 			this.process();
 		}
 	}

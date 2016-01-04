@@ -44,14 +44,14 @@ public class ChangeDivisionTypeAction extends Action {
 			
 			if (getSelectedDuration().getDivision().isEqual(divisionType)) {
 				setDivisionType(noTuplet());
-			}else {
+			} else {
 				setDivisionType(divisionType);
 			}
 		}
 		else {
 			if (getSelectedDuration().getDivision().isEqual(TGDivisionType.NORMAL)) {
 				setDivisionType(defaultDivisionType());
-			}else {
+			} else {
 				setDivisionType(noTuplet());
 			}
 		}

@@ -158,11 +158,11 @@ public class TrillEditor extends SelectionAdapter {
 		effect.setFret(this.fretSpinner.getSelection());
 		if (this.sixtyFourthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.SIXTY_FOURTH);
-		}else if (this.thirtySecondButton.getSelection()) {
+		} else if (this.thirtySecondButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.THIRTY_SECOND);
-		}else if (this.sixTeenthButton.getSelection()) {
+		} else if (this.sixTeenthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.SIXTEENTH);
-		}else {
+		} else {
 			return null;
 		}
 		return effect;

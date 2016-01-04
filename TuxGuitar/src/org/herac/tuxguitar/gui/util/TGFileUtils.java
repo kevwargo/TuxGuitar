@@ -44,7 +44,7 @@ public class TGFileUtils {
 				}
 			}
 			return TGClassLoader.instance().getClassLoader().getResourceAsStream(resource);
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -61,7 +61,7 @@ public class TGFileUtils {
 				}
 			}
 			return TGClassLoader.instance().getClassLoader().getResource(resource);
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -86,7 +86,7 @@ public class TGFileUtils {
 				}
 			}
 			return vector.elements();
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -106,7 +106,7 @@ public class TGFileUtils {
 			if (url != null) {
 				return new File(URLDecoder.decode(url.getPath(), "UTF-8")).getAbsolutePath() + File.separator;
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -162,7 +162,7 @@ public class TGFileUtils {
 				}
 				return fileNames;
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -179,7 +179,7 @@ public class TGFileUtils {
 				return new Image(TuxGuitar.instance().getDisplay(), new ImageData(stream));
 			}
 			System.err.println(name + ": not found");
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return new Image(TuxGuitar.instance().getDisplay(), 16, 16);
@@ -190,7 +190,7 @@ public class TGFileUtils {
 			if (url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
 				return true;
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return false;

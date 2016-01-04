@@ -30,7 +30,7 @@ public class KeyBindingReader {
 			if (file.exists()) {
 				return getBindings(getDocument(file).getFirstChild());
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -41,7 +41,7 @@ public class KeyBindingReader {
 			if (is!=null) {
 				return getBindings(getDocument(is).getFirstChild());
 			}
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;

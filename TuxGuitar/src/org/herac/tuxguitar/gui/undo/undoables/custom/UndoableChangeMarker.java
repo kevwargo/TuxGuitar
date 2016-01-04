@@ -26,7 +26,7 @@ public class UndoableChangeMarker implements UndoableEdit {
 		if (this.redoMarker != null) {
 			TuxGuitar.instance().getSongManager().updateMarker(this.redoMarker.clone(TuxGuitar.instance().getSongManager().getFactory()));
 			MarkerList.instance().update(true);
-		}else if (this.undoMarker != null) {
+		} else if (this.undoMarker != null) {
 			TuxGuitar.instance().getSongManager().removeMarker(this.undoMarker.clone(TuxGuitar.instance().getSongManager().getFactory()));
 			MarkerList.instance().update(false);
 		}
@@ -41,7 +41,7 @@ public class UndoableChangeMarker implements UndoableEdit {
 		if (this.undoMarker != null) {
 			TuxGuitar.instance().getSongManager().updateMarker(this.undoMarker.clone(TuxGuitar.instance().getSongManager().getFactory()));
 			MarkerList.instance().update(true);
-		}else if (this.redoMarker != null) {
+		} else if (this.redoMarker != null) {
 			TuxGuitar.instance().getSongManager().removeMarker(this.redoMarker.clone(TuxGuitar.instance().getSongManager().getFactory()));
 			MarkerList.instance().update(false);
 		}

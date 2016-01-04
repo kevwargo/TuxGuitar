@@ -73,7 +73,7 @@ public class ImportSongAction extends Action {
 	protected void processImporter(Object importer) {
 		if ( importer instanceof TGLocalFileImporter ) {
 			this.processLocalFileImporter( (TGLocalFileImporter)importer );
-		}else if ( importer instanceof TGRawImporter ) {
+		} else if ( importer instanceof TGRawImporter ) {
 			this.processRawImporter( (TGRawImporter)importer );
 		}
 	}

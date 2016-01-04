@@ -353,7 +353,7 @@ public class TuxGuitar {
 		//---Fretboard---
 		if (config.getBooleanConfigValue(TGConfigKeys.SHOW_FRETBOARD)) {
 			getFretBoardEditor().showFretBoard();
-		}else {
+		} else {
 			getFretBoardEditor().hideFretBoard();
 		}
 		//---Mixer---

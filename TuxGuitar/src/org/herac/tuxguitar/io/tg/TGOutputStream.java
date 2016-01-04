@@ -182,7 +182,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 			if (measureheader.getTripletFeel() != TGMeasureHeader.TRIPLET_FEEL_NONE) {
 				header |= MEASURE_HEADER_TRIPLET_FEEL;
 			}
-		}else {
+		} else {
 			//Time Signature
 			int numerator = measureheader.getTimeSignature().getNumerator();
 			int value = measureheader.getTimeSignature().getDenominator().getValue();
@@ -243,7 +243,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		if (lastMeasure == null) {
 			header |= MEASURE_CLEF;
 			header |= MEASURE_KEYSIGNATURE;
-		}else {
+		} else {
 			//Clef
 			if (measure.getClef() != lastMeasure.getClef()) {
 				header |= MEASURE_CLEF;

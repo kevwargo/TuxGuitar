@@ -153,7 +153,7 @@ public class BendEditor {
 		
 		if (note.getEffect().isBend()) {
 			setBend(note.getEffect().getBend());
-		}else {
+		} else {
 			setBend(this.defaultBends[0].getBend());
 		}
 		
@@ -224,7 +224,7 @@ public class BendEditor {
 		painter.setLineStyle(SWT.LINE_SOLID);
 		if (i == 0 || i == (X_LENGTH - 1)) {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}else {
+		} else {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLUE));
 			if ((i % 3) > 0) {
 				painter.setLineStyle(SWT.LINE_DOT);
@@ -236,13 +236,13 @@ public class BendEditor {
 		painter.setLineStyle(SWT.LINE_SOLID);
 		if (i == 0 || i == (Y_LENGTH - 1)) {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}else {
+		} else {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_RED));
 			
 			if ((i % 2) > 0) {
 				painter.setLineStyle(SWT.LINE_DOT);
 				painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_GRAY));
-			}else if ((i % 4) > 0) {
+			} else if ((i % 4) > 0) {
 				painter.setLineStyle(SWT.LINE_DOT);
 			}
 		}
@@ -303,7 +303,7 @@ public class BendEditor {
 		for (int i = 0;i < this.x.length;i++) {
 			if (currPointX < 0) {
 				currPointX = this.x[i];
-			}else {
+			} else {
 				int distanceX = Math.abs(pointX - currPointX);
 				int currDistanceX = Math.abs(pointX - this.x[i]);
 				if (currDistanceX < distanceX) {
@@ -319,7 +319,7 @@ public class BendEditor {
 		for (int i = 0;i < this.y.length;i++) {
 			if (currPointY < 0) {
 				currPointY = this.y[i];
-			}else {
+			} else {
 				int distanceX = Math.abs(pointY - currPointY);
 				int currDistanceX = Math.abs(pointY - this.y[i]);
 				if (currDistanceX < distanceX) {

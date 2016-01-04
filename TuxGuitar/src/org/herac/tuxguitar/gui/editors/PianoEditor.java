@@ -103,7 +103,7 @@ public class PianoEditor implements TGRedrawListener, TGExternalBeatViewerListen
 	public void doRedraw(int type) {
 		if ( type == TGRedrawListener.NORMAL ) {
 			this.redraw();
-		}else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
+		} else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
 			this.redrawPlayingMode();
 		}
 	}

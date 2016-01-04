@@ -159,7 +159,7 @@ public class TGBrowserToolBar extends TGBrowserBar {
 		TGBrowserCollection collection = this.collections.getSelection();
 		if (collection == null) {
 			closeCollection();
-		}else {
+		} else {
 			openCollection(collection);
 		}
 	}

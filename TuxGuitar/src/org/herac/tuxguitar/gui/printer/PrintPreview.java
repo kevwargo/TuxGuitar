@@ -80,7 +80,7 @@ public class PrintPreview {
 					try {
 						Integer number = new Integer(PrintPreview.this.currentText.getText());
 						changePage(number.intValue() - 1);
-					}catch(NumberFormatException exception) {
+					} catch(NumberFormatException exception) {
 						changePage(PrintPreview.this.currentPage);
 					}
 				}
@@ -167,14 +167,14 @@ public class PrintPreview {
 				this.currentPage = index;
 				this.currentText.setText(Integer.toString(index + 1));
 				this.pageComposite.redraw();
-			}else if (this.currentPage >= 0 && this.currentPage < pageCount) {
+			} else if (this.currentPage >= 0 && this.currentPage < pageCount) {
 				this.currentText.setText(Integer.toString(this.currentPage + 1 ));
 			}
 			this.previous.setEnabled(this.currentPage > 0);
 			this.next.setEnabled((this.currentPage + 1) < pageCount);
 			this.previewComposite.getVerticalBar().setSelection(0);
 			this.previewComposite.setFocus();
-		}else {
+		} else {
 			this.currentText.setEnabled(false);
 			this.previous.setEnabled(false);
 			this.next.setEnabled(false);

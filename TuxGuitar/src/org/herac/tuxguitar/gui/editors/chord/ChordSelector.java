@@ -445,7 +445,7 @@ public class ChordSelector extends Composite {
 			
 			if (!chordName.equals("5")) {
 				updateWidget(get_5List(), false);//disableWidget(get_5List());
-			}else {
+			} else {
 				updateWidget(get_5List(), true);
 			}
 		}

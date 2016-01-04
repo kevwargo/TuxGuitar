@@ -288,7 +288,7 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 	public void doUpdate(int type) {
 		if ( type == TGUpdateListener.SELECTION ) {
 			this.updateItems();
-		}else if ( type == TGUpdateListener.SONG_LOADED ) {
+		} else if ( type == TGUpdateListener.SONG_LOADED ) {
 			this.update();
 		}
 	}

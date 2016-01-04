@@ -198,7 +198,7 @@ public class Piano extends Composite {
 				painter.addRectangle(x, y, NATURAL_WIDTH, NATURAL_HEIGHT);
 				painter.closePath();
 				x += NATURAL_WIDTH;
-			}else {
+			} else {
 				painter.setBackground(this.config.getColorNotNatural());
 				painter.initPath(TGPainter.PATH_FILL);
 				painter.setAntialias(false);
@@ -234,7 +234,7 @@ public class Piano extends Composite {
 				if (!TYPE_NOTES[(i + 1)  % TYPE_NOTES.length]) {
 					width -= ((SHARP_WIDTH / 2));
 				}
-			}else {
+			} else {
 				width = SHARP_WIDTH;
 			}
 			
@@ -250,7 +250,7 @@ public class Piano extends Composite {
 					painter.setAntialias(false);
 					painter.addRectangle( (x + 1 + (((NATURAL_WIDTH - size) / 2))) ,(NATURAL_HEIGHT - size - (((NATURAL_WIDTH - size) / 2))), size, size);
 					painter.closePath();
-				}else {
+				} else {
 					painter.initPath(TGPainter.PATH_FILL);
 					painter.setAntialias(false);
 					painter.addRectangle(posX + 1, SHARP_HEIGHT - SHARP_WIDTH + 1, SHARP_WIDTH - 2, SHARP_WIDTH - 2);
@@ -284,7 +284,7 @@ public class Piano extends Composite {
 				if (!TYPE_NOTES[(i + 1)  % TYPE_NOTES.length]) {
 					width -= ((SHARP_WIDTH / 2));
 				}
-			}else {
+			} else {
 				width = SHARP_WIDTH;
 			}
 			
@@ -300,7 +300,7 @@ public class Piano extends Composite {
 					}
 					painter.addRectangle(x + 1,(y + SHARP_HEIGHT) + 1, NATURAL_WIDTH - 1,(NATURAL_HEIGHT - SHARP_HEIGHT) - 1);
 					painter.closePath();
-				}else {
+				} else {
 					painter.initPath(TGPainter.PATH_FILL);
 					painter.setAntialias(false);
 					painter.addRectangle(posX + 1, y + 1, width - 1, SHARP_HEIGHT - 1);
@@ -333,7 +333,7 @@ public class Piano extends Composite {
 				if (!TYPE_NOTES[(i + 1)  % TYPE_NOTES.length]) {
 					width -= ((SHARP_WIDTH / 2));
 				}
-			}else {
+			} else {
 				width = SHARP_WIDTH;
 			}
 			
@@ -485,9 +485,9 @@ public class Piano extends Composite {
 			}
 			if (TuxGuitar.instance().getPlayer().isRunning()) {
 				this.beat = TuxGuitar.instance().getEditorCache().getPlayBeat();
-			}else if (this.externalBeat != null) {
+			} else if (this.externalBeat != null) {
 				this.beat = this.externalBeat;
-			}else {
+			} else {
 				this.beat = TuxGuitar.instance().getEditorCache().getEditBeat();
 			}
 		}
@@ -578,13 +578,13 @@ public class Piano extends Composite {
 					ActionLock.lock();
 					if ( getExternalBeat() == null ) {
 						hit(e.x, e.y);
-					}else {
+					} else {
 						setExternalBeat( null );
 					}
 					afterAction();
 					ActionLock.unlock();
 				}
-			}else {
+			} else {
 				TuxGuitar.instance().getAction(GoRightAction.NAME).process(e);
 			}
 		}

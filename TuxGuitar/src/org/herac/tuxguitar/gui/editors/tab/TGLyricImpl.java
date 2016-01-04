@@ -39,7 +39,7 @@ public class TGLyricImpl extends TGLyric {
 		if (measure.getNumber() >= getFrom()) {
 			measure.setLyricBeatIndex(this.nextIndex);
 			this.nextIndex += (measure.getNotEmptyBeats());
-		}else {
+		} else {
 			measure.setLyricBeatIndex(-1);
 			this.start();
 		}

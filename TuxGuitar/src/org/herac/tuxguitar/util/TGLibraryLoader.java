@@ -54,7 +54,7 @@ public class TGLibraryLoader {
 		try {
 			System.out.println("Loading: " + file.getAbsolutePath());
 			System.load(file.getAbsolutePath());
-		}catch(Throwable throwable) {
+		} catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}

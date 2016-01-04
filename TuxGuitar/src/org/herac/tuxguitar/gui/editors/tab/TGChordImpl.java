@@ -230,7 +230,7 @@ public class TGChordImpl extends TGChord {
 		if ( (this.style & ViewLayout.DISPLAY_CHORD_DIAGRAM) != 0 ) {
 			if (this.diagram != null) {
 				painter.drawImage(this.diagram, x - ( (this.diagramWidth - getFirstFretSpacing()) / 2) - getFirstFretSpacing() , y);
-			}else {
+			} else {
 				paintDiagram(painter, x - ( (this.diagramWidth - getFirstFretSpacing()) / 2) - getFirstFretSpacing() , y);
 			}
 		}

@@ -324,7 +324,7 @@ public class TGBeatImpl extends TGBeat {
 				painter.lineTo(x2, i);
 				painter.closePath();
 			}
-		}else if (y > (fromY + (scoreLineSpacing * 4))) {
+		} else if (y > (fromY + (scoreLineSpacing * 4))) {
 			for (int i = (fromY +(scoreLineSpacing * 5));i < (y + scoreLineSpacing);i += scoreLineSpacing) {
 				painter.initPath();
 				painter.setAntialias(false);
@@ -355,7 +355,7 @@ public class TGBeatImpl extends TGBeat {
 			float y = (fromY + getPaintPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES)); 
 			y1 = (y + layout.getScoreLineSpacing());
 			y2 = (y + (getMeasureImpl().getTrackImpl().getScoreHeight() - layout.getScoreLineSpacing()));
-		}else {
+		} else {
 			return;
 		}
 		if ( getStroke().getDirection() == TGStroke.STROKE_UP ) {
@@ -367,7 +367,7 @@ public class TGBeatImpl extends TGBeat {
 			painter.moveTo( x , y2 );
 			painter.lineTo( x + (2.0f * scale), y2 - (5.0f * scale));
 			painter.closePath();
-		}else if ( getStroke().getDirection() == TGStroke.STROKE_DOWN ) {
+		} else if ( getStroke().getDirection() == TGStroke.STROKE_DOWN ) {
 			painter.initPath();
 			painter.setAntialias(false);
 			painter.moveTo( x, y2 );

@@ -23,7 +23,7 @@ public abstract class TGExporterPlugin extends TGPluginAdapter {
 	public void setEnabled(boolean enabled) throws TGPluginException {
 		if (enabled) {
 			addPlugin();
-		}else {
+		} else {
 			removePlugin();
 		}
 	}
