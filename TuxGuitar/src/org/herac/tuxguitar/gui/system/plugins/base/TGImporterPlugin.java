@@ -6,20 +6,20 @@ import org.herac.tuxguitar.io.base.TGFileFormatManager;
 import org.herac.tuxguitar.io.base.TGRawImporter;
 
 public abstract class TGImporterPlugin extends TGPluginAdapter {
-	
+
 	private boolean loaded;
 	private TGRawImporter importer;
-	
+
 	protected abstract TGRawImporter getImporter() throws TGPluginException;
-	
+
 	public void init() throws TGPluginException {
 		this.importer = getImporter();
 	}
-	
+
 	public void close() throws TGPluginException {
 		this.removePlugin();
 	}
-	
+
 	public void setEnabled(boolean enabled) throws TGPluginException {
 		if (enabled) {
 			addPlugin();
@@ -27,7 +27,7 @@ public abstract class TGImporterPlugin extends TGPluginAdapter {
 			removePlugin();
 		}
 	}
-	
+
 	protected void addPlugin() throws TGPluginException {
 		if (!this.loaded) {
 			TGFileFormatManager.instance().addImporter(this.importer);
@@ -35,7 +35,7 @@ public abstract class TGImporterPlugin extends TGPluginAdapter {
 			this.loaded = true;
 		}
 	}
-	
+
 	protected void removePlugin() throws TGPluginException {
 		if (this.loaded) {
 			TGFileFormatManager.instance().removeImporter(this.importer);

@@ -17,65 +17,65 @@ import org.herac.tuxguitar.player.base.MidiSequencer;
 
 public class SoundOption extends Option {
 	protected boolean initialized;
-	
+
 	//**MidiSequencer module**//
 	protected String msCurrentKey;
 	protected List msList;
 	protected Combo msCombo;
-	
+
 	//**MidiPort module**//
 	protected String mpCurrentKey;
 	protected List mpList;
 	protected Combo mpCombo;
-	
+
 	public SoundOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent) {
 		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.sound"));
 		this.initialized = false;
 	}
-	
+
 	public void createOption() {
 		getToolItem().setText(TuxGuitar.getProperty("settings.config.sound"));
 		getToolItem().setImage(TuxGuitar.instance().getIconManager().getOptionSound());
 		getToolItem().addSelectionListener(this);
-		
+
 		//---Midi Sequencer---//
 		showLabel(getComposite(), SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("midi.sequencer"));
-		
+
 		Composite msComposite = new Composite(getComposite(), SWT.NONE);
 		msComposite.setLayout(new GridLayout());
 		msComposite.setLayoutData(getTabbedData());
-		
+
 		this.msCombo = new Combo(msComposite, SWT.DROP_DOWN | SWT.READ_ONLY);
 		this.msCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
+
 		//---Midi Port---//
 		showLabel(getComposite(), SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("midi.port"));
-		
+
 		Composite mpComposite = new Composite(getComposite(), SWT.NONE);
 		mpComposite.setLayout(new GridLayout());
 		mpComposite.setLayoutData(getTabbedData());
-		
+
 		this.mpCombo = new Combo(mpComposite, SWT.DROP_DOWN | SWT.READ_ONLY);
 		this.mpCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
+
 		this.loadConfig();
 	}
-	
+
 	protected void loadConfig() {
 		new Thread(new Runnable() {
 			public void run() {
 				SoundOption.this.mpList = TuxGuitar.instance().getPlayer().listOutputPorts();
 				SoundOption.this.msList = TuxGuitar.instance().getPlayer().listSequencers();
-				
+
 				SoundOption.this.mpCurrentKey = getConfig().getStringConfigValue(TGConfigKeys.MIDI_PORT);
 				SoundOption.this.msCurrentKey = getConfig().getStringConfigValue(TGConfigKeys.MIDI_SEQUENCER);
-				
+
 				MidiSequencer sequencer = TuxGuitar.instance().getPlayer().getSequencer();
 				MidiOutputPort outputPort = TuxGuitar.instance().getPlayer().getOutputPort();
-				
+
 				final String msLoaded = (sequencer != null ? sequencer.getKey() : null ) ;
 				final String mpLoaded = (outputPort != null ? outputPort.getKey() : null );
-				
+
 				new SyncThread(new Runnable() {
 					public void run() {
 						if (!isDisposed()) {
@@ -94,7 +94,7 @@ public class SoundOption extends Option {
 							if (SoundOption.this.msCombo.getSelectionIndex() < 0 && SoundOption.this.msCombo.getItemCount() > 0) {
 								SoundOption.this.msCombo.select(0);
 							}
-							
+
 							//---Midi Port---//
 							String loadedPort = mpLoaded;
 							for (int i = 0; i < SoundOption.this.mpList.size(); i++) {
@@ -110,7 +110,7 @@ public class SoundOption extends Option {
 							if (SoundOption.this.mpCombo.getSelectionIndex() < 0 && SoundOption.this.mpCombo.getItemCount() > 0) {
 								SoundOption.this.mpCombo.select(0);
 							}
-							
+
 							SoundOption.this.initialized = true;
 							SoundOption.this.pack();
 						}
@@ -119,7 +119,7 @@ public class SoundOption extends Option {
 			}
 		}).start();
 	}
-	
+
 	public void updateConfig() {
 		if (this.initialized) {
 			int msIndex = this.msCombo.getSelectionIndex();
@@ -133,14 +133,14 @@ public class SoundOption extends Option {
 			}
 		}
 	}
-	
+
 	public void updateDefaults() {
 		if (this.initialized) {
 			getConfig().setProperty(TGConfigKeys.MIDI_PORT, getDefaults().getProperty(TGConfigKeys.MIDI_PORT));
 			getConfig().setProperty(TGConfigKeys.MIDI_SEQUENCER, getDefaults().getProperty(TGConfigKeys.MIDI_SEQUENCER));
 		}
 	}
-	
+
 	public void applyConfig(final boolean force) {
 		if (force || this.initialized) {
 			String midiSequencer = getConfig().getStringConfigValue(TGConfigKeys.MIDI_SEQUENCER);

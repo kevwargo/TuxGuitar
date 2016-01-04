@@ -19,11 +19,11 @@ import org.herac.tuxguitar.gui.editors.tab.layout.PageViewLayout;
  */
 public class SetPageLayoutAction extends Action {
 	public static final String NAME = "action.view.layout-set-page";
-	
+
 	public SetPageLayoutAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		Tablature tablature = getEditor().getTablature();
 		tablature.setViewLayout(new PageViewLayout(tablature, tablature.getViewLayout().getStyle()));

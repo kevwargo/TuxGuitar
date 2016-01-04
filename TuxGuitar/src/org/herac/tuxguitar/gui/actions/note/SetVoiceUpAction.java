@@ -26,11 +26,11 @@ import org.herac.tuxguitar.song.models.TGVoice;
  */
 public class SetVoiceUpAction extends Action {
 	public static final String NAME = "action.beat.general.voice-up";
-	
+
 	public SetVoiceUpAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGBeatImpl beat = caret.getSelectedBeat();
@@ -40,23 +40,23 @@ public class SetVoiceUpAction extends Action {
 			if (!voice.isEmpty() && !voice.isRestVoice() && group != null ) {
 				//comienza el undoable
 				UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
-				
+
 				Iterator it = group.getVoices().iterator();
 				while ( it.hasNext() ) {
 					TGVoice current = (TGVoice)it.next();
 					getSongManager().getMeasureManager().changeVoiceDirection(current, TGVoice.DIRECTION_UP);
 				}
-				
+
 				//termia el undoable
 				addUndoableEdit(undoable.endUndo());
 				TuxGuitar.instance().getFileHistory().setUnsavedFile();
-				
+
 				updateTablature();
 			}
 		}
 		return 0;
 	}
-	
+
 	public void updateTablature() {
 		fireUpdate(getEditor().getTablature().getCaret().getMeasure().getNumber());
 	}

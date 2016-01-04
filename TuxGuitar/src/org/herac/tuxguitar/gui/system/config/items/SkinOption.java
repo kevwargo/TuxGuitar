@@ -24,7 +24,7 @@ import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 import org.herac.tuxguitar.gui.util.TGFileUtils;
 
 public class SkinOption extends Option {
-	
+
 	protected boolean initialized;
 	protected List skins;
 	protected Combo combo;
@@ -34,26 +34,26 @@ public class SkinOption extends Option {
 	protected Label descriptionLabel;
 	protected Image preview;
 	protected Composite previewArea;
-	
+
 	public SkinOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent) {
 		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.skin"), SWT.FILL, SWT.FILL);
 		this.initialized = false;
 	}
-	
+
 	public void createOption() {
 		getToolItem().setText(TuxGuitar.getProperty("settings.config.skin"));
 		getToolItem().setImage(TuxGuitar.instance().getIconManager().getOptionSkin());
 		getToolItem().addSelectionListener(this);
-		
+
 		showLabel(getComposite(), SWT.FILL, SWT.TOP, true, false, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("settings.config.skin.choose"));
-		
+
 		Composite composite = new Composite(getComposite(), SWT.NONE);
 		composite.setLayout(new GridLayout());
 		composite.setLayoutData(getTabbedData(SWT.FILL, SWT.FILL, true, false));
-		
+
 		this.combo = new Combo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
 		this.combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
+
 		Composite skinInfoComposite = new Composite(getComposite(), SWT.NONE);
 		skinInfoComposite.setLayout(new GridLayout(2, false));
 		skinInfoComposite.setLayoutData(getTabbedData(SWT.FILL, SWT.FILL, true, false));
@@ -65,11 +65,11 @@ public class SkinOption extends Option {
 		this.versionLabel = showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.NONE, 0,"");
 		showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, false, true, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("description")+": ");
 		this.descriptionLabel = showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.NONE, 0,"");
-		
+
 		Composite skinPreviewComposite = new Composite(getComposite(), SWT.NONE);
 		skinPreviewComposite.setLayout(new GridLayout());
 		skinPreviewComposite.setLayoutData(getTabbedData(SWT.FILL, SWT.FILL , true, true));
-		
+
 		this.previewArea = new Composite(skinPreviewComposite, SWT.DOUBLE_BUFFERED);
 		this.previewArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.previewArea.addPaintListener(new PaintListener() {
@@ -79,10 +79,10 @@ public class SkinOption extends Option {
 				}
 			}
 		});
-		
+
 		this.loadConfig();
 	}
-	
+
 	protected void loadConfig() {
 		new Thread(new Runnable() {
 			public void run() {
@@ -127,7 +127,7 @@ public class SkinOption extends Option {
 									}
 								}
 							});
-							
+
 							int selection = SkinOption.this.combo.getSelectionIndex();
 							if (selection >= 0 && selection < SkinOption.this.skins.size()) {
 								showSkinInfo((SkinInfo)SkinOption.this.skins.get(selection));
@@ -140,7 +140,7 @@ public class SkinOption extends Option {
 			}
 		}).start();
 	}
-	
+
 	protected void showSkinInfo(final SkinInfo info) {
 		loadCursor(SWT.CURSOR_WAIT);
 		new SyncThread(new Runnable() {
@@ -160,7 +160,7 @@ public class SkinOption extends Option {
 			}
 		}).start();
 	}
-	
+
 	public void updateConfig() {
 		if (this.initialized) {
 			int selection = this.combo.getSelectionIndex();
@@ -170,13 +170,13 @@ public class SkinOption extends Option {
 			}
 		}
 	}
-	
+
 	public void updateDefaults() {
 		if (this.initialized) {
 			getConfig().setProperty(TGConfigKeys.SKIN, getDefaults().getProperty(TGConfigKeys.SKIN));
 		}
 	}
-	
+
 	public void applyConfig(boolean force) {
 		if (force || (this.initialized && TuxGuitar.instance().getIconManager().shouldReload())) {
 			addSyncThread(new Runnable() {
@@ -186,17 +186,17 @@ public class SkinOption extends Option {
 			});
 		}
 	}
-	
+
 	public void dispose() {
 		this.disposePreview();
 	}
-	
+
 	public void disposePreview() {
 		if (this.preview != null && !this.preview.isDisposed()) {
 			this.preview.dispose();
 		}
 	}
-	
+
 	private class SkinInfo {
 		private String skin;
 		private String name;
@@ -205,59 +205,59 @@ public class SkinOption extends Option {
 		private String version;
 		private String description;
 		private String preview;
-		
+
 		public SkinInfo(String skin) {
 			this.skin = skin;
 		}
-		
+
 		public String getAuthor() {
 			return this.author;
 		}
-		
+
 		public void setAuthor(String author) {
 			this.author = author;
 		}
-		
+
 		public String getDate() {
 			return this.date;
 		}
-		
+
 		public void setDate(String date) {
 			this.date = date;
 		}
-		
+
 		public String getDescription() {
 			return this.description;
 		}
-		
+
 		public void setDescription(String description) {
 			this.description = description;
 		}
-		
+
 		public String getName() {
 			return this.name;
 		}
-		
+
 		public void setName(String name) {
 			this.name = name;
 		}
-		
+
 		public String getVersion() {
 			return this.version;
 		}
-		
+
 		public void setVersion(String version) {
 			this.version = version;
 		}
-		
+
 		public String getSkin() {
 			return this.skin;
 		}
-		
+
 		public String getPreview() {
 			return this.preview;
 		}
-		
+
 		public void setPreview(String preview) {
 			this.preview = preview;
 		}

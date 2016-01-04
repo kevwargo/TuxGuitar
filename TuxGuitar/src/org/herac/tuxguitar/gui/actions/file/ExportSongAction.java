@@ -16,22 +16,22 @@ import org.herac.tuxguitar.io.base.TGRawExporter;
 
 /**
  * @author julian
- * 
+ *
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class ExportSongAction extends Action {
 	public static final String NAME = "action.file.export";
-	
+
 	public ExportSongAction() {
 		super(NAME, AUTO_LOCK | AUTO_UPDATE );
 	}
-	
+
 	protected int execute(TypedEvent e) {
-		Object data = e.widget.getData(); 
+		Object data = e.widget.getData();
 		if (! (data instanceof TGRawExporter) ) {
 			return AUTO_UNLOCK;
 		}
-		
+
 		final TGRawExporter exporter = (TGRawExporter)data;
 		if ( exporter instanceof TGLocalFileExporter ) {
 			return this.processLocalFileExporter( (TGLocalFileExporter)exporter );
@@ -41,12 +41,12 @@ public class ExportSongAction extends Action {
 		if (!exporter.configure(false)) {
 			return AUTO_UNLOCK;
 		}
-		
+
 		final String fileName = FileActionUtils.chooseFileName(exporter.getFileFormat());
 		if (fileName == null) {
 			return AUTO_UNLOCK;
 		}
-		
+
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
 			public void run() {
@@ -57,21 +57,21 @@ public class ExportSongAction extends Action {
 				}
 			}
 		}).start();
-		
+
 		return 0;
 		*/
 	}
-	
+
 	private int processLocalFileExporter( final TGLocalFileExporter exporter ) {
 		if (!exporter.configure(false)) {
 			return AUTO_UNLOCK;
 		}
-		
+
 		final String fileName = FileActionUtils.chooseFileName(exporter.getFileFormat());
 		if (fileName == null) {
 			return AUTO_UNLOCK;
 		}
-		
+
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
 			public void run() {
@@ -82,10 +82,10 @@ public class ExportSongAction extends Action {
 				}
 			}
 		}).start();
-		
+
 		return 0;
 	}
-	
+
 	private int processRawExporter( final TGRawExporter exporter ) {
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
@@ -97,7 +97,7 @@ public class ExportSongAction extends Action {
 				}
 			}
 		}).start();
-		
+
 		return 0;
 	}
 }

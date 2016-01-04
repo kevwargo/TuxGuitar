@@ -36,7 +36,7 @@ import org.herac.tuxguitar.gui.items.MenuItems;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class ViewMenuItem extends MenuItems {
-	
+
 	private Menu menu;
 	private Menu chordMenu;
 	private MenuItem layoutMenuItem;
@@ -51,82 +51,82 @@ public class ViewMenuItem extends MenuItems {
 	private MenuItem scoreEnabled;
 	private MenuItem tablatureEnabled;
 	private MenuItem compact;
-	
+
 	private MenuItem chordMenuItem;
 	private MenuItem chordName;
 	private MenuItem chordDiagram;
-	
+
 	public ViewMenuItem(Shell shell, Menu parent, int style) {
 		this.layoutMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
-	
+
 	public void showItems() {
 		//--MIXER--
 		this.showMixer = new MenuItem(this.menu, SWT.CHECK);
 		this.showMixer.addSelectionListener(TuxGuitar.instance().getAction(ShowMixerAction.NAME));
-		
+
 		//--TRANSPORT--
 		this.showTransport = new MenuItem(this.menu, SWT.CHECK);
 		this.showTransport.addSelectionListener(TuxGuitar.instance().getAction(ShowTransportAction.NAME));
-		
+
 		//--FRETBOARD--
 		this.showFretBoard = new MenuItem(this.menu, SWT.CHECK);
 		this.showFretBoard.addSelectionListener(TuxGuitar.instance().getAction(ShowFretBoardAction.NAME));
-		
+
 		//--PIANO--
 		this.showPiano = new MenuItem(this.menu, SWT.CHECK);
 		this.showPiano.addSelectionListener(TuxGuitar.instance().getAction(ShowPianoAction.NAME));
-		
+
 		//--MATRIX--
 		this.showMatrix = new MenuItem(this.menu, SWT.CHECK);
 		this.showMatrix.addSelectionListener(TuxGuitar.instance().getAction(ShowMatrixAction.NAME));
-		
+
 		new MenuItem(this.menu, SWT.SEPARATOR);
-		
+
 		//--PAGE LAYOUT--
 		this.pageLayout = new MenuItem(this.menu, SWT.RADIO);
 		this.pageLayout.addSelectionListener(TuxGuitar.instance().getAction(SetPageLayoutAction.NAME));
-		
+
 		//--LINEAR LAYOUT--
 		this.linearLayout = new MenuItem(this.menu, SWT.RADIO);
 		this.linearLayout.addSelectionListener(TuxGuitar.instance().getAction(SetLinearLayoutAction.NAME));
-		
+
 		//--MULTITRACK--
 		this.multitrack = new MenuItem(this.menu, SWT.CHECK);
 		this.multitrack.addSelectionListener(TuxGuitar.instance().getAction(SetMultitrackViewAction.NAME));
-		
+
 		//--SCORE
 		this.scoreEnabled = new MenuItem(this.menu, SWT.CHECK);
 		this.scoreEnabled.addSelectionListener(TuxGuitar.instance().getAction(SetScoreEnabledAction.NAME));
-		
+
 		//--SCORE
 		this.tablatureEnabled = new MenuItem(this.menu, SWT.CHECK);
 		this.tablatureEnabled.addSelectionListener(TuxGuitar.instance().getAction(SetTablatureEnabledAction.NAME));
-		
+
 		//--COMPACT
 		this.compact = new MenuItem(this.menu, SWT.CHECK);
 		this.compact.addSelectionListener(TuxGuitar.instance().getAction(SetCompactViewAction.NAME));
-		
+
 		new MenuItem(this.menu, SWT.SEPARATOR);
-		
+
 		//--CHORD STYLE
 		this.chordMenuItem = new MenuItem(this.menu, SWT.CASCADE);
 		this.chordMenu = new Menu(this.menu.getShell(), SWT.DROP_DOWN);
-		
+
 		this.chordName = new MenuItem(this.chordMenu, SWT.CHECK);
 		this.chordName.addSelectionListener(TuxGuitar.instance().getAction(SetChordNameEnabledAction.NAME));
-		
+
 		this.chordDiagram = new MenuItem(this.chordMenu, SWT.CHECK);
 		this.chordDiagram.addSelectionListener(TuxGuitar.instance().getAction(SetChordDiagramEnabledAction.NAME));
-		
+
 		this.chordMenuItem.setMenu(this.chordMenu);
 		this.layoutMenuItem.setMenu(this.menu);
-		
+
 		this.loadIcons();
 		this.loadProperties();
 	}
-	
+
 	public void update() {
 		ViewLayout layout = TuxGuitar.instance().getTablatureEditor().getTablature().getViewLayout();
 		int style = layout.getStyle();
@@ -145,7 +145,7 @@ public class ViewMenuItem extends MenuItems {
 		this.chordName.setSelection( (style & ViewLayout.DISPLAY_CHORD_NAME) != 0 );
 		this.chordDiagram.setSelection( (style & ViewLayout.DISPLAY_CHORD_DIAGRAM) != 0 );
 	}
-	
+
 	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.layoutMenuItem, "view", null);
 		setMenuItemTextAndAccelerator(this.showMixer, "view.show-mixer", ShowMixerAction.NAME);
@@ -163,7 +163,7 @@ public class ViewMenuItem extends MenuItems {
 		setMenuItemTextAndAccelerator(this.chordName, "view.layout.chord-name", SetChordNameEnabledAction.NAME);
 		setMenuItemTextAndAccelerator(this.chordDiagram, "view.layout.chord-diagram", SetChordDiagramEnabledAction.NAME);
 	}
-	
+
 	public void loadIcons() {
 		//Nothing to do
 	}

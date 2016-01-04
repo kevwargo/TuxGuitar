@@ -12,17 +12,17 @@ public class UndoableJoined implements UndoableEdit {
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
 	private List undoables;
-	
+
 	public UndoableJoined() {
 		this.doAction = UNDO_ACTION;
 		this.undoCaret = new UndoableCaretHelper();
 		this.undoables = new ArrayList();
 	}
-	
+
 	public void addUndoableEdit(UndoableEdit undoable) {
 		this.undoables.add(undoable);
 	}
-	
+
 	public void redo() throws CannotRedoException {
 		int count = this.undoables.size();
 		for (int i = 0;i < count;i++) {
@@ -32,7 +32,7 @@ public class UndoableJoined implements UndoableEdit {
 		this.redoCaret.update();
 		this.doAction = UNDO_ACTION;
 	}
-	
+
 	public void undo() throws CannotUndoException {
 		int count = this.undoables.size();
 		for (int i = (count - 1);i >= 0;i--) {
@@ -42,20 +42,20 @@ public class UndoableJoined implements UndoableEdit {
 		this.undoCaret.update();
 		this.doAction = REDO_ACTION;
 	}
-	
+
 	public boolean canRedo() {
 		return (this.doAction == REDO_ACTION);
 	}
-	
+
 	public boolean canUndo() {
 		return (this.doAction == UNDO_ACTION);
 	}
-	
+
 	public UndoableJoined endUndo() {
 		this.redoCaret = new UndoableCaretHelper();
 		return this;
 	}
-	
+
 	public boolean isEmpty() {
 		return this.undoables.isEmpty();
 	}

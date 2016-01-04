@@ -20,28 +20,28 @@ import org.herac.tuxguitar.gui.helper.SyncThread;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class MessageDialog {
-	
+
 	private int style;
 	private String name;
 	private String message;
-	
+
 	protected MessageDialog(String name, String message, int style) {
 		this.name = name;
 		this.message = message;
 		this.style = style;
 	}
-	
+
 	protected void show(Shell parent) {
 		MessageBox messageBox = new MessageBox(parent, this.style);
 		messageBox.setText(this.name);
 		messageBox.setMessage(this.message);
 		messageBox.open();
 	}
-	
+
 	public static void infoMessage(final String title, final String message) {
 		MessageDialog.infoMessage(TuxGuitar.instance().getShell(), title, message);
 	}
-	
+
 	public static void infoMessage(final Shell shell, final String title, final String message) {
 		new SyncThread(new Runnable() {
 			public void run() {
@@ -51,11 +51,11 @@ public class MessageDialog {
 			}
 		}).start();
 	}
-	
+
 	public static void errorMessage(final Throwable throwable) {
 		MessageDialog.errorMessage(TuxGuitar.instance().getShell(), throwable);
 	}
-	
+
 	public static void errorMessage(final Shell shell, final Throwable throwable) {
 		MessageDialog.errorMessage(shell, (throwable.getMessage() != null ? throwable.getMessage() : throwable.getClass().getName() ));
 		new Thread(new Runnable() {
@@ -64,7 +64,7 @@ public class MessageDialog {
 			}
 		}).start();
 	}
-	
+
 	public static void errorMessage(final Shell shell, final String message) {
 		if (!shell.isDisposed()) {
 			new SyncThread(new Runnable() {
@@ -79,5 +79,5 @@ public class MessageDialog {
 			}).start();
 		}
 	}
-	
+
 }

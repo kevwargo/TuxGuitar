@@ -19,11 +19,11 @@ import org.herac.tuxguitar.gui.undo.CannotUndoException;
  */
 public class UndoAction extends Action {
 	public static final String NAME = "action.edit.undo";
-	
+
 	public UndoAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		try {
 			if (TuxGuitar.instance().getUndoableManager().canUndo()) {

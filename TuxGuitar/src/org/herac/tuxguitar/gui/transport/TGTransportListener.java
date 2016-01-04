@@ -5,17 +5,17 @@ import org.herac.tuxguitar.player.base.MidiPlayerListener;
 import org.herac.tuxguitar.util.TGSynchronizer;
 
 public class TGTransportListener implements MidiPlayerListener {
-	
+
 	protected Object sync;
 	protected TGSynchronizer.TGRunnable startedRunnable;
 	protected TGSynchronizer.TGRunnable stoppedRunnable;
-	
+
 	public TGTransportListener() {
 		this.sync = new Object();
 		this.startedRunnable = getStartedRunnable();
 		this.stoppedRunnable = getStoppedRunnable();
 	}
-	
+
 	public void notifyStarted() {
 		new Thread(new Runnable() {
 			public void run() {
@@ -34,7 +34,7 @@ public class TGTransportListener implements MidiPlayerListener {
 			}
 		}).start();
 	}
-	
+
 	public void notifyStopped() {
 		try {
 			if (!TuxGuitar.instance().getDisplay().isDisposed()) {
@@ -44,11 +44,11 @@ public class TGTransportListener implements MidiPlayerListener {
 			throwable.printStackTrace();
 		}
 	}
-	
+
 	public void notifyLoop() {
 		// Not implemented
 	}
-	
+
 	private TGSynchronizer.TGRunnable getStartedRunnable() {
 		return new TGSynchronizer.TGRunnable() {
 			public void run() {
@@ -58,7 +58,7 @@ public class TGTransportListener implements MidiPlayerListener {
 			}
 		};
 	}
-	
+
 	private TGSynchronizer.TGRunnable getStoppedRunnable() {
 		return new TGSynchronizer.TGRunnable() {
 			public void run() {

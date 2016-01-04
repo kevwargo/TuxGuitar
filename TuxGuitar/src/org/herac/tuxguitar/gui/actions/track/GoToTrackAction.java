@@ -18,11 +18,11 @@ import org.herac.tuxguitar.gui.editors.tab.TGTrackImpl;
  */
 public class GoToTrackAction extends Action {
 	public static final String NAME = "action.track.goto";
-	
+
 	public GoToTrackAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		Object data = e.widget.getData();
 		if (data instanceof TGTrackImpl) {

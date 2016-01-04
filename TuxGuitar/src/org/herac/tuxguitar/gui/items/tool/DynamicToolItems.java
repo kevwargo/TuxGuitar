@@ -22,9 +22,9 @@ import org.herac.tuxguitar.song.models.TGVelocities;
  */
 public class DynamicToolItems  extends ToolItems {
 	public static final String NAME = "dynamic.items";
-	
+
 	private ToolBar toolBar;
-	
+
 	private ToolItem pianoPianissimo;
 	private ToolItem pianissimo;
 	private ToolItem piano;
@@ -33,58 +33,58 @@ public class DynamicToolItems  extends ToolItems {
 	private ToolItem forte;
 	private ToolItem fortissimo;
 	private ToolItem forteFortissimo;
-	
-	
+
+
 	public DynamicToolItems() {
 		super(NAME);
 	}
-	
+
 	public void showItems(ToolBar toolBar) {
 		this.toolBar = toolBar;
 		//--PPP--
 		this.pianoPianissimo = new ToolItem(this.toolBar, SWT.CHECK);
 		this.pianoPianissimo.setData(new Integer(TGVelocities.PIANO_PIANISSIMO));
 		this.pianoPianissimo.addSelectionListener(TuxGuitar.instance().getAction(ChangeVelocityAction.NAME));
-		
+
 		//--PP--
 		this.pianissimo = new ToolItem(this.toolBar, SWT.CHECK);
 		this.pianissimo.setData(new Integer(TGVelocities.PIANISSIMO));
 		this.pianissimo.addSelectionListener(TuxGuitar.instance().getAction(ChangeVelocityAction.NAME));
-		
+
 		//--P--
 		this.piano = new ToolItem(this.toolBar, SWT.CHECK);
 		this.piano.setData(new Integer(TGVelocities.PIANO));
 		this.piano.addSelectionListener(TuxGuitar.instance().getAction(ChangeVelocityAction.NAME));
-		
+
 		//--MP--
 		this.mezzoPiano = new ToolItem(this.toolBar, SWT.CHECK);
 		this.mezzoPiano.setData(new Integer(TGVelocities.MEZZO_PIANO));
 		this.mezzoPiano.addSelectionListener(TuxGuitar.instance().getAction(ChangeVelocityAction.NAME));
-		
+
 		//--MF--
 		this.mezzoForte = new ToolItem(this.toolBar, SWT.CHECK);
 		this.mezzoForte.setData(new Integer(TGVelocities.MEZZO_FORTE));
 		this.mezzoForte.addSelectionListener(TuxGuitar.instance().getAction(ChangeVelocityAction.NAME));
-		
+
 		//--F--
 		this.forte = new ToolItem(this.toolBar, SWT.CHECK);
 		this.forte.setData(new Integer(TGVelocities.FORTE));
 		this.forte.addSelectionListener(TuxGuitar.instance().getAction(ChangeVelocityAction.NAME));
-		
+
 		//--FF--
 		this.fortissimo = new ToolItem(this.toolBar, SWT.CHECK);
 		this.fortissimo.setData(new Integer(TGVelocities.FORTISSIMO));
 		this.fortissimo.addSelectionListener(TuxGuitar.instance().getAction(ChangeVelocityAction.NAME));
-		
+
 		//--FF--
 		this.forteFortissimo = new ToolItem(this.toolBar, SWT.CHECK);
 		this.forteFortissimo.setData(new Integer(TGVelocities.FORTE_FORTISSIMO));
 		this.forteFortissimo.addSelectionListener(TuxGuitar.instance().getAction(ChangeVelocityAction.NAME));
-		
+
 		this.loadIcons();
 		this.loadProperties();
 	}
-	
+
 	public void update() {
 		Caret caret = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 		int velocity = ((caret.getSelectedNote() != null)?caret.getSelectedNote().getVelocity():caret.getVelocity());
@@ -106,7 +106,7 @@ public class DynamicToolItems  extends ToolItems {
 		this.forteFortissimo.setSelection(velocity == TGVelocities.FORTE_FORTISSIMO);
 		this.forteFortissimo.setEnabled( !running );
 	}
-	
+
 	public void loadProperties() {
 		this.pianoPianissimo.setToolTipText(TuxGuitar.getProperty("dynamic.piano-pianissimo"));
 		this.pianissimo.setToolTipText(TuxGuitar.getProperty("dynamic.pianissimo"));
@@ -117,7 +117,7 @@ public class DynamicToolItems  extends ToolItems {
 		this.fortissimo.setToolTipText(TuxGuitar.getProperty("dynamic.fortissimo"));
 		this.forteFortissimo.setToolTipText(TuxGuitar.getProperty("dynamic.forte-fortissimo"));
 	}
-	
+
 	public void loadIcons() {
 		this.pianoPianissimo.setImage(TuxGuitar.instance().getIconManager().getDynamicPPP());
 		this.pianissimo.setImage(TuxGuitar.instance().getIconManager().getDynamicPP());

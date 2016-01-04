@@ -15,25 +15,25 @@ import org.herac.tuxguitar.gui.system.keybindings.xml.KeyBindingWriter;
 import org.herac.tuxguitar.gui.util.TGFileUtils;
 
 public class KeyBindingActionManager {
-	
+
 	private List keyBindingsActions;
 	private KeyBindingListener listener;
-	
+
 	public KeyBindingActionManager() {
 		this.keyBindingsActions = new ArrayList();
 		this.init();
 	}
-	
+
 	public void init() {
 		List enabled = KeyBindingReader.getKeyBindings(getUserFileName());
 		this.keyBindingsActions.addAll( (enabled != null ? enabled : KeyBindingActionDefaults.getDefaultKeyBindings()) );
 		this.listener = new KeyBindingListener();
 	}
-	
+
 	private String getUserFileName() {
 		return TGFileUtils.PATH_USER_CONFIG + File.separator + "shortcuts.xml";
 	}
-	
+
 	public Action getActionForKeyBinding(KeyBinding kb) {
 		Action action = KeyBindingReserveds.getActionForKeyBinding(kb);
 		if (action != null) {
@@ -48,7 +48,7 @@ public class KeyBindingActionManager {
 		}
 		return null;
 	}
-	
+
 	public KeyBinding getKeyBindingForAction(String action) {
 		KeyBinding kb = KeyBindingReserveds.getKeyBindingForAction(action);
 		if (kb != null) {
@@ -63,26 +63,26 @@ public class KeyBindingActionManager {
 		}
 		return null;
 	}
-	
+
 	public void reset(List keyBindings) {
 		this.keyBindingsActions.clear();
 		this.keyBindingsActions.addAll(keyBindings);
 	}
-	
+
 	public List getKeyBindingActions() {
 		return this.keyBindingsActions;
 	}
-	
+
 	public void saveKeyBindings() {
 		KeyBindingWriter.setBindings(getKeyBindingActions(), getUserFileName());
 	}
-	
+
 	public void appendListenersTo(Control control) {
 		control.addKeyListener(this.listener);
 	}
-	
+
 	protected class KeyBindingListener implements KeyListener {
-		
+
 		public void keyPressed(KeyEvent event) {
 			KeyBinding kb = new KeyBinding();
 			kb.setKey(event.keyCode);
@@ -92,7 +92,7 @@ public class KeyBindingActionManager {
 				action.process(event);
 			}
 		}
-		
+
 		public void keyReleased(KeyEvent evt) {
 			//not implemented
 		}

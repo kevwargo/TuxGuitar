@@ -26,16 +26,16 @@ import org.herac.tuxguitar.song.models.TGVoice;
 
 /**
  * @author julian
- * 
+ *
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class InsertChordAction extends Action {
 	public static final String NAME = "action.insert.chord";
-	
+
 	public InsertChordAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGTrackImpl track = caret.getTrack();
@@ -51,7 +51,7 @@ public class InsertChordAction extends Action {
 			else {
 				Shell shell = TuxGuitar.instance().getShell();
 				ChordDialog dialog = new ChordDialog();
-				
+
 				int result = dialog.open(shell, measure, beat, caret.getPosition());
 				if ( result == ChordDialog.RESULT_SAVE ) {
 					insertChord(dialog.getChord(), track, measure, beat, caret.getVoice());
@@ -63,56 +63,56 @@ public class InsertChordAction extends Action {
 		}
 		return 0;
 	}
-	
+
 	protected void insertChord(TGChord chord, TGTrackImpl track, TGMeasureImpl measure, TGBeat beat, int voiceIndex) {
 		boolean restBeat = beat.isRestBeat();
 		if (!restBeat || chord.countNotes() > 0 ) {
-			
+
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
-			
+
 			// Add the chord notes to the tablature
 			// Only if this is a "rest" beat
 			TGVoice voice = beat.getVoice(voiceIndex);
 			if ( restBeat ) {
-				
+
 				Iterator it = track.getStrings().iterator();
 				while (it.hasNext()) {
 					TGString string = (TGString) it.next();
-					
+
 					int value = chord.getFretValue(string.getNumber() - 1);
 					if (value >= 0) {
 						TGNote note = getSongManager().getFactory().newNote();
 						note.setValue(value);
 						note.setVelocity(getEditor().getTablature().getCaret().getVelocity());
 						note.setString(string.getNumber());
-						
+
 						TGDuration duration = getSongManager().getFactory().newDuration();
 						voice.getDuration().copy(duration);
-						
+
 						getSongManager().getMeasureManager().addNote(beat, note, duration, voice.getIndex());
 					}
 				}
 			}
-			
+
 			getSongManager().getMeasureManager().addChord(beat, chord);
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
 			fireUpdate(measure.getNumber());
-			
+
 			//termia el undoable
 			addUndoableEdit(undoable.endUndo());
 		}
 	}
-	
+
 	protected void removeChord(TGMeasureImpl measure, TGBeat beat) {
 		if ( beat.isChordBeat() ) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
-			
+
 			getSongManager().getMeasureManager().removeChord(measure, beat.getStart());
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
 			fireUpdate(measure.getNumber());
-			
+
 			//termia el undoable
 			addUndoableEdit(undoable.endUndo());
 		}

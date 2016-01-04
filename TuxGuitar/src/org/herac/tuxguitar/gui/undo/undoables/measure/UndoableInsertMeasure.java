@@ -19,7 +19,7 @@ public class UndoableInsertMeasure implements UndoableEdit {
 	private int copyCount;
 	private int fromNumber;
 	private long theMove;
-	
+
 	public UndoableInsertMeasure(int toTrack) {
 		Caret caret = getCaret();
 		this.doAction = UNDO_ACTION;
@@ -27,7 +27,7 @@ public class UndoableInsertMeasure implements UndoableEdit {
 		this.undoCaret = new UndoableCaretHelper();
 		this.insertPosition = caret.getPosition();
 	}
-	
+
 	public void redo() throws CannotRedoException {
 		if (!canRedo()) {
 			throw new CannotRedoException();
@@ -36,10 +36,10 @@ public class UndoableInsertMeasure implements UndoableEdit {
 		helper.insertMeasures(this.tracksMeasures.clone(TuxGuitar.instance().getSongManager().getFactory()), this.fromNumber, this.theMove, this.toTrack);
 		TuxGuitar.instance().fireUpdate();
 		this.redoCaret.update();
-		
+
 		this.doAction = UNDO_ACTION;
 	}
-	
+
 	public void undo() throws CannotUndoException {
 		if (!canUndo()) {
 			throw new CannotUndoException();
@@ -49,18 +49,18 @@ public class UndoableInsertMeasure implements UndoableEdit {
 		}
 		TuxGuitar.instance().fireUpdate();
 		this.undoCaret.update();
-		
+
 		this.doAction = REDO_ACTION;
 	}
-	
+
 	public boolean canRedo() {
 		return (this.doAction == REDO_ACTION);
 	}
-	
+
 	public boolean canUndo() {
 		return (this.doAction == UNDO_ACTION);
 	}
-	
+
 	public UndoableInsertMeasure endUndo(TGSongSegment tracksMeasures, int copyCount, int fromNumber, long theMove) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.copyCount = copyCount;
@@ -69,9 +69,9 @@ public class UndoableInsertMeasure implements UndoableEdit {
 		this.theMove = theMove;
 		return this;
 	}
-	
+
 	private static Caret getCaret() {
 		return TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 	}
-	
+
 }

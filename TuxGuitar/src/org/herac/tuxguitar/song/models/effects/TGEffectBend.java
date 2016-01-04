@@ -22,21 +22,21 @@ public abstract class TGEffectBend {
 	public static final int SEMITONE_LENGTH = 1;
 	public static final int MAX_POSITION_LENGTH = 12;
 	public static final int MAX_VALUE_LENGTH = (SEMITONE_LENGTH * 12);
-	
+
 	private List points;
-	
+
 	public TGEffectBend() {
 		this.points = new ArrayList();
 	}
-	
+
 	public void addPoint(int position, int value) {
 		this.points.add(new BendPoint(position, value));
 	}
-	
+
 	public List getPoints() {
 		return this.points;
 	}
-	
+
 	public TGEffectBend clone(TGFactory factory) {
 		TGEffectBend effect = factory.newEffectBend();
 		Iterator it = getPoints().iterator();
@@ -46,31 +46,31 @@ public abstract class TGEffectBend {
 		}
 		return effect;
 	}
-	
+
 	public class BendPoint {
 		private int position;
 		private int value;
-		
+
 		public BendPoint(int position, int value) {
 			this.position = position;
 			this.value = value;
 		}
-		
+
 		public int getPosition() {
 			return this.position;
 		}
-		
+
 		public int getValue() {
 			return this.value;
 		}
-		
+
 		public long getTime(long duration) {
 			return (duration * getPosition() / MAX_POSITION_LENGTH);
 		}
-		
+
 		public Object clone() {
 			return new BendPoint(getPosition(), getValue());
 		}
 	}
-	
+
 }

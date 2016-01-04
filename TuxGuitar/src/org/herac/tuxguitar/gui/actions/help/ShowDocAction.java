@@ -13,17 +13,17 @@ import org.herac.tuxguitar.gui.util.MessageDialog;
 
 /**
  * @author julian
- * 
+ *
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
 public class ShowDocAction extends Action {
 	public static final String NAME = "action.help.doc";
-	
+
 	public ShowDocAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | KEY_BINDING_AVAILABLE );
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		try {
 			new TGDocumentation().display();

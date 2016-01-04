@@ -19,11 +19,11 @@ import org.herac.tuxguitar.gui.system.keybindings.editor.KeyBindingEditor;
  */
 public class EditKeyBindingsAction extends Action {
 	public static final String NAME = "action.settings.key-bindings";
-	
+
 	public EditKeyBindingsAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		new KeyBindingEditor().show(TuxGuitar.instance().getShell());
 		return 0;

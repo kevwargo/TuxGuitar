@@ -1,37 +1,37 @@
 package org.herac.tuxguitar.gui.system.keybindings;
 
 public class KeyBinding {
-	
+
 	public static final String MASK_SEPARATOR = "+";
-	
+
 	private int mask;
 	private int key;
-	
+
 	public KeyBinding(int key, int mask) {
 		this.key = key;
 		this.mask = mask;
 	}
-	
+
 	public KeyBinding() {
 		this(0, 0);
 	}
-	
+
 	public int getKey() {
 		return this.key;
 	}
-	
+
 	public void setKey(int key) {
 		this.key = key;
 	}
-	
+
 	public int getMask() {
 		return this.mask;
 	}
-	
+
 	public void setMask(int mask) {
 		this.mask = mask;
 	}
-	
+
 	private String getSpecialKey() {
 		for (int i = 0; i < KeyConversion.relations.length; i++) {
 			if (this.key == KeyConversion.relations[i].getCode()) {
@@ -40,7 +40,7 @@ public class KeyBinding {
 		}
 		return null;
 	}
-	
+
 	private String getSpecialMask() {
 		String mask = new String();
 		for (int i = 0; i < KeyConversion.relations.length; i++) {
@@ -50,27 +50,27 @@ public class KeyBinding {
 		}
 		return mask;
 	}
-	
+
 	public boolean isSameAs(KeyBinding kb) {
 		if ( kb != null ) {
 			return (this.key == kb.key && this.mask == kb.mask);
 		}
 		return false;
 	}
-	
+
 	public String toString() {
 		String mask = getSpecialMask();
 		String key = getSpecialKey();
 		return (key != null ? (mask + key) : (mask + (char)this.key) );
 	}
-	
+
 	public Object clone() {
 		return new KeyBinding(getKey(), getMask());
 	}
 }
 
 class KeyConversion {
-	
+
 	protected static final KeyConversion[] relations = new KeyConversion[] {
 		new KeyConversion("F1", KeyBindingConstants.F1),
 		new KeyConversion("F2", KeyBindingConstants.F2),
@@ -108,19 +108,19 @@ class KeyConversion {
 		new KeyConversion("/", KeyBindingConstants.KEYPAD_DIVIDE),
 		new KeyConversion(".", KeyBindingConstants.KEYPAD_DECIMAL),
 	};
-	
+
 	private String key;
 	private int code;
-	
+
 	private KeyConversion(String key, int code) {
 		this.key = key;
 		this.code = code;
 	}
-	
+
 	public String getKey() {
 		return this.key;
 	}
-	
+
 	public int getCode() {
 		return this.code;
 	}

@@ -8,25 +8,25 @@ import org.herac.tuxguitar.gui.tools.custom.TGCustomTool;
 import org.herac.tuxguitar.gui.tools.custom.TGCustomToolManager;
 
 public abstract class TGToolItemPlugin extends TGPluginAdapter {
-	
+
 	private boolean loaded;
 	private TGCustomTool tool;
 	private TGCustomToolAction toolAction;
-	
+
 	protected abstract void doAction();
-	
+
 	protected abstract String getItemName() throws TGPluginException ;
-	
+
 	public void init() throws TGPluginException {
 		String name = getItemName();
 		this.tool = new TGCustomTool(name, name);
 		this.toolAction = new TGCustomToolAction(this.tool.getName());
 	}
-	
+
 	public void close() throws TGPluginException {
 		this.removePlugin();
 	}
-	
+
 	public void setEnabled(boolean enabled) throws TGPluginException {
 		if (enabled) {
 			addPlugin();
@@ -34,7 +34,7 @@ public abstract class TGToolItemPlugin extends TGPluginAdapter {
 			removePlugin();
 		}
 	}
-	
+
 	protected void addPlugin() throws TGPluginException {
 		if (!this.loaded) {
 			TuxGuitar.instance().getActionManager().addAction(this.toolAction);
@@ -43,7 +43,7 @@ public abstract class TGToolItemPlugin extends TGPluginAdapter {
 			this.loaded = true;
 		}
 	}
-	
+
 	protected void removePlugin() throws TGPluginException {
 		if (this.loaded) {
 			TGCustomToolManager.instance().removeCustomTool(this.tool);
@@ -52,13 +52,13 @@ public abstract class TGToolItemPlugin extends TGPluginAdapter {
 			this.loaded = false;
 		}
 	}
-	
+
 	protected class TGCustomToolAction extends Action {
-		
+
 		public TGCustomToolAction(String name) {
 			super(name, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 		}
-		
+
 		protected int execute(TypedEvent e) {
 			doAction();
 			return 0;

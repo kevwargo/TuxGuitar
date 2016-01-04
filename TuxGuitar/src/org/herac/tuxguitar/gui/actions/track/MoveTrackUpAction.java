@@ -21,22 +21,22 @@ import org.herac.tuxguitar.song.models.TGTrack;
  */
 public class MoveTrackUpAction extends Action {
 	public static final String NAME = "action.track.move-up";
-	
+
 	public MoveTrackUpAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		//comienza el undoable
 		UndoableMoveTrackUp undoable = UndoableMoveTrackUp.startUndo();
-		
+
 		Caret caret = getEditor().getTablature().getCaret();
 		TGTrack track = caret.getTrack();
-		
+
 		if (getSongManager().moveTrackUp(track)) {
 			updateTablature();
 			TuxGuitar.instance().getMixer().update();
-			
+
 			//termia el undoable
 			addUndoableEdit(undoable.endUndo(track));
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();

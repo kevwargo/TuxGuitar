@@ -19,11 +19,11 @@ import org.herac.tuxguitar.gui.system.config.TGConfigEditor;
  */
 public class EditConfigAction extends Action {
 	public static final String NAME = "action.settings.configure";
-	
+
 	public EditConfigAction() {
 		super(NAME, AUTO_LOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE );
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		new TGConfigEditor().showDialog(TuxGuitar.instance().getShell());
 		return 0;

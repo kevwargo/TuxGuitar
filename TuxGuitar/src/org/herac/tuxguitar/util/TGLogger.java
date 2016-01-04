@@ -10,7 +10,7 @@ import java.util.Calendar;
 public class TGLogger {
 
     public static final String DEFAULT_LOG_FILE = "/var/tmp/tuxguitar.log";
-    
+
 
     public static void log(String message) {
         log(message, DEFAULT_LOG_FILE);
@@ -40,7 +40,7 @@ public class TGLogger {
 
 			byte bytes[] = (dateString + message + "\n").getBytes();
 			stream.write(bytes, 0, bytes.length);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
 		} finally {
@@ -52,5 +52,5 @@ public class TGLogger {
 			catch (Exception e) { }
 		}
     }
-    
+
 }

@@ -14,16 +14,16 @@ import org.herac.tuxguitar.gui.actions.ActionLock;
 
 /**
  * @author julian
- * 
+ *
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class SaveAsFileAction extends Action {
 	public static final String NAME = "action.file.save-as";
-	
+
 	public SaveAsFileAction() {
 		super(NAME, AUTO_LOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE );
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		final String fileName = FileActionUtils.chooseFileName();
 		if (fileName == null) {
@@ -39,7 +39,7 @@ public class SaveAsFileAction extends Action {
 				}
 			}
 		}).start();
-		
+
 		return 0;
 	}
 }

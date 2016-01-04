@@ -22,11 +22,11 @@ import org.herac.tuxguitar.song.models.TGStroke;
  */
 public class SetStrokeUpAction extends Action {
 	public static final String NAME = "action.beat.general.set-stroke-up";
-	
+
 	public SetStrokeUpAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		TGBeat beat = getEditor().getTablature().getCaret().getSelectedBeat();
 		if (beat != null && !beat.isRestBeat()) {
@@ -35,7 +35,7 @@ public class SetStrokeUpAction extends Action {
 			if ( editor.getStatus() != StrokeEditor.STATUS_CANCEL ) {
 				int direction = ( editor.getStatus() == StrokeEditor.STATUS_CLEAN ? TGStroke.STROKE_NONE : TGStroke.STROKE_UP );
 				int value = editor.getValue();
-				
+
 				//comienza el undoable
 				UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 				if (getSongManager().getMeasureManager().setStroke( beat.getMeasure(), beat.getStart(), value, direction ) ) {
@@ -48,7 +48,7 @@ public class SetStrokeUpAction extends Action {
 		}
 		return 0;
 	}
-	
+
 	public void updateTablature() {
 		fireUpdate(getEditor().getTablature().getCaret().getMeasure().getNumber());
 	}

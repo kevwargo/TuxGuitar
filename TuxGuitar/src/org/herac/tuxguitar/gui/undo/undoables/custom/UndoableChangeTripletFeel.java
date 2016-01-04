@@ -21,11 +21,11 @@ public class UndoableChangeTripletFeel implements UndoableEdit {
 	private int undoableTripletFeel;
 	private List nextTripletFeelPositions;
 	private boolean toEnd;
-	
+
 	private UndoableChangeTripletFeel() {
 		super();
 	}
-	
+
 	public void redo() throws CannotRedoException {
 		if (!canRedo()) {
 			throw new CannotRedoException();
@@ -33,10 +33,10 @@ public class UndoableChangeTripletFeel implements UndoableEdit {
 		TuxGuitar.instance().getSongManager().changeTripletFeel(this.position, this.redoableTripletFeel, this.toEnd);
 		TuxGuitar.instance().fireUpdate();
 		this.redoCaret.update();
-		
+
 		this.doAction = UNDO_ACTION;
 	}
-	
+
 	public void undo() throws CannotUndoException {
 		if (!canUndo()) {
 			throw new CannotUndoException();
@@ -51,18 +51,18 @@ public class UndoableChangeTripletFeel implements UndoableEdit {
 		}
 		TuxGuitar.instance().fireUpdate();
 		this.undoCaret.update();
-		
+
 		this.doAction = REDO_ACTION;
 	}
-	
+
 	public boolean canRedo() {
 		return (this.doAction == REDO_ACTION);
 	}
-	
+
 	public boolean canUndo() {
 		return (this.doAction == UNDO_ACTION);
 	}
-	
+
 	public static UndoableChangeTripletFeel startUndo() {
 		UndoableChangeTripletFeel undoable = new UndoableChangeTripletFeel();
 		Caret caret = getCaret();
@@ -71,7 +71,7 @@ public class UndoableChangeTripletFeel implements UndoableEdit {
 		undoable.position = caret.getPosition();
 		undoable.undoableTripletFeel = caret.getMeasure().getTripletFeel();
 		undoable.nextTripletFeelPositions = new ArrayList();
-		
+
 		int prevTripletFeel = undoable.undoableTripletFeel;
 		Iterator it = TuxGuitar.instance().getSongManager().getFirstTrack().getMeasures();
 		while (it.hasNext()) {
@@ -87,23 +87,23 @@ public class UndoableChangeTripletFeel implements UndoableEdit {
 		}
 		return undoable;
 	}
-	
+
 	public UndoableChangeTripletFeel endUndo(int tripletFeel, boolean toEnd) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoableTripletFeel = tripletFeel;
 		this.toEnd = toEnd;
 		return this;
 	}
-	
+
 	private static Caret getCaret() {
 		return TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 	}
-	
-	
+
+
 	private class TripletFeelPosition {
 		private long position;
 		private int tripletFeel;
-		
+
 		public TripletFeelPosition(long position, int tripletFeel) {
 			this.position = position;
 			this.tripletFeel = tripletFeel;

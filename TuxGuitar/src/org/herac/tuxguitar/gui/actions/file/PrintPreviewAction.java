@@ -37,17 +37,17 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  */
 public class PrintPreviewAction extends Action {
 	public static final String NAME = "action.file.print-preview";
-	
+
 	public PrintPreviewAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		try {
 			final PrintStyles data = PrintStylesDialog.open(TuxGuitar.instance().getShell());
 			if (data != null) {
 				TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
-				
+
 				this.printPreview(data);
 			}
 		} catch(Throwable throwable) {
@@ -55,7 +55,7 @@ public class PrintPreviewAction extends Action {
 		}
 		return 0;
 	}
-	
+
 	public void printPreview(final PrintStyles data) {
 		new Thread(new Runnable() {
 			public void run() {
@@ -63,7 +63,7 @@ public class PrintPreviewAction extends Action {
 					final TGSongManager manager = new TGSongManager();
 					manager.setFactory(new TGFactoryImpl());
 					manager.setSong(getSongManager().getSong().clone(manager.getFactory()));
-				
+
 					printPreview(manager, data);
 				} catch(Throwable throwable) {
 					MessageDialog.errorMessage(throwable);
@@ -71,16 +71,16 @@ public class PrintPreviewAction extends Action {
 			}
 		}).start();
 	}
-	
+
 	public void printPreview(final TGSongManager manager, final PrintStyles data) {
 		new SyncThread(new Runnable() {
 			public void run() {
 				try {
 					Tablature tablature = new Tablature(TuxGuitar.instance().getShell());
 					tablature.setSongManager(manager);
-					
+
 					PrinterViewLayout layout = new PrinterViewLayout(tablature, data, 1f);
-					
+
 					printPreview( layout );
 				} catch(Throwable throwable) {
 					MessageDialog.errorMessage(throwable);
@@ -88,7 +88,7 @@ public class PrintPreviewAction extends Action {
 			}
 		}).start();
 	}
-	
+
 	public void printPreview(final PrinterViewLayout layout) {
 		new Thread(new Runnable() {
 			public void run() {
@@ -106,43 +106,43 @@ public class PrintPreviewAction extends Action {
 			}
 		}).start();
 	}
-	
+
 	private class PrintDocumentImpl implements PrintDocument {
-		
+
 		private PrinterViewLayout layout;
 		private TGPainter painter;
 		private Rectangle bounds;
 		private List pages;
-		
+
 		public PrintDocumentImpl(PrinterViewLayout layout, Rectangle bounds) {
 			this.layout = layout;
 			this.bounds = bounds;
 			this.painter = new TGPainter();
 			this.pages = new ArrayList();
 		}
-		
+
 		public TGPainter getPainter() {
 			return this.painter;
 		}
-		
+
 		public Rectangle getBounds() {
 			return this.bounds;
 		}
-		
+
 		public void pageStart() {
 			Image page = new Image(this.layout.getTablature().getDisplay(), this.bounds.width - this.bounds.x, this.bounds.height - this.bounds.y);
 			this.painter.init( page );
 			this.pages.add( page );
 		}
-		
+
 		public void pageFinish() {
 			this.painter.dispose();
 		}
-		
+
 		public void start() {
 			// Not implemented
 		}
-		
+
 		public void finish() {
 			final Tablature tablature = this.layout.getTablature();
 			final Rectangle bounds = this.bounds;
@@ -164,7 +164,7 @@ public class PrintPreviewAction extends Action {
 				e.printStackTrace();
 			}
 		}
-		
+
 		public boolean isPaintable(int page) {
 			return true;
 		}

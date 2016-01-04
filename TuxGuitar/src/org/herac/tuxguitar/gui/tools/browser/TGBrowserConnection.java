@@ -7,37 +7,37 @@ import org.herac.tuxguitar.gui.tools.browser.base.TGBrowser;
 import org.herac.tuxguitar.gui.tools.browser.base.TGBrowserElement;
 
 public class TGBrowserConnection {
-	
+
 	private boolean locked;
 	private TGBrowser browser;
 	private TGBrowserConnectionHandler handler;
-	
+
 	public TGBrowserConnection(TGBrowserConnectionHandler handler) {
 		this.handler = handler;
 	}
-	
+
 	protected void lock() {
 		this.locked = true;
 		this.handler.notifyLockStatusChanged();
 	}
-	
+
 	protected void unlock() {
 		this.locked = false;
 		this.handler.notifyLockStatusChanged();
 	}
-	
+
 	public boolean isLocked() {
 		return this.locked;
 	}
-	
+
 	public TGBrowser getBrowser() {
 		return this.browser;
 	}
-	
+
 	public boolean isOpen() {
 		return (getBrowser() != null);
 	}
-	
+
 	public void open(final int callId, final TGBrowser browser) {
 		if (!isLocked()) {
 			this.close(callId);
@@ -60,7 +60,7 @@ public class TGBrowserConnection {
 			}).start();
 		}
 	}
-	
+
 	public void close(final int callId) {
 		if (!isLocked()) {
 			this.lock();
@@ -83,7 +83,7 @@ public class TGBrowserConnection {
 			}).start();
 		}
 	}
-	
+
 	public void cdRoot(final int callId) {
 		if (!isLocked()) {
 			this.lock();
@@ -104,7 +104,7 @@ public class TGBrowserConnection {
 			}).start();
 		}
 	}
-	
+
 	public void cdUp(final int callId) {
 		if (!isLocked()) {
 			this.lock();
@@ -125,7 +125,7 @@ public class TGBrowserConnection {
 			}).start();
 		}
 	}
-	
+
 	public void cd(final int callId, final TGBrowserElement element) {
 		if (!isLocked()) {
 			this.lock();
@@ -146,7 +146,7 @@ public class TGBrowserConnection {
 			}).start();
 		}
 	}
-	
+
 	public void listElements(final int callId) {
 		if (!isLocked()) {
 			this.lock();
@@ -167,7 +167,7 @@ public class TGBrowserConnection {
 			}).start();
 		}
 	}
-	
+
 	public void openStream(final int callId, final TGBrowserElement element) {
 		if (!isLocked()) {
 			this.lock();
@@ -194,31 +194,31 @@ public class TGBrowserConnection {
 			}).start();
 		}
 	}
-	
+
 	public void release() {
 		this.unlock();
 	}
-	
+
 	public void notifyCd(final int callId) {
 		this.handler.notifyCd(callId);
 	}
-	
+
 	public void notifyClosed(final int callId) {
 		this.handler.notifyClosed(callId);
 	}
-	
+
 	public void notifyElements(final int callId, List elements) {
 		this.handler.notifyElements(callId, elements);
 	}
-	
+
 	public void notifyError(final int callId, Throwable throwable) {
 		this.handler.notifyError(callId, throwable);
 	}
-	
+
 	public void notifyOpened(final int callId) {
 		this.handler.notifyOpened(callId);
 	}
-	
+
 	public void notifyStream(final int callId, InputStream stream, TGBrowserElement element) {
 		this.handler.notifyStream(callId, stream, element);
 	}

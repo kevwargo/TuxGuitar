@@ -19,11 +19,11 @@ import org.herac.tuxguitar.gui.undo.CannotRedoException;
  */
 public class RedoAction extends Action {
 	public static final String NAME = "action.edit.redo";
-	
+
 	public RedoAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		try {
 			if (TuxGuitar.instance().getUndoableManager().canRedo()) {

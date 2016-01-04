@@ -12,26 +12,26 @@ import org.herac.tuxguitar.gui.editors.TGPainter;
 import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 
 public class TGSplash {
-	
+
 	private static TGSplash instance;
-	
+
 	private Shell shell;
-	
+
 	private TGSplash() {
 		super();
 	}
-	
+
 	public static TGSplash instance() {
 		if (instance == null) {
 			instance = new TGSplash();
 		}
 		return instance;
 	}
-	
+
 	public void init() {
 		if (TuxGuitar.instance().getConfig().getBooleanConfigValue(TGConfigKeys.SHOW_SPLASH)) {
 			final Image image = TuxGuitar.instance().getIconManager().getAppSplash();
-			
+
 			this.shell = new Shell(TuxGuitar.instance().getDisplay(), SWT.NO_TRIM | SWT.NO_BACKGROUND);
 			this.shell.setLayout(new FillLayout());
 			this.shell.setBounds(getBounds(image));
@@ -48,7 +48,7 @@ public class TGSplash {
 			this.shell.update();
 		}
 	}
-	
+
 	public void finish() {
 		if (this.shell != null && !this.shell.isDisposed()) {
 			this.shell.close();
@@ -56,7 +56,7 @@ public class TGSplash {
 		}
 		instance = null;
 	}
-	
+
 	private Rectangle getBounds(Image image) {
 		Rectangle iBounds = image.getBounds();
 		Rectangle mBounds = this.shell.getMonitor().getClientArea();
@@ -66,5 +66,5 @@ public class TGSplash {
 		int height = iBounds.height;
 		return new Rectangle( x , y , width , height);
 	}
-	
+
 }

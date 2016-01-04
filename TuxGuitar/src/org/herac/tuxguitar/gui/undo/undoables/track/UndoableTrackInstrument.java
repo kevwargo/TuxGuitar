@@ -17,11 +17,11 @@ public class UndoableTrackInstrument implements UndoableEdit {
 	private short redoInstrument;
 	private boolean undoPercussion;
 	private boolean redoPercussion;
-	
+
 	private UndoableTrackInstrument() {
 		super();
 	}
-	
+
 	public void redo() throws CannotRedoException {
 		if (!canRedo()) {
 			throw new CannotRedoException();
@@ -36,7 +36,7 @@ public class UndoableTrackInstrument implements UndoableEdit {
 		this.redoCaret.update();
 		this.doAction = UNDO_ACTION;
 	}
-	
+
 	public void undo() throws CannotUndoException {
 		if (!canUndo()) {
 			throw new CannotUndoException();
@@ -49,18 +49,18 @@ public class UndoableTrackInstrument implements UndoableEdit {
 			TuxGuitar.instance().getPlayer().updatePrograms();
 		}
 		this.undoCaret.update();
-		
+
 		this.doAction = REDO_ACTION;
 	}
-	
+
 	public boolean canRedo() {
 		return (this.doAction == REDO_ACTION);
 	}
-	
+
 	public boolean canUndo() {
 		return (this.doAction == UNDO_ACTION);
 	}
-	
+
 	public static UndoableTrackInstrument startUndo(TGTrack track) {
 		UndoableTrackInstrument undoable = new UndoableTrackInstrument();
 		undoable.doAction = UNDO_ACTION;
@@ -68,16 +68,16 @@ public class UndoableTrackInstrument implements UndoableEdit {
 		undoable.trackNumber = track.getNumber();
 		undoable.undoInstrument = track.getChannel().getInstrument();
 		undoable.undoPercussion = track.isPercussionTrack();
-		
+
 		return undoable;
 	}
-	
+
 	public UndoableTrackInstrument endUndo(TGTrack track) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoInstrument = track.getChannel().getInstrument();
 		this.redoPercussion = track.isPercussionTrack();
-		
+
 		return this;
 	}
-	
+
 }

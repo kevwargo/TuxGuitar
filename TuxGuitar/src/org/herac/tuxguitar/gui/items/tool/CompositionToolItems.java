@@ -32,7 +32,7 @@ import org.herac.tuxguitar.song.models.TGMeasure;
  */
 public class CompositionToolItems extends ToolItems {
 	public static final String NAME = "composition.items";
-	
+
 	private ToolItem tempo;
     private ComboToolItem tempoPercentage;
 	private ToolItem timeSignature;
@@ -40,11 +40,11 @@ public class CompositionToolItems extends ToolItems {
 	private ToolItem repeatClose;
 	private ToolItem repeatAlternative;
     protected static final int[] DEFAULT_PERCENTS = new int[] {25, 50, 75, 100, 125, 150, 175, 200 };
-	
+
 	public CompositionToolItems() {
 		super(NAME);
 	}
-	
+
 	public void showItems(ToolBar toolBar) {
 		this.tempo = new ToolItem(toolBar, SWT.PUSH);
 		this.tempo.addSelectionListener(TuxGuitar.instance().getAction(ChangeTempoAction.NAME));
@@ -75,22 +75,22 @@ public class CompositionToolItems extends ToolItems {
 
 		this.timeSignature = new ToolItem(toolBar, SWT.PUSH);
 		this.timeSignature.addSelectionListener(TuxGuitar.instance().getAction(ChangeTimeSignatureAction.NAME));
-		
+
 		new ToolItem(toolBar, SWT.SEPARATOR);
-		
+
 		this.repeatOpen = new ToolItem(toolBar, SWT.CHECK);
 		this.repeatOpen.addSelectionListener(TuxGuitar.instance().getAction(RepeatOpenAction.NAME));
-		
+
 		this.repeatClose = new ToolItem(toolBar, SWT.CHECK);
 		this.repeatClose.addSelectionListener(TuxGuitar.instance().getAction(RepeatCloseAction.NAME));
-		
+
 		this.repeatAlternative = new ToolItem(toolBar, SWT.CHECK);
 		this.repeatAlternative.addSelectionListener(TuxGuitar.instance().getAction(RepeatAlternativeAction.NAME));
-		
+
 		this.loadIcons();
 		this.loadProperties();
 	}
-	
+
 	public void loadProperties() {
 		this.tempo.setToolTipText(TuxGuitar.getProperty("composition.tempo"));
 		this.timeSignature.setToolTipText(TuxGuitar.getProperty("composition.timesignature"));
@@ -98,7 +98,7 @@ public class CompositionToolItems extends ToolItems {
 		this.repeatClose.setToolTipText(TuxGuitar.getProperty("repeat.close"));
 		this.repeatAlternative.setToolTipText(TuxGuitar.getProperty("repeat.alternative"));
 	}
-	
+
 	public void loadIcons() {
 		this.tempo.setImage(TuxGuitar.instance().getIconManager().getCompositionTempo());
 		this.timeSignature.setImage(TuxGuitar.instance().getIconManager().getCompositionTimeSignature());
@@ -106,7 +106,7 @@ public class CompositionToolItems extends ToolItems {
 		this.repeatClose.setImage(TuxGuitar.instance().getIconManager().getCompositionRepeatClose());
 		this.repeatAlternative.setImage(TuxGuitar.instance().getIconManager().getCompositionRepeatAlternative());
 	}
-	
+
 	public void update() {
 		TGMeasure measure = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getMeasure();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
@@ -132,12 +132,12 @@ public class CompositionToolItems extends ToolItems {
     private class TempoPercentageAdapter extends SelectionAdapter
     {
         private ComboToolItem percentageWidget;
-        
+
         public TempoPercentageAdapter(ComboToolItem item)
         {
             this.percentageWidget = item;
         }
-        
+
         public void widgetSelected(SelectionEvent e)
         {
             int index = this.percentageWidget.getSelectionIndex();

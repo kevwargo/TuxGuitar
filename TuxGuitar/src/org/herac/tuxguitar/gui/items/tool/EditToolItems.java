@@ -29,48 +29,48 @@ public class EditToolItems extends ToolItems {
 	public static final String NAME = "edit.items";
 	private ToolItem undo;
 	private ToolItem redo;
-	
+
 	private ToolItem voice1;
 	private ToolItem voice2;
-	
+
 	private ToolItem modeSelection;
 	private ToolItem modeEdition;
 	private ToolItem notNaturalKey;
-	
+
 	public EditToolItems() {
 		super(NAME);
 	}
-	
+
 	public void showItems(ToolBar toolBar) {
 		this.undo = new ToolItem(toolBar, SWT.PUSH);
 		this.undo.addSelectionListener(TuxGuitar.instance().getAction(UndoAction.NAME));
-		
+
 		this.redo = new ToolItem(toolBar, SWT.PUSH);
 		this.redo.addSelectionListener(TuxGuitar.instance().getAction(RedoAction.NAME));
-		
+
 		new ToolItem(toolBar, SWT.SEPARATOR);
-		
+
 		this.voice1 = new ToolItem(toolBar, SWT.RADIO);
 		this.voice1.addSelectionListener(TuxGuitar.instance().getAction(SetVoice1Action.NAME));
-		
+
 		this.voice2 = new ToolItem(toolBar, SWT.RADIO);
 		this.voice2.addSelectionListener(TuxGuitar.instance().getAction(SetVoice2Action.NAME));
-		
+
 		new ToolItem(toolBar, SWT.SEPARATOR);
-		
+
 		this.modeSelection = new ToolItem(toolBar, SWT.RADIO);
 		this.modeSelection.addSelectionListener(TuxGuitar.instance().getAction(SetMouseModeSelectionAction.NAME));
-		
+
 		this.modeEdition = new ToolItem(toolBar, SWT.RADIO);
 		this.modeEdition.addSelectionListener(TuxGuitar.instance().getAction(SetMouseModeEditionAction.NAME));
-		
+
 		this.notNaturalKey = new ToolItem(toolBar, SWT.CHECK);
 		this.notNaturalKey.addSelectionListener(TuxGuitar.instance().getAction(SetNaturalKeyAction.NAME));
-		
+
 		this.loadIcons();
 		this.loadProperties();
 	}
-	
+
 	public void update() {
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.undo.setEnabled(!running && TuxGuitar.instance().getUndoableManager().canUndo());
@@ -86,7 +86,7 @@ public class EditToolItems extends ToolItems {
 		this.notNaturalKey.setSelection(!getEditor().getTablature().getEditorKit().isNatural());
 		this.notNaturalKey.setEnabled(!running && getEditor().getTablature().getEditorKit().getMouseMode() == EditorKit.MOUSE_MODE_EDITION);
 	}
-	
+
 	public void loadProperties() {
 		this.undo.setToolTipText(TuxGuitar.getProperty("edit.undo"));
 		this.redo.setToolTipText(TuxGuitar.getProperty("edit.redo"));
@@ -96,7 +96,7 @@ public class EditToolItems extends ToolItems {
 		this.modeEdition.setToolTipText(TuxGuitar.getProperty("edit.mouse-mode-edition"));
 		this.notNaturalKey.setToolTipText(TuxGuitar.getProperty("edit.not-natural-key"));
 	}
-	
+
 	public void loadIcons() {
 		this.undo.setImage(TuxGuitar.instance().getIconManager().getEditUndo());
 		this.redo.setImage(TuxGuitar.instance().getIconManager().getEditRedo());

@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TGServiceReader {
-	
+
 	private static final String SERVICE_PATH = new String("META-INF/services/");
-	
+
 	public static Iterator lookupProviders(Class spi) {
 		return TGServiceReader.lookupProviders(spi, TGClassLoader.instance().getClassLoader());
 	}
-	
+
 	public static Iterator lookupProviders(Class spi, ClassLoader loader) {
 		try {
 			if (spi == null || loader == null) {
@@ -30,20 +30,20 @@ public class TGServiceReader {
 			return Collections.EMPTY_LIST.iterator();
 		}
 	}
-	
+
 	private static final class IteratorImpl implements Iterator {
 		private Class spi;
 		private ClassLoader loader;
 		private Enumeration urls;
 		private Iterator iterator;
-		
+
 		public IteratorImpl(Class spi, ClassLoader loader, Enumeration urls) {
 			this.spi = spi;
 			this.loader = loader;
 			this.urls = urls;
 			this.initialize();
 		}
-		
+
 		private void initialize() {
 			List providers = new ArrayList();
 			while (this.urls.hasMoreElements()) {
@@ -65,7 +65,7 @@ public class TGServiceReader {
 			}
 			this.iterator = providers.iterator();
 		}
-		
+
 		private String uncommentLine(String line) {
 			int index = line.indexOf('#');
 			if (index >= 0) {
@@ -73,11 +73,11 @@ public class TGServiceReader {
 			}
 			return line;
 		}
-		
+
 		public boolean hasNext() {
 			return (this.iterator != null && this.iterator.hasNext());
 		}
-		
+
 		public Object next() {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
@@ -92,7 +92,7 @@ public class TGServiceReader {
 			}
 			throw new NoSuchElementException();
 		}
-		
+
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}

@@ -21,19 +21,19 @@ import org.herac.tuxguitar.io.base.TGRawImporter;
 
 /**
  * @author julian
- * 
+ *
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class ImportSongAction extends Action {
 	public static final String NAME = "action.file.import";
-	
+
 	public ImportSongAction() {
 		super(NAME, AUTO_LOCK | AUTO_UPDATE);
 	}
-	
+
 	protected int execute(final TypedEvent event) {
 		TuxGuitar.instance().getPlayer().reset();
-		
+
 		if (TuxGuitar.instance().getFileHistory().isUnsavedFile()) {
 			ConfirmDialog confirm = new ConfirmDialog(TuxGuitar.getProperty("file.save-changes-question"));
 			confirm.setDefaultStatus( ConfirmDialog.STATUS_CANCEL );
@@ -66,10 +66,10 @@ public class ImportSongAction extends Action {
 			}
 		}
 		processImporter(event.widget.getData());
-		
+
 		return 0;
 	}
-	
+
 	protected void processImporter(Object importer) {
 		if ( importer instanceof TGLocalFileImporter ) {
 			this.processLocalFileImporter( (TGLocalFileImporter)importer );
@@ -77,14 +77,14 @@ public class ImportSongAction extends Action {
 			this.processRawImporter( (TGRawImporter)importer );
 		}
 	}
-	
+
 	private void processLocalFileImporter(final TGLocalFileImporter importer) {
 		final String path = FileChooser.instance().open(TuxGuitar.instance().getShell(), importer.getFileFormat());
 		if (!isValidFile(path) || !importer.configure(false)) {
 			ActionLock.unlock();
 			return;
 		}
-		
+
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
 			public void run() {
@@ -96,7 +96,7 @@ public class ImportSongAction extends Action {
 			}
 		}).start();
 	}
-	
+
 	private void processRawImporter( final TGRawImporter importer ) {
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
@@ -109,7 +109,7 @@ public class ImportSongAction extends Action {
 			}
 		}).start();
 	}
-	
+
 	protected boolean isValidFile( String path ) {
 		if ( path != null ) {
 			File file = new File( path );

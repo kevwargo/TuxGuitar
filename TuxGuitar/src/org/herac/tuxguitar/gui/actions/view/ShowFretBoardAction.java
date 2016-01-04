@@ -19,11 +19,11 @@ import org.herac.tuxguitar.gui.actions.Action;
  */
 public class ShowFretBoardAction extends Action {
 	public static final String NAME = "action.view.show-fretboard";
-	
+
 	public ShowFretBoardAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		if (TuxGuitar.instance().getFretBoardEditor().isVisible()) {

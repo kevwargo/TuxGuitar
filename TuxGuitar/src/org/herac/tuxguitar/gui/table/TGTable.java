@@ -27,12 +27,12 @@ public class TGTable {
 	private List rows;
 	private int rowHeight;
 	private int scrollIncrement;
-	
+
 	public TGTable(Composite parent) {
 		this.rows = new ArrayList();
 		this.newTable(parent);
 	}
-	
+
 	public void newTable(Composite parent) {
 		this.sComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.V_SCROLL);
 		this.sComposite.setLayout(new GridLayout());
@@ -43,10 +43,10 @@ public class TGTable {
 		this.table = new Composite(this.sComposite, SWT.NONE);
 		this.table.setLayout(newGridLayout(1, 0, 0, 0, 0));
 		this.table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
+
 		this.columnControl = new SashForm(this.table, SWT.HORIZONTAL);
 		this.columnControl.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-		
+
 		this.columnNumber = new TGTableColumn(this, SWT.LEFT);
         this.columnVIMT = new TGTableColumn(this, SWT.CENTER);
 		this.columnName = new TGTableColumn(this, SWT.LEFT);
@@ -56,22 +56,22 @@ public class TGTable {
         this.columnMute = new TGTableColumn(this, SWT.CENTER);
 		this.columnCanvas = new TGTableColumn(this, SWT.CENTER);
 		this.columnControl.setWeights(new int[] {1, 1, 12, 12, 2, 1, 1, 40 });
-		
+
 		this.rowControl = new Composite(this.table, SWT.NONE);
 		this.rowControl.setLayout(newGridLayout(1, 0, 1, 0, 1));
 		this.rowControl.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
+
 		this.sComposite.setContent(this.table);
 	}
-	
+
 	public Composite getControl() {
 		return this.table;
 	}
-	
+
 	public void newRow() {
 		this.rows.add(new TGTableRow(this));
 	}
-	
+
 	private GridLayout newGridLayout(int cols, int marginWidth, int marginHeight, int horizontalSpacing, int verticalSpacing) {
 		GridLayout layout = new GridLayout(cols, false);
 		layout.marginWidth = marginWidth;
@@ -80,7 +80,7 @@ public class TGTable {
 		layout.verticalSpacing = verticalSpacing;
 		return layout;
 	}
-	
+
 	public void addRowItem(TGTableColumn column, Control control, boolean computeSize) {
 		if (computeSize) {
 			this.rowHeight = Math.max(this.rowHeight, control.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
@@ -88,35 +88,35 @@ public class TGTable {
 		}
 		column.addControl(control);
 	}
-	
+
 	public int getMinHeight() {
 		return (this.sComposite.getMinHeight() + ( this.sComposite.getBorderWidth() * 2 ) );
 	}
-	
+
 	public Composite getColumnControl() {
 		return this.columnControl;
 	}
-	
+
 	public Composite getRowControl() {
 		return this.rowControl;
 	}
-	
+
 	public int getRowHeight() {
 		return this.rowHeight;
 	}
-	
+
 	public int getScrollIncrement() {
 		return this.scrollIncrement;
-	}	
-	
+	}
+
 	public TGTableColumn getColumnInstrument() {
 		return this.columnInstrument;
 	}
-	
+
 	public TGTableColumn getColumnName() {
 		return this.columnName;
 	}
-	
+
 	public TGTableColumn getColumnNumber() {
 		return this.columnNumber;
 	}
@@ -125,30 +125,30 @@ public class TGTable {
     {
         return this.columnVIMT;
     }
-	
+
 	public TGTableColumn getColumnVolume() {
 		return this.columnVolume;
 	}
-    
+
 	public TGTableColumn getColumnSolo() {
 		return this.columnSolo;
 	}
-    
+
 	public TGTableColumn getColumnMute() {
 		return this.columnMute;
 	}
-    
+
 	public TGTableColumn getColumnCanvas() {
 		return this.columnCanvas;
 	}
-	
+
 	public TGTableRow getRow(int index) {
 		if (index >= 0 && index < this.rows.size()) {
 			return (TGTableRow)this.rows.get(index);
 		}
 		return null;
 	}
-	
+
 	public void removeRowsAfter(int index) {
 		while (index < this.rows.size()) {
 			TGTableRow row = (TGTableRow)this.rows.get(index);
@@ -157,18 +157,18 @@ public class TGTable {
 		}
 		this.notifyRemoved();
 	}
-	
+
 	public int getRowCount() {
 		return this.rows.size();
 	}
-	
+
 	public void update() {
 		this.layoutColumns();
 		this.table.layout(true, true);
 		this.sComposite.setMinHeight(this.table.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
 		this.sComposite.getVerticalBar().setIncrement( (getScrollIncrement() + this.sComposite.getBorderWidth() ) );
 	}
-	
+
 	private void notifyRemoved() {
 		this.columnNumber.notifyRemoved();
 		this.columnName.notifyRemoved();
@@ -179,7 +179,7 @@ public class TGTable {
 		this.columnMute.notifyRemoved();
 		this.columnCanvas.notifyRemoved();
 	}
-	
+
 	private void layoutColumns() {
 		this.columnNumber.layout();
 		this.columnName.layout();
@@ -190,5 +190,5 @@ public class TGTable {
 		this.columnMute.layout();
 		this.columnCanvas.layout();
 	}
-	
+
 }

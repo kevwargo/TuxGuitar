@@ -24,13 +24,13 @@ import org.herac.tuxguitar.song.models.TGTrack;
  */
 public class MoveBeatsLeftAction extends Action {
 	public static final String NAME = "action.beat.general.move-left";
-	
+
 	public MoveBeatsLeftAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
-		Caret caret = getEditor().getTablature().getCaret();		
+		Caret caret = getEditor().getTablature().getCaret();
 		TGBeat beat = caret.getSelectedBeat();
 		TGMeasure measure = caret.getMeasure();
 		TGTrack track = caret.getTrack();
@@ -38,14 +38,14 @@ public class MoveBeatsLeftAction extends Action {
 		if (beat != null && measure != null && track != null && duration != null) {
 			//comienza el undoable
 			UndoableTrackGeneric undoable = UndoableTrackGeneric.startUndo(track);
-			
+
 			getSongManager().getTrackManager().moveTrackBeats(track, measure.getStart(), beat.getStart(), -duration.getTime() );
-			
+
 			//termia el undoable
 			addUndoableEdit(undoable.endUndo(track));
-			
+
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
-			
+
 			updateTablature();
 		}
 		return 0;

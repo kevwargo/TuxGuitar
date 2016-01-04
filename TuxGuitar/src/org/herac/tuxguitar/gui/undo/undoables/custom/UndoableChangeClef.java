@@ -23,11 +23,11 @@ public class UndoableChangeClef implements UndoableEdit {
 	private List nextClefPositions;
 	private boolean toEnd;
 	private TGTrack track;
-	
+
 	private UndoableChangeClef() {
 		super();
 	}
-	
+
 	public void redo() throws CannotRedoException {
 		if (!canRedo()) {
 			throw new CannotRedoException();
@@ -35,10 +35,10 @@ public class UndoableChangeClef implements UndoableEdit {
 		TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track, this.position, this.redoableClef, this.toEnd);
 		TuxGuitar.instance().fireUpdate();
 		this.redoCaret.update();
-		
+
 		this.doAction = UNDO_ACTION;
 	}
-	
+
 	public void undo() throws CannotUndoException {
 		if (!canUndo()) {
 			throw new CannotUndoException();
@@ -53,18 +53,18 @@ public class UndoableChangeClef implements UndoableEdit {
 		}
 		TuxGuitar.instance().fireUpdate();
 		this.undoCaret.update();
-		
+
 		this.doAction = REDO_ACTION;
 	}
-	
+
 	public boolean canRedo() {
 		return (this.doAction == REDO_ACTION);
 	}
-	
+
 	public boolean canUndo() {
 		return (this.doAction == UNDO_ACTION);
 	}
-	
+
 	public static UndoableChangeClef startUndo() {
 		UndoableChangeClef undoable = new UndoableChangeClef();
 		Caret caret = getCaret();
@@ -74,7 +74,7 @@ public class UndoableChangeClef implements UndoableEdit {
 		undoable.undoableClef = caret.getMeasure().getClef();
 		undoable.track = caret.getTrack();
 		undoable.nextClefPositions = new ArrayList();
-		
+
 		int prevClef = undoable.undoableClef;
 		Iterator it = caret.getTrack().getMeasures();
 		while (it.hasNext()) {
@@ -88,34 +88,34 @@ public class UndoableChangeClef implements UndoableEdit {
 				prevClef = currClef;
 			}
 		}
-		
+
 		return undoable;
 	}
-	
+
 	public UndoableChangeClef endUndo(int clef, boolean toEnd) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoableClef = clef;
 		this.toEnd = toEnd;
 		return this;
 	}
-	
+
 	private static Caret getCaret() {
 		return TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 	}
-	
+
 	private class ClefPosition {
 		private long position;
 		private int clef;
-		
+
 		public ClefPosition(long position, int clef) {
 			this.position = position;
 			this.clef = clef;
 		}
-		
+
 		public long getPosition() {
 			return this.position;
 		}
-		
+
 		public int getClef() {
 			return this.clef;
 		}

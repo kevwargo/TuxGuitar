@@ -6,11 +6,11 @@ import org.herac.tuxguitar.gui.actions.Action;
 
 public class TGBrowserAction extends Action {
 	public static final String NAME = "action.tools.browser";
-	
+
 	public TGBrowserAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		if (TuxGuitar.instance().getBrowser().isDisposed()) {
 			TuxGuitar.instance().getBrowser().show();

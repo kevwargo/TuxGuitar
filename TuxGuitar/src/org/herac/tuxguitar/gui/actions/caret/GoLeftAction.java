@@ -18,11 +18,11 @@ import org.herac.tuxguitar.gui.actions.Action;
  */
 public class GoLeftAction extends Action {
 	public static final String NAME = "action.caret.go-left";
-	
+
 	public GoLeftAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoPrevious();

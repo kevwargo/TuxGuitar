@@ -59,7 +59,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
             this.volumeControl.setMinimum(0);
             this.volumeControl.setMaximum(127);
         }
-        
+
         public Button getVisibleInMultitrackCheckbox()
         {
             return this.visibleInMultitrackCheckbox;
@@ -69,7 +69,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
         {
             return this.muteCheckbox;
         }
-        
+
         public Button getSoloCheckbox()
         {
             return this.soloCheckbox;
@@ -84,7 +84,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
         {
             return this.track;
         }
-        
+
         public void setTrack(TGTrack track)
         {
             this.track = track;
@@ -115,7 +115,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
         {
             applyVolumeChange();
         }
-        
+
         private void applySoloMute(int type)
         {
             UndoableTrackSoloMute undoable = UndoableTrackSoloMute.startUndo(track);
@@ -145,7 +145,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
                 TuxGuitar.instance().getPlayer().updateControllers();
         }
     }
-    
+
 
     public TGMiniMixer(TGTable table)
     {

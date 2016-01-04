@@ -18,11 +18,11 @@ import org.herac.tuxguitar.gui.editors.tab.edit.EditorKit;
  */
 public class SetMouseModeSelectionAction extends Action {
 	public static final String NAME = "action.edit.set-mouse-mode-selection";
-	
+
 	public SetMouseModeSelectionAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | DISABLE_ON_PLAYING | AUTO_UPDATE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		getEditor().getTablature().getEditorKit().setMouseMode(EditorKit.MOUSE_MODE_SELECTION);
 		return 0;

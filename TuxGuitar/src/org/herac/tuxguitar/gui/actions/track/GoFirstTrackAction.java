@@ -19,11 +19,11 @@ import org.herac.tuxguitar.song.models.TGTrack;
  */
 public class GoFirstTrackAction extends Action {
 	public static final String NAME = "action.track.go-first";
-	
+
 	public GoFirstTrackAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGTrack track = getSongManager().getFirstTrack();

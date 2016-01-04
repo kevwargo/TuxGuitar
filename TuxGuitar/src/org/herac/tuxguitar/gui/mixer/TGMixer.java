@@ -33,12 +33,12 @@ import org.herac.tuxguitar.song.models.TGTrack;
 
 /**
  * @author julian
- * 
+ *
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
 public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
-	
+
 	public static final int MUTE = 0x01;
 	public static final int SOLO = 0x02;
 	public static final int VOLUME = 0x04;
@@ -48,9 +48,9 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 	public static final int PHASER = 0x40;
 	public static final int TREMOLO = 0x80;
 	public static final int CHANNEL = 0x100;
-	
+
 	public static final int CHANGE_ALL = (MUTE | SOLO | VOLUME | BALANCE | CHORUS | REVERB | PHASER | TREMOLO | CHANNEL);
-	
+
 	protected Shell dialog;
 	private List tracks;
 	private Scale volumeScale;
@@ -59,15 +59,15 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 	private String volumeTip;
 	private int volumeValue;
 	private Scale metronomeVolumeScale;
-	
+
 	public TGMixer() {
 		this.tracks = new ArrayList();
 	}
-	
+
 	public void show() {
 		this.dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM);
 		this.loadData();
-		
+
 		this.addListeners();
 		this.dialog.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {
@@ -77,19 +77,19 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 		});
 		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER );
 	}
-	
+
 	public void addListeners() {
 		TuxGuitar.instance().getIconManager().addLoader(this);
 		TuxGuitar.instance().getLanguageManager().addLoader(this);
 		TuxGuitar.instance().getEditorManager().addUpdateListener(this);
 	}
-	
+
 	public void removeListeners() {
 		TuxGuitar.instance().getIconManager().removeLoader(this);
 		TuxGuitar.instance().getLanguageManager().removeLoader(this);
 		TuxGuitar.instance().getEditorManager().removeUpdateListener(this);
 	}
-	
+
 	protected void loadData() {
 		this.tracks.clear();
 		Iterator it = TuxGuitar.instance().getSongManager().getSong().getTracks();
@@ -102,33 +102,33 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 		Composite composite = new Composite(this.dialog, SWT.BORDER);
 		composite.setLayout(new GridLayout());
 		composite.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
-		
+
 		this.volumeValue = -1;
-		
+
 		this.volumeScale = new Scale(composite, SWT.VERTICAL);
 		this.volumeScale.setMaximum(10);
 		this.volumeScale.setMinimum(0);
 		this.volumeScale.setIncrement(1);
 		this.volumeScale.setPageIncrement(1);
 		this.volumeScale.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
-		
+
 		Label separator = new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR);
 		separator.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false));
-		
+
 		Composite volumeValueComposite = new Composite(composite, SWT.NONE);
 		volumeValueComposite.setLayout(new GridLayout(2, false));
-		
+
 		this.volumeValueTitleLabel = new Label(volumeValueComposite, SWT.NONE);
-		
+
 		this.volumeValueLabel = new Label(volumeValueComposite, SWT.CENTER);
 		this.volumeValueLabel.setLayoutData(getVolumeValueLabelData());
-		
+
 		this.volumeScale.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				changeVolume();
 			}
 		});
-		
+
 		this.loadVolume();
 		this.loadIcons();
 		this.loadProperties(false);
@@ -147,18 +147,18 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
                     changeMetronomeVolume();
                 }
             });
-		
+
 		this.dialog.setLayout(getLayout(this.dialog.getChildren().length));
 		this.dialog.pack();
 	}
-	
+
 	private GridLayout getLayout(int columns) {
 		GridLayout layout = new GridLayout(columns, false);
 		layout.verticalSpacing = 1;
 		layout.horizontalSpacing = 1;
 		return layout;
 	}
-	
+
 	protected void changeVolume() {
 		int volume = (short)(TGMixer.this.volumeScale.getMaximum() - TGMixer.this.volumeScale.getSelection());
 		if (volume != TuxGuitar.instance().getPlayer().getVolume()) {
@@ -172,7 +172,7 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
     protected void changeMetronomeVolume() {
         System.out.println("change metronome value " + this.metronomeVolumeScale.getSelection());
     }
-	
+
 	protected void loadVolume() {
 		int volume = TuxGuitar.instance().getPlayer().getVolume();
 		if (this.volumeValue != volume) {
@@ -181,24 +181,24 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 			this.volumeValue = volume;
 		}
 	}
-	
+
 	private GridData getVolumeValueLabelData() {
 		GridData data = new GridData(SWT.CENTER, SWT.NONE, true, false);
 		data.minimumWidth = 40;
 		return data;
 	}
-	
+
 	protected void clear() {
 		Control[] controls = this.dialog.getChildren();
 		for (int i = 0;i < controls.length;i++) {
 			controls[i].dispose();
 		}
 	}
-	
+
 	public boolean isDisposed() {
 		return (this.dialog == null || this.dialog.isDisposed());
 	}
-	
+
 	public synchronized void fireChanges(TGChannel channel, int type) {
 		Iterator it = this.tracks.iterator();
 		while (it.hasNext()) {
@@ -212,11 +212,11 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 			TuxGuitar.instance().getPlayer().updateControllers();
 		}
 	}
-	
+
 	public synchronized void loadProperties() {
 		this.loadProperties(true);
 	}
-	
+
 	public synchronized void loadProperties(boolean pack) {
 		if (!isDisposed()) {
 			Iterator it = this.tracks.iterator();
@@ -235,13 +235,13 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 			}
 		}
 	}
-	
+
 	public synchronized void loadIcons() {
 		if (!isDisposed()) {
 			this.dialog.setImage(TuxGuitar.instance().getIconManager().getAppIcon());
 		}
 	}
-	
+
 	public synchronized void updateItems() {
 		if (!isDisposed()) {
 			Iterator it = this.tracks.iterator();
@@ -251,11 +251,11 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 			}
 		}
 	}
-	
+
 	public synchronized void updateValues() {
 		if (!isDisposed()) {
 			this.loadVolume();
-			
+
 			Iterator it = this.tracks.iterator();
 			while (it.hasNext()) {
 				TGMixerTrack mixer = (TGMixerTrack)it.next();
@@ -263,7 +263,7 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 			}
 		}
 	}
-	
+
 	public synchronized void update() {
 		if (!isDisposed()) {
 			new SyncThread(new Runnable() {
@@ -278,7 +278,7 @@ public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader {
 			}).start();
 		}
 	}
-	
+
 	public synchronized void dispose() {
 		if (!isDisposed()) {
 			this.dialog.dispose();

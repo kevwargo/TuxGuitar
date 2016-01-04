@@ -21,11 +21,11 @@ import org.herac.tuxguitar.song.models.TGBeat;
  */
 public class InsertNoteAction extends Action {
 	public static final String NAME = "action.note.general.insert";
-	
+
 	public InsertNoteAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGBeat beat = caret.getSelectedBeat();
@@ -33,7 +33,7 @@ public class InsertNoteAction extends Action {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
-			
+
 			if (beat.getVoice(caret.getVoice()).isEmpty()) {
 				getSongManager().getMeasureManager().addSilence(beat, caret.getDuration().clone(getSongManager().getFactory()), caret.getVoice());
 			}
@@ -44,13 +44,13 @@ public class InsertNoteAction extends Action {
 			}
 			//termia el undoable
 			addUndoableEdit(undoable.endUndo());
-			
+
 			updateTablature();
-			
+
 		}
 		return 0;
 	}
-	
+
 	public void updateTablature() {
 		fireUpdate(getEditor().getTablature().getCaret().getMeasure().getNumber());
 	}

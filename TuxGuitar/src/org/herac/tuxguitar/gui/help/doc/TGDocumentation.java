@@ -15,24 +15,24 @@ import org.herac.tuxguitar.gui.util.DialogUtils;
 import org.herac.tuxguitar.gui.util.TGFileUtils;
 
 public class TGDocumentation {
-	
+
 	private static final String RESOURCE_PATH = "help";
 	private static final String TEMPORAL_PATH = System.getProperty("java.io.tmpdir") + File.separator + "tuxguitar";
-	
+
 	public void display() throws Throwable {
 		URL url = getIndexUrl();
 		if ( url != null ) {
 			Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.SHELL_TRIM);
 			dialog.setLayout(new FillLayout());
-			
+
 			Browser browser = new Browser(dialog, SWT.BORDER);
 			browser.setLayout(new FillLayout());
 			browser.setUrl( url.toExternalForm() );
-			
+
 			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_MAXIMIZED);
 		}
 	}
-	
+
 	private URL getIndexUrl() throws Throwable {
 		URL url = TGFileUtils.getResourceUrl(RESOURCE_PATH + "/index.html");
 		if ( url != null && !TGFileUtils.isLocalFile( url ) ) {
@@ -42,7 +42,7 @@ public class TGDocumentation {
 		}
 		return url;
 	}
-	
+
 	private void copyTemporalResources( String dstPath , String resourcePath, String[] resources ) throws Throwable {
 		if ( resources != null ) {
 			for ( int i = 0 ; i < resources.length ; i ++ ) {

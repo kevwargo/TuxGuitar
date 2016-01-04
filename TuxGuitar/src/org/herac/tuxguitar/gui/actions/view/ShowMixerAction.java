@@ -18,11 +18,11 @@ import org.herac.tuxguitar.gui.actions.Action;
  */
 public class ShowMixerAction extends Action {
 	public static final String NAME = "action.view.show-mixer";
-	
+
 	public ShowMixerAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		if (TuxGuitar.instance().getMixer().isDisposed()) {
 			TuxGuitar.instance().getMixer().show();

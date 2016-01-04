@@ -18,41 +18,41 @@ public class UndoableChangeTempo implements UndoableEdit {
 	private UndoableCaretHelper redoCaret;
 	private List undoableTempos;
 	private List redoableTempos;
-	
+
 	private UndoableChangeTempo() {
 		super();
 		this.undoableTempos = new ArrayList();
 		this.redoableTempos = new ArrayList();
 	}
-	
+
 	public void redo() throws CannotRedoException {
 		if (!canRedo()) {
 			throw new CannotRedoException();
 		}
 		this.setTempos(this.redoableTempos);
 		this.redoCaret.update();
-		
+
 		this.doAction = UNDO_ACTION;
 	}
-	
+
 	public void undo() throws CannotUndoException {
 		if (!canUndo()) {
 			throw new CannotUndoException();
 		}
 		this.setTempos(this.undoableTempos);
 		this.undoCaret.update();
-		
+
 		this.doAction = REDO_ACTION;
 	}
-	
+
 	public boolean canRedo() {
 		return (this.doAction == REDO_ACTION);
 	}
-	
+
 	public boolean canUndo() {
 		return (this.doAction == UNDO_ACTION);
 	}
-	
+
 	public static UndoableChangeTempo startUndo() {
 		UndoableChangeTempo undoable = new UndoableChangeTempo();
 		undoable.doAction = UNDO_ACTION;
@@ -60,13 +60,13 @@ public class UndoableChangeTempo implements UndoableEdit {
 		undoable.getTempos(undoable.undoableTempos);
 		return undoable;
 	}
-	
+
 	public UndoableChangeTempo endUndo() {
 		this.redoCaret = new UndoableCaretHelper();
 		this.getTempos(this.redoableTempos);
 		return this;
 	}
-	
+
 	private void getTempos(List list) {
 		Iterator it = TuxGuitar.instance().getSongManager().getSong().getMeasureHeaders();
 		while (it.hasNext()) {
@@ -74,7 +74,7 @@ public class UndoableChangeTempo implements UndoableEdit {
 			list.add(header.getTempo().clone(TuxGuitar.instance().getSongManager().getFactory()));
 		}
 	}
-	
+
 	private void setTempos(List tempos) {
 		int length = tempos.size();
 		if (length != TuxGuitar.instance().getSongManager().getSong().countMeasureHeaders()) {

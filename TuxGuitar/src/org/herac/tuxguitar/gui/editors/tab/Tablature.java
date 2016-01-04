@@ -26,44 +26,44 @@ import org.herac.tuxguitar.song.managers.TGSongManager;
 import org.herac.tuxguitar.song.models.TGDuration;
 /**
  * @author julian
- * 
+ *
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class Tablature extends Composite {
-	
+
 	private static final int SCROLL_DELAY = 15;
 	private static final int SCROLL_INCREMENT = 50;
-	
+
 	private TGSongManager songManager;
 	private Caret caret;
 	private int width;
 	private int height;
 	private ViewLayout viewLayout;
 	private EditorKit editorKit;
-	
+
 	private TGBeatImpl playedBeat;
 	private TGMeasureImpl playedMeasure;
-	
+
 	private int scrollX;
 	private int scrollY;
 	private boolean resetScroll;
 	protected long lastVScrollTime;
 	protected long lastHScrollTime;
-	
+
 	private boolean painting;
-	
+
 	public Tablature(final Composite parent) {
 		this(parent, SWT.NONE);
 	}
-	
+
 	public Tablature(final Composite parent, int style) {
 		super(parent, style);
 		this.editorKit = new EditorKit(this);
 	}
-	
+
 	public void initGUI() {
 		this.addPaintListener(new TablaturePaintListener(this));
-		
+
 		final ScrollBar hBar = getHorizontalBar();
 		hBar.setIncrement(SCROLL_INCREMENT);
 		hBar.addListener(SWT.Selection, new Listener() {
@@ -74,7 +74,7 @@ public class Tablature extends Composite {
 				}
 			}
 		});
-		
+
 		final ScrollBar vBar = getVerticalBar();
 		vBar.setIncrement(SCROLL_INCREMENT);
 		vBar.addListener(SWT.Selection, new Listener() {
@@ -85,28 +85,28 @@ public class Tablature extends Composite {
 				}
 			}
 		});
-		
+
 		this.addControlListener(new ControlAdapter() {
 			public void controlResized(ControlEvent arg0) {
 				updateScroll();
 			}
 		});
 	}
-	
+
 	public void initDefaults() {
 		this.caret = new Caret(this);
 	}
-	
+
 	public void updateTablature() {
 		this.playedBeat = null;
 		this.playedMeasure = null;
 		getViewLayout().updateSong();
 	}
-	
+
 	public void initCaret() {
 		this.caret.update(1, TGDuration.QUARTER_TIME, 1);
 	}
-	
+
 	public synchronized void paintTablature(TGPainter painter) {
         // System.out.printf("painting tablature %d\n", System.currentTimeMillis());
 		if (!TuxGuitar.instance().isLocked()) {
@@ -114,20 +114,20 @@ public class Tablature extends Composite {
 			this.setPainting(true);
 			try {
 				this.checkScroll();
-				
+
 				Rectangle area = getClientArea();
 				ScrollBar xScroll = getHorizontalBar();
 				ScrollBar yScroll = getVerticalBar();
 				this.scrollX = xScroll.getSelection();
 				this.scrollY = yScroll.getSelection();
-				
+
 				this.getViewLayout().paint(painter, area,-this.scrollX,-this.scrollY);
-				
+
 				this.width = this.viewLayout.getWidth();
 				this.height = this.viewLayout.getHeight();
-				
+
 				this.updateScroll();
-				
+
 				if (TuxGuitar.instance().getPlayer().isRunning()) {
 					redrawPlayingMode(painter, true);
 				}
@@ -137,7 +137,7 @@ public class Tablature extends Composite {
 					// Mover el scroll puede necesitar redibujar
 					// por eso es importante desmarcar los cambios antes de hacer el moveScrollTo
 					getCaret().setChanges(false);
-					
+
 					moveScrollTo(getCaret().getMeasure(), xScroll, yScroll, area);
 				}
 			} catch(Throwable throwable) {
@@ -147,11 +147,11 @@ public class Tablature extends Composite {
 			TuxGuitar.instance().unlock();
 		}
 	}
-	
+
 	public void resetScroll() {
 		this.resetScroll = true;
 	}
-	
+
 	public void checkScroll() {
 		if (this.resetScroll) {
 			getHorizontalBar().setSelection(0);
@@ -159,7 +159,7 @@ public class Tablature extends Composite {
 			this.resetScroll = false;
 		}
 	}
-	
+
 	public void updateScroll() {
 		Rectangle bounds = getBounds();
 		Rectangle client = getClientArea();
@@ -170,11 +170,11 @@ public class Tablature extends Composite {
 		hBar.setThumb(Math.min(bounds.width, client.width));
 		vBar.setThumb(Math.min(bounds.height, client.height));
 	}
-	
+
 	public boolean moveScrollTo(TGMeasureImpl measure) {
 		return moveScrollTo(measure, getHorizontalBar(), getVerticalBar(), getClientArea());
 	}
-	
+
 	public boolean moveScrollTo(TGMeasureImpl measure, ScrollBar xScroll, ScrollBar yScroll, Rectangle area) {
 		boolean success = false;
 		if (measure != null && measure.getTs() != null) {
@@ -185,33 +185,33 @@ public class Tablature extends Composite {
 			int marginWidth = getViewLayout().getFirstMeasureSpacing();
 			int marginHeight = getViewLayout().getFirstTrackSpacing();
 			boolean forceRedraw = false;
-			
+
 			//Solo se ajusta si es necesario
 			//si el largo del compas es mayor al de la pantalla. nunca se puede ajustar a la medida.
 			if ( mX < 0 || ( (mX + mWidth ) > area.width && (area.width >= mWidth + marginWidth || mX > marginWidth) )  ) {
 				xScroll.setSelection((this.scrollX + mX) - marginWidth );
 				success = true;
 			}
-			
+
 			//Solo se ajusta si es necesario
 			//si el alto del compas es mayor al de la pantalla. nunca se puede ajustar a la medida.
 			if ( mY < 0 || ( (mY + mHeight ) > area.height && (area.height >= mHeight + marginHeight || mY > marginHeight) )  ) {
 				yScroll.setSelection( (this.scrollY + mY)  - marginHeight );
 				success = true;
 			}
-			
+
 			if (!success) {
 				// Si la seleccion "real" del scroll es distinta a la anterior, se fuerza el redraw
 				forceRedraw = (this.scrollX != xScroll.getSelection() || this.scrollY != yScroll.getSelection());
 			}
-			
+
 			if (forceRedraw || success) {
 				redraw();
 			}
 		}
 		return success;
 	}
-	
+
 	public void redraw() {
 		if (!super.isDisposed() && !TuxGuitar.instance().isLocked()) {
 			this.playedBeat = null;
@@ -221,24 +221,24 @@ public class Tablature extends Composite {
 			super.redraw();
 		}
 	}
-	
+
 	public void redrawPlayingMode() {
 		if (!super.isDisposed() && !isPainting() && !TuxGuitar.instance().isLocked()) {
 			//TuxGuitar.instance().lock();
 			if (TuxGuitar.instance().getPlayer().isRunning()) {
 				this.editorKit.tryBack();
 				this.setPainting(true);
-				
+
 				TGPainter painter = new TGPainter(new GC(this));
 				redrawPlayingMode(painter, false);
 				painter.dispose();
-				
+
 				this.setPainting(false);
 			}
 			//TuxGuitar.instance().unlock();
 		}
 	}
-	
+
 	private void redrawPlayingMode(TGPainter painter, boolean force) {
 		if (!super.isDisposed() && !TuxGuitar.instance().isLocked()) {
 			try {
@@ -262,35 +262,35 @@ public class Tablature extends Composite {
 			}
 		}
 	}
-	
+
 	public boolean isPainting() {
 		return this.painting;
 	}
-	
+
 	public void setPainting(boolean painting) {
 		this.painting = painting;
 	}
-	
+
 	public Caret getCaret() {
 		return this.caret;
 	}
-	
+
 	public EditorKit getEditorKit() {
 		return this.editorKit;
 	}
-	
+
 	public TGSongManager getSongManager() {
 		return this.songManager;
 	}
-	
+
 	public void setSongManager(TGSongManager songManager) {
 		this.songManager = songManager;
 	}
-	
+
 	public ViewLayout getViewLayout() {
 		return this.viewLayout;
 	}
-	
+
 	public void setViewLayout(ViewLayout viewLayout) {
 		if (getViewLayout() != null) {
 			getViewLayout().disposeLayout();
@@ -304,20 +304,20 @@ public class Tablature extends Composite {
 		}
 		this.reloadStyles();
 	}
-	
+
 	public void reloadStyles() {
 		if (this.getViewLayout() != null) {
 			this.getViewLayout().reloadStyles();
 			this.setBackground(getViewLayout().getResources().getBackgroundColor());
 		}
 	}
-	
+
 	public void reloadViewLayout() {
 		int style =  TuxGuitar.instance().getConfig().getIntConfigValue(TGConfigKeys.LAYOUT_STYLE);
 		int mode = TuxGuitar.instance().getConfig().getIntConfigValue(TGConfigKeys.LAYOUT_MODE);
 		this.loadViewLayout(style, mode);
 	}
-	
+
 	private void loadViewLayout( int style, int mode ) {
 		switch (mode) {
 			case ViewLayout.MODE_PAGE:
@@ -333,7 +333,7 @@ public class Tablature extends Composite {
 			break;
 		}
 	}
-	
+
 	public void dispose() {
 		super.dispose();
 		this.getViewLayout().disposeLayout();

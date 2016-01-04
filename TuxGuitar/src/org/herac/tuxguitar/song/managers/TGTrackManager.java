@@ -12,15 +12,15 @@ import org.herac.tuxguitar.song.models.TGTrack;
 
 public class TGTrackManager {
 	private TGSongManager songManager;
-	
+
 	public TGTrackManager(TGSongManager songManager) {
 		this.songManager = songManager;
 	}
-	
+
 	public TGSongManager getSongManager() {
 		return this.songManager;
 	}
-	
+
 	public TGMeasure getFirstMeasure(TGTrack track) {
 		TGMeasure firstMeasure = null;
 		Iterator measures = track.getMeasures();
@@ -32,19 +32,19 @@ public class TGTrackManager {
 		}
 		return firstMeasure;
 	}
-	
+
 	public TGMeasure getLastMeasure(TGTrack track) {
 		return track.getMeasure(track.countMeasures() - 1);
 	}
-	
+
 	public TGMeasure getPrevMeasure(TGMeasure measure) {
 		return measure.getTrack().getMeasure(measure.getNumber() - 2);
 	}
-	
+
 	public TGMeasure getNextMeasure(TGMeasure measure) {
 		return measure.getTrack().getMeasure(measure.getNumber());
 	}
-	
+
 	public TGMeasure getMeasureAt(TGTrack track, long start) {
 		Iterator it = track.getMeasures();
 		while (it.hasNext()) {
@@ -57,7 +57,7 @@ public class TGTrackManager {
 		}
 		return null;
 	}
-	
+
 	public TGMeasure getMeasure(TGTrack track, int number) {
 		Iterator it = track.getMeasures();
 		while (it.hasNext()) {
@@ -68,7 +68,7 @@ public class TGTrackManager {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Retorna Todos los desde Start hasta el final del compas
 	 */
@@ -83,7 +83,7 @@ public class TGTrackManager {
 		}
 		return measures;
 	}
-	
+
 	/**
 	 * Retorna Todos los desde Start hasta el final del compas
 	 */
@@ -98,11 +98,11 @@ public class TGTrackManager {
 		}
 		return measures;
 	}
-	
+
 	public void addNewMeasureBeforeEnd(TGTrack track, TGMeasureHeader header) {
 		addNewMeasureAfter(track, header, getLastMeasure(track));
 	}
-	
+
 	/**
 	 * Agrega un Compas
 	 */
@@ -112,7 +112,7 @@ public class TGTrackManager {
 		newMeasure.setKeySignature(measure.getKeySignature());
 		addMeasure(track, newMeasure);
 	}
-	
+
 	public void addNewMeasure(TGTrack track, TGMeasureHeader header) {
 		TGMeasure previous = getMeasure(track, (header.getNumber() == 1)?(header.getNumber()+1):header.getNumber()-1);
 		TGMeasure newMeasure = getSongManager().getFactory().newMeasure(header);
@@ -144,39 +144,39 @@ public class TGTrackManager {
 			}
 		}
 	}*/
-	
+
 	/**
 	 * Agrega un Compas
 	 */
 	public void addMeasure(TGTrack track, TGMeasure measure) {
 		track.addMeasure(measure);
 	}
-	
+
 	/**
 	 * Agrega un Compas
 	 */
 	public void addMeasure(TGTrack track, int index, TGMeasure measure) {
 		track.addMeasure(index, measure);
 	}
-	
+
 	public void removeLastMeasure(TGTrack track) {
 		removeMeasure(getLastMeasure(track));
 	}
-	
+
 	public void removeMeasure(TGTrack track, long start) {
 		removeMeasure(getMeasureAt(track, start));
 	}
-	
+
 	public void removeMeasure(TGMeasure measure) {
 		measure.getTrack().removeMeasure(measure.getNumber() - 1);
 	}
-	
+
 	public TGMeasure replaceMeasure(TGTrack track, TGMeasure newMeasure) {
 		TGMeasure measure = getMeasureAt(track, newMeasure.getStart());
 		measure.makeEqual(newMeasure);
 		return measure;
 	}
-	
+
 	/**
 	 * Mueve el compas
 	 */
@@ -184,7 +184,7 @@ public class TGTrackManager {
 		//getSongManager().getMeasureManager().moveAllComponents(measure, theMove);
 		getSongManager().getMeasureManager().moveAllBeats(measure, theMove);
 	}
-	
+
 	public void moveOutOfBoundsBeatsToNewMeasure(TGTrack track, long start) {
 		Iterator it = getMeasuresBeforeEnd(track, start).iterator();
 		while ( it.hasNext() ) {
@@ -192,7 +192,7 @@ public class TGTrackManager {
 			getSongManager().getMeasureManager().moveOutOfBoundsBeatsToNewMeasure(measure);
 		}
 	}
-	
+
 	public void moveTrackBeats(TGTrack track, long measureStart, long moveStart, long theMove ) {
 		List measures = getMeasuresBeforeEnd(track, measureStart);
 		for ( int i = 0 ; i < measures.size() ; i ++ ) {
@@ -207,18 +207,18 @@ public class TGTrackManager {
 			getSongManager().getMeasureManager().moveOutOfBoundsBeatsToNewMeasure(measure, false);
 		}
 	}
-	
+
 	public void changeKeySignature(TGTrack track, long start, int keySignature, boolean toEnd) {
 		changeKeySignature(track, getMeasureAt(track, start), keySignature, toEnd);
 	}
-	
+
 	/**
 	 * Cambia el Key Signature
 	 */
 	public void changeKeySignature(TGTrack track, TGMeasure measure, int keySignature, boolean toEnd) {
 		//asigno el nuevo Key
 		measure.setKeySignature(keySignature);
-		
+
 		if (toEnd) {
 			List measures = getMeasuresBeforeEnd(track, measure.getStart() + 1);
 			Iterator it = measures.iterator();
@@ -228,18 +228,18 @@ public class TGTrackManager {
 			}
 		}
 	}
-	
+
 	public void changeClef(TGTrack track, long start, int clef, boolean toEnd) {
 		changeClef(track, getMeasureAt(track, start), clef, toEnd);
 	}
-	
+
 	/**
 	 * Cambia el Clef
 	 */
 	public void changeClef(TGTrack track, TGMeasure measure, int clef, boolean toEnd) {
 		//asigno el nuevo clef
 		measure.setClef(clef);
-		
+
 		if (toEnd) {
 			List measures = getMeasuresBeforeEnd(track, measure.getStart() + 1);
 			Iterator it = measures.iterator();
@@ -249,17 +249,17 @@ public class TGTrackManager {
 			}
 		}
 	}
-	
+
 	public void changeSolo(TGTrack track, boolean solo) {
 		track.setSolo(solo);
 		track.setMute(track.isSolo() ? false : track.isMute());
 	}
-	
+
 	public void changeMute(TGTrack track, boolean mute) {
 		track.setMute(mute);
 		track.setSolo(track.isMute() ? false : track.isSolo());
 	}
-	
+
 	public void changeInfo(TGTrack track, String name, TGColor color, int offset) {
 		track.setName(name);
 		track.setOffset(offset);
@@ -267,14 +267,14 @@ public class TGTrackManager {
 		track.getColor().setG(color.getG());
 		track.getColor().setB(color.getB());
 	}
-	
+
 	public void changeInstrumentStrings(TGTrack track, List strings) {
 		if (strings.size() < track.getStrings().size()) {
 			removeNotesAfterString(track, strings.size());
 		}
 		track.setStrings(strings);
 	}
-	
+
 	public void removeNotesAfterString(TGTrack track, int string) {
 		Iterator it = track.getMeasures();
 		while (it.hasNext()) {
@@ -282,7 +282,7 @@ public class TGTrackManager {
 			getSongManager().getMeasureManager().removeNotesAfterString(measure, string);
 		}
 	}
-	
+
 	public void changeInstrument(TGTrack track, int instrument, boolean percussion) {
 		track.getChannel().setInstrument((short)instrument);
 		if (percussion) {
@@ -297,7 +297,7 @@ public class TGTrackManager {
 		}
 		this.songManager.updateChannel(track.getChannel());
 	}
-	
+
 	public void autoCompleteSilences(TGTrack track) {
 		Iterator it = track.getMeasures();
 		while (it.hasNext()) {
@@ -305,7 +305,7 @@ public class TGTrackManager {
 			this.songManager.getMeasureManager().autoCompleteSilences(measure);
 		}
 	}
-	
+
 	public void orderBeats(TGTrack track) {
 		Iterator it = track.getMeasures();
 		while (it.hasNext()) {
@@ -313,7 +313,7 @@ public class TGTrackManager {
 			this.songManager.getMeasureManager().orderBeats(measure);
 		}
 	}
-	
+
 	public void transposeNotes(TGTrack track, int transposition , boolean tryKeepString, boolean applyToChords, int applyToString) {
 		Iterator it = track.getMeasures();
 		while (it.hasNext()) {
@@ -321,7 +321,7 @@ public class TGTrackManager {
 			this.songManager.getMeasureManager().transposeNotes(measure, transposition, tryKeepString, applyToChords, applyToString );
 		}
 	}
-	
+
 	public void transposeNotes(TGTrack track, int[] transpositionStrings , boolean tryKeepString , boolean applyToChords ) {
 		Iterator it = track.getMeasures();
 		while (it.hasNext()) {
@@ -329,14 +329,14 @@ public class TGTrackManager {
 			this.songManager.getMeasureManager().transposeNotes(measure, transpositionStrings, tryKeepString , applyToChords);
 		}
 	}
-	
+
 	/**
 	 * Retorna true si es el primer compas
 	 */
 	public boolean isFirstMeasure(TGMeasure measure) {
 		return (measure.getNumber() == 1);
 	}
-	
+
 	/**
 	 * Retorna true si es el ultimo compas
 	 */

@@ -18,11 +18,11 @@ import org.herac.tuxguitar.gui.actions.Action;
  */
 public class ShowPianoAction extends Action {
 	public static final String NAME = "action.view.show-piano";
-	
+
 	public ShowPianoAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		if (TuxGuitar.instance().getPianoEditor().isDisposed()) {
 			TuxGuitar.instance().getPianoEditor().show();

@@ -37,21 +37,21 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  */
 public class PrintAction extends Action {
 	public static final String NAME = "action.file.print";
-	
+
 	public PrintAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		try {
 			final PrintStyles data = PrintStylesDialog.open(TuxGuitar.instance().getShell());
 			if (data != null) {
 				PrintDialog dialog = new PrintDialog(TuxGuitar.instance().getShell(), SWT.NULL);
 				PrinterData printerData = dialog.open();
-				
+
 				if (printerData != null) {
 					TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
-					
+
 					this.print(printerData, data);
 				}
 			}
@@ -60,7 +60,7 @@ public class PrintAction extends Action {
 		}
 		return 0;
 	}
-	
+
 	public void print(final PrinterData printerData , final PrintStyles data) {
 		try {
 			new Thread(new Runnable() {
@@ -69,20 +69,20 @@ public class PrintAction extends Action {
 						final TGSongManager manager = new TGSongManager();
 						manager.setFactory(new TGFactoryImpl());
 						manager.setSong(getSongManager().getSong().clone(manager.getFactory()));
-						
+
 						new SyncThread(new Runnable() {
 							public void run() {
 								try {
 									Shell shell = new Shell();
 									Printer printer = new Printer(printerData);
-									
+
 									Tablature tablature = new Tablature(shell);
 									tablature.setSongManager(manager);
-									
+
 									Rectangle bounds = getPrinterArea(printer, 0.5);
-									
+
 									PrinterViewLayout layout = new PrinterViewLayout(tablature, data, getPrinterScale(printer));
-									
+
 									print(printer, printerData, layout , bounds);
 								} catch(Throwable throwable ) {
 									MessageDialog.errorMessage(throwable);
@@ -98,7 +98,7 @@ public class PrintAction extends Action {
 			MessageDialog.errorMessage(throwable);
 		}
 	}
-	
+
 	protected void print(final Printer printer, final PrinterData printerData , final PrinterViewLayout layout, final Rectangle bounds) {
 		new Thread(new Runnable() {
 			public void run() {
@@ -120,20 +120,20 @@ public class PrintAction extends Action {
 			}
 		}).start();
 	}
-	
+
 	protected Rectangle getPrinterArea(Printer printer, double margin) {
 		Rectangle clientArea = printer.getClientArea();
 		Rectangle trim = printer.computeTrim(0, 0, 0, 0);
 		Point dpi = printer.getDPI();
-		
+
 		int x = (int) (margin * dpi.x) - trim.x;
 		int y = (int) (margin * dpi.y) - trim.y;
 		int width = clientArea.width + trim.width - (int) (margin * dpi.x) - trim.x;
 		int height = clientArea.height + trim.height - (int) (margin * dpi.y) - trim.y;
-		
+
 		return new Rectangle(x, y, width, height);
 	}
-	
+
 	protected float getPrinterScale(Printer printer) {
 		Point dpi = printer.getDPI();
 		if ( dpi != null ) {
@@ -141,16 +141,16 @@ public class PrintAction extends Action {
 		}
 		return 1.0f;
 	}
-	
+
 	private class PrintDocumentImpl implements PrintDocument {
-		
+
 		private Printer printer;
 		private PrinterData printerData;
 		private PrinterViewLayout layout;
 		private TGPainter painter;
 		private Rectangle bounds;
 		private boolean started;
-		
+
 		public PrintDocumentImpl(PrinterViewLayout layout, Printer printer, PrinterData printerData, Rectangle bounds) {
 			this.layout = layout;
 			this.printer = printer;
@@ -158,33 +158,33 @@ public class PrintAction extends Action {
 			this.bounds = bounds;
 			this.painter = new TGPainter();
 		}
-		
+
 		public TGPainter getPainter() {
 			return this.painter;
 		}
-		
+
 		public Rectangle getBounds() {
 			return this.bounds;
 		}
-		
+
 		public void pageStart() {
 			if (this.started) {
 				this.printer.startPage();
 				this.painter.init(new GC(this.printer));
 			}
 		}
-		
+
 		public void pageFinish() {
 			if (this.started) {
 				this.painter.dispose();
 				this.printer.endPage();
 			}
 		}
-		
+
 		public void start() {
 			this.started = this.printer.startJob(getJobName());
 		}
-		
+
 		public void finish() {
 			if (this.started) {
 				this.printer.endJob();
@@ -201,7 +201,7 @@ public class PrintAction extends Action {
 				TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 			}
 		}
-		
+
 		public boolean isPaintable(int page) {
 			if (this.printerData.scope == PrinterData.PAGE_RANGE) {
 				if (this.printerData.startPage > 0 && this.printerData.startPage > page) {
@@ -213,13 +213,13 @@ public class PrintAction extends Action {
 			}
 			return true;
 		}
-		
+
 		public String getJobName() {
 			String prefix = TuxGuitar.APPLICATION_NAME;
 			String song = this.layout.getSongManager().getSong().getName();
 			return ( song != null && song.length() > 0 ? (prefix + "-" + song) : prefix );
 		}
-		
+
 		public void dispose() {
 			if (!this.printer.isDisposed()) {
 				this.printer.dispose();

@@ -21,11 +21,11 @@ import org.herac.tuxguitar.gui.editors.tab.TGTrackImpl;
  */
 public class GoLastMeasureAction extends Action {
 	public static final String NAME = "action.measure.go-last";
-	
+
 	public GoLastMeasureAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoLast();

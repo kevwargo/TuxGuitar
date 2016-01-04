@@ -22,11 +22,11 @@ import org.herac.tuxguitar.gui.util.ConfirmDialog;
  */
 public class NewFileAction extends Action {
 	public static final String NAME = "action.file.new";
-	
+
 	public NewFileAction() {
 		super(NAME, AUTO_LOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		if (TuxGuitar.instance().getFileHistory().isUnsavedFile()) {
 			ConfirmDialog confirm = new ConfirmDialog(TuxGuitar.getProperty("file.save-changes-question"));
@@ -60,10 +60,10 @@ public class NewFileAction extends Action {
 			}
 		}
 		newSong();
-		
+
 		return 0;
 	}
-	
+
 	protected void newSong() {
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {

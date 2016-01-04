@@ -37,14 +37,14 @@ import org.herac.tuxguitar.io.base.TGRawImporter;
 
 /**
  * @author julian
- * 
+ *
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class FileMenuItem extends MenuItems {
 	private MenuItem fileMenuItem;
 	private Menu menu;
-	private Menu importMenu; 
-	private Menu exportMenu; 
+	private Menu importMenu;
+	private Menu exportMenu;
 	private Menu historyMenu;
 	private MenuItem newSong;
 	private MenuItem open;
@@ -58,17 +58,17 @@ public class FileMenuItem extends MenuItems {
 	private MenuItem historyItem;
 	private MenuItem[] historyFiles;
 	private MenuItem exit;
-	
+
 	private List importItems;
 	private List exportItems;
-	
+
 	public FileMenuItem(Shell shell, Menu parent, int style) {
 		this.fileMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 		this.importItems = new ArrayList();
 		this.exportItems = new ArrayList();
 	}
-	
+
 	public void showItems() {
 		//---------------------------------------------------
 		//--NEW--
@@ -88,14 +88,14 @@ public class FileMenuItem extends MenuItems {
 		//--SAVE AS--
 		this.saveAs = new MenuItem(this.menu, SWT.PUSH);
 		this.saveAs.addSelectionListener(TuxGuitar.instance().getAction(SaveAsFileAction.NAME));
-		
+
 		//-- IMPORT | EXPORT --
 		int countImporters = TGFileFormatManager.instance().countImporters();
 		int countExporters = TGFileFormatManager.instance().countExporters();
 		if ( ( countImporters + countExporters ) > 0 ) {
 			//--SEPARATOR--
 			new MenuItem(this.menu, SWT.SEPARATOR);
-			
+
 			//--IMPORT--
 			this.importItems.clear();
 			if ( countImporters > 0 ) {
@@ -103,7 +103,7 @@ public class FileMenuItem extends MenuItems {
 				this.importMenu = new Menu(this.menu.getShell(), SWT.DROP_DOWN);
 				this.addImporters();
 			}
-			
+
 			//--EXPORT--
 			this.exportItems.clear();
 			if ( countExporters > 0 ) {
@@ -112,10 +112,10 @@ public class FileMenuItem extends MenuItems {
 				this.addExporters();
 			}
 		}
-		
+
 		//--SEPARATOR--
 		new MenuItem(this.menu, SWT.SEPARATOR);
-		
+
 		//--PRINT PREVIEW--
 		this.printPreview = new MenuItem(this.menu, SWT.PUSH);
 		this.printPreview.addSelectionListener(TuxGuitar.instance().getAction(PrintPreviewAction.NAME));
@@ -124,7 +124,7 @@ public class FileMenuItem extends MenuItems {
 		this.print.addSelectionListener(TuxGuitar.instance().getAction(PrintAction.NAME));
 		//--SEPARATOR--
 		new MenuItem(this.menu, SWT.SEPARATOR);
-		
+
 		//--HISTORY--
 		this.historyItem = new MenuItem(this.menu, SWT.CASCADE);
 		this.historyMenu = new Menu(this.menu.getShell(), SWT.DROP_DOWN);
@@ -134,7 +134,7 @@ public class FileMenuItem extends MenuItems {
 		//--EXIT--
 		this.exit = new MenuItem(this.menu, SWT.PUSH);
 		this.exit.addSelectionListener(TuxGuitar.instance().getAction(ExitAction.NAME));
-		
+
 		//---------------------------------------------------
 		if ( this.importItem != null ) {
 			this.importItem.setMenu(this.importMenu);
@@ -144,15 +144,15 @@ public class FileMenuItem extends MenuItems {
 		}
 		this.historyItem.setMenu(this.historyMenu);
 		this.fileMenuItem.setMenu(this.menu);
-		
+
 		this.loadIcons();
 		this.loadProperties();
 	}
-	
+
 	private void addImporters() {
 		List importersRaw = new ArrayList();
 		List importersFile = new ArrayList();
-		
+
 		Iterator importers = TGFileFormatManager.instance().getImporters();
 		while (importers.hasNext()) {
 			TGRawImporter importer = (TGRawImporter)importers.next();
@@ -162,7 +162,7 @@ public class FileMenuItem extends MenuItems {
 				importersRaw.add( importer );
 			}
 		}
-		
+
 		for ( int i = 0 ; i < importersFile.size() ; i ++ ) {
 			TGRawImporter importer = (TGRawImporter)importersFile.get( i );
 			MenuItem item = new MenuItem(this.importMenu, SWT.PUSH);
@@ -170,12 +170,12 @@ public class FileMenuItem extends MenuItems {
 			item.addSelectionListener(TuxGuitar.instance().getAction(ImportSongAction.NAME));
 			this.importItems.add( item );
 		}
-		
+
 		//--SEPARATOR--
 		if ( !importersFile.isEmpty() && !importersRaw.isEmpty() ) {
 			new MenuItem(this.importMenu, SWT.SEPARATOR);
 		}
-		
+
 		for ( int i = 0 ; i < importersRaw.size() ; i ++ ) {
 			TGRawImporter importer = (TGRawImporter)importersRaw.get( i );
 			MenuItem item = new MenuItem(this.importMenu, SWT.PUSH);
@@ -184,11 +184,11 @@ public class FileMenuItem extends MenuItems {
 			this.importItems.add( item );
 		}
 	}
-	
+
 	private void addExporters() {
 		List exportersRaw = new ArrayList();
 		List exportersFile = new ArrayList();
-		
+
 		Iterator exporters = TGFileFormatManager.instance().getExporters();
 		while (exporters.hasNext()) {
 			TGRawExporter exporter = (TGRawExporter)exporters.next();
@@ -198,7 +198,7 @@ public class FileMenuItem extends MenuItems {
 				exportersRaw.add( exporter );
 			}
 		}
-		
+
 		for ( int i = 0 ; i < exportersFile.size() ; i ++ ) {
 			TGRawExporter exporter = (TGRawExporter)exportersFile.get( i );
 			MenuItem item = new MenuItem(this.exportMenu, SWT.PUSH);
@@ -206,12 +206,12 @@ public class FileMenuItem extends MenuItems {
 			item.addSelectionListener(TuxGuitar.instance().getAction(ExportSongAction.NAME));
 			this.exportItems.add( item );
 		}
-		
+
 		//--SEPARATOR--
 		if ( !exportersFile.isEmpty() && !exportersRaw.isEmpty() ) {
 			new MenuItem(this.exportMenu, SWT.SEPARATOR);
 		}
-		
+
 		for ( int i = 0 ; i < exportersRaw.size() ; i ++ ) {
 			TGRawExporter exporter = (TGRawExporter)exportersRaw.get( i );
 			MenuItem item = new MenuItem(this.exportMenu, SWT.PUSH);
@@ -220,13 +220,13 @@ public class FileMenuItem extends MenuItems {
 			this.exportItems.add( item );
 		}
 	}
-	
+
 	private void disposeHistoryFiles() {
 		for (int i = 0;i < this.historyFiles.length; i++) {
 			this.historyFiles[i].dispose();
 		}
 	}
-	
+
 	private void updateHistoryFiles() {
 		List urls = TuxGuitar.instance().getFileHistory().getURLs();
 		this.historyFiles = new MenuItem[urls.size()];
@@ -239,7 +239,7 @@ public class FileMenuItem extends MenuItems {
 		}
 		this.historyItem.setEnabled(this.historyFiles.length > 0);
 	}
-	
+
 	private String decode(String url) {
 		try {
 			return URLDecoder.decode(url, "UTF-8");
@@ -248,7 +248,7 @@ public class FileMenuItem extends MenuItems {
 		}
 		return url;
 	}
-	
+
 	public void update() {
 		if (TuxGuitar.instance().getFileHistory().isChanged()) {
 			disposeHistoryFiles();
@@ -256,7 +256,7 @@ public class FileMenuItem extends MenuItems {
 			TuxGuitar.instance().getFileHistory().setChanged(false);
 		}
 	}
-	
+
 	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.fileMenuItem, "file", null);
 		setMenuItemTextAndAccelerator(this.newSong, "file.new", NewFileAction.NAME);
@@ -268,10 +268,10 @@ public class FileMenuItem extends MenuItems {
 		setMenuItemTextAndAccelerator(this.print, "file.print", PrintAction.NAME);
 		setMenuItemTextAndAccelerator(this.historyItem, "file.history", null);
 		setMenuItemTextAndAccelerator(this.exit, "file.exit", ExitAction.NAME);
-		
+
 		if ( this.importItem != null ) {
 			setMenuItemTextAndAccelerator(this.importItem, "file.import", ImportSongAction.NAME);
-			
+
 			Iterator importItems = this.importItems.iterator();
 			while (importItems.hasNext()) {
 				MenuItem item = (MenuItem)importItems.next();
@@ -284,7 +284,7 @@ public class FileMenuItem extends MenuItems {
 		}
 		if ( this.exportItem != null ) {
 			setMenuItemTextAndAccelerator(this.exportItem, "file.export", ExportSongAction.NAME);
-			
+
 			Iterator exportItems = this.exportItems.iterator();
 			while (exportItems.hasNext()) {
 				MenuItem item = (MenuItem)exportItems.next();
@@ -296,7 +296,7 @@ public class FileMenuItem extends MenuItems {
 			}
 		}
 	}
-	
+
 	public void loadIcons() {
 		this.newSong.setImage(TuxGuitar.instance().getIconManager().getFileNew());
 		this.open.setImage(TuxGuitar.instance().getIconManager().getFileOpen());

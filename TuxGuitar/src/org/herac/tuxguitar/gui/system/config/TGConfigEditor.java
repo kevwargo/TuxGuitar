@@ -43,39 +43,39 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class TGConfigEditor {
-	
+
 	protected Shell dialog;
 	protected TGConfigManager config;
 	protected List options;
 	protected Properties defaults;
 	protected boolean accepted;
-	
+
 	protected List runnables;
-	
+
 	public TGConfigEditor() {
 		this.config = TuxGuitar.instance().getConfig();
 	}
-	
+
 	public void showDialog(Shell shell) {
 		this.accepted = false;
-		
+
 		this.dialog = DialogUtils.newDialog(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		this.dialog.setLayout(new GridLayout());
 		this.dialog.setText(TuxGuitar.getProperty("settings.config"));
-		
+
 		//-------main-------------------------------------
 		Composite mainComposite = new Composite(this.dialog, SWT.NONE);
 		mainComposite.setLayout(new GridLayout(2, false));
 		mainComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true , true));
 		createComposites(mainComposite);
-		
+
 		//-------buttons-------------------------------------
 		Composite buttonComposite = new Composite(this.dialog, SWT.NONE);
 		buttonComposite.setLayout(new GridLayout(3, true));
 		buttonComposite.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
-		
+
 		Button buttonDefaults = new Button(buttonComposite, SWT.PUSH);
-		buttonDefaults.setLayoutData(getButtonData()); 
+		buttonDefaults.setLayoutData(getButtonData());
 		buttonDefaults.setText(TuxGuitar.getProperty("defaults"));
 		buttonDefaults.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -93,7 +93,7 @@ public class TGConfigEditor {
 				applyConfig(true);
 			}
 		});
-		
+
 		Button buttonOK = new Button(buttonComposite, SWT.PUSH);
 		buttonOK.setLayoutData(getButtonData());
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -113,9 +113,9 @@ public class TGConfigEditor {
 				applyConfig(false);
 			}
 		});
-		
+
 		Button buttonCancel = new Button(buttonComposite, SWT.PUSH);
-		buttonCancel.setLayoutData(getButtonData()); 
+		buttonCancel.setLayoutData(getButtonData());
 		buttonCancel.setText(TuxGuitar.getProperty("cancel"));
 		buttonCancel.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -124,33 +124,33 @@ public class TGConfigEditor {
 				TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 			}
 		});
-		
+
 		this.dialog.setDefaultButton( buttonOK );
-		
+
 		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
-		
+
 		if (!this.accepted) {
 			ActionLock.unlock();
 		}
 	}
-	
+
 	private void createComposites(Composite parent) {
 		ToolBar toolBar = new ToolBar(parent, SWT.VERTICAL | SWT.FLAT | SWT.WRAP);
 		toolBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true , true));
-		
+
 		Composite option = new Composite(parent, SWT.NONE);
 		option.setLayout(new FormLayout());
-		
+
 		initOptions(toolBar, option);
-		
+
 		Point optionSize = computeOptionsSize( 0 , toolBar.computeSize(SWT.DEFAULT, SWT.DEFAULT).y );
 		option.setLayoutData(new GridData(optionSize.x, optionSize.y));
-		
+
 		if (this.options.size() > 0) {
 			select((Option)this.options.get(0));
 		}
 	}
-	
+
 	private void initOptions(ToolBar toolBar, Composite parent) {
 		this.options = new ArrayList();
 		this.options.add(new MainOption(this, toolBar, parent));
@@ -159,18 +159,18 @@ public class TGConfigEditor {
 		this.options.add(new ToolBarsOption(this, toolBar, parent));
 		this.options.add(new SkinOption(this, toolBar, parent));
 		this.options.add(new SoundOption(this, toolBar, parent));
-		
+
 		Iterator it = this.options.iterator();
 		while (it.hasNext()) {
 			Option option = (Option)it.next();
 			option.createOption();
 		}
 	}
-	
+
 	private Point computeOptionsSize(int minimumWidth, int minimumHeight) {
 		int width = minimumWidth;
 		int height = minimumHeight;
-		
+
 		Iterator it = this.options.iterator();
 		while (it.hasNext()) {
 			Option option = (Option)it.next();
@@ -184,18 +184,18 @@ public class TGConfigEditor {
 		}
 		return new Point(width, height);
 	}
-	
+
 	public void pack() {
 		this.dialog.pack();
 	}
-	
+
 	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
-	
+
 	public GridData makeGridData(int with, int height, int minWith, int minHeight) {
 		GridData data = new GridData();
 		data.minimumWidth = minWith;
@@ -212,17 +212,17 @@ public class TGConfigEditor {
 			data.verticalAlignment = SWT.FILL;
 			data.grabExcessVerticalSpace = true;
 		}
-		
+
 		return data;
 	}
-	
+
 	public void select(Option option) {
 		hideAll();
 		option.setVisible(true);
 		//this.dialog.layout();
 		this.dialog.redraw();
 	}
-	
+
 	private void hideAll() {
 		Iterator it = this.options.iterator();
 		while (it.hasNext()) {
@@ -230,7 +230,7 @@ public class TGConfigEditor {
 			option.setVisible(false);
 		}
 	}
-	
+
 	protected void updateOptions() {
 		Iterator it = this.options.iterator();
 		while (it.hasNext()) {
@@ -239,7 +239,7 @@ public class TGConfigEditor {
 		}
 		this.config.save();
 	}
-	
+
 	protected void setDefaults() {
 		Iterator it = this.options.iterator();
 		while (it.hasNext()) {
@@ -248,13 +248,13 @@ public class TGConfigEditor {
 		}
 		this.config.save();
 	}
-	
+
 	protected void applyConfig(final boolean force) {
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
 			public void run() {
 				TGConfigEditor.this.runnables = new ArrayList();
-				
+
 				Iterator it = TGConfigEditor.this.options.iterator();
 				while (it.hasNext()) {
 					Option option = (Option)it.next();
@@ -288,7 +288,7 @@ public class TGConfigEditor {
 			}
 		}).start();
 	}
-	
+
 	protected void dispose() {
 		Iterator it = this.options.iterator();
 		while (it.hasNext()) {
@@ -297,26 +297,26 @@ public class TGConfigEditor {
 		}
 		getDialog().dispose();
 	}
-	
+
 	public Properties getDefaults() {
 		if (this.defaults == null) {
 			this.defaults = new TGConfigDefaults().getProperties();
 		}
 		return this.defaults;
 	}
-	
+
 	public TGConfigManager getConfig() {
 		return this.config;
 	}
-	
+
 	public TablatureEditor getEditor() {
 		return TuxGuitar.instance().getTablatureEditor();
 	}
-	
+
 	public Shell getDialog() {
 		return this.dialog;
 	}
-	
+
 	public void addSyncThread(Runnable runnable) {
 		this.runnables.add( runnable );
 	}

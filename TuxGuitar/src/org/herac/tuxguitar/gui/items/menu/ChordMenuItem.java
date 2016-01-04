@@ -18,14 +18,14 @@ public class ChordMenuItem extends MenuItems {
 	private Menu menu;
 	private MenuItem insertChord;
 	private MenuItem[] subMenuItems;
-	
+
 	private long lastEdit;
-	
+
 	public ChordMenuItem(Shell shell, Menu parent, int style) {
 		this.chordMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
-	
+
 	public void showItems() {
 		//--INSERT CHORD--
 		this.insertChord = new MenuItem(this.menu, SWT.PUSH);
@@ -34,13 +34,13 @@ public class ChordMenuItem extends MenuItems {
 		new MenuItem(this.menu, SWT.SEPARATOR);
 		//--CUSTOM CHORDS--
 		this.addItems();
-		
+
 		this.chordMenuItem.setMenu(this.menu);
-		
+
 		this.loadIcons();
 		this.loadProperties();
 	}
-	
+
 	public void addItems() {
 		this.disposeItems();
 		this.subMenuItems = new MenuItem[TuxGuitar.instance().getCustomChordManager().countChords()];
@@ -52,7 +52,7 @@ public class ChordMenuItem extends MenuItems {
 			this.subMenuItems[i].addSelectionListener(TuxGuitar.instance().getAction(InsertChordAction.NAME));
 		}
 	}
-	
+
 	public void disposeItems() {
 		if (this.subMenuItems != null) {
 			for (int i = 0;i < this.subMenuItems.length; i++) {
@@ -60,7 +60,7 @@ public class ChordMenuItem extends MenuItems {
 			}
 		}
 	}
-	
+
 	public void widgetSelected(SelectionEvent event) {
 		if (event.detail == SWT.ARROW && this.subMenuItems != null && this.subMenuItems.length > 0) {
 			ToolItem item = (ToolItem) event.widget;
@@ -72,7 +72,7 @@ public class ChordMenuItem extends MenuItems {
 			TuxGuitar.instance().getAction(InsertChordAction.NAME).process(event);
 		}
 	}
-	
+
 	public void update() {
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		if (this.lastEdit != TuxGuitar.instance().getCustomChordManager().getLastEdit()) {
@@ -84,12 +84,12 @@ public class ChordMenuItem extends MenuItems {
 			this.subMenuItems[i].setEnabled(!running);
 		}
 	}
-	
+
 	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.chordMenuItem, "chord", null);
 		setMenuItemTextAndAccelerator(this.insertChord, "insert.chord", InsertChordAction.NAME);
 	}
-	
+
 	public void loadIcons() {
 		//Nothing to do
 	}

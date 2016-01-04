@@ -16,7 +16,7 @@ public class TGTableColumn {
 	private TGTable table;
 	private CLabel column;
 	private List controls;
-	
+
 	public TGTableColumn(TGTable table, int align) {
 		this.table = table;
 		this.controls = new ArrayList();
@@ -30,28 +30,28 @@ public class TGTableColumn {
 		this.column.pack();
 		this.appendListeners(this.column);
 	}
-	
+
 	public CLabel getControl() {
 		return this.column;
 	}
-	
+
 	public void setTitle(String title) {
 		this.column.setText(title);
 	}
-	
+
 	public void addControl(Control control) {
 		this.controls.add(control);
 		this.appendListeners(control);
 	}
-	
+
 	public void appendListeners(Control control) {
 		TuxGuitar.instance().getkeyBindingManager().appendListenersTo(control);
 	}
-	
+
 	public void layout() {
 		Point location = this.column.getLocation();
 		Point size = this.column.getSize();
-		
+
 		for (int i = 0; i < this.controls.size(); i ++) {
 			Control control = (Control)this.controls.get(i);
 			if (!control.isDisposed()) {
@@ -60,7 +60,7 @@ public class TGTableColumn {
 			}
 		}
 	}
-	
+
 	public void notifyRemoved() {
 		for (int i = 0; i < this.controls.size(); i ++) {
 			Control control = (Control)this.controls.get(i);
@@ -69,5 +69,5 @@ public class TGTableColumn {
 			}
 		}
 	}
-	
+
 }

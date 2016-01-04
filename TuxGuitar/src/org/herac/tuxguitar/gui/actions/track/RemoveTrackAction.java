@@ -21,14 +21,14 @@ import org.herac.tuxguitar.gui.undo.undoables.track.UndoableRemoveTrack;
  */
 public class RemoveTrackAction extends Action {
 	public static final String NAME = "action.track.remove";
-	
+
 	public RemoveTrackAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
-		
+
 		if (getSongManager().getSong().countTracks() <= 1) {
 			//TuxGuitar.instance().getAction(NewFileAction.NAME).process(e);
 			TuxGuitar.instance().newSong();
@@ -37,7 +37,7 @@ public class RemoveTrackAction extends Action {
 		//comienza el undoable
 		UndoableRemoveTrack undoable = UndoableRemoveTrack.startUndo();
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
-		
+
 		TGTrackImpl track = caret.getTrack();
 		TGTrackImpl nextCaretTrack = (TGTrackImpl)getSongManager().getTrack(track.getNumber() + 1);
 		if (nextCaretTrack == null) {
@@ -45,16 +45,16 @@ public class RemoveTrackAction extends Action {
 		}
 		getSongManager().removeTrack(track);
 		updateTablature();
-		
+
 		//move the caret to the next or previous track
 		if (nextCaretTrack != null) {
 			caret.update(nextCaretTrack.getNumber(), getSongManager().getTrackManager().getMeasureAt(nextCaretTrack, caret.getMeasure().getStart()).getStart(), 1);
 		}
 		TuxGuitar.instance().getMixer().update();
-		
+
 		//termia el undoable
 		addUndoableEdit(undoable.endUndo());
-		
+
 		return 0;
 	}
 }

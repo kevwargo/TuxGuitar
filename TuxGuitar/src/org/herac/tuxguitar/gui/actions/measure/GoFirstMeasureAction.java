@@ -21,11 +21,11 @@ import org.herac.tuxguitar.gui.editors.tab.TGTrackImpl;
  */
 public class GoFirstMeasureAction extends Action {
 	public static final String NAME = "action.measure.go-first";
-	
+
 	public GoFirstMeasureAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoFirst();

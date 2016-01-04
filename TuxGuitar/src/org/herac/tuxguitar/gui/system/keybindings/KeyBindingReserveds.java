@@ -13,7 +13,7 @@ import org.herac.tuxguitar.gui.actions.note.InsertNoteAction;
 import org.herac.tuxguitar.gui.actions.note.RemoveNoteAction;
 
 public class KeyBindingReserveds {
-	
+
 	private static KeyBindingAction[] reserveds = new KeyBindingAction[] {
 		new KeyBindingAction(ChangeNoteAction.NAME, new KeyBinding(KeyBindingConstants.NUMBER_0, 0)),
 		new KeyBindingAction(ChangeNoteAction.NAME, new KeyBinding(KeyBindingConstants.NUMBER_1, 0)),
@@ -45,7 +45,7 @@ public class KeyBindingReserveds {
 		new KeyBindingAction(GoLeftAction.NAME, new KeyBinding(KeyBindingConstants.LEFT, 0)),
 		new KeyBindingAction(GoRightAction.NAME, new KeyBinding(KeyBindingConstants.RIGHT, 0)),
 	};
-	
+
 	public static boolean isReserved(KeyBinding kb) {
 		for (int i = 0;i < reserveds.length;i++) {
 			if (kb.isSameAs(reserveds[i].getKeyBinding())) {
@@ -54,7 +54,7 @@ public class KeyBindingReserveds {
 		}
 		return false;
 	}
-	
+
 	public static Action getActionForKeyBinding(KeyBinding kb) {
 		for (int i = 0;i < reserveds.length;i++) {
 			if (kb.isSameAs(reserveds[i].getKeyBinding())) {
@@ -63,7 +63,7 @@ public class KeyBindingReserveds {
 		}
 		return null;
 	}
-	
+
 	public static KeyBinding getKeyBindingForAction(String action) {
 		for (int i = 0;i < reserveds.length;i++) {
 			if (action.equals(reserveds[i].getAction())) {

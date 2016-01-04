@@ -17,11 +17,11 @@ public class UndoableTrackSoloMute implements UndoableEdit {
 	private boolean undoMute;
 	private boolean redoSolo;
 	private boolean redoMute;
-	
+
 	private UndoableTrackSoloMute() {
 		super();
 	}
-	
+
 	public void redo() throws CannotRedoException {
 		if (!canRedo()) {
 			throw new CannotRedoException();
@@ -38,11 +38,11 @@ public class UndoableTrackSoloMute implements UndoableEdit {
 		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getPlayer().updateControllers();
 		}
-		
+
 		this.redoCaret.update();
 		this.doAction = UNDO_ACTION;
 	}
-	
+
 	public void undo() throws CannotUndoException {
 		if (!canUndo()) {
 			throw new CannotUndoException();
@@ -59,19 +59,19 @@ public class UndoableTrackSoloMute implements UndoableEdit {
 		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getPlayer().updateControllers();
 		}
-		
+
 		this.undoCaret.update();
 		this.doAction = REDO_ACTION;
 	}
-	
+
 	public boolean canRedo() {
 		return (this.doAction == REDO_ACTION);
 	}
-	
+
 	public boolean canUndo() {
 		return (this.doAction == UNDO_ACTION);
 	}
-	
+
 	public static UndoableTrackSoloMute startUndo(TGTrack track) {
 		UndoableTrackSoloMute undoable = new UndoableTrackSoloMute();
 		undoable.doAction = UNDO_ACTION;
@@ -79,16 +79,16 @@ public class UndoableTrackSoloMute implements UndoableEdit {
 		undoable.track = track.getNumber();
 		undoable.undoSolo = track.isSolo();
 		undoable.undoMute = track.isMute();
-		
+
 		return undoable;
 	}
-	
+
 	public UndoableTrackSoloMute endUndo(TGTrack track) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoSolo = track.isSolo();
 		this.redoMute = track.isMute();
-		
+
 		return this;
 	}
-	
+
 }

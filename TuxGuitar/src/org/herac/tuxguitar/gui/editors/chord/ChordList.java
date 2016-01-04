@@ -46,18 +46,18 @@ import org.herac.tuxguitar.song.models.TGBeat;
 import org.herac.tuxguitar.song.models.TGString;
 /**
  * @author julian
- * 
+ *
  * Component that shows the list of (alternative) chords - bottom of the screen
  */
 public class ChordList extends Composite {
-	
+
 	private static final int MIN_HEIGHT = 160;
 	private static final int SCROLL_INCREMENT = 25;
 	private static final int CHORD_FIRST_FRET_SPACING = 12;
 	private static final int CHORD_STRING_SPACING = 8;
 	private static final int CHORD_FRET_SPACING = 10;
 	private static final int CHORD_NOTE_SIZE = 6;
-	
+
 	private ChordDialog dialog;
 	private TGBeat beat;
 	private List graphicChords;
@@ -65,7 +65,7 @@ public class ChordList extends Composite {
 	private TGChordImpl selectedChord;
 	private Composite composite;
 	private Font font;
-	
+
 	public ChordList(ChordDialog dialog, Composite parent, TGBeat beat) {
 		super(parent, SWT.NONE);
 		this.setLayout(dialog.gridLayout(1, false, 0, 0));
@@ -75,7 +75,7 @@ public class ChordList extends Composite {
 		this.beat = beat;
 		this.init();
 	}
-	
+
 	private void init() {
 		this.composite = new Composite(this, SWT.BORDER | SWT.V_SCROLL | SWT.DOUBLE_BUFFERED);
 		this.composite.setBackground(this.getDisplay().getSystemColor(SWT.COLOR_WHITE));
@@ -92,7 +92,7 @@ public class ChordList extends Composite {
 				redraw();
 			}
 		});
-		
+
 		final Point origin = new Point(0, 0);
 		final ScrollBar vBar = this.composite.getVerticalBar();
 		vBar.setIncrement(SCROLL_INCREMENT);
@@ -106,7 +106,7 @@ public class ChordList extends Composite {
 				redraw();
 			}
 		});
-		
+
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumHeight = MIN_HEIGHT;
 		this.composite.setLayoutData(data);
@@ -117,12 +117,12 @@ public class ChordList extends Composite {
 			}
 		});
 	}
-	
+
 	public void redraw() {
 		super.redraw();
 		this.composite.redraw();
 	}
-	
+
 	protected void paintChords(TGPainter painter) {
 		int maxHeight = 0;
 		int fromX = 15;
@@ -131,7 +131,7 @@ public class ChordList extends Composite {
 		Iterator it = this.graphicChords.iterator();
 		while (it.hasNext()) {
 			TGChordImpl chord = (TGChordImpl) it.next();
-			
+
 			Color color = getChordColor(chord);
 			chord.setBackgroundColor(this.composite.getBackground());
 			chord.setColor(color);
@@ -152,21 +152,21 @@ public class ChordList extends Composite {
 			chord.setPosX( fromX );
 			chord.setPosY( fromY - vScroll);
 			chord.paint(painter,(chord.getWidth() / 2), 0);
-			
+
 			fromX += chord.getWidth() + 10;
 			maxHeight = Math.max(maxHeight, chord.getHeight());
 		}
 		this.height = (fromY + maxHeight + 10);
 		this.updateScroll();
 	}
-	
+
 	private Color getChordColor(TGChordImpl chord) {
 		if (this.selectedChord != null && this.selectedChord.equals(chord)) {
 			return getDisplay().getSystemColor(SWT.COLOR_BLUE);
 		}
 		return getDisplay().getSystemColor(SWT.COLOR_BLACK);
 	}
-	
+
 	public void updateScroll() {
 		Rectangle rect = this.composite.getBounds();
 		Rectangle client = this.composite.getClientArea();
@@ -174,14 +174,14 @@ public class ChordList extends Composite {
 		vBar.setMaximum(this.height);
 		vBar.setThumb(Math.min(rect.height, client.height));
 	}
-	
+
 	protected int getTrackString(int number) {
 		TGString string = ChordList.this.beat.getMeasure().getTrack().getString(number);
 		return string.getValue();
 	}
-	
+
 	protected Font getFont(GC painter) {
-		if (this.font == null || this.font.isDisposed()) { 
+		if (this.font == null || this.font.isDisposed()) {
 			Font available = painter.getFont();
 			if (available == null || available.isDisposed()) {
 				available = getDisplay().getSystemFont();
@@ -193,7 +193,7 @@ public class ChordList extends Composite {
 		}
 		return this.font;
 	}
-	
+
 	protected TGChordImpl getChord(int x, int y, boolean setAsSelected) {
 		Iterator it = this.graphicChords.iterator();
 		while (it.hasNext()) {
@@ -215,11 +215,11 @@ public class ChordList extends Composite {
 		}
 		return null;
 	}
-	
+
 	public void setChords(List chords) {
 		this.disposeChords();
 		this.selectedChord = null;
-		
+
 		Iterator it = chords.iterator();
 		while (it.hasNext()) {
 			TGChordImpl chord = (TGChordImpl) it.next();
@@ -229,13 +229,13 @@ public class ChordList extends Composite {
 		}
 		this.redraw();
 	}
-	
+
 	public void disposeFont() {
 		if (this.font != null) {
 			this.font.dispose();
 		}
 	}
-	
+
 	public void disposeChords() {
 		Iterator it = this.graphicChords.iterator();
 		while (it.hasNext()) {
@@ -243,11 +243,11 @@ public class ChordList extends Composite {
 		}
 		this.graphicChords.clear();
 	}
-	
+
 	protected Composite getComposite() {
 		return this.composite;
 	}
-	
+
 	protected ChordDialog getDialog() {
 		return this.dialog;
 	}

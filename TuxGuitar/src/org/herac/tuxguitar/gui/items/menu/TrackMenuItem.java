@@ -45,12 +45,12 @@ public class TrackMenuItem extends MenuItems {
 	private MenuItem moveDown;
 	private MenuItem lyrics;
 	private MenuItem properties;
-	
+
 	public TrackMenuItem(Shell shell, Menu parent, int style) {
 		this.trackMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
-	
+
 	public void showItems() {
 		//--First--
 		this.first = new MenuItem(this.menu, SWT.PUSH);
@@ -91,13 +91,13 @@ public class TrackMenuItem extends MenuItems {
 		//--PROPERTIES--
 		this.properties = new MenuItem(this.menu, SWT.PUSH);
 		this.properties.addSelectionListener(TuxGuitar.instance().getAction(TrackPropertiesAction.NAME));
-		
+
 		this.trackMenuItem.setMenu(this.menu);
-		
+
 		this.loadIcons();
 		this.loadProperties();
 	}
-	
+
 	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.trackMenuItem, "track", null);
 		setMenuItemTextAndAccelerator(this.first, "track.first", GoFirstTrackAction.NAME);
@@ -112,7 +112,7 @@ public class TrackMenuItem extends MenuItems {
 		setMenuItemTextAndAccelerator(this.lyrics, "track.lyrics", EditLyricsAction.NAME);
 		setMenuItemTextAndAccelerator(this.properties, "track.properties", TrackPropertiesAction.NAME);
 	}
-	
+
 	public void update() {
 		TGTrackImpl track = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getTrack();
 		int tracks = track.getSong().countTracks();
@@ -130,7 +130,7 @@ public class TrackMenuItem extends MenuItems {
 		this.last.setEnabled(!isLast);
 		this.properties.setEnabled(!running);
 	}
-	
+
 	public void loadIcons() {
 		//Nothing to do
 	}

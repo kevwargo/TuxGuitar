@@ -21,18 +21,18 @@ import org.herac.tuxguitar.song.models.TGMarker;
  */
 public class AddMarkerAction extends Action {
 	public static final String NAME = "action.marker.add";
-	
+
 	public AddMarkerAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		if (new MarkerEditor(getMarker()).open(getEditor().getTablature().getShell())) {
 			MarkerList.instance().update(true);
 		}
 		return 0;
 	}
-	
+
 	private TGMarker getMarker() {
 		TGMeasureImpl measure = getEditor().getTablature().getCaret().getMeasure();
 		if (measure != null) {

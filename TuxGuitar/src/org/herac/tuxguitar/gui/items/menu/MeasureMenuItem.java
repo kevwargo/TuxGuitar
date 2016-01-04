@@ -30,9 +30,9 @@ import org.herac.tuxguitar.gui.items.MenuItems;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class MeasureMenuItem extends MenuItems {
-	
+
 	private MenuItem measureMenuItem;
-	private Menu menu; 
+	private Menu menu;
 	private MenuItem first;
 	private MenuItem last;
 	private MenuItem next;
@@ -42,12 +42,12 @@ public class MeasureMenuItem extends MenuItems {
 	private MenuItem removeMeasure;
 	private MenuItem copyMeasure;
 	private MenuItem pasteMeasure;
-	
+
 	public MeasureMenuItem(Shell shell, Menu parent, int style) {
 		this.measureMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
-	
+
 	public void showItems() {
 		//--first--
 		this.first = new MenuItem(this.menu, SWT.PUSH);
@@ -61,7 +61,7 @@ public class MeasureMenuItem extends MenuItems {
 		//--last--
 		this.last = new MenuItem(this.menu, SWT.PUSH);
 		this.last.addSelectionListener(TuxGuitar.instance().getAction(GoLastMeasureAction.NAME));
-		
+
 		//--SEPARATOR
 		new MenuItem(this.menu, SWT.SEPARATOR);
 		//--add--
@@ -73,7 +73,7 @@ public class MeasureMenuItem extends MenuItems {
 		//--remove--
 		this.removeMeasure = new MenuItem(this.menu, SWT.PUSH);
 		this.removeMeasure.addSelectionListener(TuxGuitar.instance().getAction(RemoveMeasureAction.NAME));
-		
+
 		//--SEPARATOR
 		new MenuItem(this.menu, SWT.SEPARATOR);
 		//--copy--
@@ -81,15 +81,15 @@ public class MeasureMenuItem extends MenuItems {
 		this.copyMeasure.addSelectionListener(TuxGuitar.instance().getAction(CopyMeasureAction.NAME));
 		//--paste--
 		this.pasteMeasure = new MenuItem(this.menu, SWT.PUSH);
-		
+
 		this.pasteMeasure.addSelectionListener(TuxGuitar.instance().getAction(PasteMeasureAction.NAME));
-		
+
 		this.measureMenuItem.setMenu(this.menu);
-		
+
 		this.loadIcons();
 		this.loadProperties();
 	}
-	
+
 	public void update() {
 		TGMeasureImpl measure = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getMeasure();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
@@ -105,7 +105,7 @@ public class MeasureMenuItem extends MenuItems {
 		this.copyMeasure.setEnabled(!running);
 		this.pasteMeasure.setEnabled(!running && !TuxGuitar.instance().getTablatureEditor().getClipBoard().isEmpty());
 	}
-	
+
 	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.measureMenuItem, "measure", null);
 		setMenuItemTextAndAccelerator(this.first, "measure.first", GoFirstMeasureAction.NAME);
@@ -118,7 +118,7 @@ public class MeasureMenuItem extends MenuItems {
 		setMenuItemTextAndAccelerator(this.copyMeasure, "measure.copy", CopyMeasureAction.NAME);
 		setMenuItemTextAndAccelerator(this.pasteMeasure, "measure.paste", PasteMeasureAction.NAME);
 	}
-	
+
 	public void loadIcons() {
 		//Nothing to do
 	}

@@ -29,21 +29,21 @@ import org.herac.tuxguitar.song.models.TGTrack;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class PageViewLayout extends ViewLayout {
-	
+
 	private static final int STATIC_WIDTH = TuxGuitar.instance().getConfig().getIntConfigValue(TGConfigKeys.LAYOUT_PAGE_FORCE_WIDTH, 0);
-	
+
 	private int maximumWidth;
 	private int marginLeft;
 	private int marginRight;
-	
+
 	public PageViewLayout(Tablature tablature, int style) {
 		super(tablature, style);
 	}
-	
+
 	public int getMode() {
 		return MODE_PAGE;
 	}
-	
+
 	public void paintSong(TGPainter painter, Rectangle clientArea, int fromX, int fromY) {
 		this.maximumWidth = STATIC_WIDTH;
 		this.marginLeft = getFirstMeasureSpacing();
@@ -51,13 +51,13 @@ public class PageViewLayout extends ViewLayout {
 		this.setWidth(0);
 		this.setHeight(0);
 		this.clearTrackPositions();
-		
+
 		int style = getStyle();
 		int number = ((style & ViewLayout.DISPLAY_MULTITRACK) == 0?getTablature().getCaret().getTrack().getNumber():-1);
 		int posY = fromY + getFirstTrackSpacing();
 		int height = getFirstTrackSpacing();
 		int lineHeight = 0;
-		
+
 		int measureCount = getSongManager().getSong().countMeasureHeaders();
 		int nextMeasureIndex = 0;
 		while (measureCount > nextMeasureIndex) {
@@ -67,14 +67,14 @@ public class PageViewLayout extends ViewLayout {
 				TGTrackImpl track = (TGTrackImpl) tracks.next();
 				if ((number < 0 && track.isVisibleInMultitrack())
                    || track.getNumber() == number) {
-					
+
 					TGTrackSpacing ts = new TGTrackSpacing(this) ;
 					ts.setSize(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES, ((style & DISPLAY_SCORE) != 0 ?( (getScoreLineSpacing() * 5) ):0));
-					
+
 					if (nextMeasureIndex == 0) {
 						((TGLyricImpl)track.getLyrics()).start();
 					}
-					
+
 					line = getTempLines(track, nextMeasureIndex, ts);
 					if ( (style & DISPLAY_SCORE) != 0 ) {
 						ts.setSize(TGTrackSpacing.POSITION_SCORE_UP_LINES, Math.abs(line.minY));
@@ -88,12 +88,12 @@ public class PageViewLayout extends ViewLayout {
 					}
 					ts.setSize(TGTrackSpacing.POSITION_LYRIC, 10);
 					checkDefaultSpacing(ts);
-					
+
 					paintLine(track, line, painter, fromX, posY, ts, clientArea);
-					
+
 					lineHeight = ts.getSize();
 					addTrackPosition(track.getNumber(), posY, lineHeight);
-					
+
 					int emptyX = (this.marginLeft + fromX + line.tempWith + 2);
 					int emptyWith = ( getMaxWidth() - emptyX );
 					if ((emptyWith - 20) > 0 && (line.lastIndex + 1) >= measureCount) {
@@ -103,7 +103,7 @@ public class PageViewLayout extends ViewLayout {
 							paintLines(track, ts, painter, emptyX , posY, emptyWith);
 						}
 					}
-					
+
 					posY += lineHeight + getTrackSpacing();
 					height += lineHeight + getTrackSpacing();
 				}
@@ -112,20 +112,20 @@ public class PageViewLayout extends ViewLayout {
 				nextMeasureIndex = line.lastIndex + 1;
 			}
 		}
-		
+
 		this.setHeight(height);
 		this.setWidth( getWidth() + this.marginRight );
 		this.paintCaret(painter);
 	}
-	
+
 	public void paintLine(TGTrackImpl track, TempLine line, TGPainter painter, int fromX, int fromY, TGTrackSpacing ts, Rectangle clientArea) {
 		int posX = (this.marginLeft + fromX);
 		int posY = fromY;
 		int width = this.marginLeft;
-		
+
 		//verifico si esta en el area de cliente
 		boolean isAtY = (posY + ts.getSize() > clientArea.y && posY < clientArea.y + clientArea.height + 80);
-		
+
 		int measureSpacing = 0;
 		if (line.fullLine) {
 			int diff = ( getMaxWidth() - line.tempWith);
@@ -133,20 +133,20 @@ public class PageViewLayout extends ViewLayout {
 				measureSpacing = diff / line.measures.size();
 			}
 		}
-		
+
 		for (int i = 0;i < line.measures.size();i ++) {
 			int index = ((Integer)line.measures.get(i)).intValue();
 			TGMeasureImpl currMeasure = (TGMeasureImpl)track.getMeasure(index);
-			
+
 			//asigno la posicion dentro del compas
 			currMeasure.setPosX(posX);
 			currMeasure.setPosY(posY);
 			currMeasure.setTs(ts);
-			
+
 			((TGLyricImpl)track.getLyrics()).setCurrentMeasure(currMeasure);
-			
+
 			currMeasure.setFirstOfLine(i == 0);
-			
+
 			int measureWidth = ( currMeasure.getWidth(this) + measureSpacing );
 			boolean isAtX = ( posX + measureWidth > clientArea.x && posX < clientArea.x + clientArea.width);
 			if (isAtX && isAtY) {
@@ -155,30 +155,30 @@ public class PageViewLayout extends ViewLayout {
 			} else {
 				currMeasure.setOutOfBounds(true);
 			}
-			
+
 			posX += measureWidth;
 			width += measureWidth;
 		}
 		this.setWidth(Math.max(getWidth(), width));
 	}
-	
+
 	public TempLine getTempLines(TGTrack track, int fromIndex, TGTrackSpacing ts) {
 		int style = getStyle();
-		
+
 		TempLine line = new TempLine();
 		line.maxY = 0;
 		line.minY = 0;
-		
+
 		// Need to score extra-lines in edition mode
 		if ( (style & DISPLAY_TABLATURE) == 0 && (style & DISPLAY_SCORE) != 0 ) {
 			line.maxY = ((getScoreLineSpacing() * 4) + (getScoreLineSpacing() * 4));
 			line.minY = -(getScoreLineSpacing() * 3);
 		}
-		
+
 		int measureCount = track.countMeasures();
 		for (int measureIdx = fromIndex; measureIdx < measureCount; measureIdx++) {
 			TGMeasureImpl measure = (TGMeasureImpl)track.getMeasure(measureIdx);
-			
+
 			//verifico si tengo que bajar de linea
 			if ((line.tempWith + measure.getWidth(this)) >=  getMaxWidth() && !line.measures.isEmpty()) {
 				line.fullLine = true;
@@ -187,14 +187,14 @@ public class PageViewLayout extends ViewLayout {
 			line.tempWith +=  measure.getWidth(this);
 			line.maxY = (measure.getMaxY() > line.maxY)?measure.getMaxY():line.maxY;
 			line.minY = (measure.getMinY() < line.minY)?measure.getMinY():line.minY;
-			
+
 			line.addMeasure(measureIdx);
 			measure.registerSpacing(this, ts);
 		}
-		
+
 		return line;
 	}
-	
+
 	public int getMaxWidth() {
 		if (this.maximumWidth <= 0) {
 			int marginLeft = 0;
@@ -215,7 +215,7 @@ public class PageViewLayout extends ViewLayout {
 		}
 		return (this.maximumWidth - (this.marginLeft + this.marginRight));
 	}
-	
+
 	private class TempLine {
 		protected int tempWith;
 		protected int lastIndex;
@@ -223,11 +223,11 @@ public class PageViewLayout extends ViewLayout {
 		protected int maxY = 0;
 		protected int minY = 0;
 		protected List measures;
-		
+
 		public TempLine() {
 			this.measures = new ArrayList();
 		}
-		
+
 		protected void addMeasure(int index) {
 			this.measures.add(new Integer(index));
 			this.lastIndex = index;

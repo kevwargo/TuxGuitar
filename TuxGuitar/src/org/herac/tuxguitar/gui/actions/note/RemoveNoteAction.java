@@ -22,16 +22,16 @@ import org.herac.tuxguitar.song.models.TGVoice;
  */
 public class RemoveNoteAction extends Action {
 	public static final String NAME = "action.note.general.remove";
-	
+
 	public RemoveNoteAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		//comienza el undoable
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
-		
+
 		Caret caret = getEditor().getTablature().getCaret();
 		TGBeat beat = caret.getSelectedBeat();
 		TGVoice voice = beat.getVoice( caret.getVoice() );
@@ -43,14 +43,14 @@ public class RemoveNoteAction extends Action {
 			int string = caret.getSelectedString().getNumber();
 			getSongManager().getMeasureManager().removeNote(caret.getMeasure(), beat.getStart(), caret.getVoice(), string);
 		}
-		
+
 		//termia el undoable
 		addUndoableEdit(undoable.endUndo());
 		updateTablature();
-		
+
 		return 0;
 	}
-	
+
 	public void updateTablature() {
 		fireUpdate(getEditor().getTablature().getCaret().getMeasure().getNumber());
 	}

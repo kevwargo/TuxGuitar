@@ -20,27 +20,27 @@ import org.herac.tuxguitar.song.models.TGNote;
 
 /**
  * @author julian
- * 
+ *
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class ChangeNoteAction extends Action {
-	
+
 	public static final String NAME = "action.note.general.change";
-	
+
 	private static final int DELAY = 1000;
-	
+
 	private static int lastAddedValue;
-	
+
 	private static int lastAddedString;
-	
+
 	private static long lastAddedStart;
-	
+
 	private static long lastAddedTime;
-	
+
 	public ChangeNoteAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | DISABLE_ON_PLAYING);
 	}
-	
+
 	protected int execute(TypedEvent e) {
 		if (e instanceof KeyEvent) {
 			int value = getValueOf(((KeyEvent) e).keyCode);
@@ -52,7 +52,7 @@ public class ChangeNoteAction extends Action {
 				int velocity = caret.getVelocity();
 				long start = caret.getPosition();
 				long time = System.currentTimeMillis();
-				
+
 				if (lastAddedStart == start && lastAddedString == string) {
 					if (lastAddedValue > 0 && lastAddedValue < 10 && time <  ( lastAddedTime + DELAY ) ) {
 						int newValue = ( ( lastAddedValue * 10 ) + value );
@@ -61,41 +61,41 @@ public class ChangeNoteAction extends Action {
 						}
 					}
 				}
-				
+
 				this.addNote(measure, duration, start, value, string, velocity);
 				this.fireUpdate(measure.getNumber());
-				
+
 				lastAddedValue = value;
 				lastAddedStart = start;
 				lastAddedString = string;
 				lastAddedTime = time;
-				
+
 				return AUTO_UPDATE;
 			}
 		}
 		return 0;
 	}
-	
+
 	private void addNote(TGMeasureImpl measure, TGDuration duration, long start, int value, int string, int velocity) {
 		TGNote note = getSongManager().getFactory().newNote();
 		note.setValue(value);
 		note.setVelocity(velocity);
 		note.setString(string);
-		
+
 		//comienza el undoable
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
-		
+
 		//getSongManager().getMeasureManager().addNote(measure, start, note, duration.clone(getSongManager().getFactory()) );
 		getSongManager().getMeasureManager().addNote(measure, start, note, duration.clone(getSongManager().getFactory()), getEditor().getTablature().getCaret().getVoice() );
-		
+
 		//termia el undoable
 		addUndoableEdit(undoable.endUndo());
-		
+
 		//reprodusco las notas en el pulso
 		getEditor().getTablature().getCaret().getSelectedBeat().play();
 	}
-	
+
 	private int getValueOf(int keyCode) {
 		switch (keyCode) {
 		case KeyBindingConstants.NUMBER_0:
