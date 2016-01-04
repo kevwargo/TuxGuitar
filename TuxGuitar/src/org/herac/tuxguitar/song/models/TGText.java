@@ -2,12 +2,12 @@ package org.herac.tuxguitar.song.models;
 
 import org.herac.tuxguitar.song.factory.TGFactory;
 
-public class TGText{
+public class TGText {
 	
 	private String value;
 	private TGBeat beat;
 	
-	public TGText(){
+	public TGText() {
 		super();
 	}
 	
@@ -27,7 +27,7 @@ public class TGText{
 		this.value = value;
 	}
 	
-	public boolean isEmpty(){
+	public boolean isEmpty() {
 		return (this.value == null || this.value.length() == 0);
 	}
 	

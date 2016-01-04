@@ -28,7 +28,7 @@ import org.herac.tuxguitar.gui.items.MenuItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class CompositionMenuItem extends MenuItems{
+public class CompositionMenuItem extends MenuItems {
 	private MenuItem compositionMenuItem;
 	private Menu menu;
 	private MenuItem timeSignature;
@@ -47,7 +47,7 @@ public class CompositionMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//--TIME SIGNATURE--
 		this.timeSignature = new MenuItem(this.menu, SWT.PUSH);
 		this.timeSignature.addSelectionListener(TuxGuitar.instance().getAction(ChangeTimeSignatureAction.NAME));
@@ -87,7 +87,7 @@ public class CompositionMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.timeSignature.setEnabled(!running);
 		this.tempo.setEnabled(!running);
@@ -99,7 +99,7 @@ public class CompositionMenuItem extends MenuItems{
 		this.repeatAlternative.setEnabled(!running);
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.compositionMenuItem, "composition", null);		
 		setMenuItemTextAndAccelerator(this.timeSignature, "composition.timesignature", ChangeTimeSignatureAction.NAME);
 		setMenuItemTextAndAccelerator(this.tempo, "composition.tempo", ChangeTempoAction.NAME);

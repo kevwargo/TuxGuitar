@@ -65,7 +65,7 @@ public class TGBrowserDataDialog {
 			public void widgetSelected(SelectionEvent e) {
 				DirectoryDialog directoryDialog = new DirectoryDialog(dialog);
 				String selection = directoryDialog.open();
-				if(selection != null){
+				if(selection != null) {
 					pathValue.setText(selection);
 				}
 			}
@@ -83,11 +83,11 @@ public class TGBrowserDataDialog {
 			public void widgetSelected(SelectionEvent arg0) {
 				String selectedTitle = titleValue.getText();
 				String selectedPath = pathValue.getText();
-				if(!isValidPath(selectedPath)){
+				if(!isValidPath(selectedPath)) {
 					MessageDialog.errorMessage(dialog, TuxGuitar.getProperty("browser.collection.fs.invalid-path"));
 					return;
 				}
-				if(isBlank(selectedTitle)){
+				if(isBlank(selectedTitle)) {
 					selectedTitle = selectedPath;
 				}
 				setData(new TGBrowserDataImpl(selectedTitle, selectedPath));
@@ -111,25 +111,25 @@ public class TGBrowserDataDialog {
 		return getData();
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private GridData getTextData(int span){
+	private GridData getTextData(int span) {
 		GridData data = new GridData(SWT.LEFT, SWT.CENTER, true, true, span, 1);
 		data.minimumWidth = 350;
 		return data;
 	}
 	
-	protected boolean isBlank(String s){
+	protected boolean isBlank(String s) {
 		return (s == null || s.length() == 0);
 	}
 	
-	protected boolean isValidPath(String path){
-		if(!isBlank(path)){
+	protected boolean isValidPath(String path) {
+		if(!isBlank(path)) {
 			File file = new File(path);
 			return (file.exists() && file.isDirectory());
 		}

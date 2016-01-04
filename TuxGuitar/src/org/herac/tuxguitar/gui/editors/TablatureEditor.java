@@ -18,7 +18,7 @@ import org.herac.tuxguitar.gui.editors.tab.Tablature;
  * 
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
-public class TablatureEditor implements TGRedrawListener, TGUpdateListener{
+public class TablatureEditor implements TGRedrawListener, TGUpdateListener {
 	private Tablature tablature;
 	private ClipBoard clipBoard;
 	
@@ -40,22 +40,22 @@ public class TablatureEditor implements TGRedrawListener, TGUpdateListener{
 		this.initMenu();
 	}
 	
-	private void initListener(){
+	private void initListener() {
 		TuxGuitar.instance().getEditorManager().addRedrawListener( this );
 		TuxGuitar.instance().getEditorManager().addUpdateListener( this );
 	}
 	
-	private void initKeyActions(){
+	private void initKeyActions() {
 		TuxGuitar.instance().getkeyBindingManager().appendListenersTo(this.tablature);
 	}
 	
-	private void initMenu(){
+	private void initMenu() {
 		Menu menu = TuxGuitar.instance().getItemManager().getPopupMenu();
 		menu.addMenuListener(getTablature().getEditorKit());
 		this.tablature.setMenu(menu);
 	}
 	
-	public void reloadConfig(){
+	public void reloadConfig() {
 		getTablature().reloadStyles();
 	}
 	
@@ -63,22 +63,22 @@ public class TablatureEditor implements TGRedrawListener, TGUpdateListener{
 		return this.tablature;
 	}
 	
-	public ClipBoard getClipBoard(){
+	public ClipBoard getClipBoard() {
 		return this.clipBoard;
 	}
 	
 	public void doRedraw(int type) {
-		if( type == TGRedrawListener.NORMAL ){
+		if( type == TGRedrawListener.NORMAL ) {
 			getTablature().redraw();
-		}else if( type == TGRedrawListener.PLAYING_NEW_BEAT ){
+		}else if( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
 			getTablature().redrawPlayingMode();
 		}
 	}
 	
 	public void doUpdate(int type) {
-		if( type == TGUpdateListener.SONG_UPDATED ){
+		if( type == TGUpdateListener.SONG_UPDATED ) {
 			getTablature().updateTablature();
-		}else if( type == TGUpdateListener.SONG_LOADED ){
+		}else if( type == TGUpdateListener.SONG_LOADED ) {
 			getTablature().updateTablature();
 			getTablature().resetScroll();
 			getTablature().initCaret();

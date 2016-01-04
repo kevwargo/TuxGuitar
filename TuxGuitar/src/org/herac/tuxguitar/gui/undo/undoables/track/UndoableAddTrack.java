@@ -7,18 +7,18 @@ import org.herac.tuxguitar.gui.undo.UndoableEdit;
 import org.herac.tuxguitar.gui.undo.undoables.UndoableCaretHelper;
 import org.herac.tuxguitar.song.models.TGTrack;
 
-public class UndoableAddTrack implements UndoableEdit{
+public class UndoableAddTrack implements UndoableEdit {
 	private int doAction;
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
 	private TGTrack redoableTrack;
 	
-	private UndoableAddTrack(){
+	private UndoableAddTrack() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TuxGuitar.instance().getSongManager().addTrack(cloneTrack(this.redoableTrack));
@@ -30,7 +30,7 @@ public class UndoableAddTrack implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TuxGuitar.instance().getSongManager().removeTrack(cloneTrack(this.redoableTrack));
@@ -49,7 +49,7 @@ public class UndoableAddTrack implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableAddTrack startUndo(){
+	public static UndoableAddTrack startUndo() {
 		UndoableAddTrack undoable = new UndoableAddTrack();
 		undoable.doAction = UNDO_ACTION;
 		undoable.undoCaret = new UndoableCaretHelper();
@@ -57,13 +57,13 @@ public class UndoableAddTrack implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableAddTrack endUndo(TGTrack track){
+	public UndoableAddTrack endUndo(TGTrack track) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoableTrack = cloneTrack(track);
 		return this;
 	}
 	
-	private static TGTrack cloneTrack(TGTrack track){
+	private static TGTrack cloneTrack(TGTrack track) {
 		return track.clone(TuxGuitar.instance().getSongManager().getFactory(), TuxGuitar.instance().getSongManager().getSong());
 	}
 	

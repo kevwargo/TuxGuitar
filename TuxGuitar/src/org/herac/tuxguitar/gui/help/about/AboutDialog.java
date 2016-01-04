@@ -96,11 +96,11 @@ public class AboutDialog {
 		
 		tabFolder.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(tabFolder.getSelectionIndex() == 0){
+				if(tabFolder.getSelectionIndex() == 0) {
 					AboutDialog.this.image = TuxGuitar.instance().getIconManager().getAboutDescription();
-				}else if(tabFolder.getSelectionIndex() == 1){
+				}else if(tabFolder.getSelectionIndex() == 1) {
 					AboutDialog.this.image = TuxGuitar.instance().getIconManager().getAboutAuthors();
-				}else if(tabFolder.getSelectionIndex() == 2){
+				}else if(tabFolder.getSelectionIndex() == 2) {
 					AboutDialog.this.image = TuxGuitar.instance().getIconManager().getAboutLicense();
 				}
 				AboutDialog.this.imageComposite.redraw();
@@ -128,14 +128,14 @@ public class AboutDialog {
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private void makeTabItem(TabFolder tabFolder, String itemName, String itemText){
+	private void makeTabItem(TabFolder tabFolder, String itemName, String itemText) {
 		Composite control = new Composite(tabFolder, SWT.NONE);
 		control.setLayout(new GridLayout());
 		control.setLayoutData(new FormData(TAB_ITEM_WIDTH, TAB_ITEM_HEIGHT));

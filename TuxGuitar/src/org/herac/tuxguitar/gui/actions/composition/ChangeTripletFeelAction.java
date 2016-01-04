@@ -33,14 +33,14 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ChangeTripletFeelAction extends Action{
+public class ChangeTripletFeelAction extends Action {
 	public static final String NAME = "action.composition.change-triplet-feel";
 	
 	public ChangeTripletFeelAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
@@ -128,25 +128,25 @@ public class ChangeTripletFeelAction extends Action{
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected int getSelectedTripletFeel(Button tripletFeelNone, Button tripletFeelEighth, Button tripletFeelSixteenth){
-		if(tripletFeelNone.getSelection()){
+	protected int getSelectedTripletFeel(Button tripletFeelNone, Button tripletFeelEighth, Button tripletFeelSixteenth) {
+		if(tripletFeelNone.getSelection()) {
 			return TGMeasureHeader.TRIPLET_FEEL_NONE;
-		}else if(tripletFeelEighth.getSelection()){
+		}else if(tripletFeelEighth.getSelection()) {
 			return TGMeasureHeader.TRIPLET_FEEL_EIGHTH;
-		}else if(tripletFeelSixteenth.getSelection()){
+		}else if(tripletFeelSixteenth.getSelection()) {
 			return TGMeasureHeader.TRIPLET_FEEL_SIXTEENTH;
 		}
 		return TGMeasureHeader.TRIPLET_FEEL_NONE;
 	}
 	
-	protected void setTripletFeel(int tripletFeel, boolean toEnd){
+	protected void setTripletFeel(int tripletFeel, boolean toEnd) {
 		//comienza el undoable
 		UndoableChangeTripletFeel undoable = UndoableChangeTripletFeel.startUndo();
 		

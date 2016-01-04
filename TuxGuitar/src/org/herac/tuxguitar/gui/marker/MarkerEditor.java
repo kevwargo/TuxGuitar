@@ -158,7 +158,7 @@ public class MarkerEditor {
 		return this.accepted;
 	}
 	
-	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment){
+	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment) {
 		GridData data = new GridData();
 		data.minimumWidth = minimumWidth;
 		data.horizontalAlignment = horizontalAlignment;
@@ -168,7 +168,7 @@ public class MarkerEditor {
 		return data;
 	}
 	
-	protected void setButtonColor(){
+	protected void setButtonColor() {
 		Color color = new Color(this.dialog.getDisplay(), this.marker.getColor().getR(), this.marker.getColor().getG(), this.marker.getColor().getB());
 		
 		this.colorButton.setForeground( color );
@@ -176,8 +176,8 @@ public class MarkerEditor {
 		this.colorButtonValue = color;
 	}
 	
-	protected void disposeButtonColor(){
-		if(this.colorButtonValue != null && !this.colorButtonValue.isDisposed()){
+	protected void disposeButtonColor() {
+		if(this.colorButtonValue != null && !this.colorButtonValue.isDisposed()) {
 			this.colorButtonValue.dispose();
 			this.colorButtonValue = null;
 		}
@@ -194,7 +194,7 @@ public class MarkerEditor {
 		//comienza el undoable
 		UndoableJoined joinedUndoable = new UndoableJoined();
 		
-		if(this.status == STATUS_EDIT && oldMeasure != this.marker.getMeasure()){
+		if(this.status == STATUS_EDIT && oldMeasure != this.marker.getMeasure()) {
 			UndoableChangeMarker undoable = UndoableChangeMarker.startUndo(manager.getMarker(oldMeasure));
 			TuxGuitar.instance().getSongManager().removeMarker(oldMeasure);
 			joinedUndoable.addUndoableEdit(undoable.endUndo(null));

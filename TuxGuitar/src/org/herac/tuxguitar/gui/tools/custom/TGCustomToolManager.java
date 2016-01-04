@@ -10,26 +10,26 @@ public class TGCustomToolManager {
 	
 	private List tools;
 	
-	public TGCustomToolManager(){
+	public TGCustomToolManager() {
 		this.tools = new ArrayList();
 	}
 	
-	public static TGCustomToolManager instance(){
-		if(instance == null){
+	public static TGCustomToolManager instance() {
+		if(instance == null) {
 			instance = new TGCustomToolManager();
 		}
 		return instance;
 	}
 	
-	public void addCustomTool(TGCustomTool tool){
+	public void addCustomTool(TGCustomTool tool) {
 		this.tools.add(tool);
 	}
 	
-	public void removeCustomTool(TGCustomTool tool){
+	public void removeCustomTool(TGCustomTool tool) {
 		this.tools.remove(tool);
 	}
 	
-	public Iterator getCustomTools(){
+	public Iterator getCustomTools() {
 		return this.tools.iterator();
 	}
 	

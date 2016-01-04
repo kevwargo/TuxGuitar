@@ -42,7 +42,7 @@ public class TransportModeAction extends Action {
 	
 	protected static final int MIN_SELECTION = 1;
 	protected static final int MAX_SELECTION = 500;
-	protected static final int[] DEFAULT_PERCENTS = new int[]{25, 50, 75, 100, 125, 150, 175, 200};
+	protected static final int[] DEFAULT_PERCENTS = new int[] {25, 50, 75, 100, 125, 150, 175, 200 };
 	
 	protected Button simple;
 	protected Button simpleLoop;
@@ -60,7 +60,7 @@ public class TransportModeAction extends Action {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		this.showDialog(e.widget.getDisplay().getActiveShell(), TuxGuitar.instance().getPlayer().getMode());
 		return 0;
 	}
@@ -91,9 +91,9 @@ public class TransportModeAction extends Action {
 		simpleAdapter.addControl(makeLabel(simpleGroup, TuxGuitar.getProperty("transport.mode.simple.tempo-percent"), SWT.LEFT, 1));
 		this.simplePercent = new Combo(simpleGroup, SWT.DROP_DOWN | SWT.READ_ONLY);
 		this.simplePercent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		for(int i = 0; i < DEFAULT_PERCENTS.length; i ++){
+		for(int i = 0; i < DEFAULT_PERCENTS.length; i ++) {
 			this.simplePercent.add(Integer.toString(DEFAULT_PERCENTS[i]) + "%", i);
-			if(mode.getSimplePercent() == DEFAULT_PERCENTS[i]){
+			if(mode.getSimplePercent() == DEFAULT_PERCENTS[i]) {
 				this.simplePercent.select(i);
 			}
 		}
@@ -206,20 +206,20 @@ public class TransportModeAction extends Action {
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
-	private GridData getMainData(){
+	private GridData getMainData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 350;
 		return data;
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private Label makeLabel(Composite parent, String text, int aligment, int horizontalSpan){
+	private Label makeLabel(Composite parent, String text, int aligment, int horizontalSpan) {
 		Label label = new Label(parent, SWT.CENTER | aligment);
 		label.setText(text);
 		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, true);
@@ -228,7 +228,7 @@ public class TransportModeAction extends Action {
 		return label;
 	}
 	
-	protected void updateMode(MidiPlayerMode mode){
+	protected void updateMode(MidiPlayerMode mode) {
 		int type = (this.custom.getSelection())?MidiPlayerMode.TYPE_CUSTOM:MidiPlayerMode.TYPE_SIMPLE;
 		boolean loop = (type == MidiPlayerMode.TYPE_CUSTOM || (type == MidiPlayerMode.TYPE_SIMPLE && this.simpleLoop.getSelection()));
 		mode.setType(type);
@@ -244,7 +244,7 @@ public class TransportModeAction extends Action {
 		mode.reset();
 	}
 	
-	private class RadioSelectionAdapter extends SelectionAdapter{
+	private class RadioSelectionAdapter extends SelectionAdapter {
 		private Button control;
 		private List controls;
 		
@@ -254,14 +254,14 @@ public class TransportModeAction extends Action {
 			this.control.addSelectionListener(this);
 		}
 		
-		public void addControl(Control control){
+		public void addControl(Control control) {
 			this.controls.add(control);
 		}
 		
-		public void update(){
+		public void update() {
 			boolean enabled = this.control.getSelection();
 			Iterator it = this.controls.iterator();
-			while(it.hasNext()){
+			while(it.hasNext()) {
 				Control control = (Control)it.next();
 				control.setEnabled(enabled);
 			}
@@ -273,7 +273,7 @@ public class TransportModeAction extends Action {
 		
 	}
 	
-	private class SpinnerSelectionAdapter extends SelectionAdapter{
+	private class SpinnerSelectionAdapter extends SelectionAdapter {
 		private Spinner to;
 		private Spinner from;
 		private Spinner increment;
@@ -285,26 +285,26 @@ public class TransportModeAction extends Action {
 		}
 		
 		public void widgetSelected(SelectionEvent e) {
-			if(e.widget.equals(this.from)){
-				if(this.from.getSelection() < MIN_SELECTION){
+			if(e.widget.equals(this.from)) {
+				if(this.from.getSelection() < MIN_SELECTION) {
 					this.from.setSelection(MIN_SELECTION);
-				}else if(this.from.getSelection() >= this.to.getSelection()){
+				}else if(this.from.getSelection() >= this.to.getSelection()) {
 					this.from.setSelection(this.to.getSelection() - 1);
 				}
-			}else if(e.widget.equals(this.to)){
-				if(this.to.getSelection() <= this.from.getSelection()){
+			}else if(e.widget.equals(this.to)) {
+				if(this.to.getSelection() <= this.from.getSelection()) {
 					this.to.setSelection(this.from.getSelection() + 1);
-				}else if(this.to.getSelection() > MAX_SELECTION){
+				}else if(this.to.getSelection() > MAX_SELECTION) {
 					this.to.setSelection(MAX_SELECTION);
 				}
 			}
-			if(this.increment.getSelection() > (this.to.getSelection() - this.from.getSelection())){
+			if(this.increment.getSelection() > (this.to.getSelection() - this.from.getSelection())) {
 				this.increment.setSelection(this.to.getSelection() - this.from.getSelection());
 			}
 		}
 	}
 	
-	private class MHeaderRangeStatus extends SelectionAdapter{
+	private class MHeaderRangeStatus extends SelectionAdapter {
 		
 		private List controls;
 		private boolean enabled;
@@ -324,22 +324,22 @@ public class TransportModeAction extends Action {
 			this.customLoop.addSelectionListener(this);
 		}
 		
-		public void addControl(Control control){
+		public void addControl(Control control) {
 			this.controls.add(control);
 		}
 		
-		public void update(){
+		public void update() {
 			// Check enabled
 			this.enabled = this.customLoop.getSelection();
-			if( !this.enabled ){
-				if( this.simpleMode.getSelection() ){
+			if( !this.enabled ) {
+				if( this.simpleMode.getSelection() ) {
 					this.enabled = this.simpleLoop.getSelection();
 				}
 			}
 			
 			// Update controls
 			Iterator it = this.controls.iterator();
-			while(it.hasNext()){
+			while(it.hasNext()) {
 				Control control = (Control)it.next();
 				control.setEnabled( this.enabled );
 			}
@@ -354,56 +354,56 @@ public class TransportModeAction extends Action {
 		private List values;
 		private Combo combo;
 		
-		public MHeaderCombo( Composite parent ){
+		public MHeaderCombo( Composite parent ) {
 			this.values = new ArrayList();
 			this.combo = new Combo( parent, SWT.DROP_DOWN | SWT.READ_ONLY );
 			this.combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		}
 		
-		public Combo getControl(){
+		public Combo getControl() {
 			return this.combo;
 		}
 		
-		public void clear(){
+		public void clear() {
 			this.values.clear();
 			this.combo.removeAll();
 		}
 		
-		public void addItem( String text , int value ){
+		public void addItem( String text , int value ) {
 			this.values.add( new Integer( value ) );
 			this.combo.add( text );
 		}
 		
-		public void addItem( TGMeasureHeader header ){
+		public void addItem( TGMeasureHeader header ) {
 			this.addItem( getItemText(header) , header.getNumber() );
 		}
 		
-		public void setValue( int value ){
-			for( int index = 0 ; index < this.values.size() ; index++ ){
+		public void setValue( int value ) {
+			for( int index = 0 ; index < this.values.size() ; index++ ) {
 				Integer currentValue = (Integer) this.values.get( index );
-				if( currentValue != null && currentValue.intValue() == value ){
+				if( currentValue != null && currentValue.intValue() == value ) {
 					int currentIndex = this.combo.getSelectionIndex();
-					if( currentIndex != index ){
+					if( currentIndex != index ) {
 						this.combo.select( index );
 					}
 				}
 			}
 		}
 		
-		public int getValue(){
+		public int getValue() {
 			int index = this.combo.getSelectionIndex();
-			if( index >= 0 && index < this.values.size() ){
+			if( index >= 0 && index < this.values.size() ) {
 				Integer value = (Integer) this.values.get( index );
-				if( value != null ){
+				if( value != null ) {
 					return value.intValue();
 				}
 			}
 			return -1;
 		}
 		
-		private String getItemText( TGMeasureHeader header ){
+		private String getItemText( TGMeasureHeader header ) {
 			String text = ("#" + header.getNumber());
-			if( header.hasMarker() ){
+			if( header.hasMarker() ) {
 				text += (" (" + header.getMarker().getTitle() + ")");
 			}
 			return text;
@@ -414,45 +414,45 @@ public class TransportModeAction extends Action {
 		protected MHeaderCombo loopSHeader;
 		protected MHeaderCombo loopEHeader;
 		
-		public MHeaderComboController(MHeaderCombo loopSHeader, MHeaderCombo loopEHeader){
+		public MHeaderComboController(MHeaderCombo loopSHeader, MHeaderCombo loopEHeader) {
 			this.loopSHeader = loopSHeader;
 			this.loopEHeader = loopEHeader;
 		}
 		
-		public void updateLoopSHeader( int sHeader ){
+		public void updateLoopSHeader( int sHeader ) {
 			TGSong song = TuxGuitar.instance().getSongManager().getSong();
 			this.loopSHeader.clear();
 			this.loopSHeader.addItem(TuxGuitar.getProperty("transport.mode.loop-range.from-default"), -1 );
-			for(int i = 0; i < song.countMeasureHeaders() ; i ++){
+			for(int i = 0; i < song.countMeasureHeaders() ; i ++) {
 				TGMeasureHeader header = song.getMeasureHeader( i );
 				this.loopSHeader.addItem( header );
 			}
 			this.loopSHeader.setValue( sHeader );
 		}
 		
-		public void updateLoopEHeader( int sHeader , int eHeader ){
+		public void updateLoopEHeader( int sHeader , int eHeader ) {
 			TGSong song = TuxGuitar.instance().getSongManager().getSong();
 			this.loopEHeader.clear();
 			this.loopEHeader.addItem(TuxGuitar.getProperty("transport.mode.loop-range.to-default"), -1 );
-			for(int i = 0; i < song.countMeasureHeaders() ; i ++){
+			for(int i = 0; i < song.countMeasureHeaders() ; i ++) {
 				TGMeasureHeader header = song.getMeasureHeader( i );
-				if( sHeader == -1 || header.getNumber() >= sHeader ){
+				if( sHeader == -1 || header.getNumber() >= sHeader ) {
 					this.loopEHeader.addItem( header );
 				}
 			}
 			this.loopEHeader.setValue( eHeader );
 		}
 		
-		public void updateLoopEHeader(){
+		public void updateLoopEHeader() {
 			int sHeader = this.loopSHeader.getValue();
 			int eHeader = this.loopEHeader.getValue();
-			if( eHeader != -1 && sHeader > eHeader ){
+			if( eHeader != -1 && sHeader > eHeader ) {
 				eHeader = sHeader;
 			}
 			this.updateLoopEHeader( sHeader , eHeader );
 		}
 		
-		public void appendListener(){
+		public void appendListener() {
 			this.loopSHeader.getControl().addSelectionListener( new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent e) {
 					updateLoopEHeader();

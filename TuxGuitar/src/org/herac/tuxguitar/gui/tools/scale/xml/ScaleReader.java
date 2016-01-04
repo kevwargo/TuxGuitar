@@ -20,13 +20,13 @@ public class ScaleReader {
 	private static final String NAME_ATTRIBUTE = "name";
 	private static final String KEYS_ATTRIBUTE = "keys";
 	
-	public void loadScales(List scales, InputStream stream){
-		try{
-			if ( stream != null ){
+	public void loadScales(List scales, InputStream stream) {
+		try {
+			if ( stream != null ) {
 				Document doc = getDocument(stream);
 				loadScales(scales, doc.getFirstChild());
 			}
-		}catch(Throwable e){
+		}catch(Throwable e) {
 			e.printStackTrace();
 		}
 	}
@@ -41,7 +41,7 @@ public class ScaleReader {
 		return document;
 	}
 	
-	private static void loadScales(List scales, Node node){
+	private static void loadScales(List scales, Node node) {
 		NodeList nodeList = node.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node child = nodeList.item(i);
@@ -53,7 +53,7 @@ public class ScaleReader {
 				String name = params.getNamedItem(NAME_ATTRIBUTE).getNodeValue();
 				String keys = params.getNamedItem(KEYS_ATTRIBUTE).getNodeValue();
 				
-				if (name == null || keys == null || name.trim().equals("") || keys.trim().equals("")){
+				if (name == null || keys == null || name.trim().equals("") || keys.trim().equals("")) {
 					throw new RuntimeException("Invalid Scale file format.");
 				}
 				

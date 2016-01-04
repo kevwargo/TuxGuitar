@@ -21,37 +21,37 @@ import org.herac.tuxguitar.song.models.TGDivisionType;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ChangeDivisionTypeAction extends Action{
+public class ChangeDivisionTypeAction extends Action {
 	public static final String NAME = "action.note.duration.change-division-type";
 	
 	public ChangeDivisionTypeAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		//comienza el undoable
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		boolean isKeyEvent = false;
-		if(e instanceof KeyEvent){
+		if(e instanceof KeyEvent) {
 			isKeyEvent = true;
 		}
-		if(!isKeyEvent){
+		if(!isKeyEvent) {
 			TGDivisionType divisionType = defaultDivisionType();
-			if(e.widget.getData() != null && e.widget.getData() instanceof TGDivisionType){
+			if(e.widget.getData() != null && e.widget.getData() instanceof TGDivisionType) {
 				divisionType = (TGDivisionType)e.widget.getData();
 			}
 			
-			if(getSelectedDuration().getDivision().isEqual(divisionType)){
+			if(getSelectedDuration().getDivision().isEqual(divisionType)) {
 				setDivisionType(noTuplet());
-			}else{
+			}else {
 				setDivisionType(divisionType);
 			}
 		}
-		else{
-			if(getSelectedDuration().getDivision().isEqual(TGDivisionType.NORMAL)){
+		else {
+			if(getSelectedDuration().getDivision().isEqual(TGDivisionType.NORMAL)) {
 				setDivisionType(defaultDivisionType());
-			}else{
+			}else {
 				setDivisionType(noTuplet());
 			}
 		}
@@ -63,21 +63,21 @@ public class ChangeDivisionTypeAction extends Action{
 		return 0;
 	}
 	
-	private TGDivisionType noTuplet(){
+	private TGDivisionType noTuplet() {
 		TGDivisionType divisionType = getSongManager().getFactory().newDivisionType();
 		divisionType.setEnters(1);
 		divisionType.setTimes(1);
 		return divisionType;
 	}
 	
-	private TGDivisionType defaultDivisionType(){
+	private TGDivisionType defaultDivisionType() {
 		TGDivisionType divisionType = getSongManager().getFactory().newDivisionType();
 		divisionType.setEnters(3);
 		divisionType.setTimes(2);
 		return divisionType;
 	}
 	
-	private void setDivisionType(TGDivisionType divisionType){
+	private void setDivisionType(TGDivisionType divisionType) {
 		getSelectedDuration().getDivision().setEnters(divisionType.getEnters());
 		getSelectedDuration().getDivision().setTimes(divisionType.getTimes());
 	}
@@ -89,7 +89,7 @@ public class ChangeDivisionTypeAction extends Action{
 		fireUpdate(getEditor().getTablature().getCaret().getMeasure().getNumber());
 	}
 	
-	public TGDuration getSelectedDuration(){
+	public TGDuration getSelectedDuration() {
 		return getEditor().getTablature().getCaret().getDuration();
 	}
 }

@@ -21,7 +21,7 @@ public class TGFileFormatManager {
 	private List exporters;
 	private List importers;
 	
-	private TGFileFormatManager(){
+	private TGFileFormatManager() {
 		this.loader = new TGSongLoader();
 		this.writer = new TGSongWriter();
 		this.inputStreams = new ArrayList();
@@ -31,123 +31,123 @@ public class TGFileFormatManager {
 		this.addDefaultStreams();
 	}
 	
-	public static TGFileFormatManager instance(){
-		if(instance == null){
+	public static TGFileFormatManager instance() {
+		if(instance == null) {
 			instance = new TGFileFormatManager();
 		}
 		return instance;
 	}
 	
-	public TGSongLoader getLoader(){
+	public TGSongLoader getLoader() {
 		return this.loader;
 	}
 	
-	public TGSongWriter getWriter(){
+	public TGSongWriter getWriter() {
 		return this.writer;
 	}
 	
-	public void addInputStream(TGInputStreamBase stream){
+	public void addInputStream(TGInputStreamBase stream) {
 		this.inputStreams.add(stream);
 	}
 	
-	public void removeInputStream(TGInputStreamBase stream){
+	public void removeInputStream(TGInputStreamBase stream) {
 		this.inputStreams.remove(stream);
 	}
 	
-	public int countInputStreams(){
+	public int countInputStreams() {
 		return this.inputStreams.size();
 	}
 	
-	public void addOutputStream(TGOutputStreamBase stream){
+	public void addOutputStream(TGOutputStreamBase stream) {
 		this.outputStreams.add(stream);
 	}
 	
-	public void removeOutputStream(TGOutputStreamBase stream){
+	public void removeOutputStream(TGOutputStreamBase stream) {
 		this.outputStreams.remove(stream);
 	}
 	
-	public int countOutputStreams(){
+	public int countOutputStreams() {
 		return this.outputStreams.size();
 	}
 	
-	public void addImporter(TGRawImporter importer){
+	public void addImporter(TGRawImporter importer) {
 		this.importers.add(importer);
 	}
 	
-	public void removeImporter(TGRawImporter importer){
+	public void removeImporter(TGRawImporter importer) {
 		this.importers.remove(importer);
 	}
 	
-	public int countImporters(){
+	public int countImporters() {
 		return this.importers.size();
 	}
 	
-	public void addExporter(TGRawExporter exporter){
+	public void addExporter(TGRawExporter exporter) {
 		this.exporters.add(exporter);
 	}
 	
-	public void removeExporter(TGRawExporter exporter){
+	public void removeExporter(TGRawExporter exporter) {
 		this.exporters.remove(exporter);
 	}
 	
-	public int countExporters(){
+	public int countExporters() {
 		return this.exporters.size();
 	}
 	
-	public Iterator getInputStreams(){
+	public Iterator getInputStreams() {
 		return this.inputStreams.iterator();
 	}
 	
-	public Iterator getOutputStreams(){
+	public Iterator getOutputStreams() {
 		return this.outputStreams.iterator();
 	}
 	
-	public Iterator getImporters(){
+	public Iterator getImporters() {
 		return this.importers.iterator();
 	}
 	
-	public Iterator getExporters(){
+	public Iterator getExporters() {
 		return this.exporters.iterator();
 	}
 	
-	public List getInputFormats(){
+	public List getInputFormats() {
 		List formats = new ArrayList();
 		Iterator it = getInputStreams();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			TGInputStreamBase stream = (TGInputStreamBase)it.next();
 			TGFileFormat format = stream.getFileFormat();
-			if(!existsFormat(format, formats)){
+			if(!existsFormat(format, formats)) {
 				formats.add(format);
 			}
 		}
 		return formats;
 	}
 	
-	public List getOutputFormats(){
+	public List getOutputFormats() {
 		List formats = new ArrayList();
 		Iterator it = getOutputStreams();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			TGOutputStreamBase stream = (TGOutputStreamBase)it.next();
 			TGFileFormat format = stream.getFileFormat();
-			if(!existsFormat(format, formats)){
+			if(!existsFormat(format, formats)) {
 				formats.add(format);
 			}
 		}
 		return formats;
 	}
 	
-	private boolean existsFormat(TGFileFormat format, List formats){
+	private boolean existsFormat(TGFileFormat format, List formats) {
 		Iterator it = formats.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			TGFileFormat comparator = (TGFileFormat)it.next();
-			if(comparator.getName().equals(format.getName()) || comparator.getSupportedFormats().equals(format.getSupportedFormats())){
+			if(comparator.getName().equals(format.getName()) || comparator.getSupportedFormats().equals(format.getSupportedFormats())) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	private void addDefaultStreams(){
+	private void addDefaultStreams() {
 		this.addInputStream(new TGInputStream());
 		this.addOutputStream(new TGOutputStream());
 	}

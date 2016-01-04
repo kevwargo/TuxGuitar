@@ -46,7 +46,7 @@ public class FretBoardConfig {
 	private Color colorNote;
 	private Color colorScale;
 	
-	public FretBoardConfig(){
+	public FretBoardConfig() {
 		super();
 	}
 	
@@ -78,11 +78,11 @@ public class FretBoardConfig {
 		return this.colorScale;
 	}
 	
-	public int getDirection(){
+	public int getDirection() {
 		return this.direction;
 	}
 	
-	public void load(){
+	public void load() {
 		Display display = TuxGuitar.instance().getDisplay();
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		this.style = config.getIntConfigValue(TGConfigKeys.FRETBOARD_STYLE);
@@ -95,7 +95,7 @@ public class FretBoardConfig {
 		this.colorScale = new Color(display, config.getRGBConfigValue(TGConfigKeys.FRETBOARD_COLOR_SCALE));
 	}
 	
-	public void defaults(){
+	public void defaults() {
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		Properties defaults = config.getDefaults();
 		config.setProperty(TGConfigKeys.FRETBOARD_STYLE, defaults.getProperty(TGConfigKeys.FRETBOARD_STYLE));
@@ -108,7 +108,7 @@ public class FretBoardConfig {
 		config.setProperty(TGConfigKeys.FRETBOARD_COLOR_SCALE, defaults.getProperty(TGConfigKeys.FRETBOARD_COLOR_SCALE));
 	}
 	
-	public void save(int style, int direction, FontData fontData, RGB rgbBackground, RGB rgbString, RGB rgbFretPoint, RGB rgbNote, RGB rgbScale){
+	public void save(int style, int direction, FontData fontData, RGB rgbBackground, RGB rgbString, RGB rgbFretPoint, RGB rgbNote, RGB rgbScale) {
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		config.setProperty(TGConfigKeys.FRETBOARD_STYLE, style);
 		config.setProperty(TGConfigKeys.FRETBOARD_DIRECTION, direction);
@@ -120,14 +120,14 @@ public class FretBoardConfig {
 		config.setProperty(TGConfigKeys.FRETBOARD_COLOR_SCALE, rgbScale);
 	}
 	
-	public void saveDirection( int direction ){
+	public void saveDirection( int direction ) {
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		config.setProperty(TGConfigKeys.FRETBOARD_DIRECTION, direction);
 		
 		this.direction = direction;
 	}
 	
-	public void dispose(){
+	public void dispose() {
 		this.font.dispose();
 		this.colorBackground.dispose();
 		this.colorString.dispose();
@@ -212,7 +212,7 @@ public class FretBoardConfig {
 				style |= (displayTextScale.getSelection() ? DISPLAY_TEXT_SCALE : 0 );
 				
 				int direction = directionCombo.getSelectionIndex();
-				if( direction != DIRECTION_RIGHT && direction != DIRECTION_LEFT ){
+				if( direction != DIRECTION_RIGHT && direction != DIRECTION_LEFT ) {
 					direction = DIRECTION_RIGHT;
 				}
 				//if( direction )
@@ -237,19 +237,19 @@ public class FretBoardConfig {
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
-	protected GridData getButtonData(){
+	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = MINIMUM_BUTTON_WIDTH;
 		data.minimumHeight = MINIMUM_BUTTON_HEIGHT;
 		return data;
 	}
 	
-	protected void applyChanges(){
+	protected void applyChanges() {
 		this.dispose();
 		this.load();
 	}
 	
-	private RGB getColorChooser(final Composite parent, String title, RGB rgb){
+	private RGB getColorChooser(final Composite parent, String title, RGB rgb) {
 		Label label = new Label(parent, SWT.NULL);
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		label.setText(title);
@@ -261,7 +261,7 @@ public class FretBoardConfig {
 		return button.getValue();
 	}
 	
-	private FontData getFontChooser(final Composite parent, String title, FontData fontData){
+	private FontData getFontChooser(final Composite parent, String title, FontData fontData) {
 		final FontData selection = new FontData(fontData.getName(), fontData.getHeight(), fontData.getStyle());
 		
 		Label label = new Label(parent, SWT.NULL);
@@ -277,7 +277,7 @@ public class FretBoardConfig {
 				FontDialog fontDialog = new FontDialog(parent.getShell());
 				fontDialog.setFontList(font.getFontData());
 				FontData fd = fontDialog.open();
-				if(fd != null){
+				if(fd != null) {
 					selection.setName( fd.getName() );
 					selection.setHeight( fd.getHeight() );
 					selection.setStyle( fd.getStyle() );
@@ -288,7 +288,7 @@ public class FretBoardConfig {
 		return selection;
 	}
 	
-	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment){
+	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment) {
 		GridData data = new GridData();
 		data.minimumWidth = minimumWidth;
 		data.horizontalAlignment = horizontalAlignment;
@@ -303,18 +303,18 @@ public class FretBoardConfig {
 		protected Color color;
 		protected RGB value;
 		
-		public ButtonColor(Composite parent, int style, String text){
+		public ButtonColor(Composite parent, int style, String text) {
 			this.value = new RGB(0, 0, 0);
 			this.button = new Button(parent, style);			
 			this.button.setText(text);
 			this.addListeners();
 		}
 		
-		protected void setLayoutData(Object layoutData){
+		protected void setLayoutData(Object layoutData) {
 			this.button.setLayoutData(layoutData);
 		}
 		
-		protected void loadColor(RGB rgb){
+		protected void loadColor(RGB rgb) {
 			this.value.red = rgb.red;
 			this.value.green = rgb.green;
 			this.value.blue = rgb.blue;
@@ -325,14 +325,14 @@ public class FretBoardConfig {
 			this.color = color;
 		}
 		
-		protected void disposeColor(){
-			if(this.color != null && !this.color.isDisposed()){
+		protected void disposeColor() {
+			if(this.color != null && !this.color.isDisposed()) {
 				this.color.dispose();
 				this.color = null;
 			}
 		}
 		
-		private void addListeners(){
+		private void addListeners() {
 			this.button.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent event) {
 					ColorDialog dlg = new ColorDialog(ButtonColor.this.button.getShell());
@@ -351,7 +351,7 @@ public class FretBoardConfig {
 			});
 		}
 		
-		protected RGB getValue(){
+		protected RGB getValue() {
 			return this.value;
 		}
 	}

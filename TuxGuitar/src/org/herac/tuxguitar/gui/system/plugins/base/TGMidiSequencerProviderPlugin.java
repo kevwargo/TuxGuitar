@@ -4,7 +4,7 @@ import org.herac.tuxguitar.gui.TuxGuitar;
 import org.herac.tuxguitar.gui.system.plugins.TGPluginException;
 import org.herac.tuxguitar.player.base.MidiSequencerProvider;
 
-public abstract class TGMidiSequencerProviderPlugin extends TGPluginAdapter{
+public abstract class TGMidiSequencerProviderPlugin extends TGPluginAdapter {
 	private boolean loaded;
 	private MidiSequencerProvider provider;
 	
@@ -24,15 +24,15 @@ public abstract class TGMidiSequencerProviderPlugin extends TGPluginAdapter{
 	}
 	
 	public void setEnabled(boolean enabled) throws TGPluginException {
-		if(enabled){
+		if(enabled) {
 			addPlugin();
-		}else{
+		}else {
 			removePlugin();
 		}
 	}
 	
 	protected void addPlugin() throws TGPluginException {
-		if(!this.loaded){
+		if(!this.loaded) {
 			try {
 				TuxGuitar.instance().getPlayer().addSequencerProvider(this.provider, TuxGuitar.instance().isInitialized());
 				this.loaded = true;
@@ -43,7 +43,7 @@ public abstract class TGMidiSequencerProviderPlugin extends TGPluginAdapter{
 	}
 	
 	protected void removePlugin() throws TGPluginException {
-		if(this.loaded){
+		if(this.loaded) {
 			try {
 				TuxGuitar.instance().getPlayer().removeSequencerProvider(this.provider);
 				this.loaded = false;

@@ -22,7 +22,7 @@ public class TransportPlayAction extends Action {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		TuxGuitar.instance().getTransport().play();
 		return 0;
 	}

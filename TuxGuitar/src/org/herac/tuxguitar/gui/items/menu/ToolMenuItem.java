@@ -43,7 +43,7 @@ public class ToolMenuItem extends MenuItems {
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		this.transpose = new MenuItem(this.menu, SWT.PUSH);
 		this.transpose.addSelectionListener(TuxGuitar.instance().getAction(TransposeAction.NAME));
 		
@@ -54,7 +54,7 @@ public class ToolMenuItem extends MenuItems {
 		this.browser.addSelectionListener(TuxGuitar.instance().getAction(TGBrowserAction.NAME));
 		
 		Iterator it = TGCustomToolManager.instance().getCustomTools();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			TGCustomTool tool = (TGCustomTool)it.next();
 			MenuItem menuItem = new MenuItem(this.menu, SWT.PUSH);
 			menuItem.setText(tool.getName());
@@ -82,7 +82,7 @@ public class ToolMenuItem extends MenuItems {
 		this.loadProperties();
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.settingsMenuItem, "tools", null);
 		setMenuItemTextAndAccelerator(this.transpose, "tools.transpose", TransposeAction.NAME);
 		setMenuItemTextAndAccelerator(this.scale, "tools.scale", ScaleAction.NAME);
@@ -92,11 +92,11 @@ public class ToolMenuItem extends MenuItems {
 		setMenuItemTextAndAccelerator(this.config, "tools.settings", EditConfigAction.NAME);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		//Nothing to do
 	}
 	
-	public void update(){
+	public void update() {
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.transpose.setEnabled( !running );
 	}

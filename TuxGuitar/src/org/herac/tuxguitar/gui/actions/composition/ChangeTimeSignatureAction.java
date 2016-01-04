@@ -36,14 +36,14 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ChangeTimeSignatureAction extends Action{
+public class ChangeTimeSignatureAction extends Action {
 	public static final String NAME = "action.composition.change-time-signature";
 	
 	public ChangeTimeSignatureAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
@@ -141,20 +141,20 @@ public class ChangeTimeSignatureAction extends Action{
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private GridData getComboData(){
+	private GridData getComboData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
 	
-	protected void setTimeSignature(TGTimeSignature timeSignature, boolean toEnd){
+	protected void setTimeSignature(TGTimeSignature timeSignature, boolean toEnd) {
 		//comienza el undoable
 		UndoableChangeTimeSignature undoable = UndoableChangeTimeSignature.startUndo();
 		
@@ -172,7 +172,7 @@ public class ChangeTimeSignatureAction extends Action{
 		addUndoableEdit(undoable.endUndo(timeSignature, measure.getStart(), toEnd));
 	}
 	
-	public TGSongManager getSongManager(){
+	public TGSongManager getSongManager() {
 		return super.getSongManager();
 	}
 }

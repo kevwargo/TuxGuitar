@@ -39,7 +39,7 @@ import org.herac.tuxguitar.song.models.TGNote;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class NoteEffectsMenuItem extends MenuItems{
+public class NoteEffectsMenuItem extends MenuItems {
 	
 	private MenuItem noteEffectsMenuItem;
 	private Menu menu; 
@@ -72,7 +72,7 @@ public class NoteEffectsMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//--VIBRATO--
 		this.vibrato = new MenuItem(this.menu, SWT.CHECK);
 		this.vibrato.addSelectionListener(TuxGuitar.instance().getAction(ChangeVibratoNoteAction.NAME));
@@ -167,7 +167,7 @@ public class NoteEffectsMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		TGNote note = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getSelectedNote();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.vibrato.setSelection(note != null && note.getEffect().isVibrato());
@@ -210,7 +210,7 @@ public class NoteEffectsMenuItem extends MenuItems{
 		this.fadeIn.setEnabled(!running && note != null);
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.noteEffectsMenuItem, "effects", null);
 		setMenuItemTextAndAccelerator(this.vibrato, "effects.vibrato", ChangeVibratoNoteAction.NAME);
 		setMenuItemTextAndAccelerator(this.bend, "effects.bend", ChangeBendNoteAction.NAME);
@@ -233,7 +233,7 @@ public class NoteEffectsMenuItem extends MenuItems{
 		setMenuItemTextAndAccelerator(this.fadeIn, "effects.fade-in", ChangeFadeInAction.NAME);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		//Nothing to do
 	}
 }

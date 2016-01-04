@@ -35,7 +35,7 @@ public class ChordSettingsDialog {
 		super();
 	}
 	
-	public boolean open(Shell parent){
+	public boolean open(Shell parent) {
 		this.updated = false;
 		
 		this.dialog = DialogUtils.newDialog(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
@@ -88,22 +88,22 @@ public class ChordSettingsDialog {
 		this.dialog.setDefaultButton( buttonOK );
 	}
 	
-	private GridData getGridData(int minimumWidth, int minimumHeight){
+	private GridData getGridData(int minimumWidth, int minimumHeight) {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = minimumWidth;
 		data.minimumHeight = minimumHeight;
 		return data;
 	}
 	
-	private GridData getGridData(){
+	private GridData getGridData() {
 		return getGridData(125, 0);
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		return getGridData(80, 25);
 	}
 	
-	private Spinner makeSpinner(Composite parent, String label, int value, int min, int max){
+	private Spinner makeSpinner(Composite parent, String label, int value, int min, int max) {
 		this.newLabel(parent, label);
 		Spinner spinner = new Spinner(parent, SWT.BORDER);
 		spinner.setMinimum(min);
@@ -113,7 +113,7 @@ public class ChordSettingsDialog {
 		return spinner;
 	}
 	
-	private Label newLabel(Composite parent, String text){
+	private Label newLabel(Composite parent, String text) {
 		Label label = new Label(parent, SWT.HORIZONTAL);
 		label.setText(text);
 		return label;
@@ -161,23 +161,23 @@ public class ChordSettingsDialog {
 		});
 	}
 	
-	protected void checkMinimumFretValue(){
+	protected void checkMinimumFretValue() {
 		int maxSelection = this.maxFret.getSelection();
 		int minSelection = this.minFret.getSelection();
-		if(maxSelection < minSelection){
+		if(maxSelection < minSelection) {
 			this.maxFret.setSelection(minSelection);
 		}
 	}
 	
-	protected void checkMaximumFretValue(){
+	protected void checkMaximumFretValue() {
 		int maxSelection = this.maxFret.getSelection();
 		int minSelection = this.minFret.getSelection();
-		if(maxSelection < minSelection){
+		if(maxSelection < minSelection) {
 			this.maxFret.setSelection(minSelection);
 		}
 	}
 	
-	private void update(){
+	private void update() {
 		ChordSettings.instance().setChordTypeIndex(this.typeCombo.getSelectionIndex());
 		ChordSettings.instance().setEmptyStringChords(this.emptyStringChords.getSelection());
 		ChordSettings.instance().setChordsToDisplay(this.chordsToDisplay.getSelection() );
@@ -185,9 +185,9 @@ public class ChordSettingsDialog {
 		ChordSettings.instance().setFindChordsMin(this.minFret.getSelection());
 	}
 	
-	protected void dispose(boolean updated){
+	protected void dispose(boolean updated) {
 		this.updated = updated;
-		if(this.updated){
+		if(this.updated) {
 			this.update();
 		}
 		this.dialog.dispose();

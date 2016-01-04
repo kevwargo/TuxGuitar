@@ -34,7 +34,7 @@ public abstract class TGMeasure {
 	
 	private List beats;
 	
-	public TGMeasure(TGMeasureHeader header){
+	public TGMeasure(TGMeasureHeader header) {
 		this.header = header;
 		this.clef = DEFAULT_CLEF;
 		this.keySignature = DEFAULT_KEY_SIGNATURE;
@@ -69,28 +69,28 @@ public abstract class TGMeasure {
 		return this.beats;
 	}
 	
-	public void addBeat(TGBeat beat){
+	public void addBeat(TGBeat beat) {
 		beat.setMeasure(this);
 		this.beats.add(beat);
 	}
 	
-	public void moveBeat(int index, TGBeat beat){
+	public void moveBeat(int index, TGBeat beat) {
 		this.beats.remove(beat);
 		this.beats.add(index, beat);
 	}
 	
-	public void removeBeat(TGBeat beat){
+	public void removeBeat(TGBeat beat) {
 		this.beats.remove(beat);
 	}
 	
-	public TGBeat getBeat(int index){
-		if(index >= 0 && index < countBeats()){
+	public TGBeat getBeat(int index) {
+		if(index >= 0 && index < countBeats()) {
 			return (TGBeat)this.beats.get(index);
 		}
 		return null;
 	}
 	
-	public int countBeats(){
+	public int countBeats() {
 		return this.beats.size();
 	}
 	
@@ -138,25 +138,25 @@ public abstract class TGMeasure {
 		return this.header.hasMarker();
 	}
 	
-	public TGMarker getMarker(){
+	public TGMarker getMarker() {
 		return this.header.getMarker();
 	}
 	
-	public void makeEqual(TGMeasure measure){
+	public void makeEqual(TGMeasure measure) {
 		this.clef = measure.getClef();
 		this.keySignature = measure.getKeySignature();
 		this.beats.clear();
-		for(int i = 0; i < measure.countBeats(); i ++){
+		for(int i = 0; i < measure.countBeats(); i ++) {
 			TGBeat beat = measure.getBeat(i);
 			this.addBeat(beat);
 		}
 	}
 	
-	public TGMeasure clone(TGFactory factory, TGMeasureHeader header){
+	public TGMeasure clone(TGFactory factory, TGMeasureHeader header) {
 		TGMeasure measure = factory.newMeasure(header);
 		measure.setClef(getClef());
 		measure.setKeySignature(getKeySignature());
-		for(int i = 0; i < countBeats(); i ++){
+		for(int i = 0; i < countBeats(); i ++) {
 			TGBeat beat = (TGBeat)this.beats.get(i);
 			measure.addBeat(beat.clone(factory));
 		}

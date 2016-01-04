@@ -6,7 +6,7 @@ public abstract class TGLyric {
 	private int from;
 	private String lyrics;
 	
-	public TGLyric(){
+	public TGLyric() {
 		this.from = 1;
 		this.lyrics = new String();
 	}
@@ -27,18 +27,18 @@ public abstract class TGLyric {
 		this.lyrics = lyrics;
 	}
 	
-	public String[] getLyricBeats(){
+	public String[] getLyricBeats() {
 		String lyrics = getLyrics();
 		lyrics = lyrics.replaceAll("\n", REGEX);
 		lyrics = lyrics.replaceAll("\r", REGEX);
 		return lyrics.split(REGEX);
 	}
 	
-	public boolean isEmpty(){
+	public boolean isEmpty() {
 		return (getLyrics().length() == 0);
 	}
 	
-	public void copy(TGLyric lyric){
+	public void copy(TGLyric lyric) {
 		lyric.setFrom(getFrom());
 		lyric.setLyrics(getLyrics());
 	}

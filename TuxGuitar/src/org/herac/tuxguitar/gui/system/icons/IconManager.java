@@ -136,42 +136,42 @@ public class IconManager {
 	private Image browserRefresh;
 	private Image settings;
 	
-	public IconManager(){
+	public IconManager() {
 		this.loaders = new ArrayList();
 		this.disposableIcons = new ArrayList();
 		this.loadIcons();
 	}
 	
-	public void addLoader(IconLoader loader){
-		if( !this.loaders.contains( loader )){
+	public void addLoader(IconLoader loader) {
+		if( !this.loaders.contains( loader )) {
 			this.loaders.add(loader);
 		}
 	}
 	
-	public void removeLoader(IconLoader loader){
-		if( this.loaders.contains( loader )){
+	public void removeLoader(IconLoader loader) {
+		if( this.loaders.contains( loader )) {
 			this.loaders.remove(loader);
 		}
 	}
 	
-	private void fireChanges(){
+	private void fireChanges() {
 		Iterator it = this.loaders.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			IconLoader loader = (IconLoader)it.next();
 			loader.loadIcons();
 		}
 	}
 	
-	public void reloadIcons(){
+	public void reloadIcons() {
 		List disposableIcons = purgeDisposableIcons();
 		this.loadIcons();
 		this.fireChanges();
 		this.disposeIcons(disposableIcons);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.theme = TuxGuitar.instance().getConfig().getStringConfigValue(TGConfigKeys.SKIN);
-		this.durations = new Image[]{
+		this.durations = new Image[] {
 			loadIcon("1.png"),
 			loadIcon("2.png"),
 			loadIcon("4.png"),
@@ -300,16 +300,16 @@ public class IconManager {
 		this.settings = loadIcon("settings.png");
 	}
 	
-	private Image loadIcon(String name){
+	private Image loadIcon(String name) {
 		Image image = TGFileUtils.loadImage(this.theme, name);
 		this.disposableIcons.add(image);
 		return image;
 	}
 	
-	private List purgeDisposableIcons(){
+	private List purgeDisposableIcons() {
 		List disposableIcons = new ArrayList();
 		Iterator it = this.disposableIcons.iterator();
-		while( it.hasNext() ){
+		while( it.hasNext() ) {
 			Resource resource = (Resource)it.next();
 			disposableIcons.add( resource );
 		}
@@ -317,24 +317,24 @@ public class IconManager {
 		return disposableIcons;
 	}
 	
-	public void disposeIcons(List resources){
+	public void disposeIcons(List resources) {
 		Iterator it = resources.iterator();
-		while( it.hasNext() ){
+		while( it.hasNext() ) {
 			Image image = (Image)it.next();
 			image.dispose();
 		}
 	}
 	
-	public void disposeIcons(){
+	public void disposeIcons() {
 		this.disposeIcons(purgeDisposableIcons());
 	}
 	
-	public boolean shouldReload(){
+	public boolean shouldReload() {
 		return (!this.theme.equals(TuxGuitar.instance().getConfig().getStringConfigValue(TGConfigKeys.SKIN)));
 	}
 	
-	public Image getDuration(int value){
-		switch(value){
+	public Image getDuration(int value) {
+		switch(value) {
 		case TGDuration.WHOLE:
 			return this.durations[0];
 		case TGDuration.HALF:

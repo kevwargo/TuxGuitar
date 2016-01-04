@@ -6,7 +6,7 @@ public abstract class MidiSequenceHandler {
 	
 	private int tracks;
 	
-	public MidiSequenceHandler(int tracks){
+	public MidiSequenceHandler(int tracks) {
 		this.tracks = tracks;
 	}
 	

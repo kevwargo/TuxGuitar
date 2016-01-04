@@ -26,11 +26,11 @@ public class ConfirmDialog {
 	private String message;
 	
 	
-	public ConfirmDialog(String message){
+	public ConfirmDialog(String message) {
 		this.message = message;
 	}
 	
-	public int confirm(int style, int defaultButton){
+	public int confirm(int style, int defaultButton) {
 		Shell parent = TuxGuitar.instance().getShell();
 		this.dialog = DialogUtils.newDialog(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		this.dialog.setLayout(new GridLayout(1, true));
@@ -52,15 +52,15 @@ public class ConfirmDialog {
 		buttonsComposite.setLayout(buttonsLayout);
 		buttonsComposite.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 		
-		if((style & BUTTON_YES)!= 0){
+		if((style & BUTTON_YES)!= 0) {
 			addCloseButton(TuxGuitar.getProperty("yes"), STATUS_YES, buttonsComposite, (defaultButton == BUTTON_YES) );
 			buttonsLayout.numColumns ++;
 		}
-		if((style & BUTTON_NO)!= 0){
+		if((style & BUTTON_NO)!= 0) {
 			addCloseButton(TuxGuitar.getProperty("no"), STATUS_NO, buttonsComposite, (defaultButton == BUTTON_NO) );
 			buttonsLayout.numColumns ++;
 		}
-		if((style & BUTTON_CANCEL)!= 0){
+		if((style & BUTTON_CANCEL)!= 0) {
 			addCloseButton(TuxGuitar.getProperty("cancel"), STATUS_CANCEL, buttonsComposite, (defaultButton == BUTTON_CANCEL) );
 			buttonsLayout.numColumns ++;
 		}
@@ -70,7 +70,7 @@ public class ConfirmDialog {
 		return this.status;
 	}
 	
-	private void addCloseButton(String text, final int value, Composite parent, boolean defaultButton){
+	private void addCloseButton(String text, final int value, Composite parent, boolean defaultButton) {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setLayoutData(getButtonData());
 		button.setText(text);
@@ -80,19 +80,19 @@ public class ConfirmDialog {
 				ConfirmDialog.this.status = value;
 			}
 		});
-		if(defaultButton){
+		if(defaultButton) {
 			this.dialog.setDefaultButton(button);
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	public void setDefaultStatus(int status){
+	public void setDefaultStatus(int status) {
 		this.status = status;
 	}
 	

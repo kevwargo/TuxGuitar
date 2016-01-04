@@ -17,16 +17,16 @@ import org.herac.tuxguitar.gui.undo.CannotUndoException;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class UndoAction extends Action{
+public class UndoAction extends Action {
 	public static final String NAME = "action.edit.undo";
 	
 	public UndoAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		try {
-			if(TuxGuitar.instance().getUndoableManager().canUndo()){
+			if(TuxGuitar.instance().getUndoableManager().canUndo()) {
 				TuxGuitar.instance().getUndoableManager().undo();
 			}
 		} catch (CannotUndoException e1) {

@@ -38,7 +38,7 @@ import org.herac.tuxguitar.song.models.TGDivisionType;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class DurationToolItems  extends ToolItems{
+public class DurationToolItems  extends ToolItems {
 	public static final String NAME = "duration.items";
 	protected ToolBar toolBar;
 	private ToolItem[] durationItems;
@@ -46,11 +46,11 @@ public class DurationToolItems  extends ToolItems{
 	private ToolItem doubleDotted;
 	private DivisionTypeMenuItem divisionTypeItems;
 	
-	public DurationToolItems(){
+	public DurationToolItems() {
 		super(NAME);
 	}
 	
-	public void showItems(ToolBar toolBar){
+	public void showItems(ToolBar toolBar) {
 		this.toolBar = toolBar;
 		this.durationItems = new ToolItem[7];
 		
@@ -91,11 +91,11 @@ public class DurationToolItems  extends ToolItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		TGDuration duration = getEditor().getTablature().getCaret().getDuration();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		int index = duration.getIndex();
-		for(int i = 0;i < this.durationItems.length;i++){
+		for(int i = 0;i < this.durationItems.length;i++) {
 			this.durationItems[i].setSelection( (i == index) );
 			this.durationItems[i].setEnabled( !running );
 		}
@@ -108,7 +108,7 @@ public class DurationToolItems  extends ToolItems{
 		this.divisionTypeItems.update();
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.durationItems[0].setToolTipText(TuxGuitar.getProperty("duration.whole"));
 		this.durationItems[1].setToolTipText(TuxGuitar.getProperty("duration.half"));
 		this.durationItems[2].setToolTipText(TuxGuitar.getProperty("duration.quarter"));
@@ -121,7 +121,7 @@ public class DurationToolItems  extends ToolItems{
 		this.divisionTypeItems.setText(TuxGuitar.getProperty("duration.division-type"));
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.durationItems[0].setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.WHOLE));
 		this.durationItems[1].setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.HALF));
 		this.durationItems[2].setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.QUARTER));
@@ -134,7 +134,7 @@ public class DurationToolItems  extends ToolItems{
 		this.divisionTypeItems.setImage(TuxGuitar.instance().getIconManager().getDivisionType());
 	}
 	
-	protected TablatureEditor getEditor(){
+	protected TablatureEditor getEditor() {
 		return super.getEditor();
 	}
 	
@@ -150,15 +150,15 @@ public class DurationToolItems  extends ToolItems{
 			this.subMenu = new Menu(this.divisionType.getParent().getShell());
 		}
 		
-		public void setText(String text){
+		public void setText(String text) {
 			this.divisionType.setToolTipText(text);
 		}
 		
-		public void setImage(Image image){
+		public void setImage(Image image) {
 			this.divisionType.setImage(image);
 		}
 		
-		public void setEnabled(boolean enabled){
+		public void setEnabled(boolean enabled) {
 			this.divisionType.setEnabled(enabled);
 		}
 		
@@ -213,12 +213,12 @@ public class DurationToolItems  extends ToolItems{
 				Point pt = item.getParent().toDisplay(new Point(rect.x, rect.y));
 				this.subMenu.setLocation(pt.x, pt.y + rect.height);
 				this.subMenu.setVisible(true);
-			}else{
+			}else {
 				TGDuration duration = getEditor().getTablature().getCaret().getDuration();
-				if(duration.getDivision().isEqual(TGDivisionType.NORMAL)){
+				if(duration.getDivision().isEqual(TGDivisionType.NORMAL)) {
 					((TGDivisionType)this.divisionType.getData()).setEnters(3);
 					((TGDivisionType)this.divisionType.getData()).setTimes(2);
-				}else{
+				}else {
 					((TGDivisionType)this.divisionType.getData()).setEnters(1);
 					((TGDivisionType)this.divisionType.getData()).setTimes(1);
 				}
@@ -226,16 +226,16 @@ public class DurationToolItems  extends ToolItems{
 			}
 		}
 		
-		public void update(){
+		public void update() {
 			TGDuration duration = getEditor().getTablature().getCaret().getDuration();
 			
-			for(int i = 0;i < this.subMenuItems.length;i++){
+			for(int i = 0;i < this.subMenuItems.length;i++) {
 				TGDivisionType divisionType = (TGDivisionType)this.subMenuItems[i].getData();
 				this.subMenuItems[i].setSelection((divisionType.isEqual(duration.getDivision())));
 			}
 		}
 		
-		private TGDivisionType newDivisionType(int enters, int times){
+		private TGDivisionType newDivisionType(int enters, int times) {
 			TGDivisionType divisionType = TuxGuitar.instance().getSongManager().getFactory().newDivisionType();
 			divisionType.setEnters(enters);
 			divisionType.setTimes(times);

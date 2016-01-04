@@ -13,20 +13,20 @@ public class MidiTickPlayer {
 	private long tickLength;
 	private boolean tickChanged;
 	
-	public MidiTickPlayer(){
+	public MidiTickPlayer() {
 		super();
 	}
 	
 	public void process() {
 		this.lastTime = this.time;
 		this.time = System.currentTimeMillis();
-		if(!this.tickChanged){
+		if(!this.tickChanged) {
 			this.tick += (TGDuration.QUARTER_TIME * ((float)getTempo() * (float)(this.time - this.lastTime) / 60f) / SECOND_IN_MILLIS);
 		}
 		this.tickChanged = false;
 	}
 	
-	public void clearTick(){
+	public void clearTick() {
 		this.tickLength = 0;
 	}
 	
@@ -51,7 +51,7 @@ public class MidiTickPlayer {
 		return this.tickLength;
 	}
 	
-	public void notifyTick(long tick){
+	public void notifyTick(long tick) {
 		this.tickLength = Math.max(this.tickLength, tick);
 	}
 }

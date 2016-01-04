@@ -32,14 +32,14 @@ import org.herac.tuxguitar.gui.util.DialogUtils;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class PasteMeasureAction extends Action{
+public class PasteMeasureAction extends Action {
 	public static final String NAME = "action.measure.paste";
 	
 	public PasteMeasureAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
@@ -91,9 +91,9 @@ public class PasteMeasureAction extends Action{
 				public void widgetSelected(SelectionEvent arg0) {
 					int pasteMode = 0;
 					int pasteCount = countSpinner.getSelection();
-					if( replace.getSelection() ){
+					if( replace.getSelection() ) {
 						pasteMode = MeasureTransferable.TRANSFER_TYPE_REPLACE;
-					}else if(insert.getSelection()){
+					}else if(insert.getSelection()) {
 						pasteMode = MeasureTransferable.TRANSFER_TYPE_INSERT;
 					}
 					pasteMeasures( pasteMode , pasteCount);
@@ -117,24 +117,24 @@ public class PasteMeasureAction extends Action{
 		}
 	}
 	
-	private GridData getSpinnerData(){
+	private GridData getSpinnerData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected void pasteMeasures(int pasteMode, int pasteCount){
+	protected void pasteMeasures(int pasteMode, int pasteCount) {
 		try {
-			if( pasteMode > 0 && pasteCount > 0 ){
+			if( pasteMode > 0 && pasteCount > 0 ) {
 				Transferable transferable = getEditor().getClipBoard().getTransferable();
-				if(transferable instanceof MeasureTransferable){
+				if(transferable instanceof MeasureTransferable) {
 					((MeasureTransferable)transferable).setTransferType( pasteMode );
 					((MeasureTransferable)transferable).setPasteCount( pasteCount );
 					

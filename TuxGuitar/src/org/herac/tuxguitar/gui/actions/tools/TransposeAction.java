@@ -38,21 +38,21 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TransposeAction extends Action{
+public class TransposeAction extends Action {
 	public static final String NAME = "action.tools.transpose";
 	
 	public TransposeAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
 	
 	public void showDialog(Shell shell) {
 		final int[] transpositions = new int[25];
-		for( int i = 0 ; i < transpositions.length ; i ++ ){
+		for( int i = 0 ; i < transpositions.length ; i ++ ) {
 			transpositions[ i ] = ( i - ( transpositions.length / 2 ) );
 		}
 		
@@ -74,7 +74,7 @@ public class TransposeAction extends Action{
 		
 		final Combo transpositionCombo = new Combo(group, SWT.DROP_DOWN | SWT.READ_ONLY );
 		transpositionCombo.setLayoutData( new GridData(SWT.FILL, SWT.FILL, true , true) );
-		for( int i = 0 ; i < transpositions.length ; i ++ ){
+		for( int i = 0 ; i < transpositions.length ; i ++ ) {
 			transpositionCombo.add( Integer.toString( transpositions[i]) );
 		}
 		transpositionCombo.select( ( transpositions.length / 2 ) );
@@ -115,7 +115,7 @@ public class TransposeAction extends Action{
 		buttonOK.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				int transpositionIndex =  transpositionCombo.getSelectionIndex() ;
-				if( transpositionIndex >= 0 && transpositionIndex < transpositions.length ){
+				if( transpositionIndex >= 0 && transpositionIndex < transpositions.length ) {
 					final int transposition = transpositions[ transpositionIndex ];
 					final boolean tryKeepString = tryKeepStringButton.getSelection();
 					final boolean applyToChords = applyToChordsButton.getSelection();
@@ -157,7 +157,7 @@ public class TransposeAction extends Action{
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
@@ -169,11 +169,11 @@ public class TransposeAction extends Action{
 		UndoableJoined undoableJoined = new UndoableJoined();
 		
 		Caret caret = getEditor().getTablature().getCaret();
-		if( applyToAllMeasures ){
+		if( applyToAllMeasures ) {
 			
-			if( applyToAllTracks ){
+			if( applyToAllTracks ) {
 				TGSong song = getSongManager().getSong();
-				for( int i = 0 ; i < song.countTracks() ; i ++ ){
+				for( int i = 0 ; i < song.countTracks() ; i ++ ) {
 					transposeTrack( undoableJoined , song.getTrack( i ) , transposition , tryKeepString , applyToChords);
 				}
 			} else {
@@ -181,13 +181,13 @@ public class TransposeAction extends Action{
 			}
 			
 			updateTablature();
-		}else{
-			if( applyToAllTracks ){
+		}else {
+			if( applyToAllTracks ) {
 				TGSong song = getSongManager().getSong();
-				for( int i = 0 ; i < song.countTracks() ; i ++ ){
+				for( int i = 0 ; i < song.countTracks() ; i ++ ) {
 					TGTrack track = song.getTrack( i );
 					TGMeasure measure = getSongManager().getTrackManager().getMeasure(track, caret.getMeasure().getNumber() );
-					if( measure != null ){
+					if( measure != null ) {
 						transposeMeasure( undoableJoined, measure, transposition , tryKeepString , applyToChords);
 					}
 				}
@@ -198,14 +198,14 @@ public class TransposeAction extends Action{
 		}
 		
 		//termia el undoable
-		if( !undoableJoined.isEmpty() ){
+		if( !undoableJoined.isEmpty() ) {
 			addUndoableEdit(undoableJoined.endUndo());
 		}
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 	}
 	
 	public void transposeMeasure( UndoableJoined undoableJoined , TGMeasure measure, int transposition , boolean tryKeepString , boolean applyToChords ) {
-		if( transposition != 0 && !measure.getTrack().isPercussionTrack() ){
+		if( transposition != 0 && !measure.getTrack().isPercussionTrack() ) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo( measure );
 			
@@ -217,7 +217,7 @@ public class TransposeAction extends Action{
 	}
 	
 	public void transposeTrack( UndoableJoined undoableJoined , TGTrack track, int transposition , boolean tryKeepString , boolean applyToChords ) {
-		if( transposition != 0 && !track.isPercussionTrack() ){
+		if( transposition != 0 && !track.isPercussionTrack() ) {
 			//comienza el undoable
 			UndoableTrackGeneric undoable = UndoableTrackGeneric.startUndo( track );
 			

@@ -13,7 +13,7 @@ import org.herac.tuxguitar.gui.tools.browser.TGBrowserCollection;
 import org.herac.tuxguitar.gui.tools.browser.TGBrowserManager;
 import org.herac.tuxguitar.gui.tools.browser.base.TGBrowserFactory;
 
-public class TGBrowserMenuBar extends TGBrowserBar{
+public class TGBrowserMenuBar extends TGBrowserBar {
 	private Menu menu;
 	private Menu newCollection;
 	private Menu openCollection;
@@ -32,11 +32,11 @@ public class TGBrowserMenuBar extends TGBrowserBar{
 	private MenuItem back;
 	private MenuItem refresh;
 	
-	public TGBrowserMenuBar(TGBrowserDialog browser){
+	public TGBrowserMenuBar(TGBrowserDialog browser) {
 		super(browser);
 	}
 	
-	public void init(Shell shell){
+	public void init(Shell shell) {
 		this.menu = new Menu(shell, SWT.BAR);
 		
 		//---File menu------------------------------------------------------
@@ -124,7 +124,7 @@ public class TGBrowserMenuBar extends TGBrowserBar{
 		shell.setMenuBar(this.menu);
 	}
 	
-	public void updateItems(){
+	public void updateItems() {
 		this.open.setEnabled(!getBrowser().getConnection().isLocked() && getBrowser().getConnection().isOpen());
 		this.root.setEnabled(!getBrowser().getConnection().isLocked() && getBrowser().getConnection().isOpen());
 		this.back.setEnabled(!getBrowser().getConnection().isLocked() && getBrowser().getConnection().isOpen());
@@ -135,7 +135,7 @@ public class TGBrowserMenuBar extends TGBrowserBar{
 		this.close.setEnabled(!getBrowser().getConnection().isLocked());
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.menuFileItem.setText(TuxGuitar.getProperty("browser.menu.file"));
 		this.menuCollectionItem.setText(TuxGuitar.getProperty("browser.menu.collection"));
 		this.menuGoItem.setText(TuxGuitar.getProperty("browser.menu.go"));
@@ -150,19 +150,19 @@ public class TGBrowserMenuBar extends TGBrowserBar{
 		this.refresh.setText(TuxGuitar.getProperty("browser.refresh"));
 	}
 	
-	public void updateCollections(TGBrowserCollection selection){
+	public void updateCollections(TGBrowserCollection selection) {
 		MenuItem[] openItems = this.openCollection.getItems();
-		for(int i = 0;i < openItems.length; i ++){
+		for(int i = 0;i < openItems.length; i ++) {
 			openItems[i].dispose();
 		}
 		MenuItem[] removeItems = this.removeCollection.getItems();
-		for(int i = 0;i < removeItems.length; i ++){
+		for(int i = 0;i < removeItems.length; i ++) {
 			removeItems[i].dispose();
 		}
 		Iterator it = TGBrowserManager.instance().getCollections();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			final TGBrowserCollection collection = (TGBrowserCollection)it.next();
-			if(collection.getData() != null){
+			if(collection.getData() != null) {
 				MenuItem openItem = new MenuItem(this.openCollection, SWT.PUSH);
 				openItem.setText(collection.getData().getTitle());
 				openItem.addSelectionListener(new SelectionAdapter() {
@@ -170,7 +170,7 @@ public class TGBrowserMenuBar extends TGBrowserBar{
 						openCollection(collection);
 					}
 				});
-				if(selection != null && selection.equals(collection)){
+				if(selection != null && selection.equals(collection)) {
 					openItem.setSelection(true);
 				}
 				
@@ -181,20 +181,20 @@ public class TGBrowserMenuBar extends TGBrowserBar{
 						removeCollection(collection);
 					}
 				});
-				if(selection != null && selection.equals(collection)){
+				if(selection != null && selection.equals(collection)) {
 					removeItem.setSelection(true);
 				}
 			}
 		}
 	}
 	
-	public void updateTypes(){
+	public void updateTypes() {
 		MenuItem[] items = this.newCollection.getItems();
-		for(int i = 0;i < items.length; i ++){
+		for(int i = 0;i < items.length; i ++) {
 			items[i].dispose();
 		}
 		Iterator bookTypes = TGBrowserManager.instance().getFactories();
-		while(bookTypes.hasNext()){
+		while(bookTypes.hasNext()) {
 			final TGBrowserFactory bookType = (TGBrowserFactory)bookTypes.next();
 			MenuItem item = new MenuItem(this.newCollection, SWT.PUSH);
 			item.setText(bookType.getName());
@@ -206,8 +206,8 @@ public class TGBrowserMenuBar extends TGBrowserBar{
 		}
 	}
 	
-	public void reload(Shell shell){
-		if(this.menu != null && !this.menu.isDisposed()){
+	public void reload(Shell shell) {
+		if(this.menu != null && !this.menu.isDisposed()) {
 			this.menu.dispose();
 		}
 		this.init(shell);

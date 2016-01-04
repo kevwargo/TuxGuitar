@@ -41,7 +41,7 @@ public class ChangeNoteAction extends Action {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | DISABLE_ON_PLAYING);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		if (e instanceof KeyEvent) {
 			int value = getValueOf(((KeyEvent) e).keyCode);
 			if (value >= 0) {
@@ -53,10 +53,10 @@ public class ChangeNoteAction extends Action {
 				long start = caret.getPosition();
 				long time = System.currentTimeMillis();
 				
-				if(lastAddedStart == start && lastAddedString == string){
-					if (lastAddedValue > 0 && lastAddedValue < 10 && time <  ( lastAddedTime + DELAY ) ){
+				if(lastAddedStart == start && lastAddedString == string) {
+					if (lastAddedValue > 0 && lastAddedValue < 10 && time <  ( lastAddedTime + DELAY ) ) {
 						int newValue = ( ( lastAddedValue * 10 ) + value );
-						if(newValue < 30 || caret.getTrack().isPercussionTrack()){
+						if(newValue < 30 || caret.getTrack().isPercussionTrack()) {
 							value = newValue;
 						}
 					}
@@ -96,8 +96,8 @@ public class ChangeNoteAction extends Action {
 		getEditor().getTablature().getCaret().getSelectedBeat().play();
 	}
 	
-	private int getValueOf(int keyCode){
-		switch(keyCode){
+	private int getValueOf(int keyCode) {
+		switch(keyCode) {
 		case KeyBindingConstants.NUMBER_0:
 		case KeyBindingConstants.KEYPAD_0:
 			return 0;

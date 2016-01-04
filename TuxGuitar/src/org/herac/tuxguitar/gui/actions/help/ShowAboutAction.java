@@ -29,7 +29,7 @@ public class ShowAboutAction extends Action {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		new AboutDialog().open(TuxGuitar.instance().getShell());
 		return 0;
 	}

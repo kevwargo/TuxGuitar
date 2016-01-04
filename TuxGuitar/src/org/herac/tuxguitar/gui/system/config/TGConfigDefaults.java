@@ -23,7 +23,7 @@ import org.herac.tuxguitar.gui.util.TGFileUtils;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TGConfigDefaults{
+public class TGConfigDefaults {
 	
 	private static final String DEFAULT_FILE = "config.dist";
 	
@@ -31,7 +31,7 @@ public class TGConfigDefaults{
 	
 	private Properties properties;
 	
-	public TGConfigDefaults(){
+	public TGConfigDefaults() {
 		this.properties = new Properties();
 		this.loadDefaults();
 		this.loadDefaultFile();
@@ -40,7 +40,7 @@ public class TGConfigDefaults{
 	public void loadDefaultFile() {
 		try {
 			InputStream is = TGFileUtils.getResourceAsStream(DEFAULT_FILE);
-			if(is != null){
+			if(is != null) {
 				this.properties.load(is);
 			}
 		} catch (Exception e) {
@@ -48,9 +48,9 @@ public class TGConfigDefaults{
 		}
 	}
 	
-	private void loadDefaults(){
+	private void loadDefaults() {
 		this.loadProperty(TGConfigKeys.SKIN,"Lavender");
-		this.loadProperty(TGConfigKeys.WINDOW_TITLE,"${appname} - ${filename}");
+		this.loadProperty(TGConfigKeys.WINDOW_TITLE,"$ {appname } - $ {filename }");
 		this.loadProperty(TGConfigKeys.SHOW_SPLASH, true);
 		this.loadProperty(TGConfigKeys.MAXIMIZED, false);
 		this.loadProperty(TGConfigKeys.WIDTH, 800);
@@ -127,23 +127,23 @@ public class TGConfigDefaults{
 		return this.properties;
 	}
 	
-	private void loadProperty(String key, String value){
+	private void loadProperty(String key, String value) {
 		this.properties.setProperty(key, value);
 	}
 	
-	private void loadProperty(String key, int value){
+	private void loadProperty(String key, int value) {
 		this.properties.setProperty(key, Integer.toString(value));
 	}
 	
-	private void loadProperty(String key, boolean value){
+	private void loadProperty(String key, boolean value) {
 		this.properties.setProperty(key, Boolean.toString(value));
 	}
 	
-	private static String getDefaultFontName(){
+	private static String getDefaultFontName() {
 		Font font = TuxGuitar.instance().getDisplay().getSystemFont();
-		if( font != null ){
+		if( font != null ) {
 			FontData[] fd = font.getFontData();
-			if(fd != null && fd.length > 0){
+			if(fd != null && fd.length > 0) {
 				return fd[0].getName();
 			}
 		}

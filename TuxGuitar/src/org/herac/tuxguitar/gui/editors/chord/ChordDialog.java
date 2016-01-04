@@ -179,15 +179,15 @@ public class ChordDialog {
 		this.result = result;
 	}
 	
-	public boolean isDisposed(){
+	public boolean isDisposed() {
 		return this.dialog.isDisposed();
 	}
 	
-	public Shell getDialog(){
+	public Shell getDialog() {
 		return this.dialog;
 	}
 	
-	public GridLayout gridLayout(int numColumns, boolean makeColumnsEqualWidth, int marginWidth, int marginHeight){
+	public GridLayout gridLayout(int numColumns, boolean makeColumnsEqualWidth, int marginWidth, int marginHeight) {
 		GridLayout layout = new GridLayout();
 		layout.numColumns = numColumns;
 		layout.makeColumnsEqualWidth = makeColumnsEqualWidth;
@@ -196,52 +196,52 @@ public class ChordDialog {
 		return layout;
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private int[] findCurrentTuning(TGTrack track){
+	private int[] findCurrentTuning(TGTrack track) {
 		int[] tuning = new int[track.stringCount()];
 		Iterator it = track.getStrings().iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			TGString string = (TGString)it.next();
 			tuning[(tuning.length - string.getNumber())] = string.getValue();
 		}
 		return tuning;
 	}
 	
-	protected TGChord findCurrentChord(TGMeasure measure, long start){
+	protected TGChord findCurrentChord(TGMeasure measure, long start) {
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
 		TGChord chord = manager.getMeasureManager().getChord(measure, start);
-		if(chord == null){
+		if(chord == null) {
 			chord = manager.getFactory().newChord(measure.getTrack().stringCount());
 			chord.setFirstFret(1);
 			List notes = manager.getMeasureManager().getNotes(measure, start);
-			if(!notes.isEmpty()){
+			if(!notes.isEmpty()) {
 				int maxValue = -1;
 				int minValue = -1;
 				
 				//verifico el first fret
 				Iterator it = notes.iterator();
-				while(it.hasNext()){
+				while(it.hasNext()) {
 					TGNote note = (TGNote)it.next(); 
-					if(maxValue < 0 || maxValue < note.getValue()){
+					if(maxValue < 0 || maxValue < note.getValue()) {
 						maxValue = note.getValue();
 					}
-					if(note.getValue() > 0 && (minValue < 0 || minValue > note.getValue())){
+					if(note.getValue() > 0 && (minValue < 0 || minValue > note.getValue())) {
 						minValue = note.getValue();
 					}
 				}
-				if(maxValue > TGChordImpl.MAX_FRETS  && minValue > 0){
+				if(maxValue > TGChordImpl.MAX_FRETS  && minValue > 0) {
 					chord.setFirstFret((short)(minValue));
 				}
 				
 				//agrego los valores
 				it = notes.iterator();
-				while(it.hasNext()){
+				while(it.hasNext()) {
 					TGNote note = (TGNote)it.next();
 					chord.addFretValue( ( note.getString() - 1) , note.getValue());
 				}

@@ -13,7 +13,7 @@ public abstract class TGColor {
 	private int g;
 	private int b;
 	
-	public TGColor(){
+	public TGColor() {
 		this.r = 0;
 		this.g = 0;
 		this.b = 0;
@@ -43,23 +43,23 @@ public abstract class TGColor {
 		this.r = r;
 	}
 	
-	public boolean isEqual(TGColor color){
+	public boolean isEqual(TGColor color) {
 		return (this.getR() == color.getR() && this.getG() == color.getG() && this.getB() == color.getB());
 	}
 	
-	public TGColor clone(TGFactory factory){
+	public TGColor clone(TGFactory factory) {
 		TGColor color = factory.newColor();
 		copy(color);
 		return color;
 	}
 	
-	public void copy(TGColor color){
+	public void copy(TGColor color) {
 		color.setR(getR());
 		color.setG(getG());
 		color.setB(getB());
 	}
 	
-	public static TGColor newColor(int r, int g, int b){
+	public static TGColor newColor(int r, int g, int b) {
 		TGColor color = new TGFactory().newColor();
 		color.setR(r);
 		color.setG(g);

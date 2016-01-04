@@ -13,7 +13,7 @@ import org.herac.tuxguitar.gui.actions.insert.InsertChordAction;
 import org.herac.tuxguitar.gui.items.MenuItems;
 import org.herac.tuxguitar.song.models.TGChord;
 
-public class ChordMenuItem extends MenuItems{
+public class ChordMenuItem extends MenuItems {
 	private MenuItem chordMenuItem;
 	private Menu menu;
 	private MenuItem insertChord;
@@ -44,7 +44,7 @@ public class ChordMenuItem extends MenuItems{
 	public void addItems() {
 		this.disposeItems();
 		this.subMenuItems = new MenuItem[TuxGuitar.instance().getCustomChordManager().countChords()];
-		for(int i = 0;i < this.subMenuItems.length; i++){
+		for(int i = 0;i < this.subMenuItems.length; i++) {
 			TGChord chord = TuxGuitar.instance().getCustomChordManager().getChord(i);
 			this.subMenuItems[i] = new MenuItem(this.menu, SWT.PUSH);
 			this.subMenuItems[i].setData(chord);
@@ -54,8 +54,8 @@ public class ChordMenuItem extends MenuItems{
 	}
 	
 	public void disposeItems() {
-		if(this.subMenuItems != null){
-			for(int i = 0;i < this.subMenuItems.length; i++){
+		if(this.subMenuItems != null) {
+			for(int i = 0;i < this.subMenuItems.length; i++) {
 				this.subMenuItems[i].dispose();
 			}
 		}
@@ -68,19 +68,19 @@ public class ChordMenuItem extends MenuItems{
 			Point pt = item.getParent().toDisplay(new Point(rect.x, rect.y));
 			this.menu.setLocation(pt.x, pt.y + rect.height);
 			this.menu.setVisible(true);
-		}else{
+		}else {
 			TuxGuitar.instance().getAction(InsertChordAction.NAME).process(event);
 		}
 	}
 	
-	public void update(){
+	public void update() {
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
-		if(this.lastEdit != TuxGuitar.instance().getCustomChordManager().getLastEdit()){
+		if(this.lastEdit != TuxGuitar.instance().getCustomChordManager().getLastEdit()) {
 			this.addItems();
 			this.lastEdit = TuxGuitar.instance().getCustomChordManager().getLastEdit();
 		}
 		this.insertChord.setEnabled(!running);
-		for(int i = 0;i < this.subMenuItems.length; i++){
+		for(int i = 0;i < this.subMenuItems.length; i++) {
 			this.subMenuItems[i].setEnabled(!running);
 		}
 	}

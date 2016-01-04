@@ -40,7 +40,7 @@ public class FileHistory {
 	private List urls;
 	private String chooserPath;
 	
-	public FileHistory(){
+	public FileHistory() {
 		this.urls = new ArrayList();
 		this.loadHistory();
 		this.reset(null);
@@ -53,11 +53,11 @@ public class FileHistory {
 		this.addURL(url);
 	}
 	
-	public boolean isNewFile(){
+	public boolean isNewFile() {
 		return this.newFile;
 	}
 	
-	public boolean isLocalFile(){
+	public boolean isLocalFile() {
 		return this.localFile;
 	}
 	
@@ -69,21 +69,21 @@ public class FileHistory {
 		this.unsavedFile = true;
 	}
 	
-	public void setChooserPath(String chooserPath){
+	public void setChooserPath(String chooserPath) {
 		this.chooserPath = chooserPath;
 	}
 	
-	public void setChooserPath(URL url){
+	public void setChooserPath(URL url) {
 		String path = getFilePath(url);
-		if( path != null ){
+		if( path != null ) {
 			this.setChooserPath( path );
 		}
 	}
 	
 	public String getCurrentFileName(String defaultName) {
-		if(!this.isNewFile()){
+		if(!this.isNewFile()) {
 			URL url = getCurrentURL();
-			if(url != null){
+			if(url != null) {
 				return decode(new File(url.getFile()).getName());
 			}
 		}
@@ -91,11 +91,11 @@ public class FileHistory {
 	}
 	
 	public String getCurrentFilePath() {
-		if(!this.isNewFile()){
+		if(!this.isNewFile()) {
 			URL url = getCurrentURL();
-			if(url != null){
+			if(url != null) {
 				String file = getFilePath(url);
-				if(file != null){
+				if(file != null) {
 					return decode(file);
 				}
 			}
@@ -112,14 +112,14 @@ public class FileHistory {
 		return this.chooserPath;
 	}
 	
-	protected String getFilePath(URL url){
-		if(isLocalFile(url)){
+	protected String getFilePath(URL url) {
+		if(isLocalFile(url)) {
 			return new File(url.getFile()).getParent();
 		}
 		return null;
 	}
 	
-	protected String decode(String url){
+	protected String decode(String url) {
 		try {
 			return URLDecoder.decode(url, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -128,26 +128,26 @@ public class FileHistory {
 		return url;
 	}
 	
-	protected boolean isLocalFile(URL url){
+	protected boolean isLocalFile(URL url) {
 		try {
-			if(url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ){
+			if(url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
 				return true;
 			}
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return false;
 	}
 	
-	protected URL getCurrentURL(){
-		if(!this.urls.isEmpty()){
+	protected URL getCurrentURL() {
+		if(!this.urls.isEmpty()) {
 			return (URL)this.urls.get(0);
 		}
 		return null;
 	}
 	
-	public void addURL(URL url){
-		if(url != null){
+	public void addURL(URL url) {
+		if(url != null) {
 			removeURL(url);
 			this.urls.add(0, url);
 			checkLimit();
@@ -156,20 +156,20 @@ public class FileHistory {
 		saveHistory();
 	}
 	
-	public List getURLs(){
+	public List getURLs() {
 		return this.urls;
 	}
 	
-	private void checkLimit(){
-		while(this.urls.size() > URL_LIMIT){
+	private void checkLimit() {
+		while(this.urls.size() > URL_LIMIT) {
 			this.urls.remove(this.urls.size() - 1);
 		}
 	}
 	
-	private void removeURL(URL url){
-		for(int i = 0; i < this.urls.size(); i++){
+	private void removeURL(URL url) {
+		for(int i = 0; i < this.urls.size(); i++) {
 			URL old = (URL)this.urls.get(i);
-			if(old.toString().equals(url.toString())){
+			if(old.toString().equals(url.toString())) {
 				this.urls.remove(i);
 				break;
 			}
@@ -187,7 +187,7 @@ public class FileHistory {
 	public void loadHistory() {
 		try {
 			this.urls.clear();
-			if(new File(getHistoryFileName()).exists()){
+			if(new File(getHistoryFileName()).exists()) {
 				InputStream inputStream = new FileInputStream(getHistoryFileName());
 				Properties properties = new Properties();
 				properties.load(inputStream);
@@ -195,14 +195,14 @@ public class FileHistory {
 				this.chooserPath = (String)properties.get("history.path");
 				
 				int count = Integer.parseInt((String)properties.get("history.count"));
-				for(int i = 0; i < count;i ++){
+				for(int i = 0; i < count;i ++) {
 					String url = (String)properties.get("history." + i);
-					if(URL_LIMIT > i && url != null && url.length() > 0){
+					if(URL_LIMIT > i && url != null && url.length() > 0) {
 						this.urls.add(new URL(url));
 					}
 				}
 				setChanged(true);
-			}else{
+			}else {
 				this.saveHistory();
 			}
 		} catch (Exception e) {
@@ -210,16 +210,16 @@ public class FileHistory {
 		}
 	}
 	
-	public void saveHistory(){
+	public void saveHistory() {
 		try {
 			Properties properties = new Properties();
 			
 			int count = this.urls.size();
-			for(int i = 0;i < count;i ++){
+			for(int i = 0;i < count;i ++) {
 				properties.put("history." + i, this.urls.get(i).toString());
 			}
 			properties.put("history.count", Integer.toString(count));
-			if(this.chooserPath != null){
+			if(this.chooserPath != null) {
 				properties.put("history.path", this.chooserPath);
 			}
 			properties.store(new FileOutputStream(getHistoryFileName()),"History Files");
@@ -230,7 +230,7 @@ public class FileHistory {
 		}
 	}
 	
-	private String getHistoryFileName(){
+	private String getHistoryFileName() {
 		return TGFileUtils.PATH_USER_CONFIG + File.separator + "history.properties";
 	}
 }

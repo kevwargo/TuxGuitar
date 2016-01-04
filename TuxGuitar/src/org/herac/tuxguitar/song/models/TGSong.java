@@ -118,28 +118,28 @@ public abstract class TGSong {
 		this.comments = comments;
 	}
 	
-	public int countMeasureHeaders(){
+	public int countMeasureHeaders() {
 		return this.measureHeaders.size();
 	}
 	
-	public void addMeasureHeader(TGMeasureHeader measureHeader){
+	public void addMeasureHeader(TGMeasureHeader measureHeader) {
 		this.addMeasureHeader(countMeasureHeaders(), measureHeader);
 	}
 	
-	public void addMeasureHeader(int index, TGMeasureHeader measureHeader){
+	public void addMeasureHeader(int index, TGMeasureHeader measureHeader) {
 		measureHeader.setSong(this);
 		this.measureHeaders.add(index, measureHeader);
 	}
 	
-	public void removeMeasureHeader(int index){
+	public void removeMeasureHeader(int index) {
 		this.measureHeaders.remove(index);
 	}
 	
-	public void removeMeasureHeader(TGMeasureHeader measureHeader){
+	public void removeMeasureHeader(TGMeasureHeader measureHeader) {
 		this.measureHeaders.remove(measureHeader);
 	}
 	
-	public TGMeasureHeader getMeasureHeader(int index){
+	public TGMeasureHeader getMeasureHeader(int index) {
 		return (TGMeasureHeader)this.measureHeaders.get(index);
 	}
 	
@@ -147,30 +147,30 @@ public abstract class TGSong {
 		return this.measureHeaders.iterator();
 	}
 	
-	public int countTracks(){
+	public int countTracks() {
 		return this.tracks.size();
 	}
 	
-	public void addTrack(TGTrack track){
+	public void addTrack(TGTrack track) {
 		this.addTrack(countTracks(), track);
 	}
 	
-	public void addTrack(int index, TGTrack track){
+	public void addTrack(int index, TGTrack track) {
 		track.setSong(this);
 		this.tracks.add(index, track);
 	}
 	
-	public void moveTrack(int index, TGTrack track){
+	public void moveTrack(int index, TGTrack track) {
 		this.tracks.remove(track);
 		this.tracks.add(index, track);
 	}
 	
-	public void removeTrack(TGTrack track){
+	public void removeTrack(TGTrack track) {
 		this.tracks.remove(track);
 		track.clear();
 	}
 	
-	public TGTrack getTrack(int index){
+	public TGTrack getTrack(int index) {
 		return (TGTrack)this.tracks.get(index);
 	}
 	
@@ -178,13 +178,13 @@ public abstract class TGSong {
 		return this.tracks.iterator();
 	}
 	
-	public boolean isEmpty(){
+	public boolean isEmpty() {
 		return (countMeasureHeaders() == 0 || countTracks() == 0);
 	}
 	
-	public void clear(){
+	public void clear() {
 		Iterator tracks = getTracks();
-		while(tracks.hasNext()){
+		while(tracks.hasNext()) {
 			TGTrack track = (TGTrack)tracks.next();
 			track.clear();
 		}
@@ -192,13 +192,13 @@ public abstract class TGSong {
 		this.measureHeaders.clear();
 	}
 	
-	public TGSong clone(TGFactory factory){
+	public TGSong clone(TGFactory factory) {
 		TGSong song = factory.newSong();
 		copy(factory, song);
 		return song;
 	}
 	
-	public void copy(TGFactory factory, TGSong song){
+	public void copy(TGFactory factory, TGSong song) {
 		song.clear();
 		song.setName(getName());
 		song.setArtist(getArtist());
@@ -210,12 +210,12 @@ public abstract class TGSong {
 		song.setTranscriber(getTranscriber());
 		song.setComments(getComments());
 		Iterator headers = getMeasureHeaders();
-		while(headers.hasNext()){
+		while(headers.hasNext()) {
 			TGMeasureHeader header = (TGMeasureHeader)headers.next();
 			song.addMeasureHeader(header.clone(factory));
 		}
 		Iterator tracks = getTracks();
-		while(tracks.hasNext()){
+		while(tracks.hasNext()) {
 			TGTrack track = (TGTrack)tracks.next();
 			song.addTrack(track.clone(factory, song));
 		}

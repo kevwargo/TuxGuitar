@@ -23,46 +23,46 @@ public class TGPainter {
 	
 	private Path path;
 	
-	public TGPainter(){
+	public TGPainter() {
 		super();
 	}
 	
-	public TGPainter(GC gc){
+	public TGPainter(GC gc) {
 		this.init(gc);
 	}
 	
-	public TGPainter(Image image){
+	public TGPainter(Image image) {
 		this.init(image);
 	}
 	
-	public void init(Image image){
+	public void init(Image image) {
 		this.init(new GC(image));
 	}
 	
-	public void init(GC gc){
-		if(this.gc != null && !this.gc.isDisposed()){
+	public void init(GC gc) {
+		if(this.gc != null && !this.gc.isDisposed()) {
 			this.gc.dispose();
 		}
 		this.gc = gc;
 	}
 	
-	public void initPath(int style){
+	public void initPath(int style) {
 		this.style = style;
 		this.path = new Path(this.gc.getDevice());
 		this.pathEmpty = true;
 		this.setAntialias(true);
 	}
 	
-	public void initPath(){
+	public void initPath() {
 		this.initPath( PATH_DRAW );
 	}
 	
-	public void closePath(){
-		if(! this.pathEmpty ){
-			if( (this.style & PATH_DRAW) != 0){
+	public void closePath() {
+		if(! this.pathEmpty ) {
+			if( (this.style & PATH_DRAW) != 0) {
 				this.gc.drawPath(this.path);
 			}
-			if( (this.style & PATH_FILL) != 0){
+			if( (this.style & PATH_FILL) != 0) {
 				this.gc.fillPath(this.path);
 			}
 		}
@@ -72,11 +72,11 @@ public class TGPainter {
 		this.setAntialias(false);
 	}
 	
-	public GC getGC(){
+	public GC getGC() {
 		return this.gc;
 	}
 	
-	public void dispose(){
+	public void dispose() {
 		this.gc.dispose();
 	}
 	
@@ -181,14 +181,14 @@ public class TGPainter {
 		this.gc.setAlpha(alpha);
 	}
 	
-	public void setAntialias(boolean enabled){
-		if( !TGPainterUtils.FORCE_OS_DEFAULTS ){
+	public void setAntialias(boolean enabled) {
+		if( !TGPainterUtils.FORCE_OS_DEFAULTS ) {
 			this.gc.setAntialias(enabled ? SWT.ON : SWT.OFF );
 		}
 	}
 	
-	public void setAdvanced(boolean advanced){
-		if( !TGPainterUtils.FORCE_OS_DEFAULTS ){
+	public void setAdvanced(boolean advanced) {
+		if( !TGPainterUtils.FORCE_OS_DEFAULTS ) {
 			this.gc.setAdvanced(advanced);
 		}
 	}

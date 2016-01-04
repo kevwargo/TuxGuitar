@@ -25,7 +25,7 @@ import org.herac.tuxguitar.gui.items.MenuItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class MarkerMenuItem extends MenuItems{
+public class MarkerMenuItem extends MenuItems {
 	private MenuItem markerMenuItem;
 	private Menu menu;
 	private MenuItem add;
@@ -40,7 +40,7 @@ public class MarkerMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//--ADD--
 		this.add = new MenuItem(this.menu, SWT.PUSH);
 		this.add.addSelectionListener(TuxGuitar.instance().getAction(AddMarkerAction.NAME));
@@ -74,11 +74,11 @@ public class MarkerMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		//Nothing to do
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.markerMenuItem, "marker", null);
 		setMenuItemTextAndAccelerator(this.add, "marker.add", AddMarkerAction.NAME);
 		setMenuItemTextAndAccelerator(this.list, "marker.list", ListMarkersAction.NAME);
@@ -88,7 +88,7 @@ public class MarkerMenuItem extends MenuItems{
 		setMenuItemTextAndAccelerator(this.next, "marker.next", GoNextMarkerAction.NAME);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.add.setImage(TuxGuitar.instance().getIconManager().getMarkerAdd());
 		this.list.setImage(TuxGuitar.instance().getIconManager().getMarkerList());
 		this.first.setImage(TuxGuitar.instance().getIconManager().getMarkerFirst());

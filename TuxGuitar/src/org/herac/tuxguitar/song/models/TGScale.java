@@ -5,29 +5,29 @@ public abstract class TGScale {
 	
 	private int key;
 	
-	public TGScale(){
+	public TGScale() {
 		this.clear();
 	}
 	
-	public void setKey(int key){
+	public void setKey(int key) {
 		this.key = key;
 	}
 	
-	public int getKey(){
+	public int getKey() {
 		return this.key;
 	}
 	
-	public void setNote(int note, boolean on){
+	public void setNote(int note, boolean on) {
 		this.notes[note] = on;
 	}
 	
-	public boolean getNote(int note){
+	public boolean getNote(int note) {
 		return this.notes[((note + (12 - this.key)) % 12)];
 	}
 	
-	public void clear(){
+	public void clear() {
 		this.setKey(0);
-		for(int i = 0; i < this.notes.length; i++){
+		for(int i = 0; i < this.notes.length; i++) {
 			this.setNote(i, false);
 		}
 	}

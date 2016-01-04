@@ -8,20 +8,20 @@ import org.herac.tuxguitar.gui.TuxGuitar;
 import org.herac.tuxguitar.gui.undo.undoables.track.UndoableTrackLyric;
 import org.herac.tuxguitar.song.models.TGTrack;
 
-public class LyricModifyListener implements ModifyListener{
+public class LyricModifyListener implements ModifyListener {
 	
 	private boolean enabled;
 	private LyricEditor editor;
 	private int lastPosition;
 	
-	public LyricModifyListener(LyricEditor editor){
+	public LyricModifyListener(LyricEditor editor) {
 		this.editor = editor;
 	}
 	
 	public void modifyText(ModifyEvent e) {
-		if(isEnabled() && !TuxGuitar.instance().getPlayer().isRunning()){
+		if(isEnabled() && !TuxGuitar.instance().getPlayer().isRunning()) {
 			
-			if(e.widget instanceof Text){
+			if(e.widget instanceof Text) {
 				TGTrack track = this.editor.getTrack();
 				Text text = (Text)e.widget;
 				String value = text.getText();
@@ -33,7 +33,7 @@ public class LyricModifyListener implements ModifyListener{
 				TuxGuitar.instance().getFileHistory().setUnsavedFile();
 				
 				this.lastPosition = position;
-			}else if(e.widget instanceof Spinner){
+			}else if(e.widget instanceof Spinner) {
 				TGTrack track = this.editor.getTrack();
 				UndoableTrackLyric undoable = UndoableTrackLyric.startUndo(track, this.lastPosition);
 				track.getLyrics().setFrom(((Spinner)e.widget).getSelection());

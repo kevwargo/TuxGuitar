@@ -42,7 +42,7 @@ public class TGMixerTrack {
 	private Label volumeValueLabel;
 	private Label volumeValueTitleLabel;
 	
-	public TGMixerTrack(TGMixer mixer, TGTrack track){
+	public TGMixerTrack(TGMixer mixer, TGTrack track) {
 		this.mixer = mixer;
 		this.track = track;
 	}
@@ -120,60 +120,60 @@ public class TGMixerTrack {
 		this.volumeValueLabel.setText(Integer.toString(this.track.getChannel().getVolume()));
 	}
 	
-	private GridData getHorizontalScaleData(){
+	private GridData getHorizontalScaleData() {
 		GridData data = new GridData(SWT.CENTER, SWT.NONE, false, true);
 		data.widthHint = 80;
 		return data;
 	}
 	
-	private GridData getVerticalScaleData(){
+	private GridData getVerticalScaleData() {
 		GridData data = new GridData(SWT.CENTER, SWT.FILL, false, true);
 		data.heightHint = 65;
 		return data;
 	}
 	
-	private GridData getVolumeValueLabelData(){
+	private GridData getVolumeValueLabelData() {
 		GridData data = new GridData(SWT.CENTER, SWT.NONE, true, false);
 		data.minimumWidth = 40;
 		return data;
 	}
 	
-	public void fireChanges(int type){
-		if((type & TGMixer.SOLO) != 0 || (type & TGMixer.MUTE) != 0){
+	public void fireChanges(int type) {
+		if((type & TGMixer.SOLO) != 0 || (type & TGMixer.MUTE) != 0) {
 			this.checkSolo.setSelection(this.track.isSolo());
 			this.checkMute.setSelection(this.track.isMute());
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.VOLUME) != 0){
+		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.VOLUME) != 0) {
 			int value = this.track.getChannel().getVolume();
 			this.scaleVolume.setSelection( ( value) );
 			this.volumeValueLabel.setText(Integer.toString( value ));
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.BALANCE) != 0){
+		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.BALANCE) != 0) {
 			int value = this.track.getChannel().getBalance();
 			this.scaleBalance.setSelection(value);
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.CHORUS) != 0){
+		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.CHORUS) != 0) {
 			int value = this.track.getChannel().getChorus();
 			this.scaleChorus.setSelection( ( value) );
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.REVERB) != 0){
+		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.REVERB) != 0) {
 			int value = this.track.getChannel().getReverb();
 			this.scaleReverb.setSelection( ( value) );
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.PHASER) != 0){
+		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.PHASER) != 0) {
 			int value = this.track.getChannel().getPhaser();
 			this.scalePhaser.setSelection( ( value) );
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.TREMOLO) != 0){
+		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.TREMOLO) != 0) {
 			int value = this.track.getChannel().getTremolo();
 			this.scaleTremolo.setSelection( ( value) );
 		}
-		if((type & TGMixer.CHANNEL) != 0){
+		if((type & TGMixer.CHANNEL) != 0) {
 			this.mixerChannel.updateItems(true);
 		}
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.checkSolo.setText(TuxGuitar.getProperty("mixer.track.solo"));
 		this.checkMute.setText(TuxGuitar.getProperty("mixer.track.mute"));
 		this.volumeValueTitleLabel.setText(TuxGuitar.getProperty("mixer.channel.volume") + ":");
@@ -188,35 +188,35 @@ public class TGMixerTrack {
 		this.mixerChannel.updateItems(true);
 	}
 	
-	public void updateItems(){
+	public void updateItems() {
 		this.mixerChannel.updateItems(false);
 	}
 	
-	public TGTrack getTrack(){
+	public TGTrack getTrack() {
 		return this.track;
 	}
 	
-	public TGMixer getMixer(){
+	public TGMixer getMixer() {
 		return this.mixer;
 	}
 	
-	protected void updateChannelValue(int type, int value){
-		if( (type & TGMixer.VOLUME) != 0 ){
+	protected void updateChannelValue(int type, int value) {
+		if( (type & TGMixer.VOLUME) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setVolume( (short)value );
 		}
-		else if( (type & TGMixer.BALANCE) != 0 ){
+		else if( (type & TGMixer.BALANCE) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setBalance( (short)value );
 		}
-		else if( (type & TGMixer.CHORUS) != 0 ){
+		else if( (type & TGMixer.CHORUS) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setChorus( (short)value );
 		}
-		else if( (type & TGMixer.REVERB) != 0 ){
+		else if( (type & TGMixer.REVERB) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setReverb( (short)value );
 		}
-		else if( (type & TGMixer.PHASER) != 0 ){
+		else if( (type & TGMixer.PHASER) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setPhaser( (short)value );
 		}
-		else if( (type & TGMixer.TREMOLO) != 0 ){
+		else if( (type & TGMixer.TREMOLO) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setTremolo( (short)value );
 		}
 		this.mixer.fireChanges(TGMixerTrack.this.track.getChannel(), type);
@@ -231,11 +231,11 @@ public class TGMixerTrack {
 		private String text;
 		protected UndoableTrackChannel undoable;
 		
-		public TGMixerScale(Composite parent, int style, int pageIncrement, int type, Object layoutData){
+		public TGMixerScale(Composite parent, int style, int pageIncrement, int type, Object layoutData) {
 			this.init(parent, style, pageIncrement, type, layoutData);
 		}
 		
-		public void init(Composite parent, int style, int pageIncrement, int type, Object layoutData){
+		public void init(Composite parent, int style, int pageIncrement, int type, Object layoutData) {
 			this.scale = new Scale(parent, style);
 			this.scale.setMaximum(127);
 			this.scale.setMinimum(0);
@@ -248,7 +248,7 @@ public class TGMixerTrack {
 			this.addDefaultListeners();
 		}
 		
-		public void addDefaultListeners(){
+		public void addDefaultListeners() {
 			this.scale.addListener(SWT.Selection, new Listener() {
 				public synchronized void handleEvent(Event event) {
 					TGMixerScale.this.updateValue();
@@ -260,7 +260,7 @@ public class TGMixerTrack {
 					TGMixerScale.this.undoable = UndoableTrackChannel.startUndo();
 				}
 				public void mouseUp(MouseEvent arg0) {
-					if(TGMixerScale.this.undoable != null){
+					if(TGMixerScale.this.undoable != null) {
 						TuxGuitar.instance().getUndoableManager().addEdit(TGMixerScale.this.undoable.endUndo());
 						TuxGuitar.instance().getFileHistory().setUnsavedFile();
 						TuxGuitar.instance().updateCache(true);
@@ -270,56 +270,56 @@ public class TGMixerTrack {
 			});
 		}
 		
-		public void updateValue(){
+		public void updateValue() {
 			this.setSelection( ( this.inverted ? 127 - this.scale.getSelection() : this.scale.getSelection() ) );
 		}
 		
-		public int getType(){
+		public int getType() {
 			return this.type;
 		}
 		
-		public int getSelection(){
-			if(this.value < 0){
+		public int getSelection() {
+			if(this.value < 0) {
 				this.updateValue();
 			}
 			return this.value;
 		}
 		
-		public void setSelection(int value){
-			if(value != this.value){
+		public void setSelection(int value) {
+			if(value != this.value) {
 				this.value = value;
 				this.scale.setSelection( ( this.inverted ? 127 - this.value : this.value ) );
 				this.updateToolTipValue();
 			}
 		}
 		
-		public void updateToolTipValue(){
-			if(this.text != null){
+		public void updateToolTipValue() {
+			if(this.text != null) {
 				this.scale.setToolTipText( this.text + ": " + this.value );
 			}
 		}
 		
-		public void setText(String text){
+		public void setText(String text) {
 			this.text = text;
 			this.updateToolTipValue();
 		}
 		
-		public String getText(){
+		public String getText() {
 			return this.text;
 		}
 	}
 	
-	private class TGMixerScalePopup extends TGMixerScale{
+	private class TGMixerScalePopup extends TGMixerScale {
 		
 		private Shell shell;
 		private Composite composite;
 		private Button item;
 		
-		public TGMixerScalePopup(Composite parent, int style, int pageIncrement, int type, Object layoutData){
+		public TGMixerScalePopup(Composite parent, int style, int pageIncrement, int type, Object layoutData) {
 			super(parent, style, pageIncrement, type, layoutData);
 		}
 		
-		public void init(Composite parent, int style, int pageIncrement, int type, Object layoutData){
+		public void init(Composite parent, int style, int pageIncrement, int type, Object layoutData) {
 			this.shell = new Shell( parent.getShell(), SWT.NO_TRIM);
 			this.shell.setVisible(false);
 			this.shell.setLayout(getGridLayout());
@@ -347,7 +347,7 @@ public class TGMixerTrack {
 			super.init(this.composite, style, pageIncrement, type, layoutData);
 		}
 		
-		private GridLayout getGridLayout(){
+		private GridLayout getGridLayout() {
 			GridLayout layout = new GridLayout();
 			layout.horizontalSpacing = 0;
 			layout.verticalSpacing = 0;
@@ -360,22 +360,22 @@ public class TGMixerTrack {
 			return layout;
 		}
 		
-		public void updateToolTipValue(){
+		public void updateToolTipValue() {
 			super.updateToolTipValue();
-			if(this.getText() != null){
+			if(this.getText() != null) {
 				this.item.setToolTipText( this.getText() + ": " + this.getSelection() );
 			}
 		}
 		
-		public void setText(String text){
+		public void setText(String text) {
 			super.setText(text);
-			if(this.getText() != null && this.getText().length() > 0){
+			if(this.getText() != null && this.getText().length() > 0) {
 				this.item.setText( this.getText().substring(0, 1) );
 			}
 		}
 		
 		public void showSelect() {
-			if(!this.shell.isVisible()){
+			if(!this.shell.isVisible()) {
 				Rectangle bounds = this.item.getBounds();
 				Point location = this.item.getParent().toDisplay(new Point(bounds.x, bounds.y));
 				

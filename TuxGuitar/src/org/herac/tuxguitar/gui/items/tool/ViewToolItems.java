@@ -22,7 +22,7 @@ import org.herac.tuxguitar.gui.items.ToolItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ViewToolItems extends ToolItems{
+public class ViewToolItems extends ToolItems {
 	public static final String NAME = "view.items";
 	
 	private ToolItem showFretBoard;
@@ -30,11 +30,11 @@ public class ViewToolItems extends ToolItems{
 	private ToolItem showTransport;
     private ToolItem toggleMetronome;
 	
-	public ViewToolItems(){
+	public ViewToolItems() {
 		super(NAME);
 	}
 	
-	public void showItems(ToolBar toolBar){
+	public void showItems(ToolBar toolBar) {
 		//--FRETBOARD--
 		this.showFretBoard = new ToolItem(toolBar, SWT.CHECK);
 		this.showFretBoard.addSelectionListener(TuxGuitar.instance().getAction(ShowFretBoardAction.NAME));
@@ -55,21 +55,21 @@ public class ViewToolItems extends ToolItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		this.showFretBoard.setSelection(TuxGuitar.instance().getFretBoardEditor().isVisible());
 		this.showMixer.setSelection(!TuxGuitar.instance().getMixer().isDisposed());
 		this.showTransport.setSelection(!TuxGuitar.instance().getTransport().isDisposed());
         this.toggleMetronome.setSelection(TuxGuitar.instance().getPlayer().isMetronomeEnabled());
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.showFretBoard.setToolTipText(TuxGuitar.getProperty("view.show-fretboard"));
 		this.showMixer.setToolTipText(TuxGuitar.getProperty("view.show-mixer"));
 		this.showTransport.setToolTipText(TuxGuitar.getProperty("view.show-transport"));
         this.toggleMetronome.setToolTipText(TuxGuitar.getProperty("transport.metronome"));
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.showFretBoard.setImage(TuxGuitar.instance().getIconManager().getFretboard());
 		this.showMixer.setImage(TuxGuitar.instance().getIconManager().getMixer());
 		this.showTransport.setImage(TuxGuitar.instance().getIconManager().getTransport());

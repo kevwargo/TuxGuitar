@@ -60,28 +60,28 @@ public abstract class TGTrack {
 		return this.measures.iterator();
 	}
 	
-	public void addMeasure(TGMeasure measure){
+	public void addMeasure(TGMeasure measure) {
 		measure.setTrack(this);
 		this.measures.add(measure);
 	}
 	
-	public void addMeasure(int index, TGMeasure measure){
+	public void addMeasure(int index, TGMeasure measure) {
 		measure.setTrack(this);
 		this.measures.add(index, measure);
 	}
 	
-	public TGMeasure getMeasure(int index){
-		if(index >= 0 && index < countMeasures()){
+	public TGMeasure getMeasure(int index) {
+		if(index >= 0 && index < countMeasures()) {
 			return (TGMeasure)this.measures.get(index);
 		}
 		return null;
 	}
 	
-	public void removeMeasure(int index){
+	public void removeMeasure(int index) {
 		this.measures.remove(index);
 	}
 	
-	public int countMeasures(){
+	public int countMeasures() {
 		return this.measures.size();
 	}
 	
@@ -159,15 +159,15 @@ public abstract class TGTrack {
 		this.lyrics = lyrics;
 	}
 	
-	public TGString getString(int number){
+	public TGString getString(int number) {
 		return (TGString)this.strings.get(number - 1);
 	}
 	
-	public int stringCount(){
+	public int stringCount() {
 		return this.strings.size();
 	}
 	
-	public boolean isPercussionTrack(){
+	public boolean isPercussionTrack() {
 		return (getChannel().isPercussionChannel());
 	}
 	
@@ -179,18 +179,18 @@ public abstract class TGTrack {
 		this.song = song;
 	}
 	
-	public void clear(){
+	public void clear() {
 		this.strings.clear();
 		this.measures.clear();
 	}
 	
-	public TGTrack clone(TGFactory factory, TGSong song){
+	public TGTrack clone(TGFactory factory, TGSong song) {
 		TGTrack track = factory.newTrack();
 		copy(factory, song, track);
 		return track;
 	}
 	
-	public void copy(TGFactory factory, TGSong song, TGTrack track){
+	public void copy(TGFactory factory, TGSong song, TGTrack track) {
 		track.clear();
 		track.setNumber(getNumber());
 		track.setName(getName());

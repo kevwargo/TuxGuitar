@@ -35,17 +35,17 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class PrintAction extends Action{
+public class PrintAction extends Action {
 	public static final String NAME = "action.file.print";
 	
 	public PrintAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
-		try{
+	protected int execute(TypedEvent e) {
+		try {
 			final PrintStyles data = PrintStylesDialog.open(TuxGuitar.instance().getShell());
-			if(data != null){
+			if(data != null) {
 				PrintDialog dialog = new PrintDialog(TuxGuitar.instance().getShell(), SWT.NULL);
 				PrinterData printerData = dialog.open();
 				
@@ -55,24 +55,24 @@ public class PrintAction extends Action{
 					this.print(printerData, data);
 				}
 			}
-		}catch(Throwable throwable ){
+		}catch(Throwable throwable ) {
 			MessageDialog.errorMessage(throwable);
 		}
 		return 0;
 	}
 	
-	public void print(final PrinterData printerData , final PrintStyles data){
-		try{
+	public void print(final PrinterData printerData , final PrintStyles data) {
+		try {
 			new Thread(new Runnable() {
 				public void run() {
-					try{
+					try {
 						final TGSongManager manager = new TGSongManager();
 						manager.setFactory(new TGFactoryImpl());
 						manager.setSong(getSongManager().getSong().clone(manager.getFactory()));
 						
 						new SyncThread(new Runnable() {
 							public void run() {
-								try{
+								try {
 									Shell shell = new Shell();
 									Printer printer = new Printer(printerData);
 									
@@ -84,37 +84,37 @@ public class PrintAction extends Action{
 									PrinterViewLayout layout = new PrinterViewLayout(tablature, data, getPrinterScale(printer));
 									
 									print(printer, printerData, layout , bounds);
-								}catch(Throwable throwable ){
+								}catch(Throwable throwable ) {
 									MessageDialog.errorMessage(throwable);
 								}
 							}
 						}).start();
-					}catch(Throwable throwable ){
+					}catch(Throwable throwable ) {
 						MessageDialog.errorMessage(throwable);
 					}
 				}
 			}).start();
-		}catch(Throwable throwable ){
+		}catch(Throwable throwable ) {
 			MessageDialog.errorMessage(throwable);
 		}
 	}
 	
-	protected void print(final Printer printer, final PrinterData printerData , final PrinterViewLayout layout, final Rectangle bounds){
+	protected void print(final Printer printer, final PrinterData printerData , final PrinterViewLayout layout, final Rectangle bounds) {
 		new Thread(new Runnable() {
 			public void run() {
-				try{
+				try {
 					layout.getTablature().updateTablature();
 					layout.makeDocument(new PrintDocumentImpl(layout, printer, printerData, bounds));
 					//new SyncThread(new Runnable() {
 					//	public void run() {
-					//		try{
+					//		try {
 					//			layout.makeDocument(new PrintDocumentImpl(layout, printer, bounds));
-					//		}catch(Throwable throwable ){
+					//		}catch(Throwable throwable ) {
 					//			MessageDialog.errorMessage(throwable);
 					//		}
 					//	}
-					//}).start();
-				}catch(Throwable throwable ){
+					// }).start();
+				}catch(Throwable throwable ) {
 					MessageDialog.errorMessage(throwable);
 				}
 			}
@@ -136,13 +136,13 @@ public class PrintAction extends Action{
 	
 	protected float getPrinterScale(Printer printer) {
 		Point dpi = printer.getDPI();
-		if( dpi != null ){
+		if( dpi != null ) {
 			return ( dpi.x / 100.0f );
 		}
 		return 1.0f;
 	}
 	
-	private class PrintDocumentImpl implements PrintDocument{
+	private class PrintDocumentImpl implements PrintDocument {
 		
 		private Printer printer;
 		private PrinterData printerData;
@@ -151,7 +151,7 @@ public class PrintAction extends Action{
 		private Rectangle bounds;
 		private boolean started;
 		
-		public PrintDocumentImpl(PrinterViewLayout layout, Printer printer, PrinterData printerData, Rectangle bounds){
+		public PrintDocumentImpl(PrinterViewLayout layout, Printer printer, PrinterData printerData, Rectangle bounds) {
 			this.layout = layout;
 			this.printer = printer;
 			this.printerData = printerData;
@@ -163,19 +163,19 @@ public class PrintAction extends Action{
 			return this.painter;
 		}
 		
-		public Rectangle getBounds(){
+		public Rectangle getBounds() {
 			return this.bounds;
 		}
 		
 		public void pageStart() {
-			if(this.started){
+			if(this.started) {
 				this.printer.startPage();
 				this.painter.init(new GC(this.printer));
 			}
 		}
 		
 		public void pageFinish() {
-			if(this.started){
+			if(this.started) {
 				this.painter.dispose();
 				this.printer.endPage();
 			}
@@ -186,11 +186,11 @@ public class PrintAction extends Action{
 		}
 		
 		public void finish() {
-			if(this.started){
+			if(this.started) {
 				this.printer.endJob();
 				this.started = false;
 				try {
-					TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable(){
+					TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 						public void run() {
 							dispose();
 						}
@@ -202,32 +202,32 @@ public class PrintAction extends Action{
 			}
 		}
 		
-		public boolean isPaintable(int page){
-			if(this.printerData.scope == PrinterData.PAGE_RANGE){
-				if(this.printerData.startPage > 0 && this.printerData.startPage > page){
+		public boolean isPaintable(int page) {
+			if(this.printerData.scope == PrinterData.PAGE_RANGE) {
+				if(this.printerData.startPage > 0 && this.printerData.startPage > page) {
 					return false;
 				}
-				if(this.printerData.endPage > 0 && this.printerData.endPage < page){
+				if(this.printerData.endPage > 0 && this.printerData.endPage < page) {
 					return false;
 				}
 			}
 			return true;
 		}
 		
-		public String getJobName(){
+		public String getJobName() {
 			String prefix = TuxGuitar.APPLICATION_NAME;
 			String song = this.layout.getSongManager().getSong().getName();
 			return ( song != null && song.length() > 0 ? (prefix + "-" + song) : prefix );
 		}
 		
-		public void dispose(){
-			if(!this.printer.isDisposed()){
+		public void dispose() {
+			if(!this.printer.isDisposed()) {
 				this.printer.dispose();
 			}
-			if(!this.layout.getTablature().isDisposed() && !this.layout.getTablature().getShell().isDisposed()){
+			if(!this.layout.getTablature().isDisposed() && !this.layout.getTablature().getShell().isDisposed()) {
 				this.layout.getTablature().getShell().dispose();
 			}
-			if(!this.layout.getTablature().isDisposed()){
+			if(!this.layout.getTablature().isDisposed()) {
 				this.layout.getTablature().dispose();
 			}
 		}

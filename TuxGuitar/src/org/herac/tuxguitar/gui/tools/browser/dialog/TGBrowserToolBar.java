@@ -21,7 +21,7 @@ import org.herac.tuxguitar.gui.tools.browser.TGBrowserCollection;
 import org.herac.tuxguitar.gui.tools.browser.TGBrowserManager;
 import org.herac.tuxguitar.gui.tools.browser.base.TGBrowserFactory;
 
-public class TGBrowserToolBar extends TGBrowserBar{
+public class TGBrowserToolBar extends TGBrowserBar {
 	private Composite composite;
 	private ToolBar toolBar;
 	private ToolItem newBrowser;
@@ -31,18 +31,18 @@ public class TGBrowserToolBar extends TGBrowserBar{
 	protected Menu newBrowserMenu;
 	protected TGBrowserCollectionCombo collections;
 	
-	public TGBrowserToolBar(TGBrowserDialog browser){
+	public TGBrowserToolBar(TGBrowserDialog browser) {
 		super(browser);
 	}
 	
-	public void init(Shell shell){
+	public void init(Shell shell) {
 		this.composite = new Composite(shell, SWT.NONE);
 		this.composite.setLayout(getLayout());
 		this.composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		this.initItems();
 	}
 	
-	public void initItems(){
+	public void initItems() {
 		this.toolBar = new ToolBar(this.composite, SWT.FLAT | SWT.WRAP);
 		
 		//---New Book----------------------------------------------------------
@@ -114,7 +114,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		});
 	}
 	
-	public void updateItems(){
+	public void updateItems() {
 		this.newBrowser.setEnabled(!getBrowser().getConnection().isLocked());
 		this.collections.setEnabled(!getBrowser().getConnection().isLocked());
 		this.root.setEnabled(!getBrowser().getConnection().isLocked() && getBrowser().getConnection().isOpen());
@@ -122,16 +122,16 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		this.refresh.setEnabled(!getBrowser().getConnection().isLocked() && getBrowser().getConnection().isOpen());
 	}
 	
-	public void updateCollections(TGBrowserCollection selection){
+	public void updateCollections(TGBrowserCollection selection) {
 		int index = 0;
 		this.collections.removeAll();
 		
 		Iterator it = TGBrowserManager.instance().getCollections();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			TGBrowserCollection collection = (TGBrowserCollection)it.next();
-			if(collection.getData() != null){
+			if(collection.getData() != null) {
 				this.collections.add(collection);
-				if(selection != null && selection.equals(collection)){
+				if(selection != null && selection.equals(collection)) {
 					this.collections.select(index);
 				}
 				index ++;
@@ -139,7 +139,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		}
 	}
 	
-	public void reload(){
+	public void reload() {
 		this.disposeItems();
 		this.initItems();
 		this.loadProperties();
@@ -147,7 +147,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		this.composite.layout(true, true);
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.newBrowser.setToolTipText(TuxGuitar.getProperty("browser.collection.new"));
 		this.root.setToolTipText(TuxGuitar.getProperty("browser.go-root"));
 		this.back.setToolTipText(TuxGuitar.getProperty("browser.go-back"));
@@ -155,23 +155,23 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		this.updateCollections(getBrowser().getCollection());
 	}
 	
-	protected void updateCollection(){
+	protected void updateCollection() {
 		TGBrowserCollection collection = this.collections.getSelection();
-		if(collection == null){
+		if(collection == null) {
 			closeCollection();
-		}else{
+		}else {
 			openCollection(collection);
 		}
 	}
 	
-	private void disposeItems(){
+	private void disposeItems() {
 		Control[] controls = this.composite.getChildren();
-		for(int i = 0; i < controls.length; i ++){
+		for(int i = 0; i < controls.length; i ++) {
 			controls[i].dispose();
 		}
 	}
 	
-	private GridLayout getLayout(){
+	private GridLayout getLayout() {
 		GridLayout layout = new GridLayout(2, false);
 		layout.marginWidth = 0;
 		layout.marginHeight = 0;

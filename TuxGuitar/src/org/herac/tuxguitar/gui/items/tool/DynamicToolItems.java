@@ -20,7 +20,7 @@ import org.herac.tuxguitar.song.models.TGVelocities;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class DynamicToolItems  extends ToolItems{
+public class DynamicToolItems  extends ToolItems {
 	public static final String NAME = "dynamic.items";
 	
 	private ToolBar toolBar;
@@ -35,11 +35,11 @@ public class DynamicToolItems  extends ToolItems{
 	private ToolItem forteFortissimo;
 	
 	
-	public DynamicToolItems(){
+	public DynamicToolItems() {
 		super(NAME);
 	}
 	
-	public void showItems(ToolBar toolBar){
+	public void showItems(ToolBar toolBar) {
 		this.toolBar = toolBar;
 		//--PPP--
 		this.pianoPianissimo = new ToolItem(this.toolBar, SWT.CHECK);
@@ -85,7 +85,7 @@ public class DynamicToolItems  extends ToolItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		Caret caret = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 		int velocity = ((caret.getSelectedNote() != null)?caret.getSelectedNote().getVelocity():caret.getVelocity());
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
@@ -107,7 +107,7 @@ public class DynamicToolItems  extends ToolItems{
 		this.forteFortissimo.setEnabled( !running );
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.pianoPianissimo.setToolTipText(TuxGuitar.getProperty("dynamic.piano-pianissimo"));
 		this.pianissimo.setToolTipText(TuxGuitar.getProperty("dynamic.pianissimo"));
 		this.piano.setToolTipText(TuxGuitar.getProperty("dynamic.piano"));
@@ -118,7 +118,7 @@ public class DynamicToolItems  extends ToolItems{
 		this.forteFortissimo.setToolTipText(TuxGuitar.getProperty("dynamic.forte-fortissimo"));
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.pianoPianissimo.setImage(TuxGuitar.instance().getIconManager().getDynamicPPP());
 		this.pianissimo.setImage(TuxGuitar.instance().getIconManager().getDynamicPP());
 		this.piano.setImage(TuxGuitar.instance().getIconManager().getDynamicP());

@@ -17,17 +17,17 @@ import org.herac.tuxguitar.song.models.TGTrack;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GoNextTrackAction extends Action{
+public class GoNextTrackAction extends Action {
 	public static final String NAME = "action.track.go-next";
 	
 	public GoNextTrackAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGTrack track = getSongManager().getTrack(caret.getTrack().getNumber() + 1);
-		if(track != null){
+		if(track != null) {
 			caret.update(track.getNumber());
 		}
 		return 0;

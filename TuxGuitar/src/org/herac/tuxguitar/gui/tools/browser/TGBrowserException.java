@@ -1,6 +1,6 @@
 package org.herac.tuxguitar.gui.tools.browser;
 
-public class TGBrowserException extends Exception{
+public class TGBrowserException extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 	

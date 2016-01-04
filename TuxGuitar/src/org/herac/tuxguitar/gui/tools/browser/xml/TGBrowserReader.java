@@ -20,8 +20,8 @@ public class TGBrowserReader {
 	private static final String ATTRIBUTE_TYPE = "type";
 	private static final String ATTRIBUTE_DATA = "data";
 	
-	public void loadCollections(TGBrowserManager manager, File file){
-		if (file.exists()){
+	public void loadCollections(TGBrowserManager manager, File file) {
+		if (file.exists()) {
 			try {
 				Document doc = getDocument(file);
 				loadCollections(manager, doc.getFirstChild());
@@ -31,7 +31,7 @@ public class TGBrowserReader {
 		}
 	}
 	
-	private static void loadCollections(TGBrowserManager manager, Node node){
+	private static void loadCollections(TGBrowserManager manager, Node node) {
 		NodeList listNode = node.getChildNodes();
 		for (int i = 0; i < listNode.getLength(); i++) {
 			Node child = listNode.item(i);
@@ -41,7 +41,7 @@ public class TGBrowserReader {
 				
 				String type = params.getNamedItem(ATTRIBUTE_TYPE).getNodeValue();
 				String data = params.getNamedItem(ATTRIBUTE_DATA).getNodeValue();
-				if(type != null){
+				if(type != null) {
 					TGBrowserCollectionInfo info = new TGBrowserCollectionInfo();
 					info.setType(type);
 					info.setData(data);

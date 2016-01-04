@@ -37,7 +37,7 @@ import org.herac.tuxguitar.song.models.TGNote;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class NoteEffectToolItems  extends ToolItems{
+public class NoteEffectToolItems  extends ToolItems {
 	public static final String NAME = "effect.items";
 	
 	private ToolItem deadNote;
@@ -64,11 +64,11 @@ public class NoteEffectToolItems  extends ToolItems{
 	
 	private ToolItem fadeIn;
 	
-	public NoteEffectToolItems(){
+	public NoteEffectToolItems() {
 		super(NAME);
 	}
 	
-	public void showItems(ToolBar toolBar){
+	public void showItems(ToolBar toolBar) {
 		//--DEAD NOTE--
 		this.deadNote = new ToolItem(toolBar, SWT.CHECK);
 		this.deadNote.addSelectionListener(TuxGuitar.instance().getAction(ChangeDeadNoteAction.NAME));
@@ -161,7 +161,7 @@ public class NoteEffectToolItems  extends ToolItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		TGNote note = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getSelectedNote();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.vibrato.setSelection(note != null && note.getEffect().isVibrato());
@@ -204,7 +204,7 @@ public class NoteEffectToolItems  extends ToolItems{
 		this.fadeIn.setEnabled(!running && note != null);
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.vibrato.setToolTipText(TuxGuitar.getProperty("effects.vibrato"));
 		this.bend.setToolTipText(TuxGuitar.getProperty("effects.bend"));
 		this.tremoloBar.setToolTipText(TuxGuitar.getProperty("effects.tremolo-bar"));
@@ -227,7 +227,7 @@ public class NoteEffectToolItems  extends ToolItems{
 		this.fadeIn.setToolTipText(TuxGuitar.getProperty("effects.fade-in"));
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.deadNote.setImage(TuxGuitar.instance().getIconManager().getEffectDead());
 		this.ghostNote.setImage(TuxGuitar.instance().getIconManager().getEffectGhost());
 		this.accentuatedNote.setImage(TuxGuitar.instance().getIconManager().getEffectAccentuated());

@@ -1,6 +1,6 @@
 package org.herac.tuxguitar.player.base;
 
-public class MidiPlayerMode{
+public class MidiPlayerMode {
 	
 	public static final int DEFAULT_TEMPO_PERCENT = 100;
 	
@@ -17,11 +17,11 @@ public class MidiPlayerMode{
 	private int customPercentIncrement;
 	private int currentPercent;
 	
-	public MidiPlayerMode(){
+	public MidiPlayerMode() {
 		this.clear();
 	}
 	
-	public void clear(){
+	public void clear() {
 		this.loop = false;
 		this.type = TYPE_SIMPLE;
 		this.simplePercent = DEFAULT_TEMPO_PERCENT;
@@ -33,29 +33,29 @@ public class MidiPlayerMode{
 		this.reset();
 	}
 	
-	public void reset(){
-		if(getType() == TYPE_SIMPLE){
+	public void reset() {
+		if(getType() == TYPE_SIMPLE) {
 			this.setCurrentPercent(getSimplePercent());
 		}
-		else if(getType() == TYPE_CUSTOM){
+		else if(getType() == TYPE_CUSTOM) {
 			this.setCurrentPercent(getCustomPercentFrom());
 		}
 	}
 	
-	public void notifyLoop(){
-		if(getType() == TYPE_SIMPLE){
+	public void notifyLoop() {
+		if(getType() == TYPE_SIMPLE) {
 			this.setCurrentPercent(getSimplePercent());
 		}
-		else if(getType() == TYPE_CUSTOM){
+		else if(getType() == TYPE_CUSTOM) {
 			this.setCurrentPercent(Math.min(getCustomPercentTo(),(getCurrentPercent() + getCustomPercentIncrement())));
 		}
 	}
 	
-	public int getCurrentPercent(){
+	public int getCurrentPercent() {
 		return this.currentPercent;
 	}
 	
-	public void setCurrentPercent(int currentPercent){
+	public void setCurrentPercent(int currentPercent) {
 		this.currentPercent = currentPercent;
 	}
 	

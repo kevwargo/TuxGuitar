@@ -35,14 +35,14 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ChangeKeySignatureAction extends Action{
+public class ChangeKeySignatureAction extends Action {
 	public static final String NAME = "action.composition.change-key-signature";
 	
 	public ChangeKeySignatureAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
@@ -138,20 +138,20 @@ public class ChangeKeySignatureAction extends Action{
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private GridData getComboData(){
+	private GridData getComboData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
 	
-	protected void setKeySignature(int keySignature, boolean toEnd){
+	protected void setKeySignature(int keySignature, boolean toEnd) {
 		//comienza el undoable
 		UndoableChangeKeySignature undoable = UndoableChangeKeySignature.startUndo();
 		

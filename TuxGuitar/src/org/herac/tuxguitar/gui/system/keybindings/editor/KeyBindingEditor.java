@@ -35,11 +35,11 @@ public class KeyBindingEditor {
 	protected Table table;
 	protected List items;
 	
-	public KeyBindingEditor(){
+	public KeyBindingEditor() {
 		this.items = new ArrayList();
 	}
 	
-	public void show(Shell parent){
+	public void show(Shell parent) {
 		this.dialog = DialogUtils.newDialog(parent, SWT.DIALOG_TRIM |SWT.APPLICATION_MODAL);
 		this.dialog.setText(TuxGuitar.getProperty("key-bindings-editor"));
 		this.dialog.setLayout(new GridLayout());
@@ -54,7 +54,7 @@ public class KeyBindingEditor {
 		this.table.addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent e) {
 				TableItem item = getSelectedItem();
-				if(item != null){
+				if(item != null) {
 					KeyBindingAction itemData = (KeyBindingAction)item.getData();
 					KeyBindingSelector selector = new KeyBindingSelector(KeyBindingEditor.this, itemData);
 					KeyBinding kb = selector.select(KeyBindingEditor.this.dialog.getShell());
@@ -110,33 +110,33 @@ public class KeyBindingEditor {
 		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
 	}
 	
-	protected int adjustWidth(TableColumn column, int defaultWidth){
+	protected int adjustWidth(TableColumn column, int defaultWidth) {
 		column.pack();
 		int width = column.getWidth();
-		if( width < defaultWidth ){
+		if( width < defaultWidth ) {
 			width = defaultWidth;
 			column.setWidth( width );
 		}
 		return width;
 	}
 	
-	protected GridData getButtonData(){
+	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected void loadTableItemLabel(TableItem item){
-		if(item.getData() instanceof KeyBindingAction){
+	protected void loadTableItemLabel(TableItem item) {
+		if(item.getData() instanceof KeyBindingAction) {
 			KeyBindingAction actionkeyBinding = (KeyBindingAction)item.getData();
 			String action = actionkeyBinding.getAction();
 			String shortcut = (actionkeyBinding.getKeyBinding() != null)?actionkeyBinding.getKeyBinding().toString():"";
-			item.setText(new String[] { TuxGuitar.getProperty(action), shortcut});
+			item.setText(new String[] { TuxGuitar.getProperty(action), shortcut });
 		}
 	}
 	
-	protected void loadAvailableActionKeyBindings(){
+	protected void loadAvailableActionKeyBindings() {
 		List list = TuxGuitar.instance().getActionManager().getAvailableKeyBindingActions();
 		Collections.sort(list);
 		Iterator it = list.iterator();
@@ -148,17 +148,17 @@ public class KeyBindingEditor {
 		}
 	}
 	
-	protected void loadEnableActionKeyBindings(List list){
+	protected void loadEnableActionKeyBindings(List list) {
 		Iterator items = this.items.iterator();
 		while (items.hasNext()) {
 			TableItem item = (TableItem) items.next();
-			if(item.getData() instanceof KeyBindingAction){
+			if(item.getData() instanceof KeyBindingAction) {
 				KeyBindingAction itemData = (KeyBindingAction)item.getData();
 				KeyBinding keyBinding = null;
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
 					KeyBindingAction keyBindingAction = (KeyBindingAction) it.next();
-					if(keyBindingAction.getAction().equals(itemData.getAction())){
+					if(keyBindingAction.getAction().equals(itemData.getAction())) {
 						keyBinding =  (KeyBinding) keyBindingAction.getKeyBinding().clone();
 						break;
 					}
@@ -169,14 +169,14 @@ public class KeyBindingEditor {
 		}
 	}
 	
-	protected void removeKeyBindingAction(KeyBinding kb){
-		if(kb != null){
+	protected void removeKeyBindingAction(KeyBinding kb) {
+		if(kb != null) {
 			Iterator it = this.items.iterator();
-			while(it.hasNext()){
+			while(it.hasNext()) {
 				TableItem item = (TableItem) it.next();
-				if(item.getData() instanceof KeyBindingAction){
+				if(item.getData() instanceof KeyBindingAction) {
 					KeyBindingAction itemData = (KeyBindingAction)item.getData();
-					if(kb.isSameAs(itemData.getKeyBinding())){
+					if(kb.isSameAs(itemData.getKeyBinding())) {
 						itemData.setKeyBinding(null);
 						loadTableItemLabel(item);
 					}
@@ -185,22 +185,22 @@ public class KeyBindingEditor {
 		}
 	}
 	
-	protected TableItem getSelectedItem(){
+	protected TableItem getSelectedItem() {
 		TableItem item = null;
 		int itemSelected = this.table.getSelectionIndex();
-		if(itemSelected >= 0){
+		if(itemSelected >= 0) {
 			item = this.table.getItem(itemSelected);
 		}
 		return item;
 	}
 	
-	public boolean exists(KeyBinding kb){
+	public boolean exists(KeyBinding kb) {
 		Iterator it = this.items.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			TableItem item = (TableItem) it.next();
-			if(item.getData() instanceof KeyBindingAction){
+			if(item.getData() instanceof KeyBindingAction) {
 				KeyBindingAction itemData = (KeyBindingAction)item.getData();
-				if(itemData.getKeyBinding() != null && kb.isSameAs(itemData.getKeyBinding())){
+				if(itemData.getKeyBinding() != null && kb.isSameAs(itemData.getKeyBinding())) {
 					return true;
 				}
 			}
@@ -208,14 +208,14 @@ public class KeyBindingEditor {
 		return false;
 	}
 	
-	protected void save(){
+	protected void save() {
 		List list = new ArrayList();
 		Iterator it = this.items.iterator();
 		while (it.hasNext()) {
 			TableItem item = (TableItem) it.next();
-			if(item.getData() instanceof KeyBindingAction){
+			if(item.getData() instanceof KeyBindingAction) {
 				KeyBindingAction keyBindingAction = (KeyBindingAction)item.getData();
-				if(keyBindingAction.getAction() != null && keyBindingAction.getKeyBinding() != null){
+				if(keyBindingAction.getAction() != null && keyBindingAction.getKeyBinding() != null) {
 					list.add(keyBindingAction);
 				}
 			}
@@ -225,11 +225,11 @@ public class KeyBindingEditor {
 		TuxGuitar.instance().loadLanguage();
 	}
 	
-	public Shell getDialog(){
+	public Shell getDialog() {
 		return this.dialog;
 	}
 	
-	public boolean isDisposed(){
+	public boolean isDisposed() {
 		return (this.dialog == null || this.dialog.isDisposed() );
 	}
 }

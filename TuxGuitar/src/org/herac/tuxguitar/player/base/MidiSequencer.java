@@ -1,7 +1,7 @@
 package org.herac.tuxguitar.player.base;
 
 
-public interface MidiSequencer extends MidiDevice{
+public interface MidiSequencer extends MidiDevice {
 	
 	public void start() throws MidiPlayerException;
 	

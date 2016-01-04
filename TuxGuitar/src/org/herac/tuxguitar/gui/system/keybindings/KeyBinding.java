@@ -7,12 +7,12 @@ public class KeyBinding {
 	private int mask;
 	private int key;
 	
-	public KeyBinding(int key, int mask){
+	public KeyBinding(int key, int mask) {
 		this.key = key;
 		this.mask = mask;
 	}
 	
-	public KeyBinding(){
+	public KeyBinding() {
 		this(0, 0);
 	}
 	
@@ -32,46 +32,46 @@ public class KeyBinding {
 		this.mask = mask;
 	}
 	
-	private String getSpecialKey(){
-		for(int i = 0; i < KeyConversion.relations.length; i++){
-			if (this.key == KeyConversion.relations[i].getCode()){
+	private String getSpecialKey() {
+		for(int i = 0; i < KeyConversion.relations.length; i++) {
+			if (this.key == KeyConversion.relations[i].getCode()) {
 				return KeyConversion.relations[i].getKey();
 			}
 		}
 		return null;
 	}
 	
-	private String getSpecialMask(){
+	private String getSpecialMask() {
 		String mask = new String();
-		for(int i = 0; i < KeyConversion.relations.length; i++){
-			if ( (this.mask & KeyConversion.relations[i].getCode()) == KeyConversion.relations[i].getCode()){
+		for(int i = 0; i < KeyConversion.relations.length; i++) {
+			if ( (this.mask & KeyConversion.relations[i].getCode()) == KeyConversion.relations[i].getCode()) {
 				mask += KeyConversion.relations[i].getKey() + MASK_SEPARATOR;
 			}
 		}
 		return mask;
 	}
 	
-	public boolean isSameAs(KeyBinding kb){
-		if( kb != null ){
+	public boolean isSameAs(KeyBinding kb) {
+		if( kb != null ) {
 			return (this.key == kb.key && this.mask == kb.mask);
 		}
 		return false;
 	}
 	
-	public String toString(){
+	public String toString() {
 		String mask = getSpecialMask();
 		String key = getSpecialKey();
 		return (key != null ? (mask + key) : (mask + (char)this.key) );
 	}
 	
-	public Object clone(){
+	public Object clone() {
 		return new KeyBinding(getKey(), getMask());
 	}
 }
 
 class KeyConversion {
 	
-	protected static final KeyConversion[] relations = new KeyConversion[]{
+	protected static final KeyConversion[] relations = new KeyConversion[] {
 		new KeyConversion("F1", KeyBindingConstants.F1),
 		new KeyConversion("F2", KeyBindingConstants.F2),
 		new KeyConversion("F3", KeyBindingConstants.F3),
@@ -112,16 +112,16 @@ class KeyConversion {
 	private String key;
 	private int code;
 	
-	private KeyConversion(String key, int code){
+	private KeyConversion(String key, int code) {
 		this.key = key;
 		this.code = code;
 	}
 	
-	public String getKey(){
+	public String getKey() {
 		return this.key;
 	}
 	
-	public int getCode(){
+	public int getCode() {
 		return this.code;
 	}
 }

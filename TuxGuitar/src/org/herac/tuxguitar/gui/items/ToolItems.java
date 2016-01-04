@@ -4,17 +4,17 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.herac.tuxguitar.gui.TuxGuitar;
 import org.herac.tuxguitar.gui.editors.TablatureEditor;
 
-public abstract class ToolItems implements ItemBase{
+public abstract class ToolItems implements ItemBase {
 	
 	private String name;
 	private boolean enabled;
 	
-	public ToolItems(String name){
+	public ToolItems(String name) {
 		this.name = name;
 		this.enabled = true;
 	}
 	
-	public String getName(){
+	public String getName() {
 		return this.name;
 	}
 	
@@ -26,7 +26,7 @@ public abstract class ToolItems implements ItemBase{
 		this.enabled = enabled;
 	}
 	
-	protected TablatureEditor getEditor(){
+	protected TablatureEditor getEditor() {
 		return TuxGuitar.instance().getTablatureEditor();
 	}
 	

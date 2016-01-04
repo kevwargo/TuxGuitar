@@ -26,7 +26,7 @@ import org.herac.tuxguitar.gui.items.ToolItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class LayoutToolItems extends ToolItems{
+public class LayoutToolItems extends ToolItems {
 	public static final String NAME = "layout.items";
 	
 	private ToolItem pageLayout;
@@ -35,11 +35,11 @@ public class LayoutToolItems extends ToolItems{
 	private ToolItem scoreEnabled;
 	private ToolItem compact;
 	
-	public LayoutToolItems(){
+	public LayoutToolItems() {
 		super(NAME);
 	}
 	
-	public void showItems(ToolBar toolBar){
+	public void showItems(ToolBar toolBar) {
 		this.pageLayout = new ToolItem(toolBar, SWT.RADIO);
 		this.pageLayout.addSelectionListener(TuxGuitar.instance().getAction(SetPageLayoutAction.NAME));
 		
@@ -59,7 +59,7 @@ public class LayoutToolItems extends ToolItems{
 		this.loadProperties();
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.pageLayout.setToolTipText(TuxGuitar.getProperty("view.layout.page"));
 		this.linearLayout.setToolTipText(TuxGuitar.getProperty("view.layout.linear"));
 		this.multitrack.setToolTipText(TuxGuitar.getProperty("view.layout.multitrack"));
@@ -67,7 +67,7 @@ public class LayoutToolItems extends ToolItems{
 		this.compact.setToolTipText(TuxGuitar.getProperty("view.layout.compact"));
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.pageLayout.setImage(TuxGuitar.instance().getIconManager().getLayoutPage());
 		this.linearLayout.setImage(TuxGuitar.instance().getIconManager().getLayoutLinear());
 		this.multitrack.setImage(TuxGuitar.instance().getIconManager().getLayoutMultitrack());
@@ -75,7 +75,7 @@ public class LayoutToolItems extends ToolItems{
 		this.compact.setImage(TuxGuitar.instance().getIconManager().getLayoutCompact());
 	}
 	
-	public void update(){
+	public void update() {
 		ViewLayout layout = getEditor().getTablature().getViewLayout();
 		int style = layout.getStyle();
 		this.pageLayout.setSelection(layout instanceof PageViewLayout);

@@ -24,7 +24,7 @@ public class ShowDocAction extends Action {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | KEY_BINDING_AVAILABLE );
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		try {
 			new TGDocumentation().display();
 		} catch (Throwable throwable) {

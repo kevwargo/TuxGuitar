@@ -2,7 +2,7 @@ package org.herac.tuxguitar.gui.system.keybindings;
 
 import org.eclipse.swt.SWT;
 
-public class KeyBindingConstants{
+public class KeyBindingConstants {
 	
 	public static final int F1 = SWT.F1;
 	

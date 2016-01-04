@@ -48,13 +48,13 @@ public class ChordRecognizer extends Composite {
 		this.init();
 	}
 	
-	public GridData makeGridData(){
+	public GridData makeGridData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 180;
 		return data;
 	}
 	
-	public void init(){
+	public void init() {
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout());
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -65,7 +65,7 @@ public class ChordRecognizer extends Composite {
 		this.proposalList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.proposalList.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(getDialog().getEditor() != null){
+				if(getDialog().getEditor() != null) {
 					showChord(getProposalList().getSelectionIndex());
 				}
 			}
@@ -110,7 +110,7 @@ public class ChordRecognizer extends Composite {
 		
 		new Thread( new Runnable() {
 			public void run() {
-				if(!getDialog().isDisposed() && isValidProcess(processId)){
+				if(!getDialog().isDisposed() && isValidProcess(processId)) {
 					
 					final int params[] = makeProposals(processId, chord, sharp);
 					
@@ -119,7 +119,7 @@ public class ChordRecognizer extends Composite {
 							try {
 								TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 									public void run() {
-										if(!getDialog().isDisposed() && isValidProcess(processId)){
+										if(!getDialog().isDisposed() && isValidProcess(processId)) {
 											getDialog().getEditor().setChordName("");
 										}
 									}
@@ -138,7 +138,7 @@ public class ChordRecognizer extends Composite {
 						try {
 							TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 								public void run() {
-									if(!getDialog().isDisposed()){
+									if(!getDialog().isDisposed()) {
 										redecorate(params);
 									}
 								}
@@ -152,7 +152,7 @@ public class ChordRecognizer extends Composite {
 						try {
 							TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 								public void run() {
-									if(!getDialog().isDisposed()){
+									if(!getDialog().isDisposed()) {
 										getDialog().getEditor().setChordName( (chordName != null ? chordName : "" ) );
 									}
 								}
@@ -350,11 +350,11 @@ public class ChordRecognizer extends Composite {
 			if (firstNegative==0 && current.unusualGrade<0) 
 				firstNegative=current.unusualGrade;
 			
-			if (current.unusualGrade > (firstNegative>=0 ? 0 : firstNegative)-60){
+			if (current.unusualGrade > (firstNegative>=0 ? 0 : firstNegative)-60) {
 				try {
 					TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 						public void run() {
-							if(!getDialog().isDisposed() && isValidProcess(processId)){
+							if(!getDialog().isDisposed() && isValidProcess(processId)) {
 								addProposal(current.params, getChordName(current.params, sharp)+" ("+Math.round(100+current.dontHaveGrade*7/10)+"%)" );
 							}
 						}
@@ -370,7 +370,7 @@ public class ChordRecognizer extends Composite {
 	}
 	
 	/** adjusts widgets on the Recognizer combo */
-	protected void redecorate(int params[]){
+	protected void redecorate(int params[]) {
 		this.dialog.getSelector().adjustWidgets(params[TONIC_INDEX],
 		                                        params[CHORD_INDEX],
 		                                        params[ALTERATION_INDEX],
@@ -473,7 +473,7 @@ public class ChordRecognizer extends Composite {
 				if (!found[0] || !found[3]) { // b7 or 9 not inside
 					if (!found[0] && !found[3])
 						current.params[ADDCHK_INDEX]=1;
-					else{
+					else {
 						if (!found[3])
 							current.dontHaveGrade-=25;
 						if (!found[0]) {
@@ -503,11 +503,11 @@ public class ChordRecognizer extends Composite {
 	 * @param sortIndex 1 to sort by don'tHaveGrade, 2 to sort by unusualGrade
 	 * @return sorted list by selected criteria
 	 */
-	public void shellsort( java.util.List a, int sortIndex ){
+	public void shellsort( java.util.List a, int sortIndex ) {
 		int length = a.size();
 		for( int gap = length / 2; gap > 0;
 					 gap = gap == 2 ? 1 : (int) ( gap / 2.2 ) )
-			for( int i = gap; i < length; i++ ){
+			for( int i = gap; i < length; i++ ) {
 				Proposal tmp = (Proposal)a.get(i);
 				int j = i;
 				
@@ -522,29 +522,29 @@ public class ChordRecognizer extends Composite {
 			}
 	}
 	
-	protected void addProposal(int[] params, String name){
+	protected void addProposal(int[] params, String name) {
 		this.proposalParameters.add(params);
 		this.proposalList.add(name);
 	}
 	
-	protected void clearProposals(){
+	protected void clearProposals() {
 		this.proposalList.removeAll();
 		this.proposalParameters.clear();
 	}
 	
-	protected ChordDialog getDialog(){
+	protected ChordDialog getDialog() {
 		return this.dialog;
 	}
 	
-	protected List getProposalList(){
+	protected List getProposalList() {
 		return this.proposalList;
 	}
 	
-	protected boolean isValidProcess(long processId){
+	protected boolean isValidProcess(long processId) {
 		return (this.runningProcess == processId);
 	}
 	
-	protected class Proposal implements Cloneable{
+	protected class Proposal implements Cloneable {
 		int[] params;
 		
 		/** grade for chord "unusualness" - Cm is less unusual than E7/9+/C */
@@ -556,8 +556,8 @@ public class ChordRecognizer extends Composite {
 		int missingCount;
 		int[] missingNotes;
 		
-		boolean filled[]={false, false, false, false};
-		int plusminusValue[]={0, 0, 0};
+		boolean filled[]= {false, false, false, false };
+		int plusminusValue[]= {0, 0, 0 };
 		
 		private Proposal() {
 			super();
@@ -574,7 +574,7 @@ public class ChordRecognizer extends Composite {
 			
 			int length = notes.size();
 			this.missingNotes = new int[length];
-			for (int i = 0; i< length; i++){ // deep copy, because of clone() method
+			for (int i = 0; i< length; i++) { // deep copy, because of clone() method
 				this.missingNotes[i] = ((Integer)notes.get(i)).intValue();
 			}
 			this.missingCount = length;
@@ -632,7 +632,7 @@ public class ChordRecognizer extends Composite {
 			proposal.dontHaveGrade = this.dontHaveGrade;
 			proposal.missingCount = this.missingCount;
 			proposal.missingNotes = new int[this.missingNotes.length];
-			for(int i = 0; i < proposal.missingNotes.length; i ++){
+			for(int i = 0; i < proposal.missingNotes.length; i ++) {
 				proposal.missingNotes[i] = this.missingNotes[i];
 			}
 			proposal.filled = new boolean[this.filled.length];

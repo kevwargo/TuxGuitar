@@ -4,21 +4,21 @@ public class ActionLock {
 	
 	private static boolean working;
 	
-	public synchronized static boolean isLocked(){
+	public synchronized static boolean isLocked() {
 		return working;
 	}
 	
-	public synchronized static void lock(){
+	public synchronized static void lock() {
 		working = true;
 	}
 	
-	public synchronized static void unlock(){
+	public synchronized static void unlock() {
 		working = false;
 	}
 	
-	public synchronized static void waitFor(){
+	public synchronized static void waitFor() {
 		try {
-			while(isLocked()){
+			while(isLocked()) {
 				synchronized( ActionLock.class ) {
 					ActionLock.class.wait(1);
 				}

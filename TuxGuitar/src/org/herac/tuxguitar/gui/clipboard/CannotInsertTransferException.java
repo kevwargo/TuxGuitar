@@ -12,7 +12,7 @@ package org.herac.tuxguitar.gui.clipboard;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class CannotInsertTransferException extends Exception{
+public class CannotInsertTransferException extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 	

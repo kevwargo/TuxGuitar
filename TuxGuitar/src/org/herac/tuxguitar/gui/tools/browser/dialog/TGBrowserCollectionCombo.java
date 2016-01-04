@@ -14,13 +14,13 @@ public class TGBrowserCollectionCombo {
 	private Combo combo;
 	private List collections;
 	
-	public TGBrowserCollectionCombo(Composite parent, int style){
+	public TGBrowserCollectionCombo(Composite parent, int style) {
 		this.combo = new Combo(parent, style);
 		this.collections = new ArrayList();
 		this.addFirstElement();
 	}
 	
-	private void addFirstElement(){
+	private void addFirstElement() {
 		this.combo.add(TuxGuitar.getProperty("browser.collection.select"));
 		this.combo.select(0);
 	}
@@ -30,9 +30,9 @@ public class TGBrowserCollectionCombo {
 		this.collections.add(collection);
 	}
 	
-	public TGBrowserCollection getSelection(){
+	public TGBrowserCollection getSelection() {
 		int index = ( this.combo.getSelectionIndex() - 1);
-		if(index >= 0 && index < this.collections.size()){
+		if(index >= 0 && index < this.collections.size()) {
 			return ( (TGBrowserCollection)this.collections.get(index) );
 		}
 		return null;
@@ -56,11 +56,11 @@ public class TGBrowserCollectionCombo {
 		this.combo.select( ( index + 1 ) );
 	}
 	
-	public void setEnabled(boolean enabled){
+	public void setEnabled(boolean enabled) {
 		this.combo.setEnabled(enabled);
 	}
 	
-	public boolean isEmpty(){
+	public boolean isEmpty() {
 		return this.collections.isEmpty();
 	}
 }

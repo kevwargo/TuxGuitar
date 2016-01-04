@@ -13,7 +13,7 @@ import org.herac.tuxguitar.gui.undo.UndoableEdit;
 import org.herac.tuxguitar.gui.undo.undoables.UndoableCaretHelper;
 import org.herac.tuxguitar.song.models.TGTrack;
 
-public class UndoableChangeClef implements UndoableEdit{
+public class UndoableChangeClef implements UndoableEdit {
 	private int doAction;
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
@@ -24,12 +24,12 @@ public class UndoableChangeClef implements UndoableEdit{
 	private boolean toEnd;
 	private TGTrack track;
 	
-	private UndoableChangeClef(){
+	private UndoableChangeClef() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track, this.position, this.redoableClef, this.toEnd);
@@ -40,13 +40,13 @@ public class UndoableChangeClef implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track, this.position, this.undoableClef, this.toEnd);
-		if(this.toEnd){
+		if(this.toEnd) {
 			Iterator it = this.nextClefPositions.iterator();
-			while(it.hasNext()){
+			while(it.hasNext()) {
 				ClefPosition ksp = (ClefPosition)it.next();
 				TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track, ksp.getPosition(), ksp.getClef(), true);
 			}
@@ -65,7 +65,7 @@ public class UndoableChangeClef implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableChangeClef startUndo(){
+	public static UndoableChangeClef startUndo() {
 		UndoableChangeClef undoable = new UndoableChangeClef();
 		Caret caret = getCaret();
 		undoable.doAction = UNDO_ACTION;
@@ -77,11 +77,11 @@ public class UndoableChangeClef implements UndoableEdit{
 		
 		int prevClef = undoable.undoableClef;
 		Iterator it = caret.getTrack().getMeasures();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			TGMeasureImpl measure = (TGMeasureImpl)it.next();
-			if(measure.getStart() > undoable.position){
+			if(measure.getStart() > undoable.position) {
 				int currClef = measure.getClef();
-				if(prevClef != currClef){
+				if(prevClef != currClef) {
 					ClefPosition tsp = undoable.new ClefPosition(measure.getStart(), currClef);
 					undoable.nextClefPositions.add(tsp);
 				}
@@ -92,18 +92,18 @@ public class UndoableChangeClef implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableChangeClef endUndo(int clef, boolean toEnd){
+	public UndoableChangeClef endUndo(int clef, boolean toEnd) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoableClef = clef;
 		this.toEnd = toEnd;
 		return this;
 	}
 	
-	private static Caret getCaret(){
+	private static Caret getCaret() {
 		return TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 	}
 	
-	private class ClefPosition{
+	private class ClefPosition {
 		private long position;
 		private int clef;
 		

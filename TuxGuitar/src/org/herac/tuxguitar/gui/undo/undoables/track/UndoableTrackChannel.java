@@ -13,23 +13,23 @@ import org.herac.tuxguitar.song.models.TGChannel;
 import org.herac.tuxguitar.song.models.TGSong;
 import org.herac.tuxguitar.song.models.TGTrack;
 
-public class UndoableTrackChannel implements UndoableEdit{
+public class UndoableTrackChannel implements UndoableEdit {
 	private int doAction;
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
 	private List undoChannels;
 	private List redoChannels;
 	
-	private UndoableTrackChannel(){
+	private UndoableTrackChannel() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TGSong song = TuxGuitar.instance().getSongManager().getSong();
-		for( int i = 0; i < this.redoChannels.size(); i ++){
+		for( int i = 0; i < this.redoChannels.size(); i ++) {
 			TGChannel channel = (TGChannel)this.redoChannels.get(i);
 			TGTrack track = song.getTrack(i);
 			channel.copy( track.getChannel() );
@@ -46,11 +46,11 @@ public class UndoableTrackChannel implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TGSong song = TuxGuitar.instance().getSongManager().getSong();
-		for( int i = 0; i < this.undoChannels.size(); i ++){
+		for( int i = 0; i < this.undoChannels.size(); i ++) {
 			TGChannel channel = (TGChannel)this.undoChannels.get(i);
 			TGTrack track = song.getTrack(i);
 			channel.copy( track.getChannel() );
@@ -75,7 +75,7 @@ public class UndoableTrackChannel implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableTrackChannel startUndo(){
+	public static UndoableTrackChannel startUndo() {
 		TGSong song = TuxGuitar.instance().getSongManager().getSong();
 		TGFactory factory = TuxGuitar.instance().getSongManager().getFactory();
 		int tracks = song.countTracks();
@@ -85,14 +85,14 @@ public class UndoableTrackChannel implements UndoableEdit{
 		undoable.undoCaret = new UndoableCaretHelper();
 		undoable.undoChannels = new ArrayList();
 		
-		for( int i = 0; i < tracks; i ++){
+		for( int i = 0; i < tracks; i ++) {
 			TGTrack track = song.getTrack(i);
 			undoable.undoChannels.add( track.getChannel().clone(factory) );
 		}
 		return undoable;
 	}
 	
-	public UndoableTrackChannel endUndo(){
+	public UndoableTrackChannel endUndo() {
 		TGSong song = TuxGuitar.instance().getSongManager().getSong();
 		TGFactory factory = TuxGuitar.instance().getSongManager().getFactory();
 		int tracks = song.countTracks();
@@ -100,7 +100,7 @@ public class UndoableTrackChannel implements UndoableEdit{
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoChannels = new ArrayList();
 		
-		for( int i = 0; i < tracks; i ++){
+		for( int i = 0; i < tracks; i ++) {
 			TGTrack track = song.getTrack(i);
 			this.redoChannels.add( track.getChannel().clone(factory) );
 		}

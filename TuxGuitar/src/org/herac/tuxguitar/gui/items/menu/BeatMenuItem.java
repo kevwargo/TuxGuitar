@@ -39,7 +39,7 @@ import org.herac.tuxguitar.song.models.TGStroke;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class BeatMenuItem extends MenuItems{
+public class BeatMenuItem extends MenuItems {
 	
 	private MenuItem noteMenuItem;
 	private Menu menu;
@@ -69,7 +69,7 @@ public class BeatMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//--Tied Note
 		this.tiedNote = new MenuItem(this.menu, SWT.CHECK);
 		this.tiedNote.addSelectionListener(TuxGuitar.instance().getAction(ChangeTiedNoteAction.NAME));
@@ -173,7 +173,7 @@ public class BeatMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		Caret caret = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 		TGBeat beat = caret.getSelectedBeat();
 		TGNote note = caret.getSelectedNote();
@@ -204,7 +204,7 @@ public class BeatMenuItem extends MenuItems{
 		this.dynamicMenuItem.update();
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.noteMenuItem, "beat", null);
 		setMenuItemTextAndAccelerator(this.cleanBeat, "beat.clean", CleanBeatAction.NAME);
 		setMenuItemTextAndAccelerator(this.removeVoice, "beat.voice.remove-unused", RemoveUnusedVoiceAction.NAME);
@@ -229,7 +229,7 @@ public class BeatMenuItem extends MenuItems{
 		this.dynamicMenuItem.loadProperties();
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.tiedNote.setImage(TuxGuitar.instance().getIconManager().getNoteTied());
 	}
 }

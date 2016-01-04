@@ -37,11 +37,11 @@ public class EditToolItems extends ToolItems {
 	private ToolItem modeEdition;
 	private ToolItem notNaturalKey;
 	
-	public EditToolItems(){
+	public EditToolItems() {
 		super(NAME);
 	}
 	
-	public void showItems(ToolBar toolBar){
+	public void showItems(ToolBar toolBar) {
 		this.undo = new ToolItem(toolBar, SWT.PUSH);
 		this.undo.addSelectionListener(TuxGuitar.instance().getAction(UndoAction.NAME));
 		
@@ -71,7 +71,7 @@ public class EditToolItems extends ToolItems {
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.undo.setEnabled(!running && TuxGuitar.instance().getUndoableManager().canUndo());
 		this.redo.setEnabled(!running && TuxGuitar.instance().getUndoableManager().canRedo());
@@ -87,7 +87,7 @@ public class EditToolItems extends ToolItems {
 		this.notNaturalKey.setEnabled(!running && getEditor().getTablature().getEditorKit().getMouseMode() == EditorKit.MOUSE_MODE_EDITION);
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.undo.setToolTipText(TuxGuitar.getProperty("edit.undo"));
 		this.redo.setToolTipText(TuxGuitar.getProperty("edit.redo"));
 		this.voice1.setToolTipText(TuxGuitar.getProperty("edit.voice-1"));
@@ -97,7 +97,7 @@ public class EditToolItems extends ToolItems {
 		this.notNaturalKey.setToolTipText(TuxGuitar.getProperty("edit.not-natural-key"));
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.undo.setImage(TuxGuitar.instance().getIconManager().getEditUndo());
 		this.redo.setImage(TuxGuitar.instance().getIconManager().getEditRedo());
 		this.voice1.setImage(TuxGuitar.instance().getIconManager().getEditVoice1());

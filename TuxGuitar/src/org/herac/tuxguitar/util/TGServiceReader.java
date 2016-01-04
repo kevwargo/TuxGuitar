@@ -16,44 +16,44 @@ public class TGServiceReader {
 	
 	private static final String SERVICE_PATH = new String("META-INF/services/");
 	
-	public static Iterator lookupProviders(Class spi){
+	public static Iterator lookupProviders(Class spi) {
 		return TGServiceReader.lookupProviders(spi, TGClassLoader.instance().getClassLoader());
 	}
 	
-	public static Iterator lookupProviders(Class spi, ClassLoader loader){
-		try{
-			if (spi == null || loader == null){
+	public static Iterator lookupProviders(Class spi, ClassLoader loader) {
+		try {
+			if (spi == null || loader == null) {
 				throw new IllegalArgumentException();
 			}
 			return new IteratorImpl(spi, loader, loader.getResources(SERVICE_PATH + spi.getName()));
-		}catch (IOException ioex){
+		}catch (IOException ioex) {
 			return Collections.EMPTY_LIST.iterator();
 		}
 	}
 	
-	private static final class IteratorImpl implements Iterator{
+	private static final class IteratorImpl implements Iterator {
 		private Class spi;
 		private ClassLoader loader;
 		private Enumeration urls;
 		private Iterator iterator;
 		
-		public IteratorImpl(Class spi, ClassLoader loader, Enumeration urls){
+		public IteratorImpl(Class spi, ClassLoader loader, Enumeration urls) {
 			this.spi = spi;
 			this.loader = loader;
 			this.urls = urls;
 			this.initialize();
 		}
 		
-		private void initialize(){
+		private void initialize() {
 			List providers = new ArrayList();
 			while (this.urls.hasMoreElements()) {
 				URL url = (URL) this.urls.nextElement();
 				try {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 					String line = null;
-					while((line = reader.readLine()) != null){
+					while((line = reader.readLine()) != null) {
 						String provider = uncommentLine(line).trim();
-						if(provider != null && provider.length() > 0){
+						if(provider != null && provider.length() > 0) {
 							providers.add(provider);
 						}
 					}
@@ -66,9 +66,9 @@ public class TGServiceReader {
 			this.iterator = providers.iterator();
 		}
 		
-		private String uncommentLine(String line){
+		private String uncommentLine(String line) {
 			int index = line.indexOf('#');
-			if(index >= 0){
+			if(index >= 0) {
 				return (line.substring(0, index));
 			}
 			return line;
@@ -79,12 +79,12 @@ public class TGServiceReader {
 		}
 		
 		public Object next() {
-			if (!hasNext()){
+			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
 			try {
 				Object provider = this.loader.loadClass( (String)this.iterator.next() ).newInstance();
-				if(this.spi.isInstance(provider)){
+				if(this.spi.isInstance(provider)) {
 					return provider;
 				}
 			} catch (Throwable throwable) {

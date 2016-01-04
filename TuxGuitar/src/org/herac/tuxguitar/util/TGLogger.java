@@ -49,7 +49,7 @@ public class TGLogger {
 					stream.close();
 				}
 			}
-			catch (Exception e) {}
+			catch (Exception e) { }
 		}
     }
     

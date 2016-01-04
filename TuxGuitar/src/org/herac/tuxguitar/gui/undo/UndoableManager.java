@@ -31,9 +31,9 @@ public class UndoableManager {
 		if (edit == null) {
 			throw new CannotUndoException();
 		}
-		try{
+		try {
 			edit.undo();
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throw new CannotUndoException(throwable);
 		}
 		this.indexOfNextAdd--;
@@ -44,9 +44,9 @@ public class UndoableManager {
 		if (edit == null) {
 			throw new CannotRedoException();
 		}
-		try{
+		try {
 			edit.redo();
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throw new CannotRedoException();
 		}
 		this.indexOfNextAdd++;

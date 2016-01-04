@@ -27,7 +27,7 @@ import org.herac.tuxguitar.song.models.TGMeasure;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TransportMenuItem extends MenuItems{
+public class TransportMenuItem extends MenuItems {
 	private static final int STATUS_STOPPED = 1;
 	private static final int STATUS_PAUSED = 2;
 	private static final int STATUS_RUNNING = 3;
@@ -48,7 +48,7 @@ public class TransportMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		this.play = new MenuItem(this.menu, SWT.PUSH);
 		this.play.addSelectionListener(TuxGuitar.instance().getAction(TransportPlayAction.NAME));
 		
@@ -80,7 +80,7 @@ public class TransportMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		TGMeasure measure = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getMeasure();
 		MidiPlayerMode pm = TuxGuitar.instance().getPlayer().getMode();
 		this.metronome.setSelection(TuxGuitar.instance().getPlayer().isMetronomeEnabled());
@@ -91,7 +91,7 @@ public class TransportMenuItem extends MenuItems{
 		this.loadIcons(false);
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.transportMenuItem, "transport", null);
 		setMenuItemTextAndAccelerator(this.play, "transport.start", TransportPlayAction.NAME);
 		setMenuItemTextAndAccelerator(this.stop, "transport.stop", TransportStopAction.NAME);
@@ -101,31 +101,31 @@ public class TransportMenuItem extends MenuItems{
 		setMenuItemTextAndAccelerator(this.loopEHeader, "transport.set-loop-end", TransportSetLoopEHeaderAction.NAME);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.loadIcons(true);
 		this.mode.setImage(TuxGuitar.instance().getIconManager().getTransportMode());
 		this.metronome.setImage(TuxGuitar.instance().getIconManager().getTransportMetronome());
 	}
 	
-	public void loadIcons(boolean force){
+	public void loadIcons(boolean force) {
 		int lastStatus = this.status;
 		
-		if(TuxGuitar.instance().getPlayer().isRunning()){
+		if(TuxGuitar.instance().getPlayer().isRunning()) {
 			this.status = STATUS_RUNNING;
-		}else if(TuxGuitar.instance().getPlayer().isPaused()){
+		}else if(TuxGuitar.instance().getPlayer().isPaused()) {
 			this.status = STATUS_PAUSED;
-		}else{
+		}else {
 			this.status = STATUS_STOPPED;
 		}
 		
-		if(force || lastStatus != this.status){
-			if(this.status == STATUS_RUNNING){
+		if(force || lastStatus != this.status) {
+			if(this.status == STATUS_RUNNING) {
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop2());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPause());
-			}else if(this.status == STATUS_PAUSED){
+			}else if(this.status == STATUS_PAUSED) {
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop2());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPlay2());
-			}else if(this.status == STATUS_STOPPED){
+			}else if(this.status == STATUS_STOPPED) {
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop1());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPlay1());
 			}

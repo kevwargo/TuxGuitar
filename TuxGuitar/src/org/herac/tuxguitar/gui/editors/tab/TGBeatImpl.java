@@ -12,7 +12,7 @@ import org.herac.tuxguitar.song.models.TGNoteEffect;
 import org.herac.tuxguitar.song.models.TGStroke;
 import org.herac.tuxguitar.song.models.TGVoice;
 
-public class TGBeatImpl extends TGBeat{
+public class TGBeatImpl extends TGBeat {
 	/**
 	 * desviacion a la izquierda
 	 */
@@ -56,7 +56,7 @@ public class TGBeatImpl extends TGBeat{
 	private boolean trill;
 	private boolean fadeIn;
 	
-	public TGBeatImpl(TGFactory factory){
+	public TGBeatImpl(TGFactory factory) {
 		super(factory);
 	}
 	
@@ -76,11 +76,11 @@ public class TGBeatImpl extends TGBeat{
 		this.width = width;
 	}
 	
-	public TGNoteImpl getMinNote(){
+	public TGNoteImpl getMinNote() {
 		return this.minNote;
 	}
 	
-	public TGNoteImpl getMaxNote(){
+	public TGNoteImpl getMaxNote() {
 		return this.maxNote;
 	}
 	
@@ -89,7 +89,7 @@ public class TGBeatImpl extends TGBeat{
 	}
 	
 	public boolean[] getUsedStrings() {
-		if(this.usedStrings == null){
+		if(this.usedStrings == null) {
 			this.usedStrings = new boolean[getMeasure().getTrack().stringCount()];
 		}
 		return this.usedStrings;
@@ -151,41 +151,41 @@ public class TGBeatImpl extends TGBeat{
 		this.group = group;
 	}
 	
-	public int getSpacing(){
+	public int getSpacing() {
 		return getMeasureImpl().getBeatSpacing(this);
 	}
 	
-	public boolean isPlaying(ViewLayout layout){
+	public boolean isPlaying(ViewLayout layout) {
 		return (getMeasureImpl().isPlaying(layout) && TuxGuitar.instance().getEditorCache().isPlaying(getMeasure(), this));
 	}
 	
-	public TGVoiceImpl getVoiceImpl(int index){
+	public TGVoiceImpl getVoiceImpl(int index) {
 		TGVoice voice = super.getVoice(index);
-		if(voice instanceof TGVoiceImpl){
+		if(voice instanceof TGVoiceImpl) {
 			return (TGVoiceImpl)voice;
 		}
 		return null;
 	}
 	
-	public void reset(){
+	public void reset() {
 		this.maxNote = null;
 		this.minNote = null;
 		this.usedStrings = new boolean[getMeasure().getTrack().stringCount()];
 	}
 	
-	public void check( ViewLayout layout , TGNoteImpl note){
+	public void check( ViewLayout layout , TGNoteImpl note) {
 		int value = note.getRealValue();
-		if(this.maxNote == null || value > this.maxNote.getRealValue()){
+		if(this.maxNote == null || value > this.maxNote.getRealValue()) {
 			this.maxNote = note;
 		}
-		if(this.minNote == null || value < this.minNote.getRealValue()){
+		if(this.minNote == null || value < this.minNote.getRealValue()) {
 			this.minNote = note;
 		}
 		this.getUsedStrings();
 		this.usedStrings[note.getString() - 1] = true;
 	}
 	
-	public void resetEffectsSpacing( ViewLayout layout ){
+	public void resetEffectsSpacing( ViewLayout layout ) {
 		this.bs = new TGBeatSpacing( layout );
 		this.accentuated = false;
 		this.heavyAccentuated = false;
@@ -199,79 +199,79 @@ public class TGBeatImpl extends TGBeat{
 		this.trill = false;
 	}
 	
-	public void updateEffectsSpacing(ViewLayout layout, TGNoteEffect effect){
-		if(effect.isAccentuatedNote()){
+	public void updateEffectsSpacing(ViewLayout layout, TGNoteEffect effect) {
+		if(effect.isAccentuatedNote()) {
 			this.accentuated = true;
 		}
-		if(effect.isHeavyAccentuatedNote()){
+		if(effect.isHeavyAccentuatedNote()) {
 			this.heavyAccentuated = true;
 		}
-		if(effect.isHarmonic() && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ){
+		if(effect.isHarmonic() && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ) {
 			this.harmonic = true;
 		}
-		if(effect.isTapping()){
+		if(effect.isTapping()) {
 			this.tapping = true;
 		}
-		if(effect.isSlapping()){
+		if(effect.isSlapping()) {
 			this.slapping = true;
 		}
-		if(effect.isPopping()){
+		if(effect.isPopping()) {
 			this.popping = true;
 		}
-		if(effect.isPalmMute()){
+		if(effect.isPalmMute()) {
 			this.palmMute = true;
 		}
-		if(effect.isFadeIn()){
+		if(effect.isFadeIn()) {
 			this.fadeIn = true;
 		}
-		if(effect.isVibrato()){
+		if(effect.isVibrato()) {
 			this.vibrato = true;
 		}
-		if(effect.isTrill()){
+		if(effect.isTrill()) {
 			this.trill = true;
 		}
 	}
 	
-	public int getEffectsSpacing(ViewLayout layout){
-		if(this.accentuated){
+	public int getEffectsSpacing(ViewLayout layout) {
+		if(this.accentuated) {
 			this.bs.setSize(TGBeatSpacing.POSITION_ACCENTUATED_EFFECT, layout.getEffectSpacing());
 		}
-		if(this.heavyAccentuated){
+		if(this.heavyAccentuated) {
 			this.bs.setSize(TGBeatSpacing.POSITION_HEAVY_ACCENTUATED_EFFECT, layout.getEffectSpacing());
 		}
-		if(this.harmonic){
+		if(this.harmonic) {
 			this.bs.setSize(TGBeatSpacing.POSITION_HARMONIC_EFFEC, layout.getEffectSpacing());
 		}
-		if(this.tapping){
+		if(this.tapping) {
 			this.bs.setSize(TGBeatSpacing.POSITION_TAPPING_EFFEC, layout.getEffectSpacing());
 		}
-		if(this.slapping){
+		if(this.slapping) {
 			this.bs.setSize(TGBeatSpacing.POSITION_SLAPPING_EFFEC, layout.getEffectSpacing());
 		}
-		if(this.popping){
+		if(this.popping) {
 			this.bs.setSize(TGBeatSpacing.POSITION_POPPING_EFFEC, layout.getEffectSpacing());
 		}
-		if(this.palmMute){
+		if(this.palmMute) {
 			this.bs.setSize(TGBeatSpacing.POSITION_PALM_MUTE_EFFEC, layout.getEffectSpacing());
 		}
-		if(this.fadeIn){
+		if(this.fadeIn) {
 			this.bs.setSize(TGBeatSpacing.POSITION_FADE_IN, layout.getEffectSpacing());
 		}
-		if(this.vibrato){
+		if(this.vibrato) {
 			this.bs.setSize(TGBeatSpacing.POSITION_VIBRATO_EFFEC, layout.getEffectSpacing());
 		}
-		if(this.trill){
+		if(this.trill) {
 			this.bs.setSize(TGBeatSpacing.POSITION_TRILL_EFFEC, layout.getEffectSpacing());
 		}
 		return this.bs.getSize();
 	}
 	
-	public void play(){
-		if(!TuxGuitar.instance().getPlayer().isRunning()){
+	public void play() {
+		if(!TuxGuitar.instance().getPlayer().isRunning()) {
 			new Thread(new Runnable() {
 				public void run() {
 					List notes = new ArrayList();
-					for( int v = 0; v < countVoices(); v ++){
+					for( int v = 0; v < countVoices(); v ++) {
 						notes.addAll( getVoice(v).getNotes() );
 					}
 					TuxGuitar.instance().getPlayer().playBeat(getMeasure().getTrack(), notes);
@@ -281,32 +281,32 @@ public class TGBeatImpl extends TGBeat{
 	}
 	
 	public void paint(ViewLayout layout, TGPainter painter, int fromX, int fromY/*, boolean playMode*/) {
-		if(!layout.isPlayModeEnabled() && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0 ){
+		if(!layout.isPlayModeEnabled() && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0 ) {
 			paintExtraLines(painter, layout, fromX, fromY);
 		}
-		for(int v = 0; v < TGBeat.MAX_VOICES; v ++){
+		for(int v = 0; v < TGBeat.MAX_VOICES; v ++) {
 			getVoiceImpl(v).paint(layout, painter, fromX, fromY);
 		}
-		if(!layout.isPlayModeEnabled()){
-			if(isChordBeat()){
+		if(!layout.isPlayModeEnabled()) {
+			if(isChordBeat()) {
 				TGChordImpl chord = (TGChordImpl)getChord();
 				chord.paint(layout, painter, fromX, fromY);
 			}
-			if(getStroke().getDirection() != TGStroke.STROKE_NONE){
+			if(getStroke().getDirection() != TGStroke.STROKE_NONE) {
 				paintStroke(layout, painter, fromX, fromY);
 			}
 		}
 	}
 	
-	public void paintExtraLines(TGPainter painter, ViewLayout layout, int fromX, int fromY){
-		if(!isRestBeat()){
+	public void paintExtraLines(TGPainter painter, ViewLayout layout, int fromX, int fromY) {
+		if(!isRestBeat()) {
 			int scoreY = (fromY + getMeasureImpl().getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES));
 			paintExtraLines(painter, layout, getMinNote(), fromX, scoreY);
 			paintExtraLines(painter, layout, getMaxNote(), fromX, scoreY);
 		}
 	}
 	
-	private void paintExtraLines(TGPainter painter, ViewLayout layout, TGNoteImpl note, int fromX, int fromY){
+	private void paintExtraLines(TGPainter painter, ViewLayout layout, TGNoteImpl note, int fromX, int fromY) {
 		float scale = layout.getScale();
 		int y = fromY + note.getScorePosY();
 		int x = fromX + getPosX() + getSpacing();
@@ -316,16 +316,16 @@ public class TGBeatImpl extends TGBeat{
 		int scoreLineSpacing = layout.getScoreLineSpacing();
 		
 		layout.setLineStyle(painter);
-		if(y < fromY){
-			for(int i = fromY;i > y;i -= scoreLineSpacing){
+		if(y < fromY) {
+			for(int i = fromY;i > y;i -= scoreLineSpacing) {
 				painter.initPath();
 				painter.setAntialias(false);
 				painter.moveTo(x1, i);
 				painter.lineTo(x2, i);
 				painter.closePath();
 			}
-		}else if(y > (fromY + (scoreLineSpacing * 4))){
-			for(int i = (fromY +(scoreLineSpacing * 5));i < (y + scoreLineSpacing);i += scoreLineSpacing){
+		}else if(y > (fromY + (scoreLineSpacing * 4))) {
+			for(int i = (fromY +(scoreLineSpacing * 5));i < (y + scoreLineSpacing);i += scoreLineSpacing) {
 				painter.initPath();
 				painter.setAntialias(false);
 				painter.moveTo(x1, i);
@@ -335,30 +335,30 @@ public class TGBeatImpl extends TGBeat{
 		}
 	}
 	
-	public void paintStroke(ViewLayout layout, TGPainter painter, int fromX, int fromY){
+	public void paintStroke(ViewLayout layout, TGPainter painter, int fromX, int fromY) {
 		int style = layout.getStyle();
 		float scale = layout.getScale();
 		float x = (fromX + getPosX() + getSpacing() + ( 12f * scale ));
 		float y1 = 0;
 		float y2 = 0;
-		if((style & ViewLayout.DISPLAY_SCORE) != 0){
+		if((style & ViewLayout.DISPLAY_SCORE) != 0) {
 			float y = (fromY + getPaintPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES)); 
 			y1 = (y + layout.getScoreLineSpacing());
 			y2 = (y + (getMeasureImpl().getTrackImpl().getScoreHeight() - layout.getScoreLineSpacing()));
 		}
-		if((style & ViewLayout.DISPLAY_TABLATURE) != 0){
+		if((style & ViewLayout.DISPLAY_TABLATURE) != 0) {
 			float y = (fromY + getPaintPosition(TGTrackSpacing.POSITION_TABLATURE));
 			y1 = (y + layout.getStringSpacing());
 			y2 = (y + (getMeasureImpl().getTrackImpl().getTabHeight() - layout.getStringSpacing()));
 		}
-		else if((style & ViewLayout.DISPLAY_SCORE) != 0){
+		else if((style & ViewLayout.DISPLAY_SCORE) != 0) {
 			float y = (fromY + getPaintPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES)); 
 			y1 = (y + layout.getScoreLineSpacing());
 			y2 = (y + (getMeasureImpl().getTrackImpl().getScoreHeight() - layout.getScoreLineSpacing()));
-		}else{
+		}else {
 			return;
 		}
-		if( getStroke().getDirection() == TGStroke.STROKE_UP ){
+		if( getStroke().getDirection() == TGStroke.STROKE_UP ) {
 			painter.initPath();
 			painter.setAntialias(false);
 			painter.moveTo( x, y1 );
@@ -367,7 +367,7 @@ public class TGBeatImpl extends TGBeat{
 			painter.moveTo( x , y2 );
 			painter.lineTo( x + (2.0f * scale), y2 - (5.0f * scale));
 			painter.closePath();
-		}else if( getStroke().getDirection() == TGStroke.STROKE_DOWN ){
+		}else if( getStroke().getDirection() == TGStroke.STROKE_DOWN ) {
 			painter.initPath();
 			painter.setAntialias(false);
 			painter.moveTo( x, y2 );
@@ -379,24 +379,24 @@ public class TGBeatImpl extends TGBeat{
 		}
 	}
 	
-	public int getPaintPosition(int index){
+	public int getPaintPosition(int index) {
 		return getMeasureImpl().getTs().getPosition(index);
 	}
 	
-	public TGBeatSpacing getBs(){
+	public TGBeatSpacing getBs() {
 		return this.bs;
 	}
 	
-	public void removeChord(){
-		if(isChordBeat()){
+	public void removeChord() {
+		if(isChordBeat()) {
 			TGChordImpl chord = (TGChordImpl)getChord();
 			chord.dispose();
 		}
 		super.removeChord();
 	}
 	
-	public void dispose(){
-		if(isChordBeat()){
+	public void dispose() {
+		if(isChordBeat()) {
 			TGChordImpl chord = (TGChordImpl)getChord();
 			chord.dispose();
 		}

@@ -29,7 +29,7 @@ public abstract class TGEffectTrill {
 		this.duration = duration;
 	}
 	
-	public TGEffectTrill clone(TGFactory factory){
+	public TGEffectTrill clone(TGFactory factory) {
 		TGEffectTrill effect = factory.newEffectTrill();
 		effect.setFret(getFret());
 		effect.getDuration().setValue(getDuration().getValue());

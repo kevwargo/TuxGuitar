@@ -13,7 +13,7 @@ import org.herac.tuxguitar.song.helpers.TGSongSegment;
 import org.herac.tuxguitar.song.helpers.TGSongSegmentHelper;
 import org.herac.tuxguitar.song.models.TGMarker;
 
-public class UndoableRemoveMeasure implements UndoableEdit{
+public class UndoableRemoveMeasure implements UndoableEdit {
 	private int doAction;
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
@@ -22,7 +22,7 @@ public class UndoableRemoveMeasure implements UndoableEdit{
 	private int n1;
 	private int n2;
 	
-	public UndoableRemoveMeasure(int n1, int n2){
+	public UndoableRemoveMeasure(int n1, int n2) {
 		this.doAction = UNDO_ACTION;
 		this.undoCaret = new UndoableCaretHelper();
 		this.n1 = n1;
@@ -32,7 +32,7 @@ public class UndoableRemoveMeasure implements UndoableEdit{
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TuxGuitar.instance().getSongManager().removeMeasureHeaders(this.n1, this.n2);
@@ -43,7 +43,7 @@ public class UndoableRemoveMeasure implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		new TGSongSegmentHelper(TuxGuitar.instance().getSongManager()).insertMeasures(this.tracksMeasures.clone(TuxGuitar.instance().getSongManager().getFactory()), this.n1, 0, 0);
@@ -63,26 +63,26 @@ public class UndoableRemoveMeasure implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public UndoableRemoveMeasure endUndo(){
+	public UndoableRemoveMeasure endUndo() {
 		this.redoCaret = new UndoableCaretHelper();
 		return this;
 	}
 	
-	private class UndoMarkers{
+	private class UndoMarkers {
 		private List markers;
 		
-		public UndoMarkers(){
+		public UndoMarkers() {
 			this.markers = new ArrayList();
 			Iterator it = TuxGuitar.instance().getSongManager().getMarkers().iterator();
-			while(it.hasNext()){
+			while(it.hasNext()) {
 				this.markers.add(((TGMarker)it.next()).clone(TuxGuitar.instance().getSongManager().getFactory()));
 			}
 		}
 		
-		public void undo(){
+		public void undo() {
 			TuxGuitar.instance().getSongManager().removeAllMarkers();
 			Iterator it = this.markers.iterator();
-			while(it.hasNext()){
+			while(it.hasNext()) {
 				TGMarker marker = (TGMarker)it.next();
 				TuxGuitar.instance().getSongManager().updateMarker(marker.clone(TuxGuitar.instance().getSongManager().getFactory()));
 			}

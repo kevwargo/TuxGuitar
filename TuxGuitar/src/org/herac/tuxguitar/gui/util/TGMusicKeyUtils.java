@@ -15,33 +15,33 @@ public class TGMusicKeyUtils {
 	
 	public static final String PREFIX_MATRIX = "matrix";
 	
-	private static final String[][] DEFAULT_KEY_NAMES = new String[][]{
-		{"C","C#","Cb"},
-		{"D","D#","Db"},
-		{"E","E#","Eb"},
-		{"F","F#","Fb"},
-		{"G","G#","Gb"},
-		{"A","A#","Ab"},
-		{"B","B#","Bb"}
+	private static final String[][] DEFAULT_KEY_NAMES = new String[][] {
+		{"C","C#","Cb" },
+		{"D","D#","Db" },
+		{"E","E#","Eb" },
+		{"F","F#","Fb" },
+		{"G","G#","Gb" },
+		{"A","A#","Ab" },
+		{"B","B#","Bb" }
 	};
 	
-	public static String[] getSharpKeyNames(String prefix){
+	public static String[] getSharpKeyNames(String prefix) {
 		return new TGMusicKeyNames(true, prefix).getNames();
 	}
 	
-	public static String[] getFlatKeyNames(String prefix){
+	public static String[] getFlatKeyNames(String prefix) {
 		return new TGMusicKeyNames(false, prefix).getNames();
 	}
 	
-	protected static void loadKeyNames(String[] names, String prefix, boolean sharp){
-		if(sharp){
+	protected static void loadKeyNames(String[] names, String prefix, boolean sharp) {
+		if(sharp) {
 			loadSharpKeyNames(names, prefix);
-		}else{
+		}else {
 			loadFlatKeyNames(names, prefix);
 		}
 	}
 	
-	private static void loadSharpKeyNames(String[] names, String prefix){
+	private static void loadSharpKeyNames(String[] names, String prefix) {
 		names[0] = getName(prefix, 0, 0);
 		names[1] = getName(prefix, 0, 1);
 		names[2] = getName(prefix, 1, 0);
@@ -56,7 +56,7 @@ public class TGMusicKeyUtils {
 		names[11] = getName(prefix, 6, 0);
 	}
 	
-	private static void loadFlatKeyNames(String[] names, String prefix){
+	private static void loadFlatKeyNames(String[] names, String prefix) {
 		names[0] = getName(prefix, 0, 0);
 		names[1] = getName(prefix, 1, 2);
 		names[2] = getName(prefix, 1, 0);
@@ -71,19 +71,19 @@ public class TGMusicKeyUtils {
 		names[11] = getName(prefix, 6, 0);
 	}
 	
-	private static String getName(String prefix, int key, int signature){
+	private static String getName(String prefix, int key, int signature) {
 		String resource = ("key." + prefix + "." + key + "." + signature);
 		return TuxGuitar.instance().getLanguageManager().getProperty(resource, DEFAULT_KEY_NAMES[key][signature]);
 	}
 }
 
-class TGMusicKeyNames implements LanguageLoader{
+class TGMusicKeyNames implements LanguageLoader {
 	
 	private boolean sharp;
 	private String prefix;
 	private String[] names;
 	
-	public TGMusicKeyNames(boolean sharp, String prefix){
+	public TGMusicKeyNames(boolean sharp, String prefix) {
 		this.sharp = sharp;
 		this.prefix = prefix;
 		this.names = new String[12];
@@ -92,7 +92,7 @@ class TGMusicKeyNames implements LanguageLoader{
 		TuxGuitar.instance().getLanguageManager().addLoader(this);
 	}
 	
-	public String[] getNames(){
+	public String[] getNames() {
 		return this.names;
 	}
 	

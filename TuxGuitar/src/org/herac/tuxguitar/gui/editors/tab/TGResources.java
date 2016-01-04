@@ -70,19 +70,19 @@ public class TGResources {
 	
 	private int scoreNoteWidth;
 	
-	public TGResources(ViewLayout layout){
+	public TGResources(ViewLayout layout) {
 		this.layout = layout;
 		this.resources = new ArrayList();
 	}
 	
-	public void load(){
+	public void load() {
 		this.dispose();
 		this.initFonts();
 		this.initColors();
 		this.initImages();
 	}
 	
-	public ViewLayout getLayout(){
+	public ViewLayout getLayout() {
 		return this.layout;
 	}
 	
@@ -98,23 +98,23 @@ public class TGResources {
 		return this.timeSignatureFont;
 	}
 	
-	public Font getLyricFont(){
+	public Font getLyricFont() {
 		return this.lyricFont;
 	}
 	
-	public Font getTextFont(){
+	public Font getTextFont() {
 		return this.textFont;
 	}
 	
-	public Font getMarkerFont(){
+	public Font getMarkerFont() {
 		return this.markerFont;
 	}
 	
-	public Font getChordFont(){
+	public Font getChordFont() {
 		return this.chordFont;
 	}
 	
-	public Font getChordFretFont(){
+	public Font getChordFretFont() {
 		return this.chordFretFont;
 	}
 	
@@ -202,19 +202,19 @@ public class TGResources {
 		return this.tempoImage;
 	}
 	
-	public Image getTripletFeel8(){
+	public Image getTripletFeel8() {
 		return this.tripletFeel8;
 	}
 	
-	public Image getTripletFeelNone8(){
+	public Image getTripletFeelNone8() {
 		return this.tripletFeelNone8;
 	}
 	
-	public Image getTripletFeel16(){
+	public Image getTripletFeel16() {
 		return this.tripletFeel16;
 	}
 	
-	public Image getTripletFeelNone16(){
+	public Image getTripletFeelNone16() {
 		return this.tripletFeelNone16;
 	}
 	
@@ -232,11 +232,11 @@ public class TGResources {
 		return this.harmonicNotes[index];
 	}
 	
-	public int getScoreNoteWidth(){
+	public int getScoreNoteWidth() {
 		return this.scoreNoteWidth;
 	}
 	
-	private void initFonts(){
+	private void initFonts() {
 		float scale = this.layout.getFontScale() ;
 		this.defaultFont = getFont(TGConfigKeys.FONT_DEFAULT, scale);
 		this.noteFont = getFont(TGConfigKeys.FONT_NOTE, scale);
@@ -256,7 +256,7 @@ public class TGResources {
 		this.printerChordFont = getFont(TGConfigKeys.FONT_PRINTER_CHORD, scale);
 	}
 	
-	private void initColors(){
+	private void initColors() {
 		this.backgroundColor = getColor(TGConfigKeys.COLOR_BACKGROUND);
 		this.lineColor = getColor(TGConfigKeys.COLOR_LINE);
 		this.scoreNoteColor = getColor(TGConfigKeys.COLOR_SCORE_NOTE);
@@ -272,7 +272,7 @@ public class TGResources {
 		this.colorRed = TuxGuitar.instance().getDisplay().getSystemColor(SWT.COLOR_RED);
 	}
 	
-	private void initImages(){
+	private void initImages() {
 		this.scoreNotes = new Image[4];
 		this.scoreNotes[SCORE_NOTE_EMPTY_NORMAL_MODE] = getScoreNoteImage( getScoreNoteColor(), false);
 		this.scoreNotes[SCORE_NOTE_EMPTY_PLAY_MODE] = getScoreNoteImage( getPlayNoteColor(), false);
@@ -293,9 +293,9 @@ public class TGResources {
 		this.tripletFeelNone16 = getTripletFeelNone16(this.getColorBlack());
 	}
 	
-	private Font getFont(String key, float scale){
+	private Font getFont(String key, float scale) {
 		FontData data = TuxGuitar.instance().getConfig().getFontDataConfigValue(key);
-		if(data == null){
+		if(data == null) {
 			data = new FontData();
 		}
 		float height = ( data.getHeight() * scale );
@@ -307,9 +307,9 @@ public class TGResources {
 		return font;
 	}
 	
-	private Color getColor(String key){
+	private Color getColor(String key) {
 		RGB rgb = TuxGuitar.instance().getConfig().getRGBConfigValue(key);
-		if(rgb == null){
+		if(rgb == null) {
 			rgb = new RGB(0, 0, 0);
 		}
 		Color color = new Color(TuxGuitar.instance().getDisplay(), rgb);
@@ -455,7 +455,7 @@ public class TGResources {
 		return getImageMask(image, getBackgroundColor().getRGB(), color.getRGB());
 	}
 	
-	private Image getImage(int width, int height){
+	private Image getImage(int width, int height) {
 		Image image = new Image(getLayout().getTablature().getDisplay(), width, height);
 		TGPainter painter = new TGPainter(new GC(image));
 		painter.setBackground( getBackgroundColor());
@@ -466,7 +466,7 @@ public class TGResources {
 		return image;
 	}
 	
-	private Image getImageMask(Image src, RGB alpha, RGB none){
+	private Image getImageMask(Image src, RGB alpha, RGB none) {
 		ImageData srcData = src.getImageData();
 		ImageData maskData = ImageUtils.applyMask(srcData, alpha , none);
 		src.dispose();
@@ -475,9 +475,9 @@ public class TGResources {
 		return image;
 	}
 	
-	public void dispose(){
+	public void dispose() {
 		Iterator it = this.resources.iterator();
-		while( it.hasNext() ){
+		while( it.hasNext() ) {
 			Resource resource = (Resource)it.next();
 			resource.dispose();
 		}

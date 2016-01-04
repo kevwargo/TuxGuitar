@@ -19,14 +19,14 @@ import org.herac.tuxguitar.song.models.TGDuration;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ChangeDottedDurationAction extends Action{
+public class ChangeDottedDurationAction extends Action {
 	public static final String NAME = "action.note.duration.change-dotted";
 	
 	public ChangeDottedDurationAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		//comienza el undoable
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
@@ -48,7 +48,7 @@ public class ChangeDottedDurationAction extends Action{
 		fireUpdate(getEditor().getTablature().getCaret().getMeasure().getNumber());
 	}
 	
-	public TGDuration getSelectedDuration(){
+	public TGDuration getSelectedDuration() {
 		return getEditor().getTablature().getCaret().getDuration();
 	}
 }

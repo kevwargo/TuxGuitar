@@ -26,7 +26,7 @@ import org.herac.tuxguitar.gui.editors.TGPainter;
 import org.herac.tuxguitar.gui.system.keybindings.KeyBindingConstants;
 import org.herac.tuxguitar.gui.util.DialogUtils;
 
-public class PrintPreview{
+public class PrintPreview {
 	private static final int SCROLL_INCREMENT = 50;
 	private static final int MARGIN_TOP = 20;
 	private static final int MARGIN_BOTTOM = 40;
@@ -43,12 +43,12 @@ public class PrintPreview{
 	protected List pages;
 	protected int currentPage;
 	
-	public PrintPreview(List pages, Rectangle bounds){
+	public PrintPreview(List pages, Rectangle bounds) {
 		this.pages = pages;
 		this.bounds = bounds;
 	}
 	
-	public void showPreview(Shell parent){
+	public void showPreview(Shell parent) {
 		this.dialog = DialogUtils.newDialog(parent, SWT.SHELL_TRIM | SWT.APPLICATION_MODAL );
 		this.dialog.setLayout(new GridLayout());
 		this.dialog.setText(TuxGuitar.getProperty("print.preview"));
@@ -60,7 +60,7 @@ public class PrintPreview{
 		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_MAXIMIZED | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
-	private void initToolBar(){
+	private void initToolBar() {
 		Composite composite = new Composite(this.dialog, SWT.NONE);
 		composite.setLayout(new GridLayout(5, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
@@ -76,11 +76,11 @@ public class PrintPreview{
 		
 		this.currentText.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
-				if(e.keyCode == KeyBindingConstants.ENTER){
-					try{
+				if(e.keyCode == KeyBindingConstants.ENTER) {
+					try {
 						Integer number = new Integer(PrintPreview.this.currentText.getText());
 						changePage(number.intValue() - 1);
-					}catch(NumberFormatException exception){
+					}catch(NumberFormatException exception) {
 						changePage(PrintPreview.this.currentPage);
 					}
 				}
@@ -88,14 +88,14 @@ public class PrintPreview{
 		});
 		this.previous.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(PrintPreview.this.currentPage >= 0){
+				if(PrintPreview.this.currentPage >= 0) {
 					changePage(PrintPreview.this.currentPage - 1);
 				}
 			}
 		});
 		this.next.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(PrintPreview.this.currentPage >= 0){
+				if(PrintPreview.this.currentPage >= 0) {
 					changePage(PrintPreview.this.currentPage + 1);
 				}
 			}
@@ -109,14 +109,14 @@ public class PrintPreview{
 		close.setText(TuxGuitar.getProperty("close"));
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.RIGHT, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private void initPreviewComposite(){
+	private void initPreviewComposite() {
 		this.previewComposite = new Composite(this.dialog, SWT.BORDER | SWT.V_SCROLL);
 		this.previewComposite.setLayout(new GridLayout());
 		this.previewComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -127,7 +127,7 @@ public class PrintPreview{
 		this.pageComposite.setBackground(this.previewComposite.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		this.pageComposite.addPaintListener(new PaintListener() {
 			public void paintControl(PaintEvent e) {
-				if(PrintPreview.this.currentPage >= 0){
+				if(PrintPreview.this.currentPage >= 0) {
 					updateScroll();
 					
 					int vScroll = PrintPreview.this.previewComposite.getVerticalBar().getSelection();
@@ -153,28 +153,28 @@ public class PrintPreview{
 		});
 	}
 	
-	protected void updateScroll(){
+	protected void updateScroll() {
 		ScrollBar vBar = this.previewComposite.getVerticalBar();
 		Rectangle client = this.pageComposite.getClientArea();
 		vBar.setMaximum((this.bounds.height - this.bounds.y) + (MARGIN_TOP + MARGIN_BOTTOM));
 		vBar.setThumb(Math.min((this.bounds.height - this.bounds.y) + (MARGIN_TOP + MARGIN_BOTTOM), client.height));
 	}
 	
-	protected void changePage(int index){
-		if(!this.pages.isEmpty()){
+	protected void changePage(int index) {
+		if(!this.pages.isEmpty()) {
 			int pageCount = this.pages.size();
-			if(index >= 0 && index < pageCount){
+			if(index >= 0 && index < pageCount) {
 				this.currentPage = index;
 				this.currentText.setText(Integer.toString(index + 1));
 				this.pageComposite.redraw();
-			}else if(this.currentPage >= 0 && this.currentPage < pageCount){
+			}else if(this.currentPage >= 0 && this.currentPage < pageCount) {
 				this.currentText.setText(Integer.toString(this.currentPage + 1 ));
 			}
 			this.previous.setEnabled(this.currentPage > 0);
 			this.next.setEnabled((this.currentPage + 1) < pageCount);
 			this.previewComposite.getVerticalBar().setSelection(0);
 			this.previewComposite.setFocus();
-		}else{
+		}else {
 			this.currentText.setEnabled(false);
 			this.previous.setEnabled(false);
 			this.next.setEnabled(false);

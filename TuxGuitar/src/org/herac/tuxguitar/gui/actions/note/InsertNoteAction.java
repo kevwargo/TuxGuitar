@@ -19,25 +19,25 @@ import org.herac.tuxguitar.song.models.TGBeat;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class InsertNoteAction extends Action{
+public class InsertNoteAction extends Action {
 	public static final String NAME = "action.note.general.insert";
 	
 	public InsertNoteAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGBeat beat = caret.getSelectedBeat();
-		if(beat != null){
+		if(beat != null) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
 			
-			if(beat.getVoice(caret.getVoice()).isEmpty()){
+			if(beat.getVoice(caret.getVoice()).isEmpty()) {
 				getSongManager().getMeasureManager().addSilence(beat, caret.getDuration().clone(getSongManager().getFactory()), caret.getVoice());
 			}
-			else{
+			else {
 				long start = beat.getStart();
 				long length = beat.getVoice(caret.getVoice()).getDuration().getTime();
 				getSongManager().getMeasureManager().moveVoices(caret.getMeasure(), start, length, caret.getVoice(), beat.getVoice(caret.getVoice()).getDuration());

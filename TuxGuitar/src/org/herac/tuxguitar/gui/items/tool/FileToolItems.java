@@ -32,11 +32,11 @@ public class FileToolItems extends ToolItems {
 	private ToolItem printSong;
 	private ToolItem printPreviewSong;
 	
-	public FileToolItems(){
+	public FileToolItems() {
 		super(NAME);
 	}
 	
-	public void showItems(ToolBar toolBar){
+	public void showItems(ToolBar toolBar) {
 		this.newSong = new ToolItem(toolBar, SWT.PUSH);
 		this.newSong.addSelectionListener(TuxGuitar.instance().getAction(NewFileAction.NAME));
 		
@@ -59,11 +59,11 @@ public class FileToolItems extends ToolItems {
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		//Nothing to do
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.newSong.setToolTipText(TuxGuitar.getProperty("file.new"));
 		this.openSong.setToolTipText(TuxGuitar.getProperty("file.open"));
 		this.saveSong.setToolTipText(TuxGuitar.getProperty("file.save"));
@@ -72,7 +72,7 @@ public class FileToolItems extends ToolItems {
 		this.printPreviewSong.setToolTipText(TuxGuitar.getProperty("file.print-preview"));
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.newSong.setImage(TuxGuitar.instance().getIconManager().getFileNew());
 		this.openSong.setImage(TuxGuitar.instance().getIconManager().getFileOpen());
 		this.saveSong.setImage(TuxGuitar.instance().getIconManager().getFileSave());

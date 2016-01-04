@@ -4,7 +4,7 @@ import org.herac.tuxguitar.gui.editors.TGPainter;
 
 public class TGSilencePainter {
 	
-	public static void paintWhole(TGPainter painter, float x, float y, float scale){
+	public static void paintWhole(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (0.04681015f * scale)),(y + (0.046812057f * scale)));
 		painter.lineTo((x + (0.1170311f * scale)),(y + (0.0f * scale)));
 		painter.lineTo((x + (4.3769493f * scale)),(y + (0.0f * scale)));
@@ -24,7 +24,7 @@ public class TGSilencePainter {
 		painter.lineTo((x + (0.04681015f * scale)),(y + (0.046812057f * scale)));
 	}
 	
-	public static void paintHalf(TGPainter painter, float x, float y, float scale){
+	public static void paintHalf(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (0.04681015f * scale)),(y + (0.046812057f * scale)));
 		painter.lineTo((x + (0.1170311f * scale)),(y + (0.0f * scale)));
 		painter.lineTo((x + (4.3769493f * scale)),(y + (0.0f * scale)));
@@ -44,7 +44,7 @@ public class TGSilencePainter {
 		painter.lineTo((x + (0.04681015f * scale)),(y + (0.046812057f * scale)));
 	}
 	
-	public static void paintQuarter(TGPainter painter, float x, float y, float scale){
+	public static void paintQuarter(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (2.1034088f * scale)),(y + (0.047267675f * scale)));
 		painter.cubicTo((x + (2.1979485f * scale)),(y + (0.0f * scale)),(x + (2.2924728f * scale)),(y + (0.0f * scale)),(x + (2.387024f * scale)),(y + (0.023633957f * scale)));
 		painter.cubicTo((x + (2.4579277f * scale)),(y + (0.070901394f * scale)),(x + (6.121151f * scale)),(y + (4.4195156f * scale)),(x + (6.2156906f * scale)),(y + (4.6085863f * scale)));
@@ -80,7 +80,7 @@ public class TGSilencePainter {
 		painter.cubicTo((x + (1.8670654f * scale)),(y + (0.30723906f * scale)),(x + (1.9379692f * scale)),(y + (0.11816859f * scale)),(x + (2.1034088f * scale)),(y + (0.047267675f * scale)));
 	}
 	
-	public static void paintEighth(TGPainter painter, float x, float y, float scale){
+	public static void paintEighth(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (1.6779978f * scale)),(y + (0.070901394f * scale)));
 		painter.cubicTo((x + (2.1979408f * scale)),(y + (0.0f * scale)),(x + (2.6469831f * scale)),(y + (0.14180231f * scale)),(x + (3.0014887f * scale)),(y + (0.47267532f * scale)));
 		painter.cubicTo((x + (3.214193f * scale)),(y + (0.7090125f * scale)),(x + (3.3087273f * scale)),(y + (0.89808273f * scale)),(x + (3.450531f * scale)),(y + (1.4652932f * scale)));
@@ -105,7 +105,7 @@ public class TGSilencePainter {
 		painter.cubicTo((x + (0.85081583f * scale)),(y + (0.4254074f * scale)),(x + (1.2525895f * scale)),(y + (0.14180231f * scale)),(x + (1.6779978f * scale)),(y + (0.070901394f * scale)));
 	}
 	
-	public static void paintSixteenth(TGPainter painter, float x, float y, float scale){
+	public static void paintSixteenth(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (3.5214243f * scale)),(y + (0.070901394f * scale)));
 		painter.cubicTo((x + (4.041381f * scale)),(y + (0.0f * scale)),(x + (4.490409f * scale)),(y + (0.14180231f * scale)),(x + (4.8449125f * scale)),(y + (0.4726758f * scale)));
 		painter.cubicTo((x + (5.0576286f * scale)),(y + (0.7090137f * scale)),(x + (5.152153f * scale)),(y + (0.89808273f * scale)),(x + (5.2939644f * scale)),(y + (1.4652946f * scale)));
@@ -142,7 +142,7 @@ public class TGSilencePainter {
 		painter.cubicTo((x + (2.69425f * scale)),(y + (0.4254074f * scale)),(x + (3.096015f * scale)),(y + (0.14180231f * scale)),(x + (3.5214243f * scale)),(y + (0.070901394f * scale)));
 	}
 	
-	public static void paintThirtySecond(TGPainter painter, float x, float y, float scale){
+	public static void paintThirtySecond(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (4.939474f * scale)),(y + (0.070901155f * scale)));
 		painter.cubicTo((x + (5.459408f * scale)),(y + (0.0f * scale)),(x + (5.9084606f * scale)),(y + (0.14180207f * scale)),(x + (6.2629623f * scale)),(y + (0.4726758f * scale)));
 		painter.cubicTo((x + (6.4756565f * scale)),(y + (0.70901346f * scale)),(x + (6.570204f * scale)),(y + (0.89808273f * scale)),(x + (6.7119904f * scale)),(y + (1.4652941f * scale)));
@@ -191,7 +191,7 @@ public class TGSilencePainter {
 		painter.cubicTo((x + (4.112276f * scale)),(y + (0.4254074f * scale)),(x + (4.5140667f * scale)),(y + (0.14180207f * scale)),(x + (4.939474f * scale)),(y + (0.070901155f * scale)));
 	}
 	
-	public static void paintSixtyFourth(TGPainter painter, float x, float y, float scale){
+	public static void paintSixtyFourth(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (5.908436f * scale)),(y + (0.07090092f * scale)));
 		painter.cubicTo((x + (6.4283676f * scale)),(y + (0.0f * scale)),(x + (6.8774185f * scale)),(y + (0.14180303f * scale)),(x + (7.231926f * scale)),(y + (0.4726758f * scale)));
 		painter.cubicTo((x + (7.4446335f * scale)),(y + (0.70901346f * scale)),(x + (7.5391655f * scale)),(y + (0.8980839f * scale)),(x + (7.680977f * scale)),(y + (1.4652941f * scale)));

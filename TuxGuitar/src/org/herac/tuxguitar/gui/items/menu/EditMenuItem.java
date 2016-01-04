@@ -27,7 +27,7 @@ import org.herac.tuxguitar.gui.items.MenuItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class EditMenuItem extends MenuItems{
+public class EditMenuItem extends MenuItems {
 	
 	private MenuItem editMenuItem;
 	private Menu menu; 
@@ -44,7 +44,7 @@ public class EditMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//---------------------------------------------------
 		//--UNDO--
 		this.undo = new MenuItem(this.menu, SWT.PUSH);
@@ -78,7 +78,7 @@ public class EditMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		EditorKit kit = TuxGuitar.instance().getTablatureEditor().getTablature().getEditorKit();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.undo.setEnabled(!running && TuxGuitar.instance().getUndoableManager().canUndo());
@@ -93,7 +93,7 @@ public class EditMenuItem extends MenuItems{
 		this.voice2.setSelection(kit.getTablature().getCaret().getVoice() == 1);
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.editMenuItem, "edit.menu", null);
 		setMenuItemTextAndAccelerator(this.undo, "edit.undo", UndoAction.NAME);
 		setMenuItemTextAndAccelerator(this.redo, "edit.redo", RedoAction.NAME);
@@ -104,7 +104,7 @@ public class EditMenuItem extends MenuItems{
 		setMenuItemTextAndAccelerator(this.voice2, "edit.voice-2", SetVoice2Action.NAME);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.undo.setImage(TuxGuitar.instance().getIconManager().getEditUndo());
 		this.redo.setImage(TuxGuitar.instance().getIconManager().getEditRedo());
 	}

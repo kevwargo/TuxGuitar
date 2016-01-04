@@ -26,7 +26,7 @@ public class ScaleManager {
 	
 	private int selectionKey;
 	
-	public ScaleManager(){
+	public ScaleManager() {
 		this.scales = new ArrayList();
 		this.scaleListeners = new ArrayList();
 		this.scale = TuxGuitar.instance().getSongManager().getFactory().newScale();
@@ -35,36 +35,36 @@ public class ScaleManager {
 		this.loadScales();
 	}
 	
-	public void addListener( ScaleListener listener){
-		if(!this.scaleListeners.contains( listener )){
+	public void addListener( ScaleListener listener) {
+		if(!this.scaleListeners.contains( listener )) {
 			this.scaleListeners.add( listener );
 		}
 	}
 	
-	public void removeListener( ScaleListener listener){
-		if(this.scaleListeners.contains( listener )){
+	public void removeListener( ScaleListener listener) {
+		if(this.scaleListeners.contains( listener )) {
 			this.scaleListeners.remove( listener );
 		}
 	}
 	
-	public void fireListeners(){
-		for(int i = 0; i < this.scaleListeners.size(); i ++){
+	public void fireListeners() {
+		for(int i = 0; i < this.scaleListeners.size(); i ++) {
 			ScaleListener listener = (ScaleListener) this.scaleListeners.get( i );
 			listener.loadScale();
 		}
 	}
 		
-	public void selectScale(int index, int key){
-		if(index == NONE_SELECTION){
+	public void selectScale(int index, int key) {
+		if(index == NONE_SELECTION) {
 			getScale().clear();
 		}
-		else if(index >= 0 && index < this.scales.size()){
+		else if(index >= 0 && index < this.scales.size()) {
 			getScale().clear();
 			ScaleInfo info = (ScaleInfo)this.scales.get(index);
 			String[] keys = info.getKeys().split(KEY_SEPARATOR);
-			for (int i = 0; i < keys.length; i ++){
+			for (int i = 0; i < keys.length; i ++) {
 				int note = (Integer.parseInt(keys[i]) - 1);
-				if(note >= 0 && note < 12){
+				if(note >= 0 && note < 12) {
 					getScale().setNote(note, true);
 				}
 			}
@@ -97,23 +97,23 @@ public class ScaleManager {
 		return null;
 	}
 	
-	public String[] getScaleNames(){
+	public String[] getScaleNames() {
 		String[] names = new String[this.scales.size()];
-		for(int i = 0;i < this.scales.size();i ++){
+		for(int i = 0;i < this.scales.size();i ++) {
 			ScaleInfo info = (ScaleInfo)this.scales.get(i);
 			names[i] = info.getName();
 		}
 		return names;
 	}
 	
-	public String getKeyName(int index){
-		if( index >=0 && index < KEY_NAMES.length){
+	public String getKeyName(int index) {
+		if( index >=0 && index < KEY_NAMES.length) {
 			return KEY_NAMES[ index ];
 		}
 		return null;
 	}
 	
-	public String[] getKeyNames(){
+	public String[] getKeyNames() {
 		return KEY_NAMES;
 	}
 	
@@ -125,8 +125,8 @@ public class ScaleManager {
 		return this.selectionKey;
 	}
 	
-	private void loadScales(){
-		try{
+	private void loadScales() {
+		try {
 			new ScaleReader().loadScales(this.scales, TGFileUtils.getResourceAsStream("scales/scales.xml") );
 		} catch (Throwable e) {
 			e.printStackTrace();

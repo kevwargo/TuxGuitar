@@ -18,20 +18,20 @@ import org.herac.tuxguitar.gui.undo.undoables.measure.UndoableAddMeasure;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GoRightAction extends Action{
+public class GoRightAction extends Action {
 	public static final String NAME = "action.caret.go-right";
 	
 	public GoRightAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE);
 	}
 	
-	protected int execute(TypedEvent e){
-		if(TuxGuitar.instance().getPlayer().isRunning()){
+	protected int execute(TypedEvent e) {
+		if(TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoNext();
 		}
-		else{
+		else {
 			Caret caret = getEditor().getTablature().getCaret();
-			if(!caret.moveRight()){
+			if(!caret.moveRight()) {
 				int number = (getSongManager().getSong().countMeasureHeaders() + 1);
 				
 				//comienza el undoable

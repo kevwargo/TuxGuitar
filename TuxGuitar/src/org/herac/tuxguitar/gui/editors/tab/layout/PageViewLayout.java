@@ -28,7 +28,7 @@ import org.herac.tuxguitar.song.models.TGTrack;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class PageViewLayout extends ViewLayout{
+public class PageViewLayout extends ViewLayout {
 	
 	private static final int STATIC_WIDTH = TuxGuitar.instance().getConfig().getIntConfigValue(TGConfigKeys.LAYOUT_PAGE_FORCE_WIDTH, 0);
 	
@@ -36,11 +36,11 @@ public class PageViewLayout extends ViewLayout{
 	private int marginLeft;
 	private int marginRight;
 	
-	public PageViewLayout(Tablature tablature, int style){
+	public PageViewLayout(Tablature tablature, int style) {
 		super(tablature, style);
 	}
 	
-	public int getMode(){
+	public int getMode() {
 		return MODE_PAGE;
 	}
 	
@@ -60,29 +60,29 @@ public class PageViewLayout extends ViewLayout{
 		
 		int measureCount = getSongManager().getSong().countMeasureHeaders();
 		int nextMeasureIndex = 0;
-		while(measureCount > nextMeasureIndex){
+		while(measureCount > nextMeasureIndex) {
 			TempLine line = null;
 			Iterator tracks = getSongManager().getSong().getTracks();
-			while(tracks.hasNext()){
+			while(tracks.hasNext()) {
 				TGTrackImpl track = (TGTrackImpl) tracks.next();
 				if((number < 0 && track.isVisibleInMultitrack())
-                   || track.getNumber() == number){
+                   || track.getNumber() == number) {
 					
 					TGTrackSpacing ts = new TGTrackSpacing(this) ;
 					ts.setSize(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES, ((style & DISPLAY_SCORE) != 0 ?( (getScoreLineSpacing() * 5) ):0));
 					
-					if(nextMeasureIndex == 0){
+					if(nextMeasureIndex == 0) {
 						((TGLyricImpl)track.getLyrics()).start();
 					}
 					
 					line = getTempLines(track, nextMeasureIndex, ts);
-					if( (style & DISPLAY_SCORE) != 0 ){
+					if( (style & DISPLAY_SCORE) != 0 ) {
 						ts.setSize(TGTrackSpacing.POSITION_SCORE_UP_LINES, Math.abs(line.minY));
-						if(line.maxY + getMinScoreTabSpacing() > getScoreSpacing()){
+						if(line.maxY + getMinScoreTabSpacing() > getScoreSpacing()) {
 							ts.setSize(TGTrackSpacing.POSITION_SCORE_DOWN_LINES, (line.maxY - (getScoreLineSpacing() * 4)) );
 						}
 					}
-					if((style & DISPLAY_TABLATURE) != 0){
+					if((style & DISPLAY_TABLATURE) != 0) {
 						ts.setSize(TGTrackSpacing.POSITION_TABLATURE_TOP_SEPARATOR, ((style & DISPLAY_SCORE) != 0 ? getMinScoreTabSpacing() : Math.max(Math.abs(line.minY), getStringSpacing()) ));
 						ts.setSize(TGTrackSpacing.POSITION_TABLATURE, ((style & DISPLAY_SCORE) != 0 ?  track.getTabHeight() + getStringSpacing() + 1 : Math.max( line.maxY, track.getTabHeight() + getStringSpacing() + 1) ));
 					}
@@ -96,8 +96,8 @@ public class PageViewLayout extends ViewLayout{
 					
 					int emptyX = (this.marginLeft + fromX + line.tempWith + 2);
 					int emptyWith = ( getMaxWidth() - emptyX );
-					if((emptyWith - 20) > 0 && (line.lastIndex + 1) >= measureCount){
-						if(emptyX < (clientArea.x + clientArea.width)){
+					if((emptyWith - 20) > 0 && (line.lastIndex + 1) >= measureCount) {
+						if(emptyX < (clientArea.x + clientArea.width)) {
 							emptyX = (emptyX < clientArea.x ? clientArea.x :emptyX);
 							emptyWith = ( emptyWith > clientArea.width ? clientArea.width : emptyWith );
 							paintLines(track, ts, painter, emptyX , posY, emptyWith);
@@ -108,7 +108,7 @@ public class PageViewLayout extends ViewLayout{
 					height += lineHeight + getTrackSpacing();
 				}
 			}
-			if(line != null){
+			if(line != null) {
 				nextMeasureIndex = line.lastIndex + 1;
 			}
 		}
@@ -127,14 +127,14 @@ public class PageViewLayout extends ViewLayout{
 		boolean isAtY = (posY + ts.getSize() > clientArea.y && posY < clientArea.y + clientArea.height + 80);
 		
 		int measureSpacing = 0;
-		if(line.fullLine){
+		if(line.fullLine) {
 			int diff = ( getMaxWidth() - line.tempWith);
-			if(diff != 0 && line.measures.size() > 0){
+			if(diff != 0 && line.measures.size() > 0) {
 				measureSpacing = diff / line.measures.size();
 			}
 		}
 		
-		for(int i = 0;i < line.measures.size();i ++){
+		for(int i = 0;i < line.measures.size();i ++) {
 			int index = ((Integer)line.measures.get(i)).intValue();
 			TGMeasureImpl currMeasure = (TGMeasureImpl)track.getMeasure(index);
 			
@@ -149,10 +149,10 @@ public class PageViewLayout extends ViewLayout{
 			
 			int measureWidth = ( currMeasure.getWidth(this) + measureSpacing );
 			boolean isAtX = ( posX + measureWidth > clientArea.x && posX < clientArea.x + clientArea.width);
-			if(isAtX && isAtY){
+			if(isAtX && isAtY) {
 				paintMeasure(currMeasure, painter, measureSpacing);
 				((TGLyricImpl)track.getLyrics()).paintCurrentNoteBeats(painter, this, currMeasure, posX, posY);
-			}else{
+			}else {
 				currMeasure.setOutOfBounds(true);
 			}
 			
@@ -170,7 +170,7 @@ public class PageViewLayout extends ViewLayout{
 		line.minY = 0;
 		
 		// Need to score extra-lines in edition mode
-		if( (style & DISPLAY_TABLATURE) == 0 && (style & DISPLAY_SCORE) != 0 ){
+		if( (style & DISPLAY_TABLATURE) == 0 && (style & DISPLAY_SCORE) != 0 ) {
 			line.maxY = ((getScoreLineSpacing() * 4) + (getScoreLineSpacing() * 4));
 			line.minY = -(getScoreLineSpacing() * 3);
 		}
@@ -180,7 +180,7 @@ public class PageViewLayout extends ViewLayout{
 			TGMeasureImpl measure = (TGMeasureImpl)track.getMeasure(measureIdx);
 			
 			//verifico si tengo que bajar de linea
-			if((line.tempWith + measure.getWidth(this)) >=  getMaxWidth() && !line.measures.isEmpty()){
+			if((line.tempWith + measure.getWidth(this)) >=  getMaxWidth() && !line.measures.isEmpty()) {
 				line.fullLine = true;
 				return line;
 			}
@@ -195,19 +195,19 @@ public class PageViewLayout extends ViewLayout{
 		return line;
 	}
 	
-	public int getMaxWidth(){
-		if(this.maximumWidth <= 0){
+	public int getMaxWidth() {
+		if(this.maximumWidth <= 0) {
 			int marginLeft = 0;
 			int marginRight = 0;
 			int monitorWidth = getTablature().getMonitor().getClientArea().width;
 			Rectangle tablatureArea = getTablature().getClientArea();
 			Composite parent = getTablature().getParent();
-			while( parent != null ){
+			while( parent != null ) {
 				Rectangle parentArea = parent.getClientArea();
 				parent = parent.getParent();
-				if( parent == null ){
+				if( parent == null ) {
 					marginRight = ( parentArea.width - (marginLeft + tablatureArea.width ) );
-				}else{
+				}else {
 					marginLeft += parentArea.x ;
 				}
 			}
@@ -216,7 +216,7 @@ public class PageViewLayout extends ViewLayout{
 		return (this.maximumWidth - (this.marginLeft + this.marginRight));
 	}
 	
-	private class TempLine{
+	private class TempLine {
 		protected int tempWith;
 		protected int lastIndex;
 		protected boolean fullLine;
@@ -224,11 +224,11 @@ public class PageViewLayout extends ViewLayout{
 		protected int minY = 0;
 		protected List measures;
 		
-		public TempLine(){
+		public TempLine() {
 			this.measures = new ArrayList();
 		}
 		
-		protected void addMeasure(int index){
+		protected void addMeasure(int index) {
 			this.measures.add(new Integer(index));
 			this.lastIndex = index;
 		}

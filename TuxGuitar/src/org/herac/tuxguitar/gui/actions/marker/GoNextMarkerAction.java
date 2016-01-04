@@ -17,14 +17,14 @@ import org.herac.tuxguitar.gui.marker.MarkerNavigator;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GoNextMarkerAction extends Action{
+public class GoNextMarkerAction extends Action {
 	public static final String NAME = "action.marker.go-next";
 	
 	public GoNextMarkerAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE );
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		
 		new MarkerNavigator().goToSelectedMarker(getSongManager().getNextMarker(caret.getMeasure().getNumber()));

@@ -9,7 +9,7 @@ import org.herac.tuxguitar.gui.undo.undoables.UndoableCaretHelper;
 import org.herac.tuxguitar.song.managers.TGSongManager;
 import org.herac.tuxguitar.song.models.TGMeasure;
 
-public class UndoableChangeCloseRepeat implements UndoableEdit{
+public class UndoableChangeCloseRepeat implements UndoableEdit {
 	private int doAction;
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
@@ -17,12 +17,12 @@ public class UndoableChangeCloseRepeat implements UndoableEdit{
 	private int undoRepeatClose;
 	private int redoRepeatClose;
 	
-	private UndoableChangeCloseRepeat(){
+	private UndoableChangeCloseRepeat() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
@@ -35,7 +35,7 @@ public class UndoableChangeCloseRepeat implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
@@ -55,12 +55,12 @@ public class UndoableChangeCloseRepeat implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableChangeCloseRepeat startUndo(){
+	public static UndoableChangeCloseRepeat startUndo() {
 		Caret caret = getCaret();
 		return startUndo(caret.getPosition(), caret.getMeasure().getRepeatClose());
 	}
 	
-	public static UndoableChangeCloseRepeat startUndo(long position, int repeatClose){
+	public static UndoableChangeCloseRepeat startUndo(long position, int repeatClose) {
 		UndoableChangeCloseRepeat undoable = new UndoableChangeCloseRepeat();
 		undoable.doAction = UNDO_ACTION;
 		undoable.undoCaret = new UndoableCaretHelper();
@@ -70,13 +70,13 @@ public class UndoableChangeCloseRepeat implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableChangeCloseRepeat endUndo(int redoRepeatClose){
+	public UndoableChangeCloseRepeat endUndo(int redoRepeatClose) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoRepeatClose = redoRepeatClose;
 		return this;
 	}
 	
-	private static Caret getCaret(){
+	private static Caret getCaret() {
 		return TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 	}
 }

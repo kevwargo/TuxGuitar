@@ -49,16 +49,16 @@ public class Caret {
 		this.changes = false;
 	}
 	
-	public synchronized void update(){
+	public synchronized void update() {
 		int trackNumber = (this.selectedTrack != null)?this.selectedTrack.getNumber():1;
 		update(trackNumber, this.position, this.string);
 	}
 	
-	public synchronized void update(int trackNumber){
+	public synchronized void update(int trackNumber) {
 		update(trackNumber, this.position, this.string);
 	}
 	
-	public synchronized void update(int trackNumber, long position, int string){
+	public synchronized void update(int trackNumber, long position, int string) {
 		update(trackNumber, position, string, getVelocity());
 	}
 	
@@ -67,7 +67,7 @@ public class Caret {
 		TGTrackImpl track = findTrack(trackNumber); 
 		TGMeasureImpl measure = findMeasure(realPosition, track);
 		TGBeat beat = findBeat(realPosition, measure);
-		if(track != null && measure != null && beat != null){
+		if(track != null && measure != null && beat != null) {
 			moveTo(track, measure, beat, string);
 		}
 		setVelocity(velocity);
@@ -87,31 +87,31 @@ public class Caret {
 		this.setChanges(true);
 	}
 	
-	private TGTrackImpl findTrack(int number){
+	private TGTrackImpl findTrack(int number) {
 		TGTrackImpl track = (TGTrackImpl)getSongManager().getTrack(number);
-		if(track == null){
+		if(track == null) {
 			track = (TGTrackImpl)getSongManager().getFirstTrack();
 		}
 		return track;
 	}
 	
-	private TGMeasureImpl findMeasure(long position, TGTrackImpl track){
+	private TGMeasureImpl findMeasure(long position, TGTrackImpl track) {
 		TGMeasureImpl measure = null;
-		if(track != null){
+		if(track != null) {
 			measure = (TGMeasureImpl)getSongManager().getTrackManager().getMeasureAt(track, position);
-			if(measure == null){
+			if(measure == null) {
 				measure = (TGMeasureImpl)getSongManager().getTrackManager().getFirstMeasure(track);
 			}
 		}
 		return measure;
 	}
 	
-	private TGBeat findBeat(long position, TGMeasureImpl measure){
+	private TGBeat findBeat(long position, TGMeasureImpl measure) {
 		TGBeat beat = null;
-		if(measure != null){
+		if(measure != null) {
 			TGMeasureManager manager = getSongManager().getMeasureManager();
 			TGVoice voice = manager.getVoiceIn(measure, position, getVoice());
-			if( voice != null ){
+			if( voice != null ) {
 				beat = voice.getBeat();
 			}
 			if (beat == null) {
@@ -121,17 +121,17 @@ public class Caret {
 		return beat;
 	}
 	
-	public synchronized void goToTickPosition(){
+	public synchronized void goToTickPosition() {
 		long start = MidiTickUtil.getStart(TuxGuitar.instance().getPlayer().getTickPosition());
 		this.update(this.selectedTrack.getNumber(), start, this.string);
 		this.setChanges(true);
 	}
 	
 	public void paintCaret(ViewLayout layout, TGPainter painter) {
-		if(!TuxGuitar.instance().getPlayer().isRunning()){
+		if(!TuxGuitar.instance().getPlayer().isRunning()) {
 			if (this.selectedMeasure != null && this.selectedBeat instanceof TGBeatImpl) {
 				TGBeatImpl beat = (TGBeatImpl)this.selectedBeat;
-				if( (layout.getStyle() & ViewLayout.DISPLAY_TABLATURE) != 0){
+				if( (layout.getStyle() & ViewLayout.DISPLAY_TABLATURE) != 0) {
 					boolean expectedVoice = (getSelectedNote() == null || getSelectedNote().getVoice().getIndex() == getVoice());
 					int stringSpacing = this.tablature.getViewLayout().getStringSpacing();
 					int leftSpacing = beat.getMeasureImpl().getHeaderImpl().getLeftSpacing(layout);
@@ -145,7 +145,7 @@ public class Caret {
 					painter.addRectangle(x, y, width, height);
 					painter.closePath();
 				}
-				else if( (layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0){
+				else if( (layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0) {
 					int line = this.tablature.getViewLayout().getScoreLineSpacing();
 					int leftSpacing = beat.getMeasureImpl().getHeaderImpl().getLeftSpacing(layout);
 					float xMargin = (2.0f * layout.getScale());
@@ -172,7 +172,7 @@ public class Caret {
 			TGMeasureImpl measure = getMeasure();
 			TGVoice voice = getSongManager().getMeasureManager().getNextVoice(measure.getBeats(), getSelectedBeat(), getVoice());
 			TGBeat beat = (voice != null ? voice.getBeat() : null );
-			if (beat == null){
+			if (beat == null) {
 				//si no habia mas componentes. busco el siguiente compas
 				measure = (TGMeasureImpl)getSongManager().getTrackManager().getNextMeasure(getMeasure());
 				if (measure == null) {
@@ -180,11 +180,11 @@ public class Caret {
 				}
 				voice = getSongManager().getMeasureManager().getFirstVoice(measure.getBeats(), getVoice());
 				beat = (voice != null ? voice.getBeat() : null );
-				if( beat == null ){
+				if( beat == null ) {
 					beat = getSongManager().getMeasureManager().getFirstBeat(measure.getBeats());
 				}
 			}
-			if(beat != null){
+			if(beat != null) {
 				moveTo(getTrack(), measure, beat, getStringNumber());
 			}
 		}
@@ -204,11 +204,11 @@ public class Caret {
 				}
 				voice = getSongManager().getMeasureManager().getLastVoice(measure.getBeats(), getVoice());
 				beat = (voice != null ? voice.getBeat() : null );
-				if( beat == null ){
+				if( beat == null ) {
 					beat = getSongManager().getMeasureManager().getFirstBeat(measure.getBeats());
 				}
 			}
-			if(beat != null){
+			if(beat != null) {
 				moveTo(getTrack(), measure, beat, getStringNumber());
 			}
 		}
@@ -235,12 +235,12 @@ public class Caret {
 		setStringNumber(nextString);
 	}
 	
-	public void setStringNumber(int number){
+	public void setStringNumber(int number) {
 		this.string = number;
 		this.updateNote();
 	}
 	
-	public int getStringNumber(){
+	public int getStringNumber() {
 		return this.string;
 	}
 	
@@ -276,22 +276,22 @@ public class Caret {
 		return null;
 	}
 	
-	public void changeDuration(TGDuration duration){
+	public void changeDuration(TGDuration duration) {
 		getSongManager().getMeasureManager().changeDuration(getMeasure(), getSelectedBeat(), duration, getVoice(), true);
 		setChanges(true);
 	}
 	
-	private void updatePosition(){
+	private void updatePosition() {
 		this.position = getSelectedBeat().getStart();
 	}
 	
-	private void updateString(){
-		if(this.string < 1 || this.string > getTrack().stringCount() ){
+	private void updateString() {
+		if(this.string < 1 || this.string > getTrack().stringCount() ) {
 			this.string = 1;
 		}
 	}
 	
-	private void checkTransport(){
+	private void checkTransport() {
 		TuxGuitar.instance().getTransport().gotoMeasure(getMeasure().getHeader());
 	}
 	
@@ -311,28 +311,28 @@ public class Caret {
 		this.velocity = velocity;
 	}
 	
-	private void updateNote(){
+	private void updateNote() {
 		this.selectedNote = null;
 		
 		TGString string = getSelectedString();
-		if( string != null ){
+		if( string != null ) {
 			this.selectedNote = getSongManager().getMeasureManager().getNote(getMeasure(), getPosition(), string.getNumber());
 		}
 	}
 	
-	public TGNote getSelectedNote(){
+	public TGNote getSelectedNote() {
 		return this.selectedNote;
 	}
 	
-	private void updateBeat(){
+	private void updateBeat() {
 		this.restBeat = this.selectedBeat.isRestBeat();
 	}
 	
-	public TGBeatImpl getSelectedBeat(){
+	public TGBeatImpl getSelectedBeat() {
 		return (TGBeatImpl)this.selectedBeat;
 	}
 	
-	public TGSongManager getSongManager(){
+	public TGSongManager getSongManager() {
 		return this.tablature.getSongManager();
 	}
 	
@@ -345,7 +345,7 @@ public class Caret {
 		this.update();
 	}
 	
-	public boolean isRestBeatSelected(){
+	public boolean isRestBeatSelected() {
 		return this.restBeat;
 	}
 }

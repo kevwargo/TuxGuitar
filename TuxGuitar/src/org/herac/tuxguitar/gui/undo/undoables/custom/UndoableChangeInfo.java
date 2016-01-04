@@ -7,7 +7,7 @@ import org.herac.tuxguitar.gui.undo.UndoableEdit;
 import org.herac.tuxguitar.gui.undo.undoables.UndoableCaretHelper;
 import org.herac.tuxguitar.song.models.TGSong;
 
-public class UndoableChangeInfo implements UndoableEdit{
+public class UndoableChangeInfo implements UndoableEdit {
 	private int doAction;
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
@@ -30,12 +30,12 @@ public class UndoableChangeInfo implements UndoableEdit{
 	private String redoTranscriber;
 	private String redoComments;
 	
-	private UndoableChangeInfo(){
+	private UndoableChangeInfo() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TuxGuitar.instance().getSongManager().setProperties(this.redoName, this.redoArtist, this.redoAlbum, this.redoAuthor, this.redoDate, this.redoCopyright, this.redoWriter, this.redoTranscriber, this.redoComments);
@@ -46,7 +46,7 @@ public class UndoableChangeInfo implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TuxGuitar.instance().getSongManager().setProperties(this.undoName, this.undoArtist, this.undoAlbum, this.undoAuthor, this.undoDate, this.undoCopyright, this.undoWriter, this.undoTranscriber, this.undoComments);
@@ -64,7 +64,7 @@ public class UndoableChangeInfo implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableChangeInfo startUndo(){
+	public static UndoableChangeInfo startUndo() {
 		TGSong song = TuxGuitar.instance().getSongManager().getSong();
 		UndoableChangeInfo undoable = new UndoableChangeInfo();
 		undoable.doAction = UNDO_ACTION;
@@ -81,7 +81,7 @@ public class UndoableChangeInfo implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableChangeInfo endUndo(){
+	public UndoableChangeInfo endUndo() {
 		TGSong song = TuxGuitar.instance().getSongManager().getSong();
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoName = song.getName();

@@ -19,21 +19,21 @@ import org.herac.tuxguitar.song.models.TGTrack;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class MoveTrackUpAction extends Action{
+public class MoveTrackUpAction extends Action {
 	public static final String NAME = "action.track.move-up";
 	
 	public MoveTrackUpAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		//comienza el undoable
 		UndoableMoveTrackUp undoable = UndoableMoveTrackUp.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
 		TGTrack track = caret.getTrack();
 		
-		if(getSongManager().moveTrackUp(track)){
+		if(getSongManager().moveTrackUp(track)) {
 			updateTablature();
 			TuxGuitar.instance().getMixer().update();
 			

@@ -17,7 +17,7 @@ import org.herac.tuxguitar.gui.helper.SyncThread;
 import org.herac.tuxguitar.gui.items.ToolItems;
 import org.herac.tuxguitar.gui.system.config.TGConfigEditor;
 
-public class ToolBarsOption extends Option{
+public class ToolBarsOption extends Option {
 	protected boolean initialized;
 	
 	protected Table table;
@@ -25,7 +25,7 @@ public class ToolBarsOption extends Option{
 	protected Button moveUp;
 	protected Button moveDown;
 	
-	public ToolBarsOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent){
+	public ToolBarsOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent) {
 		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.toolbars"), SWT.FILL, SWT.FILL);
 		this.initialized = false;
 	}
@@ -75,18 +75,18 @@ public class ToolBarsOption extends Option{
 		this.loadConfig();
 	}
 	
-	protected GridData getButtonData(){
+	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected void moveUp(){
-		if(this.initialized){
+	protected void moveUp() {
+		if(this.initialized) {
 			int count = this.table.getItemCount();
 			int index = this.table.getSelectionIndex();
-			if(index > 0 && index < count){
+			if(index > 0 && index < count) {
 				TableItem item1 = this.table.getItem(index);
 				TableItem item2 = this.table.getItem(index - 1);
 				this.swapItems(item1, item2);
@@ -95,11 +95,11 @@ public class ToolBarsOption extends Option{
 		}
 	}
 	
-	protected void moveDown(){
-		if(this.initialized){
+	protected void moveDown() {
+		if(this.initialized) {
 			int count = this.table.getItemCount();
 			int index = this.table.getSelectionIndex();
-			if(index >= 0 && index < ( count - 1 ) ){
+			if(index >= 0 && index < ( count - 1 ) ) {
 				TableItem item1 = this.table.getItem(index);
 				TableItem item2 = this.table.getItem(index + 1);
 				this.swapItems(item1, item2);
@@ -108,27 +108,27 @@ public class ToolBarsOption extends Option{
 		}
 	}
 	
-	protected void swapItems(TableItem item1, TableItem item2){
+	protected void swapItems(TableItem item1, TableItem item2) {
 		ToolItems data1 = (ToolItems)item1.getData();
 		ToolItems data2 = (ToolItems)item2.getData();
 		loadItem(item1, data2);
 		loadItem(item2, data1);
 	}
 	
-	protected void loadItem(TableItem item, ToolItems data){
+	protected void loadItem(TableItem item, ToolItems data) {
 		item.setText( TuxGuitar.getProperty( data.getName() ));
 		item.setChecked( data.isEnabled() );
 		item.setData( data );
 	}
 	
-	protected void loadConfig(){
+	protected void loadConfig() {
 		new Thread(new Runnable() {
 			public void run() {
 				final ToolItems[] items = TuxGuitar.instance().getItemManager().getToolBars();
 				new SyncThread(new Runnable() {
 					public void run() {
-						if(!isDisposed()){
-							for(int i = 0;i < items.length; i ++){
+						if(!isDisposed()) {
+							for(int i = 0;i < items.length; i ++) {
 								loadItem(new TableItem(ToolBarsOption.this.table, SWT.NONE), items[i]);
 							}
 							ToolBarsOption.this.initialized = true;
@@ -142,8 +142,8 @@ public class ToolBarsOption extends Option{
 	}
 	
 	public void updateConfig() {
-		if(this.initialized){
-			for( int i = 0 ; i < this.table.getItemCount() ; i ++){
+		if(this.initialized) {
+			for( int i = 0 ; i < this.table.getItemCount() ; i ++) {
 				TableItem item = this.table.getItem( i );
 				ToolItems data = (ToolItems)item.getData();
 				TuxGuitar.instance().getItemManager().setToolBarStatus(data.getName(), item.getChecked() , i);
@@ -153,14 +153,14 @@ public class ToolBarsOption extends Option{
 	}
 	
 	public void updateDefaults() {
-		if(this.initialized){
+		if(this.initialized) {
 			TuxGuitar.instance().getItemManager().setDefaultToolBars();
 			TuxGuitar.instance().getItemManager().writeToolBars();
 		}
 	}
 	
-	public void applyConfig(boolean force){
-		if(force || (this.initialized && TuxGuitar.instance().getItemManager().shouldReloadToolBars())){
+	public void applyConfig(boolean force) {
+		if(force || (this.initialized && TuxGuitar.instance().getItemManager().shouldReloadToolBars())) {
 			addSyncThread(new Runnable() {
 				public void run() {
 					TuxGuitar.instance().loadToolBars();
@@ -169,7 +169,7 @@ public class ToolBarsOption extends Option{
 		}
 	}
 	
-	public Point computeSize(){
+	public Point computeSize() {
 		return this.computeSize(SWT.DEFAULT, SWT.NONE);
 	}
 }

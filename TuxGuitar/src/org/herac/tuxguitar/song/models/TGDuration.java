@@ -69,7 +69,7 @@ public abstract class TGDuration {
 	 */
 	private TGDivisionType divisionType;
 	
-	public TGDuration(TGFactory factory){
+	public TGDuration(TGFactory factory) {
 		this.value = QUARTER;
 		this.dotted = false;
 		this.doubleDotted = false;
@@ -100,21 +100,21 @@ public abstract class TGDuration {
 		this.doubleDotted = doubleDotted;
 	}
 	
-	public TGDivisionType getDivision(){
+	public TGDivisionType getDivision() {
 		return this.divisionType;
 	}
 	
-	public long getTime(){
+	public long getTime() {
 		long time = (long)( QUARTER_TIME * ( 4.0f / this.value ) ) ;
-		if(this.dotted){
+		if(this.dotted) {
 			time += time / 2;
-		}else if(this.doubleDotted){
+		}else if(this.doubleDotted) {
 			time += ((time / 4) * 3);
 		}
 		return this.divisionType.convertTime(time);
 	}
 	
-	public static TGDuration fromTime(TGFactory factory, long time){
+	public static TGDuration fromTime(TGFactory factory, long time) {
 		TGDuration duration = factory.newDuration();
 		duration.setValue(TGDuration.SIXTY_FOURTH);
 		duration.setDotted(false);
@@ -124,66 +124,66 @@ public abstract class TGDuration {
 		return fromTime(factory, time, duration);
 	}
 	
-	public static TGDuration fromTime(TGFactory factory, long time, TGDuration minDuration){
+	public static TGDuration fromTime(TGFactory factory, long time, TGDuration minDuration) {
 		return fromTime(factory, time, minDuration, 10);
 	}
 	
-	public static TGDuration fromTime(TGFactory factory, long time, TGDuration minimum, int diff){
+	public static TGDuration fromTime(TGFactory factory, long time, TGDuration minimum, int diff) {
 		TGDuration duration = minimum.clone(factory);
 		TGDuration tmpDuration = factory.newDuration();
 		tmpDuration.setValue(TGDuration.WHOLE);
 		tmpDuration.setDotted(true);
 		boolean finish = false;
-		while(!finish){
+		while(!finish) {
 			long tmpTime = tmpDuration.getTime();
-			if(tmpTime - diff <= time){
-				//if(tmpTime > duration.getTime()){
-				if(Math.abs( tmpTime - time ) < Math.abs( duration.getTime() - time ) ){
+			if(tmpTime - diff <= time) {
+				//if(tmpTime > duration.getTime()) {
+				if(Math.abs( tmpTime - time ) < Math.abs( duration.getTime() - time ) ) {
 					duration = tmpDuration.clone(factory);
 				}
 			}
-			if(tmpDuration.isDotted()){
+			if(tmpDuration.isDotted()) {
 				tmpDuration.setDotted(false);
-			}else if(tmpDuration.getDivision().isEqual(TGDivisionType.NORMAL)){
+			}else if(tmpDuration.getDivision().isEqual(TGDivisionType.NORMAL)) {
 				tmpDuration.getDivision().setEnters(3);
 				tmpDuration.getDivision().setTimes(2);
-			}else{
+			}else {
 				tmpDuration.setValue(tmpDuration.getValue() * 2);
 				tmpDuration.setDotted(true);
 				tmpDuration.getDivision().setEnters(1);
 				tmpDuration.getDivision().setTimes(1);
 			}
-			if(tmpDuration.getValue() > TGDuration.SIXTY_FOURTH){
+			if(tmpDuration.getValue() > TGDuration.SIXTY_FOURTH) {
 				finish = true;
 			}
 		}
 		return duration;
 	}
 	/*
-	public int log2(){
+	public int log2() {
 		return (int)((Math.log(getValue() ) / Math.log(2.0)) + 0.5f );
 	}
 	*/
-	public int getIndex(){
+	public int getIndex() {
 		int index = 0;
 		int value = this.value;
-		while( ( value = ( value >> 1 ) ) > 0 ){
+		while( ( value = ( value >> 1 ) ) > 0 ) {
 			index ++;
 		}
 		return index;
 	}
 	
-	public boolean isEqual(TGDuration d){
+	public boolean isEqual(TGDuration d) {
 		return (getValue() == d.getValue() && isDotted() == d.isDotted() && isDoubleDotted() == d.isDoubleDotted() && getDivision().isEqual(d.getDivision()));
 	}
 	
-	public TGDuration clone(TGFactory factory){
+	public TGDuration clone(TGFactory factory) {
 		TGDuration duration = factory.newDuration();
 		copy(duration);
 		return duration;
 	}
 	
-	public void copy(TGDuration duration){
+	public void copy(TGDuration duration) {
 		duration.setValue(getValue());
 		duration.setDotted(isDotted());
 		duration.setDoubleDotted(isDoubleDotted());

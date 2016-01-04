@@ -22,16 +22,16 @@ import org.herac.tuxguitar.song.models.TGSong;
  */
 public class TGSongWriter {
 	
-	public TGSongWriter(){
+	public TGSongWriter() {
 		super();
 	}
 	
-	public void write(TGFactory factory, TGSong song, String path) throws TGFileFormatException{
+	public void write(TGFactory factory, TGSong song, String path) throws TGFileFormatException {
 		try {
 			Iterator it = TGFileFormatManager.instance().getOutputStreams();
-			while(it.hasNext()){
+			while(it.hasNext()) {
 				TGOutputStreamBase writer = (TGOutputStreamBase)it.next();
-				if(isSupportedExtension(writer, path)){
+				if(isSupportedExtension(writer, path)) {
 					writer.init(factory, new BufferedOutputStream(new FileOutputStream(new File(path))));
 					writer.writeSong(song);
 					return;
@@ -43,9 +43,9 @@ public class TGSongWriter {
 		throw new TGFileFormatException("Unsupported file format");
 	}
 	
-	private boolean isSupportedExtension(TGOutputStreamBase writer, String path){
+	private boolean isSupportedExtension(TGOutputStreamBase writer, String path) {
 		int index = path.lastIndexOf(".");
-		if(index > 0){
+		if(index > 0) {
 			return writer.isSupportedExtension(path.substring(index));
 		}
 		return false;

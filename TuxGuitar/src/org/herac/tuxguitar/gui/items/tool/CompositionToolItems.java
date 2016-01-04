@@ -30,7 +30,7 @@ import org.herac.tuxguitar.song.models.TGMeasure;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class CompositionToolItems extends ToolItems{
+public class CompositionToolItems extends ToolItems {
 	public static final String NAME = "composition.items";
 	
 	private ToolItem tempo;
@@ -39,13 +39,13 @@ public class CompositionToolItems extends ToolItems{
 	private ToolItem repeatOpen;
 	private ToolItem repeatClose;
 	private ToolItem repeatAlternative;
-    protected static final int[] DEFAULT_PERCENTS = new int[]{25, 50, 75, 100, 125, 150, 175, 200};
+    protected static final int[] DEFAULT_PERCENTS = new int[] {25, 50, 75, 100, 125, 150, 175, 200 };
 	
-	public CompositionToolItems(){
+	public CompositionToolItems() {
 		super(NAME);
 	}
 	
-	public void showItems(ToolBar toolBar){
+	public void showItems(ToolBar toolBar) {
 		this.tempo = new ToolItem(toolBar, SWT.PUSH);
 		this.tempo.addSelectionListener(TuxGuitar.instance().getAction(ChangeTempoAction.NAME));
 
@@ -61,8 +61,8 @@ public class CompositionToolItems extends ToolItems{
                 this.tempoPercentage.select(i);
         }
         TuxGuitar.instance().getPlayer().addListener(new MidiPlayerListener() {
-            public void notifyStarted() {}
-            public void notifyStopped() {}
+            public void notifyStarted() { }
+            public void notifyStopped() { }
             public void notifyLoop() {
                 TuxGuitar.instance().getDisplay().asyncExec(new Runnable() {
                     public void run() {
@@ -91,7 +91,7 @@ public class CompositionToolItems extends ToolItems{
 		this.loadProperties();
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.tempo.setToolTipText(TuxGuitar.getProperty("composition.tempo"));
 		this.timeSignature.setToolTipText(TuxGuitar.getProperty("composition.timesignature"));
 		this.repeatOpen.setToolTipText(TuxGuitar.getProperty("repeat.open"));
@@ -99,7 +99,7 @@ public class CompositionToolItems extends ToolItems{
 		this.repeatAlternative.setToolTipText(TuxGuitar.getProperty("repeat.alternative"));
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.tempo.setImage(TuxGuitar.instance().getIconManager().getCompositionTempo());
 		this.timeSignature.setImage(TuxGuitar.instance().getIconManager().getCompositionTimeSignature());
 		this.repeatOpen.setImage(TuxGuitar.instance().getIconManager().getCompositionRepeatOpen());
@@ -107,7 +107,7 @@ public class CompositionToolItems extends ToolItems{
 		this.repeatAlternative.setImage(TuxGuitar.instance().getIconManager().getCompositionRepeatAlternative());
 	}
 	
-	public void update(){
+	public void update() {
 		TGMeasure measure = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getMeasure();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.tempo.setEnabled( !running );

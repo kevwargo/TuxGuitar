@@ -18,15 +18,15 @@ import org.herac.tuxguitar.gui.undo.undoables.measure.UndoableMeasureGeneric;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ChangeVelocityAction extends Action{
+public class ChangeVelocityAction extends Action {
 	public static final String NAME = "action.note.general.velocity";
 	
 	public ChangeVelocityAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | DISABLE_ON_PLAYING);
 	}
 	
-	protected int execute(TypedEvent e){
-		if(e.widget.getData() instanceof Integer){
+	protected int execute(TypedEvent e) {
+		if(e.widget.getData() instanceof Integer) {
 			int velocity = ((Integer)e.widget.getData()).intValue();
 			
 			//comienza el undoable

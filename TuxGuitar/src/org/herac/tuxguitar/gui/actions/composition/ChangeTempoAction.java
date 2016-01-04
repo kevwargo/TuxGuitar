@@ -36,18 +36,18 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ChangeTempoAction extends Action{
+public class ChangeTempoAction extends Action {
 	public static final String NAME = "action.composition.change-tempo";
 	private static final int MIN_TEMPO = 30;
 	private static final int MAX_TEMPO = 320;
 	
-	protected static final int[] DEFAULT_PERCENTS = new int[]{25, 50, 75, 100, 125, 150, 175, 200};
+	protected static final int[] DEFAULT_PERCENTS = new int[] {25, 50, 75, 100, 125, 150, 175, 200 };
 	
 	public ChangeTempoAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
@@ -139,21 +139,21 @@ public class ChangeTempoAction extends Action{
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private GridData getSpinnerData(){
+	private GridData getSpinnerData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
 	
-	protected void setTempo(int tempoValue, boolean applyToAllMeasures, boolean applyToEnd){
-		if(tempoValue >= MIN_TEMPO && MAX_TEMPO <= 320){
+	protected void setTempo(int tempoValue, boolean applyToAllMeasures, boolean applyToEnd) {
+		if(tempoValue >= MIN_TEMPO && MAX_TEMPO <= 320) {
 			TGTempo tempo = getSongManager().getFactory().newTempo();
 			tempo.setValue(tempoValue);
 			
@@ -175,7 +175,7 @@ public class ChangeTempoAction extends Action{
 		}
 	}
 	
-	public TGSongManager getSongManager(){
+	public TGSongManager getSongManager() {
 		return super.getSongManager();
 	}
 }

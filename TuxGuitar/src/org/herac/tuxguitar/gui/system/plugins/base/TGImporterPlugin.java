@@ -5,7 +5,7 @@ import org.herac.tuxguitar.gui.system.plugins.TGPluginException;
 import org.herac.tuxguitar.io.base.TGFileFormatManager;
 import org.herac.tuxguitar.io.base.TGRawImporter;
 
-public abstract class TGImporterPlugin extends TGPluginAdapter{
+public abstract class TGImporterPlugin extends TGPluginAdapter {
 	
 	private boolean loaded;
 	private TGRawImporter importer;
@@ -21,15 +21,15 @@ public abstract class TGImporterPlugin extends TGPluginAdapter{
 	}
 	
 	public void setEnabled(boolean enabled) throws TGPluginException {
-		if(enabled){
+		if(enabled) {
 			addPlugin();
-		}else{
+		}else {
 			removePlugin();
 		}
 	}
 	
 	protected void addPlugin() throws TGPluginException {
-		if(!this.loaded){
+		if(!this.loaded) {
 			TGFileFormatManager.instance().addImporter(this.importer);
 			TuxGuitar.instance().getItemManager().createMenu();
 			this.loaded = true;
@@ -37,7 +37,7 @@ public abstract class TGImporterPlugin extends TGPluginAdapter{
 	}
 	
 	protected void removePlugin() throws TGPluginException {
-		if(this.loaded){
+		if(this.loaded) {
 			TGFileFormatManager.instance().removeImporter(this.importer);
 			TuxGuitar.instance().getItemManager().createMenu();
 			this.loaded = false;

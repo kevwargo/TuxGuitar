@@ -7,9 +7,9 @@ import org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout;
 import org.herac.tuxguitar.song.models.TGVoice;
 
 public class TGBeatGroup {
-	private static final int SCORE_MIDDLE_KEYS[] = new int[]{55, 40, 40, 50};
-	private static final int SCORE_SHARP_POSITIONS[] = new int[]{7, 7, 6, 6, 5, 4, 4, 3, 3, 2, 2, 1};
-	private static final int SCORE_FLAT_POSITIONS[] = new int[]{7, 6, 6, 5, 5, 4, 3, 3, 2, 2, 1, 1};
+	private static final int SCORE_MIDDLE_KEYS[] = new int[] {55, 40, 40, 50 };
+	private static final int SCORE_SHARP_POSITIONS[] = new int[] {7, 7, 6, 6, 5, 4, 4, 3, 3, 2, 2, 1 };
+	private static final int SCORE_FLAT_POSITIONS[] = new int[] {7, 6, 6, 5, 5, 4, 3, 3, 2, 2, 1, 1 };
 	
 	public static final int DIRECTION_NOT_SETTED = 0;
 	public static final int DIRECTION_UP = 1;
@@ -28,7 +28,7 @@ public class TGBeatGroup {
 	private TGNoteImpl maxNote;
 	private TGNoteImpl minNote;
 	
-	public TGBeatGroup(int voice){
+	public TGBeatGroup(int voice) {
 		this.voice = voice;
 		this.voices = new ArrayList();
 		this.direction = DIRECTION_NOT_SETTED;
@@ -40,95 +40,95 @@ public class TGBeatGroup {
 		this.minNote = null;
 	}
 	
-	public void check(TGVoiceImpl voice){
+	public void check(TGVoiceImpl voice) {
 		this.check(voice.getMaxNote());
 		this.check(voice.getMinNote());
 		this.voices.add( voice );
-		if( voice.getDirection() != TGVoice.DIRECTION_NONE ){
-			if( voice.getDirection() == TGVoice.DIRECTION_UP ){
+		if( voice.getDirection() != TGVoice.DIRECTION_NONE ) {
+			if( voice.getDirection() == TGVoice.DIRECTION_UP ) {
 				this.direction = DIRECTION_UP;
 			}
-			else if( voice.getDirection() == TGVoice.DIRECTION_DOWN ){
+			else if( voice.getDirection() == TGVoice.DIRECTION_DOWN ) {
 				this.direction = DIRECTION_DOWN;
 			}
 		}
 	}
 	
-	private void check(TGNoteImpl note){
+	private void check(TGNoteImpl note) {
 		int value = note.getRealValue();
 		
 		//FIRST MIN NOTE
-		if(this.firstMinNote == null || note.getVoice().getBeat().getStart() < this.firstMinNote.getVoice().getBeat().getStart()){
+		if(this.firstMinNote == null || note.getVoice().getBeat().getStart() < this.firstMinNote.getVoice().getBeat().getStart()) {
 			this.firstMinNote = note;
-		}else if(note.getVoice().getBeat().getStart() == this.firstMinNote.getVoice().getBeat().getStart()){
-			if(note.getRealValue() < this.firstMinNote.getRealValue()){
+		}else if(note.getVoice().getBeat().getStart() == this.firstMinNote.getVoice().getBeat().getStart()) {
+			if(note.getRealValue() < this.firstMinNote.getRealValue()) {
 				this.firstMinNote = note;
 			}
 		}
 		//FIRST MAX NOTE
-		if(this.firstMaxNote == null || note.getVoice().getBeat().getStart() < this.firstMaxNote.getVoice().getBeat().getStart()){
+		if(this.firstMaxNote == null || note.getVoice().getBeat().getStart() < this.firstMaxNote.getVoice().getBeat().getStart()) {
 			this.firstMaxNote = note;
-		}else if(note.getVoice().getBeat().getStart() == this.firstMaxNote.getVoice().getBeat().getStart()){
-			if(note.getRealValue() > this.firstMaxNote.getRealValue()){
+		}else if(note.getVoice().getBeat().getStart() == this.firstMaxNote.getVoice().getBeat().getStart()) {
+			if(note.getRealValue() > this.firstMaxNote.getRealValue()) {
 				this.firstMaxNote = note;
 			}
 		}
 		
 		//LAST MIN NOTE
-		if(this.lastMinNote == null || note.getVoice().getBeat().getStart() > this.lastMinNote.getVoice().getBeat().getStart()){
+		if(this.lastMinNote == null || note.getVoice().getBeat().getStart() > this.lastMinNote.getVoice().getBeat().getStart()) {
 			this.lastMinNote = note;
-		}else if(note.getVoice().getBeat().getStart() == this.lastMinNote.getVoice().getBeat().getStart()){
-			if(note.getRealValue() < this.lastMinNote.getRealValue()){
+		}else if(note.getVoice().getBeat().getStart() == this.lastMinNote.getVoice().getBeat().getStart()) {
+			if(note.getRealValue() < this.lastMinNote.getRealValue()) {
 				this.lastMinNote = note;
 			}
 		}
 		//LAST MIN NOTE
-		if(this.lastMaxNote == null || note.getVoice().getBeat().getStart() > this.lastMaxNote.getVoice().getBeat().getStart()){
+		if(this.lastMaxNote == null || note.getVoice().getBeat().getStart() > this.lastMaxNote.getVoice().getBeat().getStart()) {
 			this.lastMaxNote = note;
-		}else if(note.getVoice().getBeat().getStart() == this.lastMaxNote.getVoice().getBeat().getStart()){
-			if(note.getRealValue() > this.lastMaxNote.getRealValue()){
+		}else if(note.getVoice().getBeat().getStart() == this.lastMaxNote.getVoice().getBeat().getStart()) {
+			if(note.getRealValue() > this.lastMaxNote.getRealValue()) {
 				this.lastMaxNote = note;
 			}
 		}
 		
-		if(this.maxNote == null || value > this.maxNote.getRealValue()){
+		if(this.maxNote == null || value > this.maxNote.getRealValue()) {
 			this.maxNote = note;
 		}
-		if(this.minNote == null || value < this.minNote.getRealValue()){
+		if(this.minNote == null || value < this.minNote.getRealValue()) {
 			this.minNote = note;
 		}
 	}
 	
-	public void finish(ViewLayout layout, TGMeasureImpl measure){
-		if( this.direction == DIRECTION_NOT_SETTED ){
-			if (measure.getNotEmptyVoices() > 1 ){
+	public void finish(ViewLayout layout, TGMeasureImpl measure) {
+		if( this.direction == DIRECTION_NOT_SETTED ) {
+			if (measure.getNotEmptyVoices() > 1 ) {
 				this.direction = this.voice == 0 ? DIRECTION_UP : DIRECTION_DOWN;
-			}else if ( (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ){
+			}else if ( (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ) {
 				this.direction = DIRECTION_DOWN;
-			}else{
+			}else {
 				int max = Math.abs(this.minNote.getRealValue() - (SCORE_MIDDLE_KEYS[measure.getClef() - 1] + 100));
 				int min = Math.abs(this.maxNote.getRealValue() - (SCORE_MIDDLE_KEYS[measure.getClef() - 1] - 100));
-				if(max > min){
+				if(max > min) {
 					this.direction = DIRECTION_UP;
-				}else{
+				}else {
 					this.direction = DIRECTION_DOWN;
 				}
 			}
 		}
 	}
 	
-	public List getVoices(){
+	public List getVoices() {
 		return this.voices;
 	}
 	
-	public int getY1(ViewLayout layout, TGNoteImpl note, int key, int clef){
+	public int getY1(ViewLayout layout, TGNoteImpl note, int key, int clef) {
 		double scale = (layout.getScoreLineSpacing() / 2.00);
 		int noteValue = note.getRealValue();
 		
 		int scoreLineY = 0;
-		if(key <= 7){
+		if(key <= 7) {
 			scoreLineY = (int)((SCORE_SHARP_POSITIONS[noteValue % 12]) * scale - (7 * (noteValue / 12)) * scale);
-		}else{
+		}else {
 			scoreLineY = (int)((SCORE_FLAT_POSITIONS[noteValue % 12]) * scale - (7 * (noteValue / 12)) * scale);
 		}
 		
@@ -137,12 +137,12 @@ public class TGBeatGroup {
 		return scoreLineY;
 	}
 	
-	public int getY2(ViewLayout layout, int x, int key, int clef){
+	public int getY2(ViewLayout layout, int x, int key, int clef) {
 		int maxDistance = 10;
 		float upOffset = TGBeatGroup.getUpOffset(layout);
 		float downOffset = TGBeatGroup.getDownOffset(layout);
-		if(this.direction == DIRECTION_DOWN){
-			if(this.minNote != this.firstMinNote && this.minNote != this.lastMinNote){
+		if(this.direction == DIRECTION_DOWN) {
+			if(this.minNote != this.firstMinNote && this.minNote != this.lastMinNote) {
 				return (int) (getY1(layout, this.minNote, key, clef) + downOffset);
 			}
 			
@@ -156,13 +156,13 @@ public class TGBeatGroup {
 			if(y2 > y1 && (y2 - y1) > maxDistance) y1 = (y2 - maxDistance);
 			
 			//int y = (int)((((double)y1 -(double)y2) / ((double)x1 - (double)x2)) * ((double)x1 - (double)x));
-			if( (y1 - y2) != 0 && (x1 - x2) != 0 && (x1 - x) != 0){
+			if( (y1 - y2) != 0 && (x1 - x2) != 0 && (x1 - x) != 0) {
 				y = (int)((((double)y1 -(double)y2) / ((double)x1 - (double)x2)) * ((double)x1 - (double)x));
 			}
 			return y1 - y;
-		}else if(this.maxNote != this.firstMaxNote && this.maxNote != this.lastMaxNote){
+		}else if(this.maxNote != this.firstMaxNote && this.maxNote != this.lastMaxNote) {
 			return (int)(getY1(layout, this.maxNote, key, clef) - upOffset);
-		}else{
+		}else {
 			int y = 0;
 			int x1 = this.firstMaxNote.getPosX() + this.firstMaxNote.getBeatImpl().getSpacing();
 			int x2 = this.lastMaxNote.getPosX() + this.lastMaxNote.getBeatImpl().getSpacing();
@@ -172,7 +172,7 @@ public class TGBeatGroup {
 			if(y1 < y2 && (y2 - y1) > maxDistance) y2 = (y1 + maxDistance);
 			if(y2 < y1 && (y1 - y2) > maxDistance) y1 = (y2 + maxDistance);
 			
-			if( (y1 - y2) != 0 && (x1 - x2) != 0 && (x1 - x) != 0){
+			if( (y1 - y2) != 0 && (x1 - x2) != 0 && (x1 - x) != 0) {
 				y = (int)((((double)y1 -(double)y2) / ((double)x1 - (double)x2)) * ((double)x1 - (double)x));
 			}
 			return y1 - y;
@@ -183,20 +183,20 @@ public class TGBeatGroup {
 		return this.direction;
 	}
 	
-	public TGNoteImpl getMinNote(){
+	public TGNoteImpl getMinNote() {
 		return this.minNote;
 	}
 	
-	public TGNoteImpl getMaxNote(){
+	public TGNoteImpl getMaxNote() {
 		return this.maxNote;
 	}
 	
-	public static float getUpOffset(ViewLayout layout){
+	public static float getUpOffset(ViewLayout layout) {
 		float scale = (layout.getScoreLineSpacing() / 8.0f);
 		return (UP_OFFSET * scale);
 	}
 	
-	public static float getDownOffset(ViewLayout layout){
+	public static float getDownOffset(ViewLayout layout) {
 		float scale = (layout.getScoreLineSpacing() / 8.0f);
 		return (DOWN_OFFSET * scale);
 	}

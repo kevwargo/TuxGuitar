@@ -1,7 +1,7 @@
 package org.herac.tuxguitar.gui.system.plugins;
 
 
-public class TGPluginException extends Exception{
+public class TGPluginException extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 	

@@ -29,7 +29,7 @@ import org.herac.tuxguitar.gui.items.MenuItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class MeasureMenuItem extends MenuItems{
+public class MeasureMenuItem extends MenuItems {
 	
 	private MenuItem measureMenuItem;
 	private Menu menu; 
@@ -48,7 +48,7 @@ public class MeasureMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//--first--
 		this.first = new MenuItem(this.menu, SWT.PUSH);
 		this.first.addSelectionListener(TuxGuitar.instance().getAction(GoFirstMeasureAction.NAME));
@@ -90,7 +90,7 @@ public class MeasureMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		TGMeasureImpl measure = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getMeasure();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		boolean isFirst = (measure.getNumber() == 1);
@@ -106,7 +106,7 @@ public class MeasureMenuItem extends MenuItems{
 		this.pasteMeasure.setEnabled(!running && !TuxGuitar.instance().getTablatureEditor().getClipBoard().isEmpty());
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.measureMenuItem, "measure", null);
 		setMenuItemTextAndAccelerator(this.first, "measure.first", GoFirstMeasureAction.NAME);
 		setMenuItemTextAndAccelerator(this.last, "measure.last", GoLastMeasureAction.NAME);
@@ -119,7 +119,7 @@ public class MeasureMenuItem extends MenuItems{
 		setMenuItemTextAndAccelerator(this.pasteMeasure, "measure.paste", PasteMeasureAction.NAME);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		//Nothing to do
 	}
 }

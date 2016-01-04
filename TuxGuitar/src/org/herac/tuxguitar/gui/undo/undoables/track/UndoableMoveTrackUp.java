@@ -8,18 +8,18 @@ import org.herac.tuxguitar.gui.undo.undoables.UndoableCaretHelper;
 import org.herac.tuxguitar.song.managers.TGSongManager;
 import org.herac.tuxguitar.song.models.TGTrack;
 
-public class UndoableMoveTrackUp implements UndoableEdit{
+public class UndoableMoveTrackUp implements UndoableEdit {
 	private int doAction;
 	private int trackNumber;
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
 	
-	private UndoableMoveTrackUp(){
+	private UndoableMoveTrackUp() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
@@ -31,7 +31,7 @@ public class UndoableMoveTrackUp implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
@@ -50,7 +50,7 @@ public class UndoableMoveTrackUp implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableMoveTrackUp startUndo(){
+	public static UndoableMoveTrackUp startUndo() {
 		UndoableMoveTrackUp undoable = new UndoableMoveTrackUp();
 		undoable.doAction = UNDO_ACTION;
 		undoable.undoCaret = new UndoableCaretHelper();
@@ -58,7 +58,7 @@ public class UndoableMoveTrackUp implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableMoveTrackUp endUndo(TGTrack track){
+	public UndoableMoveTrackUp endUndo(TGTrack track) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.trackNumber = track.getNumber();
 		

@@ -22,9 +22,9 @@ public class TGTrackSpacing extends TGSpacing {
 	public static final int POSITION_LYRIC = 14;
 	public static final int POSITION_BOTTOM = 15;
 	
-	private static final int[][] POSITIONS = new int[][]{
+	private static final int[][] POSITIONS = new int[][] {
 		/** SCORE **/
-		new int[]{
+		new int[] {
 				0,  //POSITION_TOP
 				1,  //POSITION_LOOP_MARKER
 				2,  //POSITION_MARKER
@@ -44,7 +44,7 @@ public class TGTrackSpacing extends TGSpacing {
 			},
 			
 		/** TABLATURE **/
-		new int[]{
+		new int[] {
 				0,  //POSITION_TOP
 				1,  //POSITION_LOOP_MARKER
 				2,  //POSITION_MARKER
@@ -64,7 +64,7 @@ public class TGTrackSpacing extends TGSpacing {
 			},
 			
 		/** SCORE | TABLATURE **/
-		new int[]{
+		new int[] {
 				0,  //POSITION_TOP
 				1,  //POSITION_LOOP_MARKER
 				2,  //POSITION_MARKER
@@ -84,7 +84,7 @@ public class TGTrackSpacing extends TGSpacing {
 			},
 	};
 	
-	public TGTrackSpacing(ViewLayout layout){
+	public TGTrackSpacing(ViewLayout layout) {
 		super( layout , POSITIONS , 16);
 	}
 }

@@ -82,7 +82,7 @@ public class TrackPropertiesAction extends Action {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
@@ -128,7 +128,7 @@ public class TrackPropertiesAction extends Action {
 		}
 	}
 	
-	private Group makeGroup(Composite parent, int horizontalSpan, String text){
+	private Group makeGroup(Composite parent, int horizontalSpan, String text) {
 		Group group = new Group(parent, SWT.SHADOW_ETCHED_IN);
 		group.setLayoutData(makeGridData(horizontalSpan));
 		group.setText(text);
@@ -136,13 +136,13 @@ public class TrackPropertiesAction extends Action {
 		return group;
 	}
 	
-	private GridData makeGridData(int horizontalSpan){
+	private GridData makeGridData(int horizontalSpan) {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.horizontalSpan = horizontalSpan;
 		return data;
 	}
 	
-	public GridData getButtonsData(){
+	public GridData getButtonsData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = MINIMUM_BUTTON_WIDTH;
 		data.minimumHeight = MINIMUM_BUTTON_HEIGHT;
@@ -259,9 +259,9 @@ public class TrackPropertiesAction extends Action {
 		this.offsetCombo = new Combo(middle, SWT.DROP_DOWN | SWT.READ_ONLY);
 		//this.offsetCombo.setLayoutData(getAlignmentData(80, SWT.LEFT));
 		this.offsetCombo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
-		for(int i = TGTrack.MIN_OFFSET;i <= TGTrack.MAX_OFFSET;i ++){
+		for(int i = TGTrack.MIN_OFFSET;i <= TGTrack.MAX_OFFSET;i ++) {
 			this.offsetCombo.add(Integer.toString(i));
-			if(i == track.getOffset()){
+			if(i == track.getOffset()) {
 				this.offsetCombo.select(i - TGTrack.MIN_OFFSET);
 			}
 		}
@@ -293,7 +293,7 @@ public class TrackPropertiesAction extends Action {
 		});
 	}
 	
-	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment){
+	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment) {
 		GridData data = new GridData();
 		data.minimumWidth = minimumWidth;
 		data.horizontalAlignment = horizontalAlignment;
@@ -400,7 +400,7 @@ public class TrackPropertiesAction extends Action {
 		final boolean transposeTryKeepString = (transposeStrings && this.stringTranspositionTryKeepString.getSelection());
 		
 		try {
-			if(infoChanges || tuningChanges || instrumentChanges){
+			if(infoChanges || tuningChanges || instrumentChanges) {
 				ActionLock.lock();
 				TGSynchronizer.instance().runLater(new TGSynchronizer.TGRunnable() {
 					public void run() throws Throwable {
@@ -411,44 +411,44 @@ public class TrackPropertiesAction extends Action {
 								UndoableJoined undoable = new UndoableJoined();
 								
 								UndoableTrackGeneric undoableGeneric = null;
-								if(tuningChanges){
+								if(tuningChanges) {
 									undoableGeneric = UndoableTrackGeneric.startUndo(track);
 								}
 								
 								//--------------------------------------info---------------------------------------
-								if(infoChanges){
+								if(infoChanges) {
 									UndoableTrackInfo undoableInfo = null;
-									if(!tuningChanges){
+									if(!tuningChanges) {
 										undoableInfo = UndoableTrackInfo.startUndo(track);
 									}
 									getSongManager().getTrackManager().changeInfo(track, trackName, trackColor, offset);
-									if(!tuningChanges && undoableInfo != null){
+									if(!tuningChanges && undoableInfo != null) {
 										undoable.addUndoableEdit(undoableInfo.endUndo(track));
 									}
 								}
 								//--------------------------------------tuning---------------------------------------
-								if(tuningChanges){
+								if(tuningChanges) {
 									updateTrackTunings(track, strings, transposeStrings, transposeTryKeepString, transposeApplyToChords);
 								}
 								//-----------------------------instrument----------------------------------------------
-								if(instrumentChanges){
+								if(instrumentChanges) {
 									UndoableTrackInstrument undoableInstrument = null;
-									if(!tuningChanges){
+									if(!tuningChanges) {
 										undoableInstrument = UndoableTrackInstrument.startUndo(track);
 									}
 									getSongManager().getTrackManager().changeInstrument(track, instrument, percussion);
-									if(!tuningChanges && undoableInstrument != null){
+									if(!tuningChanges && undoableInstrument != null) {
 										undoable.addUndoableEdit(undoableInstrument.endUndo(track));
 									}
 								}
-								if(tuningChanges && undoableGeneric != null){
+								if(tuningChanges && undoableGeneric != null) {
 									undoable.addUndoableEdit(undoableGeneric.endUndo(track));
 								}
 								addUndoableEdit(undoable.endUndo());
 								
 								new SyncThread(new Runnable() {
 									public void run() {
-										if(!TuxGuitar.isDisposed()){
+										if(!TuxGuitar.isDisposed()) {
 											updateTablature();
 											TuxGuitar.instance().getMixer().updateValues();
 											TuxGuitar.instance().updateCache( true );
@@ -469,77 +469,77 @@ public class TrackPropertiesAction extends Action {
 		}
 	}
 	
-	protected boolean hasInfoChanges(TGTrackImpl track, String name, TGColor color, int offset){
-		if(!name.equals(track.getName())){
+	protected boolean hasInfoChanges(TGTrackImpl track, String name, TGColor color, int offset) {
+		if(!name.equals(track.getName())) {
 			return true;
 		}
-		if(!color.isEqual(track.getColor())){
+		if(!color.isEqual(track.getColor())) {
 			return true;
 		}
-		if(offset != track.getOffset()){
+		if(offset != track.getOffset()) {
 			return true;
 		}
 		return false;
 	}
 	
-	protected boolean hasInstrumentChanges(TGTrackImpl track, int instrument, boolean percussion){
+	protected boolean hasInstrumentChanges(TGTrackImpl track, int instrument, boolean percussion) {
 		return ((track.getChannel().getInstrument() != instrument) || (track.isPercussionTrack() != percussion));
 	}
 	
-	protected boolean hasTuningChanges(TGTrackImpl track, List newStrings){
+	protected boolean hasTuningChanges(TGTrackImpl track, List newStrings) {
 		List oldStrings = track.getStrings();
 		//check the number of strings
-		if(oldStrings.size() != newStrings.size()){
+		if(oldStrings.size() != newStrings.size()) {
 			return true;
 		}
 		//check the tuning of strings
-		for(int i = 0;i < oldStrings.size();i++){
+		for(int i = 0;i < oldStrings.size();i++) {
 			TGString oldString = (TGString)oldStrings.get(i);
 			boolean stringExists = false;
-			for(int j = 0;j < newStrings.size();j++){
+			for(int j = 0;j < newStrings.size();j++) {
 				TGString newString = (TGString)newStrings.get(j);
-				if(newString.isEqual(oldString)){
+				if(newString.isEqual(oldString)) {
 					stringExists = true;
 				}
 			}
-			if(!stringExists){
+			if(!stringExists) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	protected void updateTrackTunings(TGTrackImpl track, List strings, boolean transposeStrings , boolean transposeTryKeepString , boolean transposeApplyToChords ){
+	protected void updateTrackTunings(TGTrackImpl track, List strings, boolean transposeStrings , boolean transposeTryKeepString , boolean transposeApplyToChords ) {
 		int[] transpositions = getStringTranspositions(track, strings);
 		getSongManager().getTrackManager().changeInstrumentStrings(track, strings);
-		if( transposeStrings ){
+		if( transposeStrings ) {
 			getSongManager().getTrackManager().transposeNotes(track, transpositions, transposeTryKeepString, transposeApplyToChords );
 		}
 	}
 	
-	protected int[] getStringTranspositions(TGTrackImpl track, List newStrings ){
+	protected int[] getStringTranspositions(TGTrackImpl track, List newStrings ) {
 		int[] transpositions = new int[ newStrings.size() ];
 		
 		TGString newString = null;
 		TGString oldString = null;
-		for( int index = 0; index < transpositions.length ; index ++ ){
-			for( int i = 0; i < track.stringCount() ; i ++ ){
+		for( int index = 0; index < transpositions.length ; index ++ ) {
+			for( int i = 0; i < track.stringCount() ; i ++ ) {
 				TGString string = track.getString( i + 1 );
-				if( string.getNumber() == (index + 1) ){
+				if( string.getNumber() == (index + 1) ) {
 					oldString = string;
 					break;
 				}
 			}
-			for( int i = 0; i < newStrings.size() ; i ++ ){
+			for( int i = 0; i < newStrings.size() ; i ++ ) {
 				TGString string = (TGString)newStrings.get( i );
-				if( string.getNumber() == (index + 1) ){
+				if( string.getNumber() == (index + 1) ) {
 					newString = string;
 					break;
 				}
 			}
-			if( oldString != null && newString != null ){
+			if( oldString != null && newString != null ) {
 				transpositions[ index ] = (oldString.getValue() - newString.getValue());
-			}else{
+			}else {
 				transpositions[ index ] = 0;
 			}
 			
@@ -550,15 +550,15 @@ public class TrackPropertiesAction extends Action {
 		return transpositions;
 	}
 	
-	protected void setButtonColor(Button button){
+	protected void setButtonColor(Button button) {
 		Color color = new Color(this.dialog.getDisplay(), this.trackColor.getR(), this.trackColor.getG(), this.trackColor.getB());
 		button.setForeground( color );
 		this.disposeButtonColor();
 		this.colorButtonValue = color;
 	}
 	
-	protected void disposeButtonColor(){
-		if(this.colorButtonValue != null && !this.colorButtonValue.isDisposed()){
+	protected void disposeButtonColor() {
+		if(this.colorButtonValue != null && !this.colorButtonValue.isDisposed()) {
 			this.colorButtonValue.dispose();
 			this.colorButtonValue = null;
 		}
@@ -630,7 +630,7 @@ public class TrackPropertiesAction extends Action {
 				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 4, 28));
 				break;
 			default:
-				for( int i = 1 ; i <= this.stringCount ; i ++ ){
+				for( int i = 1 ; i <= this.stringCount ; i ++ ) {
 					this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), i, 0));
 				}
 				break;

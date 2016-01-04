@@ -4,7 +4,7 @@ import org.herac.tuxguitar.gui.editors.TGPainter;
 
 public class TGKeySignaturePainter {
 	
-	public static void paintSharp(TGPainter painter, float x, float y, float scale){
+	public static void paintSharp(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (0.4330491f * scale)),(y + (-0.7961011300329119f * scale)));
 		painter.cubicTo((x + (0.44892004f * scale)),(y + (-0.8051702223718167f * scale)),(x + (0.47386006f * scale)),(y + (-0.7983684030594305f * scale)),(x + (0.48292914f * scale)),(y + (-0.7779629465192557f * scale)));
 		painter.cubicTo((x + (0.48746368f * scale)),(y + (-0.7688938558101654f * scale)),(x + (0.48746368f * scale)),(y + (-0.7620920382440091f * scale)),(x + (0.48746368f * scale)),(y + (-0.6033829182386399f * scale)));
@@ -76,7 +76,7 @@ public class TGKeySignaturePainter {
 		painter.lineTo((x + (0.40810916f * scale)),(y + (0.008780729770660356f * scale)));
 	}
 	
-	public static void paintFlat(TGPainter painter, float x, float y, float scale){
+	public static void paintFlat(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (0.036081146f * scale)),(y + (-1.2279010191746056f * scale)));
 		painter.cubicTo((x + (0.066563375f * scale)),(y + (-1.2334432420507073f * scale)),(x + (0.11644338f * scale)),(y + (-1.2279010191746056f * scale)),(x + (0.13584116f * scale)),(y + (-1.2140454626828432f * scale)));
 		painter.cubicTo((x + (0.14138338f * scale)),(y + (-1.2112743496149778f * scale)),(x + (0.14138338f * scale)),(y + (-1.1807921263575554f * scale)),(x + (0.13307005f * scale)),(y + (-0.729100923538208f * scale)));
@@ -109,7 +109,7 @@ public class TGKeySignaturePainter {
 		painter.cubicTo((x + (0.37138563f * scale)),(y + (-0.18042085647583006f * scale)),(x + (0.35475895f * scale)),(y + (-0.19981859207153319f * scale)),(x + (0.32981896f * scale)),(y + (-0.21090314865112303f * scale)));
 	}
 	
-	public static void paintNatural(TGPainter painter, float x, float y, float scale){
+	public static void paintNatural(TGPainter painter, float x, float y, float scale) {
 		painter.moveTo((x + (0.038880464f * scale)),(y + (-0.99784582760185f * scale)));
 		painter.cubicTo((x + (0.061049357f * scale)),(y + (-1.0033880504779518f * scale)),(x + (0.11092936f * scale)),(y + (-0.99784582760185f * scale)),(x + (0.13032715f * scale)),(y + (-0.9839902706444263f * scale)));
 		painter.cubicTo((x + (0.13309824f * scale)),(y + (-0.9812191594392061f * scale)),(x + (0.13309824f * scale)),(y + (-0.9396524876356125f * scale)),(x + (0.13032715f * scale)),(y + (-0.7429035902023315f * scale)));

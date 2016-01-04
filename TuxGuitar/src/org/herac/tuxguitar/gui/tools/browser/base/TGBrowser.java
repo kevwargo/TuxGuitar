@@ -6,7 +6,7 @@ import org.herac.tuxguitar.gui.tools.browser.TGBrowserException;
 
 public abstract class TGBrowser {
 	
-	public TGBrowser(){
+	public TGBrowser() {
 		super();
 	}
 	

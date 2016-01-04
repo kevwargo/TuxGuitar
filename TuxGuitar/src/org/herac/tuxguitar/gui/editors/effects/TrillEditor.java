@@ -17,7 +17,7 @@ import org.herac.tuxguitar.song.models.TGDuration;
 import org.herac.tuxguitar.song.models.TGNote;
 import org.herac.tuxguitar.song.models.effects.TGEffectTrill;
 
-public class TrillEditor extends SelectionAdapter{
+public class TrillEditor extends SelectionAdapter {
 	
 	public static final int WIDTH = 400;
 	
@@ -30,11 +30,11 @@ public class TrillEditor extends SelectionAdapter{
 	
 	protected TGEffectTrill result;
 	
-	public TrillEditor(){
+	public TrillEditor() {
 		super();
 	}
 	
-	public TGEffectTrill show(final TGNote note){
+	public TGEffectTrill show(final TGNote note) {
 		final Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		
 		dialog.setLayout(new GridLayout());
@@ -50,7 +50,7 @@ public class TrillEditor extends SelectionAdapter{
 		//-----defaults-------------------------------------------------
 		int fret = note.getValue();
 		int duration = TGDuration.SIXTEENTH;
-		if(note.getEffect().isTrill()){
+		if(note.getEffect().isTrill()) {
 			fret = note.getEffect().getTrill().getFret();
 			duration = note.getEffect().getTrill().getDuration().getValue();
 		}
@@ -132,7 +132,7 @@ public class TrillEditor extends SelectionAdapter{
 		return this.result;
 	}
 	
-	private Group makeGroup(Composite parent, int horizontalSpan, String text){
+	private Group makeGroup(Composite parent, int horizontalSpan, String text) {
 		Group group = new Group(parent, SWT.SHADOW_ETCHED_IN);
 		group.setLayoutData(makeGridData(horizontalSpan));
 		group.setText(text);
@@ -140,29 +140,29 @@ public class TrillEditor extends SelectionAdapter{
 		return group;
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private GridData makeGridData(int horizontalSpan){
+	private GridData makeGridData(int horizontalSpan) {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.horizontalSpan = horizontalSpan;
 		return data;
 	}
 	
-	public TGEffectTrill getTrill(){
+	public TGEffectTrill getTrill() {
 		TGEffectTrill effect = TuxGuitar.instance().getSongManager().getFactory().newEffectTrill();
 		effect.setFret(this.fretSpinner.getSelection());
-		if(this.sixtyFourthButton.getSelection()){
+		if(this.sixtyFourthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.SIXTY_FOURTH);
-		}else if(this.thirtySecondButton.getSelection()){
+		}else if(this.thirtySecondButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.THIRTY_SECOND);
-		}else if(this.sixTeenthButton.getSelection()){
+		}else if(this.sixTeenthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.SIXTEENTH);
-		}else{
+		}else {
 			return null;
 		}
 		return effect;

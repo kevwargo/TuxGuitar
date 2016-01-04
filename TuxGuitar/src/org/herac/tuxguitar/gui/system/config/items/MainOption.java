@@ -13,18 +13,18 @@ import org.herac.tuxguitar.gui.system.config.TGConfigEditor;
 import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 import org.herac.tuxguitar.gui.util.WindowTitleUtil;
 
-public class MainOption  extends Option{
+public class MainOption  extends Option {
 	protected boolean initialized;
 	protected Button showSplash;
 	protected Button autoSizeTable;
 	protected Text windowTitle;
 	
-	public MainOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent){
+	public MainOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent) {
 		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.main"));
 		this.initialized = false;
 	}
 	
-	public void createOption(){
+	public void createOption() {
 		getToolItem().setText(TuxGuitar.getProperty("settings.config.main"));
 		getToolItem().setImage(TuxGuitar.instance().getIconManager().getOptionMain());
 		getToolItem().addSelectionListener(this);
@@ -89,7 +89,7 @@ public class MainOption  extends Option{
 		this.loadConfig();
 	}
 	
-	protected void loadConfig(){
+	protected void loadConfig() {
 		new Thread(new Runnable() {
 			public void run() {
 				final String windowTitle = getConfig().getStringConfigValue(TGConfigKeys.WINDOW_TITLE);
@@ -97,7 +97,7 @@ public class MainOption  extends Option{
 				final boolean autoSizeTable = getConfig().getBooleanConfigValue(TGConfigKeys.TABLE_AUTO_SIZE);
 				new SyncThread(new Runnable() {
 					public void run() {
-						if(!isDisposed()){
+						if(!isDisposed()) {
 							MainOption.this.windowTitle.setText(windowTitle);
 							MainOption.this.showSplash.setSelection(showSplash);
 							MainOption.this.autoSizeTable.setSelection(autoSizeTable);
@@ -110,24 +110,24 @@ public class MainOption  extends Option{
 		}).start();
 	}
 	
-	public void updateConfig(){
-		if(this.initialized){
+	public void updateConfig() {
+		if(this.initialized) {
 			getConfig().setProperty(TGConfigKeys.WINDOW_TITLE, this.windowTitle.getText());
 			getConfig().setProperty(TGConfigKeys.SHOW_SPLASH, this.showSplash.getSelection());
 			getConfig().setProperty(TGConfigKeys.TABLE_AUTO_SIZE, this.autoSizeTable.getSelection());
 		}
 	}
 	
-	public void updateDefaults(){
-		if(this.initialized){
+	public void updateDefaults() {
+		if(this.initialized) {
 			getConfig().setProperty(TGConfigKeys.WINDOW_TITLE, getDefaults().getProperty(TGConfigKeys.WINDOW_TITLE));
 			getConfig().setProperty(TGConfigKeys.SHOW_SPLASH, getDefaults().getProperty(TGConfigKeys.SHOW_SPLASH));
 			getConfig().setProperty(TGConfigKeys.TABLE_AUTO_SIZE, getDefaults().getProperty(TGConfigKeys.TABLE_AUTO_SIZE));
 		}
 	}
 	
-	public void applyConfig(boolean force){
-		if(force || this.initialized){
+	public void applyConfig(boolean force) {
+		if(force || this.initialized) {
 			TuxGuitar.instance().showTitle();
 			TuxGuitar.instance().getTable().loadConfig();
 		}

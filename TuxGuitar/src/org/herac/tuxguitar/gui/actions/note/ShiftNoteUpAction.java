@@ -18,21 +18,21 @@ import org.herac.tuxguitar.song.models.TGNote;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ShiftNoteUpAction extends Action{
+public class ShiftNoteUpAction extends Action {
 	public static final String NAME = "action.note.general.shift-up";
 	
 	public ShiftNoteUpAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		TGNote note = getEditor().getTablature().getCaret().getSelectedNote();
-		if(note != null){
+		if(note != null) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			
 			int nextString = getSongManager().getMeasureManager().shiftNoteUp(getEditor().getTablature().getCaret().getMeasure(), note.getVoice().getBeat().getStart(), note.getString());
-			if(nextString > 0){
+			if(nextString > 0) {
 				getEditor().getTablature().getCaret().setStringNumber(nextString);
 				
 				//termia el undoable

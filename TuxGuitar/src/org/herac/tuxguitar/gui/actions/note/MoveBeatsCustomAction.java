@@ -31,15 +31,15 @@ import org.herac.tuxguitar.song.models.TGMeasure;
 import org.herac.tuxguitar.song.models.TGTrack;
 import org.herac.tuxguitar.util.TGSynchronizer;
 
-public class MoveBeatsCustomAction extends Action{
+public class MoveBeatsCustomAction extends Action {
 	public static final String NAME = "action.beat.general.move-custom";
 	
-	private static final ComboItem[] MOVE_DIRECTIONS = new ComboItem[]{
+	private static final ComboItem[] MOVE_DIRECTIONS = new ComboItem[] {
 		new ComboItem( TuxGuitar.getProperty("beat.move-custom.dialog.direction.right"), new Integer(1) ),
 		new ComboItem( TuxGuitar.getProperty("beat.move-custom.dialog.direction.left") , new Integer(-1) ),
 	};
 	
-	private static final ComboItem[] MOVE_DURATIONS = new ComboItem[]{
+	private static final ComboItem[] MOVE_DURATIONS = new ComboItem[] {
 		new ComboItem( TuxGuitar.getProperty("duration.whole") , new Integer(TGDuration.WHOLE) ),
 		new ComboItem( TuxGuitar.getProperty("duration.half") , new Integer(TGDuration.HALF) ),
 		new ComboItem( TuxGuitar.getProperty("duration.quarter") , new Integer(TGDuration.QUARTER) ),
@@ -49,34 +49,34 @@ public class MoveBeatsCustomAction extends Action{
 		new ComboItem( TuxGuitar.getProperty("duration.sixtyfourth") , new Integer(TGDuration.SIXTY_FOURTH) ),
 	};
 	
-	private static final ComboItem[] MOVE_DURATION_TYPES = new ComboItem[]{
-		new ComboItem( TuxGuitar.getProperty("beat.move-custom.dialog.duration.type.normal") , new boolean[]{ false, false} ),
-		new ComboItem( TuxGuitar.getProperty("duration.dotted") , new boolean[]{ true, false} ),
-		new ComboItem( TuxGuitar.getProperty("duration.doubledotted") , new boolean[]{ false, true} ),
+	private static final ComboItem[] MOVE_DURATION_TYPES = new ComboItem[] {
+		new ComboItem( TuxGuitar.getProperty("beat.move-custom.dialog.duration.type.normal") , new boolean[] { false, false } ),
+		new ComboItem( TuxGuitar.getProperty("duration.dotted") , new boolean[] { true, false } ),
+		new ComboItem( TuxGuitar.getProperty("duration.doubledotted") , new boolean[] { false, true } ),
 	};
 	
-	private static final ComboItem[] MOVE_DURATION_DIVISIONS = new ComboItem[]{
-		new ComboItem( TuxGuitar.getProperty("beat.move-custom.dialog.duration.division-type.normal") , new int[] { 1  , 1} ),
-		new ComboItem( "3"    , new int[] { 3  , 2} ),
-		new ComboItem( "5"    , new int[] { 5  , 4} ),
-		new ComboItem( "6"    , new int[] { 6  , 4} ),
-		new ComboItem( "7"    , new int[] { 7  , 4} ),
-		new ComboItem( "9"    , new int[] { 9  , 8} ),
-		new ComboItem( "10"   , new int[] { 10 , 8} ),
-		new ComboItem( "11"   , new int[] { 11 , 8} ),
-		new ComboItem( "12"   , new int[] { 12 , 8} ),
+	private static final ComboItem[] MOVE_DURATION_DIVISIONS = new ComboItem[] {
+		new ComboItem( TuxGuitar.getProperty("beat.move-custom.dialog.duration.division-type.normal") , new int[] { 1  , 1 } ),
+		new ComboItem( "3"    , new int[] { 3  , 2 } ),
+		new ComboItem( "5"    , new int[] { 5  , 4 } ),
+		new ComboItem( "6"    , new int[] { 6  , 4 } ),
+		new ComboItem( "7"    , new int[] { 7  , 4 } ),
+		new ComboItem( "9"    , new int[] { 9  , 8 } ),
+		new ComboItem( "10"   , new int[] { 10 , 8 } ),
+		new ComboItem( "11"   , new int[] { 11 , 8 } ),
+		new ComboItem( "12"   , new int[] { 12 , 8 } ),
 	};
 	
 	public MoveBeatsCustomAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		this.showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
 	
-	protected void showDialog(Shell shell){
+	protected void showDialog(Shell shell) {
 		final Shell dialog = DialogUtils.newDialog(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		
 		dialog.setLayout(new GridLayout());
@@ -92,7 +92,7 @@ public class MoveBeatsCustomAction extends Action{
 		directionLabel.setText(TuxGuitar.getProperty("beat.move-custom.dialog.direction") + ":");
 		
 		final Combo directionCombo = new Combo(direction, SWT.DROP_DOWN | SWT.READ_ONLY);
-		for( int i = 0 ; i < MOVE_DIRECTIONS.length ; i ++ ){
+		for( int i = 0 ; i < MOVE_DIRECTIONS.length ; i ++ ) {
 			directionCombo.add( MOVE_DIRECTIONS[i].getLabel() );
 		}
 		directionCombo.select( 0 );
@@ -129,7 +129,7 @@ public class MoveBeatsCustomAction extends Action{
 		
 		final Combo duration1Combo = new Combo(move1, SWT.DROP_DOWN | SWT.READ_ONLY);
 		duration1Combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		for( int i = 0 ; i < MOVE_DURATIONS.length ; i ++ ){
+		for( int i = 0 ; i < MOVE_DURATIONS.length ; i ++ ) {
 			duration1Combo.add( MOVE_DURATIONS[i].getLabel() );
 		}
 		duration1Combo.select( 0 );
@@ -164,7 +164,7 @@ public class MoveBeatsCustomAction extends Action{
 		
 		final Combo duration2Combo = new Combo(move2, SWT.DROP_DOWN | SWT.READ_ONLY);
 		duration2Combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		for( int i = 0 ; i < MOVE_DURATIONS.length ; i ++ ){
+		for( int i = 0 ; i < MOVE_DURATIONS.length ; i ++ ) {
 			duration2Combo.add( MOVE_DURATIONS[i].getLabel() );
 		}
 		duration2Combo.select( 2 );
@@ -177,7 +177,7 @@ public class MoveBeatsCustomAction extends Action{
 		
 		final Combo type2Combo = new Combo(move2, SWT.DROP_DOWN | SWT.READ_ONLY);
 		type2Combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		for( int i = 0 ; i < MOVE_DURATION_TYPES.length ; i ++ ){
+		for( int i = 0 ; i < MOVE_DURATION_TYPES.length ; i ++ ) {
 			type2Combo.add( MOVE_DURATION_TYPES[i].getLabel() );
 		}
 		type2Combo.select( 0 );
@@ -190,7 +190,7 @@ public class MoveBeatsCustomAction extends Action{
 		
 		final Combo division2Combo = new Combo(move2, SWT.DROP_DOWN | SWT.READ_ONLY);
 		division2Combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		for( int i = 0 ; i < MOVE_DURATION_DIVISIONS.length ; i ++ ){
+		for( int i = 0 ; i < MOVE_DURATION_DIVISIONS.length ; i ++ ) {
 			division2Combo.add( MOVE_DURATION_DIVISIONS[i].getLabel() );
 		}
 		division2Combo.select( 0 );
@@ -244,22 +244,22 @@ public class MoveBeatsCustomAction extends Action{
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
-	protected GridData getButtonData(){
+	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected int getDirection( int index ){
-		if( index >= 0 && index < MOVE_DIRECTIONS.length ){
+	protected int getDirection( int index ) {
+		if( index >= 0 && index < MOVE_DIRECTIONS.length ) {
 			return ((Integer)MOVE_DIRECTIONS[ index ].getValue()).intValue();
 		}
 		return 0;
 	}
 	
-	protected long getDuration1( int index , int count ){
-		if( count > 0 && index >= 0 && index < MOVE_DURATIONS.length ){
+	protected long getDuration1( int index , int count ) {
+		if( count > 0 && index >= 0 && index < MOVE_DURATIONS.length ) {
 			TGDuration duration = getSongManager().getFactory().newDuration();
 			duration.setValue( ((Integer)MOVE_DURATIONS[ index ].getValue()).intValue() );
 			duration.setDotted( false );
@@ -271,9 +271,9 @@ public class MoveBeatsCustomAction extends Action{
 		return 0;
 	}
 	
-	protected long getDuration2( int index , int indexType , int indexDivision, int count ){
-		if( count > 0 && index >= 0 && index < MOVE_DURATIONS.length ){
-			if( indexType >= 0 && indexType < MOVE_DURATION_TYPES.length && indexDivision >= 0 && indexDivision < MOVE_DURATION_DIVISIONS.length ){
+	protected long getDuration2( int index , int indexType , int indexDivision, int count ) {
+		if( count > 0 && index >= 0 && index < MOVE_DURATIONS.length ) {
+			if( indexType >= 0 && indexType < MOVE_DURATION_TYPES.length && indexDivision >= 0 && indexDivision < MOVE_DURATION_DIVISIONS.length ) {
 				TGDuration duration = getSongManager().getFactory().newDuration();
 				duration.setValue( ((Integer)MOVE_DURATIONS[ index ].getValue()).intValue() );
 				duration.setDotted(((boolean[])MOVE_DURATION_TYPES[ indexType ].getValue())[0]);
@@ -286,20 +286,20 @@ public class MoveBeatsCustomAction extends Action{
 		return 0;
 	}
 	
-	protected void updateControls(int count, List controls){
+	protected void updateControls(int count, List controls) {
 		Iterator it = controls.iterator();
-		while( it.hasNext() ){
+		while( it.hasNext() ) {
 			Control control = (Control) it.next();
 			control.setEnabled( count > 0 );
 		}
 	}
 	
-	protected int moveBeats( long theMove ){
+	protected int moveBeats( long theMove ) {
 		Caret caret = getEditor().getTablature().getCaret();		
 		TGBeat beat = caret.getSelectedBeat();
 		TGMeasure measure = caret.getMeasure();
 		TGTrack track = caret.getTrack();
-		if(beat != null && measure != null && track != null){
+		if(beat != null && measure != null && track != null) {
 			//comienza el undoable
 			UndoableTrackGeneric undoable = UndoableTrackGeneric.startUndo(track);
 			
@@ -319,7 +319,7 @@ public class MoveBeatsCustomAction extends Action{
 		private String label;
 		private Object value;
 		
-		public ComboItem(String label, Object value){
+		public ComboItem(String label, Object value) {
 			this.label = label;
 			this.value = value;
 		}

@@ -30,14 +30,14 @@ import org.herac.tuxguitar.gui.util.DialogUtils;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class RepeatCloseAction extends Action{
+public class RepeatCloseAction extends Action {
 	public static final String NAME = "action.insert.close-repeat";
 	
 	public RepeatCloseAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		TGMeasureImpl measure = getEditor().getTablature().getCaret().getMeasure();
 		showCloseRepeatDialog(getEditor().getTablature().getShell(), measure);
 		return 0;
@@ -111,21 +111,21 @@ public class RepeatCloseAction extends Action{
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected GridData getSpinnerData(){
+	protected GridData getSpinnerData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 100;
 		return data;
 	}
 	
 	protected void closeRepeat(TGMeasureImpl measure, int repeatClose) {
-		if(repeatClose >= 0){
+		if(repeatClose >= 0) {
 			
 			//comienza el undoable
 			UndoableChangeCloseRepeat undoable = UndoableChangeCloseRepeat.startUndo();

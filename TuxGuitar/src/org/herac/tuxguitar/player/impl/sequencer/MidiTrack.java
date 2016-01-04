@@ -5,7 +5,7 @@ public class MidiTrack {
 	private boolean solo;
 	private boolean mute;
 	
-	public MidiTrack(){
+	public MidiTrack() {
 		this.solo = false;
 		this.mute = false;
 	}

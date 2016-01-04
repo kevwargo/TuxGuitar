@@ -23,7 +23,7 @@ public class ExitAction extends Action {
 		super(NAME, AUTO_LOCK | KEY_BINDING_AVAILABLE );
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		ActionLock.unlock();
 		TuxGuitar.instance().getShell().close();
 		return 0;

@@ -20,9 +20,9 @@ public abstract class TGChord {
 	private String name;
 	private TGBeat beat;
 	
-	public TGChord(int length){
+	public TGChord(int length) {
 		this.strings = new int[length];
-		for(int i = 0;i < this.strings.length;i++){
+		for(int i = 0;i < this.strings.length;i++) {
 			this.strings[i] = -1;
 		}
 	}
@@ -35,14 +35,14 @@ public abstract class TGChord {
 		this.beat = beat;
 	}
 	
-	public void addFretValue(int string, int fret){
-		if(string >= 0 && string < this.strings.length){
+	public void addFretValue(int string, int fret) {
+		if(string >= 0 && string < this.strings.length) {
 			this.strings[string] = fret;
 		}
 	}
 	
-	public int getFretValue(int string){
-		if(string >= 0 && string < this.strings.length){
+	public int getFretValue(int string) {
+		if(string >= 0 && string < this.strings.length) {
 			return this.strings[string];
 		}
 		return -1;
@@ -60,14 +60,14 @@ public abstract class TGChord {
 		return this.strings;
 	}
 	
-	public int countStrings(){
+	public int countStrings() {
 		return this.strings.length;
 	}
 	
-	public int countNotes(){
+	public int countNotes() {
 		int count = 0;
-		for(int i = 0;i < this.strings.length;i++){
-			if(this.strings[i] >= 0){
+		for(int i = 0;i < this.strings.length;i++) {
+			if(this.strings[i] >= 0) {
 				count ++;
 			}
 		}
@@ -82,11 +82,11 @@ public abstract class TGChord {
 		this.name = name;
 	}
 	
-	public TGChord clone(TGFactory factory){
+	public TGChord clone(TGFactory factory) {
 		TGChord chord = factory.newChord(this.strings.length);
 		chord.setName(getName());
 		chord.setFirstFret(getFirstFret());
-		for(int i = 0;i < chord.strings.length;i++){
+		for(int i = 0;i < chord.strings.length;i++) {
 			chord.strings[i] = this.strings[i];
 		}
 		return chord;

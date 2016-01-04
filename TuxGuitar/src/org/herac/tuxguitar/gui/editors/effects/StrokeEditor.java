@@ -15,7 +15,7 @@ import org.herac.tuxguitar.song.models.TGBeat;
 import org.herac.tuxguitar.song.models.TGDuration;
 import org.herac.tuxguitar.song.models.TGStroke;
 
-public class StrokeEditor extends SelectionAdapter{
+public class StrokeEditor extends SelectionAdapter {
 	
 	public static final int WIDTH = 400;
 	
@@ -34,11 +34,11 @@ public class StrokeEditor extends SelectionAdapter{
 	private int status;
 	private int value;
 	
-	public StrokeEditor(){
+	public StrokeEditor() {
 		super();
 	}
 	
-	public void open(final TGBeat beat){
+	public void open(final TGBeat beat) {
 		this.status = STATUS_CANCEL;
 		
 		final Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
@@ -47,7 +47,7 @@ public class StrokeEditor extends SelectionAdapter{
 		
 		//-----defaults-------------------------------------------------
 		int duration = TGDuration.SIXTEENTH;
-		if( beat.getStroke().getDirection() != TGStroke.STROKE_NONE ){
+		if( beat.getStroke().getDirection() != TGStroke.STROKE_NONE ) {
 			duration = beat.getStroke().getValue();
 		}
 		
@@ -126,27 +126,27 @@ public class StrokeEditor extends SelectionAdapter{
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
-	protected GridData getButtonData(){
+	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected int getSelection(){
-		if( this.duration4.getSelection() ){
+	protected int getSelection() {
+		if( this.duration4.getSelection() ) {
 			return TGDuration.QUARTER;
 		}
-		if( this.duration8.getSelection() ){
+		if( this.duration8.getSelection() ) {
 			return TGDuration.EIGHTH;
 		}
-		if( this.duration16.getSelection() ){
+		if( this.duration16.getSelection() ) {
 			return TGDuration.SIXTEENTH;
 		}
-		if( this.duration32.getSelection() ){
+		if( this.duration32.getSelection() ) {
 			return TGDuration.THIRTY_SECOND;
 		}
-		if( this.duration64.getSelection() ){
+		if( this.duration64.getSelection() ) {
 			return TGDuration.SIXTY_FOURTH;
 		}
 		return 0;

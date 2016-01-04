@@ -34,14 +34,14 @@ import org.herac.tuxguitar.song.models.TGTrack;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class RemoveMeasureAction extends Action{
+public class RemoveMeasureAction extends Action {
 	public static final String NAME = "action.measure.remove";
 	
 	public RemoveMeasureAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell()/*, e*/);
 		return 0;
 	}
@@ -86,9 +86,9 @@ public class RemoveMeasureAction extends Action{
 					int fromSelection = fromSpinner.getSelection();
 					int toSelection = toSpinner.getSelection();
 					
-					if(fromSelection < minSelection){
+					if(fromSelection < minSelection) {
 						fromSpinner.setSelection(minSelection);
-					}else if(fromSelection > toSelection){
+					}else if(fromSelection > toSelection) {
 						fromSpinner.setSelection(toSelection);
 					}
 				}
@@ -97,9 +97,9 @@ public class RemoveMeasureAction extends Action{
 				public void widgetSelected(SelectionEvent e) {
 					int toSelection = toSpinner.getSelection();
 					int fromSelection = fromSpinner.getSelection();
-					if(toSelection < fromSelection){
+					if(toSelection < fromSelection) {
 						toSpinner.setSelection(fromSelection);
-					}else if(toSelection > maxSelection){
+					}else if(toSelection > maxSelection) {
 						toSpinner.setSelection(maxSelection);
 					}
 				}
@@ -134,24 +134,24 @@ public class RemoveMeasureAction extends Action{
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected GridData getSpinnerData(){
+	protected GridData getSpinnerData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 180;
 		return data;
 	}
 	
-	protected void removeMeasures(int m1, int m2/*, TypedEvent event*/){
-		if(m1 > 0 && m1 <= m2 && m2 <= getSongManager().getSong().countMeasureHeaders()){
+	protected void removeMeasures(int m1, int m2/*, TypedEvent event*/) {
+		if(m1 > 0 && m1 <= m2 && m2 <= getSongManager().getSong().countMeasureHeaders()) {
 			Caret caret = getEditor().getTablature().getCaret();
 			
-			if(m1 == 1 && m2 == getSongManager().getSong().countMeasureHeaders()){
+			if(m1 == 1 && m2 == getSongManager().getSong().countMeasureHeaders()) {
 				//TuxGuitar.instance().getAction(NewFileAction.NAME).process(event);
 				TuxGuitar.instance().newSong();
 				return;
@@ -166,7 +166,7 @@ public class RemoveMeasureAction extends Action{
 			updateTablature();
 			
 			int measureCount = getSongManager().getSong().countMeasureHeaders();
-			if(caret.getMeasure().getNumber() > measureCount){
+			if(caret.getMeasure().getNumber() > measureCount) {
 				TGTrack track = getSongManager().getTrack(caret.getTrack().getNumber());
 				TGMeasure measure = getSongManager().getTrackManager().getMeasure(track, measureCount);
 				caret.update(track.getNumber(), measure.getStart(), 1);

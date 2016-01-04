@@ -16,10 +16,10 @@ import org.herac.tuxguitar.gui.editors.TGPainter;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TablaturePaintListener implements PaintListener{
+public class TablaturePaintListener implements PaintListener {
 	private Tablature tablature;
 	
-	public TablaturePaintListener(Tablature tablature){
+	public TablaturePaintListener(Tablature tablature) {
 		this.tablature = tablature;
 	}
 	

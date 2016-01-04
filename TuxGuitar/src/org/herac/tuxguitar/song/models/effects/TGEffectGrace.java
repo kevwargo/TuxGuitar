@@ -78,12 +78,12 @@ public abstract class TGEffectGrace {
 		this.transition = transition;
 	}
 	
-	public int getDurationTime(){
+	public int getDurationTime() {
 		//return (int)(((float)TGDuration.QUARTER_TIME / 16.00 ) * (float)getDuration());
 		return (int)((TGDuration.QUARTER_TIME / 16.00 ) * getDuration());
 	}
 	
-	public TGEffectGrace clone(TGFactory factory){
+	public TGEffectGrace clone(TGFactory factory) {
 		TGEffectGrace effect = factory.newEffectGrace();
 		effect.setFret(getFret());
 		effect.setDuration(getDuration());

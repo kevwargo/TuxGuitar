@@ -32,8 +32,8 @@ public class ChordSettings {
 		this.findChordsMax=15;
 	}
 	
-	public static ChordSettings instance(){
-		if( instance == null ){
+	public static ChordSettings instance() {
+		if( instance == null ) {
 			instance = new ChordSettings();
 		}
 		return instance;

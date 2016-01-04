@@ -19,25 +19,25 @@ import org.herac.tuxguitar.song.models.TGMarker;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class AddMarkerAction extends Action{
+public class AddMarkerAction extends Action {
 	public static final String NAME = "action.marker.add";
 	
 	public AddMarkerAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
-		if(new MarkerEditor(getMarker()).open(getEditor().getTablature().getShell())){
+	protected int execute(TypedEvent e) {
+		if(new MarkerEditor(getMarker()).open(getEditor().getTablature().getShell())) {
 			MarkerList.instance().update(true);
 		}
 		return 0;
 	}
 	
-	private TGMarker getMarker(){
+	private TGMarker getMarker() {
 		TGMeasureImpl measure = getEditor().getTablature().getCaret().getMeasure();
 		if (measure != null) {
 			TGMarker marker = getSongManager().getMarker(measure.getNumber());
-			if(marker == null){
+			if(marker == null) {
 				marker = getSongManager().getFactory().newMarker();
 				marker.setMeasure(measure.getNumber());
 			}

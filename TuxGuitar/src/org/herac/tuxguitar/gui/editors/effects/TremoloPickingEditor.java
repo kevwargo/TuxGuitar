@@ -15,7 +15,7 @@ import org.herac.tuxguitar.song.models.TGDuration;
 import org.herac.tuxguitar.song.models.TGNote;
 import org.herac.tuxguitar.song.models.effects.TGEffectTremoloPicking;
 
-public class TremoloPickingEditor extends SelectionAdapter{
+public class TremoloPickingEditor extends SelectionAdapter {
 	
 	public static final int WIDTH = 400;
 	
@@ -27,11 +27,11 @@ public class TremoloPickingEditor extends SelectionAdapter{
 	
 	protected TGEffectTremoloPicking result;
 	
-	public TremoloPickingEditor(){
+	public TremoloPickingEditor() {
 		super();
 	}
 	
-	public TGEffectTremoloPicking show(final TGNote note){
+	public TGEffectTremoloPicking show(final TGNote note) {
 		final Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		
 		dialog.setLayout(new GridLayout());
@@ -45,7 +45,7 @@ public class TremoloPickingEditor extends SelectionAdapter{
 		
 		//-----defaults-------------------------------------------------
 		int duration = TGDuration.EIGHTH;
-		if(note.getEffect().isTremoloPicking()){
+		if(note.getEffect().isTremoloPicking()) {
 			duration = note.getEffect().getTremoloPicking().getDuration().getValue();
 		}
 		
@@ -112,7 +112,7 @@ public class TremoloPickingEditor extends SelectionAdapter{
 		return this.result;
 	}
 	
-	private Group makeGroup(Composite parent, int horizontalSpan, String text){
+	private Group makeGroup(Composite parent, int horizontalSpan, String text) {
 		Group group = new Group(parent, SWT.SHADOW_ETCHED_IN);
 		group.setLayoutData(makeGridData(horizontalSpan));
 		group.setText(text);
@@ -120,28 +120,28 @@ public class TremoloPickingEditor extends SelectionAdapter{
 		return group;
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private GridData makeGridData(int horizontalSpan){
+	private GridData makeGridData(int horizontalSpan) {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.horizontalSpan = horizontalSpan;
 		return data;
 	}
 	
-	public TGEffectTremoloPicking getTremoloPicking(){
+	public TGEffectTremoloPicking getTremoloPicking() {
 		TGEffectTremoloPicking effect = TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloPicking();
-		if(this.thirtySecondButton.getSelection()){
+		if(this.thirtySecondButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.THIRTY_SECOND);
-		}else if(this.sixTeenthButton.getSelection()){
+		}else if(this.sixTeenthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.SIXTEENTH);
-		}else if(this.eighthButton.getSelection()){
+		}else if(this.eighthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.EIGHTH);
-		}else{
+		}else {
 			return null;
 		}
 		return effect;

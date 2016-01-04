@@ -32,7 +32,7 @@ public abstract class TGConfigManager {
 		super();
 	}
 	
-	public void init(){
+	public void init() {
 		this.properties = new Properties(getDefaults());
 		this.load();
 	}
@@ -42,10 +42,10 @@ public abstract class TGConfigManager {
 	}
 	
 	public String getStringConfigValue(String key, String defaultValue) {
-		try{
+		try {
 			String property = getProperty(key);
 			return (property == null)?defaultValue:property.trim();
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -56,10 +56,10 @@ public abstract class TGConfigManager {
 	}
 	
 	public int getIntConfigValue(String key, int defaultValue) {
-		try{
+		try {
 			String value = getProperty(key);
 			return (value == null)?defaultValue:Integer.parseInt(value.trim());
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -70,10 +70,10 @@ public abstract class TGConfigManager {
 	}
 	
 	public float getFloatConfigValue(String key, float defaultValue) {
-		try{
+		try {
 			String value = getProperty(key);
 			return (value == null)?defaultValue:Float.parseFloat(value.trim());
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -84,10 +84,10 @@ public abstract class TGConfigManager {
 	}
 	
 	public double getDoubleConfigValue(String key, double defaultValue) {
-		try{
+		try {
 			String value = getProperty(key);
 			return (value == null)?defaultValue:Double.parseDouble(value.trim());
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -98,10 +98,10 @@ public abstract class TGConfigManager {
 	}
 	
 	public boolean getBooleanConfigValue(String key, boolean defaultValue) {
-		try{
+		try {
 			String value = getProperty(key);
 			return (value == null)?defaultValue:Boolean.valueOf(value.trim()).booleanValue();
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return defaultValue;
@@ -111,104 +111,104 @@ public abstract class TGConfigManager {
 		return this.getBooleanConfigValue(key, false);
 	}
 	
-	public FontData getFontDataConfigValue(String key){
-		try{
+	public FontData getFontDataConfigValue(String key) {
+		try {
 			String value = getProperty(key);
-			if(value != null){
+			if(value != null) {
 				String[] values = value.trim().split(",");
-				if(values != null && values.length == 3){
-					try{
+				if(values != null && values.length == 3) {
+					try {
 						String name = values[0].trim();
 						int size = Integer.parseInt(values[1].trim());
 						int style = Integer.parseInt(values[2].trim());
 						return new FontData( (name == null ? "" : name), size, style);
-					}catch(NumberFormatException e){
+					}catch(NumberFormatException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return new FontData();
 	}
 	
-	public RGB getRGBConfigValue(String key){
-		try{
+	public RGB getRGBConfigValue(String key) {
+		try {
 			String value = getProperty(key);
-			if(value != null){
+			if(value != null) {
 				String[] values = value.trim().split(",");
-				if(values != null && values.length == 3){
-					try{
+				if(values != null && values.length == 3) {
+					try {
 						int red = Integer.parseInt(values[0].trim());
 						int green = Integer.parseInt(values[1].trim());
 						int blue = Integer.parseInt(values[2].trim());
 						
 						return new RGB(red, green, blue);
-					}catch(NumberFormatException e){
+					}catch(NumberFormatException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
 	}
 	
-	public void setProperty(String key, String value){
+	public void setProperty(String key, String value) {
 		this.properties.setProperty(key, (value != null ? value : new String()) );
 	}
 	
-	public void setProperty(String key, int value){
+	public void setProperty(String key, int value) {
 		this.setProperty(key, Integer.toString(value));
 	}
 	
-	public void setProperty(String key, float value){
+	public void setProperty(String key, float value) {
 		this.setProperty(key, Float.toString(value));
 	}
 	
-	public void setProperty(String key, double value){
+	public void setProperty(String key, double value) {
 		this.setProperty(key, Double.toString(value));
 	}
 	
-	public void setProperty(String key, boolean value){
+	public void setProperty(String key, boolean value) {
 		this.setProperty(key, Boolean.toString(value));
 	}
 	
-	public void setProperty(String key, RGB rgb){
+	public void setProperty(String key, RGB rgb) {
 		this.setProperty(key,(rgb.red + "," + rgb.green + "," + rgb.blue));
 	}
 	
-	public void setProperty(String key, FontData fd){
+	public void setProperty(String key, FontData fd) {
 		this.setProperty(key,(fd.getName() + "," + fd.getHeight() + "," + fd.getStyle()));
 	}
 	
-	public void setDefaults(){
+	public void setDefaults() {
 		Properties defaults = new TGConfigDefaults().getProperties();
 		Iterator it = defaults.entrySet().iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			Map.Entry property = (Map.Entry)it.next();
 			setProperty((String)property.getKey(),(String)property.getValue());
 		}
 		this.save();
 	}
 	
-	public void removeProperty(String key){
+	public void removeProperty(String key) {
 		this.properties.remove(key);
 	}
 	
-	public void clear(){
+	public void clear() {
 		this.properties.clear();
 	}
 	
 	public void load() {
 		try {
-			if(new File(getFileName()).exists()){
+			if(new File(getFileName()).exists()) {
 				InputStream inputStream = new FileInputStream(getFileName());
 				this.properties.clear();
 				this.properties.load(inputStream);
-			}else{
+			}else {
 				this.save();
 			}
 		} catch (Exception e) {
@@ -216,12 +216,12 @@ public abstract class TGConfigManager {
 		}
 	}
 	
-	public void save(){
+	public void save() {
 		try {
 			File file = new File(getFileName());
-			if(!file.exists()){
+			if(!file.exists()) {
 				File folder = file.getParentFile();
-				if(folder != null && !folder.exists()){
+				if(folder != null && !folder.exists()) {
 					folder.mkdirs();
 				}
 			}

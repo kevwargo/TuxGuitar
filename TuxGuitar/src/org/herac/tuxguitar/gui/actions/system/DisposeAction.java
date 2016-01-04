@@ -31,26 +31,26 @@ public class DisposeAction extends Action {
 		super(NAME, AUTO_LOCK);
 	}
 	
-	protected int execute(TypedEvent e){
-		if(e instanceof ShellEvent){
+	protected int execute(TypedEvent e) {
+		if(e instanceof ShellEvent) {
 			TuxGuitar.instance().getPlayer().reset();
 			
-			if(TuxGuitar.instance().getFileHistory().isUnsavedFile()){
+			if(TuxGuitar.instance().getFileHistory().isUnsavedFile()) {
 				ConfirmDialog confirm = new ConfirmDialog(TuxGuitar.getProperty("file.save-changes-question"));
 				confirm.setDefaultStatus( ConfirmDialog.STATUS_CANCEL );
 				int status = confirm.confirm(ConfirmDialog.BUTTON_YES | ConfirmDialog.BUTTON_NO | ConfirmDialog.BUTTON_CANCEL, ConfirmDialog.BUTTON_YES);
-				if(status == ConfirmDialog.STATUS_CANCEL){
+				if(status == ConfirmDialog.STATUS_CANCEL) {
 					return AUTO_UNLOCK;
 				}
-				if(status == ConfirmDialog.STATUS_YES){
+				if(status == ConfirmDialog.STATUS_YES) {
 					final String fileName = FileActionUtils.getFileName();
-					if(fileName == null){
+					if(fileName == null) {
 						return AUTO_UNLOCK;
 					}
 					TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 					new Thread(new Runnable() {
 						public void run() {
-							if(!TuxGuitar.isDisposed()){
+							if(!TuxGuitar.isDisposed()) {
 								FileActionUtils.save(fileName);
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 								
@@ -66,7 +66,7 @@ public class DisposeAction extends Action {
 		return 0;
 	}
 	
-	protected void exit(){
+	protected void exit() {
 		try {
 			TGSynchronizer.instance().runLater(new TGSynchronizer.TGRunnable() {
 				public void run() throws Throwable {
@@ -82,7 +82,7 @@ public class DisposeAction extends Action {
 		}
 	}
 	
-	protected void saveConfig(){
+	protected void saveConfig() {
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		
 		config.setProperty(TGConfigKeys.LAYOUT_MODE, getEditor().getTablature().getViewLayout().getMode());
@@ -102,12 +102,12 @@ public class DisposeAction extends Action {
 		TuxGuitar.instance().getConfig().save();
 	}
 	
-	protected void closeModules(){
+	protected void closeModules() {
 		TuxGuitar.instance().getPlayer().close();
 		TuxGuitar.instance().getPluginManager().closePlugins();
 	}
 	
-	protected void dispose(){
+	protected void dispose() {
 		TGTableViewer.disposeColors();
 		TuxGuitar.instance().getSongManager().clearSong();
 		TuxGuitar.instance().getFretBoardEditor().dispose();

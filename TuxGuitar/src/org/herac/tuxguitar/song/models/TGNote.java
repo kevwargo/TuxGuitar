@@ -77,7 +77,7 @@ public abstract class TGNote {
 		this.voice = voice;
 	}
 	
-	public TGNote clone(TGFactory factory){
+	public TGNote clone(TGFactory factory) {
 		TGNote note = factory.newNote();
 		note.setValue(getValue());
 		note.setVelocity(getVelocity());

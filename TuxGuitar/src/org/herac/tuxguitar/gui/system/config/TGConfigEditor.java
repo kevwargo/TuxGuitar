@@ -42,7 +42,7 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TGConfigEditor{
+public class TGConfigEditor {
 	
 	protected Shell dialog;
 	protected TGConfigManager config;
@@ -85,7 +85,7 @@ public class TGConfigEditor{
 				setDefaults();
 				ConfirmDialog confirm = new ConfirmDialog(TuxGuitar.getProperty("settings.config.apply-changes-question"));
 				confirm.setDefaultStatus( ConfirmDialog.STATUS_NO );
-				if(confirm.confirm(ConfirmDialog.BUTTON_YES | ConfirmDialog.BUTTON_NO, ConfirmDialog.BUTTON_YES) == ConfirmDialog.STATUS_NO){
+				if(confirm.confirm(ConfirmDialog.BUTTON_YES | ConfirmDialog.BUTTON_NO, ConfirmDialog.BUTTON_YES) == ConfirmDialog.STATUS_NO) {
 					TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 					ActionLock.unlock();
 					return;
@@ -105,7 +105,7 @@ public class TGConfigEditor{
 				dispose();
 				ConfirmDialog confirm = new ConfirmDialog(TuxGuitar.getProperty("settings.config.apply-changes-question"));
 				confirm.setDefaultStatus( ConfirmDialog.STATUS_NO );
-				if(confirm.confirm(ConfirmDialog.BUTTON_YES | ConfirmDialog.BUTTON_NO, ConfirmDialog.BUTTON_YES) == ConfirmDialog.STATUS_NO){
+				if(confirm.confirm(ConfirmDialog.BUTTON_YES | ConfirmDialog.BUTTON_NO, ConfirmDialog.BUTTON_YES) == ConfirmDialog.STATUS_NO) {
 					TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 					ActionLock.unlock();
 					return;
@@ -129,7 +129,7 @@ public class TGConfigEditor{
 		
 		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		
-		if(!this.accepted){
+		if(!this.accepted) {
 			ActionLock.unlock();
 		}
 	}
@@ -146,12 +146,12 @@ public class TGConfigEditor{
 		Point optionSize = computeOptionsSize( 0 , toolBar.computeSize(SWT.DEFAULT, SWT.DEFAULT).y );
 		option.setLayoutData(new GridData(optionSize.x, optionSize.y));
 		
-		if(this.options.size() > 0){
+		if(this.options.size() > 0) {
 			select((Option)this.options.get(0));
 		}
 	}
 	
-	private void initOptions(ToolBar toolBar, Composite parent){
+	private void initOptions(ToolBar toolBar, Composite parent) {
 		this.options = new ArrayList();
 		this.options.add(new MainOption(this, toolBar, parent));
 		this.options.add(new StylesOption(this, toolBar, parent));
@@ -161,54 +161,54 @@ public class TGConfigEditor{
 		this.options.add(new SoundOption(this, toolBar, parent));
 		
 		Iterator it = this.options.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			Option option = (Option)it.next();
 			option.createOption();
 		}
 	}
 	
-	private Point computeOptionsSize(int minimumWidth, int minimumHeight){
+	private Point computeOptionsSize(int minimumWidth, int minimumHeight) {
 		int width = minimumWidth;
 		int height = minimumHeight;
 		
 		Iterator it = this.options.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			Option option = (Option)it.next();
 			Point size = option.computeSize();
-			if(size.x > width){
+			if(size.x > width) {
 				width = size.x;
 			}
-			if(size.y > height){
+			if(size.y > height) {
 				height = size.y;
 			}
 		}
 		return new Point(width, height);
 	}
 	
-	public void pack(){
+	public void pack() {
 		this.dialog.pack();
 	}
 	
-	protected GridData getButtonData(){
+	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	public GridData makeGridData(int with, int height, int minWith, int minHeight){
+	public GridData makeGridData(int with, int height, int minWith, int minHeight) {
 		GridData data = new GridData();
 		data.minimumWidth = minWith;
 		data.minimumHeight = minHeight;
-		if(with > 0){
+		if(with > 0) {
 			data.widthHint = with;
-		}else{
+		}else {
 			data.horizontalAlignment = SWT.FILL;
 			data.grabExcessHorizontalSpace = true;
 		}
-		if(height > 0){
+		if(height > 0) {
 			data.heightHint = with;
-		}else{
+		}else {
 			data.verticalAlignment = SWT.FILL;
 			data.grabExcessVerticalSpace = true;
 		}
@@ -216,47 +216,47 @@ public class TGConfigEditor{
 		return data;
 	}
 	
-	public void select(Option option){
+	public void select(Option option) {
 		hideAll();
 		option.setVisible(true);
 		//this.dialog.layout();
 		this.dialog.redraw();
 	}
 	
-	private void hideAll(){
+	private void hideAll() {
 		Iterator it = this.options.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			Option option = (Option)it.next();
 			option.setVisible(false);
 		}
 	}
 	
-	protected void updateOptions(){
+	protected void updateOptions() {
 		Iterator it = this.options.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			Option option = (Option)it.next();
 			option.updateConfig();
 		}
 		this.config.save();
 	}
 	
-	protected void setDefaults(){
+	protected void setDefaults() {
 		Iterator it = this.options.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			Option option = (Option)it.next();
 			option.updateDefaults();
 		}
 		this.config.save();
 	}
 	
-	protected void applyConfig(final boolean force){
+	protected void applyConfig(final boolean force) {
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
 			public void run() {
 				TGConfigEditor.this.runnables = new ArrayList();
 				
 				Iterator it = TGConfigEditor.this.options.iterator();
-				while(it.hasNext()){
+				while(it.hasNext()) {
 					Option option = (Option)it.next();
 					option.applyConfig(force);
 				}
@@ -264,7 +264,7 @@ public class TGConfigEditor{
 					TGSynchronizer.instance().runLater(new TGSynchronizer.TGRunnable() {
 						public void run() throws Throwable {
 							Iterator it = TGConfigEditor.this.runnables.iterator();
-							while(it.hasNext()){
+							while(it.hasNext()) {
 								Runnable current = (Runnable)it.next();
 								current.run();
 							}
@@ -289,35 +289,35 @@ public class TGConfigEditor{
 		}).start();
 	}
 	
-	protected void dispose(){
+	protected void dispose() {
 		Iterator it = this.options.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			Option option = (Option)it.next();
 			option.dispose();
 		}
 		getDialog().dispose();
 	}
 	
-	public Properties getDefaults(){
-		if(this.defaults == null){
+	public Properties getDefaults() {
+		if(this.defaults == null) {
 			this.defaults = new TGConfigDefaults().getProperties();
 		}
 		return this.defaults;
 	}
 	
-	public TGConfigManager getConfig(){
+	public TGConfigManager getConfig() {
 		return this.config;
 	}
 	
-	public TablatureEditor getEditor(){
+	public TablatureEditor getEditor() {
 		return TuxGuitar.instance().getTablatureEditor();
 	}
 	
-	public Shell getDialog(){
+	public Shell getDialog() {
 		return this.dialog;
 	}
 	
-	public void addSyncThread(Runnable runnable){
+	public void addSyncThread(Runnable runnable) {
 		this.runnables.add( runnable );
 	}
 }

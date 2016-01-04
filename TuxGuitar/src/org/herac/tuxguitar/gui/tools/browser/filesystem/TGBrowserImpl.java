@@ -8,21 +8,21 @@ import java.util.List;
 import org.herac.tuxguitar.gui.tools.browser.base.TGBrowser;
 import org.herac.tuxguitar.gui.tools.browser.base.TGBrowserElement;
 
-public class TGBrowserImpl extends TGBrowser{
+public class TGBrowserImpl extends TGBrowser {
 	
 	private File root;
 	private TGBrowserElementImpl element;
 	private TGBrowserDataImpl data;
 	
-	public TGBrowserImpl(TGBrowserDataImpl data){
+	public TGBrowserImpl(TGBrowserDataImpl data) {
 		this.data = data;
 	}
 	
-	public void open(){
+	public void open() {
 		this.root = new File(this.data.getPath());
 	}
 	
-	public void close(){
+	public void close() {
 		this.root = null;
 	}
 	
@@ -35,7 +35,7 @@ public class TGBrowserImpl extends TGBrowser{
 	}
 	
 	public void cdUp() {
-		if(this.element != null){
+		if(this.element != null) {
 			this.element = this.element.getParent();
 		}
 	}
@@ -43,13 +43,13 @@ public class TGBrowserImpl extends TGBrowser{
 	public List listElements() {
 		List elements = new ArrayList();
 		File file = ((this.element != null)?this.element.getFile():this.root);
-		if(file.exists() && file.isDirectory()){
+		if(file.exists() && file.isDirectory()) {
 			File[] files = file.listFiles();
-			for(int i = 0; i < files.length;i ++){
+			for(int i = 0; i < files.length;i ++) {
 				elements.add(new TGBrowserElementImpl(this.element, files[i]));
 			}
 		}
-		if( !elements.isEmpty() ){
+		if( !elements.isEmpty() ) {
 			Collections.sort(elements, new TGBrowserElementComparator());
 		}
 		return elements;

@@ -31,14 +31,14 @@ import org.herac.tuxguitar.gui.util.DialogUtils;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class AddMeasureAction extends Action{
+public class AddMeasureAction extends Action {
 	public static final String NAME = "action.measure.add";
 	
 	public AddMeasureAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog();
 		return 0;
 	}
@@ -91,11 +91,11 @@ public class AddMeasureAction extends Action{
 				public void widgetSelected(SelectionEvent arg0) {
 					int number = 0;
 					int count = countSpinner.getSelection();
-					if(beforePosition.getSelection()){
+					if(beforePosition.getSelection()) {
 						number = (getEditor().getTablature().getCaret().getMeasure().getNumber());
-					}else if(afterPosition.getSelection()){
+					}else if(afterPosition.getSelection()) {
 						number = (getEditor().getTablature().getCaret().getMeasure().getNumber() + 1);
-					}else if(atEnd.getSelection()){
+					}else if(atEnd.getSelection()) {
 						number = (getSongManager().getSong().countMeasureHeaders() + 1);
 					}
 					addMeasure(number, count);
@@ -118,27 +118,27 @@ public class AddMeasureAction extends Action{
 		}
 	}
 	
-	private GridData getSpinnerData(){
+	private GridData getSpinnerData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private void addMeasure( final int number , final int count ){
-		if(count > 0 && number > 0 && number <=  (getSongManager().getSong().countMeasureHeaders() + 1)){
+	private void addMeasure( final int number , final int count ) {
+		if(count > 0 && number > 0 && number <=  (getSongManager().getSong().countMeasureHeaders() + 1)) {
 			new Thread(new Runnable() {
 				public void run() {
 					new SyncThread(new Runnable() {
 						public void run() {
 							UndoableJoined undoable = new UndoableJoined();
-							for( int i = 0 ; i < count ; i ++ ){
+							for( int i = 0 ; i < count ; i ++ ) {
 								//comienza el undoable
 								UndoableAddMeasure mUndoable = UndoableAddMeasure.startUndo( ( number + i ) );
 								

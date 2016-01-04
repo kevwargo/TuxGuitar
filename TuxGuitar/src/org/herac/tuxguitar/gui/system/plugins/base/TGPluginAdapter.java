@@ -2,7 +2,7 @@ package org.herac.tuxguitar.gui.system.plugins.base;
 
 import org.herac.tuxguitar.gui.system.plugins.TGPlugin;
 
-public abstract class TGPluginAdapter implements TGPlugin{
+public abstract class TGPluginAdapter implements TGPlugin {
 	
 	public String getName() {
 		return "Untitled Plugin";

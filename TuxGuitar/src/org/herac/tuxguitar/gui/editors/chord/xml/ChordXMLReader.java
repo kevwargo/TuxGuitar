@@ -21,13 +21,13 @@ public class ChordXMLReader {
 	
 	public static List getChords(String fileName) {
 		List chords = new ArrayList();
-		try{
+		try {
 			File file = new File(fileName);
-			if (file.exists()){
+			if (file.exists()) {
 				Document doc = getDocument(file);
 				loadChords(doc.getFirstChild(), chords);
 			}
-		}catch(Exception e){
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return chords;
@@ -55,8 +55,8 @@ public class ChordXMLReader {
 	 * @param shortcutsNode
 	 * @return
 	 */
-	private static void loadChords(Node chordsNode, List chords){
-		try{
+	private static void loadChords(Node chordsNode, List chords) {
+		try {
 			NodeList chordList = chordsNode.getChildNodes();
 			for (int i = 0; i < chordList.getLength(); i++) {
 				Node chordItem = chordList.item(i);
@@ -86,7 +86,7 @@ public class ChordXMLReader {
 					chords.add(chord);
 				}
 			}
-		}catch(Exception e){
+		}catch(Exception e) {
 			chords.clear();
 			e.printStackTrace();
 		}

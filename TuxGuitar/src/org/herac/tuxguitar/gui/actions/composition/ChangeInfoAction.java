@@ -33,7 +33,7 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ChangeInfoAction extends Action{
+public class ChangeInfoAction extends Action {
 	public static final String NAME = "action.composition.change-info";
 	
 	private static final int GROUP_WIDTH  = 450;
@@ -43,7 +43,7 @@ public class ChangeInfoAction extends Action{
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
@@ -189,7 +189,7 @@ public class ChangeInfoAction extends Action{
 		}
 	}
 	
-	private GridLayout makeGroupLayout(int spacing){
+	private GridLayout makeGroupLayout(int spacing) {
 		GridLayout layout = new GridLayout(2, false);
 		layout.marginTop = spacing;
 		layout.marginBottom = spacing;
@@ -200,28 +200,28 @@ public class ChangeInfoAction extends Action{
 		return layout;
 	}
 	
-	private GridData makeTextAreaData(){
+	private GridData makeTextAreaData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumHeight = 100;
 		return data;
 	}
 	
-	private GridData makeTextData(){
+	private GridData makeTextData() {
 		return new GridData(SWT.FILL, SWT.FILL, true, true);
 	}
 	
-	private GridData makeLabelData(){
+	private GridData makeLabelData() {
 		return new GridData(SWT.RIGHT, SWT.CENTER, false, true);
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected void setProperties(String name, String artist, String album, String author, String date, String copyright, String writer, String transcriber, String comments){
+	protected void setProperties(String name, String artist, String album, String author, String date, String copyright, String writer, String transcriber, String comments) {
 		//comienza el undoable
 		UndoableChangeInfo undoable = UndoableChangeInfo.startUndo();
 		

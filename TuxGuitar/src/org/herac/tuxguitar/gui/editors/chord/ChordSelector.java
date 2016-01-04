@@ -28,9 +28,9 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  *    WIDGET SET that allows complex chord choosing<br>
  *    Chord theory according to <a href="http://www.jazzguitar.be/quick_crd_ref.html">http://www.jazzguitar.be/quick_crd_ref.html</a>.
  */
-public class ChordSelector extends Composite{
+public class ChordSelector extends Composite {
 	
-	public static final String[][] KEY_NAMES = new String[][]{
+	public static final String[][] KEY_NAMES = new String[][] {
 		TGMusicKeyUtils.getSharpKeyNames(TGMusicKeyUtils.PREFIX_CHORD),
 		TGMusicKeyUtils.getFlatKeyNames(TGMusicKeyUtils.PREFIX_CHORD),
 	};
@@ -63,7 +63,7 @@ public class ChordSelector extends Composite{
 	}
 	
 	
-	public void init(){
+	public void init() {
 		Composite tonicComposite = new Composite(this, SWT.NONE);
 		tonicComposite.setLayout(this.dialog.gridLayout(1, false, 0, 0));
 		tonicComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -95,7 +95,7 @@ public class ChordSelector extends Composite{
 		
 		customizeButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
-				if(new ChordSettingsDialog().open(ChordSelector.this.getShell())){
+				if(new ChordSettingsDialog().open(ChordSelector.this.getShell())) {
 					new SyncThread(new Runnable() {
 						public void run() {
 							ChordSelector.this.showChord();
@@ -125,29 +125,29 @@ public class ChordSelector extends Composite{
 		this.chordList.setSelection(0);
 		
 		String[] alterationNames = getAlterationNames();
-		for(int i = 0;i < alterationNames.length;i++){
+		for(int i = 0;i < alterationNames.length;i++) {
 			this.alterationList.add(alterationNames[i]);
 		}
 		this.alterationList.setSelection(0);
 		
 		String[] plusMinus = this.getPlusMinus("");
-		for(int i = 0;i < plusMinus.length;i++){
+		for(int i = 0;i < plusMinus.length;i++) {
 			this.plusMinusList.add(plusMinus[i]);
 		}
 		this.plusMinusList.setSelection(0);
 		
 		String[] plus5Minus = this.getPlusMinus("/5");
-		for(int i = 0;i < plus5Minus.length;i++){
+		for(int i = 0;i < plus5Minus.length;i++) {
 			this._5List.add(plus5Minus[i]);
 		}
 		this._5List.setSelection(0);
 		String[] plus9Minus = this.getPlusMinus("/9");
-		for(int i = 0;i < plus9Minus.length;i++){
+		for(int i = 0;i < plus9Minus.length;i++) {
 			this._9List.add(plus9Minus[i]);
 		}
 		this._9List.setSelection(0);
 		String[] plus11Minus = this.getPlusMinus("/11");
-		for(int i = 0;i < plus11Minus.length;i++){
+		for(int i = 0;i < plus11Minus.length;i++) {
 			this._11List.add(plus11Minus[i]);
 		}
 		this._11List.setSelection(0);
@@ -157,7 +157,7 @@ public class ChordSelector extends Composite{
 		this.tonicList.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				if (ChordSelector.this.getRefresh()) {
-					if(getDialog().getEditor() != null && getDialog().getList() != null){
+					if(getDialog().getEditor() != null && getDialog().getList() != null) {
 						getBassCombo().select(getTonicList().getSelectionIndex());
 						showChord();
 					}
@@ -168,7 +168,7 @@ public class ChordSelector extends Composite{
 		this.bassCombo.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				if (ChordSelector.this.getRefresh()) {
-					if(getDialog().getEditor() != null && getDialog().getList() != null){
+					if(getDialog().getEditor() != null && getDialog().getList() != null) {
 						showChord();
 					}
 				}
@@ -177,7 +177,7 @@ public class ChordSelector extends Composite{
 		
 		this.chordList.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(getDialog().getEditor() != null && getDialog().getList() != null){
+				if(getDialog().getEditor() != null && getDialog().getList() != null) {
 					adjustWidgetAvailability();
 					if (ChordSelector.this.getRefresh()) {
 						showChord();
@@ -188,7 +188,7 @@ public class ChordSelector extends Composite{
 		
 		this.alterationList.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(getDialog().getEditor() != null && getDialog().getList() != null){
+				if(getDialog().getEditor() != null && getDialog().getList() != null) {
 					ChordSelector.this.adjustWidgetAvailability();
 					if (ChordSelector.this.getRefresh()) {
 						showChord();
@@ -199,7 +199,7 @@ public class ChordSelector extends Composite{
 		
 		this.addCheck.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
-				if(getDialog().getEditor() != null && getDialog().getList() != null){
+				if(getDialog().getEditor() != null && getDialog().getList() != null) {
 					
 					ChordSelector.this.adjustWidgetAvailability();
 					/*
@@ -219,7 +219,7 @@ public class ChordSelector extends Composite{
 		
 		this._5List.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(getDialog().getEditor() != null && getDialog().getList() != null){
+				if(getDialog().getEditor() != null && getDialog().getList() != null) {
 					if (ChordSelector.this.getRefresh()) {
 						showChord();
 					}
@@ -229,7 +229,7 @@ public class ChordSelector extends Composite{
 		
 		this._9List.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(getDialog().getEditor() != null && getDialog().getList() != null){
+				if(getDialog().getEditor() != null && getDialog().getList() != null) {
 					if (ChordSelector.this.getRefresh()) {
 						showChord();
 					}
@@ -239,7 +239,7 @@ public class ChordSelector extends Composite{
 		
 		this._11List.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(getDialog().getEditor() != null && getDialog().getList() != null){
+				if(getDialog().getEditor() != null && getDialog().getList() != null) {
 					if (ChordSelector.this.getRefresh()) {
 						showChord();
 					}
@@ -249,7 +249,7 @@ public class ChordSelector extends Composite{
 		
 		this.plusMinusList.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(getDialog().getEditor() != null && getDialog().getList() != null){
+				if(getDialog().getEditor() != null && getDialog().getList() != null) {
 					if (ChordSelector.this.getRefresh()) {
 						showChord();
 						//ChordSelector.this.dialog.getList().redraw();
@@ -318,7 +318,7 @@ public class ChordSelector extends Composite{
 		this.bassCombo.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false));
 	}
 	
-	protected void insertTonicNames(boolean sharp){
+	protected void insertTonicNames(boolean sharp) {
 		
 		String[] names = KEY_NAMES[ sharp?0:1 ];
 		
@@ -334,7 +334,7 @@ public class ChordSelector extends Composite{
 		// update the list
 		this.tonicList.removeAll();
 		this.bassCombo.removeAll();
-		for(int i = 0;i < names.length;i++){
+		for(int i = 0;i < names.length;i++) {
 			this.tonicList.add(names[i]);
 			this.bassCombo.add(names[i]);
 		}
@@ -342,7 +342,7 @@ public class ChordSelector extends Composite{
 		this.bassCombo.select(indexC);
 	}
 	
-	private String[] getPlusMinus(String text){
+	private String[] getPlusMinus(String text) {
 		String[] names = new String[3];
 		
 		names[0] = " ";
@@ -352,7 +352,7 @@ public class ChordSelector extends Composite{
 		return names;
 	}
 	
-	private String[] getAlterationNames(){
+	private String[] getAlterationNames() {
 		String[] names = new String[4];
 		
 		names[0] = " ";
@@ -363,14 +363,14 @@ public class ChordSelector extends Composite{
 		return names;
 	}
 	
-	protected void showChord(){
+	protected void showChord() {
 		TuxGuitar.instance().loadCursor(getShell(), SWT.CURSOR_WAIT);
 		ChordCreatorListener listener = new ChordCreatorListener() {
 			public void notifyChords(final ChordCreatorUtil instance, final java.util.List chords) {
 				try {
 					TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 						public void run() {
-							if(instance.isValidProcess() && !getDialog().isDisposed()){
+							if(instance.isValidProcess() && !getDialog().isDisposed()) {
 								getDialog().getList().setChords(chords);
 								TuxGuitar.instance().loadCursor(getShell(), SWT.CURSOR_ARROW);
 							}
@@ -398,14 +398,14 @@ public class ChordSelector extends Composite{
 	
 	protected void updateWidget(List widget, boolean enabled) {
 		widget.setEnabled(enabled);
-		if(!enabled){
+		if(!enabled) {
 			widget.setSelection(0);
 		}
 	}
 	
 	protected void updateWidget(Button widget, boolean enabled) {
 		widget.setEnabled(enabled);
-		if(!enabled){
+		if(!enabled) {
 			widget.setSelection(false);
 		}
 	}
@@ -443,9 +443,9 @@ public class ChordSelector extends Composite{
 			updateWidget(get_11List(), false);
 			updateWidget(getPlusMinusList(), false);
 			
-			if (!chordName.equals("5")){
+			if (!chordName.equals("5")) {
 				updateWidget(get_5List(), false);//disableWidget(get_5List());
-			}else{
+			}else {
 				updateWidget(get_5List(), true);
 			}
 		}
@@ -457,7 +457,7 @@ public class ChordSelector extends Composite{
 			updateWidget(get_5List(), true);
 		}
 		
-		if(this.alterationList.isEnabled()){
+		if(this.alterationList.isEnabled()) {
 			int currentIndex = this.alterationList.getSelectionIndex();
 			// handle the +- list and ADD checkbox
 			// handle the 9 and 11 list
@@ -476,11 +476,11 @@ public class ChordSelector extends Composite{
 		this.refresh = refresh;
 	}
 	
-	public void setTuning(int[] tuning){
+	public void setTuning(int[] tuning) {
 		this.tuning = tuning;
 	}
 	
-	public int[] getTuning(){
+	public int[] getTuning() {
 		return this.tuning;
 	}
 	

@@ -34,14 +34,14 @@ import org.herac.tuxguitar.song.models.TGMeasure;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class CleanMeasureAction extends Action{
+public class CleanMeasureAction extends Action {
 	public static final String NAME = "action.measure.clean";
 	
 	public CleanMeasureAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(TuxGuitar.instance().getShell());
 		return 0;
 	}
@@ -86,9 +86,9 @@ public class CleanMeasureAction extends Action{
 					int fromSelection = fromSpinner.getSelection();
 					int toSelection = toSpinner.getSelection();
 					
-					if(fromSelection < minSelection){
+					if(fromSelection < minSelection) {
 						fromSpinner.setSelection(minSelection);
-					}else if(fromSelection > toSelection){
+					}else if(fromSelection > toSelection) {
 						fromSpinner.setSelection(toSelection);
 					}
 				}
@@ -97,9 +97,9 @@ public class CleanMeasureAction extends Action{
 				public void widgetSelected(SelectionEvent e) {
 					int toSelection = toSpinner.getSelection();
 					int fromSelection = fromSpinner.getSelection();
-					if(toSelection < fromSelection){
+					if(toSelection < fromSelection) {
 						toSpinner.setSelection(fromSelection);
-					}else if(toSelection > maxSelection){
+					}else if(toSelection > maxSelection) {
 						toSpinner.setSelection(maxSelection);
 					}
 				}
@@ -135,28 +135,28 @@ public class CleanMeasureAction extends Action{
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected GridData getSpinnerData(){
+	protected GridData getSpinnerData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 180;
 		return data;
 	}
 	
-	public void cleanMeasures(int m1, int m2){
-		if(m1 > 0 && m1 <= m2){
+	public void cleanMeasures(int m1, int m2) {
+		if(m1 > 0 && m1 <= m2) {
 			//comienza el undoable
 			UndoableJoined undoable = new UndoableJoined();
 			
 			Caret caret = getEditor().getTablature().getCaret();
-			for( int number = m1 ; number <= m2 ; number ++ ){
+			for( int number = m1 ; number <= m2 ; number ++ ) {
 				TGMeasure measure = getSongManager().getTrackManager().getMeasure( caret.getTrack() , number );
-				if( measure != null ){
+				if( measure != null ) {
 					//comienza el undoable
 					UndoableMeasureGeneric mUndoable = UndoableMeasureGeneric.startUndo( measure );
 					
@@ -168,7 +168,7 @@ public class CleanMeasureAction extends Action{
 			}
 			
 			//termia el undoable
-			if( ! undoable.isEmpty()){
+			if( ! undoable.isEmpty()) {
 				addUndoableEdit(undoable.endUndo());
 			}
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();

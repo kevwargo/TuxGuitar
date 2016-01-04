@@ -16,18 +16,18 @@ import org.herac.tuxguitar.gui.actions.Action;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GoLeftAction extends Action{
+public class GoLeftAction extends Action {
 	public static final String NAME = "action.caret.go-left";
 	
 	public GoLeftAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE);
 	}
 	
-	protected int execute(TypedEvent e){
-		if(TuxGuitar.instance().getPlayer().isRunning()){
+	protected int execute(TypedEvent e) {
+		if(TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoPrevious();
 		}
-		else{
+		else {
 			getEditor().getTablature().getCaret().moveLeft();
 		}
 		return 0;

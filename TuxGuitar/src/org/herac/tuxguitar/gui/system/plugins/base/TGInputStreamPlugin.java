@@ -4,7 +4,7 @@ import org.herac.tuxguitar.gui.system.plugins.TGPluginException;
 import org.herac.tuxguitar.io.base.TGFileFormatManager;
 import org.herac.tuxguitar.io.base.TGInputStreamBase;
 
-public abstract class TGInputStreamPlugin extends TGPluginAdapter{
+public abstract class TGInputStreamPlugin extends TGPluginAdapter {
 	
 	private boolean loaded;
 	private TGInputStreamBase stream;
@@ -20,22 +20,22 @@ public abstract class TGInputStreamPlugin extends TGPluginAdapter{
 	}
 	
 	public void setEnabled(boolean enabled) throws TGPluginException {
-		if(enabled){
+		if(enabled) {
 			addPlugin();
-		}else{
+		}else {
 			removePlugin();
 		}
 	}
 	
 	protected void addPlugin() throws TGPluginException {
-		if(!this.loaded){
+		if(!this.loaded) {
 			TGFileFormatManager.instance().addInputStream(this.stream);
 			this.loaded = true;
 		}
 	}
 	
 	protected void removePlugin() throws TGPluginException {
-		if(this.loaded){
+		if(this.loaded) {
 			TGFileFormatManager.instance().removeInputStream(this.stream);
 			this.loaded = false;
 		}

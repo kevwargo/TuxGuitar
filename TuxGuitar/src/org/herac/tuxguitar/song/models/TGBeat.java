@@ -28,7 +28,7 @@ public abstract class TGBeat {
 		this.start = TGDuration.QUARTER_TIME;
 		this.stroke = factory.newStroke();
 		this.voices = new TGVoice[ MAX_VOICES ];
-		for( int i = 0 ; i < MAX_VOICES ; i ++ ){
+		for( int i = 0 ; i < MAX_VOICES ; i ++ ) {
 			this.setVoice(i, factory.newVoice(i));
 		}
 	}
@@ -49,21 +49,21 @@ public abstract class TGBeat {
 		this.start = start;
 	}
 	
-	public void setVoice(int index, TGVoice voice){
-		if( index >= 0 && index < this.voices.length ){
+	public void setVoice(int index, TGVoice voice) {
+		if( index >= 0 && index < this.voices.length ) {
 			this.voices[index] = voice;
 			this.voices[index].setBeat( this );
 		}
 	}
 	
-	public TGVoice getVoice(int index){
-		if( index >= 0 && index < this.voices.length ){
+	public TGVoice getVoice(int index) {
+		if( index >= 0 && index < this.voices.length ) {
 			return this.voices[index];
 		}
 		return null;
 	}
 	
-	public int countVoices(){
+	public int countVoices() {
 		return this.voices.length;
 	}
 	
@@ -89,15 +89,15 @@ public abstract class TGBeat {
 		this.text.setBeat(this);
 	}
 	
-	public void removeText(){
+	public void removeText() {
 		this.text = null;
 	}
 	
-	public boolean isChordBeat(){
+	public boolean isChordBeat() {
 		return ( this.chord != null );
 	}
 	
-	public boolean isTextBeat(){
+	public boolean isTextBeat() {
 		return ( this.text != null );
 	}
 	
@@ -105,27 +105,27 @@ public abstract class TGBeat {
 		return this.stroke;
 	}
 	
-	public boolean isRestBeat(){
-		for(int v = 0; v < this.countVoices() ; v ++ ){
+	public boolean isRestBeat() {
+		for(int v = 0; v < this.countVoices() ; v ++ ) {
 			TGVoice voice = this.getVoice( v );
-			if( !voice.isEmpty() && !voice.isRestVoice() ){
+			if( !voice.isEmpty() && !voice.isRestVoice() ) {
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	public TGBeat clone(TGFactory factory){
+	public TGBeat clone(TGFactory factory) {
 		TGBeat beat = factory.newBeat();
 		beat.setStart(getStart());
 		getStroke().copy( beat.getStroke() );
-		for( int i = 0 ; i < this.voices.length ; i ++ ){
+		for( int i = 0 ; i < this.voices.length ; i ++ ) {
 			beat.setVoice(i, this.voices[i].clone(factory));
 		}
-		if(this.chord != null){
+		if(this.chord != null) {
 			beat.setChord( this.chord.clone(factory));
 		}
-		if(this.text != null){
+		if(this.text != null) {
 			beat.setText( this.text.clone(factory));
 		}
 		return beat;

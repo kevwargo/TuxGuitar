@@ -8,7 +8,7 @@ import org.herac.tuxguitar.gui.undo.undoables.UndoableCaretHelper;
 import org.herac.tuxguitar.song.managers.TGSongManager;
 import org.herac.tuxguitar.song.models.TGTrack;
 
-public class UndoableTrackSoloMute implements UndoableEdit{
+public class UndoableTrackSoloMute implements UndoableEdit {
 	private int doAction;
 	private int track;
 	private UndoableCaretHelper undoCaret;
@@ -18,17 +18,17 @@ public class UndoableTrackSoloMute implements UndoableEdit{
 	private boolean redoSolo;
 	private boolean redoMute;
 	
-	private UndoableTrackSoloMute(){
+	private UndoableTrackSoloMute() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
 		TGTrack track = manager.getTrack( this.track );
-		if( track != null ){
+		if( track != null ) {
 			manager.getTrackManager().changeSolo(track, this.redoSolo );
 			manager.getTrackManager().changeMute(track, this.redoMute );
 		}
@@ -44,12 +44,12 @@ public class UndoableTrackSoloMute implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
 		TGTrack track = manager.getTrack( this.track );
-		if( track != null ){
+		if( track != null ) {
 			manager.getTrackManager().changeSolo(track, this.undoSolo );
 			manager.getTrackManager().changeMute(track, this.undoMute );
 		}
@@ -72,7 +72,7 @@ public class UndoableTrackSoloMute implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableTrackSoloMute startUndo(TGTrack track){
+	public static UndoableTrackSoloMute startUndo(TGTrack track) {
 		UndoableTrackSoloMute undoable = new UndoableTrackSoloMute();
 		undoable.doAction = UNDO_ACTION;
 		undoable.undoCaret = new UndoableCaretHelper();
@@ -83,7 +83,7 @@ public class UndoableTrackSoloMute implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableTrackSoloMute endUndo(TGTrack track){
+	public UndoableTrackSoloMute endUndo(TGTrack track) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoSolo = track.isSolo();
 		this.redoMute = track.isMute();

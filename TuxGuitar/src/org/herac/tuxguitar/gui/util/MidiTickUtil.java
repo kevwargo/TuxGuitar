@@ -7,23 +7,23 @@ import org.herac.tuxguitar.song.models.TGMeasureHeader;
 
 public class MidiTickUtil {
 	
-	public static long getStart(long tick){
+	public static long getStart(long tick) {
 		long startPoint = getStartPoint();
 		long start = startPoint;
 		long length = 0;
 		
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
 		MidiRepeatController controller = new MidiRepeatController(manager.getSong(), getSHeader() , getEHeader() );
-		while(!controller.finished()){
+		while(!controller.finished()) {
 			TGMeasureHeader header = manager.getSong().getMeasureHeader(controller.getIndex());
 			controller.process();
-			if(controller.shouldPlay()){
+			if(controller.shouldPlay()) {
 				
 				start += length;
 				length = header.getLength();
 				
 				//verifico si es el compas correcto
-				if(tick >= start && tick < (start + length )){
+				if(tick >= start && tick < (start + length )) {
 					return header.getStart() + (tick - start);
 				}
 			}
@@ -31,23 +31,23 @@ public class MidiTickUtil {
 		return ( tick < startPoint ? startPoint : start );
 	}
 	
-	public static long getTick(long start){
+	public static long getTick(long start) {
 		long startPoint = getStartPoint();
 		long tick = startPoint;
 		long length = 0;
 		
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
 		MidiRepeatController controller = new MidiRepeatController(manager.getSong(), getSHeader() , getEHeader() );
-		while(!controller.finished()){
+		while(!controller.finished()) {
 			TGMeasureHeader header = manager.getSong().getMeasureHeader(controller.getIndex());
 			controller.process();
-			if(controller.shouldPlay()){
+			if(controller.shouldPlay()) {
 				
 				tick += length;
 				length = header.getLength();
 				
 				//verifico si es el compas correcto
-				if(start >= header.getStart() && start < (header.getStart() + length )){
+				if(start >= header.getStart() && start < (header.getStart() + length )) {
 					return tick;
 				}
 			}
@@ -55,7 +55,7 @@ public class MidiTickUtil {
 		return ( start < startPoint ? startPoint : tick );
 	}
 	
-	private static long getStartPoint(){
+	private static long getStartPoint() {
 		TuxGuitar.instance().getPlayer().updateLoop( false );
 		return TuxGuitar.instance().getPlayer().getLoopSPosition();
 	}

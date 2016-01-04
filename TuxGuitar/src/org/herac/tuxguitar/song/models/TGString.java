@@ -18,7 +18,7 @@ public abstract class TGString {
 	private int number;
 	private int value;
 	
-	public TGString(){
+	public TGString() {
 		this.number = 0;
 		this.value = 0;
 	}
@@ -39,17 +39,17 @@ public abstract class TGString {
 		this.value = value;
 	}
 	
-	public boolean isEqual(TGString string){
+	public boolean isEqual(TGString string) {
 		return (this.getNumber() == string.getNumber() && this.getValue() == string.getValue());
 	}
 	
-	public TGString clone(TGFactory factory){
+	public TGString clone(TGFactory factory) {
 		TGString string = factory.newString();
 		copy(string);
 		return string;
 	}
 	
-	public void copy(TGString string){
+	public void copy(TGString string) {
 		string.setNumber(getNumber());
 		string.setValue(getValue());
 	}

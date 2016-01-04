@@ -19,7 +19,7 @@ import org.herac.tuxguitar.song.models.TGDuration;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class SetHalfDurationAction extends Action{
+public class SetHalfDurationAction extends Action {
 	public static final String NAME = "action.note.duration.set-half";
 	public static final int VALUE = TGDuration.HALF;
 	
@@ -27,8 +27,8 @@ public class SetHalfDurationAction extends Action{
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
-		if(getSelectedDuration().getValue() != VALUE){
+	protected int execute(TypedEvent e) {
+		if(getSelectedDuration().getValue() != VALUE) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			
@@ -50,7 +50,7 @@ public class SetHalfDurationAction extends Action{
 		fireUpdate(getEditor().getTablature().getCaret().getMeasure().getNumber());
 	}
 	
-	public TGDuration getSelectedDuration(){
+	public TGDuration getSelectedDuration() {
 		return getEditor().getTablature().getCaret().getDuration();
 	}
 }

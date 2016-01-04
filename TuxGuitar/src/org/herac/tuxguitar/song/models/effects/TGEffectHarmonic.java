@@ -30,19 +30,19 @@ public abstract class TGEffectHarmonic {
 	public static final int MAX_TAPPED_OFFSET = 24;
 	
 	public static final int NATURAL_FREQUENCIES[][] = {
-		{12, 12}, //AH12 (+12 frets)
-		{9 , 28}, //AH9 (+28 frets)
-		{5 , 24}, //AH5 (+24 frets)
-		{7 , 19}, //AH7 (+19 frets)
-		{4 , 28}, //AH4 (+28 frets)
-		{3 , 31}  //AH3 (+31 frets)
+		{12, 12 }, //AH12 (+12 frets)
+		{9 , 28 }, //AH9 (+28 frets)
+		{5 , 24 }, //AH5 (+24 frets)
+		{7 , 19 }, //AH7 (+19 frets)
+		{4 , 28 }, //AH4 (+28 frets)
+		{3 , 31 }  //AH3 (+31 frets)
 	};
 	
 	private int type;
 	
 	private int data;
 	
-	public TGEffectHarmonic(){
+	public TGEffectHarmonic() {
 		this.type = 0;
 		this.data = 0;
 	}
@@ -63,27 +63,27 @@ public abstract class TGEffectHarmonic {
 		this.type = type;
 	}
 	
-	public boolean isNatural(){
+	public boolean isNatural() {
 		return (this.type == TYPE_NATURAL);
 	}
 	
-	public boolean isArtificial(){
+	public boolean isArtificial() {
 		return (this.type == TYPE_ARTIFICIAL);
 	}
 	
-	public boolean isTapped(){
+	public boolean isTapped() {
 		return (this.type == TYPE_TAPPED);
 	}
 	
-	public boolean isPinch(){
+	public boolean isPinch() {
 		return (this.type == TYPE_PINCH);
 	}
 	
-	public boolean isSemi(){
+	public boolean isSemi() {
 		return (this.type == TYPE_SEMI);
 	}
 	
-	public TGEffectHarmonic clone(TGFactory factory){
+	public TGEffectHarmonic clone(TGFactory factory) {
 		TGEffectHarmonic effect = factory.newEffectHarmonic();
 		effect.setType(getType());
 		effect.setData(getData());

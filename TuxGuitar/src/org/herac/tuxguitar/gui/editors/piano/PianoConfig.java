@@ -34,7 +34,7 @@ public class PianoConfig {
 	private Color colorNote;
 	private Color colorScale;
 	
-	public PianoConfig(){
+	public PianoConfig() {
 		super();
 	}
 	
@@ -54,7 +54,7 @@ public class PianoConfig {
 		return this.colorScale;
 	}
 	
-	public void load(){
+	public void load() {
 		Display display = TuxGuitar.instance().getDisplay();
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		this.colorNatural = new Color(display, config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_KEY_NATURAL));
@@ -63,7 +63,7 @@ public class PianoConfig {
 		this.colorScale = new Color(display, config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_SCALE));
 	}
 	
-	public void defaults(){
+	public void defaults() {
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		Properties defaults = config.getDefaults();
 		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NATURAL, defaults.getProperty(TGConfigKeys.PIANO_COLOR_KEY_NATURAL));
@@ -72,7 +72,7 @@ public class PianoConfig {
 		config.setProperty(TGConfigKeys.PIANO_COLOR_SCALE, defaults.getProperty(TGConfigKeys.PIANO_COLOR_SCALE));
 	}
 	
-	public void save(RGB rgbNatural, RGB rgbNotNatural, RGB rgbNote, RGB rgbScale){
+	public void save(RGB rgbNatural, RGB rgbNotNatural, RGB rgbNote, RGB rgbScale) {
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NATURAL, rgbNatural);
 		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NOT_NATURAL, rgbNotNatural);
@@ -80,7 +80,7 @@ public class PianoConfig {
 		config.setProperty(TGConfigKeys.PIANO_COLOR_SCALE, rgbScale);
 	}
 	
-	public void dispose(){
+	public void dispose() {
 		this.colorNatural.dispose();
 		this.colorNotNatural.dispose();
 		this.colorNote.dispose();
@@ -146,12 +146,12 @@ public class PianoConfig {
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
-	protected void applyChanges(){
+	protected void applyChanges() {
 		this.dispose();
 		this.load();
 	}
 	
-	private RGB getColorChooser(final Composite parent, String title, RGB rgb){
+	private RGB getColorChooser(final Composite parent, String title, RGB rgb) {
 		Label label = new Label(parent, SWT.NULL);
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		label.setText(title);
@@ -163,7 +163,7 @@ public class PianoConfig {
 		return button.getValue();
 	}
 	
-	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment){
+	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment) {
 		GridData data = new GridData();
 		data.minimumWidth = minimumWidth;
 		data.horizontalAlignment = horizontalAlignment;
@@ -173,7 +173,7 @@ public class PianoConfig {
 		return data;
 	}
 	
-	protected GridData getButtonData(){
+	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = MINIMUM_BUTTON_WIDTH;
 		data.minimumHeight = MINIMUM_BUTTON_HEIGHT;
@@ -185,18 +185,18 @@ public class PianoConfig {
 		protected Color color;
 		protected RGB value;
 		
-		public ButtonColor(Composite parent, int style, String text){
+		public ButtonColor(Composite parent, int style, String text) {
 			this.value = new RGB(0, 0, 0);
 			this.button = new Button(parent, style);			
 			this.button.setText(text);
 			this.addListeners();
 		}
 		
-		protected void setLayoutData(Object layoutData){
+		protected void setLayoutData(Object layoutData) {
 			this.button.setLayoutData(layoutData);
 		}
 		
-		protected void loadColor(RGB rgb){
+		protected void loadColor(RGB rgb) {
 			this.value.red = rgb.red;
 			this.value.green = rgb.green;
 			this.value.blue = rgb.blue;
@@ -207,14 +207,14 @@ public class PianoConfig {
 			this.color = color;
 		}
 		
-		protected void disposeColor(){
-			if(this.color != null && !this.color.isDisposed()){
+		protected void disposeColor() {
+			if(this.color != null && !this.color.isDisposed()) {
 				this.color.dispose();
 				this.color = null;
 			}
 		}
 		
-		private void addListeners(){
+		private void addListeners() {
 			this.button.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent event) {
 					ColorDialog dlg = new ColorDialog(ButtonColor.this.button.getShell());
@@ -233,7 +233,7 @@ public class PianoConfig {
 			});
 		}
 		
-		protected RGB getValue(){
+		protected RGB getValue() {
 			return this.value;
 		}
 	}

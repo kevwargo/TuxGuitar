@@ -11,45 +11,45 @@ import org.herac.tuxguitar.song.models.TGText;
 import org.herac.tuxguitar.song.models.TGTrack;
 import org.herac.tuxguitar.song.models.TGVoice;
 
-public class TGFactoryImpl extends TGFactory{
+public class TGFactoryImpl extends TGFactory {
 	
-	public TGFactoryImpl(){
+	public TGFactoryImpl() {
 		super();
 	}
 	
-	public TGMeasureHeader newHeader(){
+	public TGMeasureHeader newHeader() {
 		return new TGMeasureHeaderImpl(this);
 	}
 	
-	public TGTrack newTrack(){
+	public TGTrack newTrack() {
 		return new TGTrackImpl(this);
 	}
 	
-	public TGMeasure newMeasure(TGMeasureHeader header){
+	public TGMeasure newMeasure(TGMeasureHeader header) {
 		return new TGMeasureImpl(header);
 	}
 	
-	public TGNote newNote(){
+	public TGNote newNote() {
 		return new TGNoteImpl(this);
 	}
 	
-	public TGBeat newBeat(){
+	public TGBeat newBeat() {
 		return new TGBeatImpl(this);
 	}
 	
-	public TGVoice newVoice(int index){
+	public TGVoice newVoice(int index) {
 		return new TGVoiceImpl(this, index);
 	}
 	
-	public TGLyric newLyric(){
+	public TGLyric newLyric() {
 		return new TGLyricImpl();
 	}
 	
-	public TGChord newChord(int length){
+	public TGChord newChord(int length) {
 		return new TGChordImpl(length);
 	}
 	
-	public TGText newText(){
+	public TGText newText() {
 		return new TGTextImpl();
 	}
 }

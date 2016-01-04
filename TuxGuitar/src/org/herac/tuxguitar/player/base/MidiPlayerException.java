@@ -1,6 +1,6 @@
 package org.herac.tuxguitar.player.base;
 
-public class MidiPlayerException extends Exception{
+public class MidiPlayerException extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 	

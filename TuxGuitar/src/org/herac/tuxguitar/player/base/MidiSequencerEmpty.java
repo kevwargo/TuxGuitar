@@ -2,7 +2,7 @@ package org.herac.tuxguitar.player.base;
 
 import org.herac.tuxguitar.song.models.TGTimeSignature;
 
-public class MidiSequencerEmpty implements MidiSequencer{
+public class MidiSequencerEmpty implements MidiSequencer {
 	
 	public void open() {
 		// Not implemented

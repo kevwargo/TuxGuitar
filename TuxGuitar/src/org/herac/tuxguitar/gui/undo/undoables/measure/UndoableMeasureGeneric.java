@@ -10,7 +10,7 @@ import org.herac.tuxguitar.song.models.TGMeasure;
 import org.herac.tuxguitar.song.models.TGMeasureHeader;
 import org.herac.tuxguitar.song.models.TGTrack;
 
-public class UndoableMeasureGeneric implements UndoableEdit{
+public class UndoableMeasureGeneric implements UndoableEdit {
 	private int doAction;
 	private int trackNumber;
 	private UndoableCaretHelper undoCaret;
@@ -18,12 +18,12 @@ public class UndoableMeasureGeneric implements UndoableEdit{
 	private TGMeasure undoMeasure;
 	private TGMeasure redoMeasure;
 	
-	private UndoableMeasureGeneric(){
+	private UndoableMeasureGeneric() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		this.replace(this.redoMeasure);
@@ -32,7 +32,7 @@ public class UndoableMeasureGeneric implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		this.replace(this.undoMeasure);
@@ -48,9 +48,9 @@ public class UndoableMeasureGeneric implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	private void replace(TGMeasure replace){
+	private void replace(TGMeasure replace) {
 		TGTrack track = TuxGuitar.instance().getSongManager().getTrack(this.trackNumber);
-		if(track != null && replace != null){
+		if(track != null && replace != null) {
 			TGMeasureHeader header = TuxGuitar.instance().getSongManager().getMeasureHeader(replace.getNumber());
 			TGMeasure measure = replace.clone(TuxGuitar.instance().getSongManager().getFactory(), header);
 			measure = TuxGuitar.instance().getSongManager().getTrackManager().replaceMeasure(track, measure);
@@ -58,7 +58,7 @@ public class UndoableMeasureGeneric implements UndoableEdit{
 		}
 	}
 	
-	public static UndoableMeasureGeneric startUndo( TGMeasure measure ){
+	public static UndoableMeasureGeneric startUndo( TGMeasure measure ) {
 		UndoableMeasureGeneric undoable = new UndoableMeasureGeneric();
 		undoable.doAction = UNDO_ACTION;
 		undoable.trackNumber = measure.getTrack().getNumber();
@@ -67,13 +67,13 @@ public class UndoableMeasureGeneric implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableMeasureGeneric endUndo( TGMeasure measure ){
+	public UndoableMeasureGeneric endUndo( TGMeasure measure ) {
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoMeasure = measure.clone(TuxGuitar.instance().getSongManager().getFactory(), measure.getHeader().clone(TuxGuitar.instance().getSongManager().getFactory()));
 		return this;
 	}
 	
-	public static UndoableMeasureGeneric startUndo(){
+	public static UndoableMeasureGeneric startUndo() {
 		/*
 		UndoableMeasureGeneric undoable = new UndoableMeasureGeneric();
 		Caret caret = getCaret();
@@ -86,7 +86,7 @@ public class UndoableMeasureGeneric implements UndoableEdit{
 		return startUndo( getCaret().getMeasure() );
 	}
 	
-	public UndoableMeasureGeneric endUndo(){
+	public UndoableMeasureGeneric endUndo() {
 		/*
 		Caret caret = getCaret();
 		this.redoCaret = new UndoableCaretHelper();
@@ -96,7 +96,7 @@ public class UndoableMeasureGeneric implements UndoableEdit{
 		return endUndo( getCaret().getMeasure() );
 	}
 	
-	private static Caret getCaret(){
+	private static Caret getCaret() {
 		return TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 	}
 }

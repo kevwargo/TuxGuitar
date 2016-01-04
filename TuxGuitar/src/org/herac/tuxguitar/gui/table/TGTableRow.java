@@ -35,12 +35,12 @@ public class TGTableRow {
 	private MouseListener mouseListenerCanvas;
 	private PaintListener paintListenerCanvas;
 	
-	public TGTableRow(TGTable table){
+	public TGTableRow(TGTable table) {
 		this.table = table;
 		this.init();
 	}
 	
-	public void init(){
+	public void init() {
 		MouseListener mouseListenerLabel = new MouseListenerLabel();
 		MouseListener mouseListenerCanvas = new MouseListenerCanvas();
 		PaintListener paintListenerCanvas = new PaintListenerCanvas();
@@ -81,14 +81,14 @@ public class TGTableRow {
 		this.row.pack();
 	}
 	
-	public void setBackground(Color background){
+	public void setBackground(Color background) {
 		this.number.setBackground(background);
 		this.name.setBackground(background);
 		this.instrument.setBackground(background);
         this.muteCheckbox.setBackground(background);
 	}
 	
-	public void dispose(){
+	public void dispose() {
 		this.row.dispose();
 	}
 	
@@ -149,45 +149,45 @@ public class TGTableRow {
 		this.paintListenerCanvas = paintListenerCanvas;
 	}
 	
-	private class MouseListenerLabel implements MouseListener{
+	private class MouseListenerLabel implements MouseListener {
 		
-		public MouseListenerLabel(){
+		public MouseListenerLabel() {
 			super();
 		}
 		
 		public void mouseDoubleClick(MouseEvent e) {
-			if(getMouseListenerLabel() != null){
+			if(getMouseListenerLabel() != null) {
 				getMouseListenerLabel().mouseDoubleClick(e);
 			}
 		}
 		
 		public void mouseDown(MouseEvent e) {
-			if(getMouseListenerLabel() != null){
+			if(getMouseListenerLabel() != null) {
 				getMouseListenerLabel().mouseDown(e);
 			}
 		}
 		
 		public void mouseUp(MouseEvent e) {
-			if(getMouseListenerLabel() != null){
+			if(getMouseListenerLabel() != null) {
 				getMouseListenerLabel().mouseUp(e);
 			}
 		}
 	}
 	
-	private class MouseListenerCanvas implements MouseListener{
+	private class MouseListenerCanvas implements MouseListener {
 		
-		public MouseListenerCanvas(){
+		public MouseListenerCanvas() {
 			super();
 		}
 		
 		public void mouseDoubleClick(MouseEvent e) {
-			if(getMouseListenerCanvas() != null){
+			if(getMouseListenerCanvas() != null) {
 				getMouseListenerCanvas().mouseDoubleClick(e);
 			}
 		}
 		
 		public void mouseDown(MouseEvent e) {
-			if(getMouseListenerCanvas() != null && e.button != 4 && e.button != 5){
+			if(getMouseListenerCanvas() != null && e.button != 4 && e.button != 5) {
                 System.out.println("canvas mouse down " + e.button);
                 
 				getMouseListenerCanvas().mouseDown(e);
@@ -195,21 +195,21 @@ public class TGTableRow {
 		}
 		
 		public void mouseUp(MouseEvent e) {
-			if(getMouseListenerCanvas() != null && e.button != 4 && e.button != 5){
+			if(getMouseListenerCanvas() != null && e.button != 4 && e.button != 5) {
                 System.out.println("canvas mouse up " + e.button);
 				getMouseListenerCanvas().mouseUp(e);
 			}
 		}
 	}
 	
-	private class PaintListenerCanvas implements PaintListener{
+	private class PaintListenerCanvas implements PaintListener {
 		
-		public PaintListenerCanvas(){
+		public PaintListenerCanvas() {
 			super();
 		}
 		
 		public void paintControl(PaintEvent e) {
-			if(getPaintListenerCanvas() != null){
+			if(getPaintListenerCanvas() != null) {
 				getPaintListenerCanvas().paintControl(e);
 			}
 		}

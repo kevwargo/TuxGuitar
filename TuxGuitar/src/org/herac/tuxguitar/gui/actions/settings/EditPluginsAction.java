@@ -40,7 +40,7 @@ import org.herac.tuxguitar.gui.util.MessageDialog;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class EditPluginsAction extends Action{
+public class EditPluginsAction extends Action {
 	public static final String NAME = "action.settings.plugins";
 	
 	private static final int TABLE_WIDTH = 400;
@@ -50,7 +50,7 @@ public class EditPluginsAction extends Action{
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog();
 		return 0;
 	}
@@ -74,7 +74,7 @@ public class EditPluginsAction extends Action{
 		columnPlugin.setWidth( (TABLE_WIDTH - (TABLE_WIDTH / 4)) );
 		
 		Iterator it = TuxGuitar.instance().getPluginManager().getPlugins().iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			TGPlugin plugin = (TGPlugin)it.next();
 			TableItem item = new TableItem(table, SWT.NONE);
 			item.setData(plugin);
@@ -94,10 +94,10 @@ public class EditPluginsAction extends Action{
 		buttonSetup.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				TableItem item = table.getItem(table.getSelectionIndex());
-				if(item != null && item.getData() instanceof TGPluginSetup){
+				if(item != null && item.getData() instanceof TGPluginSetup) {
 					try {
 						((TGPluginSetup)item.getData()).setupDialog(dialog);
-					}catch(Throwable throwable){
+					}catch(Throwable throwable) {
 						MessageDialog.errorMessage(dialog, throwable);
 					}
 				}
@@ -111,10 +111,10 @@ public class EditPluginsAction extends Action{
 		buttonInfo.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				TableItem item = table.getItem(table.getSelectionIndex());
-				if(item != null && item.getData() instanceof TGPlugin){
+				if(item != null && item.getData() instanceof TGPlugin) {
 					try {
 						showInfo(dialog,(TGPlugin)item.getData());
-					}catch(Throwable throwable){
+					}catch(Throwable throwable) {
 						MessageDialog.errorMessage(dialog, throwable);
 					}
 				}
@@ -134,9 +134,9 @@ public class EditPluginsAction extends Action{
 			public void handleEvent (Event event) {
 				buttonInfo.setEnabled(false);
 				buttonSetup.setEnabled(false);
-				if(event.item instanceof TableItem && event.item.getData() instanceof TGPlugin){
+				if(event.item instanceof TableItem && event.item.getData() instanceof TGPlugin) {
 					final TableItem item = (TableItem)event.item;
-					if(event.detail == SWT.CHECK){
+					if(event.detail == SWT.CHECK) {
 						TuxGuitar.instance().loadCursor(dialog, SWT.CURSOR_WAIT);
 						TuxGuitar.instance().getPluginManager().setEnabled((TGPlugin)item.getData(), item.getChecked());
 						TuxGuitar.instance().loadCursor(dialog, SWT.CURSOR_ARROW);
@@ -186,7 +186,7 @@ public class EditPluginsAction extends Action{
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
 	}
 	
-	private void showInfoString(Composite parent, String key, String value){
+	private void showInfoString(Composite parent, String key, String value) {
 		Label labelKey = new Label(parent, SWT.LEFT);
 		Label labelValue = new Label(parent, SWT.LEFT | SWT.WRAP);
 		labelKey.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true));
@@ -196,9 +196,9 @@ public class EditPluginsAction extends Action{
 		labelValue.setText( (value != null && value.length() > 0)?value:TuxGuitar.getProperty("plugin.unknown-value"));
 	}
 	
-	private void setBold(Label label){
+	private void setBold(Label label) {
 		FontData[] fontDatas = label.getFont().getFontData();
-		if(fontDatas.length > 0){
+		if(fontDatas.length > 0) {
 			final Font font = new Font(label.getDisplay(), fontDatas[0].getName(),(fontDatas[0].getHeight()), SWT.BOLD);
 			label.setFont(font);
 			label.addDisposeListener(new DisposeListener() {
@@ -209,7 +209,7 @@ public class EditPluginsAction extends Action{
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;

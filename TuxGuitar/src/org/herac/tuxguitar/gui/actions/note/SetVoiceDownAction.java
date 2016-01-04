@@ -24,25 +24,25 @@ import org.herac.tuxguitar.song.models.TGVoice;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class SetVoiceDownAction extends Action{
+public class SetVoiceDownAction extends Action {
 	public static final String NAME = "action.beat.general.voice-down";
 	
 	public SetVoiceDownAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGBeatImpl beat = caret.getSelectedBeat();
-		if( beat != null ){
+		if( beat != null ) {
 			TGVoiceImpl voice = beat.getVoiceImpl( caret.getVoice() );
 			TGBeatGroup group = voice.getBeatGroup();
-			if(!voice.isEmpty() && !voice.isRestVoice() && group != null ){
+			if(!voice.isEmpty() && !voice.isRestVoice() && group != null ) {
 				//comienza el undoable
 				UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 				
 				Iterator it = group.getVoices().iterator();
-				while( it.hasNext() ){
+				while( it.hasNext() ) {
 					TGVoice current = (TGVoice)it.next();
 					getSongManager().getMeasureManager().changeVoiceDirection(current, TGVoice.DIRECTION_DOWN);
 				}

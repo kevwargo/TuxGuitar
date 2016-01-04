@@ -35,7 +35,7 @@ import org.herac.tuxguitar.gui.items.MenuItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ViewMenuItem extends MenuItems{
+public class ViewMenuItem extends MenuItems {
 	
 	private Menu menu;
 	private Menu chordMenu;
@@ -61,7 +61,7 @@ public class ViewMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//--MIXER--
 		this.showMixer = new MenuItem(this.menu, SWT.CHECK);
 		this.showMixer.addSelectionListener(TuxGuitar.instance().getAction(ShowMixerAction.NAME));
@@ -127,7 +127,7 @@ public class ViewMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		ViewLayout layout = TuxGuitar.instance().getTablatureEditor().getTablature().getViewLayout();
 		int style = layout.getStyle();
 		this.showMixer.setSelection(!TuxGuitar.instance().getMixer().isDisposed());
@@ -146,7 +146,7 @@ public class ViewMenuItem extends MenuItems{
 		this.chordDiagram.setSelection( (style & ViewLayout.DISPLAY_CHORD_DIAGRAM) != 0 );
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.layoutMenuItem, "view", null);
 		setMenuItemTextAndAccelerator(this.showMixer, "view.show-mixer", ShowMixerAction.NAME);
 		setMenuItemTextAndAccelerator(this.showTransport, "view.show-transport", ShowTransportAction.NAME);
@@ -164,7 +164,7 @@ public class ViewMenuItem extends MenuItems{
 		setMenuItemTextAndAccelerator(this.chordDiagram, "view.layout.chord-diagram", SetChordDiagramEnabledAction.NAME);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		//Nothing to do
 	}
 }

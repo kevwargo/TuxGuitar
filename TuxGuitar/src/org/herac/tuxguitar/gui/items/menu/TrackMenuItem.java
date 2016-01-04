@@ -31,7 +31,7 @@ import org.herac.tuxguitar.gui.items.MenuItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TrackMenuItem extends MenuItems{
+public class TrackMenuItem extends MenuItems {
 	private MenuItem trackMenuItem;
 	private Menu menu;
 	private MenuItem first;
@@ -51,7 +51,7 @@ public class TrackMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//--First--
 		this.first = new MenuItem(this.menu, SWT.PUSH);
 		this.first.addSelectionListener(TuxGuitar.instance().getAction(GoFirstTrackAction.NAME));
@@ -98,7 +98,7 @@ public class TrackMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.trackMenuItem, "track", null);
 		setMenuItemTextAndAccelerator(this.first, "track.first", GoFirstTrackAction.NAME);
 		setMenuItemTextAndAccelerator(this.last, "track.last", GoLastTrackAction.NAME);
@@ -113,7 +113,7 @@ public class TrackMenuItem extends MenuItems{
 		setMenuItemTextAndAccelerator(this.properties, "track.properties", TrackPropertiesAction.NAME);
 	}
 	
-	public void update(){
+	public void update() {
 		TGTrackImpl track = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getTrack();
 		int tracks = track.getSong().countTracks();
 		boolean isFirst = (track.getNumber() == 1);
@@ -131,7 +131,7 @@ public class TrackMenuItem extends MenuItems{
 		this.properties.setEnabled(!running);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		//Nothing to do
 	}
 }

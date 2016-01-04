@@ -119,32 +119,32 @@ public class TGStream {
 		private long currentStart;
 		private TGVoiceData[] voices;
 		
-		protected TGBeatData(TGMeasure measure){
+		protected TGBeatData(TGMeasure measure) {
 			this.init(measure);
 		}
 		
-		private void init(TGMeasure measure){
+		private void init(TGMeasure measure) {
 			this.currentStart = measure.getStart();
 			this.voices = new TGVoiceData[TGBeat.MAX_VOICES];
-			for(int i = 0 ; i < this.voices.length ; i ++ ){
+			for(int i = 0 ; i < this.voices.length ; i ++ ) {
 				this.voices[i] = new TGVoiceData(measure);
 			}
 		}
 		
-		protected TGVoiceData getVoice(int index){
+		protected TGVoiceData getVoice(int index) {
 			return this.voices[index];
 		}
 		
-		public long getCurrentStart(){
+		public long getCurrentStart() {
 			long minimumStart = -1;
-			for(int i = 0 ; i < this.voices.length ; i ++ ){
-				if( this.voices[i].getStart() > this.currentStart ){
-					if( minimumStart < 0 || this.voices[i].getStart() < minimumStart ){
+			for(int i = 0 ; i < this.voices.length ; i ++ ) {
+				if( this.voices[i].getStart() > this.currentStart ) {
+					if( minimumStart < 0 || this.voices[i].getStart() < minimumStart ) {
 						minimumStart = this.voices[i].getStart();
 					}
 				}
 			}
-			if( minimumStart > this.currentStart ){
+			if( minimumStart > this.currentStart ) {
 				this.currentStart = minimumStart;
 			}
 			return this.currentStart;
@@ -157,11 +157,11 @@ public class TGStream {
 		private int flags;
 		private TGDuration duration;
 		
-		protected TGVoiceData(TGMeasure measure){
+		protected TGVoiceData(TGMeasure measure) {
 			this.init(measure);
 		}
 		
-		private void init(TGMeasure measure){
+		private void init(TGMeasure measure) {
 			this.flags = 0;
 			this.setStart(measure.getStart());
 			this.setVelocity(TGVelocities.DEFAULT);

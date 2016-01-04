@@ -29,12 +29,12 @@ public class KeyBindingWriter {
 	private static final String SHORTCUT_ATTRIBUTE_MASK = "mask";
 	
 	public static void setBindings(List list, String fileName) {
-		try{
+		try {
 			File file = new File(fileName);
 			Document doc = createDocument();
 			setBindings(list, doc);
 			saveDocument(doc, file);
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}
@@ -45,7 +45,7 @@ public class KeyBindingWriter {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.newDocument();
 			return document;
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -62,7 +62,7 @@ public class KeyBindingWriter {
 			Result output = new StreamResult(fs);
 			idTransform.setOutputProperty(OutputKeys.INDENT, "yes");
 			idTransform.transform(input, output);
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}
@@ -73,11 +73,11 @@ public class KeyBindingWriter {
 	 * @param shortcutsNode
 	 * @return
 	 */
-	private static void setBindings(List list, Document document){
+	private static void setBindings(List list, Document document) {
 		Node shortcutsNode = document.createElement(SHORTCUT_ROOT);
 		
 		Iterator it = list.iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			KeyBindingAction keyBindingAction = (KeyBindingAction) it.next();
 			
 			Node node = document.createElement(SHORTCUT_TAG);

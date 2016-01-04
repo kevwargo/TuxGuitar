@@ -35,86 +35,86 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class PrintPreviewAction extends Action{
+public class PrintPreviewAction extends Action {
 	public static final String NAME = "action.file.print-preview";
 	
 	public PrintPreviewAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
-		try{
+	protected int execute(TypedEvent e) {
+		try {
 			final PrintStyles data = PrintStylesDialog.open(TuxGuitar.instance().getShell());
-			if(data != null){
+			if(data != null) {
 				TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 				
 				this.printPreview(data);
 			}
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			MessageDialog.errorMessage(throwable);
 		}
 		return 0;
 	}
 	
-	public void printPreview(final PrintStyles data){
+	public void printPreview(final PrintStyles data) {
 		new Thread(new Runnable() {
 			public void run() {
-				try{
+				try {
 					final TGSongManager manager = new TGSongManager();
 					manager.setFactory(new TGFactoryImpl());
 					manager.setSong(getSongManager().getSong().clone(manager.getFactory()));
 				
 					printPreview(manager, data);
-				}catch(Throwable throwable){
+				}catch(Throwable throwable) {
 					MessageDialog.errorMessage(throwable);
 				}
 			}
 		}).start();
 	}
 	
-	public void printPreview(final TGSongManager manager, final PrintStyles data){
+	public void printPreview(final TGSongManager manager, final PrintStyles data) {
 		new SyncThread(new Runnable() {
 			public void run() {
-				try{
+				try {
 					Tablature tablature = new Tablature(TuxGuitar.instance().getShell());
 					tablature.setSongManager(manager);
 					
 					PrinterViewLayout layout = new PrinterViewLayout(tablature, data, 1f);
 					
 					printPreview( layout );
-				}catch(Throwable throwable){
+				}catch(Throwable throwable) {
 					MessageDialog.errorMessage(throwable);
 				}
 			}
 		}).start();
 	}
 	
-	public void printPreview(final PrinterViewLayout layout){
+	public void printPreview(final PrinterViewLayout layout) {
 		new Thread(new Runnable() {
 			public void run() {
-				try{
+				try {
 					layout.getTablature().updateTablature();
 					layout.makeDocument(new PrintDocumentImpl(layout, new Rectangle(0, 0, 850, 1050)));
 					//new SyncThread(new Runnable() {
 					//	public void run() {
 					//		layout.makeDocument(new PrintDocumentImpl(layout, new Rectangle(0, 0, 850, 1050)));
 					//	}
-					//}).start();
-				}catch(Throwable throwable){
+					// }).start();
+				}catch(Throwable throwable) {
 					MessageDialog.errorMessage(throwable);
 				}
 			}
 		}).start();
 	}
 	
-	private class PrintDocumentImpl implements PrintDocument{
+	private class PrintDocumentImpl implements PrintDocument {
 		
 		private PrinterViewLayout layout;
 		private TGPainter painter;
 		private Rectangle bounds;
 		private List pages;
 		
-		public PrintDocumentImpl(PrinterViewLayout layout, Rectangle bounds){
+		public PrintDocumentImpl(PrinterViewLayout layout, Rectangle bounds) {
 			this.layout = layout;
 			this.bounds = bounds;
 			this.painter = new TGPainter();
@@ -125,7 +125,7 @@ public class PrintPreviewAction extends Action{
 			return this.painter;
 		}
 		
-		public Rectangle getBounds(){
+		public Rectangle getBounds() {
 			return this.bounds;
 		}
 		
@@ -148,13 +148,13 @@ public class PrintPreviewAction extends Action{
 			final Rectangle bounds = this.bounds;
 			final List pages = this.pages;
 			try {
-				TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable(){
+				TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 					public void run() {
 						tablature.dispose();
 						PrintPreview preview = new PrintPreview(pages, bounds);
 						preview.showPreview(getEditor().getTablature().getShell());
 						Iterator it = pages.iterator();
-						while(it.hasNext()){
+						while(it.hasNext()) {
 							Image image = (Image)it.next();
 							image.dispose();
 						}

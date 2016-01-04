@@ -107,32 +107,32 @@ public abstract class TGChannel {
 		this.volume = volume;
 	}
 	
-	public boolean isPercussionChannel(){
+	public boolean isPercussionChannel() {
 		return TGChannel.isPercussionChannel(this.getChannel());
 	}
 	
-	public static boolean isPercussionChannel(int channel){
+	public static boolean isPercussionChannel(int channel) {
 		return (channel == DEFAULT_PERCUSSION_CHANNEL);
 	}
 	
-	public static void setPercussionChannel(TGChannel channel){
+	public static void setPercussionChannel(TGChannel channel) {
 		channel.setChannel(DEFAULT_PERCUSSION_CHANNEL);
 		channel.setEffectChannel(DEFAULT_PERCUSSION_CHANNEL);
 	}
 	
-	public static TGChannel newPercussionChannel(TGFactory factory){
+	public static TGChannel newPercussionChannel(TGFactory factory) {
 		TGChannel channel = factory.newChannel();
 		TGChannel.setPercussionChannel(channel);
 		return channel;
 	}
 	
-	public TGChannel clone(TGFactory factory){
+	public TGChannel clone(TGFactory factory) {
 		TGChannel channel = factory.newChannel();
 		copy(channel);
 		return channel; 
 	}
 	
-	public void copy(TGChannel channel){
+	public void copy(TGChannel channel) {
 		channel.setChannel(getChannel());
 		channel.setEffectChannel(getEffectChannel());
 		channel.setInstrument(getInstrument());

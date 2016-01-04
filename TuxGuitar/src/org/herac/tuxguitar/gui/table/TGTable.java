@@ -28,12 +28,12 @@ public class TGTable {
 	private int rowHeight;
 	private int scrollIncrement;
 	
-	public TGTable(Composite parent){
+	public TGTable(Composite parent) {
 		this.rows = new ArrayList();
 		this.newTable(parent);
 	}
 	
-	public void newTable(Composite parent){
+	public void newTable(Composite parent) {
 		this.sComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.V_SCROLL);
 		this.sComposite.setLayout(new GridLayout());
 		this.sComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -55,7 +55,7 @@ public class TGTable {
         this.columnSolo = new TGTableColumn(this, SWT.CENTER);
         this.columnMute = new TGTableColumn(this, SWT.CENTER);
 		this.columnCanvas = new TGTableColumn(this, SWT.CENTER);
-		this.columnControl.setWeights(new int[]{1, 1, 12, 12, 2, 1, 1, 40});
+		this.columnControl.setWeights(new int[] {1, 1, 12, 12, 2, 1, 1, 40 });
 		
 		this.rowControl = new Composite(this.table, SWT.NONE);
 		this.rowControl.setLayout(newGridLayout(1, 0, 1, 0, 1));
@@ -64,15 +64,15 @@ public class TGTable {
 		this.sComposite.setContent(this.table);
 	}
 	
-	public Composite getControl(){
+	public Composite getControl() {
 		return this.table;
 	}
 	
-	public void newRow(){
+	public void newRow() {
 		this.rows.add(new TGTableRow(this));
 	}
 	
-	private GridLayout newGridLayout(int cols, int marginWidth, int marginHeight, int horizontalSpacing, int verticalSpacing){
+	private GridLayout newGridLayout(int cols, int marginWidth, int marginHeight, int horizontalSpacing, int verticalSpacing) {
 		GridLayout layout = new GridLayout(cols, false);
 		layout.marginWidth = marginWidth;
 		layout.marginHeight = marginHeight;
@@ -81,31 +81,31 @@ public class TGTable {
 		return layout;
 	}
 	
-	public void addRowItem(TGTableColumn column, Control control, boolean computeSize){
-		if(computeSize){
+	public void addRowItem(TGTableColumn column, Control control, boolean computeSize) {
+		if(computeSize) {
 			this.rowHeight = Math.max(this.rowHeight, control.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
 			this.scrollIncrement = this.rowHeight;
 		}
 		column.addControl(control);
 	}
 	
-	public int getMinHeight(){
+	public int getMinHeight() {
 		return (this.sComposite.getMinHeight() + ( this.sComposite.getBorderWidth() * 2 ) );
 	}
 	
-	public Composite getColumnControl(){
+	public Composite getColumnControl() {
 		return this.columnControl;
 	}
 	
-	public Composite getRowControl(){
+	public Composite getRowControl() {
 		return this.rowControl;
 	}
 	
-	public int getRowHeight(){
+	public int getRowHeight() {
 		return this.rowHeight;
 	}
 	
-	public int getScrollIncrement(){
+	public int getScrollIncrement() {
 		return this.scrollIncrement;
 	}	
 	
@@ -142,15 +142,15 @@ public class TGTable {
 		return this.columnCanvas;
 	}
 	
-	public TGTableRow getRow(int index){
-		if(index >= 0 && index < this.rows.size()){
+	public TGTableRow getRow(int index) {
+		if(index >= 0 && index < this.rows.size()) {
 			return (TGTableRow)this.rows.get(index);
 		}
 		return null;
 	}
 	
-	public void removeRowsAfter(int index){
-		while(index < this.rows.size()){
+	public void removeRowsAfter(int index) {
+		while(index < this.rows.size()) {
 			TGTableRow row = (TGTableRow)this.rows.get(index);
 			row.dispose();
 			this.rows.remove(index);
@@ -158,18 +158,18 @@ public class TGTable {
 		this.notifyRemoved();
 	}
 	
-	public int getRowCount(){
+	public int getRowCount() {
 		return this.rows.size();
 	}
 	
-	public void update(){
+	public void update() {
 		this.layoutColumns();
 		this.table.layout(true, true);
 		this.sComposite.setMinHeight(this.table.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
 		this.sComposite.getVerticalBar().setIncrement( (getScrollIncrement() + this.sComposite.getBorderWidth() ) );
 	}
 	
-	private void notifyRemoved(){
+	private void notifyRemoved() {
 		this.columnNumber.notifyRemoved();
 		this.columnName.notifyRemoved();
 		this.columnInstrument.notifyRemoved();
@@ -180,7 +180,7 @@ public class TGTable {
 		this.columnCanvas.notifyRemoved();
 	}
 	
-	private void layoutColumns(){
+	private void layoutColumns() {
 		this.columnNumber.layout();
 		this.columnName.layout();
 		this.columnInstrument.layout();

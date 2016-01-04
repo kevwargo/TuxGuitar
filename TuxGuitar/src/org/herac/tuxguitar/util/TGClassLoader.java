@@ -5,28 +5,28 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-public class TGClassLoader{
+public class TGClassLoader {
 	
 	private static TGClassLoader instance;
 	
 	private URLClassLoaderImpl classLoader;
 	
-	private TGClassLoader(){
+	private TGClassLoader() {
 		this.classLoader = new URLClassLoaderImpl();
 	}
 	
-	public static TGClassLoader instance(){
-		if(instance == null){
+	public static TGClassLoader instance() {
+		if(instance == null) {
 			instance = new TGClassLoader();
 		}
 		return instance;
 	}
 	
-	public ClassLoader getClassLoader(){
+	public ClassLoader getClassLoader() {
 		return this.classLoader;
 	}
 	
-	public Object newInstance(String loadClassName){
+	public Object newInstance(String loadClassName) {
 		Object object = null;
 		try {
 			object = getClassLoader().loadClass(loadClassName).newInstance();
@@ -40,7 +40,7 @@ public class TGClassLoader{
 		return object;
 	}
 	
-	public void addPath(String path){
+	public void addPath(String path) {
 		try {
 			this.classLoader.addURL(new File(path).toURI().toURL());
 		} catch (MalformedURLException e) {
@@ -48,10 +48,10 @@ public class TGClassLoader{
 		}
 	}
 	
-	public void addPaths(File folder){
-		if(folder != null && folder.exists() && folder.isDirectory()){
+	public void addPaths(File folder) {
+		if(folder != null && folder.exists() && folder.isDirectory()) {
 			String[] files = folder.list();
-			for(int i = 0;i < files.length;i++){
+			for(int i = 0;i < files.length;i++) {
 				try {
 					this.addPath( (folder.getAbsolutePath() + File.separator + files[i]) );
 				} catch (Throwable throwable) {
@@ -61,13 +61,13 @@ public class TGClassLoader{
 		}
 	}
 	
-	private class URLClassLoaderImpl extends URLClassLoader{
+	private class URLClassLoaderImpl extends URLClassLoader {
 		
-		public URLClassLoaderImpl(){
-			super(new URL[]{}, TGClassLoader.class.getClassLoader());
+		public URLClassLoaderImpl() {
+			super(new URL[] { }, TGClassLoader.class.getClassLoader());
 		}
 		
-		public void addURL(URL url){
+		public void addURL(URL url) {
 			super.addURL(url);
 		}
 		

@@ -14,7 +14,7 @@ import org.herac.tuxguitar.gui.actions.note.RemoveNoteAction;
 
 public class KeyBindingReserveds {
 	
-	private static KeyBindingAction[] reserveds = new KeyBindingAction[]{
+	private static KeyBindingAction[] reserveds = new KeyBindingAction[] {
 		new KeyBindingAction(ChangeNoteAction.NAME, new KeyBinding(KeyBindingConstants.NUMBER_0, 0)),
 		new KeyBindingAction(ChangeNoteAction.NAME, new KeyBinding(KeyBindingConstants.NUMBER_1, 0)),
 		new KeyBindingAction(ChangeNoteAction.NAME, new KeyBinding(KeyBindingConstants.NUMBER_2, 0)),
@@ -46,27 +46,27 @@ public class KeyBindingReserveds {
 		new KeyBindingAction(GoRightAction.NAME, new KeyBinding(KeyBindingConstants.RIGHT, 0)),
 	};
 	
-	public static boolean isReserved(KeyBinding kb){
-		for(int i = 0;i < reserveds.length;i++){
-			if(kb.isSameAs(reserveds[i].getKeyBinding())){
+	public static boolean isReserved(KeyBinding kb) {
+		for(int i = 0;i < reserveds.length;i++) {
+			if(kb.isSameAs(reserveds[i].getKeyBinding())) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public static Action getActionForKeyBinding(KeyBinding kb){
-		for(int i = 0;i < reserveds.length;i++){
-			if(kb.isSameAs(reserveds[i].getKeyBinding())){
+	public static Action getActionForKeyBinding(KeyBinding kb) {
+		for(int i = 0;i < reserveds.length;i++) {
+			if(kb.isSameAs(reserveds[i].getKeyBinding())) {
 				return TuxGuitar.instance().getAction(reserveds[i].getAction());
 			}
 		}
 		return null;
 	}
 	
-	public static KeyBinding getKeyBindingForAction(String action){
-		for(int i = 0;i < reserveds.length;i++){
-			if(action.equals(reserveds[i].getAction())){
+	public static KeyBinding getKeyBindingForAction(String action) {
+		for(int i = 0;i < reserveds.length;i++) {
+			if(action.equals(reserveds[i].getAction())) {
 				return reserveds[i].getKeyBinding();
 			}
 		}

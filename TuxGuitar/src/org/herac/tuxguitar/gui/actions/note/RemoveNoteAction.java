@@ -20,14 +20,14 @@ import org.herac.tuxguitar.song.models.TGVoice;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class RemoveNoteAction extends Action{
+public class RemoveNoteAction extends Action {
 	public static final String NAME = "action.note.general.remove";
 	
 	public RemoveNoteAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		//comienza el undoable
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
@@ -35,11 +35,11 @@ public class RemoveNoteAction extends Action{
 		Caret caret = getEditor().getTablature().getCaret();
 		TGBeat beat = caret.getSelectedBeat();
 		TGVoice voice = beat.getVoice( caret.getVoice() );
-		if( beat.isTextBeat() && beat.isRestBeat() ){
+		if( beat.isTextBeat() && beat.isRestBeat() ) {
 			getSongManager().getMeasureManager().removeText(beat);
-		}else if(voice.isRestVoice()){
+		}else if(voice.isRestVoice()) {
 			getSongManager().getMeasureManager().removeVoice(voice , true);
-		}else{
+		}else {
 			int string = caret.getSelectedString().getNumber();
 			getSongManager().getMeasureManager().removeNote(caret.getMeasure(), beat.getStart(), caret.getVoice(), string);
 		}

@@ -4,9 +4,9 @@ import org.herac.tuxguitar.gui.editors.TGPainter;
 import org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout;
 import org.herac.tuxguitar.song.models.TGText;
 
-public class TGTextImpl extends TGText{
+public class TGTextImpl extends TGText {
 	
-	public void paint(ViewLayout layout, TGPainter painter, int fromX, int fromY){
+	public void paint(ViewLayout layout, TGPainter painter, int fromX, int fromY) {
 		TGBeatImpl beat = (TGBeatImpl)getBeat();
 		TGMeasureImpl measure = beat.getMeasureImpl();
 		int x = fromX + beat.getSpacing() + beat.getPosX();

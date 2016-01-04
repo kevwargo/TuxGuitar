@@ -21,7 +21,7 @@ import org.herac.tuxguitar.gui.items.MenuItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class HelpMenuItem extends MenuItems{
+public class HelpMenuItem extends MenuItems {
 	private MenuItem helpMenuItem;
 	private Menu menu; 
 	private MenuItem doc;
@@ -32,7 +32,7 @@ public class HelpMenuItem extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//--Doc
 		this.doc = new MenuItem(this.menu, SWT.PUSH);
 		this.doc.addSelectionListener(TuxGuitar.instance().getAction(ShowDocAction.NAME));
@@ -47,17 +47,17 @@ public class HelpMenuItem extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.helpMenuItem, "help", null);
 		setMenuItemTextAndAccelerator(this.doc, "help.doc", ShowDocAction.NAME);
 		setMenuItemTextAndAccelerator(this.about, "help.about", ShowAboutAction.NAME);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		//Nothing to do
 	}
 	
-	public void update(){
+	public void update() {
 		//Nothing to do
 	}
 }

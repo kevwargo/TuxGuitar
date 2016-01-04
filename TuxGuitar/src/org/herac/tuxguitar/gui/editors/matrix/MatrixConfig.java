@@ -37,7 +37,7 @@ public class MatrixConfig {
 	private Color colorNote;
 	private Color colorPlay;
 	
-	public MatrixConfig(){
+	public MatrixConfig() {
 		super();
 	}
 	
@@ -73,7 +73,7 @@ public class MatrixConfig {
 		return this.colorLines[index];
 	}
 	
-	public void load(){
+	public void load() {
 		Display display = TuxGuitar.instance().getDisplay();
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		this.font = new Font(display, config.getFontDataConfigValue(TGConfigKeys.MATRIX_FONT));
@@ -82,14 +82,14 @@ public class MatrixConfig {
 		this.colorPosition = new Color(display, config.getRGBConfigValue(TGConfigKeys.MATRIX_COLOR_POSITION));
 		this.colorNote = new Color(display, config.getRGBConfigValue(TGConfigKeys.MATRIX_COLOR_NOTE));
 		this.colorPlay = new Color(display, config.getRGBConfigValue(TGConfigKeys.MATRIX_COLOR_PLAY_NOTE));
-		this.colorLines = new Color[]{
+		this.colorLines = new Color[] {
 				new Color(display, config.getRGBConfigValue(TGConfigKeys.MATRIX_COLOR_LINE_1)),
 				new Color(display, config.getRGBConfigValue(TGConfigKeys.MATRIX_COLOR_LINE_2)),
 				new Color(display, config.getRGBConfigValue(TGConfigKeys.MATRIX_COLOR_LINE_3)),
 		};
 	}
 	
-	public void defaults(){
+	public void defaults() {
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		Properties defaults = config.getDefaults();
 		config.setProperty(TGConfigKeys.MATRIX_FONT, defaults.getProperty(TGConfigKeys.MATRIX_FONT));
@@ -109,7 +109,7 @@ public class MatrixConfig {
 					 RGB rgbPosition,
 					 RGB rgbNote,
 					 RGB rgbPlay,
-					 RGB rgbLines[]){
+					 RGB rgbLines[]) {
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		
 		config.setProperty(TGConfigKeys.MATRIX_FONT, fontData);
@@ -123,7 +123,7 @@ public class MatrixConfig {
 		config.setProperty(TGConfigKeys.MATRIX_COLOR_LINE_3, rgbLines[2]);
 	}
 	
-	public void dispose(){
+	public void dispose() {
 		dispose(this.font);
 		dispose(this.colorForeground);
 		dispose(this.colorBorder);
@@ -133,16 +133,16 @@ public class MatrixConfig {
 		dispose(this.colorLines);
 	}
 	
-	protected void dispose(Resource[] resources){
-		if(resources != null){
-			for(int i = 0; i < resources.length; i ++){
+	protected void dispose(Resource[] resources) {
+		if(resources != null) {
+			for(int i = 0; i < resources.length; i ++) {
 				dispose(resources[i]);
 			}
 		}
 	}
 	
-	protected void dispose(Resource resource){
-		if(resource != null){
+	protected void dispose(Resource resource) {
+		if(resource != null) {
 			resource.dispose();
 		}
 	}
@@ -168,7 +168,7 @@ public class MatrixConfig {
 		// colors
 		final RGB rgbForeground = getColorChooser(group, TuxGuitar.getProperty("matrix.foreground-color"), this.colorForeground.getRGB());
 		
-		final RGB rgbLines[] = new RGB[]{
+		final RGB rgbLines[] = new RGB[] {
 				getColorChooser(group, TuxGuitar.getProperty("matrix.line-color-1"), this.colorLines[0].getRGB()),
 				getColorChooser(group, TuxGuitar.getProperty("matrix.line-color-2"), this.colorLines[1].getRGB()),
 				getColorChooser(group, TuxGuitar.getProperty("matrix.line-color-over"), this.colorLines[2].getRGB()),
@@ -220,19 +220,19 @@ public class MatrixConfig {
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
-	protected GridData getButtonData(){
+	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = MINIMUM_BUTTON_WIDTH;
 		data.minimumHeight = MINIMUM_BUTTON_HEIGHT;
 		return data;
 	}
 	
-	protected void applyChanges(){
+	protected void applyChanges() {
 		this.dispose();
 		this.load();
 	}
 	
-	private RGB getColorChooser(final Composite parent, String title, RGB rgb){
+	private RGB getColorChooser(final Composite parent, String title, RGB rgb) {
 		Label label = new Label(parent, SWT.NULL);
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		label.setText(title);
@@ -244,7 +244,7 @@ public class MatrixConfig {
 		return button.getValue();
 	}
 	
-	private FontData getFontChooser(final Composite parent, String title, FontData fontData){
+	private FontData getFontChooser(final Composite parent, String title, FontData fontData) {
 		final FontData selection = new FontData(fontData.getName(), fontData.getHeight(), fontData.getStyle());
 		
 		Label label = new Label(parent, SWT.NULL);
@@ -260,7 +260,7 @@ public class MatrixConfig {
 				FontDialog fontDialog = new FontDialog(parent.getShell());
 				fontDialog.setFontList(font.getFontData());
 				FontData fd = fontDialog.open();
-				if(fd != null){
+				if(fd != null) {
 					selection.setName( fd.getName() );
 					selection.setHeight( fd.getHeight() );
 					selection.setStyle( fd.getStyle() );
@@ -271,7 +271,7 @@ public class MatrixConfig {
 		return selection;
 	}
 	
-	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment){
+	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment) {
 		GridData data = new GridData();
 		data.minimumWidth = minimumWidth;
 		data.horizontalAlignment = horizontalAlignment;
@@ -286,18 +286,18 @@ public class MatrixConfig {
 		protected Color color;
 		protected RGB value;
 		
-		public ButtonColor(Composite parent, int style, String text){
+		public ButtonColor(Composite parent, int style, String text) {
 			this.value = new RGB(0, 0, 0);
 			this.button = new Button(parent, style);			
 			this.button.setText(text);
 			this.addListeners();
 		}
 		
-		protected void setLayoutData(Object layoutData){
+		protected void setLayoutData(Object layoutData) {
 			this.button.setLayoutData(layoutData);
 		}
 		
-		protected void loadColor(RGB rgb){
+		protected void loadColor(RGB rgb) {
 			this.value.red = rgb.red;
 			this.value.green = rgb.green;
 			this.value.blue = rgb.blue;
@@ -308,14 +308,14 @@ public class MatrixConfig {
 			this.color = color;
 		}
 		
-		protected void disposeColor(){
-			if(this.color != null && !this.color.isDisposed()){
+		protected void disposeColor() {
+			if(this.color != null && !this.color.isDisposed()) {
 				this.color.dispose();
 				this.color = null;
 			}
 		}
 		
-		private void addListeners(){
+		private void addListeners() {
 			this.button.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent event) {
 					ColorDialog dlg = new ColorDialog(ButtonColor.this.button.getShell());
@@ -334,7 +334,7 @@ public class MatrixConfig {
 			});
 		}
 		
-		protected RGB getValue(){
+		protected RGB getValue() {
 			return this.value;
 		}
 	}

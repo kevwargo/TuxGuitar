@@ -17,19 +17,19 @@ public class TGSplash {
 	
 	private Shell shell;
 	
-	private TGSplash(){
+	private TGSplash() {
 		super();
 	}
 	
-	public static TGSplash instance(){
-		if(instance == null){
+	public static TGSplash instance() {
+		if(instance == null) {
 			instance = new TGSplash();
 		}
 		return instance;
 	}
 	
 	public void init() {
-		if(TuxGuitar.instance().getConfig().getBooleanConfigValue(TGConfigKeys.SHOW_SPLASH)){
+		if(TuxGuitar.instance().getConfig().getBooleanConfigValue(TGConfigKeys.SHOW_SPLASH)) {
 			final Image image = TuxGuitar.instance().getIconManager().getAppSplash();
 			
 			this.shell = new Shell(TuxGuitar.instance().getDisplay(), SWT.NO_TRIM | SWT.NO_BACKGROUND);
@@ -49,15 +49,15 @@ public class TGSplash {
 		}
 	}
 	
-	public void finish(){
-		if(this.shell != null && !this.shell.isDisposed()){
+	public void finish() {
+		if(this.shell != null && !this.shell.isDisposed()) {
 			this.shell.close();
 			this.shell.dispose();
 		}
 		instance = null;
 	}
 	
-	private Rectangle getBounds(Image image){
+	private Rectangle getBounds(Image image) {
 		Rectangle iBounds = image.getBounds();
 		Rectangle mBounds = this.shell.getMonitor().getClientArea();
 		int x = ( ((mBounds.x + mBounds.width) / 2) - (iBounds.width / 2) );

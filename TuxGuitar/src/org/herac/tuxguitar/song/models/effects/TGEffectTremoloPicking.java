@@ -19,7 +19,7 @@ public abstract class TGEffectTremoloPicking {
 		this.duration = duration;
 	}
 	
-	public TGEffectTremoloPicking clone(TGFactory factory){
+	public TGEffectTremoloPicking clone(TGFactory factory) {
 		TGEffectTremoloPicking effect = factory.newEffectTremoloPicking();
 		effect.getDuration().setValue(getDuration().getValue());
 		effect.getDuration().setDotted(getDuration().isDotted());

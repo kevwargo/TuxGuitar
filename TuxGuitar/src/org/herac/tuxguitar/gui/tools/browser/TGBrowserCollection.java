@@ -7,7 +7,7 @@ public class TGBrowserCollection {
 	private String type;
 	private TGBrowserData data;
 	
-	public TGBrowserCollection(){
+	public TGBrowserCollection() {
 		super();
 	}
 	

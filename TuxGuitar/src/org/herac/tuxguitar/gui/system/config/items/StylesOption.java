@@ -21,7 +21,7 @@ import org.herac.tuxguitar.gui.helper.SyncThread;
 import org.herac.tuxguitar.gui.system.config.TGConfigEditor;
 import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 
-public class StylesOption extends Option{
+public class StylesOption extends Option {
 	private static final int BUTTON_WIDTH = 200;
 	private static final int BUTTON_HEIGHT = 0;
 	
@@ -54,7 +54,7 @@ public class StylesOption extends Option{
 	protected ButtonColor playNoteColorButton;
 	protected ButtonColor linesColorButton;
 	
-	public StylesOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent){
+	public StylesOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent) {
 		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.styles"));
 		this.initialized = false;
 		this.defaultFontData = new FontData();
@@ -69,7 +69,7 @@ public class StylesOption extends Option{
 		this.printerLyricFontData = new FontData();
 	}
 	
-	public void createOption(){
+	public void createOption() {
 		getToolItem().setText(TuxGuitar.getProperty("settings.config.styles"));
 		getToolItem().setImage(TuxGuitar.instance().getIconManager().getOptionStyle());
 		getToolItem().addSelectionListener(this);
@@ -153,17 +153,17 @@ public class StylesOption extends Option{
 		this.loadConfig();
 	}
 	
-	private void addFontButtonListeners(final Button button, final FontData fontData){
+	private void addFontButtonListeners(final Button button, final FontData fontData) {
 		button.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
-				if(StylesOption.this.initialized){
+				if(StylesOption.this.initialized) {
 					Font font = new Font(getDisplay(), fontData);
 					FontData[] fontDataList = font.getFontData();
 					font.dispose();
 					FontDialog fontDialog = new FontDialog(getShell());
 					fontDialog.setFontList(fontDataList);
 					FontData result = fontDialog.open();
-					if(result != null){
+					if(result != null) {
 						loadFontData(result, fontData, button);
 					}
 				}
@@ -171,40 +171,40 @@ public class StylesOption extends Option{
 		});
 	}
 	
-	protected void loadFontData(FontData src, FontData dst, Button button){
+	protected void loadFontData(FontData src, FontData dst, Button button) {
 		copyFontData(src, dst);
 		setButtonFontData(button, dst);
 	}
 	
-	protected void loadColor(ButtonColor button, RGB rgb){
+	protected void loadColor(ButtonColor button, RGB rgb) {
 		button.loadColor(rgb);
 	}
 	
 	protected void setButtonFontData(Button button, FontData fontData) {
 		String text = fontData.getName();
-		if( (fontData.getStyle() & SWT.BOLD) != 0 ){
+		if( (fontData.getStyle() & SWT.BOLD) != 0 ) {
 			text += " Bold";
 		}
-		if( (fontData.getStyle() & SWT.ITALIC) != 0 ){
+		if( (fontData.getStyle() & SWT.ITALIC) != 0 ) {
 			text += " Italic";
 		}
 		text += (" " + fontData.getHeight());
 		button.setText(text);
 	}
 	
-	protected void copyFontData(FontData src, FontData dst){
+	protected void copyFontData(FontData src, FontData dst) {
 		dst.setName( src.getName() );
 		dst.setStyle( src.getStyle() );
 		dst.setHeight( src.getHeight() );
 	}
 	
-	protected void copyRGB(RGB src, RGB dst){
+	protected void copyRGB(RGB src, RGB dst) {
 		dst.red = src.red;
 		dst.green = src.green;
 		dst.blue = src.blue;
 	}
 	
-	protected void loadConfig(){
+	protected void loadConfig() {
 		new Thread(new Runnable() {
 			public void run() {
 				final FontData defaultFontData = getConfig().getFontDataConfigValue(TGConfigKeys.FONT_DEFAULT);
@@ -223,7 +223,7 @@ public class StylesOption extends Option{
 				final RGB linesRGB  = getConfig().getRGBConfigValue(TGConfigKeys.COLOR_LINE);
 				new SyncThread(new Runnable() {
 					public void run() {
-						if(!isDisposed()){
+						if(!isDisposed()) {
 							loadFontData(defaultFontData, StylesOption.this.defaultFontData, StylesOption.this.defaultFontButton);
 							loadFontData(noteFontData, StylesOption.this.noteFontData, StylesOption.this.noteFontButton);
 							loadFontData(timeSignatureFontData, StylesOption.this.timeSignatureFontData, StylesOption.this.timeSignatureFontButton);
@@ -247,15 +247,15 @@ public class StylesOption extends Option{
 		}).start();
 	}
 	
-	public GridData makeButtonData(){
+	public GridData makeButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, true);
 		data.minimumWidth = BUTTON_WIDTH;
 		data.minimumHeight = BUTTON_HEIGHT;
 		return data;
 	}
 	
-	public void updateConfig(){
-		if(this.initialized){
+	public void updateConfig() {
+		if(this.initialized) {
 			getConfig().setProperty(TGConfigKeys.FONT_DEFAULT, this.defaultFontData);
 			getConfig().setProperty(TGConfigKeys.FONT_NOTE, this.noteFontData);
 			getConfig().setProperty(TGConfigKeys.FONT_TIME_SIGNATURE, this.timeSignatureFontData);
@@ -273,8 +273,8 @@ public class StylesOption extends Option{
 		}
 	}
 	
-	public void updateDefaults(){
-		if(this.initialized){
+	public void updateDefaults() {
+		if(this.initialized) {
 			getConfig().setProperty(TGConfigKeys.FONT_DEFAULT, getDefaults().getProperty(TGConfigKeys.FONT_DEFAULT));
 			getConfig().setProperty(TGConfigKeys.FONT_NOTE, getDefaults().getProperty(TGConfigKeys.FONT_NOTE));
 			getConfig().setProperty(TGConfigKeys.FONT_TIME_SIGNATURE, getDefaults().getProperty(TGConfigKeys.FONT_TIME_SIGNATURE));
@@ -292,8 +292,8 @@ public class StylesOption extends Option{
 		}
 	}
 	
-	public void applyConfig(boolean force){
-		if(force || this.initialized){
+	public void applyConfig(boolean force) {
+		if(force || this.initialized) {
 			addSyncThread(new Runnable() {
 				public void run() {
 					TuxGuitar.instance().loadStyles();
@@ -307,7 +307,7 @@ public class StylesOption extends Option{
 		protected Color color;
 		protected RGB value;
 		
-		public ButtonColor(Composite parent, int style, Object layoutData, String text){
+		public ButtonColor(Composite parent, int style, Object layoutData, String text) {
 			this.value = new RGB(0, 0, 0);
 			this.button = new Button(parent, style);
 			this.button.setLayoutData(layoutData);
@@ -315,7 +315,7 @@ public class StylesOption extends Option{
 			this.addListeners();
 		}
 		
-		protected void loadColor(RGB rgb){
+		protected void loadColor(RGB rgb) {
 			this.value.red = rgb.red;
 			this.value.green = rgb.green;
 			this.value.blue = rgb.blue;
@@ -326,17 +326,17 @@ public class StylesOption extends Option{
 			this.color = color;
 		}
 		
-		protected void disposeColor(){
-			if(this.color != null && !this.color.isDisposed()){
+		protected void disposeColor() {
+			if(this.color != null && !this.color.isDisposed()) {
 				this.color.dispose();
 				this.color = null;
 			}
 		}
 		
-		private void addListeners(){
+		private void addListeners() {
 			this.button.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent event) {
-					if(StylesOption.this.initialized){
+					if(StylesOption.this.initialized) {
 						ColorDialog dlg = new ColorDialog(getShell());
 						dlg.setRGB(ButtonColor.this.value);
 						dlg.setText(TuxGuitar.getProperty("choose-color"));
@@ -354,7 +354,7 @@ public class StylesOption extends Option{
 			});
 		}
 		
-		protected RGB getValue(){
+		protected RGB getValue() {
 			return this.value;
 		}
 	}

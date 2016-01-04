@@ -17,7 +17,7 @@ public class TGTableColumn {
 	private CLabel column;
 	private List controls;
 	
-	public TGTableColumn(TGTable table, int align){
+	public TGTableColumn(TGTable table, int align) {
 		this.table = table;
 		this.controls = new ArrayList();
 		this.column = new CLabel(this.table.getColumnControl(), align | SWT.SHADOW_OUT);
@@ -31,40 +31,40 @@ public class TGTableColumn {
 		this.appendListeners(this.column);
 	}
 	
-	public CLabel getControl(){
+	public CLabel getControl() {
 		return this.column;
 	}
 	
-	public void setTitle(String title){
+	public void setTitle(String title) {
 		this.column.setText(title);
 	}
 	
-	public void addControl(Control control){
+	public void addControl(Control control) {
 		this.controls.add(control);
 		this.appendListeners(control);
 	}
 	
-	public void appendListeners(Control control){
+	public void appendListeners(Control control) {
 		TuxGuitar.instance().getkeyBindingManager().appendListenersTo(control);
 	}
 	
-	public void layout(){
+	public void layout() {
 		Point location = this.column.getLocation();
 		Point size = this.column.getSize();
 		
-		for(int i = 0; i < this.controls.size(); i ++){
+		for(int i = 0; i < this.controls.size(); i ++) {
 			Control control = (Control)this.controls.get(i);
-			if(!control.isDisposed()){
+			if(!control.isDisposed()) {
 				control.setSize(size.x, this.table.getRowHeight());
 				control.setLocation(location.x, 0);
 			}
 		}
 	}
 	
-	public void notifyRemoved(){
-		for(int i = 0; i < this.controls.size(); i ++){
+	public void notifyRemoved() {
+		for(int i = 0; i < this.controls.size(); i ++) {
 			Control control = (Control)this.controls.get(i);
-			if(control.isDisposed()){
+			if(control.isDisposed()) {
 				this.controls.remove(i --);
 			}
 		}

@@ -11,7 +11,7 @@ public class TGTrackSegment {
 	private int track;
 	private List measures;
 	
-	public TGTrackSegment(int track, List measures){
+	public TGTrackSegment(int track, List measures) {
 		this.track = track;
 		this.measures = measures;
 	}
@@ -24,9 +24,9 @@ public class TGTrackSegment {
 		return this.track;
 	}
 	
-	public Object clone(TGFactory factory, List headers){
+	public Object clone(TGFactory factory, List headers) {
 		List measures = new ArrayList();
-		for(int i = 0;i < getMeasures().size();i++){
+		for(int i = 0;i < getMeasures().size();i++) {
 			TGMeasure measure = (TGMeasure)getMeasures().get(i);
 			measures.add(measure.clone(factory,(TGMeasureHeader)headers.get(i)));
 		}

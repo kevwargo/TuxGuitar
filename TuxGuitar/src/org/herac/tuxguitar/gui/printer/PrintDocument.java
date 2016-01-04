@@ -3,7 +3,7 @@ package org.herac.tuxguitar.gui.printer;
 import org.eclipse.swt.graphics.Rectangle;
 import org.herac.tuxguitar.gui.editors.TGPainter;
 
-public interface PrintDocument{
+public interface PrintDocument {
 	
 	public void start();
 	

@@ -35,14 +35,14 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ChangeClefAction extends Action{
+public class ChangeClefAction extends Action {
 	public static final String NAME = "action.composition.change-clef";
 	
 	public ChangeClefAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		return 0;
 	}
@@ -128,20 +128,20 @@ public class ChangeClefAction extends Action{
 		}
 	}
 	
-	private GridData getComboData(){
+	private GridData getComboData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
 	
-	protected GridData getButtonData(){
+	protected GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected void setClef(int clef, boolean toEnd){
+	protected void setClef(int clef, boolean toEnd) {
 		//comienza el undoable
 		UndoableChangeClef undoable = UndoableChangeClef.startUndo();
 		

@@ -16,7 +16,7 @@ import org.herac.tuxguitar.gui.util.DialogUtils;
 import org.herac.tuxguitar.song.models.TGNote;
 import org.herac.tuxguitar.song.models.effects.TGEffectHarmonic;
 
-public class HarmonicEditor extends SelectionAdapter{
+public class HarmonicEditor extends SelectionAdapter {
 	
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 0;
@@ -25,13 +25,13 @@ public class HarmonicEditor extends SelectionAdapter{
 	protected Combo harmonicDataCombo;
 	protected TGEffectHarmonic result;
 	
-	public HarmonicEditor(){
+	public HarmonicEditor() {
 		super();
 	}
 	
 	protected Button[] typeButtons;
 	
-	public TGEffectHarmonic show(final TGNote note){
+	public TGEffectHarmonic show(final TGNote note) {
 		final Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		
 		dialog.setLayout(new GridLayout());
@@ -121,19 +121,19 @@ public class HarmonicEditor extends SelectionAdapter{
 		return this.result;
 	}
 	
-	private GridData resizeData(GridData data, int minWidth){
+	private GridData resizeData(GridData data, int minWidth) {
 		data.minimumWidth = minWidth;
 		return data;
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private void initButton(Composite parent, SelectionListener listener, int index, int type, String label){
+	private void initButton(Composite parent, SelectionListener listener, int index, int type, String label) {
 		this.typeButtons[index] = new Button(parent, SWT.RADIO);
 		this.typeButtons[index].setText(label);
 		this.typeButtons[index].setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -141,76 +141,76 @@ public class HarmonicEditor extends SelectionAdapter{
 		this.typeButtons[index].addSelectionListener(listener);
 	}
 	
-	protected void initDefaults(TGNote note){
+	protected void initDefaults(TGNote note) {
 		int type = TGEffectHarmonic.TYPE_NATURAL;
-		if(note.getEffect().isHarmonic()){
+		if(note.getEffect().isHarmonic()) {
 			type = note.getEffect().getHarmonic().getType();
 		}
-		else{
+		else {
 			boolean naturalValid = false;
-			for(int i = 0;i < TGEffectHarmonic.NATURAL_FREQUENCIES.length;i ++){
-				if((note.getValue() % 12) == (TGEffectHarmonic.NATURAL_FREQUENCIES[i][0] % 12)  ){
+			for(int i = 0;i < TGEffectHarmonic.NATURAL_FREQUENCIES.length;i ++) {
+				if((note.getValue() % 12) == (TGEffectHarmonic.NATURAL_FREQUENCIES[i][0] % 12)  ) {
 					naturalValid = true;
 					break;
 				}
 			}
-			if(!naturalValid){
+			if(!naturalValid) {
 				this.typeButtons[0].setEnabled(false);
 				type = TGEffectHarmonic.TYPE_ARTIFICIAL;
 			}
 			
 		}
-		for(int i = 0; i < this.typeButtons.length; i ++){
+		for(int i = 0; i < this.typeButtons.length; i ++) {
 			int data = ((Integer)this.typeButtons[i].getData()).intValue();
 			this.typeButtons[i].setSelection((data == type));
 		}
 		update(note, type);
 	}
 	
-	protected int getSelectedType(){
-		for(int i = 0; i < this.typeButtons.length; i ++){
-			if(this.typeButtons[i].getSelection()){
+	protected int getSelectedType() {
+		for(int i = 0; i < this.typeButtons.length; i ++) {
+			if(this.typeButtons[i].getSelection()) {
 				return ((Integer)this.typeButtons[i].getData()).intValue();
 			}
 		}
 		return 0;
 	}
 	
-	protected void update(TGNote note, int type){
+	protected void update(TGNote note, int type) {
 		TGEffectHarmonic h = note.getEffect().getHarmonic();
 		this.harmonicDataCombo.removeAll();
 		this.harmonicDataCombo.setEnabled(type != TGEffectHarmonic.TYPE_NATURAL);
-		if(type != TGEffectHarmonic.TYPE_NATURAL){
+		if(type != TGEffectHarmonic.TYPE_NATURAL) {
 			String label = getTypeLabel(type);
-			for(int i = 0;i < TGEffectHarmonic.NATURAL_FREQUENCIES.length;i ++){
+			for(int i = 0;i < TGEffectHarmonic.NATURAL_FREQUENCIES.length;i ++) {
 				this.harmonicDataCombo.add(label + "(" + Integer.toString(TGEffectHarmonic.NATURAL_FREQUENCIES[i][0]) + ")" );
 			}
 			this.harmonicDataCombo.select((h != null && h.getType() == type)?h.getData():0);
 		}
 	}
 	
-	private String getTypeLabel(int type){
-		if(type == TGEffectHarmonic.TYPE_NATURAL){
+	private String getTypeLabel(int type) {
+		if(type == TGEffectHarmonic.TYPE_NATURAL) {
 			return TGEffectHarmonic.KEY_NATURAL;
 		}
-		if(type == TGEffectHarmonic.TYPE_ARTIFICIAL){
+		if(type == TGEffectHarmonic.TYPE_ARTIFICIAL) {
 			return TGEffectHarmonic.KEY_ARTIFICIAL;
 		}
-		if(type == TGEffectHarmonic.TYPE_TAPPED){
+		if(type == TGEffectHarmonic.TYPE_TAPPED) {
 			return TGEffectHarmonic.KEY_TAPPED;
 		}
-		if(type == TGEffectHarmonic.TYPE_PINCH){
+		if(type == TGEffectHarmonic.TYPE_PINCH) {
 			return TGEffectHarmonic.KEY_PINCH;
 		}
-		if(type == TGEffectHarmonic.TYPE_SEMI){
+		if(type == TGEffectHarmonic.TYPE_SEMI) {
 			return TGEffectHarmonic.KEY_SEMI;
 		}
 		return new String();
 	}
 	
-	public TGEffectHarmonic getHarmonic(){
+	public TGEffectHarmonic getHarmonic() {
 		int type = getSelectedType();
-		if(type > 0){
+		if(type > 0) {
 			TGEffectHarmonic effect = TuxGuitar.instance().getSongManager().getFactory().newEffectHarmonic();
 			effect.setType(type);
 			effect.setData(this.harmonicDataCombo.getSelectionIndex());

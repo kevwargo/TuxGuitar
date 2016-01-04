@@ -57,11 +57,11 @@ public class ToolBarsWriter {
 		idTransform.transform(input, output);
 	}
 	
-	private static void setToolBars(ToolItems[] items, Document document){
+	private static void setToolBars(ToolItems[] items, Document document) {
 		//chords tag
 		Node listNode = document.createElement(ITEM_LIST_TAG);
 		
-		for(int i = 0; i < items.length ; i ++){
+		for(int i = 0; i < items.length ; i ++) {
 			
 			//chord tag
 			Node node = document.createElement(ITEM_TAG);

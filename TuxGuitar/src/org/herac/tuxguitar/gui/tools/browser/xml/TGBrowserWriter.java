@@ -33,21 +33,21 @@ public class TGBrowserWriter {
 	private static final String ATTRIBUTE_DATA = "data";
 	
 	public void saveCollections(TGBrowserManager manager, String fileName) {
-		try{
+		try {
 			Document doc = createDocument();
 			saveCollections(manager, doc);
 			saveDocument(doc, new File(fileName));
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 	}
 	
-	private static void saveCollections(TGBrowserManager manager, Document document){
+	private static void saveCollections(TGBrowserManager manager, Document document) {
 		//chords tag
 		Node listNode = document.createElement(ITEM_LIST_TAG);
 		
 		Iterator collections = manager.getCollections();
-		while(collections.hasNext()){
+		while(collections.hasNext()) {
 			TGBrowserCollection collection = (TGBrowserCollection)collections.next();
 			
 			//chord tag

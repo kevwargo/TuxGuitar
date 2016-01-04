@@ -18,7 +18,7 @@ import org.herac.tuxguitar.song.models.TGNote;
 import org.herac.tuxguitar.song.models.TGVelocities;
 import org.herac.tuxguitar.song.models.effects.TGEffectGrace;
 
-public class GraceEditor extends SelectionAdapter{
+public class GraceEditor extends SelectionAdapter {
 	
 	public static final int WIDTH = 400;
 	
@@ -46,13 +46,13 @@ public class GraceEditor extends SelectionAdapter{
 	
 	protected TGEffectGrace result;
 	
-	public GraceEditor(){
+	public GraceEditor() {
 		super();
 	}
 	
 	private static final int LAYOUT_COLUMNS = 2;
 	
-	public TGEffectGrace show(final TGNote note){
+	public TGEffectGrace show(final TGNote note) {
 		final Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		
 		dialog.setLayout(new GridLayout());
@@ -72,7 +72,7 @@ public class GraceEditor extends SelectionAdapter{
 		int duration = 1;
 		int dynamic = TGVelocities.DEFAULT;
 		int transition = TGEffectGrace.TRANSITION_NONE;
-		if(note.getEffect().isGrace()){
+		if(note.getEffect().isGrace()) {
 			dead = note.getEffect().getGrace().isDead();
 			fret = note.getEffect().getGrace().getFret();
 			onBeat = note.getEffect().getGrace().isOnBeat();
@@ -248,7 +248,7 @@ public class GraceEditor extends SelectionAdapter{
 		return this.result;
 	}
 	
-	private Group makeGroup(Composite parent, int horizontalSpan, String text){
+	private Group makeGroup(Composite parent, int horizontalSpan, String text) {
 		Group group = new Group(parent, SWT.SHADOW_ETCHED_IN);
 		group.setLayoutData(makeGridData(horizontalSpan));
 		group.setText(text);
@@ -256,20 +256,20 @@ public class GraceEditor extends SelectionAdapter{
 		return group;
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	private GridData makeGridData(int horizontalSpan){
+	private GridData makeGridData(int horizontalSpan) {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.horizontalSpan = horizontalSpan;
 		return data;
 	}
 	
-	public TGEffectGrace getGrace(){
+	public TGEffectGrace getGrace() {
 		TGEffectGrace effect = TuxGuitar.instance().getSongManager().getFactory().newEffectGrace();
 		
 		effect.setFret(this.fretSpinner.getSelection());
@@ -277,40 +277,40 @@ public class GraceEditor extends SelectionAdapter{
 		effect.setOnBeat(this.onBeatButton.getSelection());
 		
 		//duration
-		if(this.durationButton1.getSelection()){
+		if(this.durationButton1.getSelection()) {
 			effect.setDuration(1);
-		}else if(this.durationButton2.getSelection()){
+		}else if(this.durationButton2.getSelection()) {
 			effect.setDuration(2);
-		}else if(this.durationButton3.getSelection()){
+		}else if(this.durationButton3.getSelection()) {
 			effect.setDuration(3);
 		}
 		//velocity
-		if(this.pppButton.getSelection()){
+		if(this.pppButton.getSelection()) {
 			effect.setDynamic(TGVelocities.PIANO_PIANISSIMO);
-		}else if(this.ppButton.getSelection()){
+		}else if(this.ppButton.getSelection()) {
 			effect.setDynamic(TGVelocities.PIANISSIMO);
-		}else if(this.pButton.getSelection()){
+		}else if(this.pButton.getSelection()) {
 			effect.setDynamic(TGVelocities.PIANO);
-		}else if(this.mpButton.getSelection()){
+		}else if(this.mpButton.getSelection()) {
 			effect.setDynamic(TGVelocities.MEZZO_PIANO);
-		}else if(this.mfButton.getSelection()){
+		}else if(this.mfButton.getSelection()) {
 			effect.setDynamic(TGVelocities.MEZZO_FORTE);
-		}else if(this.fButton.getSelection()){
+		}else if(this.fButton.getSelection()) {
 			effect.setDynamic(TGVelocities.FORTE);
-		}else if(this.ffButton.getSelection()){
+		}else if(this.ffButton.getSelection()) {
 			effect.setDynamic(TGVelocities.FORTISSIMO);
-		}else if(this.fffButton.getSelection()){
+		}else if(this.fffButton.getSelection()) {
 			effect.setDynamic(TGVelocities.FORTE_FORTISSIMO);
 		}
 		
 		//transition
-		if(this.noneButton.getSelection()){
+		if(this.noneButton.getSelection()) {
 			effect.setTransition(TGEffectGrace.TRANSITION_NONE);
-		}else if(this.slideButton.getSelection()){
+		}else if(this.slideButton.getSelection()) {
 			effect.setTransition(TGEffectGrace.TRANSITION_SLIDE);
-		}else if(this.bendButton.getSelection()){
+		}else if(this.bendButton.getSelection()) {
 			effect.setTransition(TGEffectGrace.TRANSITION_BEND);
-		}else if(this.hammerButton.getSelection()){
+		}else if(this.hammerButton.getSelection()) {
 			effect.setTransition(TGEffectGrace.TRANSITION_HAMMER);
 		}
 		

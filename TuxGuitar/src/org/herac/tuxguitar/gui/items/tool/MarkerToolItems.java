@@ -23,7 +23,7 @@ import org.herac.tuxguitar.gui.items.ToolItems;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class MarkerToolItems  extends ToolItems{
+public class MarkerToolItems  extends ToolItems {
 	public static final String NAME = "marker.items";
 	
 	private ToolItem add;
@@ -33,11 +33,11 @@ public class MarkerToolItems  extends ToolItems{
 	private ToolItem previous;
 	private ToolItem next;
 	
-	public MarkerToolItems(){
+	public MarkerToolItems() {
 		super(NAME);
 	}
 	
-	public void showItems(ToolBar toolBar){
+	public void showItems(ToolBar toolBar) {
 		//--ADD--
 		this.add = new ToolItem(toolBar, SWT.PUSH);
 		this.add.addSelectionListener(TuxGuitar.instance().getAction(AddMarkerAction.NAME));
@@ -69,11 +69,11 @@ public class MarkerToolItems  extends ToolItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		//Nothing to do
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		this.add.setToolTipText(TuxGuitar.getProperty("marker.add"));
 		this.list.setToolTipText(TuxGuitar.getProperty("marker.list"));
 		this.first.setToolTipText(TuxGuitar.getProperty("marker.first"));
@@ -82,7 +82,7 @@ public class MarkerToolItems  extends ToolItems{
 		this.next.setToolTipText(TuxGuitar.getProperty("marker.next"));
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.add.setImage(TuxGuitar.instance().getIconManager().getMarkerAdd());
 		this.list.setImage(TuxGuitar.instance().getIconManager().getMarkerList());
 		this.first.setImage(TuxGuitar.instance().getIconManager().getMarkerFirst());

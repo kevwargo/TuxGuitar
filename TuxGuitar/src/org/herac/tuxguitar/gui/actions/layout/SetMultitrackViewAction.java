@@ -16,14 +16,14 @@ import org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class SetMultitrackViewAction extends Action{
+public class SetMultitrackViewAction extends Action {
 	public static final String NAME = "action.view.layout-set-multitrack";
 	
 	public SetMultitrackViewAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		ViewLayout layout = getEditor().getTablature().getViewLayout();
 		layout.setStyle( ( layout.getStyle() ^ ViewLayout.DISPLAY_MULTITRACK ) );
 		updateTablature();

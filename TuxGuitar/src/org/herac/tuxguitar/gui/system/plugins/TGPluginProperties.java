@@ -17,19 +17,19 @@ import org.herac.tuxguitar.gui.util.TGFileUtils;
  * 
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
-public class TGPluginProperties  extends TGConfigManager{
+public class TGPluginProperties  extends TGConfigManager {
 	
 	private static TGPluginProperties instance;
 	
-	public static TGPluginProperties instance(){
-		if(instance == null){
+	public static TGPluginProperties instance() {
+		if(instance == null) {
 			instance = new TGPluginProperties();
 			instance.init();
 		}
 		return instance;
 	}
 	
-	private TGPluginProperties(){
+	private TGPluginProperties() {
 		super();
 	}
 	
@@ -37,7 +37,7 @@ public class TGPluginProperties  extends TGConfigManager{
 		return "TuxGuitar Plugin Properties";
 	}
 	
-	public String getFileName(){
+	public String getFileName() {
 		return TGFileUtils.PATH_USER_CONFIG + File.separator + "plugin.properties";
 	}
 	

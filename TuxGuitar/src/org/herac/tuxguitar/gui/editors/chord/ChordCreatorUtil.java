@@ -90,16 +90,16 @@ public class ChordCreatorUtil {
 	/** current tunning */
 	private int[] tuning;
 	
-	private ChordCreatorUtil(long processId, ChordCreatorListener listener){
+	private ChordCreatorUtil(long processId, ChordCreatorListener listener) {
 		this.processId = processId;
 		this.listener = listener;
 	}
 	
-	public boolean isValidProcess(){
+	public boolean isValidProcess() {
 		return (this.processId == runningProcess);
 	}
 	
-	public static long getNewProcess(){
+	public static long getNewProcess() {
 		return (++ runningProcess);
 	}
 	
@@ -114,7 +114,7 @@ public class ChordCreatorUtil {
 	                             final int add11,
 	                             final int bassTonic,
 	                             final int chordTonic,
-	                             final boolean sharp){
+	                             final boolean sharp) {
 		
 		final ChordCreatorUtil chordCreator = new ChordCreatorUtil(getNewProcess(), listener );
 		new Thread(new Runnable() {
@@ -136,7 +136,7 @@ public class ChordCreatorUtil {
 	                         int chordTonic,
 	                         boolean sharp) {
 		
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return;
 		}
 		
@@ -221,9 +221,9 @@ public class ChordCreatorUtil {
 		this.requiredNotes = tempNotes;
 		
 		//return getChords();
-		if(isValidProcess()){
+		if(isValidProcess()) {
 			List chords = getChords();
-			if(chords != null && isValidProcess()){
+			if(chords != null && isValidProcess()) {
 				this.listener.notifyChords(this, chords);
 			}
 		}
@@ -250,7 +250,7 @@ public class ChordCreatorUtil {
 	 * 
 	 */
 	private java.util.List getChords() {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return null;
 		}
 		ArrayList potentialNotes = makePotentialNotes();
@@ -271,7 +271,7 @@ public class ChordCreatorUtil {
 	 * @return TGChord collection
 	 */
 	private ArrayList createChords(ArrayList top) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return null;
 		}
 		
@@ -305,8 +305,8 @@ public class ChordCreatorUtil {
 	 * @return true if the note is needed for chord formation
 	 * 
 	 */
-	private void find(int stringTone, int stringIndex, int fret, List stringList){
-		if(!isValidProcess()){
+	private void find(int stringTone, int stringIndex, int fret, List stringList) {
+		if(!isValidProcess()) {
 			return;
 		}
 		boolean bassAlreadyIn=false;
@@ -379,8 +379,8 @@ public class ChordCreatorUtil {
 		return wantedNote;
 	}
 	
-	private ArrayList makePotentialNotes(){
-		if(!isValidProcess()){
+	private ArrayList makePotentialNotes() {
+		if(!isValidProcess()) {
 			return null;
 		}
 		ArrayList potentialNotes = new ArrayList(this.tuning.length);
@@ -418,7 +418,7 @@ public class ChordCreatorUtil {
 	 * 
 	 */
 	private ArrayList makeCombinations(ArrayList potentialNotes) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return null;
 		}
 		
@@ -466,7 +466,7 @@ public class ChordCreatorUtil {
 				
 			}
 			
-			if(lastLevelCombination != null){
+			if(lastLevelCombination != null) {
 				combinations.addAll(lastLevelCombination);
 			}
 		}
@@ -483,8 +483,8 @@ public class ChordCreatorUtil {
 	 * @return structure of stringCombination is AL { AL(0), AL(0, 1),
 	 *         AL(0, 2), AL(0, 1, 3, 4), AL(0, 1, 2, 3, 4, 5) }
 	 */
-	private ArrayList makeStringCombination(ArrayList lastLevelCombinationRef){
-		if(!isValidProcess()){
+	private ArrayList makeStringCombination(ArrayList lastLevelCombinationRef) {
+		if(!isValidProcess()) {
 			return null;
 		}
 		
@@ -544,7 +544,7 @@ public class ChordCreatorUtil {
 	 * 
 	 */
 	private ArrayList makeStringValueCombination(ArrayList lastLevelCombination, ArrayList notes) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return null;
 		}
 		ArrayList thisLevelCombination = null;
@@ -659,7 +659,7 @@ public class ChordCreatorUtil {
 	 * 
 	 */
 	private ArrayList determinePriority(ArrayList allCombinations) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return null;
 		}
 		ArrayList ordered = new ArrayList();
@@ -722,7 +722,7 @@ public class ChordCreatorUtil {
 	 * 
 	 */
 	private ArrayList takeBest(ArrayList priorityItems) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return null;
 		}
 		
@@ -731,12 +731,12 @@ public class ChordCreatorUtil {
 		ArrayList bestOnes = new ArrayList(maximum);
 		
 		Collections.sort(priorityItems, new PriorityComparator());
-		for(int i = 0; i < priorityItems.size() && isValidProcess(); i ++){
+		for(int i = 0; i < priorityItems.size() && isValidProcess(); i ++) {
 			PriorityItem item = (PriorityItem)priorityItems.get(i);
-			if (!checkIfSubset(item.stringValues, bestOnes) ){
+			if (!checkIfSubset(item.stringValues, bestOnes) ) {
 				bestOnes.add(item.stringValues);
 				
-				if( bestOnes.size() >= maximum ){
+				if( bestOnes.size() >= maximum ) {
 					break;
 				}
 			}
@@ -748,7 +748,7 @@ public class ChordCreatorUtil {
 	
 	/** adds points if the combination has all the notes in the basis of chord */
 	private float combinationHasAllRequiredNotes(ArrayList stringValueCombination) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return 0;
 		}
 		Iterator it = stringValueCombination.iterator();
@@ -815,7 +815,7 @@ public class ChordCreatorUtil {
 	
 	/** adds points if the combination has strings in a row */
 	private float combinationHasSubsequentStrings(ArrayList stringValueCombination) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return 0;
 		}
 		boolean stumbled = false, noMore = false, penalty = false;
@@ -847,7 +847,7 @@ public class ChordCreatorUtil {
 	
 	/** checks if the bass tone is the lowest tone in chord */
 	private float combinationBassInBass(ArrayList stringValueCombination) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return 0;
 		}
 		for (int i = 0; i < this.tuning.length; i++) {
@@ -881,7 +881,7 @@ public class ChordCreatorUtil {
 	 * 
 	 */
 	private float combinationHasGoodFingering(ArrayList stringValueCombination) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return 0;
 		}
 		// init: copy into simple array
@@ -968,7 +968,7 @@ public class ChordCreatorUtil {
 		// TODO: what to do with e.g. chord -35556 (C7)
 		// ... it can be held with capo on 5th fret, but very hard :)
 		// ... This is the same as with "capo after", I didn't consider that (e.g. chord -35555)
-		ArrayList[] fingers={new ArrayList(2), new ArrayList(2), new ArrayList(2), new ArrayList(2)};
+		ArrayList[] fingers= {new ArrayList(2), new ArrayList(2), new ArrayList(2), new ArrayList(2) };
 		// TODO: still no thumb, sorry :)
 		
 		// STRUCTURE: ArrayList consists of Integers - first is fret
@@ -1042,7 +1042,7 @@ public class ChordCreatorUtil {
 	 *  - If there are not some with NON_ESSENTIAL_INDEX are not here, penalty should be less<br>
 	 */
 	private float combinationChordSemantics(ArrayList stringValueCombination) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return 0;
 		}
 		float finalGrade = 0;
@@ -1137,7 +1137,7 @@ public class ChordCreatorUtil {
 	 *  @return true if it is duplicate, false if it is unique
 	 */
 	private boolean checkIfSubset(List stringValues, List betterOnes) {
-		if(!isValidProcess()){
+		if(!isValidProcess()) {
 			return false;
 		}
 		Iterator it = betterOnes.iterator();

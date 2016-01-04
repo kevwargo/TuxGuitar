@@ -10,7 +10,7 @@ public class TGSongSegment {
 	private List headers;
 	private List tracks;
 	
-	public TGSongSegment(){
+	public TGSongSegment() {
 		this.headers = new ArrayList();
 		this.tracks = new ArrayList();
 	}
@@ -23,21 +23,21 @@ public class TGSongSegment {
 		return this.tracks;
 	}
 	
-	public void addTrack(int track, List measures){
+	public void addTrack(int track, List measures) {
 		this.tracks.add(new TGTrackSegment(track, measures));
 	}
 	
-	public boolean isEmpty(){
+	public boolean isEmpty() {
 		return (this.headers.isEmpty() || this.tracks.isEmpty());
 	}
 	
-	public TGSongSegment clone(TGFactory factory){
+	public TGSongSegment clone(TGFactory factory) {
 		TGSongSegment segment = new TGSongSegment();
-		for(int i = 0;i < getHeaders().size();i++){
+		for(int i = 0;i < getHeaders().size();i++) {
 			TGMeasureHeader header = (TGMeasureHeader)getHeaders().get(i);
 			segment.getHeaders().add(header.clone(factory));
 		}
-		for(int i = 0;i < getTracks().size();i++){
+		for(int i = 0;i < getTracks().size();i++) {
 			TGTrackSegment trackMeasure = (TGTrackSegment)getTracks().get(i);
 			segment.getTracks().add(trackMeasure.clone(factory, segment.getHeaders()));
 		}

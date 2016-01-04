@@ -9,7 +9,7 @@ import org.herac.tuxguitar.song.factory.TGFactory;
 import org.herac.tuxguitar.song.models.TGSong;
 import org.herac.tuxguitar.song.models.TGTimeSignature;
 
-public class UndoableChangeTimeSignature implements UndoableEdit{
+public class UndoableChangeTimeSignature implements UndoableEdit {
 	private int doAction;
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
@@ -18,12 +18,12 @@ public class UndoableChangeTimeSignature implements UndoableEdit{
 	private boolean tsToEnd;
 	private TGTimeSignature ts;
 	
-	private UndoableChangeTimeSignature(){
+	private UndoableChangeTimeSignature() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TuxGuitar.instance().getTablatureEditor().getTablature().getSongManager().changeTimeSignature(this.tsStart, this.ts, this.tsToEnd);
@@ -33,7 +33,7 @@ public class UndoableChangeTimeSignature implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TGFactory factory = TuxGuitar.instance().getTablatureEditor().getTablature().getSongManager().getFactory();
@@ -52,7 +52,7 @@ public class UndoableChangeTimeSignature implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableChangeTimeSignature startUndo(){
+	public static UndoableChangeTimeSignature startUndo() {
 		TGFactory factory = new TGFactory();
 		TGSong song = TuxGuitar.instance().getTablatureEditor().getTablature().getSongManager().getSong();
 		UndoableChangeTimeSignature undoable = new UndoableChangeTimeSignature();
@@ -62,7 +62,7 @@ public class UndoableChangeTimeSignature implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableChangeTimeSignature endUndo(TGTimeSignature timeSignature, long start, boolean toEnd){
+	public UndoableChangeTimeSignature endUndo(TGTimeSignature timeSignature, long start, boolean toEnd) {
 		this.ts = timeSignature;
 		this.tsStart = start;
 		this.tsToEnd = toEnd;

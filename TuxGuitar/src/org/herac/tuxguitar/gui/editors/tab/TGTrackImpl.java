@@ -17,7 +17,7 @@ import org.herac.tuxguitar.song.models.TGTrack;
  * 
  * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
-public class TGTrackImpl extends TGTrack{
+public class TGTrackImpl extends TGTrack {
 	
 	private int tabHeight;
 	private int scoreHeight;
@@ -26,7 +26,7 @@ public class TGTrackImpl extends TGTrack{
 		super(factory);
 	}
 	
-	public void update(ViewLayout layout){
+	public void update(ViewLayout layout) {
 		this.calculateTabHeight(layout);
 		this.calculateScoreHeight(layout);
 	}
@@ -44,7 +44,7 @@ public class TGTrackImpl extends TGTrack{
 		this.scoreHeight = ((layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0 ?(layout.getScoreLineSpacing() * 4):0);
 	}
 	
-	public boolean hasCaret(ViewLayout layout){
+	public boolean hasCaret(ViewLayout layout) {
 		return (this.equals(layout.getTablature().getCaret().getTrack()));
 	}
 	
@@ -60,20 +60,20 @@ public class TGTrackImpl extends TGTrack{
 		this.tabHeight = tabHeight;
 	}
 	
-	public void clear(){
+	public void clear() {
 		Iterator measures = getMeasures();
-		while(measures.hasNext()){
+		while(measures.hasNext()) {
 			TGMeasureImpl measure = (TGMeasureImpl)measures.next();
-			if(!measure.isDisposed()){
+			if(!measure.isDisposed()) {
 				measure.dispose();
 			}
 		}
 		super.clear();
 	}
 	
-	public void removeMeasure(int index){
+	public void removeMeasure(int index) {
 		TGMeasureImpl measure = (TGMeasureImpl)getMeasure(index);
-		if(!measure.isDisposed()){
+		if(!measure.isDisposed()) {
 			measure.dispose();
 		}
 		super.removeMeasure(index);

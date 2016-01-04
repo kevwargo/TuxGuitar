@@ -16,7 +16,7 @@ public class TGBeatSpacing extends TGSpacing {
 	public static final int POSITION_TRILL_EFFEC = 8;
 	public static final int POSITION_FADE_IN = 9;
 	
-	private static final int[] EFFECT_POSITIONS = new int[]{
+	private static final int[] EFFECT_POSITIONS = new int[] {
 		POSITION_ACCENTUATED_EFFECT,
 		POSITION_HEAVY_ACCENTUATED_EFFECT,
 		POSITION_HARMONIC_EFFEC,
@@ -29,7 +29,7 @@ public class TGBeatSpacing extends TGSpacing {
 		POSITION_FADE_IN,
 	};
 	
-	private static final int[][] POSITIONS = new int[][]{
+	private static final int[][] POSITIONS = new int[][] {
 		/** SCORE **/
 		EFFECT_POSITIONS ,
 		/** TABLATURE **/

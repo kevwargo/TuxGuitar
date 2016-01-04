@@ -25,23 +25,23 @@ public class KeyBindingReader {
 	private static final String SHORTCUT_ATTRIBUTE_MASK = "mask";
 	
 	public static List getKeyBindings(String fileName) {
-		try{
+		try {
 			File file = new File(fileName);
-			if (file.exists()){
+			if (file.exists()) {
 				return getBindings(getDocument(file).getFirstChild());
 			}
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
 	}
 	
 	public static List getKeyBindings(InputStream is) {
-		try{
-			if (is!=null){
+		try {
+			if (is!=null) {
 				return getBindings(getDocument(is).getFirstChild());
 			}
-		}catch(Throwable throwable){
+		}catch(Throwable throwable) {
 			throwable.printStackTrace();
 		}
 		return null;
@@ -86,7 +86,7 @@ public class KeyBindingReader {
 	 * @param shortcutsNode
 	 * @return
 	 */
-	private static List getBindings(Node shortcutsNode){
+	private static List getBindings(Node shortcutsNode) {
 		List list = new ArrayList();
 		
 		NodeList nodeList = shortcutsNode.getChildNodes();
@@ -100,12 +100,12 @@ public class KeyBindingReader {
 				Node nodeKey = params.getNamedItem(SHORTCUT_ATTRIBUTE_KEY);
 				Node nodeMask = params.getNamedItem(SHORTCUT_ATTRIBUTE_MASK);
 				Node nodeAction = params.getNamedItem(SHORTCUT_ATTRIBUTE_ACTION);
-				if( nodeKey != null && nodeMask != null && nodeAction != null){
+				if( nodeKey != null && nodeMask != null && nodeAction != null) {
 					String key = nodeKey.getNodeValue();
 					String mask = nodeMask.getNodeValue();
 					String action = nodeAction.getNodeValue();
 					
-					if (key != null && mask != null && action != null){
+					if (key != null && mask != null && action != null) {
 						list.add(new KeyBindingAction(action, new KeyBinding(Integer.parseInt(key), Integer.parseInt(mask)) ));
 					}
 				}

@@ -12,44 +12,44 @@ public class TGBrowserConnection {
 	private TGBrowser browser;
 	private TGBrowserConnectionHandler handler;
 	
-	public TGBrowserConnection(TGBrowserConnectionHandler handler){
+	public TGBrowserConnection(TGBrowserConnectionHandler handler) {
 		this.handler = handler;
 	}
 	
-	protected void lock(){
+	protected void lock() {
 		this.locked = true;
 		this.handler.notifyLockStatusChanged();
 	}
 	
-	protected void unlock(){
+	protected void unlock() {
 		this.locked = false;
 		this.handler.notifyLockStatusChanged();
 	}
 	
-	public boolean isLocked(){
+	public boolean isLocked() {
 		return this.locked;
 	}
 	
-	public TGBrowser getBrowser(){
+	public TGBrowser getBrowser() {
 		return this.browser;
 	}
 	
-	public boolean isOpen(){
+	public boolean isOpen() {
 		return (getBrowser() != null);
 	}
 	
-	public void open(final int callId, final TGBrowser browser){
-		if(!isLocked()){
+	public void open(final int callId, final TGBrowser browser) {
+		if(!isLocked()) {
 			this.close(callId);
 			this.lock();
 			this.browser = browser;
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						if(getBrowser() != null){
+						if(getBrowser() != null) {
 							getBrowser().open();
 							notifyOpened(callId);
-						}else{
+						}else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -61,18 +61,18 @@ public class TGBrowserConnection {
 		}
 	}
 	
-	public void close(final int callId){
-		if(!isLocked()){
+	public void close(final int callId) {
+		if(!isLocked()) {
 			this.lock();
 			final TGBrowser browser = getBrowser();
 			this.browser = null;
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						if(browser != null){
+						if(browser != null) {
 							browser.close();
 							notifyClosed(callId);
-						}else{
+						}else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -84,16 +84,16 @@ public class TGBrowserConnection {
 		}
 	}
 	
-	public void cdRoot(final int callId){
-		if(!isLocked()){
+	public void cdRoot(final int callId) {
+		if(!isLocked()) {
 			this.lock();
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						if(isOpen()){
+						if(isOpen()) {
 							getBrowser().cdRoot();
 							notifyCd(callId);
-						}else{
+						}else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -105,16 +105,16 @@ public class TGBrowserConnection {
 		}
 	}
 	
-	public void cdUp(final int callId){
-		if(!isLocked()){
+	public void cdUp(final int callId) {
+		if(!isLocked()) {
 			this.lock();
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						if(isOpen()){
+						if(isOpen()) {
 							getBrowser().cdUp();
 							notifyCd(callId);
-						}else{
+						}else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -126,16 +126,16 @@ public class TGBrowserConnection {
 		}
 	}
 	
-	public void cd(final int callId, final TGBrowserElement element){
-		if(!isLocked()){
+	public void cd(final int callId, final TGBrowserElement element) {
+		if(!isLocked()) {
 			this.lock();
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						if(isOpen()){
+						if(isOpen()) {
 							getBrowser().cdElement(element);
 							notifyCd(callId);
-						}else{
+						}else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -147,16 +147,16 @@ public class TGBrowserConnection {
 		}
 	}
 	
-	public void listElements(final int callId){
-		if(!isLocked()){
+	public void listElements(final int callId) {
+		if(!isLocked()) {
 			this.lock();
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						if(isOpen()){
+						if(isOpen()) {
 							List elements = getBrowser().listElements();
 							notifyElements(callId, elements);
-						}else{
+						}else {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
@@ -168,21 +168,21 @@ public class TGBrowserConnection {
 		}
 	}
 	
-	public void openStream(final int callId, final TGBrowserElement element){
-		if(!isLocked()){
+	public void openStream(final int callId, final TGBrowserElement element) {
+		if(!isLocked()) {
 			this.lock();
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						if(element == null){
+						if(element == null) {
 							release();
 							return;
 						}
-						if(element.isFolder()){
+						if(element.isFolder()) {
 							release();
 							cd(callId, element);
 						}
-						else{
+						else {
 							InputStream stream = element.getInputStream();
 							notifyStream(callId, stream, element);
 						}
@@ -195,7 +195,7 @@ public class TGBrowserConnection {
 		}
 	}
 	
-	public void release(){
+	public void release() {
 		this.unlock();
 	}
 	

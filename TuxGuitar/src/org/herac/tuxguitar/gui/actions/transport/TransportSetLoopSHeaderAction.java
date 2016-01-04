@@ -14,11 +14,11 @@ public class TransportSetLoopSHeaderAction extends Action {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		TGMeasure measure = getEditor().getTablature().getCaret().getMeasure();
-		if( measure != null ){
+		if( measure != null ) {
 			MidiPlayerMode pm = TuxGuitar.instance().getPlayer().getMode();
-			if( pm.isLoop() ){
+			if( pm.isLoop() ) {
 				pm.setLoopSHeader( pm.getLoopSHeader() != measure.getNumber() ? measure.getNumber() : -1 );
 			}
 		}

@@ -12,7 +12,7 @@ public class UndoableCaretHelper {
 	private int velocity;
 	private TGDuration duration;
 	
-	public UndoableCaretHelper(){
+	public UndoableCaretHelper() {
 		Caret caret = getCaret();
 		this.track = caret.getTrack().getNumber();
 		this.position = caret.getPosition();
@@ -20,17 +20,17 @@ public class UndoableCaretHelper {
 		this.duration = caret.getDuration().clone(TuxGuitar.instance().getSongManager().getFactory());
 		this.string = 1;
 		TGString instrumentString = caret.getSelectedString();
-		if(instrumentString != null){
+		if(instrumentString != null) {
 			this.string = instrumentString.getNumber();
 		}
 	}
 	
-	public void update(){
+	public void update() {
 		getCaret().update(this.track, this.position, this.string, this.velocity);
 		getCaret().setSelectedDuration(this.duration.clone(TuxGuitar.instance().getSongManager().getFactory()));
 	}
 	
-	private static Caret getCaret(){
+	private static Caret getCaret() {
 		return TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 	}
 	

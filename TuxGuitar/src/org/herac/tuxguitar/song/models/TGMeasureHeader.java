@@ -30,7 +30,7 @@ public abstract class TGMeasureHeader {
 	private int tripletFeel;
 	private TGSong song;
 	
-	public TGMeasureHeader(TGFactory factory){
+	public TGMeasureHeader(TGFactory factory) {
 		this.number = 0;
 		this.start = TGDuration.QUARTER_TIME;
 		this.timeSignature = factory.newTimeSignature();
@@ -120,17 +120,17 @@ public abstract class TGMeasureHeader {
 		this.marker = marker;
 	}
 	
-	public boolean hasMarker(){
+	public boolean hasMarker() {
 		return (getMarker() != null);
 	}
 	
-	private void checkMarker(){
-		if(hasMarker()){
+	private void checkMarker() {
+		if(hasMarker()) {
 			this.marker.setMeasure(getNumber());
 		}
 	}
 	
-	public long getLength(){
+	public long getLength() {
 		return getTimeSignature().getNumerator() * getTimeSignature().getDenominator().getTime();
 	}
 	
@@ -142,7 +142,7 @@ public abstract class TGMeasureHeader {
 		this.song = song;
 	}
 	
-	public void makeEqual(TGMeasureHeader measure){
+	public void makeEqual(TGMeasureHeader measure) {
 		this.start = measure.getStart();
 		this.timeSignature = measure.getTimeSignature();
 		this.tempo = measure.getTempo();
@@ -153,7 +153,7 @@ public abstract class TGMeasureHeader {
 		this.checkMarker();
 	}
 	
-	public TGMeasureHeader clone(TGFactory factory){
+	public TGMeasureHeader clone(TGFactory factory) {
 		TGMeasureHeader header = factory.newHeader();
 		header.setNumber(getNumber());
 		header.setStart(getStart());

@@ -31,7 +31,7 @@ import org.herac.tuxguitar.gui.util.DialogUtils;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class CopyMeasureAction extends Action{
+public class CopyMeasureAction extends Action {
 	public static final String NAME = "action.measure.copy";
 	
 	protected boolean copyAllTracks;
@@ -40,7 +40,7 @@ public class CopyMeasureAction extends Action{
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
 	}
 	
-	protected int execute(TypedEvent e){
+	protected int execute(TypedEvent e) {
 		showDialog(getEditor().getTablature().getShell());
 		
 		return 0;
@@ -86,9 +86,9 @@ public class CopyMeasureAction extends Action{
 					int fromSelection = fromSpinner.getSelection();
 					int toSelection = toSpinner.getSelection();
 					
-					if(fromSelection < minSelection){
+					if(fromSelection < minSelection) {
 						fromSpinner.setSelection(minSelection);
-					}else if(fromSelection > toSelection){
+					}else if(fromSelection > toSelection) {
 						fromSpinner.setSelection(toSelection);
 					}
 				}
@@ -97,16 +97,16 @@ public class CopyMeasureAction extends Action{
 				public void widgetSelected(SelectionEvent e) {
 					int toSelection = toSpinner.getSelection();
 					int fromSelection = fromSpinner.getSelection();
-					if(toSelection < fromSelection){
+					if(toSelection < fromSelection) {
 						toSpinner.setSelection(fromSelection);
-					}else if(toSelection > maxSelection){
+					}else if(toSelection > maxSelection) {
 						toSpinner.setSelection(maxSelection);
 					}
 				}
 			});
 			//----------------------------------------------------------------------
 			this.copyAllTracks = true;
-			if(getSongManager().getSong().countTracks() > 1){
+			if(getSongManager().getSong().countTracks() > 1) {
 				Group checkComposites = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 				checkComposites.setLayout(new GridLayout());
 				checkComposites.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -151,21 +151,21 @@ public class CopyMeasureAction extends Action{
 		}
 	}
 	
-	private GridData getButtonData(){
+	private GridData getButtonData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;
 	}
 	
-	protected GridData getSpinnerData(){
+	protected GridData getSpinnerData() {
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 180;
 		return data;
 	}
 	
-	protected void copyMeasures(int m1, int m2, boolean allTracks){
-		if(m1 > 0 && m1 <= m2){
+	protected void copyMeasures(int m1, int m2, boolean allTracks) {
+		if(m1 > 0 && m1 <= m2) {
 			MeasureTransferable transferable = new MeasureTransferable(getEditor(), m1, m2, allTracks);
 			getEditor().getClipBoard().addTransferable(transferable);
 		}

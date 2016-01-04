@@ -41,7 +41,7 @@ public abstract class TGNoteEffect {
 	private boolean popping;
 	private boolean fadeIn;
 	
-	public TGNoteEffect(){
+	public TGNoteEffect() {
 		this.bend = null;
 		this.tremoloBar = null;
 		this.harmonic = null;
@@ -70,7 +70,7 @@ public abstract class TGNoteEffect {
 	public void setDeadNote(boolean deadNote) {
 		this.deadNote = deadNote;
 		//si es true, quito los efectos incompatibles
-		if(this.isDeadNote()){
+		if(this.isDeadNote()) {
 			this.tremoloBar = null;
 			this.bend = null;
 			this.trill = null;
@@ -85,7 +85,7 @@ public abstract class TGNoteEffect {
 	public void setVibrato(boolean vibrato) {
 		this.vibrato = vibrato;
 		//si no es null quito los efectos incompatibles
-		if(this.isVibrato()){
+		if(this.isVibrato()) {
 			this.trill = null;
 		}
 	}
@@ -97,7 +97,7 @@ public abstract class TGNoteEffect {
 	public void setBend(TGEffectBend bend) {
 		this.bend = bend;
 		//si no es null quito los efectos incompatibles
-		if(this.isBend()){
+		if(this.isBend()) {
 			this.tremoloBar = null;
 			this.trill = null;
 			this.deadNote = false;
@@ -117,7 +117,7 @@ public abstract class TGNoteEffect {
 	public void setTremoloBar(TGEffectTremoloBar tremoloBar) {
 		this.tremoloBar = tremoloBar;
 		//si no es null quito los efectos incompatibles
-		if(this.isTremoloBar()){
+		if(this.isTremoloBar()) {
 			this.bend = null;
 			this.trill = null;
 			this.deadNote = false;
@@ -138,7 +138,7 @@ public abstract class TGNoteEffect {
 	public void setTrill(TGEffectTrill trill) {
 		this.trill = trill;
 		//si es true, quito los efectos incompatibles
-		if(this.isTrill()){
+		if(this.isTrill()) {
 			this.bend = null;
 			this.tremoloBar = null;
 			this.tremoloPicking = null;
@@ -160,7 +160,7 @@ public abstract class TGNoteEffect {
 	public void setTremoloPicking(TGEffectTremoloPicking tremoloPicking) {
 		this.tremoloPicking = tremoloPicking;
 		//si es true, quito los efectos incompatibles
-		if(this.isTremoloPicking()){
+		if(this.isTremoloPicking()) {
 			this.trill = null;
 			this.bend = null;
 			this.tremoloBar = null;
@@ -182,7 +182,7 @@ public abstract class TGNoteEffect {
 	public void setHammer(boolean hammer) {
 		this.hammer = hammer;
 		//si es true, quito los efectos incompatibles
-		if(this.isHammer()){
+		if(this.isHammer()) {
 			this.trill = null;
 			this.tremoloBar = null;
 			this.bend = null;
@@ -198,7 +198,7 @@ public abstract class TGNoteEffect {
 	public void setSlide(boolean slide) {
 		this.slide = slide;
 		//si es true, quito los efectos incompatibles
-		if(this.isSlide()){
+		if(this.isSlide()) {
 			this.trill = null;
 			this.tremoloBar = null;
 			this.bend = null;
@@ -214,7 +214,7 @@ public abstract class TGNoteEffect {
 	public void setGhostNote(boolean ghostNote) {
 		this.ghostNote = ghostNote;
 		//si es true, quito los efectos incompatibles
-		if(this.isGhostNote()){
+		if(this.isGhostNote()) {
 			this.accentuatedNote = false;
 			this.heavyAccentuatedNote = false;
 		}
@@ -227,7 +227,7 @@ public abstract class TGNoteEffect {
 	public void setAccentuatedNote(boolean accentuatedNote) {
 		this.accentuatedNote = accentuatedNote;
 		//si es true, quito los efectos incompatibles
-		if(this.isAccentuatedNote()){
+		if(this.isAccentuatedNote()) {
 			this.ghostNote = false;
 			this.heavyAccentuatedNote = false;
 		}
@@ -240,7 +240,7 @@ public abstract class TGNoteEffect {
 	public void setHeavyAccentuatedNote(boolean heavyAccentuatedNote) {
 		this.heavyAccentuatedNote = heavyAccentuatedNote;
 		//si es true, quito los efectos incompatibles
-		if(this.isHeavyAccentuatedNote()){
+		if(this.isHeavyAccentuatedNote()) {
 			this.ghostNote = false;
 			this.accentuatedNote = false;
 		}
@@ -277,7 +277,7 @@ public abstract class TGNoteEffect {
 	public void setPalmMute(boolean palmMute) {
 		this.palmMute = palmMute;
 		//si es true, quito los efectos incompatibles
-		if(this.isPalmMute()){
+		if(this.isPalmMute()) {
 			this.staccato = false;
 		}
 	}
@@ -289,7 +289,7 @@ public abstract class TGNoteEffect {
 	public void setStaccato(boolean staccato) {
 		this.staccato = staccato;
 		//si es true, quito los efectos incompatibles
-		if(this.isStaccato()){
+		if(this.isStaccato()) {
 			this.palmMute = false;
 		}
 	}
@@ -301,7 +301,7 @@ public abstract class TGNoteEffect {
 	public void setPopping(boolean popping) {
 		this.popping = popping;
 		//si es true, quito los efectos incompatibles
-		if(this.isPopping()){
+		if(this.isPopping()) {
 			this.tapping = false;
 			this.slapping = false;
 		}
@@ -314,7 +314,7 @@ public abstract class TGNoteEffect {
 	public void setSlapping(boolean slapping) {
 		this.slapping = slapping;
 		//si es true, quito los efectos incompatibles
-		if(this.isSlapping()){
+		if(this.isSlapping()) {
 			this.tapping = false;
 			this.popping = false;
 		}
@@ -327,7 +327,7 @@ public abstract class TGNoteEffect {
 	public void setTapping(boolean tapping) {
 		this.tapping = tapping;
 		//si es true, quito los efectos incompatibles
-		if(this.isTapping()){
+		if(this.isTapping()) {
 			this.slapping = false;
 			this.popping = false;
 		}
@@ -341,7 +341,7 @@ public abstract class TGNoteEffect {
 		this.fadeIn = fadeIn;
 	}
 	
-	public boolean hasAnyEffect(){
+	public boolean hasAnyEffect() {
 		return (isBend() ||
 				isTremoloBar() ||
 				isHarmonic() ||
@@ -363,7 +363,7 @@ public abstract class TGNoteEffect {
 				isFadeIn());
 	}
 	
-	public TGNoteEffect clone(TGFactory factory){
+	public TGNoteEffect clone(TGFactory factory) {
 		TGNoteEffect effect = factory.newEffect();
 		effect.setVibrato(isVibrato());
 		effect.setDeadNote(isDeadNote());

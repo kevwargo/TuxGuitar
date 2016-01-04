@@ -8,7 +8,7 @@ public class TGVersion {
 	private int minor;
 	private int revision;
 	
-	public TGVersion(int major, int minor, int revision){
+	public TGVersion(int major, int minor, int revision) {
 		this.major = major;
 		this.minor = minor;
 		this.revision = revision;
@@ -26,22 +26,22 @@ public class TGVersion {
 		return this.revision;
 	}
 	
-	public boolean isSameVersion(TGVersion version){
-		if( version == null ){
+	public boolean isSameVersion(TGVersion version) {
+		if( version == null ) {
 			return false;
 		}
 		return ( version.getMajor() == getMajor() && version.getMinor() == getMinor() && version.getRevision() == getRevision());
 	}
 	
-	public String getVersion(){
+	public String getVersion() {
 		String version = (getMajor() + "." + getMinor());
-		if( getRevision() > 0 ){
+		if( getRevision() > 0 ) {
 			version += ("." + getRevision());
 		}
 		return version;
 	}
 	
-	public String toString(){
+	public String toString() {
 		return getVersion();
 	}
 }

@@ -160,12 +160,12 @@ public class ActionManager {
 	
 	private Map actions;
 	
-	public ActionManager(){
+	public ActionManager() {
 		this.actions = new HashMap();
 		this.init();
 	}
 	
-	public void init(){
+	public void init() {
 		//file actions
 		addAction(new NewFileAction());
 		addAction(new OpenFileAction());
@@ -340,24 +340,24 @@ public class ActionManager {
 		addAction(new DisposeAction());
 	}
 	
-	public void addAction(Action action){
+	public void addAction(Action action) {
 		this.actions.put(action.getName(), action);
 	}
 	
-	public void removeAction(String name){
+	public void removeAction(String name) {
 		this.actions.remove(name);
 	}
 	
-	public Action getAction(String name){
+	public Action getAction(String name) {
 		return (Action)this.actions.get(name);
 	}
 	
-	public List getAvailableKeyBindingActions(){
+	public List getAvailableKeyBindingActions() {
 		List availableKeyBindingActions = new ArrayList();
 		Iterator it = this.actions.keySet().iterator();
-		while(it.hasNext()){
+		while(it.hasNext()) {
 			String actionName = (String)it.next();
-			if(getAction(actionName).isKeyBindingAvailable()){
+			if(getAction(actionName).isKeyBindingAvailable()) {
 				availableKeyBindingActions.add(actionName);
 			}
 		}

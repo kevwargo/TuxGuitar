@@ -9,18 +9,18 @@ import org.herac.tuxguitar.gui.undo.undoables.UndoableCaretHelper;
 import org.herac.tuxguitar.song.managers.TGSongManager;
 import org.herac.tuxguitar.song.models.TGMeasure;
 
-public class UndoableChangeOpenRepeat implements UndoableEdit{
+public class UndoableChangeOpenRepeat implements UndoableEdit {
 	private int doAction;
 	private UndoableCaretHelper undoCaret;
 	private UndoableCaretHelper redoCaret;
 	private long position;
 	
-	private UndoableChangeOpenRepeat(){
+	private UndoableChangeOpenRepeat() {
 		super();
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()){
+		if(!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
@@ -33,7 +33,7 @@ public class UndoableChangeOpenRepeat implements UndoableEdit{
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()){
+		if(!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
@@ -53,7 +53,7 @@ public class UndoableChangeOpenRepeat implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableChangeOpenRepeat startUndo(){
+	public static UndoableChangeOpenRepeat startUndo() {
 		UndoableChangeOpenRepeat undoable = new UndoableChangeOpenRepeat();
 		Caret caret = getCaret();
 		undoable.doAction = UNDO_ACTION;
@@ -63,12 +63,12 @@ public class UndoableChangeOpenRepeat implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableChangeOpenRepeat endUndo(){
+	public UndoableChangeOpenRepeat endUndo() {
 		this.redoCaret = new UndoableCaretHelper();
 		return this;
 	}
 	
-	private static Caret getCaret(){
+	private static Caret getCaret() {
 		return TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 	}
 	

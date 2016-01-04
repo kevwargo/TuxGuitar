@@ -3,7 +3,7 @@ package org.herac.tuxguitar.player.impl.sequencer;
 import org.herac.tuxguitar.player.base.MidiSequenceHandler;
 import org.herac.tuxguitar.song.models.TGTimeSignature;
 
-public class MidiSequenceHandlerImpl extends MidiSequenceHandler{
+public class MidiSequenceHandlerImpl extends MidiSequenceHandler {
 	
 	private MidiSequencerImpl seq;
 	
@@ -41,7 +41,7 @@ public class MidiSequenceHandlerImpl extends MidiSequenceHandler{
 		//not implemented
 	}
 	
-	public void notifyFinish(){
+	public void notifyFinish() {
 		//not implemented
 	}
 }

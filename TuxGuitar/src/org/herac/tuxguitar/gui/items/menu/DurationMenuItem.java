@@ -29,7 +29,7 @@ import org.herac.tuxguitar.song.models.TGDuration;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class DurationMenuItem  extends MenuItems{
+public class DurationMenuItem  extends MenuItems {
 	private MenuItem durationMenuItem;
 	private Menu menu;
 	private MenuItem whole;
@@ -48,7 +48,7 @@ public class DurationMenuItem  extends MenuItems{
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
-	public void showItems(){
+	public void showItems() {
 		//--whole--
 		this.whole = new MenuItem(this.menu, SWT.PUSH);
 		this.whole.addSelectionListener(TuxGuitar.instance().getAction(SetWholeDurationAction.NAME));
@@ -91,7 +91,7 @@ public class DurationMenuItem  extends MenuItems{
 		this.loadProperties();
 	}
 	
-	public void update(){
+	public void update() {
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		this.whole.setEnabled(!running);
 		this.half.setEnabled(!running);
@@ -105,7 +105,7 @@ public class DurationMenuItem  extends MenuItems{
 		this.division.setEnabled(!running);
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		setMenuItemTextAndAccelerator(this.durationMenuItem, "duration", null);
 		setMenuItemTextAndAccelerator(this.whole, "duration.whole", SetWholeDurationAction.NAME);
 		setMenuItemTextAndAccelerator(this.half, "duration.half", SetHalfDurationAction.NAME);

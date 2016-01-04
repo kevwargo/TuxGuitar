@@ -4,7 +4,7 @@ import org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout;
 import org.herac.tuxguitar.song.factory.TGFactory;
 import org.herac.tuxguitar.song.models.TGMeasureHeader;
 
-public class TGMeasureHeaderImpl extends TGMeasureHeader{
+public class TGMeasureHeaderImpl extends TGMeasureHeader {
 	/**
 	 * Espacio por defecto del timeSignature
 	 */
@@ -34,7 +34,7 @@ public class TGMeasureHeaderImpl extends TGMeasureHeader{
 	
 	private int maxWidth;
 	
-	public TGMeasureHeaderImpl(TGFactory factory){
+	public TGMeasureHeaderImpl(TGFactory factory) {
 		super(factory);
 	}
 	
@@ -60,17 +60,17 @@ public class TGMeasureHeaderImpl extends TGMeasureHeader{
 	
 	public void calculateMeasureChanges(ViewLayout layout) {
 		TGMeasureHeader previous = layout.getSongManager().getPrevMeasureHeader(this);
-		if(previous == null){
+		if(previous == null) {
 			this.paintFlags |= PAINT_TEMPO; 
 			this.paintFlags |= ((this.getTripletFeel() != TGMeasureHeader.TRIPLET_FEEL_NONE)?PAINT_TRIPLET_FEEL:0);
 			this.paintFlags |= PAINT_TIME_SIGNATURE;
-		}else{
+		}else {
 			//Tempo
-			if(this.getTempo().getValue() != previous.getTempo().getValue()){
+			if(this.getTempo().getValue() != previous.getTempo().getValue()) {
 				this.paintFlags |= PAINT_TEMPO; 
 			}
 			//Triplet Feel
-			if(this.getTripletFeel() != previous.getTripletFeel()){
+			if(this.getTripletFeel() != previous.getTripletFeel()) {
 				this.paintFlags |= PAINT_TRIPLET_FEEL;
 			}
 			//Time Signature
@@ -78,21 +78,21 @@ public class TGMeasureHeaderImpl extends TGMeasureHeader{
 			int thisValue = this.getTimeSignature().getDenominator().getValue();
 			int prevNumerator = previous.getTimeSignature().getNumerator();
 			int prevValue = previous.getTimeSignature().getDenominator().getValue();
-			if(thisNumerator != prevNumerator || thisValue != prevValue){
+			if(thisNumerator != prevNumerator || thisValue != prevValue) {
 				this.paintFlags |= PAINT_TIME_SIGNATURE;
 			}
 		}
 	}
 	
-	public boolean shouldPaintTempo(){
+	public boolean shouldPaintTempo() {
 		return ( (this.paintFlags & PAINT_TEMPO) != 0 );
 	}
 	
-	public boolean shouldPaintTripletFeel(){
+	public boolean shouldPaintTripletFeel() {
 		return ( (this.paintFlags & PAINT_TRIPLET_FEEL) != 0 );
 	}
 	
-	public boolean shouldPaintTimeSignature(){
+	public boolean shouldPaintTimeSignature() {
 		return ( (this.paintFlags & PAINT_TIME_SIGNATURE) != 0 );
 	}
 	
@@ -104,54 +104,54 @@ public class TGMeasureHeaderImpl extends TGMeasureHeader{
 		this.maxQuarterSpacing = ((spacing > this.maxQuarterSpacing) ? spacing : this.maxQuarterSpacing );
 	}
 	
-	public int getClefSpacing(ViewLayout layout, TGMeasureImpl measure){
+	public int getClefSpacing(ViewLayout layout, TGMeasureImpl measure) {
 		return (!measure.isPaintClef() && (layout.getStyle() & ViewLayout.DISPLAY_MULTITRACK) == 0 ? 0 : this.maxClefSpacing );
 	}
 	
-	public int getKeySignatureSpacing(ViewLayout layout, TGMeasureImpl measure){
+	public int getKeySignatureSpacing(ViewLayout layout, TGMeasureImpl measure) {
 		return (!measure.isPaintKeySignature() && (layout.getStyle() & ViewLayout.DISPLAY_MULTITRACK) == 0 ? 0 : this.maxKeySignatureSpacing );
 	}
 	
-	public int getTempoSpacing(ViewLayout layout){
+	public int getTempoSpacing(ViewLayout layout) {
 		return (shouldPaintTempo()? Math.round( 45 * layout.getScale() ):0);
 	}
 	
-	public int getTripletFeelSpacing(ViewLayout layout){
+	public int getTripletFeelSpacing(ViewLayout layout) {
 		return (shouldPaintTripletFeel()? Math.round( 55 * layout.getScale() ):0);
 	}
 	
-	public int getTimeSignatureSpacing(ViewLayout layout){
+	public int getTimeSignatureSpacing(ViewLayout layout) {
 		return (shouldPaintTimeSignature()? Math.round( DEFAULT_TIME_SIGNATURE_SPACING * layout.getScale() ):0);
 	}
 	
-	public int getLeftSpacing(ViewLayout layout){
+	public int getLeftSpacing(ViewLayout layout) {
 		return Math.round( DEFAULT_LEFT_SPACING * layout.getScale() );
 	}
 	
-	public int getRightSpacing(ViewLayout layout){
+	public int getRightSpacing(ViewLayout layout) {
 		return Math.round( DEFAULT_RIGHT_SPACING * layout.getScale() );
 	}
 	
-	public int getFirstNoteSpacing(ViewLayout layout, TGMeasureImpl measure){
+	public int getFirstNoteSpacing(ViewLayout layout, TGMeasureImpl measure) {
 		int topSpacing = getTempoSpacing(layout) + getTripletFeelSpacing(layout);
 		int middleSpacing = getClefSpacing(layout, measure) + getKeySignatureSpacing(layout, measure) + getTimeSignatureSpacing(layout);
 		
 		return Math.round(Math.max( topSpacing , middleSpacing) + (10f * layout.getScale()));
 	}
 	
-	public void notifyClefSpacing(int spacing){
+	public void notifyClefSpacing(int spacing) {
 		this.maxClefSpacing = ((spacing > this.maxClefSpacing)?spacing:this.maxClefSpacing);
 	}
 	
-	public void notifyKeySignatureSpacing(int spacing){
+	public void notifyKeySignatureSpacing(int spacing) {
 		this.maxKeySignatureSpacing = ((spacing > this.maxKeySignatureSpacing) ? spacing : this.maxKeySignatureSpacing);
 	}
 	
-	public void notifyWidth(int width){
+	public void notifyWidth(int width) {
 		this.maxWidth = ((width > this.maxWidth)?width:this.maxWidth);
 	}
 	
-	public int getMaxWidth(){
+	public int getMaxWidth() {
 		return this.maxWidth;
 	}
 }

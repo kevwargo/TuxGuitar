@@ -183,7 +183,7 @@ public class FretBoard extends Composite {
 		this.toolComposite.setLayout(layout);
 	}
 	
-	private void makeToolSeparator(Composite parent){
+	private void makeToolSeparator(Composite parent) {
 		Label separator = new Label(parent, SWT.SEPARATOR);
 		separator.setLayoutData(new GridData(20, 20));
 	}
@@ -206,7 +206,7 @@ public class FretBoard extends Composite {
 	
 	private void loadDurationImage(boolean force) {
 		int duration = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getDuration().getValue();
-		if(force || this.duration != duration){
+		if(force || this.duration != duration) {
 			this.duration = duration;
 			this.durationLabel.setImage(TuxGuitar.instance().getIconManager().getDuration(this.duration));
 		}
@@ -230,8 +230,8 @@ public class FretBoard extends Composite {
 		this.fretSpacing += (aux / MAX_FRETS) + 2;
 	}
 	
-	private void disposeFretBoardImage(){
-		if(this.fretBoard != null && !this.fretBoard.isDisposed()){
+	private void disposeFretBoardImage() {
+		if(this.fretBoard != null && !this.fretBoard.isDisposed()) {
 			this.fretBoard.dispose();
 		}
 	}
@@ -253,9 +253,9 @@ public class FretBoard extends Composite {
 		}
 	}
 	
-	private int getDirection( int value ){
+	private int getDirection( int value ) {
 		int direction = value;
-		if( direction != FretBoardConfig.DIRECTION_RIGHT && direction != FretBoardConfig.DIRECTION_LEFT ){
+		if( direction != FretBoardConfig.DIRECTION_RIGHT && direction != FretBoardConfig.DIRECTION_LEFT ) {
 			direction = FretBoardConfig.DIRECTION_RIGHT;
 		}
 		return direction;
@@ -270,13 +270,13 @@ public class FretBoard extends Composite {
 		}
 	}
 	
-	private void updateEditor(){
-		if(isVisible()){
-			if(TuxGuitar.instance().getPlayer().isRunning()){
+	private void updateEditor() {
+		if(isVisible()) {
+			if(TuxGuitar.instance().getPlayer().isRunning()) {
 				this.beat = TuxGuitar.instance().getEditorCache().getPlayBeat();
-			}else if(this.externalBeat != null){
+			}else if(this.externalBeat != null) {
 				this.beat = this.externalBeat;
-			}else{
+			}else {
 				this.beat = TuxGuitar.instance().getEditorCache().getEditBeat();
 			}
 			
@@ -290,11 +290,11 @@ public class FretBoard extends Composite {
 			int clientWidth = getClientArea().width;
 			int clientHeight = getClientArea().height;
 			
-			if(this.lastSize.x != clientWidth || hasChanges()){
+			if(this.lastSize.x != clientWidth || hasChanges()) {
 				this.layout(getClientArea().width);
 			}
 			
-			if(this.lastSize.y != clientHeight){
+			if(this.lastSize.y != clientHeight) {
 				TuxGuitar.instance().getFretBoardEditor().showFretBoard();
 			}
 			this.lastSize.x = clientWidth;
@@ -302,8 +302,8 @@ public class FretBoard extends Composite {
 		}
 	}
 	
-	private void paintFretBoard(TGPainter painter){
-		if(this.fretBoard == null || this.fretBoard.isDisposed()){
+	private void paintFretBoard(TGPainter painter) {
+		if(this.fretBoard == null || this.fretBoard.isDisposed()) {
 			this.fretBoard = new Image(getDisplay(), getClientArea().width,((STRING_SPACING) * (this.strings.length - 1)) + TOP_SPACING + BOTTOM_SPACING);
 			
 			TGPainter painterBuffer = new TGPainter(new GC(this.fretBoard));
@@ -330,7 +330,7 @@ public class FretBoard extends Composite {
 			// pinto las cuerdas
 			for (int i = 0; i < this.strings.length; i++) {
 				painterBuffer.setForeground(this.config.getColorString());
-				if(i > 2){
+				if(i > 2) {
 					painterBuffer.setLineWidth(2);
 				}
 				painterBuffer.initPath();
@@ -382,17 +382,17 @@ public class FretBoard extends Composite {
 			for (int j = 0; j < this.frets.length; j++) {
 				
 				int noteIndex = ((string.getValue() + j) %  12 );
-				if(TuxGuitar.instance().getScaleManager().getScale().getNote(noteIndex)){
+				if(TuxGuitar.instance().getScaleManager().getScale().getNote(noteIndex)) {
 					int x = this.frets[j];
-					if(j > 0){
+					if(j > 0) {
 						x -= ((x - this.frets[j - 1]) / 2);
 					}
 					int y = this.strings[i];
 					
-					if( (this.config.getStyle() & FretBoardConfig.DISPLAY_TEXT_SCALE) != 0 ){
+					if( (this.config.getStyle() & FretBoardConfig.DISPLAY_TEXT_SCALE) != 0 ) {
 						paintKeyText(painter, this.config.getColorScale(), x, y, NOTE_NAMES[noteIndex]);
 					}
-					else{
+					else {
 						paintKeyOval(painter, this.config.getColorScale(), x, y);
 					}
 				}
@@ -403,10 +403,10 @@ public class FretBoard extends Composite {
 	}
 	
 	private void paintNotes(TGPainter painter) {
-		if(this.beat != null){
+		if(this.beat != null) {
 			TGTrack track = getTrack();
 			
-			for(int v = 0; v < this.beat.countVoices(); v ++){
+			for(int v = 0; v < this.beat.countVoices(); v ++) {
 				TGVoice voice = this.beat.getVoice( v );
 				Iterator it = voice.getNotes().iterator();
 				while (it.hasNext()) {
@@ -420,11 +420,11 @@ public class FretBoard extends Composite {
 						}
 						int y = this.strings[stringIndex];
 						
-						if( (this.config.getStyle() & FretBoardConfig.DISPLAY_TEXT_NOTE) != 0 ){
+						if( (this.config.getStyle() & FretBoardConfig.DISPLAY_TEXT_NOTE) != 0 ) {
 							int realValue = track.getString(note.getString()).getValue() + note.getValue();
 							paintKeyText(painter, this.config.getColorNote(), x, y, NOTE_NAMES[ (realValue % 12) ]);
 						}
-						else{
+						else {
 							paintKeyOval(painter, this.config.getColorNote(), x, y);
 						}
 					}
@@ -455,7 +455,7 @@ public class FretBoard extends Composite {
 	}
 	
 	protected void paintEditor(TGPainter painter) {
-		if(!TuxGuitar.instance().isLocked()){
+		if(!TuxGuitar.instance().isLocked()) {
 			TuxGuitar.instance().lock();
 			this.updateEditor();
 			if (this.frets.length > 0 && this.strings.length > 0) {
@@ -512,8 +512,8 @@ public class FretBoard extends Composite {
 	}
 	
 	private boolean removeNote(int fret, int string) {
-		if(this.beat != null){
-			for(int v = 0; v < this.beat.countVoices(); v ++){
+		if(this.beat != null) {
+			for(int v = 0; v < this.beat.countVoices(); v ++) {
 				TGVoice voice = this.beat.getVoice( v );
 				Iterator it = voice.getNotes().iterator();
 				while (it.hasNext()) {
@@ -538,11 +538,11 @@ public class FretBoard extends Composite {
 	}
 	
 	private TGTrack getTrack() {
-		if( this.beat != null ){
+		if( this.beat != null ) {
 			TGMeasure measure = this.beat.getMeasure();
-			if( measure != null ){
+			if( measure != null ) {
 				TGTrack track = measure.getTrack();
-				if( track != null ){
+				if( track != null ) {
 					return track;
 				}
 			}
@@ -552,13 +552,13 @@ public class FretBoard extends Composite {
 	
 	private int getStringCount() {
 		TGTrack track = getTrack();
-		if( track != null ){
+		if( track != null ) {
 			return track.stringCount();
 		}
 		return 0;
 	}
 	
-	private int getOvalSize(){
+	private int getOvalSize() {
 		return ((STRING_SPACING / 2) + (STRING_SPACING / 10));
 	}
 	
@@ -594,50 +594,50 @@ public class FretBoard extends Composite {
 		TuxGuitar.instance().updateCache(true);
 	}
 	
-	protected void updateDirection( int direction ){
+	protected void updateDirection( int direction ) {
 		this.config.saveDirection( this.getDirection(direction) );
 		this.initFrets(10);
 		this.setChanges(true);
 		this.fretBoardComposite.redraw();
 	}
 	
-	public boolean hasChanges(){
+	public boolean hasChanges() {
 		return this.changes;
 	}
 	
-	public void setChanges(boolean changes){
+	public void setChanges(boolean changes) {
 		this.changes = changes;
 	}
 	
-	public void setExternalBeat(TGBeat externalBeat){
+	public void setExternalBeat(TGBeat externalBeat) {
 		this.externalBeat = externalBeat;
 	}
 	
-	public TGBeat getExternalBeat(){
+	public TGBeat getExternalBeat() {
 		return this.externalBeat;
 	}
 	
 	public void redraw() {
-		if(!super.isDisposed() && !TuxGuitar.instance().isLocked()){
+		if(!super.isDisposed() && !TuxGuitar.instance().isLocked()) {
 			super.redraw();
 			this.fretBoardComposite.redraw();
 			this.loadDurationImage(false);
 		}
 	}
 	
-	public void redrawPlayingMode(){
-		if(!super.isDisposed() && !TuxGuitar.instance().isLocked()){
+	public void redrawPlayingMode() {
+		if(!super.isDisposed() && !TuxGuitar.instance().isLocked()) {
 			this.fretBoardComposite.redraw();
 		}
 	 }
 	
-	public void dispose(){
+	public void dispose() {
 		super.dispose();
 		this.disposeFretBoardImage();
 		this.config.dispose();
 	}
 	
-	public void loadProperties(){
+	public void loadProperties() {
 		int selection = this.handSelector.getSelectionIndex();
 		this.handSelector.removeAll();
 		this.handSelector.add(TuxGuitar.getProperty("fretboard.right-mode"));
@@ -650,34 +650,34 @@ public class FretBoard extends Composite {
 		this.layout(true, true);
 	}
 	
-	public void loadIcons(){
+	public void loadIcons() {
 		this.settings.setImage(TuxGuitar.instance().getIconManager().getSettings());
 		this.loadDurationImage(true);
 		this.layout(true, true);
 		this.layout(getClientArea().width);
 	}
 	
-	public void loadScale(){
+	public void loadScale() {
 		this.loadScaleName();
 		this.setChanges(true);
 	}
 	
-	public int getHeight(){
+	public int getHeight() {
 		int borderWidth = (2 * this.fretBoardComposite.getBorderWidth());
 		int toolBarHeight = (this.toolComposite.getBounds().height);
 		int fretBoardHeight = (((STRING_SPACING) * (this.strings.length - 1)) + TOP_SPACING + BOTTOM_SPACING);
 		return (borderWidth + toolBarHeight + fretBoardHeight);
 	}
 	
-	public int getWidth(){
+	public int getWidth() {
 		return this.frets[this.frets.length - 1];
 	}
 	
-	public void layout(){
+	public void layout() {
 		super.layout();
 	}
 	
-	public void layout(int width){
+	public void layout(int width) {
 		this.disposeFretBoardImage();
 		this.calculateFretSpacing(width);
 		this.initFrets(10);
@@ -685,20 +685,20 @@ public class FretBoard extends Composite {
 		this.setChanges(false);
 	}
 	
-	protected void configure(){
+	protected void configure() {
 		this.config.configure(getShell());
 		this.handSelector.select( this.getDirection(this.config.getDirection()) );
 		this.setChanges(true);
 		this.redraw();
 	}
 	
-	public Composite getFretBoardComposite(){
+	public Composite getFretBoardComposite() {
 		return this.fretBoardComposite;
 	}
 	
 	private class FretBoardListener implements PaintListener, MouseListener {
 		
-		public FretBoardListener(){
+		public FretBoardListener() {
 			super();
 		}
 		
@@ -709,18 +709,18 @@ public class FretBoard extends Composite {
 		
 		public void mouseUp(MouseEvent e) {
 			getFretBoardComposite().setFocus();
-			if(e.button == 1){
-				if(!TuxGuitar.instance().getPlayer().isRunning() && !TuxGuitar.instance().isLocked() && !ActionLock.isLocked()){
+			if(e.button == 1) {
+				if(!TuxGuitar.instance().getPlayer().isRunning() && !TuxGuitar.instance().isLocked() && !ActionLock.isLocked()) {
 					ActionLock.lock();
-					if( getExternalBeat() == null ){
+					if( getExternalBeat() == null ) {
 						hit(e.x, e.y);
-					}else{
+					}else {
 						setExternalBeat( null );
 					}
 					afterAction();
 					ActionLock.unlock();
 				}
-			}else{
+			}else {
 				TuxGuitar.instance().getAction(GoRightAction.NAME).process(e);
 			}
 		}
