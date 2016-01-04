@@ -78,20 +78,20 @@ public class SoundOption extends Option {
 				
 				new SyncThread(new Runnable() {
 					public void run() {
-						if(!isDisposed()) {
+						if (!isDisposed()) {
 							//---Midi Sequencer---//
 							String loadedSequencer = msLoaded;
 							for (int i = 0; i < SoundOption.this.msList.size(); i++) {
 								MidiSequencer sequencer = (MidiSequencer)SoundOption.this.msList.get(i);
 								SoundOption.this.msCombo.add(sequencer.getName());
-								if(SoundOption.this.msCurrentKey != null && SoundOption.this.msCurrentKey.equals(sequencer.getKey())) {
+								if (SoundOption.this.msCurrentKey != null && SoundOption.this.msCurrentKey.equals(sequencer.getKey())) {
 									SoundOption.this.msCombo.select(i);
 									loadedSequencer = null;
-								}else if(loadedSequencer != null && loadedSequencer.equals(sequencer.getKey())) {
+								}else if (loadedSequencer != null && loadedSequencer.equals(sequencer.getKey())) {
 									SoundOption.this.msCombo.select(i);
 								}
 							}
-							if(SoundOption.this.msCombo.getSelectionIndex() < 0 && SoundOption.this.msCombo.getItemCount() > 0) {
+							if (SoundOption.this.msCombo.getSelectionIndex() < 0 && SoundOption.this.msCombo.getItemCount() > 0) {
 								SoundOption.this.msCombo.select(0);
 							}
 							
@@ -100,14 +100,14 @@ public class SoundOption extends Option {
 							for (int i = 0; i < SoundOption.this.mpList.size(); i++) {
 								MidiOutputPort port = (MidiOutputPort)SoundOption.this.mpList.get(i);
 								SoundOption.this.mpCombo.add(port.getName());
-								if(SoundOption.this.mpCurrentKey != null && SoundOption.this.mpCurrentKey.equals(port.getKey())) {
+								if (SoundOption.this.mpCurrentKey != null && SoundOption.this.mpCurrentKey.equals(port.getKey())) {
 									SoundOption.this.mpCombo.select(i);
 									loadedPort = null;
-								}else if(loadedPort != null && loadedPort.equals(port.getKey())) {
+								}else if (loadedPort != null && loadedPort.equals(port.getKey())) {
 									SoundOption.this.mpCombo.select(i);
 								}
 							}
-							if(SoundOption.this.mpCombo.getSelectionIndex() < 0 && SoundOption.this.mpCombo.getItemCount() > 0) {
+							if (SoundOption.this.mpCombo.getSelectionIndex() < 0 && SoundOption.this.mpCombo.getItemCount() > 0) {
 								SoundOption.this.mpCombo.select(0);
 							}
 							
@@ -121,13 +121,13 @@ public class SoundOption extends Option {
 	}
 	
 	public void updateConfig() {
-		if(this.initialized) {
+		if (this.initialized) {
 			int msIndex = this.msCombo.getSelectionIndex();
-			if(msIndex >= 0 && msIndex < this.msList.size()) {
+			if (msIndex >= 0 && msIndex < this.msList.size()) {
 				getConfig().setProperty(TGConfigKeys.MIDI_SEQUENCER, ((MidiSequencer)this.msList.get(msIndex)).getKey());
 			}
 			int mpIndex = this.mpCombo.getSelectionIndex();
-			if(mpIndex >= 0 && mpIndex < this.mpList.size()) {
+			if (mpIndex >= 0 && mpIndex < this.mpList.size()) {
 				MidiOutputPort midiPort = (MidiOutputPort)this.mpList.get(mpIndex);
 				getConfig().setProperty(TGConfigKeys.MIDI_PORT, midiPort.getKey());
 			}
@@ -135,20 +135,20 @@ public class SoundOption extends Option {
 	}
 	
 	public void updateDefaults() {
-		if(this.initialized) {
+		if (this.initialized) {
 			getConfig().setProperty(TGConfigKeys.MIDI_PORT, getDefaults().getProperty(TGConfigKeys.MIDI_PORT));
 			getConfig().setProperty(TGConfigKeys.MIDI_SEQUENCER, getDefaults().getProperty(TGConfigKeys.MIDI_SEQUENCER));
 		}
 	}
 	
 	public void applyConfig(final boolean force) {
-		if(force || this.initialized) {
+		if (force || this.initialized) {
 			String midiSequencer = getConfig().getStringConfigValue(TGConfigKeys.MIDI_SEQUENCER);
-			if(force || !TuxGuitar.instance().getPlayer().isSequencerOpen(midiSequencer)) {
+			if (force || !TuxGuitar.instance().getPlayer().isSequencerOpen(midiSequencer)) {
 				TuxGuitar.instance().getPlayer().openSequencer(midiSequencer);
 			}
 			String midiPort = getConfig().getStringConfigValue(TGConfigKeys.MIDI_PORT);
-			if(force || !TuxGuitar.instance().getPlayer().isOutputPortOpen(midiPort)) {
+			if (force || !TuxGuitar.instance().getPlayer().isOutputPortOpen(midiPort)) {
 				TuxGuitar.instance().getPlayer().openOutputPort(midiPort);
 			}
 		}

@@ -59,10 +59,10 @@ public class TremoloBarEditor {
 		this.height = ((Y_SPACING * Y_LENGTH) - Y_SPACING);
 		this.points = new ArrayList();
 		
-		for(int i = 0;i < this.x.length;i++) {
+		for (int i = 0;i < this.x.length;i++) {
 			this.x[i] = ((i + 1) * X_SPACING);
 		}
-		for(int i = 0;i < this.y.length;i++) {
+		for (int i = 0;i < this.y.length;i++) {
 			this.y[i] = ((i + 1) * Y_SPACING);
 		}
 	}
@@ -106,7 +106,7 @@ public class TremoloBarEditor {
 		//-------------DEFAULT BEND LIST---------------------------------------------------
 		this.resetDefaultTremoloBars();
 		final org.eclipse.swt.widgets.List defaultTremoloBarList = new org.eclipse.swt.widgets.List(rightComposite, SWT.BORDER);
-		for(int i = 0;i < this.defaultTremoloBars.length;i++) {
+		for (int i = 0;i < this.defaultTremoloBars.length;i++) {
 			defaultTremoloBarList.add(this.defaultTremoloBars[i].getName());
 		}
 		defaultTremoloBarList.select(0);
@@ -114,7 +114,7 @@ public class TremoloBarEditor {
 		defaultTremoloBarList.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				int index = defaultTremoloBarList.getSelectionIndex();
-				if(index >= 0 && index < TremoloBarEditor.this.defaultTremoloBars.length) {
+				if (index >= 0 && index < TremoloBarEditor.this.defaultTremoloBars.length) {
 					setTremoloBar(TremoloBarEditor.this.defaultTremoloBars[index].getTremoloBar());
 					TremoloBarEditor.this.editor.redraw();
 				}
@@ -150,7 +150,7 @@ public class TremoloBarEditor {
 			}
 		});
 		
-		if(note.getEffect().isTremoloBar()) {
+		if (note.getEffect().isTremoloBar()) {
 			setTremoloBar(note.getEffect().getTremoloBar());
 		}else {
 			setTremoloBar(this.defaultTremoloBars[0].getTremoloBar());
@@ -170,7 +170,7 @@ public class TremoloBarEditor {
 	}
 	
 	protected void paintEditor(TGPainter painter) {
-		for(int i = 0;i < this.x.length;i++) {
+		for (int i = 0;i < this.x.length;i++) {
 			this.setStyleX(painter, i);
 			painter.initPath();
 			painter.setAntialias(false);
@@ -178,7 +178,7 @@ public class TremoloBarEditor {
 			painter.lineTo(this.x[i], Y_SPACING + this.height);
 			painter.closePath();
 		}
-		for(int i = 0;i < this.y.length;i++) {
+		for (int i = 0;i < this.y.length;i++) {
 			this.setStyleY(painter, i);
 			painter.initPath();
 			painter.setAntialias(false);
@@ -193,9 +193,9 @@ public class TremoloBarEditor {
 		painter.setLineWidth(2);
 		painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_GRAY));
 		it = this.points.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			Point point = (Point)it.next();
-			if(prevPoint != null) {
+			if (prevPoint != null) {
 				painter.initPath();
 				painter.moveTo(prevPoint.x, prevPoint.y);
 				painter.lineTo(point.x, point.y);
@@ -207,7 +207,7 @@ public class TremoloBarEditor {
 		painter.setLineWidth(5);
 		painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		it = this.points.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			Point point = (Point)it.next();
 			painter.initPath();
 			painter.setAntialias(false);
@@ -219,11 +219,11 @@ public class TremoloBarEditor {
 	
 	private void setStyleX(TGPainter painter, int i) {
 		painter.setLineStyle(SWT.LINE_SOLID);
-		if(i == 0 || i == (X_LENGTH - 1)) {
+		if (i == 0 || i == (X_LENGTH - 1)) {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}else {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLUE));
-			if((i % 3) > 0) {
+			if ((i % 3) > 0) {
 				painter.setLineStyle(SWT.LINE_DOT);
 			}
 		}
@@ -231,14 +231,14 @@ public class TremoloBarEditor {
 	
 	private void setStyleY(TGPainter painter, int i) {
 		painter.setLineStyle(SWT.LINE_SOLID);
-		if(i == 0 || i == (Y_LENGTH - 1)) {
+		if (i == 0 || i == (Y_LENGTH - 1)) {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}
-		else if(i == (TGEffectTremoloBar.MAX_VALUE_LENGTH)) {
+		else if (i == (TGEffectTremoloBar.MAX_VALUE_LENGTH)) {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}else {
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_RED));
-			if((i % 2) > 0) {
+			if ((i % 2) > 0) {
 				painter.setLineStyle(SWT.LINE_DOT);
 				painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_GRAY));
 			}
@@ -247,7 +247,7 @@ public class TremoloBarEditor {
 	
 	protected void checkPoint(int x, int y) {
 		Point point = new Point(this.getX(x), this.getY(y));
-		if(!this.removePoint(point)) {
+		if (!this.removePoint(point)) {
 			this.removePointsAtXLine(point.x);
 			this.addPoint(point);
 			this.orderPoints();
@@ -256,9 +256,9 @@ public class TremoloBarEditor {
 	
 	private boolean removePoint(Point point) {
 		Iterator it = this.points.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			Point currPoint = (Point)it.next();
-			if(currPoint.x == point.x && currPoint.y == point.y) {
+			if (currPoint.x == point.x && currPoint.y == point.y) {
 				this.points.remove(point);
 				return true;
 			}
@@ -267,11 +267,11 @@ public class TremoloBarEditor {
 	}
 	
 	private void orderPoints() {
-		for(int i = 0;i < this.points.size();i++) {
+		for (int i = 0;i < this.points.size();i++) {
 			Point minPoint = null;
-			for(int noteIdx = i;noteIdx < this.points.size();noteIdx++) {
+			for (int noteIdx = i;noteIdx < this.points.size();noteIdx++) {
 				Point point = (Point)this.points.get(noteIdx);
-				if(minPoint == null || point.x < minPoint.x) {
+				if (minPoint == null || point.x < minPoint.x) {
 					minPoint = point;
 				}
 			}
@@ -282,9 +282,9 @@ public class TremoloBarEditor {
 	
 	private void removePointsAtXLine(int x) {
 		Iterator it = this.points.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			Point point = (Point)it.next();
-			if(point.x == x) {
+			if (point.x == x) {
 				this.points.remove(point);
 				break;
 			}
@@ -297,13 +297,13 @@ public class TremoloBarEditor {
 	
 	private int getX(int pointX) {
 		int currPointX = -1;
-		for(int i = 0;i < this.x.length;i++) {
-			if(currPointX < 0) {
+		for (int i = 0;i < this.x.length;i++) {
+			if (currPointX < 0) {
 				currPointX = this.x[i];
 			}else {
 				int distanceX = Math.abs(pointX - currPointX);
 				int currDistanceX = Math.abs(pointX - this.x[i]);
-				if(currDistanceX < distanceX) {
+				if (currDistanceX < distanceX) {
 					currPointX = this.x[i];
 				}
 			}
@@ -313,13 +313,13 @@ public class TremoloBarEditor {
 	
 	private int getY(int pointY) {
 		int currPointY = -1;
-		for(int i = 0;i < this.y.length;i++) {
-			if(currPointY < 0) {
+		for (int i = 0;i < this.y.length;i++) {
+			if (currPointY < 0) {
 				currPointY = this.y[i];
 			}else {
 				int distanceX = Math.abs(pointY - currPointY);
 				int currDistanceX = Math.abs(pointY - this.y[i]);
-				if(currDistanceX < distanceX) {
+				if (currDistanceX < distanceX) {
 					currPointY = this.y[i];
 				}
 			}
@@ -332,10 +332,10 @@ public class TremoloBarEditor {
 	}
 	
 	public TGEffectTremoloBar getTremoloBar() {
-		if(this.points != null && !this.points.isEmpty()) {
+		if (this.points != null && !this.points.isEmpty()) {
 			TGEffectTremoloBar tremoloBar = TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar();//new TremoloBarEffect();
 			Iterator it = this.points.iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				Point point = (Point)it.next();
 				addTremoloBarPoint(tremoloBar, point);
 			}
@@ -347,13 +347,13 @@ public class TremoloBarEditor {
 	private void addTremoloBarPoint(TGEffectTremoloBar effect, Point point) {
 		int position = 0;
 		int value = 0;
-		for(int i=0;i<this.x.length;i++) {
-			if(point.x == this.x[i]) {
+		for (int i=0;i<this.x.length;i++) {
+			if (point.x == this.x[i]) {
 				position = i;
 			}
 		}
-		for(int i=0;i<this.y.length;i++) {
-			if(point.y == this.y[i]) {
+		for (int i=0;i<this.y.length;i++) {
+			if (point.y == this.y[i]) {
 				value = (TGEffectTremoloBar.MAX_VALUE_LENGTH - i);
 			}
 		}
@@ -363,7 +363,7 @@ public class TremoloBarEditor {
 	public void setTremoloBar(TGEffectTremoloBar effect) {
 		this.points.clear();
 		Iterator it = effect.getPoints().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGEffectTremoloBar.TremoloBarPoint tremoloBarPoint = (TGEffectTremoloBar.TremoloBarPoint)it.next();
 			this.makePoint(tremoloBarPoint);
 		}
@@ -372,7 +372,7 @@ public class TremoloBarEditor {
 	private void makePoint(TGEffectTremoloBar.TremoloBarPoint tremoloBarPoint) {
 		int indexX = tremoloBarPoint.getPosition();
 		int indexY = ( (this.y.length - TGEffectTremoloBar.MAX_VALUE_LENGTH) - tremoloBarPoint.getValue()) - 1;
-		if(indexX >= 0 && indexX < this.x.length && indexY >= 0 && indexY < this.y.length) {
+		if (indexX >= 0 && indexX < this.x.length && indexY >= 0 && indexY < this.y.length) {
 			Point point = new Point(0, 0);
 			point.x = this.x[indexX];
 			point.y = this.y[indexY];

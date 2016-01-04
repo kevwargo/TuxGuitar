@@ -40,7 +40,7 @@ public abstract class TGEffectBend {
 	public TGEffectBend clone(TGFactory factory) {
 		TGEffectBend effect = factory.newEffectBend();
 		Iterator it = getPoints().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			BendPoint point = (BendPoint)it.next();
 			effect.addPoint(point.getPosition(), point.getValue());
 		}

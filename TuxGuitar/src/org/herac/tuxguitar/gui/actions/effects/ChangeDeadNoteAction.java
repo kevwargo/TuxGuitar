@@ -33,7 +33,7 @@ public class ChangeDeadNoteAction extends Action {
 		
 		Caret caret = getEditor().getTablature().getCaret();
 		TGNote note = caret.getSelectedNote();
-		if(note == null) {
+		if (note == null) {
 			note = getSongManager().getFactory().newNote();
 			note.setValue(0);
 			note.setVelocity(caret.getVelocity());

@@ -45,7 +45,7 @@ public class MessageDialog {
 	public static void infoMessage(final Shell shell, final String title, final String message) {
 		new SyncThread(new Runnable() {
 			public void run() {
-				if(!shell.isDisposed()) {
+				if (!shell.isDisposed()) {
 					new MessageDialog(title, message, SWT.ICON_INFORMATION).show(shell);
 				}
 			}
@@ -66,10 +66,10 @@ public class MessageDialog {
 	}
 	
 	public static void errorMessage(final Shell shell, final String message) {
-		if(!shell.isDisposed()) {
+		if (!shell.isDisposed()) {
 			new SyncThread(new Runnable() {
 				public void run() {
-					if(!shell.isDisposed()) {
+					if (!shell.isDisposed()) {
 						ActionLock.unlock();
 						TuxGuitar.instance().unlock();
 						shell.setCursor(shell.getDisplay().getSystemCursor(SWT.CURSOR_ARROW));

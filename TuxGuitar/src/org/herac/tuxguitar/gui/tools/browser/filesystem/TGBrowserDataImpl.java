@@ -28,7 +28,7 @@ public class TGBrowserDataImpl implements TGBrowserData {
 	
 	public static TGBrowserData fromString(String string) {
 		String[] data = string.split(STRING_SEPARATOR);
-		if(data.length == 2) {
+		if (data.length == 2) {
 			return new TGBrowserDataImpl(data[0], data[1]);
 		}
 		return null;

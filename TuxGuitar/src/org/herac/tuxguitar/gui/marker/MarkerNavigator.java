@@ -15,15 +15,15 @@ public class MarkerNavigator {
 	}
 	
 	public void goToSelectedMarker(TGMarker marker) {
-		if(marker != null) {
+		if (marker != null) {
 			Caret caret = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 			TGSongManager manager = TuxGuitar.instance().getSongManager();
 			TGTrackImpl track = caret.getTrack();
-			if(track != null) {
+			if (track != null) {
 				TGMeasureImpl measure = (TGMeasureImpl)manager.getTrackManager().getMeasure(track, marker.getMeasure());
-				if(measure != null) {
+				if (measure != null) {
 					TGBeat beat = manager.getMeasureManager().getFirstBeat(measure.getBeats());
-					if(beat != null) {
+					if (beat != null) {
 						caret.moveTo(track, measure, beat, caret.getStringNumber());
 					}
 				}

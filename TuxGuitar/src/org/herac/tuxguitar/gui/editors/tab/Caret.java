@@ -67,7 +67,7 @@ public class Caret {
 		TGTrackImpl track = findTrack(trackNumber); 
 		TGMeasureImpl measure = findMeasure(realPosition, track);
 		TGBeat beat = findBeat(realPosition, measure);
-		if(track != null && measure != null && beat != null) {
+		if (track != null && measure != null && beat != null) {
 			moveTo(track, measure, beat, string);
 		}
 		setVelocity(velocity);
@@ -89,7 +89,7 @@ public class Caret {
 	
 	private TGTrackImpl findTrack(int number) {
 		TGTrackImpl track = (TGTrackImpl)getSongManager().getTrack(number);
-		if(track == null) {
+		if (track == null) {
 			track = (TGTrackImpl)getSongManager().getFirstTrack();
 		}
 		return track;
@@ -97,9 +97,9 @@ public class Caret {
 	
 	private TGMeasureImpl findMeasure(long position, TGTrackImpl track) {
 		TGMeasureImpl measure = null;
-		if(track != null) {
+		if (track != null) {
 			measure = (TGMeasureImpl)getSongManager().getTrackManager().getMeasureAt(track, position);
-			if(measure == null) {
+			if (measure == null) {
 				measure = (TGMeasureImpl)getSongManager().getTrackManager().getFirstMeasure(track);
 			}
 		}
@@ -108,10 +108,10 @@ public class Caret {
 	
 	private TGBeat findBeat(long position, TGMeasureImpl measure) {
 		TGBeat beat = null;
-		if(measure != null) {
+		if (measure != null) {
 			TGMeasureManager manager = getSongManager().getMeasureManager();
 			TGVoice voice = manager.getVoiceIn(measure, position, getVoice());
-			if( voice != null ) {
+			if ( voice != null ) {
 				beat = voice.getBeat();
 			}
 			if (beat == null) {
@@ -128,10 +128,10 @@ public class Caret {
 	}
 	
 	public void paintCaret(ViewLayout layout, TGPainter painter) {
-		if(!TuxGuitar.instance().getPlayer().isRunning()) {
+		if (!TuxGuitar.instance().getPlayer().isRunning()) {
 			if (this.selectedMeasure != null && this.selectedBeat instanceof TGBeatImpl) {
 				TGBeatImpl beat = (TGBeatImpl)this.selectedBeat;
-				if( (layout.getStyle() & ViewLayout.DISPLAY_TABLATURE) != 0) {
+				if ( (layout.getStyle() & ViewLayout.DISPLAY_TABLATURE) != 0) {
 					boolean expectedVoice = (getSelectedNote() == null || getSelectedNote().getVoice().getIndex() == getVoice());
 					int stringSpacing = this.tablature.getViewLayout().getStringSpacing();
 					int leftSpacing = beat.getMeasureImpl().getHeaderImpl().getLeftSpacing(layout);
@@ -145,7 +145,7 @@ public class Caret {
 					painter.addRectangle(x, y, width, height);
 					painter.closePath();
 				}
-				else if( (layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0) {
+				else if ( (layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0) {
 					int line = this.tablature.getViewLayout().getScoreLineSpacing();
 					int leftSpacing = beat.getMeasureImpl().getHeaderImpl().getLeftSpacing(layout);
 					float xMargin = (2.0f * layout.getScale());
@@ -180,11 +180,11 @@ public class Caret {
 				}
 				voice = getSongManager().getMeasureManager().getFirstVoice(measure.getBeats(), getVoice());
 				beat = (voice != null ? voice.getBeat() : null );
-				if( beat == null ) {
+				if ( beat == null ) {
 					beat = getSongManager().getMeasureManager().getFirstBeat(measure.getBeats());
 				}
 			}
-			if(beat != null) {
+			if (beat != null) {
 				moveTo(getTrack(), measure, beat, getStringNumber());
 			}
 		}
@@ -204,11 +204,11 @@ public class Caret {
 				}
 				voice = getSongManager().getMeasureManager().getLastVoice(measure.getBeats(), getVoice());
 				beat = (voice != null ? voice.getBeat() : null );
-				if( beat == null ) {
+				if ( beat == null ) {
 					beat = getSongManager().getMeasureManager().getFirstBeat(measure.getBeats());
 				}
 			}
-			if(beat != null) {
+			if (beat != null) {
 				moveTo(getTrack(), measure, beat, getStringNumber());
 			}
 		}
@@ -286,7 +286,7 @@ public class Caret {
 	}
 	
 	private void updateString() {
-		if(this.string < 1 || this.string > getTrack().stringCount() ) {
+		if (this.string < 1 || this.string > getTrack().stringCount() ) {
 			this.string = 1;
 		}
 	}
@@ -315,7 +315,7 @@ public class Caret {
 		this.selectedNote = null;
 		
 		TGString string = getSelectedString();
-		if( string != null ) {
+		if ( string != null ) {
 			this.selectedNote = getSongManager().getMeasureManager().getNote(getMeasure(), getPosition(), string.getNumber());
 		}
 	}

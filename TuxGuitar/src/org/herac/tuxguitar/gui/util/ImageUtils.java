@@ -43,10 +43,10 @@ public class ImageUtils {
 	 */
 	public static ImageData applyMask(ImageData src, RGB alpha, RGB none) {
 		ImageData maskData = new ImageData(src.width, src.height, 1, new PaletteData(new RGB[] { none, alpha }  ));
-		for(int x = 0; x< maskData.width; x++) {
-			for(int y = 0; y < maskData.height; y++) {
+		for (int x = 0; x< maskData.width; x++) {
+			for (int y = 0; y < maskData.height; y++) {
 				RGB rgb = src.palette.getRGB(src.getPixel(x, y));
-				if(rgb.red == alpha.red && rgb.green == alpha.green && rgb.blue == alpha.blue) {
+				if (rgb.red == alpha.red && rgb.green == alpha.green && rgb.blue == alpha.blue) {
 					maskData.setPixel(x, y, maskData.palette.getPixel(none));
 				}else {
 					maskData.setPixel(x, y, maskData.palette.getPixel(alpha));

@@ -162,8 +162,8 @@ public class LyricEditor implements TGUpdateListener, IconLoader, LanguageLoader
 		this.text.addModifyListener(this.listener);
 		this.text.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent event) {
-				for( int i = 0 ; i < KB_ACTIONS.length ; i ++ ) {
-					if(event.keyCode == KB_ACTIONS[i].getKeyBinding().getKey() && event.stateMask == KB_ACTIONS[i].getKeyBinding().getMask()) {
+				for ( int i = 0 ; i < KB_ACTIONS.length ; i ++ ) {
+					if (event.keyCode == KB_ACTIONS[i].getKeyBinding().getKey() && event.stateMask == KB_ACTIONS[i].getKeyBinding().getMask()) {
 						TuxGuitar.instance().getAction(KB_ACTIONS[i].getAction()).process(event);
 						return;
 					}
@@ -173,23 +173,23 @@ public class LyricEditor implements TGUpdateListener, IconLoader, LanguageLoader
 	}
 	
 	public void updateItems() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			boolean enabled = !TuxGuitar.instance().getPlayer().isRunning();
 			
 			this.listener.setEnabled(false);
-			if(this.updated) {
+			if (this.updated) {
 				this.lastTrack = 0;
 				this.lastTrackName = null;
 				this.lastMeasuseCount = 0;
 			}
 			this.track = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getTrack();
-			if( isTrackNameChanged() ) {
+			if ( isTrackNameChanged() ) {
 				this.label.setText(this.track.getName());
 			}
-			if( isMeasureCountChanged() ) {
+			if ( isMeasureCountChanged() ) {
 				this.from.setMaximum(this.track.countMeasures());
 			}
-			if( isTrackChanged() ) {
+			if ( isTrackChanged() ) {
 				this.from.setSelection(this.track.getLyrics().getFrom());
 				this.text.setText(this.track.getLyrics().getLyrics());
 				this.text.setSelection( (this.caretPosition >= 0 ? this.caretPosition : this.text.getCharCount()));
@@ -207,7 +207,7 @@ public class LyricEditor implements TGUpdateListener, IconLoader, LanguageLoader
 	
 	private boolean isTrackChanged() {
 		int current = this.track.getNumber();
-		if(current != this.lastTrack) {
+		if (current != this.lastTrack) {
 			this.lastTrack = current;
 			return true;
 		}
@@ -216,7 +216,7 @@ public class LyricEditor implements TGUpdateListener, IconLoader, LanguageLoader
 	
 	private boolean isTrackNameChanged() {
 		String current = this.track.getName();
-		if(this.lastTrackName == null || !current.equals( this.lastTrackName ) ) {
+		if (this.lastTrackName == null || !current.equals( this.lastTrackName ) ) {
 			this.lastTrackName = current;
 			return true;
 		}
@@ -225,7 +225,7 @@ public class LyricEditor implements TGUpdateListener, IconLoader, LanguageLoader
 	
 	private boolean isMeasureCountChanged() {
 		int current = this.track.countMeasures();
-		if(current != this.lastMeasuseCount) {
+		if (current != this.lastMeasuseCount) {
 			this.lastMeasuseCount = current;
 			return true;
 		}
@@ -245,14 +245,14 @@ public class LyricEditor implements TGUpdateListener, IconLoader, LanguageLoader
 	}
 	
 	public void loadProperties() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			this.dialog.setText(TuxGuitar.getProperty("lyric.editor"));
 			this.fromLabel.setText(TuxGuitar.getProperty("edit.from"));
 		}
 	}
 	
 	public void loadIcons() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			this.dialog.setImage(TuxGuitar.instance().getIconManager().getAppIcon());
 		}
 	}
@@ -262,15 +262,15 @@ public class LyricEditor implements TGUpdateListener, IconLoader, LanguageLoader
 	}
 	
 	public void dispose() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			this.dialog.dispose();
 		}
 	}
 
 	public void doUpdate(int type) {
-		if( type == TGUpdateListener.SELECTION ) {
+		if ( type == TGUpdateListener.SELECTION ) {
 			this.updateItems();
-		}else if( type == TGUpdateListener.SONG_UPDATED || type == TGUpdateListener.SONG_LOADED) {
+		}else if ( type == TGUpdateListener.SONG_UPDATED || type == TGUpdateListener.SONG_LOADED) {
 			this.update();
 		}
 	}

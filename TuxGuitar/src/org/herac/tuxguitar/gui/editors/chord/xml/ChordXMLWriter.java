@@ -77,7 +77,7 @@ public class ChordXMLWriter {
 		Node chordsNode = document.createElement(ChordXML.CHORD_LIST_TAG);
 		
 		Iterator it = chords.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGChord chord = (TGChord)it.next();
 			
 			//chord tag
@@ -99,7 +99,7 @@ public class ChordXMLWriter {
 			firstFretAttr.setNodeValue(Integer.toString(chord.getFirstFret()));
 			chordNode.getAttributes().setNamedItem(firstFretAttr);
 			
-			for(int i = 0;i < chord.getStrings().length; i++) {
+			for (int i = 0;i < chord.getStrings().length; i++) {
 				//string tag
 				Node stringNode = document.createElement(ChordXML.STRING_TAG);
 				chordNode.appendChild(stringNode);

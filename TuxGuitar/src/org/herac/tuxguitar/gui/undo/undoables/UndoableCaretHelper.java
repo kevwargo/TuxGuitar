@@ -20,7 +20,7 @@ public class UndoableCaretHelper {
 		this.duration = caret.getDuration().clone(TuxGuitar.instance().getSongManager().getFactory());
 		this.string = 1;
 		TGString instrumentString = caret.getSelectedString();
-		if(instrumentString != null) {
+		if (instrumentString != null) {
 			this.string = instrumentString.getNumber();
 		}
 	}

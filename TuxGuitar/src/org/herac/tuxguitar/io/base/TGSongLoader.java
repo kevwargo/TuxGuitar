@@ -34,10 +34,10 @@ public class TGSongLoader {
 			BufferedInputStream stream = new BufferedInputStream(is);
 			stream.mark(1);
 			Iterator it = TGFileFormatManager.instance().getInputStreams();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				TGInputStreamBase reader = (TGInputStreamBase)it.next();
 				reader.init(factory, stream);
-				if(reader.isSupportedVersion()) {
+				if (reader.isSupportedVersion()) {
 					return reader.readSong();
 				}
 				stream.reset();

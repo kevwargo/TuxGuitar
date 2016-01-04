@@ -45,7 +45,7 @@ public class PrintPreviewAction extends Action {
 	protected int execute(TypedEvent e) {
 		try {
 			final PrintStyles data = PrintStylesDialog.open(TuxGuitar.instance().getShell());
-			if(data != null) {
+			if (data != null) {
 				TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 				
 				this.printPreview(data);
@@ -154,7 +154,7 @@ public class PrintPreviewAction extends Action {
 						PrintPreview preview = new PrintPreview(pages, bounds);
 						preview.showPreview(getEditor().getTablature().getShell());
 						Iterator it = pages.iterator();
-						while(it.hasNext()) {
+						while (it.hasNext()) {
 							Image image = (Image)it.next();
 							image.dispose();
 						}

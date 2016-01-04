@@ -33,7 +33,7 @@ public class MoveTrackUpAction extends Action {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGTrack track = caret.getTrack();
 		
-		if(getSongManager().moveTrackUp(track)) {
+		if (getSongManager().moveTrackUp(track)) {
 			updateTablature();
 			TuxGuitar.instance().getMixer().update();
 			

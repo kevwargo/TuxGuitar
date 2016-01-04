@@ -47,8 +47,8 @@ public class KeyBindingReserveds {
 	};
 	
 	public static boolean isReserved(KeyBinding kb) {
-		for(int i = 0;i < reserveds.length;i++) {
-			if(kb.isSameAs(reserveds[i].getKeyBinding())) {
+		for (int i = 0;i < reserveds.length;i++) {
+			if (kb.isSameAs(reserveds[i].getKeyBinding())) {
 				return true;
 			}
 		}
@@ -56,8 +56,8 @@ public class KeyBindingReserveds {
 	}
 	
 	public static Action getActionForKeyBinding(KeyBinding kb) {
-		for(int i = 0;i < reserveds.length;i++) {
-			if(kb.isSameAs(reserveds[i].getKeyBinding())) {
+		for (int i = 0;i < reserveds.length;i++) {
+			if (kb.isSameAs(reserveds[i].getKeyBinding())) {
 				return TuxGuitar.instance().getAction(reserveds[i].getAction());
 			}
 		}
@@ -65,8 +65,8 @@ public class KeyBindingReserveds {
 	}
 	
 	public static KeyBinding getKeyBindingForAction(String action) {
-		for(int i = 0;i < reserveds.length;i++) {
-			if(action.equals(reserveds[i].getAction())) {
+		for (int i = 0;i < reserveds.length;i++) {
+			if (action.equals(reserveds[i].getAction())) {
 				return reserveds[i].getKeyBinding();
 			}
 		}

@@ -60,17 +60,17 @@ public class TGMeasureHeaderImpl extends TGMeasureHeader {
 	
 	public void calculateMeasureChanges(ViewLayout layout) {
 		TGMeasureHeader previous = layout.getSongManager().getPrevMeasureHeader(this);
-		if(previous == null) {
+		if (previous == null) {
 			this.paintFlags |= PAINT_TEMPO; 
 			this.paintFlags |= ((this.getTripletFeel() != TGMeasureHeader.TRIPLET_FEEL_NONE)?PAINT_TRIPLET_FEEL:0);
 			this.paintFlags |= PAINT_TIME_SIGNATURE;
 		}else {
 			//Tempo
-			if(this.getTempo().getValue() != previous.getTempo().getValue()) {
+			if (this.getTempo().getValue() != previous.getTempo().getValue()) {
 				this.paintFlags |= PAINT_TEMPO; 
 			}
 			//Triplet Feel
-			if(this.getTripletFeel() != previous.getTripletFeel()) {
+			if (this.getTripletFeel() != previous.getTripletFeel()) {
 				this.paintFlags |= PAINT_TRIPLET_FEEL;
 			}
 			//Time Signature
@@ -78,7 +78,7 @@ public class TGMeasureHeaderImpl extends TGMeasureHeader {
 			int thisValue = this.getTimeSignature().getDenominator().getValue();
 			int prevNumerator = previous.getTimeSignature().getNumerator();
 			int prevValue = previous.getTimeSignature().getDenominator().getValue();
-			if(thisNumerator != prevNumerator || thisValue != prevValue) {
+			if (thisNumerator != prevNumerator || thisValue != prevValue) {
 				this.paintFlags |= PAINT_TIME_SIGNATURE;
 			}
 		}

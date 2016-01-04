@@ -153,7 +153,7 @@ public class ChangeTempoAction extends Action {
 	}
 	
 	protected void setTempo(int tempoValue, boolean applyToAllMeasures, boolean applyToEnd) {
-		if(tempoValue >= MIN_TEMPO && MAX_TEMPO <= 320) {
+		if (tempoValue >= MIN_TEMPO && MAX_TEMPO <= 320) {
 			TGTempo tempo = getSongManager().getFactory().newTempo();
 			tempo.setValue(tempoValue);
 			

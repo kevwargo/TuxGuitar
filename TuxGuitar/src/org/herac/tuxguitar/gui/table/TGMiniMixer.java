@@ -171,7 +171,7 @@ public class TGMiniMixer implements TGUpdateListener, TGRedrawListener
 
     public void doRedraw(int type)
     {
-        if( type == TGRedrawListener.NORMAL ||
+        if ( type == TGRedrawListener.NORMAL ||
             type == TGRedrawListener.PLAYING_NEW_BEAT )
 			this.updateMixer();
 	}

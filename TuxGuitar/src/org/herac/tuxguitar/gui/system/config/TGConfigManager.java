@@ -114,9 +114,9 @@ public abstract class TGConfigManager {
 	public FontData getFontDataConfigValue(String key) {
 		try {
 			String value = getProperty(key);
-			if(value != null) {
+			if (value != null) {
 				String[] values = value.trim().split(",");
-				if(values != null && values.length == 3) {
+				if (values != null && values.length == 3) {
 					try {
 						String name = values[0].trim();
 						int size = Integer.parseInt(values[1].trim());
@@ -136,9 +136,9 @@ public abstract class TGConfigManager {
 	public RGB getRGBConfigValue(String key) {
 		try {
 			String value = getProperty(key);
-			if(value != null) {
+			if (value != null) {
 				String[] values = value.trim().split(",");
-				if(values != null && values.length == 3) {
+				if (values != null && values.length == 3) {
 					try {
 						int red = Integer.parseInt(values[0].trim());
 						int green = Integer.parseInt(values[1].trim());
@@ -187,7 +187,7 @@ public abstract class TGConfigManager {
 	public void setDefaults() {
 		Properties defaults = new TGConfigDefaults().getProperties();
 		Iterator it = defaults.entrySet().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			Map.Entry property = (Map.Entry)it.next();
 			setProperty((String)property.getKey(),(String)property.getValue());
 		}
@@ -204,7 +204,7 @@ public abstract class TGConfigManager {
 	
 	public void load() {
 		try {
-			if(new File(getFileName()).exists()) {
+			if (new File(getFileName()).exists()) {
 				InputStream inputStream = new FileInputStream(getFileName());
 				this.properties.clear();
 				this.properties.load(inputStream);
@@ -219,9 +219,9 @@ public abstract class TGConfigManager {
 	public void save() {
 		try {
 			File file = new File(getFileName());
-			if(!file.exists()) {
+			if (!file.exists()) {
 				File folder = file.getParentFile();
-				if(folder != null && !folder.exists()) {
+				if (folder != null && !folder.exists()) {
 					folder.mkdirs();
 				}
 			}

@@ -110,22 +110,22 @@ public class TransportMenuItem extends MenuItems {
 	public void loadIcons(boolean force) {
 		int lastStatus = this.status;
 		
-		if(TuxGuitar.instance().getPlayer().isRunning()) {
+		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			this.status = STATUS_RUNNING;
-		}else if(TuxGuitar.instance().getPlayer().isPaused()) {
+		}else if (TuxGuitar.instance().getPlayer().isPaused()) {
 			this.status = STATUS_PAUSED;
 		}else {
 			this.status = STATUS_STOPPED;
 		}
 		
-		if(force || lastStatus != this.status) {
-			if(this.status == STATUS_RUNNING) {
+		if (force || lastStatus != this.status) {
+			if (this.status == STATUS_RUNNING) {
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop2());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPause());
-			}else if(this.status == STATUS_PAUSED) {
+			}else if (this.status == STATUS_PAUSED) {
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop2());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPlay2());
-			}else if(this.status == STATUS_STOPPED) {
+			}else if (this.status == STATUS_STOPPED) {
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop1());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPlay1());
 			}

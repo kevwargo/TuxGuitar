@@ -27,14 +27,14 @@ public class GoLastMeasureAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getPlayer().isRunning()) {
+		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoLast();
 		}
 		else {
 			Caret caret = getEditor().getTablature().getCaret();
 			TGTrackImpl track = caret.getTrack();
 			TGMeasureImpl measure = (TGMeasureImpl)getSongManager().getTrackManager().getLastMeasure(track);
-			if(track != null && measure != null) {
+			if (track != null && measure != null) {
 				caret.update(track.getNumber(), measure.getStart(), caret.getSelectedString().getNumber());
 			}
 		}

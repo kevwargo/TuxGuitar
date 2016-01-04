@@ -156,19 +156,19 @@ public class TGTableRow {
 		}
 		
 		public void mouseDoubleClick(MouseEvent e) {
-			if(getMouseListenerLabel() != null) {
+			if (getMouseListenerLabel() != null) {
 				getMouseListenerLabel().mouseDoubleClick(e);
 			}
 		}
 		
 		public void mouseDown(MouseEvent e) {
-			if(getMouseListenerLabel() != null) {
+			if (getMouseListenerLabel() != null) {
 				getMouseListenerLabel().mouseDown(e);
 			}
 		}
 		
 		public void mouseUp(MouseEvent e) {
-			if(getMouseListenerLabel() != null) {
+			if (getMouseListenerLabel() != null) {
 				getMouseListenerLabel().mouseUp(e);
 			}
 		}
@@ -181,13 +181,13 @@ public class TGTableRow {
 		}
 		
 		public void mouseDoubleClick(MouseEvent e) {
-			if(getMouseListenerCanvas() != null) {
+			if (getMouseListenerCanvas() != null) {
 				getMouseListenerCanvas().mouseDoubleClick(e);
 			}
 		}
 		
 		public void mouseDown(MouseEvent e) {
-			if(getMouseListenerCanvas() != null && e.button != 4 && e.button != 5) {
+			if (getMouseListenerCanvas() != null && e.button != 4 && e.button != 5) {
                 System.out.println("canvas mouse down " + e.button);
                 
 				getMouseListenerCanvas().mouseDown(e);
@@ -195,7 +195,7 @@ public class TGTableRow {
 		}
 		
 		public void mouseUp(MouseEvent e) {
-			if(getMouseListenerCanvas() != null && e.button != 4 && e.button != 5) {
+			if (getMouseListenerCanvas() != null && e.button != 4 && e.button != 5) {
                 System.out.println("canvas mouse up " + e.button);
 				getMouseListenerCanvas().mouseUp(e);
 			}
@@ -209,7 +209,7 @@ public class TGTableRow {
 		}
 		
 		public void paintControl(PaintEvent e) {
-			if(getPaintListenerCanvas() != null) {
+			if (getPaintListenerCanvas() != null) {
 				getPaintListenerCanvas().paintControl(e);
 			}
 		}

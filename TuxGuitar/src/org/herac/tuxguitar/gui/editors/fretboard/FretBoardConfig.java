@@ -212,10 +212,10 @@ public class FretBoardConfig {
 				style |= (displayTextScale.getSelection() ? DISPLAY_TEXT_SCALE : 0 );
 				
 				int direction = directionCombo.getSelectionIndex();
-				if( direction != DIRECTION_RIGHT && direction != DIRECTION_LEFT ) {
+				if ( direction != DIRECTION_RIGHT && direction != DIRECTION_LEFT ) {
 					direction = DIRECTION_RIGHT;
 				}
-				//if( direction )
+				//if ( direction )
 				dialog.dispose();
 				
 				save(style, direction, fontData, rgbBackground, rgbString, rgbFretPoint, rgbNote, rgbScale);
@@ -277,7 +277,7 @@ public class FretBoardConfig {
 				FontDialog fontDialog = new FontDialog(parent.getShell());
 				fontDialog.setFontList(font.getFontData());
 				FontData fd = fontDialog.open();
-				if(fd != null) {
+				if (fd != null) {
 					selection.setName( fd.getName() );
 					selection.setHeight( fd.getHeight() );
 					selection.setStyle( fd.getStyle() );
@@ -326,7 +326,7 @@ public class FretBoardConfig {
 		}
 		
 		protected void disposeColor() {
-			if(this.color != null && !this.color.isDisposed()) {
+			if (this.color != null && !this.color.isDisposed()) {
 				this.color.dispose();
 				this.color = null;
 			}

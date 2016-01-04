@@ -33,7 +33,7 @@ public class KeyBinding {
 	}
 	
 	private String getSpecialKey() {
-		for(int i = 0; i < KeyConversion.relations.length; i++) {
+		for (int i = 0; i < KeyConversion.relations.length; i++) {
 			if (this.key == KeyConversion.relations[i].getCode()) {
 				return KeyConversion.relations[i].getKey();
 			}
@@ -43,7 +43,7 @@ public class KeyBinding {
 	
 	private String getSpecialMask() {
 		String mask = new String();
-		for(int i = 0; i < KeyConversion.relations.length; i++) {
+		for (int i = 0; i < KeyConversion.relations.length; i++) {
 			if ( (this.mask & KeyConversion.relations[i].getCode()) == KeyConversion.relations[i].getCode()) {
 				mask += KeyConversion.relations[i].getKey() + MASK_SEPARATOR;
 			}
@@ -52,7 +52,7 @@ public class KeyBinding {
 	}
 	
 	public boolean isSameAs(KeyBinding kb) {
-		if( kb != null ) {
+		if ( kb != null ) {
 			return (this.key == kb.key && this.mask == kb.mask);
 		}
 		return false;

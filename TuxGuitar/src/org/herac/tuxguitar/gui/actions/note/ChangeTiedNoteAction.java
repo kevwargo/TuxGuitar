@@ -33,7 +33,7 @@ public class ChangeTiedNoteAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
-		if(caret.getSelectedNote() != null) {
+		if (caret.getSelectedNote() != null) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			
@@ -69,17 +69,17 @@ public class ChangeTiedNoteAction extends Action {
 	private void setTiedNoteValue(TGNote note, Caret caret) {
 		TGMeasure measure = caret.getMeasure();
 		TGVoice voice = getSongManager().getMeasureManager().getPreviousVoice( measure.getBeats(), caret.getSelectedBeat(), caret.getVoice());
-		while( measure != null) {
-			while( voice != null ) {
-				if(voice.isRestVoice()) {
+		while ( measure != null) {
+			while ( voice != null ) {
+				if (voice.isRestVoice()) {
 					note.setValue(0);
 					return;
 				}
 				// Check if is there any note at same string.
 				Iterator it = voice.getNotes().iterator();
-				while( it.hasNext() ) {
+				while ( it.hasNext() ) {
 					TGNote current = (TGNote) it.next();
-					if(current.getString() == note.getString()) {
+					if (current.getString() == note.getString()) {
 						note.setValue( current.getValue() );
 						return;
 					}
@@ -87,7 +87,7 @@ public class ChangeTiedNoteAction extends Action {
 				voice = getSongManager().getMeasureManager().getPreviousVoice( measure.getBeats(), voice.getBeat(), caret.getVoice());
 			}
 			measure = getSongManager().getTrackManager().getPrevMeasure(measure);
-			if( measure != null ) {
+			if ( measure != null ) {
 				voice = getSongManager().getMeasureManager().getLastVoice( measure.getBeats() , caret.getVoice());
 			}
 		}

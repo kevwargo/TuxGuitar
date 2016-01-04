@@ -29,7 +29,7 @@ public class UndoableInsertMeasure implements UndoableEdit {
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()) {
+		if (!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TGSongSegmentHelper helper = new TGSongSegmentHelper(TuxGuitar.instance().getSongManager());
@@ -41,10 +41,10 @@ public class UndoableInsertMeasure implements UndoableEdit {
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()) {
+		if (!canUndo()) {
 			throw new CannotUndoException();
 		}
-		for(int i = 0;i < this.copyCount;i ++) {
+		for (int i = 0;i < this.copyCount;i ++) {
 			TuxGuitar.instance().getSongManager().removeMeasure(this.insertPosition);
 		}
 		TuxGuitar.instance().fireUpdate();

@@ -24,7 +24,7 @@ public class GoLeftAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getPlayer().isRunning()) {
+		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoPrevious();
 		}
 		else {

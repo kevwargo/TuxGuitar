@@ -76,7 +76,7 @@ public class PrintPreview {
 		
 		this.currentText.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
-				if(e.keyCode == KeyBindingConstants.ENTER) {
+				if (e.keyCode == KeyBindingConstants.ENTER) {
 					try {
 						Integer number = new Integer(PrintPreview.this.currentText.getText());
 						changePage(number.intValue() - 1);
@@ -88,14 +88,14 @@ public class PrintPreview {
 		});
 		this.previous.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(PrintPreview.this.currentPage >= 0) {
+				if (PrintPreview.this.currentPage >= 0) {
 					changePage(PrintPreview.this.currentPage - 1);
 				}
 			}
 		});
 		this.next.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(PrintPreview.this.currentPage >= 0) {
+				if (PrintPreview.this.currentPage >= 0) {
 					changePage(PrintPreview.this.currentPage + 1);
 				}
 			}
@@ -127,7 +127,7 @@ public class PrintPreview {
 		this.pageComposite.setBackground(this.previewComposite.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		this.pageComposite.addPaintListener(new PaintListener() {
 			public void paintControl(PaintEvent e) {
-				if(PrintPreview.this.currentPage >= 0) {
+				if (PrintPreview.this.currentPage >= 0) {
 					updateScroll();
 					
 					int vScroll = PrintPreview.this.previewComposite.getVerticalBar().getSelection();
@@ -161,13 +161,13 @@ public class PrintPreview {
 	}
 	
 	protected void changePage(int index) {
-		if(!this.pages.isEmpty()) {
+		if (!this.pages.isEmpty()) {
 			int pageCount = this.pages.size();
-			if(index >= 0 && index < pageCount) {
+			if (index >= 0 && index < pageCount) {
 				this.currentPage = index;
 				this.currentText.setText(Integer.toString(index + 1));
 				this.pageComposite.redraw();
-			}else if(this.currentPage >= 0 && this.currentPage < pageCount) {
+			}else if (this.currentPage >= 0 && this.currentPage < pageCount) {
 				this.currentText.setText(Integer.toString(this.currentPage + 1 ));
 			}
 			this.previous.setEnabled(this.currentPage > 0);

@@ -20,7 +20,7 @@ public class MidiTickPlayer {
 	public void process() {
 		this.lastTime = this.time;
 		this.time = System.currentTimeMillis();
-		if(!this.tickChanged) {
+		if (!this.tickChanged) {
 			this.tick += (TGDuration.QUARTER_TIME * ((float)getTempo() * (float)(this.time - this.lastTime) / 60f) / SECOND_IN_MILLIS);
 		}
 		this.tickChanged = false;

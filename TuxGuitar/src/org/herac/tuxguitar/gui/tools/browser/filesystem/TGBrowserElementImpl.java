@@ -32,7 +32,7 @@ public class TGBrowserElementImpl extends TGBrowserElement {
 	}
 	
 	public InputStream getInputStream() throws TGBrowserException {
-		if(!isFolder()) {
+		if (!isFolder()) {
 			try {
 				return new FileInputStream(getFile());
 			} catch (FileNotFoundException e) {

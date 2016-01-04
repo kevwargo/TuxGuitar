@@ -68,7 +68,7 @@ public class Tablature extends Composite {
 		hBar.setIncrement(SCROLL_INCREMENT);
 		hBar.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				if(Tablature.this.lastHScrollTime + SCROLL_DELAY < System.currentTimeMillis()) {
+				if (Tablature.this.lastHScrollTime + SCROLL_DELAY < System.currentTimeMillis()) {
 					redraw();
 					Tablature.this.lastHScrollTime = System.currentTimeMillis();
 				}
@@ -79,7 +79,7 @@ public class Tablature extends Composite {
 		vBar.setIncrement(SCROLL_INCREMENT);
 		vBar.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				if(Tablature.this.lastVScrollTime + SCROLL_DELAY < System.currentTimeMillis()) {
+				if (Tablature.this.lastVScrollTime + SCROLL_DELAY < System.currentTimeMillis()) {
 					redraw();
 					Tablature.this.lastVScrollTime = System.currentTimeMillis();
 				}
@@ -109,7 +109,7 @@ public class Tablature extends Composite {
 	
 	public synchronized void paintTablature(TGPainter painter) {
         // System.out.printf("painting tablature %d\n", System.currentTimeMillis());
-		if(!TuxGuitar.instance().isLocked()) {
+		if (!TuxGuitar.instance().isLocked()) {
 			TuxGuitar.instance().lock();
 			this.setPainting(true);
 			try {
@@ -128,12 +128,12 @@ public class Tablature extends Composite {
 				
 				this.updateScroll();
 				
-				if(TuxGuitar.instance().getPlayer().isRunning()) {
+				if (TuxGuitar.instance().getPlayer().isRunning()) {
 					redrawPlayingMode(painter, true);
 				}
 				// Si no estoy reproduciendo y hay cambios
 				// muevo el scroll al compas que tiene el caret
-				else if(getCaret().hasChanges()) {
+				else if (getCaret().hasChanges()) {
 					// Mover el scroll puede necesitar redibujar
 					// por eso es importante desmarcar los cambios antes de hacer el moveScrollTo
 					getCaret().setChanges(false);
@@ -153,7 +153,7 @@ public class Tablature extends Composite {
 	}
 	
 	public void checkScroll() {
-		if(this.resetScroll) {
+		if (this.resetScroll) {
 			getHorizontalBar().setSelection(0);
 			getVerticalBar().setSelection(0);
 			this.resetScroll = false;
@@ -177,7 +177,7 @@ public class Tablature extends Composite {
 	
 	public boolean moveScrollTo(TGMeasureImpl measure, ScrollBar xScroll, ScrollBar yScroll, Rectangle area) {
 		boolean success = false;
-		if(measure != null && measure.getTs() != null) {
+		if (measure != null && measure.getTs() != null) {
 			int mX = measure.getPosX();
 			int mY = measure.getPosY();
 			int mWidth = measure.getWidth(getViewLayout());
@@ -188,24 +188,24 @@ public class Tablature extends Composite {
 			
 			//Solo se ajusta si es necesario
 			//si el largo del compas es mayor al de la pantalla. nunca se puede ajustar a la medida.
-			if( mX < 0 || ( (mX + mWidth ) > area.width && (area.width >= mWidth + marginWidth || mX > marginWidth) )  ) {
+			if ( mX < 0 || ( (mX + mWidth ) > area.width && (area.width >= mWidth + marginWidth || mX > marginWidth) )  ) {
 				xScroll.setSelection((this.scrollX + mX) - marginWidth );
 				success = true;
 			}
 			
 			//Solo se ajusta si es necesario
 			//si el alto del compas es mayor al de la pantalla. nunca se puede ajustar a la medida.
-			if( mY < 0 || ( (mY + mHeight ) > area.height && (area.height >= mHeight + marginHeight || mY > marginHeight) )  ) {
+			if ( mY < 0 || ( (mY + mHeight ) > area.height && (area.height >= mHeight + marginHeight || mY > marginHeight) )  ) {
 				yScroll.setSelection( (this.scrollY + mY)  - marginHeight );
 				success = true;
 			}
 			
-			if(!success) {
+			if (!success) {
 				// Si la seleccion "real" del scroll es distinta a la anterior, se fuerza el redraw
 				forceRedraw = (this.scrollX != xScroll.getSelection() || this.scrollY != yScroll.getSelection());
 			}
 			
-			if(forceRedraw || success) {
+			if (forceRedraw || success) {
 				redraw();
 			}
 		}
@@ -213,7 +213,7 @@ public class Tablature extends Composite {
 	}
 	
 	public void redraw() {
-		if(!super.isDisposed() && !TuxGuitar.instance().isLocked()) {
+		if (!super.isDisposed() && !TuxGuitar.instance().isLocked()) {
 			this.playedBeat = null;
 			this.playedMeasure = null;
 			this.editorKit.tryBack();
@@ -223,9 +223,9 @@ public class Tablature extends Composite {
 	}
 	
 	public void redrawPlayingMode() {
-		if(!super.isDisposed() && !isPainting() && !TuxGuitar.instance().isLocked()) {
+		if (!super.isDisposed() && !isPainting() && !TuxGuitar.instance().isLocked()) {
 			//TuxGuitar.instance().lock();
-			if(TuxGuitar.instance().getPlayer().isRunning()) {
+			if (TuxGuitar.instance().getPlayer().isRunning()) {
 				this.editorKit.tryBack();
 				this.setPainting(true);
 				
@@ -240,17 +240,17 @@ public class Tablature extends Composite {
 	}
 	
 	private void redrawPlayingMode(TGPainter painter, boolean force) {
-		if(!super.isDisposed() && !TuxGuitar.instance().isLocked()) {
+		if (!super.isDisposed() && !TuxGuitar.instance().isLocked()) {
 			try {
 				TGMeasureImpl measure = TuxGuitar.instance().getEditorCache().getPlayMeasure();
 				TGBeatImpl beat = TuxGuitar.instance().getEditorCache().getPlayBeat();
-				if(measure != null && beat != null && measure.hasTrack(getCaret().getTrack().getNumber())) {
-					if(!moveScrollTo(measure) || force) {
+				if (measure != null && beat != null && measure.hasTrack(getCaret().getTrack().getNumber())) {
+					if (!moveScrollTo(measure) || force) {
 						boolean paintMeasure = (force || this.playedMeasure == null || !this.playedMeasure.equals(measure));
-						if(this.playedMeasure != null && this.playedBeat != null && !this.playedMeasure.isOutOfBounds() && this.playedMeasure.hasTrack(getCaret().getTrack().getNumber())) {
+						if (this.playedMeasure != null && this.playedBeat != null && !this.playedMeasure.isOutOfBounds() && this.playedMeasure.hasTrack(getCaret().getTrack().getNumber())) {
 							getViewLayout().paintPlayMode(painter, this.playedMeasure, this.playedBeat, paintMeasure);
 						}
-						if(!measure.isOutOfBounds()) {
+						if (!measure.isOutOfBounds()) {
 							getViewLayout().paintPlayMode(painter, measure, beat, paintMeasure);
 						}
 						this.playedBeat = beat;
@@ -292,21 +292,21 @@ public class Tablature extends Composite {
 	}
 	
 	public void setViewLayout(ViewLayout viewLayout) {
-		if(getViewLayout() != null) {
+		if (getViewLayout() != null) {
 			getViewLayout().disposeLayout();
 		}
 		this.viewLayout = viewLayout;
-		if(this.getHorizontalBar() != null) {
+		if (this.getHorizontalBar() != null) {
 			this.getHorizontalBar().setSelection(0);
 		}
-		if(this.getVerticalBar() != null) {
+		if (this.getVerticalBar() != null) {
 			this.getVerticalBar().setSelection(0);
 		}
 		this.reloadStyles();
 	}
 	
 	public void reloadStyles() {
-		if(this.getViewLayout() != null) {
+		if (this.getViewLayout() != null) {
 			this.getViewLayout().reloadStyles();
 			this.setBackground(getViewLayout().getResources().getBackgroundColor());
 		}
@@ -319,7 +319,7 @@ public class Tablature extends Composite {
 	}
 	
 	private void loadViewLayout( int style, int mode ) {
-		switch(mode) {
+		switch (mode) {
 			case ViewLayout.MODE_PAGE:
 				setViewLayout(new PageViewLayout(this, style));
 			break;
@@ -327,7 +327,7 @@ public class Tablature extends Composite {
 				setViewLayout(new LinearViewLayout(this, style));
 			break;
 			default:
-				if( mode != ViewLayout.DEFAULT_MODE ) {
+				if ( mode != ViewLayout.DEFAULT_MODE ) {
 					this.loadViewLayout( style, ViewLayout.DEFAULT_MODE );
 				}
 			break;

@@ -57,8 +57,8 @@ public class KeyBindingSelector {
 		composite.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				KeyBinding kb = new KeyBinding(e.keyCode, e.stateMask);
-				if(kb.isSameAs(KeyBindingSelector.this.keyBinding) || isValid(kb)) {
-					if(KeyBindingSelector.this.keyBinding == null) {
+				if (kb.isSameAs(KeyBindingSelector.this.keyBinding) || isValid(kb)) {
+					if (KeyBindingSelector.this.keyBinding == null) {
 						KeyBindingSelector.this.keyBinding = new KeyBinding();
 					}
 					KeyBindingSelector.this.keyBinding.setKey(kb.getKey());
@@ -77,7 +77,7 @@ public class KeyBindingSelector {
 		textLabel.setText(TuxGuitar.getProperty("key-bindings-editor-push-a-key"));
 		
 		FontData[] fd = textLabel.getFont().getFontData();
-		if(fd != null && fd.length > 0) {
+		if (fd != null && fd.length > 0) {
 			final Font font = new Font(textLabel.getDisplay(), new FontData( fd[0].getName(), 14 , SWT.BOLD) );
 			textLabel.setFont(font);
 			textLabel.addDisposeListener(new DisposeListener() {
@@ -134,18 +134,18 @@ public class KeyBindingSelector {
 	}
 	
 	protected boolean isValid(KeyBinding kb) {
-		if(KeyBindingReserveds.isReserved(kb)) {
-			if(!this.editor.isDisposed()) {
+		if (KeyBindingReserveds.isReserved(kb)) {
+			if (!this.editor.isDisposed()) {
 				String title = TuxGuitar.getProperty("key-bindings-editor-reserved-title");
 				String message = TuxGuitar.getProperty("key-bindings-editor-reserved-message");
 				MessageDialog.infoMessage(this.editor.getDialog(), title, message);
 			}
 			return false;
 		}
-		if(this.editor.exists(kb)) {
+		if (this.editor.exists(kb)) {
 			ConfirmDialog confirm = new ConfirmDialog(TuxGuitar.getProperty("key-bindings-editor-override"));
 			confirm.setDefaultStatus( ConfirmDialog.STATUS_NO );
-			if(confirm.confirm(ConfirmDialog.BUTTON_YES | ConfirmDialog.BUTTON_NO, ConfirmDialog.BUTTON_NO) == ConfirmDialog.STATUS_NO) {
+			if (confirm.confirm(ConfirmDialog.BUTTON_YES | ConfirmDialog.BUTTON_NO, ConfirmDialog.BUTTON_NO) == ConfirmDialog.STATUS_NO) {
 				return false;
 			}
 		}

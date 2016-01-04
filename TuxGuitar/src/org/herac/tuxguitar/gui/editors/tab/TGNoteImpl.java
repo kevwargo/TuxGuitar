@@ -57,7 +57,7 @@ public class TGNoteImpl extends TGNote {
 	public void paint(ViewLayout layout, TGPainter painter, int fromX, int fromY) {
 		int spacing = getBeatImpl().getSpacing();
 		paintScoreNote(layout, painter, fromX, fromY + getPaintPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES), spacing);
-		if(!layout.isPlayModeEnabled()) {
+		if (!layout.isPlayModeEnabled()) {
 			paintOfflineEffects(layout, painter, fromX, fromY, spacing);
 		}
 		paintTablatureNote(layout, painter, fromX, fromY + getPaintPosition(TGTrackSpacing.POSITION_TABLATURE), spacing);
@@ -72,22 +72,22 @@ public class TGNoteImpl extends TGNote {
 		int bsY = (tsY + (ts.getSize(TGTrackSpacing.POSITION_EFFECTS) - bs.getSize( )));
 		
 		layout.setOfflineEffectStyle(painter);
-		if(effect.isAccentuatedNote()) {
+		if (effect.isAccentuatedNote()) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_ACCENTUATED_EFFECT ));
 			paintAccentuated(layout, painter, x, y);
 		}
-		if(effect.isHeavyAccentuatedNote()) {
+		if (effect.isHeavyAccentuatedNote()) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_HEAVY_ACCENTUATED_EFFECT ));
 			paintHeavyAccentuated(layout, painter, x, y);
 		}
-		if(effect.isFadeIn()) {
+		if (effect.isFadeIn()) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_FADE_IN ));
 			paintFadeIn(layout, painter, x, y);
 		}
-		if(effect.isHarmonic() && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ) {
+		if (effect.isHarmonic() && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_HARMONIC_EFFEC ));
 			String key = new String();
@@ -98,32 +98,32 @@ public class TGNoteImpl extends TGNote {
 			key = effect.getHarmonic().isSemi()?TGEffectHarmonic.KEY_SEMI:key;
 			painter.drawString(key, x, y);
 		}
-		if(effect.isTapping()) {
+		if (effect.isTapping()) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_TAPPING_EFFEC ));
 			painter.drawString("T", x, y);
 		}
-		if(effect.isSlapping()) {
+		if (effect.isSlapping()) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_SLAPPING_EFFEC ));
 			painter.drawString("S", x, y);
 		}
-		if(effect.isPopping()) {
+		if (effect.isPopping()) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_POPPING_EFFEC ));
 			painter.drawString("P", x, y);
 		}
-		if(effect.isPalmMute()) {
+		if (effect.isPalmMute()) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_PALM_MUTE_EFFEC ));
 			painter.drawString("P.M", x, y);
 		}
-		if(effect.isVibrato()) {
+		if (effect.isVibrato()) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_VIBRATO_EFFEC ));
 			paintVibrato(layout, painter, x, y);
 		}
-		if(effect.isTrill()) {
+		if (effect.isTrill()) {
 			int x = fromX + getPosX() + spacing;
 			int y = (bsY + bs.getPosition( TGBeatSpacing.POSITION_TRILL_EFFEC ));
 			paintTrill(layout, painter, x, y);
@@ -135,7 +135,7 @@ public class TGNoteImpl extends TGNote {
 	 */
 	public void paintTablatureNote(ViewLayout layout, TGPainter painter, int fromX, int fromY, int spacing) {
 		int style = layout.getStyle();
-		if((style & ViewLayout.DISPLAY_TABLATURE) != 0) {
+		if ((style & ViewLayout.DISPLAY_TABLATURE) != 0) {
 			int stringSpacing = layout.getStringSpacing();
 			int x = fromX + getPosX() + spacing + 2;
 			int y = fromY + getTabPosY();
@@ -168,7 +168,7 @@ public class TGNoteImpl extends TGNote {
 				painter.closePath();
 				
 			//-------------nota--------------------------------------
-			} else if(!isTiedNote()) {
+			} else if (!isTiedNote()) {
 				Rectangle r = layout.getNoteOrientation(painter, x, y, this);
 				this.noteOrientation.x = r.x;
 				this.noteOrientation.y = r.y;
@@ -180,20 +180,20 @@ public class TGNoteImpl extends TGNote {
 			}
 			
 			//-------------efectos--------------------------------------
-			if(! layout.isPlayModeEnabled() ) {
+			if (! layout.isPlayModeEnabled() ) {
 				
 				paintEffects(layout, painter, fromX, fromY, spacing);
 				
-				if((style & ViewLayout.DISPLAY_SCORE) == 0) {
+				if ((style & ViewLayout.DISPLAY_SCORE) == 0) {
 					int y1 = (fromY + getMeasureImpl().getTrackImpl().getTabHeight() + (stringSpacing / 2));
 					int y2 = (fromY + getMeasureImpl().getTrackImpl().getTabHeight() + ((stringSpacing / 2) * 5));
 					
 					//-------------tremolo picking--------------------------------------
-					if(getEffect().isTremoloPicking()) {
+					if (getEffect().isTremoloPicking()) {
 						layout.setTabEffectStyle(painter);
 						painter.initPath();
 						int posy = (y1 + ((y2 - y1) / 2));
-						for(int i = TGDuration.EIGHTH;i <= getEffect().getTremoloPicking().getDuration().getValue(); i += i) {
+						for (int i = TGDuration.EIGHTH;i <= getEffect().getTremoloPicking().getDuration().getValue(); i += i) {
 							painter.moveTo(x - 3, posy - 1);
 							painter.lineTo(x + 4, posy + 1);
 							posy += 4;
@@ -211,7 +211,7 @@ public class TGNoteImpl extends TGNote {
 	 * Pinta la nota en la partitura
 	 */
 	private void paintScoreNote(ViewLayout layout, TGPainter painter, int fromX, int fromY, int spacing) {
-		if((layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0 ) {
+		if ((layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0 ) {
 			float scale = layout.getScoreLineSpacing();
 			int direction = getVoiceImpl().getBeatGroup().getDirection();
 			int key = getMeasureImpl().getKeySignature();
@@ -246,24 +246,24 @@ public class TGNoteImpl extends TGNote {
 				painter.closePath();
 			}
 			//----------sostenido--------------------------------------
-			if(this.accidental == TGMeasureImpl.NATURAL) {
+			if (this.accidental == TGMeasureImpl.NATURAL) {
 				painter.initPath(TGPainter.PATH_FILL);
 				TGKeySignaturePainter.paintNatural(painter,(x - (scale - (scale / 4)) ),(y1 + (scale / 2)), scale);
 				painter.closePath();
 			}
-			else if(this.accidental == TGMeasureImpl.SHARP) {
+			else if (this.accidental == TGMeasureImpl.SHARP) {
 				painter.initPath(TGPainter.PATH_FILL);
 				TGKeySignaturePainter.paintSharp(painter,(x - (scale - (scale / 4)) ),(y1 + (scale / 2)), scale);
 				painter.closePath();
 			}
-			else if(this.accidental == TGMeasureImpl.FLAT) {
+			else if (this.accidental == TGMeasureImpl.FLAT) {
 				painter.initPath(TGPainter.PATH_FILL);
 				TGKeySignaturePainter.paintFlat(painter,(x - (scale - (scale / 4)) ),(y1 + (scale / 2)), scale);
 				painter.closePath();
 			}
 			//----------fin sostenido--------------------------------------
-			if(getEffect().isHarmonic()) {
-				if( layout.isBufferEnabled() ) {
+			if (getEffect().isHarmonic()) {
+				if ( layout.isBufferEnabled() ) {
 					painter.drawImage(layout.getResources().getHarmonicNote(getVoice().getDuration().getValue(), playing), x, y1);
 				}else {
 					boolean full = (getVoice().getDuration().getValue() >= TGDuration.QUARTER);
@@ -272,7 +272,7 @@ public class TGNoteImpl extends TGNote {
 					painter.closePath();
 				}
 			}else {
-				if( layout.isBufferEnabled() ) {
+				if ( layout.isBufferEnabled() ) {
 					painter.drawImage(layout.getResources().getScoreNote(getVoice().getDuration().getValue(), playing), x, y1);
 				}else {
 					boolean full = (getVoice().getDuration().getValue() >= TGDuration.QUARTER);
@@ -282,9 +282,9 @@ public class TGNoteImpl extends TGNote {
 				}
 			}
 			
-			if(! layout.isPlayModeEnabled() ) {
+			if (! layout.isPlayModeEnabled() ) {
 				
-				if(getEffect().isGrace()) {
+				if (getEffect().isGrace()) {
 					paintGrace(layout, painter, x , y1);
 				}
 				
@@ -294,7 +294,7 @@ public class TGNoteImpl extends TGNote {
 				}
 				
 				//dibujo el pie
-				if(getVoice().getDuration().getValue() >= TGDuration.HALF) {
+				if (getVoice().getDuration().getValue() >= TGDuration.HALF) {
 					layout.setScoreNoteFooterStyle(painter);
 					int xMove = (direction == TGBeatGroup.DIRECTION_UP ? layout.getResources().getScoreNoteWidth() : 0);
 					int y2 = fromY + getVoiceImpl().getBeatGroup().getY2(layout, getPosX() + spacing, key, clef);
@@ -311,16 +311,16 @@ public class TGNoteImpl extends TGNote {
 						painter.closePath();
 					}
 					//tremolo picking
-					if(getEffect().isTremoloPicking()) {
+					if (getEffect().isTremoloPicking()) {
 						layout.setScoreEffectStyle(painter);
 						painter.initPath();
 						int tpY = fromY;
-						if((direction == TGBeatGroup.DIRECTION_UP)) {
+						if ((direction == TGBeatGroup.DIRECTION_UP)) {
 							tpY += (getVoiceImpl().getBeatGroup().getMaxNote().getScorePosY() - layout.getScoreLineSpacing() - 4);
 						}else {
 							tpY += (getVoiceImpl().getBeatGroup().getMinNote().getScorePosY() + layout.getScoreLineSpacing() + 4);
 						}
-						for(int i = TGDuration.EIGHTH;i <= getEffect().getTremoloPicking().getDuration().getValue(); i += i) {
+						for (int i = TGDuration.EIGHTH;i <= getEffect().getTremoloPicking().getDuration().getValue(); i += i) {
 							painter.moveTo(x + xMove - 3, tpY + 1);
 							painter.lineTo(x + xMove + 4, tpY - 1);
 							tpY += 4;
@@ -342,12 +342,12 @@ public class TGNoteImpl extends TGNote {
 						painter.closePath();
 					}
 					//tremolo picking
-					if(getEffect().isTremoloPicking()) {
+					if (getEffect().isTremoloPicking()) {
 						layout.setScoreEffectStyle(painter);
 						painter.initPath();
 						int tpX = (x + (layout.getResources().getScoreNoteWidth() / 2));
 						int tpY = fromY + (getVoiceImpl().getBeatGroup().getMaxNote().getScorePosY() - layout.getScoreLineSpacing() - 4);
-						for(int i = TGDuration.EIGHTH;i <= getEffect().getTremoloPicking().getDuration().getValue(); i += i) {
+						for (int i = TGDuration.EIGHTH;i <= getEffect().getTremoloPicking().getDuration().getValue(); i += i) {
 							painter.moveTo(tpX - 3, tpY + 1);
 							painter.lineTo(tpX + 4, tpY - 1);
 							tpY += 4;
@@ -370,7 +370,7 @@ public class TGNoteImpl extends TGNote {
 			TGVoice voice = beat.getVoice( getVoice().getIndex() );
 			if (beat.getStart() < getBeatImpl().getStart() && !voice.isRestVoice()) {
 				Iterator it = voice.getNotes().iterator();
-				while(it.hasNext()) {
+				while (it.hasNext()) {
 					TGNoteImpl note = (TGNoteImpl)it.next();
 					if (note.getString() == getString()) {
 						return note;
@@ -388,22 +388,22 @@ public class TGNoteImpl extends TGNote {
 		int x = fromX + getPosX() + spacing;
 		int y = fromY + getTabPosY();
 		TGNoteEffect effect = getEffect();
-		if(effect.isGrace()) {
+		if (effect.isGrace()) {
 			layout.setTabGraceStyle(painter);
 			String value = Integer.toString(effect.getGrace().getFret());
 			Point gracePoint = painter.getStringExtent(value);
 			painter.drawString(value, (this.noteOrientation.x - gracePoint.x - 2), this.noteOrientation.y );
 		}
-		if(effect.isBend()) {
+		if (effect.isBend()) {
 			paintBend(layout, painter,(this.noteOrientation.x + this.noteOrientation.width), y);
-		}else if(effect.isTremoloBar()) {
+		}else if (effect.isTremoloBar()) {
 			paintTremoloBar(layout, painter,(this.noteOrientation.x + this.noteOrientation.width), y);
-		}else if(effect.isSlide() || effect.isHammer()) {
+		}else if (effect.isSlide() || effect.isHammer()) {
 			int nextFromX = fromX;
 			TGNoteImpl nextNote = (TGNoteImpl)layout.getSongManager().getMeasureManager().getNextNote(getMeasureImpl(), getBeatImpl().getStart(), getVoice().getIndex(), getString());
-			if(effect.isSlide()) {
+			if (effect.isSlide()) {
 				paintSlide(layout, painter, nextNote, x, y, nextFromX);
-			}else if(effect.isHammer()) {
+			}else if (effect.isHammer()) {
 				paintHammer(layout, painter, nextNote, x, y, nextFromX);
 			}
 		}
@@ -448,14 +448,14 @@ public class TGNoteImpl extends TGNote {
 		float x = fromX;
 		float y = fromY;
 		layout.setTabEffectStyle(painter);
-		if(nextNote != null) {
+		if (nextNote != null) {
 			float nextX = nextNote.getPosX() + nextFromX + nextNote.getBeatImpl().getSpacing();
 			float nextY = y;
 			
-			if(nextNote.getValue() < getValue()) {
+			if (nextNote.getValue() < getValue()) {
 				y -= yMove;
 				nextY += yMove;
-			}else if(nextNote.getValue() > getValue()) {
+			}else if (nextNote.getValue() > getValue()) {
 				y += yMove;
 				nextY -= yMove;
 			}else {
@@ -522,11 +522,11 @@ public class TGNoteImpl extends TGNote {
 		float width = ( getVoiceImpl().getWidth() - (2.0f * scale) );
 		
 		int loops = (int)(width / (6.0f * scale) );
-		if(loops > 0 ) {
+		if (loops > 0 ) {
 			layout.setTabEffectStyle(painter);
 			painter.initPath(TGPainter.PATH_FILL);
 			painter.moveTo(( x + ((2.0f) * scale) ),( y + (1.0f * scale) ));
-			for( int i = 0; i < loops ; i ++ ) {
+			for ( int i = 0; i < loops ; i ++ ) {
 				x = (fromX + ( (6.0f * scale) * i ) );
 				painter.lineTo(( x + (2.0f * scale) ),( y + (1.0f * scale) ));
 				painter.cubicTo(( x + (2.0f * scale) ),( y + (1.0f * scale) ),( x + (3.0f * scale) ), y ,( x + (4.0f * scale) ),( y + (1.0f * scale) ));
@@ -536,7 +536,7 @@ public class TGNoteImpl extends TGNote {
 			painter.lineTo(( x + (7.0f * scale) ),( y + (2.0f * scale) ));
 			painter.cubicTo(( x + (7.0f * scale) ),( y + (2.0f * scale) ),( x + (8.0f * scale) ),( y + (2.0f * scale) ),( x + (7.0f * scale) ),( y + (3.0f * scale) ));
 			
-			for( int i = (loops - 1); i >= 0 ; i -- ) {
+			for ( int i = (loops - 1); i >= 0 ; i -- ) {
 				x = (fromX + ( (6.0f * scale) * i ) );
 				painter.lineTo(( x + (6.0f * scale) ),( y + (4.0f * scale) ));
 				painter.cubicTo(( x + (6.0f * scale) ),( y + (4.0f * scale) ),( x + (5.0f * scale) ),( y + (5.0f * scale) ),( x + (4.0f * scale) ),( y + (4.0f * scale) ));
@@ -558,13 +558,13 @@ public class TGNoteImpl extends TGNote {
 		float width = ( getVoiceImpl().getWidth() - stringSize.x - (2.0f * scale) );
 		
 		int loops = (int)(width / (6.0f * scale) );
-		if(loops > 0 ) {
+		if (loops > 0 ) {
 			painter.drawString(string, fromX, fromY);
 			
 			layout.setTabEffectStyle(painter);
 			painter.initPath(TGPainter.PATH_FILL);
 			painter.moveTo(( x + (2.0f * scale) ),( y + (1.0f * scale) ));
-			for( int i = 0; i < loops ; i ++ ) {
+			for ( int i = 0; i < loops ; i ++ ) {
 				x = (fromX + stringSize.x + ( (6.0f * scale) * i ) );
 				painter.lineTo(( x + (2.0f * scale) ),( y + (1.0f * scale) ));
 				painter.cubicTo(( x + (2.0f * scale) ),( y + (1.0f * scale) ),( x + (3.0f * scale) ), y ,( x + (4.0f * scale) ),( y + (1.0f * scale) ));
@@ -574,7 +574,7 @@ public class TGNoteImpl extends TGNote {
 			painter.lineTo(( x + (7.0f * scale) ),( y + (2.0f * scale) ));
 			painter.cubicTo(( x + (7.0f * scale) ),( y + (2.0f * scale) ),( x + (8.0f * scale) ),( y + (2.0f * scale) ),( x + (7.0f * scale) ),( y + (3.0f * scale) ));
 			
-			for( int i = (loops - 1); i >= 0 ; i -- ) {
+			for ( int i = (loops - 1); i >= 0 ; i -- ) {
 				x = (fromX + stringSize.x + ( (6.0f * scale) * i ) );
 				painter.lineTo(( x + (6.0f * scale) ),( y + (4.0f * scale) ));
 				painter.cubicTo(( x + (6.0f * scale) ),( y + (4.0f * scale) ),( x + (5.0f * scale) ),( y + (5.0f * scale) ),( x + (4.0f * scale) ),( y + (4.0f * scale) ));

@@ -65,7 +65,7 @@ public class EditorCache {
 	}
 	
 	public TGBeatImpl getEditBeat() {
-		if(this.editUpdate) {
+		if (this.editUpdate) {
 			this.editBeat =  TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getSelectedBeat();
 			this.editUpdate = false;
 		}
@@ -73,34 +73,34 @@ public class EditorCache {
 	}
 	
 	public TGBeatImpl getPlayBeat() {
-		if(this.playUpdate) {
+		if (this.playUpdate) {
 			this.playChanges = false;
 			
 			TGSongManager manager = TuxGuitar.instance().getSongManager();
-			if(TuxGuitar.instance().getPlayer().isRunning()) {
+			if (TuxGuitar.instance().getPlayer().isRunning()) {
 				Caret caret = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 				TGTrack track = caret.getTrack();
 				
 				long tick = TuxGuitar.instance().getPlayer().getTickPosition();
 				long start = this.playStart + (tick - this.playTick);
-				if(this.playMeasure == null || start < this.playMeasure.getStart() || start > (this.playMeasure.getStart() + this.playMeasure.getLength())) {
+				if (this.playMeasure == null || start < this.playMeasure.getStart() || start > (this.playMeasure.getStart() + this.playMeasure.getLength())) {
 					this.playMeasure = null;
 					start = MidiTickUtil.getStart(tick);
 				}
 				
-				if(this.playMeasure == null || this.playBeatEnd == 0 || start > this.playBeatEnd || start < this.playStart || track.getNumber() != this.playTrack) {
+				if (this.playMeasure == null || this.playBeatEnd == 0 || start > this.playBeatEnd || start < this.playStart || track.getNumber() != this.playTrack) {
 					this.playBeat = null;
 					this.playBeatEnd = 0;
 					this.playChanges = true;
 					
-					if(this.playMeasure == null || !this.playMeasure.hasTrack(track.getNumber())  || !isPlaying(this.playMeasure)) {
+					if (this.playMeasure == null || !this.playMeasure.hasTrack(track.getNumber())  || !isPlaying(this.playMeasure)) {
 						this.playMeasure = (TGMeasureImpl)manager.getTrackManager().getMeasureAt(track, start);
 					}
 					if (this.playMeasure != null) {
 						this.playBeat = (TGBeatImpl)manager.getMeasureManager().getBeatIn(this.playMeasure, start);
-						if(this.playBeat != null) {
+						if (this.playBeat != null) {
 							TGBeat next = manager.getMeasureManager().getNextBeat(this.playMeasure.getBeats(), this.playBeat);
-							if( next != null ) {
+							if ( next != null ) {
 								this.playBeatEnd = next.getStart();
 							}else {
 								TGDuration duration = manager.getMeasureManager().getMinimumDuration(this.playBeat);

@@ -25,7 +25,7 @@ public class TGPluginManager {
 		try {
 			//Search available providers
 			Iterator it = TGServiceReader.lookupProviders(TGPlugin.class, TGClassLoader.instance().getClassLoader());
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				try {
 					TGPlugin plugin = (TGPlugin)it.next();
 					plugin.init();
@@ -43,7 +43,7 @@ public class TGPluginManager {
 	
 	public void closePlugins() {
 		Iterator it = this.plugins.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			try {
 				((TGPlugin)it.next()).close();
 			}catch(TGPluginException exception) {
@@ -56,7 +56,7 @@ public class TGPluginManager {
 	
 	public void openPlugins() {
 		Iterator it = this.plugins.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			try {
 				TGPlugin plugin = (TGPlugin)it.next();
 				plugin.setEnabled(isEnabled(plugin));

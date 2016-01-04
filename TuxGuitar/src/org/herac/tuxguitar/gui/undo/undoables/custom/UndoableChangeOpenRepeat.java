@@ -20,7 +20,7 @@ public class UndoableChangeOpenRepeat implements UndoableEdit {
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()) {
+		if (!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
@@ -33,7 +33,7 @@ public class UndoableChangeOpenRepeat implements UndoableEdit {
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()) {
+		if (!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();

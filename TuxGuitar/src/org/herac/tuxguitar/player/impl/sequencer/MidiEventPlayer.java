@@ -22,9 +22,9 @@ public class MidiEventPlayer {
 	public void process() throws MidiPlayerException {
 		this.lastTick = this.tick;
 		this.tick = this.sequencer.getTickPosition();
-		for(int i = 0;i < this.events.size();i ++) {
+		for (int i = 0;i < this.events.size();i ++) {
 			MidiEvent event = (MidiEvent)this.events.get(i);
-			if(shouldSend(event, this.tick, this.lastTick)) {
+			if (shouldSend(event, this.tick, this.lastTick)) {
 				this.sequencer.sendEvent(event);
 			}
 		}
@@ -32,25 +32,25 @@ public class MidiEventPlayer {
 	}
 	
 	private boolean shouldSend(MidiEvent event, long tick, long lastTick) {
-		if(event.getTick() > tick) {
+		if (event.getTick() > tick) {
 			return false;
 		}
-		if(event.getTrack() != MidiEvent.ALL_TRACKS) {
-			if(this.sequencer.getMidiTrackController().isMute(event.getTrack())) {
+		if (event.getTrack() != MidiEvent.ALL_TRACKS) {
+			if (this.sequencer.getMidiTrackController().isMute(event.getTrack())) {
 				return false;
 			}
-			if(this.sequencer.getMidiTrackController().isAnySolo() && !this.sequencer.getMidiTrackController().isSolo(event.getTrack())) {
+			if (this.sequencer.getMidiTrackController().isAnySolo() && !this.sequencer.getMidiTrackController().isSolo(event.getTrack())) {
 				return false;
 			}
 		}
-		if(this.reset) {
-			if(event.getType() == MidiEvent.MIDI_SYSTEM_EVENT) {
+		if (this.reset) {
+			if (event.getType() == MidiEvent.MIDI_SYSTEM_EVENT) {
 				return true;
 			}
-			if(event.getType() == MidiEvent.MIDI_EVENT_CONTROL_CHANGE) {
+			if (event.getType() == MidiEvent.MIDI_EVENT_CONTROL_CHANGE) {
 				return true;
 			}
-			if(event.getType() == MidiEvent.MIDI_EVENT_PROGRAM_CHANGE) {
+			if (event.getType() == MidiEvent.MIDI_EVENT_PROGRAM_CHANGE) {
 				return true;
 			}
 		}

@@ -28,7 +28,7 @@ public abstract class TGToolItemPlugin extends TGPluginAdapter {
 	}
 	
 	public void setEnabled(boolean enabled) throws TGPluginException {
-		if(enabled) {
+		if (enabled) {
 			addPlugin();
 		}else {
 			removePlugin();
@@ -36,7 +36,7 @@ public abstract class TGToolItemPlugin extends TGPluginAdapter {
 	}
 	
 	protected void addPlugin() throws TGPluginException {
-		if(!this.loaded) {
+		if (!this.loaded) {
 			TuxGuitar.instance().getActionManager().addAction(this.toolAction);
 			TGCustomToolManager.instance().addCustomTool(this.tool);
 			TuxGuitar.instance().getItemManager().createMenu();
@@ -45,7 +45,7 @@ public abstract class TGToolItemPlugin extends TGPluginAdapter {
 	}
 	
 	protected void removePlugin() throws TGPluginException {
-		if(this.loaded) {
+		if (this.loaded) {
 			TGCustomToolManager.instance().removeCustomTool(this.tool);
 			TuxGuitar.instance().getActionManager().removeAction(this.tool.getAction());
 			TuxGuitar.instance().getItemManager().createMenu();

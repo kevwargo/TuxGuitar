@@ -22,7 +22,7 @@ public class TGPluginProperties  extends TGConfigManager {
 	private static TGPluginProperties instance;
 	
 	public static TGPluginProperties instance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new TGPluginProperties();
 			instance.init();
 		}

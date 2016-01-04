@@ -40,7 +40,7 @@ public class TGConfigDefaults {
 	public void loadDefaultFile() {
 		try {
 			InputStream is = TGFileUtils.getResourceAsStream(DEFAULT_FILE);
-			if(is != null) {
+			if (is != null) {
 				this.properties.load(is);
 			}
 		} catch (Exception e) {
@@ -141,9 +141,9 @@ public class TGConfigDefaults {
 	
 	private static String getDefaultFontName() {
 		Font font = TuxGuitar.instance().getDisplay().getSystemFont();
-		if( font != null ) {
+		if ( font != null ) {
 			FontData[] fd = font.getFontData();
-			if(fd != null && fd.length > 0) {
+			if (fd != null && fd.length > 0) {
 				return fd[0].getName();
 			}
 		}

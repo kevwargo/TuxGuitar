@@ -97,7 +97,7 @@ public abstract class TGVoice {
 	}
 	
 	public TGNote getNote(int index) {
-		if(index >= 0 && index < countNotes()) {
+		if (index >= 0 && index < countNotes()) {
 			return (TGNote)this.notes.get(index);
 		}
 		return null;
@@ -116,7 +116,7 @@ public abstract class TGVoice {
 		voice.setEmpty(isEmpty());
 		voice.setDirection( getDirection() );
 		getDuration().copy(voice.getDuration());
-		for(int i = 0;i < countNotes();i++) {
+		for (int i = 0;i < countNotes();i++) {
 			TGNote note = (TGNote)this.notes.get(i);
 			voice.addNote(note.clone(factory));
 		}

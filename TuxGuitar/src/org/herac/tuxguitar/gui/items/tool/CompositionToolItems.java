@@ -52,7 +52,7 @@ public class CompositionToolItems extends ToolItems {
         this.tempoPercentage = new ComboToolItem(toolBar);
         TempoPercentageAdapter adapter = new TempoPercentageAdapter(this.tempoPercentage);
         MidiPlayerMode mode = TuxGuitar.instance().getPlayer().getMode();
-        for(int i = 0; i < DEFAULT_PERCENTS.length; i++)
+        for (int i = 0; i < DEFAULT_PERCENTS.length; i++)
         {
             MenuItem item = this.tempoPercentage.newSubItem(SWT.CHECK);
             item.setText(Integer.toString(DEFAULT_PERCENTS[i]) + "%");

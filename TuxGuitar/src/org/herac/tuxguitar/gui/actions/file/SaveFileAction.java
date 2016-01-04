@@ -27,13 +27,13 @@ public class SaveFileAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		final String fileName = FileActionUtils.getFileName();
-		if(fileName == null) {
+		if (fileName == null) {
 			return AUTO_UNLOCK;
 		}
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
 			public void run() {
-				if(!TuxGuitar.isDisposed()) {
+				if (!TuxGuitar.isDisposed()) {
 					FileActionUtils.save(fileName);
 					TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 					ActionLock.unlock();

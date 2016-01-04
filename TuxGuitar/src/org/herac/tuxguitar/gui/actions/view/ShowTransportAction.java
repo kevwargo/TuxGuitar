@@ -24,7 +24,7 @@ public class ShowTransportAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getTransport().isDisposed()) {
+		if (TuxGuitar.instance().getTransport().isDisposed()) {
 			TuxGuitar.instance().getTransport().show();
 		}else {
 			TuxGuitar.instance().getTransport().dispose();

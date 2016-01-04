@@ -25,7 +25,7 @@ public class UndoableJoined implements UndoableEdit {
 	
 	public void redo() throws CannotRedoException {
 		int count = this.undoables.size();
-		for(int i = 0;i < count;i++) {
+		for (int i = 0;i < count;i++) {
 			UndoableEdit undoable = (UndoableEdit)this.undoables.get(i);
 			undoable.redo();
 		}
@@ -35,7 +35,7 @@ public class UndoableJoined implements UndoableEdit {
 	
 	public void undo() throws CannotUndoException {
 		int count = this.undoables.size();
-		for(int i = (count - 1);i >= 0;i--) {
+		for (int i = (count - 1);i >= 0;i--) {
 			UndoableEdit undoable = (UndoableEdit)this.undoables.get(i);
 			undoable.undo();
 		}

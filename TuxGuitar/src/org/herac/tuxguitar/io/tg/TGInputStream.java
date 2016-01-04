@@ -82,7 +82,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 	
 	public TGSong readSong() throws TGFileFormatException {
 		try {
-			if(this.isSupportedVersion()) {
+			if (this.isSupportedVersion()) {
 				TGSong song = this.read();
 				this.dataInputStream.close();
 				return song;
@@ -94,7 +94,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 	}
 	
 	private void readVersion() {
-		if(this.version == null) {
+		if (this.version == null) {
 			this.version = readUnsignedByteString();
 		}
 	}
@@ -135,7 +135,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		//leo las pistas
 		TGMeasureHeader lastHeader = null;
 		long headerStart = TGDuration.QUARTER_TIME;
-		for(int i = 0;i < headerCount;i++) {
+		for (int i = 0;i < headerCount;i++) {
 			TGMeasureHeader header = readMeasureHeader(i + 1, headerStart, lastHeader);
 			song.addMeasureHeader(header);
 			headerStart += header.getLength();
@@ -146,7 +146,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		int trackCount = readByte();
 		
 		//leo las pistas
-		for(int i = 0;i < trackCount;i++) {
+		for (int i = 0;i < trackCount;i++) {
 			song.addTrack(readTrack(i + 1, song));
 		}
 		
@@ -178,7 +178,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		
 		//leo los compases
 		TGMeasure lastMeasure = null;
-		for(int i = 0;i < measureCount;i++) {
+		for (int i = 0;i < measureCount;i++) {
 			TGMeasure measure = readMeasure(song.getMeasureHeader(i), lastMeasure);
 			track.addMeasure(measure);
 			lastMeasure = measure;
@@ -188,7 +188,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		int stringCount = readByte();
 		
 		//leo las cuerdas
-		for(int i = 0;i < stringCount;i++) {
+		for (int i = 0;i < stringCount;i++) {
 			track.getStrings().add(readInstrumentString(i + 1));
 		}
 		
@@ -199,7 +199,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		readRGBColor(track.getColor());
 		
 		//leo el lyrics
-		if(((header & TRACK_LYRICS) != 0)) {
+		if (((header & TRACK_LYRICS) != 0)) {
 			readLyrics(track.getLyrics());
 		}
 		
@@ -214,16 +214,16 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		measureHeader.setStart(start);
 		
 		//leo el time signature
-		if(((header & MEASURE_HEADER_TIMESIGNATURE) != 0)) {
+		if (((header & MEASURE_HEADER_TIMESIGNATURE) != 0)) {
 			readTimeSignature(measureHeader.getTimeSignature());
-		}else if(lastMeasureHeader != null) {
+		}else if (lastMeasureHeader != null) {
 			lastMeasureHeader.getTimeSignature().copy(measureHeader.getTimeSignature());
 		}
 		
 		//leo el tempo
-		if(((header & MEASURE_HEADER_TEMPO) != 0)) {
+		if (((header & MEASURE_HEADER_TEMPO) != 0)) {
 			readTempo(measureHeader.getTempo());
-		}else if(lastMeasureHeader != null) {
+		}else if (lastMeasureHeader != null) {
 			lastMeasureHeader.getTempo().copy(measureHeader.getTempo());
 		}
 		
@@ -231,22 +231,22 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		measureHeader.setRepeatOpen((header & MEASURE_HEADER_REPEAT_OPEN) != 0);
 		
 		//leo el numero de repeticiones
-		if(((header & MEASURE_HEADER_REPEAT_CLOSE) != 0)) {
+		if (((header & MEASURE_HEADER_REPEAT_CLOSE) != 0)) {
 			 measureHeader.setRepeatClose(readShort());
 		}
 		
 		//leo los finales alternativos
-		if(((header & MEASURE_HEADER_REPEAT_ALTERNATIVE) != 0)) {
+		if (((header & MEASURE_HEADER_REPEAT_ALTERNATIVE) != 0)) {
 			 measureHeader.setRepeatAlternative(readByte());
 		}
 		
 		//leo el marker
-		if(((header & MEASURE_HEADER_MARKER) != 0)) {
+		if (((header & MEASURE_HEADER_MARKER) != 0)) {
 			measureHeader.setMarker(readMarker(number));
 		}
 		
 		measureHeader.setTripletFeel((lastMeasureHeader != null)?lastMeasureHeader.getTripletFeel():TGMeasureHeader.TRIPLET_FEEL_NONE);
-		if(((header & MEASURE_HEADER_TRIPLET_FEEL) != 0)) {
+		if (((header & MEASURE_HEADER_TRIPLET_FEEL) != 0)) {
 			measureHeader.setTripletFeel(readByte());
 		}
 		
@@ -264,13 +264,13 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		
 		//leo la clave
 		measure.setClef( (lastMeasure == null)?TGMeasure.CLEF_TREBLE:lastMeasure.getClef());
-		if(((header & MEASURE_CLEF) != 0)) {
+		if (((header & MEASURE_CLEF) != 0)) {
 			measure.setClef(readByte());
 		}
 		
 		//leo el key signature
 		measure.setKeySignature((lastMeasure == null)?0:lastMeasure.getKeySignature());
-		if(((header & MEASURE_KEYSIGNATURE) != 0)) {
+		if (((header & MEASURE_KEYSIGNATURE) != 0)) {
 			measure.setKeySignature(readByte());
 		}
 		
@@ -308,7 +308,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 	
 	private void readBeats(TGMeasure measure, TGBeatData data) {
 		int header = BEAT_HAS_NEXT;
-		while(((header & BEAT_HAS_NEXT) != 0)) {
+		while (((header & BEAT_HAS_NEXT) != 0)) {
 			header = readHeader();
 			readBeat(header, measure, data);
 		}
@@ -322,17 +322,17 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		readVoices(header, beat, data);
 		
 		//leo el stroke
-		if(((header & BEAT_HAS_STROKE) != 0)) {
+		if (((header & BEAT_HAS_STROKE) != 0)) {
 			readStroke(beat.getStroke());
 		}
 		
 		//leo el acorde
-		if(((header & BEAT_HAS_CHORD) != 0)) {
+		if (((header & BEAT_HAS_CHORD) != 0)) {
 			readChord(beat);
 		}
 		
 		//leo el texto
-		if(((header & BEAT_HAS_TEXT) != 0)) {
+		if (((header & BEAT_HAS_TEXT) != 0)) {
 			readText(beat);
 		}
 		
@@ -340,33 +340,33 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 	}
 	
 	private void readVoices(int header, TGBeat beat, TGBeatData data) {
-		for(int i = 0 ; i < TGBeat.MAX_VOICES; i ++ ) {
+		for (int i = 0 ; i < TGBeat.MAX_VOICES; i ++ ) {
 			int shift = (i * 2 );
 			
 			beat.getVoice(i).setEmpty(true);
 			
-			if(((header & (BEAT_HAS_VOICE << shift)) != 0)) {
-				if(((header & (BEAT_HAS_VOICE_CHANGES << shift)) != 0)) {
+			if (((header & (BEAT_HAS_VOICE << shift)) != 0)) {
+				if (((header & (BEAT_HAS_VOICE_CHANGES << shift)) != 0)) {
 					data.getVoice(i).setFlags( readHeader() );
 				}
 				
 				int flags = data.getVoice(i).getFlags();
 				
 				//leo la duracion
-				if(((flags & VOICE_NEXT_DURATION) != 0)) {
+				if (((flags & VOICE_NEXT_DURATION) != 0)) {
 					readDuration(data.getVoice(i).getDuration());
 				}
 				
 				//leo las notas
-				if(((flags & VOICE_HAS_NOTES) != 0)) {
+				if (((flags & VOICE_HAS_NOTES) != 0)) {
 					readNotes(beat.getVoice(i), data);
 				}
 				
 				//leo la direccion
-				if(((flags & VOICE_DIRECTION_UP) != 0)) {
+				if (((flags & VOICE_DIRECTION_UP) != 0)) {
 					beat.getVoice(i).setDirection( TGVoice.DIRECTION_UP );
 				}
-				else if(((flags & VOICE_DIRECTION_DOWN) != 0)) {
+				else if (((flags & VOICE_DIRECTION_DOWN) != 0)) {
 					beat.getVoice(i).setDirection( TGVoice.DIRECTION_DOWN );
 				}
 				data.getVoice(i).getDuration().copy(beat.getVoice(i).getDuration());
@@ -379,7 +379,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 	
 	private void readNotes(TGVoice voice, TGBeatData data) {
 		int header = NOTE_HAS_NEXT;
-		while(((header & NOTE_HAS_NEXT) != 0)) {
+		while (((header & NOTE_HAS_NEXT) != 0)) {
 			header = readHeader();
 			readNote(header, voice, data);
 		}
@@ -398,13 +398,13 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		note.setTiedNote((header & NOTE_TIED) != 0);
 		
 		//leo el velocity
-		if(((header & NOTE_VELOCITY) != 0)) {
+		if (((header & NOTE_VELOCITY) != 0)) {
 			data.getVoice(voice.getIndex()).setVelocity(readByte());
 		}
 		note.setVelocity(data.getVoice(voice.getIndex()).getVelocity());
 		
 		//leo los efectos
-		if(((header & NOTE_EFFECT) != 0)) {
+		if (((header & NOTE_EFFECT) != 0)) {
 			readNoteEffect(note.getEffect());
 		}
 		
@@ -421,7 +421,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		chord.setFirstFret(readByte());
 		
 		//leo las cuerdas
-		for(int string = 0; string < chord.countStrings(); string ++) {
+		for (int string = 0; string < chord.countStrings(); string ++) {
 			chord.addFretValue(string, readByte());
 		}
 		beat.setChord(chord);
@@ -473,7 +473,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		duration.setValue(readByte());
 		
 		//leo el tipo de divisiones
-		if(((header & DURATION_NO_TUPLET) != 0)) {
+		if (((header & DURATION_NO_TUPLET) != 0)) {
 			readDivisionType(duration.getDivision());
 		}
 		else {
@@ -501,32 +501,32 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		int header = readHeader(3);
 		
 		//leo el bend
-		if(((header & EFFECT_BEND) != 0)) {
+		if (((header & EFFECT_BEND) != 0)) {
 			effect.setBend(readBendEffect());
 		}
 		
 		//leo el tremolo bar
-		if(((header & EFFECT_TREMOLO_BAR) != 0)) {
+		if (((header & EFFECT_TREMOLO_BAR) != 0)) {
 			effect.setTremoloBar(readTremoloBarEffect());
 		}
 		
 		//leo el harmonic
-		if(((header & EFFECT_HARMONIC) != 0)) {
+		if (((header & EFFECT_HARMONIC) != 0)) {
 			effect.setHarmonic(readHarmonicEffect());
 		}
 		
 		//leo el grace
-		if(((header & EFFECT_GRACE) != 0)) {
+		if (((header & EFFECT_GRACE) != 0)) {
 			effect.setGrace(readGraceEffect());
 		}
 		
 		//leo el trill
-		if(((header & EFFECT_TRILL) != 0)) {
+		if (((header & EFFECT_TRILL) != 0)) {
 			effect.setTrill(readTrillEffect());
 		}
 		
 		//leo el tremolo picking
-		if(((header & EFFECT_TREMOLO_PICKING) != 0)) {
+		if (((header & EFFECT_TREMOLO_PICKING) != 0)) {
 			effect.setTremoloPicking(readTremoloPickingEffect());
 		}
 		
@@ -576,7 +576,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		//leo la cantidad de puntos
 		int count = readByte();
 		
-		for(int i = 0;i < count;i++) {
+		for (int i = 0;i < count;i++) {
 			//leo la posicion
 			int position = readByte();
 			
@@ -595,7 +595,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		//leo la cantidad de puntos
 		int count = readByte();
 		
-		for(int i = 0;i < count;i++) {
+		for (int i = 0;i < count;i++) {
 			//leo la posicion
 			int position = readByte();
 			
@@ -615,7 +615,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 		effect.setType(readByte());
 		
 		//leo la data
-		if(effect.getType() != TGEffectHarmonic.TYPE_NATURAL) {
+		if (effect.getType() != TGEffectHarmonic.TYPE_NATURAL) {
 			effect.setData(readByte());
 		}
 		return effect;
@@ -715,7 +715,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 	
 	private int readHeader(int bCount) {
 		int header = 0;
-		for(int i = bCount; i > 0; i --) {
+		for (int i = bCount; i > 0; i --) {
 			header += ( readHeader() << ( (8 * i) - 8 ) );
 		}
 		return header;
@@ -751,7 +751,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase {
 	private String readString(int length) {
 		try {
 			char[] chars = new char[length];
-			for(int i = 0;i < chars.length; i++) {
+			for (int i = 0;i < chars.length; i++) {
 				chars[i] = this.dataInputStream.readChar();
 			}
 			return String.copyValueOf(chars);

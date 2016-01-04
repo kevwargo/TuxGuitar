@@ -22,7 +22,7 @@ public abstract class TGChord {
 	
 	public TGChord(int length) {
 		this.strings = new int[length];
-		for(int i = 0;i < this.strings.length;i++) {
+		for (int i = 0;i < this.strings.length;i++) {
 			this.strings[i] = -1;
 		}
 	}
@@ -36,13 +36,13 @@ public abstract class TGChord {
 	}
 	
 	public void addFretValue(int string, int fret) {
-		if(string >= 0 && string < this.strings.length) {
+		if (string >= 0 && string < this.strings.length) {
 			this.strings[string] = fret;
 		}
 	}
 	
 	public int getFretValue(int string) {
-		if(string >= 0 && string < this.strings.length) {
+		if (string >= 0 && string < this.strings.length) {
 			return this.strings[string];
 		}
 		return -1;
@@ -66,8 +66,8 @@ public abstract class TGChord {
 	
 	public int countNotes() {
 		int count = 0;
-		for(int i = 0;i < this.strings.length;i++) {
-			if(this.strings[i] >= 0) {
+		for (int i = 0;i < this.strings.length;i++) {
+			if (this.strings[i] >= 0) {
 				count ++;
 			}
 		}
@@ -86,7 +86,7 @@ public abstract class TGChord {
 		TGChord chord = factory.newChord(this.strings.length);
 		chord.setName(getName());
 		chord.setFirstFret(getFirstFret());
-		for(int i = 0;i < chord.strings.length;i++) {
+		for (int i = 0;i < chord.strings.length;i++) {
 			chord.strings[i] = this.strings[i];
 		}
 		return chord;

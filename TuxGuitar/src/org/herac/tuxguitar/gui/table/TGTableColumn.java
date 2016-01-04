@@ -52,9 +52,9 @@ public class TGTableColumn {
 		Point location = this.column.getLocation();
 		Point size = this.column.getSize();
 		
-		for(int i = 0; i < this.controls.size(); i ++) {
+		for (int i = 0; i < this.controls.size(); i ++) {
 			Control control = (Control)this.controls.get(i);
-			if(!control.isDisposed()) {
+			if (!control.isDisposed()) {
 				control.setSize(size.x, this.table.getRowHeight());
 				control.setLocation(location.x, 0);
 			}
@@ -62,9 +62,9 @@ public class TGTableColumn {
 	}
 	
 	public void notifyRemoved() {
-		for(int i = 0; i < this.controls.size(); i ++) {
+		for (int i = 0; i < this.controls.size(); i ++) {
 			Control control = (Control)this.controls.get(i);
-			if(control.isDisposed()) {
+			if (control.isDisposed()) {
 				this.controls.remove(i --);
 			}
 		}

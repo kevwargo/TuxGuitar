@@ -20,7 +20,7 @@ public abstract class TGBrowserPlugin extends TGPluginAdapter {
 	}
 	
 	public void setEnabled(boolean enabled) throws TGPluginException {
-		if(enabled) {
+		if (enabled) {
 			addPlugin();
 		}else {
 			removePlugin();
@@ -28,14 +28,14 @@ public abstract class TGBrowserPlugin extends TGPluginAdapter {
 	}
 	
 	protected void addPlugin() throws TGPluginException {
-		if(!this.loaded) {
+		if (!this.loaded) {
 			TGBrowserManager.instance().addFactory(this.factory);
 			this.loaded = true;
 		}
 	}
 	
 	protected void removePlugin() throws TGPluginException {
-		if(this.loaded) {
+		if (this.loaded) {
 			TGBrowserManager.instance().removeFactory(this.factory);
 			this.loaded = false;
 		}

@@ -20,13 +20,13 @@ public class UndoableChangeMarker implements UndoableEdit {
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()) {
+		if (!canRedo()) {
 			throw new CannotRedoException();
 		}
-		if(this.redoMarker != null) {
+		if (this.redoMarker != null) {
 			TuxGuitar.instance().getSongManager().updateMarker(this.redoMarker.clone(TuxGuitar.instance().getSongManager().getFactory()));
 			MarkerList.instance().update(true);
-		}else if(this.undoMarker != null) {
+		}else if (this.undoMarker != null) {
 			TuxGuitar.instance().getSongManager().removeMarker(this.undoMarker.clone(TuxGuitar.instance().getSongManager().getFactory()));
 			MarkerList.instance().update(false);
 		}
@@ -35,13 +35,13 @@ public class UndoableChangeMarker implements UndoableEdit {
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()) {
+		if (!canUndo()) {
 			throw new CannotUndoException();
 		}
-		if(this.undoMarker != null) {
+		if (this.undoMarker != null) {
 			TuxGuitar.instance().getSongManager().updateMarker(this.undoMarker.clone(TuxGuitar.instance().getSongManager().getFactory()));
 			MarkerList.instance().update(true);
-		}else if(this.redoMarker != null) {
+		}else if (this.redoMarker != null) {
 			TuxGuitar.instance().getSongManager().removeMarker(this.redoMarker.clone(TuxGuitar.instance().getSongManager().getFactory()));
 			MarkerList.instance().update(false);
 		}

@@ -50,7 +50,7 @@ public class TrillEditor extends SelectionAdapter {
 		//-----defaults-------------------------------------------------
 		int fret = note.getValue();
 		int duration = TGDuration.SIXTEENTH;
-		if(note.getEffect().isTrill()) {
+		if (note.getEffect().isTrill()) {
 			fret = note.getEffect().getTrill().getFret();
 			duration = note.getEffect().getTrill().getDuration().getValue();
 		}
@@ -156,11 +156,11 @@ public class TrillEditor extends SelectionAdapter {
 	public TGEffectTrill getTrill() {
 		TGEffectTrill effect = TuxGuitar.instance().getSongManager().getFactory().newEffectTrill();
 		effect.setFret(this.fretSpinner.getSelection());
-		if(this.sixtyFourthButton.getSelection()) {
+		if (this.sixtyFourthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.SIXTY_FOURTH);
-		}else if(this.thirtySecondButton.getSelection()) {
+		}else if (this.thirtySecondButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.THIRTY_SECOND);
-		}else if(this.sixTeenthButton.getSelection()) {
+		}else if (this.sixTeenthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.SIXTEENTH);
 		}else {
 			return null;

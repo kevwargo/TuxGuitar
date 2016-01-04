@@ -82,7 +82,7 @@ public class TGTable {
 	}
 	
 	public void addRowItem(TGTableColumn column, Control control, boolean computeSize) {
-		if(computeSize) {
+		if (computeSize) {
 			this.rowHeight = Math.max(this.rowHeight, control.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
 			this.scrollIncrement = this.rowHeight;
 		}
@@ -143,14 +143,14 @@ public class TGTable {
 	}
 	
 	public TGTableRow getRow(int index) {
-		if(index >= 0 && index < this.rows.size()) {
+		if (index >= 0 && index < this.rows.size()) {
 			return (TGTableRow)this.rows.get(index);
 		}
 		return null;
 	}
 	
 	public void removeRowsAfter(int index) {
-		while(index < this.rows.size()) {
+		while (index < this.rows.size()) {
 			TGTableRow row = (TGTableRow)this.rows.get(index);
 			row.dispose();
 			this.rows.remove(index);

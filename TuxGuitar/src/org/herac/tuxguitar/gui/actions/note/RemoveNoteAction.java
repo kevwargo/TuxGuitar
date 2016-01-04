@@ -35,9 +35,9 @@ public class RemoveNoteAction extends Action {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGBeat beat = caret.getSelectedBeat();
 		TGVoice voice = beat.getVoice( caret.getVoice() );
-		if( beat.isTextBeat() && beat.isRestBeat() ) {
+		if ( beat.isTextBeat() && beat.isRestBeat() ) {
 			getSongManager().getMeasureManager().removeText(beat);
-		}else if(voice.isRestVoice()) {
+		}else if (voice.isRestVoice()) {
 			getSongManager().getMeasureManager().removeVoice(voice , true);
 		}else {
 			int string = caret.getSelectedString().getNumber();

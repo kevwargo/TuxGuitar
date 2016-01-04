@@ -24,7 +24,7 @@ public class ListMarkersAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(MarkerList.instance().isDisposed()) {
+		if (MarkerList.instance().isDisposed()) {
 			MarkerList.instance().show();
 		}
 		else {

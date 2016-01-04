@@ -14,16 +14,16 @@ public class MidiTickUtil {
 		
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
 		MidiRepeatController controller = new MidiRepeatController(manager.getSong(), getSHeader() , getEHeader() );
-		while(!controller.finished()) {
+		while (!controller.finished()) {
 			TGMeasureHeader header = manager.getSong().getMeasureHeader(controller.getIndex());
 			controller.process();
-			if(controller.shouldPlay()) {
+			if (controller.shouldPlay()) {
 				
 				start += length;
 				length = header.getLength();
 				
 				//verifico si es el compas correcto
-				if(tick >= start && tick < (start + length )) {
+				if (tick >= start && tick < (start + length )) {
 					return header.getStart() + (tick - start);
 				}
 			}
@@ -38,16 +38,16 @@ public class MidiTickUtil {
 		
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
 		MidiRepeatController controller = new MidiRepeatController(manager.getSong(), getSHeader() , getEHeader() );
-		while(!controller.finished()) {
+		while (!controller.finished()) {
 			TGMeasureHeader header = manager.getSong().getMeasureHeader(controller.getIndex());
 			controller.process();
-			if(controller.shouldPlay()) {
+			if (controller.shouldPlay()) {
 				
 				tick += length;
 				length = header.getLength();
 				
 				//verifico si es el compas correcto
-				if(start >= header.getStart() && start < (header.getStart() + length )) {
+				if (start >= header.getStart() && start < (header.getStart() + length )) {
 					return tick;
 				}
 			}

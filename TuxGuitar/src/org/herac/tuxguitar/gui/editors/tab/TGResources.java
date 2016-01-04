@@ -295,7 +295,7 @@ public class TGResources {
 	
 	private Font getFont(String key, float scale) {
 		FontData data = TuxGuitar.instance().getConfig().getFontDataConfigValue(key);
-		if(data == null) {
+		if (data == null) {
 			data = new FontData();
 		}
 		float height = ( data.getHeight() * scale );
@@ -309,7 +309,7 @@ public class TGResources {
 	
 	private Color getColor(String key) {
 		RGB rgb = TuxGuitar.instance().getConfig().getRGBConfigValue(key);
-		if(rgb == null) {
+		if (rgb == null) {
 			rgb = new RGB(0, 0, 0);
 		}
 		Color color = new Color(TuxGuitar.instance().getDisplay(), rgb);
@@ -477,7 +477,7 @@ public class TGResources {
 	
 	public void dispose() {
 		Iterator it = this.resources.iterator();
-		while( it.hasNext() ) {
+		while ( it.hasNext() ) {
 			Resource resource = (Resource)it.next();
 			resource.dispose();
 		}

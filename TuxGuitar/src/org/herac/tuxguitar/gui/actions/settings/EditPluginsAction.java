@@ -74,7 +74,7 @@ public class EditPluginsAction extends Action {
 		columnPlugin.setWidth( (TABLE_WIDTH - (TABLE_WIDTH / 4)) );
 		
 		Iterator it = TuxGuitar.instance().getPluginManager().getPlugins().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGPlugin plugin = (TGPlugin)it.next();
 			TableItem item = new TableItem(table, SWT.NONE);
 			item.setData(plugin);
@@ -94,7 +94,7 @@ public class EditPluginsAction extends Action {
 		buttonSetup.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				TableItem item = table.getItem(table.getSelectionIndex());
-				if(item != null && item.getData() instanceof TGPluginSetup) {
+				if (item != null && item.getData() instanceof TGPluginSetup) {
 					try {
 						((TGPluginSetup)item.getData()).setupDialog(dialog);
 					}catch(Throwable throwable) {
@@ -111,7 +111,7 @@ public class EditPluginsAction extends Action {
 		buttonInfo.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				TableItem item = table.getItem(table.getSelectionIndex());
-				if(item != null && item.getData() instanceof TGPlugin) {
+				if (item != null && item.getData() instanceof TGPlugin) {
 					try {
 						showInfo(dialog,(TGPlugin)item.getData());
 					}catch(Throwable throwable) {
@@ -134,9 +134,9 @@ public class EditPluginsAction extends Action {
 			public void handleEvent (Event event) {
 				buttonInfo.setEnabled(false);
 				buttonSetup.setEnabled(false);
-				if(event.item instanceof TableItem && event.item.getData() instanceof TGPlugin) {
+				if (event.item instanceof TableItem && event.item.getData() instanceof TGPlugin) {
 					final TableItem item = (TableItem)event.item;
-					if(event.detail == SWT.CHECK) {
+					if (event.detail == SWT.CHECK) {
 						TuxGuitar.instance().loadCursor(dialog, SWT.CURSOR_WAIT);
 						TuxGuitar.instance().getPluginManager().setEnabled((TGPlugin)item.getData(), item.getChecked());
 						TuxGuitar.instance().loadCursor(dialog, SWT.CURSOR_ARROW);
@@ -198,7 +198,7 @@ public class EditPluginsAction extends Action {
 	
 	private void setBold(Label label) {
 		FontData[] fontDatas = label.getFont().getFontData();
-		if(fontDatas.length > 0) {
+		if (fontDatas.length > 0) {
 			final Font font = new Font(label.getDisplay(), fontDatas[0].getName(),(fontDatas[0].getHeight()), SWT.BOLD);
 			label.setFont(font);
 			label.addDisposeListener(new DisposeListener() {

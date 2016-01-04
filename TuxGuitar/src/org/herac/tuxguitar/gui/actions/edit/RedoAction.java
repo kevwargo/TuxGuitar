@@ -26,7 +26,7 @@ public class RedoAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		try {
-			if(TuxGuitar.instance().getUndoableManager().canRedo()) {
+			if (TuxGuitar.instance().getUndoableManager().canRedo()) {
 				TuxGuitar.instance().getUndoableManager().redo();
 			}
 		} catch (CannotRedoException e1) {

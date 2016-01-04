@@ -25,7 +25,7 @@ public class GoToTrackAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		Object data = e.widget.getData();
-		if(data instanceof TGTrackImpl) {
+		if (data instanceof TGTrackImpl) {
 			TGTrackImpl track = (TGTrackImpl)data;
 			getEditor().getTablature().getCaret().update(track.getNumber());
 		}

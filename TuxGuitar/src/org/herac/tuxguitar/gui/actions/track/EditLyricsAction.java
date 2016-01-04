@@ -24,7 +24,7 @@ public class EditLyricsAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getLyricEditor().isDisposed()) {
+		if (TuxGuitar.instance().getLyricEditor().isDisposed()) {
 			TuxGuitar.instance().getLyricEditor().show();
 		}else {
 			TuxGuitar.instance().getLyricEditor().dispose();

@@ -42,14 +42,14 @@ public class MidiRepeatController {
 		TGMeasureHeader header = this.song.getMeasureHeader(this.index);
 		
 		//Verifica si el compas esta dentro del rango.
-		if( (this.sHeader != -1 && header.getNumber() < this.sHeader) || ( this.eHeader != -1 && header.getNumber() > this.eHeader ) ) {
+		if ( (this.sHeader != -1 && header.getNumber() < this.sHeader) || ( this.eHeader != -1 && header.getNumber() > this.eHeader ) ) {
 			this.shouldPlay = false;
 			this.index ++;
 			return;
 		}
 		
 		//Abro repeticion siempre para el primer compas.
-		if( (this.sHeader != -1 && header.getNumber() == this.sHeader ) || header.getNumber() == 1 ) {
+		if ( (this.sHeader != -1 && header.getNumber() == this.sHeader ) || header.getNumber() == 1 ) {
 			this.repeatStartIndex = this.index;
 			this.repeatStart = header.getStart();
 			this.repeatOpen = true;
@@ -67,14 +67,14 @@ public class MidiRepeatController {
 			
 			//Si es la primer vez que paso por este compas
 			//Pongo numero de repeticion y final alternativo en cero
-			if(this.index > this.lastIndex) {
+			if (this.index > this.lastIndex) {
 				this.repeatNumber = 0;
 				this.repeatAlternative = 0;
 			}
 		}
 		else {
 			//verifico si hay un final alternativo abierto
-			if(this.repeatAlternative == 0) {
+			if (this.repeatAlternative == 0) {
 				this.repeatAlternative = header.getRepeatAlternative();
 			}
 			//Si estoy en un final alternativo.

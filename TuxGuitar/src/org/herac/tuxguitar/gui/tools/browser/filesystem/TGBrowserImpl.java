@@ -35,7 +35,7 @@ public class TGBrowserImpl extends TGBrowser {
 	}
 	
 	public void cdUp() {
-		if(this.element != null) {
+		if (this.element != null) {
 			this.element = this.element.getParent();
 		}
 	}
@@ -43,13 +43,13 @@ public class TGBrowserImpl extends TGBrowser {
 	public List listElements() {
 		List elements = new ArrayList();
 		File file = ((this.element != null)?this.element.getFile():this.root);
-		if(file.exists() && file.isDirectory()) {
+		if (file.exists() && file.isDirectory()) {
 			File[] files = file.listFiles();
-			for(int i = 0; i < files.length;i ++) {
+			for (int i = 0; i < files.length;i ++) {
 				elements.add(new TGBrowserElementImpl(this.element, files[i]));
 			}
 		}
-		if( !elements.isEmpty() ) {
+		if ( !elements.isEmpty() ) {
 			Collections.sort(elements, new TGBrowserElementComparator());
 		}
 		return elements;

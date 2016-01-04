@@ -30,7 +30,7 @@ public class ChangeTrillNoteAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		TGNote note = getEditor().getTablature().getCaret().getSelectedNote();
-		if(note != null) {
+		if (note != null) {
 			changeTrill(new TrillEditor().show(note));
 		}
 		return 0;

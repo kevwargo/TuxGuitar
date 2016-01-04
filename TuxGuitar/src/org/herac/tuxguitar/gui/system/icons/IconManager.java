@@ -143,20 +143,20 @@ public class IconManager {
 	}
 	
 	public void addLoader(IconLoader loader) {
-		if( !this.loaders.contains( loader )) {
+		if ( !this.loaders.contains( loader )) {
 			this.loaders.add(loader);
 		}
 	}
 	
 	public void removeLoader(IconLoader loader) {
-		if( this.loaders.contains( loader )) {
+		if ( this.loaders.contains( loader )) {
 			this.loaders.remove(loader);
 		}
 	}
 	
 	private void fireChanges() {
 		Iterator it = this.loaders.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			IconLoader loader = (IconLoader)it.next();
 			loader.loadIcons();
 		}
@@ -309,7 +309,7 @@ public class IconManager {
 	private List purgeDisposableIcons() {
 		List disposableIcons = new ArrayList();
 		Iterator it = this.disposableIcons.iterator();
-		while( it.hasNext() ) {
+		while ( it.hasNext() ) {
 			Resource resource = (Resource)it.next();
 			disposableIcons.add( resource );
 		}
@@ -319,7 +319,7 @@ public class IconManager {
 	
 	public void disposeIcons(List resources) {
 		Iterator it = resources.iterator();
-		while( it.hasNext() ) {
+		while ( it.hasNext() ) {
 			Image image = (Image)it.next();
 			image.dispose();
 		}
@@ -334,7 +334,7 @@ public class IconManager {
 	}
 	
 	public Image getDuration(int value) {
-		switch(value) {
+		switch (value) {
 		case TGDuration.WHOLE:
 			return this.durations[0];
 		case TGDuration.HALF:

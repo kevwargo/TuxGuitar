@@ -27,7 +27,7 @@ public class TGPluginConfigManager extends TGConfigManager {
 		Properties properties = new Properties();
 		try {
 			InputStream is = TGFileUtils.getResourceAsStream(this.name + ".cfg");
-			if(is != null) {
+			if (is != null) {
 				properties.load(is);
 			}
 		} catch (Throwable throwable) {

@@ -86,9 +86,9 @@ public class CopyMeasureAction extends Action {
 					int fromSelection = fromSpinner.getSelection();
 					int toSelection = toSpinner.getSelection();
 					
-					if(fromSelection < minSelection) {
+					if (fromSelection < minSelection) {
 						fromSpinner.setSelection(minSelection);
-					}else if(fromSelection > toSelection) {
+					}else if (fromSelection > toSelection) {
 						fromSpinner.setSelection(toSelection);
 					}
 				}
@@ -97,16 +97,16 @@ public class CopyMeasureAction extends Action {
 				public void widgetSelected(SelectionEvent e) {
 					int toSelection = toSpinner.getSelection();
 					int fromSelection = fromSpinner.getSelection();
-					if(toSelection < fromSelection) {
+					if (toSelection < fromSelection) {
 						toSpinner.setSelection(fromSelection);
-					}else if(toSelection > maxSelection) {
+					}else if (toSelection > maxSelection) {
 						toSpinner.setSelection(maxSelection);
 					}
 				}
 			});
 			//----------------------------------------------------------------------
 			this.copyAllTracks = true;
-			if(getSongManager().getSong().countTracks() > 1) {
+			if (getSongManager().getSong().countTracks() > 1) {
 				Group checkComposites = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 				checkComposites.setLayout(new GridLayout());
 				checkComposites.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -165,7 +165,7 @@ public class CopyMeasureAction extends Action {
 	}
 	
 	protected void copyMeasures(int m1, int m2, boolean allTracks) {
-		if(m1 > 0 && m1 <= m2) {
+		if (m1 > 0 && m1 <= m2) {
 			MeasureTransferable transferable = new MeasureTransferable(getEditor(), m1, m2, allTracks);
 			getEditor().getClipBoard().addTransferable(transferable);
 		}

@@ -27,7 +27,7 @@ public class CleanBeatAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		TGBeat beat = getEditor().getTablature().getCaret().getSelectedBeat();
-		if( beat != null) {
+		if ( beat != null) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();

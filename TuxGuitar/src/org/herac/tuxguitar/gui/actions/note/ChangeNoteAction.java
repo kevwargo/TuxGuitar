@@ -53,10 +53,10 @@ public class ChangeNoteAction extends Action {
 				long start = caret.getPosition();
 				long time = System.currentTimeMillis();
 				
-				if(lastAddedStart == start && lastAddedString == string) {
+				if (lastAddedStart == start && lastAddedString == string) {
 					if (lastAddedValue > 0 && lastAddedValue < 10 && time <  ( lastAddedTime + DELAY ) ) {
 						int newValue = ( ( lastAddedValue * 10 ) + value );
-						if(newValue < 30 || caret.getTrack().isPercussionTrack()) {
+						if (newValue < 30 || caret.getTrack().isPercussionTrack()) {
 							value = newValue;
 						}
 					}
@@ -97,7 +97,7 @@ public class ChangeNoteAction extends Action {
 	}
 	
 	private int getValueOf(int keyCode) {
-		switch(keyCode) {
+		switch (keyCode) {
 		case KeyBindingConstants.NUMBER_0:
 		case KeyBindingConstants.KEYPAD_0:
 			return 0;

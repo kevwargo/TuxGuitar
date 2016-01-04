@@ -29,7 +29,7 @@ public class UndoableChangeKeySignature implements UndoableEdit {
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()) {
+		if (!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TuxGuitar.instance().getSongManager().getTrackManager().changeKeySignature(this.track, this.position, this.redoableKeySignature, this.toEnd);
@@ -40,13 +40,13 @@ public class UndoableChangeKeySignature implements UndoableEdit {
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()) {
+		if (!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TuxGuitar.instance().getSongManager().getTrackManager().changeKeySignature(this.track, this.position, this.undoableKeySignature, this.toEnd);
-		if(this.toEnd) {
+		if (this.toEnd) {
 			Iterator it = this.nextKeySignaturePositions.iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				KeySignaturePosition ksp = (KeySignaturePosition)it.next();
 				TuxGuitar.instance().getSongManager().getTrackManager().changeKeySignature(this.track, ksp.getPosition(), ksp.getKeySignature(), true);
 			}
@@ -77,11 +77,11 @@ public class UndoableChangeKeySignature implements UndoableEdit {
 		
 		int prevKeySignature = undoable.undoableKeySignature;
 		Iterator it = caret.getTrack().getMeasures();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGMeasureImpl measure = (TGMeasureImpl)it.next();
-			if(measure.getStart() > undoable.position) {
+			if (measure.getStart() > undoable.position) {
 				int currKeySignature = measure.getKeySignature();
-				if(prevKeySignature != currKeySignature) {
+				if (prevKeySignature != currKeySignature) {
 					KeySignaturePosition tsp = undoable.new KeySignaturePosition(measure.getStart(), currKeySignature);
 					undoable.nextKeySignaturePositions.add(tsp);
 				}

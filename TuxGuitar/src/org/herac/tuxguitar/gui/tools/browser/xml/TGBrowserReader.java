@@ -41,7 +41,7 @@ public class TGBrowserReader {
 				
 				String type = params.getNamedItem(ATTRIBUTE_TYPE).getNodeValue();
 				String data = params.getNamedItem(ATTRIBUTE_DATA).getNodeValue();
-				if(type != null) {
+				if (type != null) {
 					TGBrowserCollectionInfo info = new TGBrowserCollectionInfo();
 					info.setType(type);
 					info.setData(data);

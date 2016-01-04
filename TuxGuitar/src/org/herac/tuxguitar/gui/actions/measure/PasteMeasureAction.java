@@ -91,9 +91,9 @@ public class PasteMeasureAction extends Action {
 				public void widgetSelected(SelectionEvent arg0) {
 					int pasteMode = 0;
 					int pasteCount = countSpinner.getSelection();
-					if( replace.getSelection() ) {
+					if ( replace.getSelection() ) {
 						pasteMode = MeasureTransferable.TRANSFER_TYPE_REPLACE;
-					}else if(insert.getSelection()) {
+					}else if (insert.getSelection()) {
 						pasteMode = MeasureTransferable.TRANSFER_TYPE_INSERT;
 					}
 					pasteMeasures( pasteMode , pasteCount);
@@ -132,9 +132,9 @@ public class PasteMeasureAction extends Action {
 	
 	protected void pasteMeasures(int pasteMode, int pasteCount) {
 		try {
-			if( pasteMode > 0 && pasteCount > 0 ) {
+			if ( pasteMode > 0 && pasteCount > 0 ) {
 				Transferable transferable = getEditor().getClipBoard().getTransferable();
-				if(transferable instanceof MeasureTransferable) {
+				if (transferable instanceof MeasureTransferable) {
 					((MeasureTransferable)transferable).setTransferType( pasteMode );
 					((MeasureTransferable)transferable).setPasteCount( pasteCount );
 					

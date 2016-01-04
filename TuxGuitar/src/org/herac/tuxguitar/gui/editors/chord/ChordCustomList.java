@@ -57,7 +57,7 @@ public class ChordCustomList extends Composite {
 		this.chords.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.chords.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				if(getDialog().getEditor() != null) {
+				if (getDialog().getEditor() != null) {
 					showChord(getChords().getSelectionIndex());
 				}
 			}
@@ -98,16 +98,16 @@ public class ChordCustomList extends Composite {
 		int selectionIndex = this.chords.getSelectionIndex();
 		this.chords.removeAll();
 		
-		for(int i = 0;i < TuxGuitar.instance().getCustomChordManager().countChords();i ++) {
+		for (int i = 0;i < TuxGuitar.instance().getCustomChordManager().countChords();i ++) {
 			TGChord chord = TuxGuitar.instance().getCustomChordManager().getChord(i);
-			if(chord != null) {
+			if (chord != null) {
 				this.chords.add(chord.getName());
 			}
 		}
 		
-		if(selectionIndex >= 0 && selectionIndex < this.chords.getItemCount()) {
+		if (selectionIndex >= 0 && selectionIndex < this.chords.getItemCount()) {
 			this.chords.select(selectionIndex);
-		}else if(selectionIndex > 0 && (selectionIndex - 1) < this.chords.getItemCount()) {
+		}else if (selectionIndex > 0 && (selectionIndex - 1) < this.chords.getItemCount()) {
 			this.chords.select((selectionIndex - 1));
 		}
 	}
@@ -121,16 +121,16 @@ public class ChordCustomList extends Composite {
 	
 	protected void addCustomChord() {
 		TGChord chord = this.dialog.getEditor().getChord();
-		if(chord != null) {
+		if (chord != null) {
 			NameDialog nDialog = new NameDialog();
 			nDialog.name = this.dialog.getEditor().getChordName().getText().trim();
 			String name = nDialog.open();
-			if(name != null) {
-				if(name.length() == 0) {
+			if (name != null) {
+				if (name.length() == 0) {
 					MessageDialog.errorMessage(getShell(), TuxGuitar.getProperty("chord.custom.name-empty-error"));
 					return;
 				}
-				if(TuxGuitar.instance().getCustomChordManager().existOtherEqualCustomChord(name,-1)) {
+				if (TuxGuitar.instance().getCustomChordManager().existOtherEqualCustomChord(name,-1)) {
 					MessageDialog.errorMessage(getShell(), TuxGuitar.getProperty("chord.custom.name-exist-error"));
 					return;
 				}
@@ -143,14 +143,14 @@ public class ChordCustomList extends Composite {
 	
 	protected void renameCustomChord(int index) {
 		TGChord chord =  TuxGuitar.instance().getCustomChordManager().getChord(index);
-		if(chord != null) {
+		if (chord != null) {
 			String name = new NameDialog(chord.getName()).open();
-			if(name != null) {
-				if(name.length() == 0) {
+			if (name != null) {
+				if (name.length() == 0) {
 					MessageDialog.errorMessage(getShell(), TuxGuitar.getProperty("chord.custom.name-empty-error"));
 					return;
 				}
-				if(TuxGuitar.instance().getCustomChordManager().existOtherEqualCustomChord(name, index)) {
+				if (TuxGuitar.instance().getCustomChordManager().existOtherEqualCustomChord(name, index)) {
 					MessageDialog.errorMessage(getShell(), TuxGuitar.getProperty("chord.custom.name-exist-error"));
 					return;
 				}

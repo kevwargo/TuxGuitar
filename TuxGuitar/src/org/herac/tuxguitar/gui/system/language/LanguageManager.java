@@ -34,20 +34,20 @@ public class LanguageManager {
 	}
 	
 	public void addLoader(LanguageLoader loader) {
-		if( !this.loaders.contains( loader )) {
+		if ( !this.loaders.contains( loader )) {
 			this.loaders.add(loader);
 		}
 	}
 	
 	public void removeLoader(LanguageLoader loader) {
-		if( this.loaders.contains( loader )) {
+		if ( this.loaders.contains( loader )) {
 			this.loaders.remove(loader);
 		}
 	}
 	
 	private void fireChanges() {
 		Iterator it = this.loaders.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			LanguageLoader loader = (LanguageLoader)it.next();
 			loader.loadProperties();
 		}
@@ -65,7 +65,7 @@ public class LanguageManager {
 	}
 	
 	private Locale getLocale(String lang) {
-		if(this.isSupportedLanguage(lang)) {
+		if (this.isSupportedLanguage(lang)) {
 			String[] locale = lang.split("_");
 			String language = (locale.length > 0 ? locale[0] : "" );
 			String country =  (locale.length > 1 ? locale[1] : "" );
@@ -76,9 +76,9 @@ public class LanguageManager {
 	}
 	
 	private boolean isSupportedLanguage(String lang) {
-		if(lang != null && lang.length() > 0 && this.languages != null) {
-			for(int i = 0 ; i < this.languages.length; i ++) {
-				if(this.languages[i].equals(lang)) {
+		if (lang != null && lang.length() > 0 && this.languages != null) {
+			for (int i = 0 ; i < this.languages.length; i ++) {
+				if (this.languages[i].equals(lang)) {
 					return true;
 				}
 			}
@@ -113,20 +113,20 @@ public class LanguageManager {
 	}
 	
 	public String getLanguage() {
-		if(this.resources != null) {
+		if (this.resources != null) {
 			Locale locale = this.resources.getLocale();
 			boolean language = (locale.getLanguage() != null && locale.getLanguage().length() > 0);
 			boolean country = (locale.getCountry() != null && locale.getCountry().length() > 0);
 			boolean variant = (locale.getVariant() != null && locale.getVariant().length() > 0);
 			
 			String localeId = new String();
-			if( language ) {
+			if ( language ) {
 				localeId += locale.getLanguage();
 			}
-			if( country ) {
+			if ( country ) {
 				localeId += "_" + locale.getCountry();
 			}
-			if( variant ) {
+			if ( variant ) {
 				localeId += "_" + ( country ? locale.getVariant() : ("_" + locale.getVariant()) );
 			}
 			return localeId;
@@ -141,20 +141,20 @@ public class LanguageManager {
 	private void loadLanguages() {
 		List availableList = new ArrayList();
 		String[] fileNames = TGFileUtils.getFileNames("lang");
-		if( fileNames != null ) {
+		if ( fileNames != null ) {
 			// now iterate over them
-			for(int i = 0;i < fileNames.length;i++) {
+			for (int i = 0;i < fileNames.length;i++) {
 				if (fileNames[i].indexOf("messages_") == 0) {
 					int prefixIndex = fileNames[i].indexOf(PREFIX + "_");
 					int extensionIndex = fileNames[i].indexOf(EXTENSION);
-					if(prefixIndex == 0 && extensionIndex > (PREFIX + "_").length()) {
+					if (prefixIndex == 0 && extensionIndex > (PREFIX + "_").length()) {
 						availableList.add( fileNames[i].substring( (PREFIX + "_").length() , extensionIndex ) );
 					}
 				}
 			}
 		}
 		this.languages = new String[availableList.size()];
-		for(int i = 0; i < this.languages.length; i++) {
+		for (int i = 0; i < this.languages.length; i++) {
 			this.languages[i] = (String) availableList.get( i );
 		}
 	}

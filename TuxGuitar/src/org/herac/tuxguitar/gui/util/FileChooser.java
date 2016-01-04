@@ -34,7 +34,7 @@ public class FileChooser {
 	private static FileChooser instance;
 	
 	public static FileChooser instance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new FileChooser();
 		}
 		return instance;
@@ -83,10 +83,10 @@ public class FileChooser {
 	
 	private String openDialog(FileDialog dialog) {
 		String path = dialog.open();
-		if(path != null) {
+		if (path != null) {
 			File file = new File(path);
 			File parent = file.getParentFile();
-			if( parent != null && parent.exists() && parent.isDirectory() ) {
+			if ( parent != null && parent.exists() && parent.isDirectory() ) {
 				TuxGuitar.instance().getFileHistory().setChooserPath( parent.getAbsolutePath() );
 			}
 		}
@@ -94,35 +94,35 @@ public class FileChooser {
 	}
 	
 	private String getFileName(List formats, String defaultName, boolean replaceExtension) {
-		if(formats == null || formats.isEmpty()) {
+		if (formats == null || formats.isEmpty()) {
 			return defaultName;
 		}
 		String file = TuxGuitar.instance().getFileHistory().getCurrentFileName(defaultName);
-		if(file != null && file.length() > 0) {
+		if (file != null && file.length() > 0) {
 			int index = file.lastIndexOf('.');
-			if(index > 0) {
+			if (index > 0) {
 				String fileName = file.substring(0, index);
 				String fileExtension = file.substring(index).toLowerCase();
 				Iterator it = formats.iterator();
-				while(it.hasNext()) {
+				while (it.hasNext()) {
 					TGFileFormat format = (TGFileFormat)it.next();
-					if(format.getSupportedFormats() != null) {
+					if (format.getSupportedFormats() != null) {
 						String[] extensions = format.getSupportedFormats().split(TGFileFormat.EXTENSION_SEPARATOR);
-						if(extensions != null && extensions.length > 0) {
-							for(int i = 0; i < extensions.length; i ++) {
-								if(extensions[i].equals("*" + fileExtension)) {
+						if (extensions != null && extensions.length > 0) {
+							for (int i = 0; i < extensions.length; i ++) {
+								if (extensions[i].equals("*" + fileExtension)) {
 									return file;
 								}
 							}
 						}
 					}
 				}
-				if( replaceExtension ) {
+				if ( replaceExtension ) {
 					TGFileFormat format = (TGFileFormat)formats.get(0);
-					if(format.getSupportedFormats() != null) {
+					if (format.getSupportedFormats() != null) {
 						String[] extensions = format.getSupportedFormats().split(TGFileFormat.EXTENSION_SEPARATOR);
-						if(extensions != null && extensions.length > 0) {
-							if(extensions[0].length() > 1) {
+						if (extensions != null && extensions.length > 0) {
+							if (extensions[0].length() > 1) {
 								return (fileName + extensions[0].substring(1));
 							}
 						}
@@ -143,7 +143,7 @@ public class FileChooser {
 			this.filterExtensions = new String[size];
 			this.filterNames[0] = new String("All Supported Formats");
 			this.filterExtensions[0] = new String();
-			for(int i = 1; i < (size - 1); i ++) {
+			for (int i = 1; i < (size - 1); i ++) {
 				TGFileFormat format = (TGFileFormat)formats.get(i-1);
 				this.filterNames[i] = format.getName();
 				this.filterExtensions[i] = format.getSupportedFormats();

@@ -53,19 +53,19 @@ public class FretBoardEditor implements TGRedrawListener, TGExternalBeatViewerLi
 	}
 	
 	public void dispose() {
-		if(getFretBoard() != null && !getFretBoard().isDisposed()) {
+		if (getFretBoard() != null && !getFretBoard().isDisposed()) {
 			getFretBoard().dispose();
 		}
 	}
 	
 	public void redraw() {
-		if(getFretBoard() != null && !getFretBoard().isDisposed() && !TuxGuitar.instance().isLocked()) {
+		if (getFretBoard() != null && !getFretBoard().isDisposed() && !TuxGuitar.instance().isLocked()) {
 			getFretBoard().redraw();
 		}
 	}
 	
 	public void redrawPlayingMode() {
-		if(getFretBoard() != null && !getFretBoard().isDisposed() && !TuxGuitar.instance().isLocked()) {
+		if (getFretBoard() != null && !getFretBoard().isDisposed() && !TuxGuitar.instance().isLocked()) {
 			getFretBoard().redrawPlayingMode();
 		}
 	}
@@ -75,39 +75,39 @@ public class FretBoardEditor implements TGRedrawListener, TGExternalBeatViewerLi
 	}
 	
 	public void loadProperties() {
-		if(getFretBoard() != null && !getFretBoard().isDisposed()) {
+		if (getFretBoard() != null && !getFretBoard().isDisposed()) {
 			getFretBoard().loadProperties();
 		}
 	}
 	
 	public void loadIcons() {
-		if(getFretBoard() != null && !getFretBoard().isDisposed()) {
+		if (getFretBoard() != null && !getFretBoard().isDisposed()) {
 			getFretBoard().loadIcons();
 		}
 	}
 	
 	public void loadScale() {
-		if(getFretBoard() != null) {
+		if (getFretBoard() != null) {
 			getFretBoard().loadScale();
 		}
 	}
 	
 	public void doRedraw(int type) {
-		if( type == TGRedrawListener.NORMAL ) {
+		if ( type == TGRedrawListener.NORMAL ) {
 			this.redraw();
-		}else if( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
+		}else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
 			this.redrawPlayingMode();
 		}
 	}
 	
 	public void showExternalBeat(TGBeat beat) {
-		if(getFretBoard() != null && !getFretBoard().isDisposed()) {
+		if (getFretBoard() != null && !getFretBoard().isDisposed()) {
 			getFretBoard().setExternalBeat(beat);
 		}
 	}
 	
 	public void hideExternalBeat() {
-		if(getFretBoard() != null && !getFretBoard().isDisposed()) {
+		if (getFretBoard() != null && !getFretBoard().isDisposed()) {
 			getFretBoard().setExternalBeat(null);
 		}
 	}

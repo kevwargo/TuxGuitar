@@ -24,7 +24,7 @@ public class ShowMatrixAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getMatrixEditor().isDisposed()) {
+		if (TuxGuitar.instance().getMatrixEditor().isDisposed()) {
 			TuxGuitar.instance().getMatrixEditor().show();
 		}else {
 			TuxGuitar.instance().getMatrixEditor().dispose();

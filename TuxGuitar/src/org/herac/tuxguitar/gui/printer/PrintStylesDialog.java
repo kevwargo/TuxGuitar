@@ -35,7 +35,7 @@ public class PrintStylesDialog {
 		
 		final Combo tracks = new Combo(track, SWT.DROP_DOWN | SWT.READ_ONLY);
 		tracks.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		for(int number = 1; number <= TuxGuitar.instance().getSongManager().getSong().countTracks(); number ++) {
+		for (int number = 1; number <= TuxGuitar.instance().getSongManager().getSong().countTracks(); number ++) {
 			tracks.add(TuxGuitar.instance().getSongManager().getTrack(number).getName());
 		}
 		tracks.select(TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getTrack().getNumber() - 1);
@@ -70,9 +70,9 @@ public class PrintStylesDialog {
 				int fromSelection = fromSpinner.getSelection();
 				int toSelection = toSpinner.getSelection();
 				
-				if(fromSelection < minSelection) {
+				if (fromSelection < minSelection) {
 					fromSpinner.setSelection(minSelection);
-				}else if(fromSelection > toSelection) {
+				}else if (fromSelection > toSelection) {
 					fromSpinner.setSelection(toSelection);
 				}
 			}
@@ -81,9 +81,9 @@ public class PrintStylesDialog {
 			public void widgetSelected(SelectionEvent e) {
 				int toSelection = toSpinner.getSelection();
 				int fromSelection = fromSpinner.getSelection();
-				if(toSelection < fromSelection) {
+				if (toSelection < fromSelection) {
 					toSpinner.setSelection(fromSelection);
-				}else if(toSelection > maxSelection) {
+				}else if (toSelection > maxSelection) {
 					toSpinner.setSelection(maxSelection);
 				}
 			}
@@ -116,14 +116,14 @@ public class PrintStylesDialog {
 		
 		tablatureEnabled.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
-				if(!tablatureEnabled.getSelection()) {
+				if (!tablatureEnabled.getSelection()) {
 					scoreEnabled.setSelection(true);
 				}
 			}
 		});
 		scoreEnabled.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
-				if(!scoreEnabled.getSelection()) {
+				if (!scoreEnabled.getSelection()) {
 					tablatureEnabled.setSelection(true);
 				}
 			}

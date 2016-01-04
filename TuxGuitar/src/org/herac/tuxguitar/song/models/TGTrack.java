@@ -71,7 +71,7 @@ public abstract class TGTrack {
 	}
 	
 	public TGMeasure getMeasure(int index) {
-		if(index >= 0 && index < countMeasures()) {
+		if (index >= 0 && index < countMeasures()) {
 			return (TGMeasure)this.measures.get(index);
 		}
 		return null;

@@ -43,7 +43,7 @@ public class InsertChordAction extends Action {
 		TGBeat beat = caret.getSelectedBeat();
 		if (track != null && measure != null && beat != null) {
 			//Si el acorde llego en el data del widget solo lo agrego
-			if(e.widget.getData() instanceof TGChord) {
+			if (e.widget.getData() instanceof TGChord) {
 				TGChord chord = ((TGChord)e.widget.getData()).clone(getSongManager().getFactory());
 				insertChord(chord, track, measure, beat, caret.getVoice());
 			}
@@ -53,10 +53,10 @@ public class InsertChordAction extends Action {
 				ChordDialog dialog = new ChordDialog();
 				
 				int result = dialog.open(shell, measure, beat, caret.getPosition());
-				if( result == ChordDialog.RESULT_SAVE ) {
+				if ( result == ChordDialog.RESULT_SAVE ) {
 					insertChord(dialog.getChord(), track, measure, beat, caret.getVoice());
 				}
-				else if( result == ChordDialog.RESULT_CLEAN ) {
+				else if ( result == ChordDialog.RESULT_CLEAN ) {
 					removeChord( measure, beat);
 				}
 			}
@@ -66,7 +66,7 @@ public class InsertChordAction extends Action {
 	
 	protected void insertChord(TGChord chord, TGTrackImpl track, TGMeasureImpl measure, TGBeat beat, int voiceIndex) {
 		boolean restBeat = beat.isRestBeat();
-		if(!restBeat || chord.countNotes() > 0 ) {
+		if (!restBeat || chord.countNotes() > 0 ) {
 			
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
@@ -74,7 +74,7 @@ public class InsertChordAction extends Action {
 			// Add the chord notes to the tablature
 			// Only if this is a "rest" beat
 			TGVoice voice = beat.getVoice(voiceIndex);
-			if( restBeat ) {
+			if ( restBeat ) {
 				
 				Iterator it = track.getStrings().iterator();
 				while (it.hasNext()) {
@@ -105,7 +105,7 @@ public class InsertChordAction extends Action {
 	}
 	
 	protected void removeChord(TGMeasureImpl measure, TGBeat beat) {
-		if( beat.isChordBeat() ) {
+		if ( beat.isChordBeat() ) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			

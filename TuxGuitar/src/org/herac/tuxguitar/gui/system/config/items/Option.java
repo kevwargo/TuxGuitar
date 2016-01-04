@@ -87,7 +87,7 @@ public abstract class Option extends SelectionAdapter {
 		label.setLayoutData(new GridData(hAlign, vAlign, grabExcessHSpace, grabExcessVSpace));
 		
 		FontData[] fontDatas = label.getFont().getFontData();
-		if(fontDatas.length > 0) {
+		if (fontDatas.length > 0) {
 			final Font font = new Font(label.getDisplay(), fontDatas[0].getName(),(fontDatas[0].getHeight() + fontScale), fontStyle);
 			label.setFont(font);
 			label.addDisposeListener(new DisposeListener() {

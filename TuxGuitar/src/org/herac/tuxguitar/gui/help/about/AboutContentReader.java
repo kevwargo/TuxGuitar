@@ -22,10 +22,10 @@ public class AboutContentReader {
 	public StringBuffer read(String doc) {
 		String lang = TuxGuitar.instance().getLanguageManager().getLanguage();
 		InputStream is = TGClassLoader.instance().getClassLoader().getResourceAsStream(PREFIX + doc + "_" + lang + EXTENSION);
-		if(is == null) {
+		if (is == null) {
 			is = TGClassLoader.instance().getClassLoader().getResourceAsStream(PREFIX + doc + EXTENSION);
 		}
-		if(is != null) {
+		if (is != null) {
 			return read(is);
 		}
 		System.out.println(doc + ".txt");
@@ -38,7 +38,7 @@ public class AboutContentReader {
 		try {
 			int length = 0;
 			byte[] buffer = new byte[1024];
-			while((length = is.read(buffer)) != -1) {
+			while ((length = is.read(buffer)) != -1) {
 				sb.append(new String(buffer, 0, length));
 			}
 			is.close();

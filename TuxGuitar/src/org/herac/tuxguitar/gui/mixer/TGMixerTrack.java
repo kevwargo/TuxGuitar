@@ -139,36 +139,36 @@ public class TGMixerTrack {
 	}
 	
 	public void fireChanges(int type) {
-		if((type & TGMixer.SOLO) != 0 || (type & TGMixer.MUTE) != 0) {
+		if ((type & TGMixer.SOLO) != 0 || (type & TGMixer.MUTE) != 0) {
 			this.checkSolo.setSelection(this.track.isSolo());
 			this.checkMute.setSelection(this.track.isMute());
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.VOLUME) != 0) {
+		if ((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.VOLUME) != 0) {
 			int value = this.track.getChannel().getVolume();
 			this.scaleVolume.setSelection( ( value) );
 			this.volumeValueLabel.setText(Integer.toString( value ));
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.BALANCE) != 0) {
+		if ((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.BALANCE) != 0) {
 			int value = this.track.getChannel().getBalance();
 			this.scaleBalance.setSelection(value);
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.CHORUS) != 0) {
+		if ((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.CHORUS) != 0) {
 			int value = this.track.getChannel().getChorus();
 			this.scaleChorus.setSelection( ( value) );
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.REVERB) != 0) {
+		if ((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.REVERB) != 0) {
 			int value = this.track.getChannel().getReverb();
 			this.scaleReverb.setSelection( ( value) );
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.PHASER) != 0) {
+		if ((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.PHASER) != 0) {
 			int value = this.track.getChannel().getPhaser();
 			this.scalePhaser.setSelection( ( value) );
 		}
-		if((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.TREMOLO) != 0) {
+		if ((type & TGMixer.CHANNEL) != 0 || (type & TGMixer.TREMOLO) != 0) {
 			int value = this.track.getChannel().getTremolo();
 			this.scaleTremolo.setSelection( ( value) );
 		}
-		if((type & TGMixer.CHANNEL) != 0) {
+		if ((type & TGMixer.CHANNEL) != 0) {
 			this.mixerChannel.updateItems(true);
 		}
 	}
@@ -201,22 +201,22 @@ public class TGMixerTrack {
 	}
 	
 	protected void updateChannelValue(int type, int value) {
-		if( (type & TGMixer.VOLUME) != 0 ) {
+		if ( (type & TGMixer.VOLUME) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setVolume( (short)value );
 		}
-		else if( (type & TGMixer.BALANCE) != 0 ) {
+		else if ( (type & TGMixer.BALANCE) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setBalance( (short)value );
 		}
-		else if( (type & TGMixer.CHORUS) != 0 ) {
+		else if ( (type & TGMixer.CHORUS) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setChorus( (short)value );
 		}
-		else if( (type & TGMixer.REVERB) != 0 ) {
+		else if ( (type & TGMixer.REVERB) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setReverb( (short)value );
 		}
-		else if( (type & TGMixer.PHASER) != 0 ) {
+		else if ( (type & TGMixer.PHASER) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setPhaser( (short)value );
 		}
-		else if( (type & TGMixer.TREMOLO) != 0 ) {
+		else if ( (type & TGMixer.TREMOLO) != 0 ) {
 			TGMixerTrack.this.track.getChannel().setTremolo( (short)value );
 		}
 		this.mixer.fireChanges(TGMixerTrack.this.track.getChannel(), type);
@@ -260,7 +260,7 @@ public class TGMixerTrack {
 					TGMixerScale.this.undoable = UndoableTrackChannel.startUndo();
 				}
 				public void mouseUp(MouseEvent arg0) {
-					if(TGMixerScale.this.undoable != null) {
+					if (TGMixerScale.this.undoable != null) {
 						TuxGuitar.instance().getUndoableManager().addEdit(TGMixerScale.this.undoable.endUndo());
 						TuxGuitar.instance().getFileHistory().setUnsavedFile();
 						TuxGuitar.instance().updateCache(true);
@@ -279,14 +279,14 @@ public class TGMixerTrack {
 		}
 		
 		public int getSelection() {
-			if(this.value < 0) {
+			if (this.value < 0) {
 				this.updateValue();
 			}
 			return this.value;
 		}
 		
 		public void setSelection(int value) {
-			if(value != this.value) {
+			if (value != this.value) {
 				this.value = value;
 				this.scale.setSelection( ( this.inverted ? 127 - this.value : this.value ) );
 				this.updateToolTipValue();
@@ -294,7 +294,7 @@ public class TGMixerTrack {
 		}
 		
 		public void updateToolTipValue() {
-			if(this.text != null) {
+			if (this.text != null) {
 				this.scale.setToolTipText( this.text + ": " + this.value );
 			}
 		}
@@ -362,20 +362,20 @@ public class TGMixerTrack {
 		
 		public void updateToolTipValue() {
 			super.updateToolTipValue();
-			if(this.getText() != null) {
+			if (this.getText() != null) {
 				this.item.setToolTipText( this.getText() + ": " + this.getSelection() );
 			}
 		}
 		
 		public void setText(String text) {
 			super.setText(text);
-			if(this.getText() != null && this.getText().length() > 0) {
+			if (this.getText() != null && this.getText().length() > 0) {
 				this.item.setText( this.getText().substring(0, 1) );
 			}
 		}
 		
 		public void showSelect() {
-			if(!this.shell.isVisible()) {
+			if (!this.shell.isVisible()) {
 				Rectangle bounds = this.item.getBounds();
 				Point location = this.item.getParent().toDisplay(new Point(bounds.x, bounds.y));
 				

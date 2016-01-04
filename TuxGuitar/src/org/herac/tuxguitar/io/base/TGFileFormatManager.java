@@ -32,7 +32,7 @@ public class TGFileFormatManager {
 	}
 	
 	public static TGFileFormatManager instance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new TGFileFormatManager();
 		}
 		return instance;
@@ -113,10 +113,10 @@ public class TGFileFormatManager {
 	public List getInputFormats() {
 		List formats = new ArrayList();
 		Iterator it = getInputStreams();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGInputStreamBase stream = (TGInputStreamBase)it.next();
 			TGFileFormat format = stream.getFileFormat();
-			if(!existsFormat(format, formats)) {
+			if (!existsFormat(format, formats)) {
 				formats.add(format);
 			}
 		}
@@ -126,10 +126,10 @@ public class TGFileFormatManager {
 	public List getOutputFormats() {
 		List formats = new ArrayList();
 		Iterator it = getOutputStreams();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGOutputStreamBase stream = (TGOutputStreamBase)it.next();
 			TGFileFormat format = stream.getFileFormat();
-			if(!existsFormat(format, formats)) {
+			if (!existsFormat(format, formats)) {
 				formats.add(format);
 			}
 		}
@@ -138,9 +138,9 @@ public class TGFileFormatManager {
 	
 	private boolean existsFormat(TGFileFormat format, List formats) {
 		Iterator it = formats.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGFileFormat comparator = (TGFileFormat)it.next();
-			if(comparator.getName().equals(format.getName()) || comparator.getSupportedFormats().equals(format.getSupportedFormats())) {
+			if (comparator.getName().equals(format.getName()) || comparator.getSupportedFormats().equals(format.getSupportedFormats())) {
 				return true;
 			}
 		}

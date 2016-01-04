@@ -355,9 +355,9 @@ public class ActionManager {
 	public List getAvailableKeyBindingActions() {
 		List availableKeyBindingActions = new ArrayList();
 		Iterator it = this.actions.keySet().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			String actionName = (String)it.next();
-			if(getAction(actionName).isKeyBindingAvailable()) {
+			if (getAction(actionName).isKeyBindingAvailable()) {
 				availableKeyBindingActions.add(actionName);
 			}
 		}

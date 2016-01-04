@@ -17,14 +17,14 @@ public class TGBrowserElementComparator implements Comparator {
 	private static final int DIRECTION_FOLDER = 1;
 	
 	public int compare(Object o1, Object o2) {
-		if(o1 instanceof TGBrowserElement && o2 instanceof TGBrowserElement) {
+		if (o1 instanceof TGBrowserElement && o2 instanceof TGBrowserElement) {
 			TGBrowserElement element1 = (TGBrowserElement)o1;
 			TGBrowserElement element2 = (TGBrowserElement)o2;
 			
-			if(element1.isFolder() && !element2.isFolder()) {
+			if (element1.isFolder() && !element2.isFolder()) {
 				return (DIRECTION_FOLDER * RESULT_LESS);
 			}
-			if(element2.isFolder() && !element1.isFolder()) {
+			if (element2.isFolder() && !element1.isFolder()) {
 				return (DIRECTION_FOLDER * RESULT_GREATER);
 			}
 			

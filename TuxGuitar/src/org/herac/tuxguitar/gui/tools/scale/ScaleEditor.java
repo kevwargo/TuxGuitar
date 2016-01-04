@@ -27,7 +27,7 @@ public class ScaleEditor {
 		final List keys = new List(composite, SWT.BORDER | SWT.V_SCROLL);
 		keys.setLayoutData(new GridData(50, 200));
 		String[] keyNames = TuxGuitar.instance().getScaleManager().getKeyNames();
-		for(int i = 0;i < keyNames.length;i ++) {
+		for (int i = 0;i < keyNames.length;i ++) {
 			keys.add(keyNames[i]);
 		}
 		keys.select(TuxGuitar.instance().getScaleManager().getSelectionKey());
@@ -36,7 +36,7 @@ public class ScaleEditor {
 		scales.setLayoutData(new GridData(SWT.DEFAULT, 200));
 		scales.add("None");
 		String[] scaleNames = TuxGuitar.instance().getScaleManager().getScaleNames();
-		for(int i = 0;i < scaleNames.length;i ++) {
+		for (int i = 0;i < scaleNames.length;i ++) {
 			scales.add(scaleNames[i]);
 		}
 		scales.select(TuxGuitar.instance().getScaleManager().getSelectionIndex() + 1);

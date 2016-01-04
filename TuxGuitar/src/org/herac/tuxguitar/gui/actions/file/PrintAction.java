@@ -45,7 +45,7 @@ public class PrintAction extends Action {
 	protected int execute(TypedEvent e) {
 		try {
 			final PrintStyles data = PrintStylesDialog.open(TuxGuitar.instance().getShell());
-			if(data != null) {
+			if (data != null) {
 				PrintDialog dialog = new PrintDialog(TuxGuitar.instance().getShell(), SWT.NULL);
 				PrinterData printerData = dialog.open();
 				
@@ -136,7 +136,7 @@ public class PrintAction extends Action {
 	
 	protected float getPrinterScale(Printer printer) {
 		Point dpi = printer.getDPI();
-		if( dpi != null ) {
+		if ( dpi != null ) {
 			return ( dpi.x / 100.0f );
 		}
 		return 1.0f;
@@ -168,14 +168,14 @@ public class PrintAction extends Action {
 		}
 		
 		public void pageStart() {
-			if(this.started) {
+			if (this.started) {
 				this.printer.startPage();
 				this.painter.init(new GC(this.printer));
 			}
 		}
 		
 		public void pageFinish() {
-			if(this.started) {
+			if (this.started) {
 				this.painter.dispose();
 				this.printer.endPage();
 			}
@@ -186,7 +186,7 @@ public class PrintAction extends Action {
 		}
 		
 		public void finish() {
-			if(this.started) {
+			if (this.started) {
 				this.printer.endJob();
 				this.started = false;
 				try {
@@ -203,11 +203,11 @@ public class PrintAction extends Action {
 		}
 		
 		public boolean isPaintable(int page) {
-			if(this.printerData.scope == PrinterData.PAGE_RANGE) {
-				if(this.printerData.startPage > 0 && this.printerData.startPage > page) {
+			if (this.printerData.scope == PrinterData.PAGE_RANGE) {
+				if (this.printerData.startPage > 0 && this.printerData.startPage > page) {
 					return false;
 				}
-				if(this.printerData.endPage > 0 && this.printerData.endPage < page) {
+				if (this.printerData.endPage > 0 && this.printerData.endPage < page) {
 					return false;
 				}
 			}
@@ -221,13 +221,13 @@ public class PrintAction extends Action {
 		}
 		
 		public void dispose() {
-			if(!this.printer.isDisposed()) {
+			if (!this.printer.isDisposed()) {
 				this.printer.dispose();
 			}
-			if(!this.layout.getTablature().isDisposed() && !this.layout.getTablature().getShell().isDisposed()) {
+			if (!this.layout.getTablature().isDisposed() && !this.layout.getTablature().getShell().isDisposed()) {
 				this.layout.getTablature().getShell().dispose();
 			}
-			if(!this.layout.getTablature().isDisposed()) {
+			if (!this.layout.getTablature().isDisposed()) {
 				this.layout.getTablature().dispose();
 			}
 		}

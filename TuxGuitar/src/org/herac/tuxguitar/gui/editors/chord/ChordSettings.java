@@ -33,7 +33,7 @@ public class ChordSettings {
 	}
 	
 	public static ChordSettings instance() {
-		if( instance == null ) {
+		if ( instance == null ) {
 			instance = new ChordSettings();
 		}
 		return instance;

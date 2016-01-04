@@ -97,7 +97,7 @@ public class MainOption  extends Option {
 				final boolean autoSizeTable = getConfig().getBooleanConfigValue(TGConfigKeys.TABLE_AUTO_SIZE);
 				new SyncThread(new Runnable() {
 					public void run() {
-						if(!isDisposed()) {
+						if (!isDisposed()) {
 							MainOption.this.windowTitle.setText(windowTitle);
 							MainOption.this.showSplash.setSelection(showSplash);
 							MainOption.this.autoSizeTable.setSelection(autoSizeTable);
@@ -111,7 +111,7 @@ public class MainOption  extends Option {
 	}
 	
 	public void updateConfig() {
-		if(this.initialized) {
+		if (this.initialized) {
 			getConfig().setProperty(TGConfigKeys.WINDOW_TITLE, this.windowTitle.getText());
 			getConfig().setProperty(TGConfigKeys.SHOW_SPLASH, this.showSplash.getSelection());
 			getConfig().setProperty(TGConfigKeys.TABLE_AUTO_SIZE, this.autoSizeTable.getSelection());
@@ -119,7 +119,7 @@ public class MainOption  extends Option {
 	}
 	
 	public void updateDefaults() {
-		if(this.initialized) {
+		if (this.initialized) {
 			getConfig().setProperty(TGConfigKeys.WINDOW_TITLE, getDefaults().getProperty(TGConfigKeys.WINDOW_TITLE));
 			getConfig().setProperty(TGConfigKeys.SHOW_SPLASH, getDefaults().getProperty(TGConfigKeys.SHOW_SPLASH));
 			getConfig().setProperty(TGConfigKeys.TABLE_AUTO_SIZE, getDefaults().getProperty(TGConfigKeys.TABLE_AUTO_SIZE));
@@ -127,7 +127,7 @@ public class MainOption  extends Option {
 	}
 	
 	public void applyConfig(boolean force) {
-		if(force || this.initialized) {
+		if (force || this.initialized) {
 			TuxGuitar.instance().showTitle();
 			TuxGuitar.instance().getTable().loadConfig();
 		}

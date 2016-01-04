@@ -27,7 +27,7 @@ public class TGVersion {
 	}
 	
 	public boolean isSameVersion(TGVersion version) {
-		if( version == null ) {
+		if ( version == null ) {
 			return false;
 		}
 		return ( version.getMajor() == getMajor() && version.getMinor() == getMinor() && version.getRevision() == getRevision());
@@ -35,7 +35,7 @@ public class TGVersion {
 	
 	public String getVersion() {
 		String version = (getMajor() + "." + getMinor());
-		if( getRevision() > 0 ) {
+		if ( getRevision() > 0 ) {
 			version += ("." + getRevision());
 		}
 		return version;

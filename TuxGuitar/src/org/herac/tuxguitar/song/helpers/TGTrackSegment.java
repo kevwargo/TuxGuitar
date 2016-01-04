@@ -26,7 +26,7 @@ public class TGTrackSegment {
 	
 	public Object clone(TGFactory factory, List headers) {
 		List measures = new ArrayList();
-		for(int i = 0;i < getMeasures().size();i++) {
+		for (int i = 0;i < getMeasures().size();i++) {
 			TGMeasure measure = (TGMeasure)getMeasures().get(i);
 			measures.add(measure.clone(factory,(TGMeasureHeader)headers.get(i)));
 		}

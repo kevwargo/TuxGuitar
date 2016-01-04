@@ -23,7 +23,7 @@ public class UndoableMeasureGeneric implements UndoableEdit {
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()) {
+		if (!canRedo()) {
 			throw new CannotRedoException();
 		}
 		this.replace(this.redoMeasure);
@@ -32,7 +32,7 @@ public class UndoableMeasureGeneric implements UndoableEdit {
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()) {
+		if (!canUndo()) {
 			throw new CannotUndoException();
 		}
 		this.replace(this.undoMeasure);
@@ -50,7 +50,7 @@ public class UndoableMeasureGeneric implements UndoableEdit {
 	
 	private void replace(TGMeasure replace) {
 		TGTrack track = TuxGuitar.instance().getSongManager().getTrack(this.trackNumber);
-		if(track != null && replace != null) {
+		if (track != null && replace != null) {
 			TGMeasureHeader header = TuxGuitar.instance().getSongManager().getMeasureHeader(replace.getNumber());
 			TGMeasure measure = replace.clone(TuxGuitar.instance().getSongManager().getFactory(), header);
 			measure = TuxGuitar.instance().getSongManager().getTrackManager().replaceMeasure(track, measure);

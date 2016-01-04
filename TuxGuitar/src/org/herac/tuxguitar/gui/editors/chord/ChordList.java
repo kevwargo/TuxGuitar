@@ -144,7 +144,7 @@ public class ChordList extends Composite {
 			chord.setFirstFretFont(getFont(painter.getGC()));
 			chord.setStyle(ViewLayout.DISPLAY_CHORD_DIAGRAM);
 			chord.update(painter, true);
-			if(fromX + chord.getWidth() >= ((getBounds().x + getBounds().width) - 20)) {
+			if (fromX + chord.getWidth() >= ((getBounds().x + getBounds().width) - 20)) {
 				fromX = 15;
 				fromY += chord.getHeight() + 10;
 			}
@@ -161,7 +161,7 @@ public class ChordList extends Composite {
 	}
 	
 	private Color getChordColor(TGChordImpl chord) {
-		if(this.selectedChord != null && this.selectedChord.equals(chord)) {
+		if (this.selectedChord != null && this.selectedChord.equals(chord)) {
 			return getDisplay().getSystemColor(SWT.COLOR_BLUE);
 		}
 		return getDisplay().getSystemColor(SWT.COLOR_BLACK);
@@ -181,13 +181,13 @@ public class ChordList extends Composite {
 	}
 	
 	protected Font getFont(GC painter) {
-		if(this.font == null || this.font.isDisposed()) { 
+		if (this.font == null || this.font.isDisposed()) { 
 			Font available = painter.getFont();
-			if(available == null || available.isDisposed()) {
+			if (available == null || available.isDisposed()) {
 				available = getDisplay().getSystemFont();
 			}
 			FontData[] datas = available.getFontData();
-			if(datas.length > 0) {
+			if (datas.length > 0) {
 				this.font = new Font(getDisplay(), datas[0].getName(), Math.min(7, datas[0].getHeight()), SWT.BOLD);
 			}
 		}
@@ -203,8 +203,8 @@ public class ChordList extends Composite {
 			int y1 = chord.getPosY();
 			int y2 = y1 + chord.getHeight();
 			if (x > x1 && x < x2 && y > y1 && y < y2) {
-				if(setAsSelected) {
-					if(this.selectedChord != null) {
+				if (setAsSelected) {
+					if (this.selectedChord != null) {
 						this.selectedChord.dispose();
 					}
 					this.selectedChord = chord;
@@ -231,7 +231,7 @@ public class ChordList extends Composite {
 	}
 	
 	public void disposeFont() {
-		if(this.font != null) {
+		if (this.font != null) {
 			this.font.dispose();
 		}
 	}

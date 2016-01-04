@@ -15,7 +15,7 @@ public class TGCustomToolManager {
 	}
 	
 	public static TGCustomToolManager instance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new TGCustomToolManager();
 		}
 		return instance;

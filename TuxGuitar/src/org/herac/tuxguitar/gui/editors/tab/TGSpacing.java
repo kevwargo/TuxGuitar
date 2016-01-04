@@ -20,13 +20,13 @@ public abstract class TGSpacing {
 	}
 	
 	public void clear() {
-		for(int i = 0; i < this.spacing.length; i ++) {
+		for (int i = 0; i < this.spacing.length; i ++) {
 			this.spacing[i] = 0;
 		}
 	}
 	
 	public void setSize(int index, int size) {
-		if( size > this.spacing[ this.positions [this.flags -1] [index] ] ) {
+		if ( size > this.spacing[ this.positions [this.flags -1] [index] ] ) {
 			this.spacing[ this.positions [this.flags -1] [index] ] = size;
 		}
 	}
@@ -37,7 +37,7 @@ public abstract class TGSpacing {
 	
 	public int getSize() {
 		int spacing = 0;
-		for(int i = 0;i < this.spacing.length; i ++) {
+		for (int i = 0;i < this.spacing.length; i ++) {
 			spacing += this.spacing[i];
 		}
 		return spacing;
@@ -45,7 +45,7 @@ public abstract class TGSpacing {
 	
 	public int getPosition(int index) {
 		int spacing = 0;
-		for(int i = 0;i < this.positions[this.flags -1][index]; i ++) {
+		for (int i = 0;i < this.positions[this.flags -1][index]; i ++) {
 			spacing += this.spacing[i];
 		}
 		return spacing;

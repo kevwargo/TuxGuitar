@@ -47,7 +47,7 @@ public class StrokeEditor extends SelectionAdapter {
 		
 		//-----defaults-------------------------------------------------
 		int duration = TGDuration.SIXTEENTH;
-		if( beat.getStroke().getDirection() != TGStroke.STROKE_NONE ) {
+		if ( beat.getStroke().getDirection() != TGStroke.STROKE_NONE ) {
 			duration = beat.getStroke().getValue();
 		}
 		
@@ -134,19 +134,19 @@ public class StrokeEditor extends SelectionAdapter {
 	}
 	
 	protected int getSelection() {
-		if( this.duration4.getSelection() ) {
+		if ( this.duration4.getSelection() ) {
 			return TGDuration.QUARTER;
 		}
-		if( this.duration8.getSelection() ) {
+		if ( this.duration8.getSelection() ) {
 			return TGDuration.EIGHTH;
 		}
-		if( this.duration16.getSelection() ) {
+		if ( this.duration16.getSelection() ) {
 			return TGDuration.SIXTEENTH;
 		}
-		if( this.duration32.getSelection() ) {
+		if ( this.duration32.getSelection() ) {
 			return TGDuration.THIRTY_SECOND;
 		}
-		if( this.duration64.getSelection() ) {
+		if ( this.duration64.getSelection() ) {
 			return TGDuration.SIXTY_FOURTH;
 		}
 		return 0;

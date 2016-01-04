@@ -27,7 +27,7 @@ public class GoLastTrackAction extends Action {
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGTrack track = getSongManager().getLastTrack();
-		if(track != null) {
+		if (track != null) {
 			caret.update(track.getNumber());
 		}
 		return 0;

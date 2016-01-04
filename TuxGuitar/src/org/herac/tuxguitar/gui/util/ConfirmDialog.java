@@ -52,15 +52,15 @@ public class ConfirmDialog {
 		buttonsComposite.setLayout(buttonsLayout);
 		buttonsComposite.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 		
-		if((style & BUTTON_YES)!= 0) {
+		if ((style & BUTTON_YES)!= 0) {
 			addCloseButton(TuxGuitar.getProperty("yes"), STATUS_YES, buttonsComposite, (defaultButton == BUTTON_YES) );
 			buttonsLayout.numColumns ++;
 		}
-		if((style & BUTTON_NO)!= 0) {
+		if ((style & BUTTON_NO)!= 0) {
 			addCloseButton(TuxGuitar.getProperty("no"), STATUS_NO, buttonsComposite, (defaultButton == BUTTON_NO) );
 			buttonsLayout.numColumns ++;
 		}
-		if((style & BUTTON_CANCEL)!= 0) {
+		if ((style & BUTTON_CANCEL)!= 0) {
 			addCloseButton(TuxGuitar.getProperty("cancel"), STATUS_CANCEL, buttonsComposite, (defaultButton == BUTTON_CANCEL) );
 			buttonsLayout.numColumns ++;
 		}
@@ -80,7 +80,7 @@ public class ConfirmDialog {
 				ConfirmDialog.this.status = value;
 			}
 		});
-		if(defaultButton) {
+		if (defaultButton) {
 			this.dialog.setDefaultButton(button);
 		}
 	}

@@ -34,15 +34,15 @@ public class SetVoiceAutoAction extends Action {
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGBeatImpl beat = caret.getSelectedBeat();
-		if( beat != null ) {
+		if ( beat != null ) {
 			TGVoiceImpl voice = beat.getVoiceImpl( caret.getVoice() );
 			TGBeatGroup group = voice.getBeatGroup();
-			if(!voice.isEmpty() && !voice.isRestVoice() && group != null ) {
+			if (!voice.isEmpty() && !voice.isRestVoice() && group != null ) {
 				//comienza el undoable
 				UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 				
 				Iterator it = group.getVoices().iterator();
-				while( it.hasNext() ) {
+				while ( it.hasNext() ) {
 					TGVoice current = (TGVoice)it.next();
 					getSongManager().getMeasureManager().changeVoiceDirection(current, TGVoice.DIRECTION_NONE);
 				}

@@ -28,7 +28,7 @@ public class SetWholeDurationAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(getSelectedDuration().getValue() != VALUE) {
+		if (getSelectedDuration().getValue() != VALUE) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			

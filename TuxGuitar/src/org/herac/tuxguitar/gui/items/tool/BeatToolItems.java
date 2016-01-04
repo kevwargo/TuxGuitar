@@ -99,7 +99,7 @@ public class BeatToolItems  extends ToolItems {
 		public void addItems() {
 			this.disposeItems();
 			this.subMenuItems = new MenuItem[TuxGuitar.instance().getCustomChordManager().countChords()];
-			for(int i = 0;i < this.subMenuItems.length; i++) {
+			for (int i = 0;i < this.subMenuItems.length; i++) {
 				TGChord chord = TuxGuitar.instance().getCustomChordManager().getChord(i);
 				this.subMenuItems[i] = new MenuItem(this.subMenu, SWT.PUSH);
 				this.subMenuItems[i].setData(chord);
@@ -109,8 +109,8 @@ public class BeatToolItems  extends ToolItems {
 		}
 		
 		public void disposeItems() {
-			if(this.subMenuItems != null) {
-				for(int i = 0;i < this.subMenuItems.length; i++) {
+			if (this.subMenuItems != null) {
+				for (int i = 0;i < this.subMenuItems.length; i++) {
 					this.subMenuItems[i].dispose();
 				}
 			}
@@ -129,7 +129,7 @@ public class BeatToolItems  extends ToolItems {
 		}
 		
 		public void update() {
-			if(this.lastEdit != TuxGuitar.instance().getCustomChordManager().getLastEdit()) {
+			if (this.lastEdit != TuxGuitar.instance().getCustomChordManager().getLastEdit()) {
 				this.addItems();
 				this.lastEdit = TuxGuitar.instance().getCustomChordManager().getLastEdit();
 			}

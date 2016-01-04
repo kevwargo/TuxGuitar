@@ -26,7 +26,7 @@ public class SetScoreEnabledAction extends Action {
 	protected int execute(TypedEvent e) {
 		ViewLayout layout = getEditor().getTablature().getViewLayout();
 		layout.setStyle( ( layout.getStyle() ^ ViewLayout.DISPLAY_SCORE ) );
-		if((layout.getStyle() & ViewLayout.DISPLAY_TABLATURE) == 0 && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ) {
+		if ((layout.getStyle() & ViewLayout.DISPLAY_TABLATURE) == 0 && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) == 0 ) {
 			layout.setStyle( ( layout.getStyle() ^ ViewLayout.DISPLAY_TABLATURE) );
 		}
 		updateTablature();

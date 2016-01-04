@@ -27,7 +27,7 @@ public class GoFirstTrackAction extends Action {
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGTrack track = getSongManager().getFirstTrack();
-		if(track != null) {
+		if (track != null) {
 			caret.update(track.getNumber());
 		}
 		return 0;

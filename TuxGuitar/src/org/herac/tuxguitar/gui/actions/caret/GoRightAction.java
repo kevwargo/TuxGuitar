@@ -26,12 +26,12 @@ public class GoRightAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getPlayer().isRunning()) {
+		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoNext();
 		}
 		else {
 			Caret caret = getEditor().getTablature().getCaret();
-			if(!caret.moveRight()) {
+			if (!caret.moveRight()) {
 				int number = (getSongManager().getSong().countMeasureHeaders() + 1);
 				
 				//comienza el undoable

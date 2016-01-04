@@ -28,29 +28,29 @@ public class ExportSongAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		Object data = e.widget.getData(); 
-		if(! (data instanceof TGRawExporter) ) {
+		if (! (data instanceof TGRawExporter) ) {
 			return AUTO_UNLOCK;
 		}
 		
 		final TGRawExporter exporter = (TGRawExporter)data;
-		if( exporter instanceof TGLocalFileExporter ) {
+		if ( exporter instanceof TGLocalFileExporter ) {
 			return this.processLocalFileExporter( (TGLocalFileExporter)exporter );
 		}
 		return this.processRawExporter( exporter );
 		/*
-		if(!exporter.configure(false)) {
+		if (!exporter.configure(false)) {
 			return AUTO_UNLOCK;
 		}
 		
 		final String fileName = FileActionUtils.chooseFileName(exporter.getFileFormat());
-		if(fileName == null) {
+		if (fileName == null) {
 			return AUTO_UNLOCK;
 		}
 		
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
 			public void run() {
-				if(!TuxGuitar.isDisposed()) {
+				if (!TuxGuitar.isDisposed()) {
 					FileActionUtils.exportSong(exporter, fileName);
 					TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 					ActionLock.unlock();
@@ -63,19 +63,19 @@ public class ExportSongAction extends Action {
 	}
 	
 	private int processLocalFileExporter( final TGLocalFileExporter exporter ) {
-		if(!exporter.configure(false)) {
+		if (!exporter.configure(false)) {
 			return AUTO_UNLOCK;
 		}
 		
 		final String fileName = FileActionUtils.chooseFileName(exporter.getFileFormat());
-		if(fileName == null) {
+		if (fileName == null) {
 			return AUTO_UNLOCK;
 		}
 		
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
 			public void run() {
-				if(!TuxGuitar.isDisposed()) {
+				if (!TuxGuitar.isDisposed()) {
 					FileActionUtils.exportSong(exporter, fileName);
 					TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 					ActionLock.unlock();
@@ -90,7 +90,7 @@ public class ExportSongAction extends Action {
 		TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
 		new Thread(new Runnable() {
 			public void run() {
-				if(!TuxGuitar.isDisposed()) {
+				if (!TuxGuitar.isDisposed()) {
 					FileActionUtils.exportSong(exporter);
 					TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 					ActionLock.unlock();

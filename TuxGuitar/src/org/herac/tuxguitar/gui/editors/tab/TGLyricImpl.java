@@ -36,7 +36,7 @@ public class TGLyricImpl extends TGLyric {
 	}
 	
 	public void setCurrentMeasure(TGMeasureImpl measure) {
-		if(measure.getNumber() >= getFrom()) {
+		if (measure.getNumber() >= getFrom()) {
 			measure.setLyricBeatIndex(this.nextIndex);
 			this.nextIndex += (measure.getNotEmptyBeats());
 		}else {
@@ -48,14 +48,14 @@ public class TGLyricImpl extends TGLyric {
 	public void paintCurrentNoteBeats(TGPainter painter, ViewLayout layout, TGMeasureImpl currentMeasure , int fromX, int fromY) {
 		int from = currentMeasure.getLyricBeatIndex();
 		String[] beats = getLyricBeats();
-		if(beats != null && from >= 0 && from < beats.length) {
+		if (beats != null && from >= 0 && from < beats.length) {
 			int beatIndex = 0;
-			for(int i = 0;i < currentMeasure.countBeats();i ++) {
+			for (int i = 0;i < currentMeasure.countBeats();i ++) {
 				TGBeatImpl beat = (TGBeatImpl)currentMeasure.getBeat(i);
-				if(!beat.isRestBeat()) {
-					if((from + beatIndex) < beats.length) {
+				if (!beat.isRestBeat()) {
+					if ((from + beatIndex) < beats.length) {
 						String str = beats[from + beatIndex].trim();
-						if(str.length() > 0) {
+						if (str.length() > 0) {
 							int x = (fromX + beat.getPosX() + beat.getSpacing() + 2);
 							layout.setLyricStyle(painter,(layout.isPlayModeEnabled() && beat.isPlaying(layout)));
 							painter.drawString(str, x + 13,(fromY + currentMeasure.getTs().getPosition(TGTrackSpacing.POSITION_LYRIC)));

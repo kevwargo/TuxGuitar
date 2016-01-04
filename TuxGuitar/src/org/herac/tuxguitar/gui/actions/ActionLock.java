@@ -18,7 +18,7 @@ public class ActionLock {
 	
 	public synchronized static void waitFor() {
 		try {
-			while(isLocked()) {
+			while (isLocked()) {
 				synchronized( ActionLock.class ) {
 					ActionLock.class.wait(1);
 				}

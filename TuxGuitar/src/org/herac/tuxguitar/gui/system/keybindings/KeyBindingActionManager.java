@@ -36,13 +36,13 @@ public class KeyBindingActionManager {
 	
 	public Action getActionForKeyBinding(KeyBinding kb) {
 		Action action = KeyBindingReserveds.getActionForKeyBinding(kb);
-		if(action != null) {
+		if (action != null) {
 			return action;
 		}
 		Iterator it = this.keyBindingsActions.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			KeyBindingAction keyBindingAction = (KeyBindingAction)it.next();
-			if(keyBindingAction.getKeyBinding() != null && kb.isSameAs( keyBindingAction.getKeyBinding() )) {
+			if (keyBindingAction.getKeyBinding() != null && kb.isSameAs( keyBindingAction.getKeyBinding() )) {
 				return TuxGuitar.instance().getAction(keyBindingAction.getAction());
 			}
 		}
@@ -51,13 +51,13 @@ public class KeyBindingActionManager {
 	
 	public KeyBinding getKeyBindingForAction(String action) {
 		KeyBinding kb = KeyBindingReserveds.getKeyBindingForAction(action);
-		if(kb != null) {
+		if (kb != null) {
 			return kb;
 		}
 		Iterator it = this.keyBindingsActions.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			KeyBindingAction keyBindingAction = (KeyBindingAction)it.next();
-			if(action.equals( keyBindingAction.getAction() )) {
+			if (action.equals( keyBindingAction.getAction() )) {
 				return keyBindingAction.getKeyBinding();
 			}
 		}

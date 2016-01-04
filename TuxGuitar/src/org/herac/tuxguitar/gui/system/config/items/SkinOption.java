@@ -74,7 +74,7 @@ public class SkinOption extends Option {
 		this.previewArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.previewArea.addPaintListener(new PaintListener() {
 			public void paintControl(PaintEvent e) {
-				if(SkinOption.this.preview != null && !SkinOption.this.preview.isDisposed()) {
+				if (SkinOption.this.preview != null && !SkinOption.this.preview.isDisposed()) {
 					e.gc.drawImage(SkinOption.this.preview, 0, 0);
 				}
 			}
@@ -88,12 +88,12 @@ public class SkinOption extends Option {
 			public void run() {
 				SkinOption.this.skins = new ArrayList();
 				String[] skinNames = TGFileUtils.getFileNames("skins");
-				if( skinNames != null ) {
-					for(int i = 0;i < skinNames.length;i++) {
+				if ( skinNames != null ) {
+					for (int i = 0;i < skinNames.length;i++) {
 						Properties properties = new Properties();
 						try {
 							InputStream skinInfo = TGFileUtils.getResourceAsStream("skins/" + skinNames[i] + "/skin.properties");
-							if( skinInfo != null ) {
+							if ( skinInfo != null ) {
 								properties.load( skinInfo );
 							}
 						}catch (Throwable throwable) {
@@ -111,25 +111,25 @@ public class SkinOption extends Option {
 				}
 				new SyncThread(new Runnable() {
 					public void run() {
-						if(!isDisposed()) {
-							for(int i = 0;i < SkinOption.this.skins.size();i++) {
+						if (!isDisposed()) {
+							for (int i = 0;i < SkinOption.this.skins.size();i++) {
 								SkinInfo info = (SkinInfo)SkinOption.this.skins.get(i);
 								SkinOption.this.combo.add(info.getName());
-								if(info.getSkin().equals(getConfig().getStringConfigValue(TGConfigKeys.SKIN))) {
+								if (info.getSkin().equals(getConfig().getStringConfigValue(TGConfigKeys.SKIN))) {
 									SkinOption.this.combo.select(i);
 								}
 							}
 							SkinOption.this.combo.addSelectionListener(new SelectionAdapter() {
 								public void widgetSelected(SelectionEvent e) {
 									int selection = SkinOption.this.combo.getSelectionIndex();
-									if(selection >= 0 && selection < SkinOption.this.skins.size()) {
+									if (selection >= 0 && selection < SkinOption.this.skins.size()) {
 										showSkinInfo((SkinInfo)SkinOption.this.skins.get(selection));
 									}
 								}
 							});
 							
 							int selection = SkinOption.this.combo.getSelectionIndex();
-							if(selection >= 0 && selection < SkinOption.this.skins.size()) {
+							if (selection >= 0 && selection < SkinOption.this.skins.size()) {
 								showSkinInfo((SkinInfo)SkinOption.this.skins.get(selection));
 							}
 							SkinOption.this.initialized = true;
@@ -145,13 +145,13 @@ public class SkinOption extends Option {
 		loadCursor(SWT.CURSOR_WAIT);
 		new SyncThread(new Runnable() {
 			public void run() {
-				if(!isDisposed()) {
+				if (!isDisposed()) {
 					disposePreview();
 					SkinOption.this.nameLabel.setText(info.getName());
 					SkinOption.this.authorLabel.setText(info.getAuthor());
 					SkinOption.this.descriptionLabel.setText(info.getDescription());
 					SkinOption.this.versionLabel.setText((info.getDate() == null)?info.getVersion():info.getVersion() + " (" + info.getDate() + ")");
-					if(info.getPreview() != null) {
+					if (info.getPreview() != null) {
 						SkinOption.this.preview = TGFileUtils.loadImage(info.getSkin(), info.getPreview());
 					}
 					SkinOption.this.previewArea.redraw();
@@ -162,9 +162,9 @@ public class SkinOption extends Option {
 	}
 	
 	public void updateConfig() {
-		if(this.initialized) {
+		if (this.initialized) {
 			int selection = this.combo.getSelectionIndex();
-			if(selection >= 0 && selection < this.skins.size()) {
+			if (selection >= 0 && selection < this.skins.size()) {
 				SkinInfo info = (SkinInfo)this.skins.get(selection);
 				getConfig().setProperty(TGConfigKeys.SKIN, info.getSkin());
 			}
@@ -172,13 +172,13 @@ public class SkinOption extends Option {
 	}
 	
 	public void updateDefaults() {
-		if(this.initialized) {
+		if (this.initialized) {
 			getConfig().setProperty(TGConfigKeys.SKIN, getDefaults().getProperty(TGConfigKeys.SKIN));
 		}
 	}
 	
 	public void applyConfig(boolean force) {
-		if(force || (this.initialized && TuxGuitar.instance().getIconManager().shouldReload())) {
+		if (force || (this.initialized && TuxGuitar.instance().getIconManager().shouldReload())) {
 			addSyncThread(new Runnable() {
 				public void run() {
 					TuxGuitar.instance().loadSkin();
@@ -192,7 +192,7 @@ public class SkinOption extends Option {
 	}
 	
 	public void disposePreview() {
-		if(this.preview != null && !this.preview.isDisposed()) {
+		if (this.preview != null && !this.preview.isDisposed()) {
 			this.preview.dispose();
 		}
 	}

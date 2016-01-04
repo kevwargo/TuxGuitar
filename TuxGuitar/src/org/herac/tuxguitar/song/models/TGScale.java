@@ -27,7 +27,7 @@ public abstract class TGScale {
 	
 	public void clear() {
 		this.setKey(0);
-		for(int i = 0; i < this.notes.length; i++) {
+		for (int i = 0; i < this.notes.length; i++) {
 			this.setNote(i, false);
 		}
 	}

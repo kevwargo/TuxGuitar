@@ -26,9 +26,9 @@ public abstract class TGBrowserBar implements LanguageLoader {
 	
 	protected void newCollection(String type) {
 		TGBrowserFactory factory = TGBrowserManager.instance().getFactory(type);
-		if(factory != null) {
+		if (factory != null) {
 			TGBrowserData data = factory.dataDialog(getBrowser().getShell());
-			if(data != null) {
+			if (data != null) {
 				openCollection(addCollection(factory, data, true));
 			}
 		}
@@ -43,7 +43,7 @@ public abstract class TGBrowserBar implements LanguageLoader {
 		collection.setType(factory.getType());
 		collection.setData(data);
 		collection = TGBrowserManager.instance().addCollection(collection);
-		if(reload) {
+		if (reload) {
 			getBrowser().updateCollections(collection);
 		}
 		return collection;

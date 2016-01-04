@@ -26,7 +26,7 @@ public class UndoAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		try {
-			if(TuxGuitar.instance().getUndoableManager().canUndo()) {
+			if (TuxGuitar.instance().getUndoableManager().canUndo()) {
 				TuxGuitar.instance().getUndoableManager().undo();
 			}
 		} catch (CannotUndoException e1) {

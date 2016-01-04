@@ -28,7 +28,7 @@ public class DecrementDurationAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		TGDuration duration = getEditor().getTablature().getCaret().getDuration();
-		if(duration.getValue() > TGDuration.WHOLE) {
+		if (duration.getValue() > TGDuration.WHOLE) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			

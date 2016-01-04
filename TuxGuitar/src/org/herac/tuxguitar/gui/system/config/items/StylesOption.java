@@ -156,14 +156,14 @@ public class StylesOption extends Option {
 	private void addFontButtonListeners(final Button button, final FontData fontData) {
 		button.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
-				if(StylesOption.this.initialized) {
+				if (StylesOption.this.initialized) {
 					Font font = new Font(getDisplay(), fontData);
 					FontData[] fontDataList = font.getFontData();
 					font.dispose();
 					FontDialog fontDialog = new FontDialog(getShell());
 					fontDialog.setFontList(fontDataList);
 					FontData result = fontDialog.open();
-					if(result != null) {
+					if (result != null) {
 						loadFontData(result, fontData, button);
 					}
 				}
@@ -182,10 +182,10 @@ public class StylesOption extends Option {
 	
 	protected void setButtonFontData(Button button, FontData fontData) {
 		String text = fontData.getName();
-		if( (fontData.getStyle() & SWT.BOLD) != 0 ) {
+		if ( (fontData.getStyle() & SWT.BOLD) != 0 ) {
 			text += " Bold";
 		}
-		if( (fontData.getStyle() & SWT.ITALIC) != 0 ) {
+		if ( (fontData.getStyle() & SWT.ITALIC) != 0 ) {
 			text += " Italic";
 		}
 		text += (" " + fontData.getHeight());
@@ -223,7 +223,7 @@ public class StylesOption extends Option {
 				final RGB linesRGB  = getConfig().getRGBConfigValue(TGConfigKeys.COLOR_LINE);
 				new SyncThread(new Runnable() {
 					public void run() {
-						if(!isDisposed()) {
+						if (!isDisposed()) {
 							loadFontData(defaultFontData, StylesOption.this.defaultFontData, StylesOption.this.defaultFontButton);
 							loadFontData(noteFontData, StylesOption.this.noteFontData, StylesOption.this.noteFontButton);
 							loadFontData(timeSignatureFontData, StylesOption.this.timeSignatureFontData, StylesOption.this.timeSignatureFontButton);
@@ -255,7 +255,7 @@ public class StylesOption extends Option {
 	}
 	
 	public void updateConfig() {
-		if(this.initialized) {
+		if (this.initialized) {
 			getConfig().setProperty(TGConfigKeys.FONT_DEFAULT, this.defaultFontData);
 			getConfig().setProperty(TGConfigKeys.FONT_NOTE, this.noteFontData);
 			getConfig().setProperty(TGConfigKeys.FONT_TIME_SIGNATURE, this.timeSignatureFontData);
@@ -274,7 +274,7 @@ public class StylesOption extends Option {
 	}
 	
 	public void updateDefaults() {
-		if(this.initialized) {
+		if (this.initialized) {
 			getConfig().setProperty(TGConfigKeys.FONT_DEFAULT, getDefaults().getProperty(TGConfigKeys.FONT_DEFAULT));
 			getConfig().setProperty(TGConfigKeys.FONT_NOTE, getDefaults().getProperty(TGConfigKeys.FONT_NOTE));
 			getConfig().setProperty(TGConfigKeys.FONT_TIME_SIGNATURE, getDefaults().getProperty(TGConfigKeys.FONT_TIME_SIGNATURE));
@@ -293,7 +293,7 @@ public class StylesOption extends Option {
 	}
 	
 	public void applyConfig(boolean force) {
-		if(force || this.initialized) {
+		if (force || this.initialized) {
 			addSyncThread(new Runnable() {
 				public void run() {
 					TuxGuitar.instance().loadStyles();
@@ -327,7 +327,7 @@ public class StylesOption extends Option {
 		}
 		
 		protected void disposeColor() {
-			if(this.color != null && !this.color.isDisposed()) {
+			if (this.color != null && !this.color.isDisposed()) {
 				this.color.dispose();
 				this.color = null;
 			}
@@ -336,7 +336,7 @@ public class StylesOption extends Option {
 		private void addListeners() {
 			this.button.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent event) {
-					if(StylesOption.this.initialized) {
+					if (StylesOption.this.initialized) {
 						ColorDialog dlg = new ColorDialog(getShell());
 						dlg.setRGB(ButtonColor.this.value);
 						dlg.setText(TuxGuitar.getProperty("choose-color"));

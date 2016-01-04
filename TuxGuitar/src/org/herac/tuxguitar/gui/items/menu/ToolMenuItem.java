@@ -54,7 +54,7 @@ public class ToolMenuItem extends MenuItems {
 		this.browser.addSelectionListener(TuxGuitar.instance().getAction(TGBrowserAction.NAME));
 		
 		Iterator it = TGCustomToolManager.instance().getCustomTools();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGCustomTool tool = (TGCustomTool)it.next();
 			MenuItem menuItem = new MenuItem(this.menu, SWT.PUSH);
 			menuItem.setText(tool.getName());

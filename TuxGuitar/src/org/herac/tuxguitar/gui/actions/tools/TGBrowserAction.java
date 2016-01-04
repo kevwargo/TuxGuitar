@@ -12,7 +12,7 @@ public class TGBrowserAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getBrowser().isDisposed()) {
+		if (TuxGuitar.instance().getBrowser().isDisposed()) {
 			TuxGuitar.instance().getBrowser().show();
 		}else {
 			TuxGuitar.instance().getBrowser().dispose();

@@ -65,7 +65,7 @@ public class TGBrowserDataDialog {
 			public void widgetSelected(SelectionEvent e) {
 				DirectoryDialog directoryDialog = new DirectoryDialog(dialog);
 				String selection = directoryDialog.open();
-				if(selection != null) {
+				if (selection != null) {
 					pathValue.setText(selection);
 				}
 			}
@@ -83,11 +83,11 @@ public class TGBrowserDataDialog {
 			public void widgetSelected(SelectionEvent arg0) {
 				String selectedTitle = titleValue.getText();
 				String selectedPath = pathValue.getText();
-				if(!isValidPath(selectedPath)) {
+				if (!isValidPath(selectedPath)) {
 					MessageDialog.errorMessage(dialog, TuxGuitar.getProperty("browser.collection.fs.invalid-path"));
 					return;
 				}
-				if(isBlank(selectedTitle)) {
+				if (isBlank(selectedTitle)) {
 					selectedTitle = selectedPath;
 				}
 				setData(new TGBrowserDataImpl(selectedTitle, selectedPath));
@@ -129,7 +129,7 @@ public class TGBrowserDataDialog {
 	}
 	
 	protected boolean isValidPath(String path) {
-		if(!isBlank(path)) {
+		if (!isBlank(path)) {
 			File file = new File(path);
 			return (file.exists() && file.isDirectory());
 		}

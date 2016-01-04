@@ -32,16 +32,16 @@ public class DialogUtils {
 	
 	public static final void openDialog(Shell dialog, Shell parent, int style) {
 		Display display = dialog.getDisplay();
-		if((style & OPEN_STYLE_PACK) != 0) {
+		if ((style & OPEN_STYLE_PACK) != 0) {
 			dialog.pack();
 		}
-		if((style & OPEN_STYLE_LAYOUT) != 0) {
+		if ((style & OPEN_STYLE_LAYOUT) != 0) {
 			dialog.layout();
 		}
-		if((style & OPEN_STYLE_MAXIMIZED) != 0) {
+		if ((style & OPEN_STYLE_MAXIMIZED) != 0) {
 			dialog.setMaximized(true);
 		}
-		else if((style & OPEN_STYLE_CENTER) != 0) {
+		else if ((style & OPEN_STYLE_CENTER) != 0) {
 			int x = Math.max(0, parent.getBounds().x + (parent.getBounds().width - dialog.getSize().x) / 2);
 			int y = Math.max(0, parent.getBounds().y + (parent.getBounds().height - dialog.getSize().y) / 2);
 			dialog.setLocation(x, y);
@@ -50,8 +50,8 @@ public class DialogUtils {
 		
 		parent.setCursor(display.getSystemCursor(SWT.CURSOR_ARROW));
 		
-		if((style & OPEN_STYLE_WAIT) != 0) {
-			if( (dialog.getStyle() & SWT.APPLICATION_MODAL) == 0 ) {
+		if ((style & OPEN_STYLE_WAIT) != 0) {
+			if ( (dialog.getStyle() & SWT.APPLICATION_MODAL) == 0 ) {
 				ActionLock.unlock();
 			}
 			while (!display.isDisposed() && !dialog.isDisposed()) {

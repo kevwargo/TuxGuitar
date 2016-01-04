@@ -100,7 +100,7 @@ public class KeyBindingReader {
 				Node nodeKey = params.getNamedItem(SHORTCUT_ATTRIBUTE_KEY);
 				Node nodeMask = params.getNamedItem(SHORTCUT_ATTRIBUTE_MASK);
 				Node nodeAction = params.getNamedItem(SHORTCUT_ATTRIBUTE_ACTION);
-				if( nodeKey != null && nodeMask != null && nodeAction != null) {
+				if ( nodeKey != null && nodeMask != null && nodeAction != null) {
 					String key = nodeKey.getNodeValue();
 					String mask = nodeMask.getNodeValue();
 					String action = nodeAction.getNodeValue();

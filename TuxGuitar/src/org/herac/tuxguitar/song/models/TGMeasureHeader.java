@@ -125,7 +125,7 @@ public abstract class TGMeasureHeader {
 	}
 	
 	private void checkMarker() {
-		if(hasMarker()) {
+		if (hasMarker()) {
 			this.marker.setMeasure(getNumber());
 		}
 	}

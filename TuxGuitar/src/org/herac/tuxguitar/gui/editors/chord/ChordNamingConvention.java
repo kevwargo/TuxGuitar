@@ -65,7 +65,7 @@ public class ChordNamingConvention {
 	/** tonic marks */
 	public String getTonic(int chordTonic, boolean sharp) {
 		String retVal;
-		switch(chordTonic) {
+		switch (chordTonic) {
 			case 0 : retVal="C"; break;
 			case 1 : retVal= sharp ? "C#" : "Db"; break;
 			case 2 : retVal="D"; break;
@@ -85,7 +85,7 @@ public class ChordNamingConvention {
 	/** adds + or - to an add chord String */
 	private String getAdd(String number, int selectionIndex) {
 		StringBuffer retVal=new StringBuffer(number);
-		switch(selectionIndex) {
+		switch (selectionIndex) {
 			case 1 : retVal.append("+"); break;
 			case 2 : retVal.append("-"); break;
 		}

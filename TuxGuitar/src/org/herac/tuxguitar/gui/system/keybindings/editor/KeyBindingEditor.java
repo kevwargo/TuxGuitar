@@ -54,7 +54,7 @@ public class KeyBindingEditor {
 		this.table.addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent e) {
 				TableItem item = getSelectedItem();
-				if(item != null) {
+				if (item != null) {
 					KeyBindingAction itemData = (KeyBindingAction)item.getData();
 					KeyBindingSelector selector = new KeyBindingSelector(KeyBindingEditor.this, itemData);
 					KeyBinding kb = selector.select(KeyBindingEditor.this.dialog.getShell());
@@ -113,7 +113,7 @@ public class KeyBindingEditor {
 	protected int adjustWidth(TableColumn column, int defaultWidth) {
 		column.pack();
 		int width = column.getWidth();
-		if( width < defaultWidth ) {
+		if ( width < defaultWidth ) {
 			width = defaultWidth;
 			column.setWidth( width );
 		}
@@ -128,7 +128,7 @@ public class KeyBindingEditor {
 	}
 	
 	protected void loadTableItemLabel(TableItem item) {
-		if(item.getData() instanceof KeyBindingAction) {
+		if (item.getData() instanceof KeyBindingAction) {
 			KeyBindingAction actionkeyBinding = (KeyBindingAction)item.getData();
 			String action = actionkeyBinding.getAction();
 			String shortcut = (actionkeyBinding.getKeyBinding() != null)?actionkeyBinding.getKeyBinding().toString():"";
@@ -152,13 +152,13 @@ public class KeyBindingEditor {
 		Iterator items = this.items.iterator();
 		while (items.hasNext()) {
 			TableItem item = (TableItem) items.next();
-			if(item.getData() instanceof KeyBindingAction) {
+			if (item.getData() instanceof KeyBindingAction) {
 				KeyBindingAction itemData = (KeyBindingAction)item.getData();
 				KeyBinding keyBinding = null;
 				Iterator it = list.iterator();
 				while (it.hasNext()) {
 					KeyBindingAction keyBindingAction = (KeyBindingAction) it.next();
-					if(keyBindingAction.getAction().equals(itemData.getAction())) {
+					if (keyBindingAction.getAction().equals(itemData.getAction())) {
 						keyBinding =  (KeyBinding) keyBindingAction.getKeyBinding().clone();
 						break;
 					}
@@ -170,13 +170,13 @@ public class KeyBindingEditor {
 	}
 	
 	protected void removeKeyBindingAction(KeyBinding kb) {
-		if(kb != null) {
+		if (kb != null) {
 			Iterator it = this.items.iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				TableItem item = (TableItem) it.next();
-				if(item.getData() instanceof KeyBindingAction) {
+				if (item.getData() instanceof KeyBindingAction) {
 					KeyBindingAction itemData = (KeyBindingAction)item.getData();
-					if(kb.isSameAs(itemData.getKeyBinding())) {
+					if (kb.isSameAs(itemData.getKeyBinding())) {
 						itemData.setKeyBinding(null);
 						loadTableItemLabel(item);
 					}
@@ -188,7 +188,7 @@ public class KeyBindingEditor {
 	protected TableItem getSelectedItem() {
 		TableItem item = null;
 		int itemSelected = this.table.getSelectionIndex();
-		if(itemSelected >= 0) {
+		if (itemSelected >= 0) {
 			item = this.table.getItem(itemSelected);
 		}
 		return item;
@@ -196,11 +196,11 @@ public class KeyBindingEditor {
 	
 	public boolean exists(KeyBinding kb) {
 		Iterator it = this.items.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TableItem item = (TableItem) it.next();
-			if(item.getData() instanceof KeyBindingAction) {
+			if (item.getData() instanceof KeyBindingAction) {
 				KeyBindingAction itemData = (KeyBindingAction)item.getData();
-				if(itemData.getKeyBinding() != null && kb.isSameAs(itemData.getKeyBinding())) {
+				if (itemData.getKeyBinding() != null && kb.isSameAs(itemData.getKeyBinding())) {
 					return true;
 				}
 			}
@@ -213,9 +213,9 @@ public class KeyBindingEditor {
 		Iterator it = this.items.iterator();
 		while (it.hasNext()) {
 			TableItem item = (TableItem) it.next();
-			if(item.getData() instanceof KeyBindingAction) {
+			if (item.getData() instanceof KeyBindingAction) {
 				KeyBindingAction keyBindingAction = (KeyBindingAction)item.getData();
-				if(keyBindingAction.getAction() != null && keyBindingAction.getKeyBinding() != null) {
+				if (keyBindingAction.getAction() != null && keyBindingAction.getKeyBinding() != null) {
 					list.add(keyBindingAction);
 				}
 			}

@@ -35,7 +35,7 @@ public class MoveBeatsLeftAction extends Action {
 		TGMeasure measure = caret.getMeasure();
 		TGTrack track = caret.getTrack();
 		TGDuration duration = (beat != null ? beat.getVoice( caret.getVoice() ).getDuration() : null );
-		if(beat != null && measure != null && track != null && duration != null) {
+		if (beat != null && measure != null && track != null && duration != null) {
 			//comienza el undoable
 			UndoableTrackGeneric undoable = UndoableTrackGeneric.startUndo(track);
 			

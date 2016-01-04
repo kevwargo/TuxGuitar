@@ -106,9 +106,9 @@ public abstract class TGDuration {
 	
 	public long getTime() {
 		long time = (long)( QUARTER_TIME * ( 4.0f / this.value ) ) ;
-		if(this.dotted) {
+		if (this.dotted) {
 			time += time / 2;
-		}else if(this.doubleDotted) {
+		}else if (this.doubleDotted) {
 			time += ((time / 4) * 3);
 		}
 		return this.divisionType.convertTime(time);
@@ -134,17 +134,17 @@ public abstract class TGDuration {
 		tmpDuration.setValue(TGDuration.WHOLE);
 		tmpDuration.setDotted(true);
 		boolean finish = false;
-		while(!finish) {
+		while (!finish) {
 			long tmpTime = tmpDuration.getTime();
-			if(tmpTime - diff <= time) {
-				//if(tmpTime > duration.getTime()) {
-				if(Math.abs( tmpTime - time ) < Math.abs( duration.getTime() - time ) ) {
+			if (tmpTime - diff <= time) {
+				//if (tmpTime > duration.getTime()) {
+				if (Math.abs( tmpTime - time ) < Math.abs( duration.getTime() - time ) ) {
 					duration = tmpDuration.clone(factory);
 				}
 			}
-			if(tmpDuration.isDotted()) {
+			if (tmpDuration.isDotted()) {
 				tmpDuration.setDotted(false);
-			}else if(tmpDuration.getDivision().isEqual(TGDivisionType.NORMAL)) {
+			}else if (tmpDuration.getDivision().isEqual(TGDivisionType.NORMAL)) {
 				tmpDuration.getDivision().setEnters(3);
 				tmpDuration.getDivision().setTimes(2);
 			}else {
@@ -153,7 +153,7 @@ public abstract class TGDuration {
 				tmpDuration.getDivision().setEnters(1);
 				tmpDuration.getDivision().setTimes(1);
 			}
-			if(tmpDuration.getValue() > TGDuration.SIXTY_FOURTH) {
+			if (tmpDuration.getValue() > TGDuration.SIXTY_FOURTH) {
 				finish = true;
 			}
 		}
@@ -167,7 +167,7 @@ public abstract class TGDuration {
 	public int getIndex() {
 		int index = 0;
 		int value = this.value;
-		while( ( value = ( value >> 1 ) ) > 0 ) {
+		while ( ( value = ( value >> 1 ) ) > 0 ) {
 			index ++;
 		}
 		return index;

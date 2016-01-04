@@ -62,7 +62,7 @@ public class RepeatAlternativeAction extends Action {
 			group.setText(TuxGuitar.getProperty("repeat.alternative"));
 			
 			final Button[] selections = new Button[8];
-			for(int i = 0; i < selections.length; i ++) {
+			for (int i = 0; i < selections.length; i ++) {
 				boolean enabled = ((existentEndings & (1 << i)) == 0);
 				selections[i] = new Button(group, SWT.CHECK);
 				selections[i].setText(Integer.toString( i + 1 ));
@@ -82,7 +82,7 @@ public class RepeatAlternativeAction extends Action {
 			buttonOK.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent arg0) {
 					int values = 0;
-					for(int i = 0; i < selections.length; i ++) {
+					for (int i = 0; i < selections.length; i ++) {
 						values |=  (  (selections[i].getSelection()) ? (1 << i) : 0  );
 					}
 					update(measure, values);
@@ -129,12 +129,12 @@ public class RepeatAlternativeAction extends Action {
 	protected int getExistentEndings(TGMeasure measure) {
 		int existentEndings = 0;
 		Iterator it = getSongManager().getSong().getMeasureHeaders();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGMeasureHeader header = (TGMeasureHeader)it.next();
-			if(header.getNumber() == measure.getNumber()) {
+			if (header.getNumber() == measure.getNumber()) {
 				break;
 			}
-			if(header.isRepeatOpen()) {
+			if (header.isRepeatOpen()) {
 				existentEndings = 0;
 			}
 			existentEndings |= header.getRepeatAlternative();
@@ -143,8 +143,8 @@ public class RepeatAlternativeAction extends Action {
 	}
 	
 	protected int getDefaultEndings(int existentEndings) {
-		for(int i = 0; i < 8; i ++) {
-			if((existentEndings & (1 << i)) == 0) {
+		for (int i = 0; i < 8; i ++) {
+			if ((existentEndings & (1 << i)) == 0) {
 				return (1 << i);
 			}
 		}
@@ -153,7 +153,7 @@ public class RepeatAlternativeAction extends Action {
 	
 	protected void update(TGMeasure measure, int value) {
 		//Solo si hubieron cambios
-		if(value != measure.getHeader().getRepeatAlternative()) {
+		if (value != measure.getHeader().getRepeatAlternative()) {
 			//Si no estoy editando, y la alternativa no contiene el primer final,
 			//por defecto se cierra la repeticion del compas anterior
 			boolean previousRepeatClose = (measure.getHeader().getRepeatAlternative() == 0 && ((value & (1 << 0)) == 0)) ;
@@ -168,10 +168,10 @@ public class RepeatAlternativeAction extends Action {
 			fireUpdate(measure.getNumber());
 			undoable.addUndoableEdit(u1.endUndo(value));
 			
-			if(previousRepeatClose) {
+			if (previousRepeatClose) {
 				//Agrego un cierre de repeticion al compaz anterior
 				TGMeasureHeader previous = getSongManager().getMeasureHeader( measure.getNumber() - 1);
-				if(previous != null && previous.getRepeatClose() == 0) {
+				if (previous != null && previous.getRepeatClose() == 0) {
 					UndoableChangeCloseRepeat u2 = UndoableChangeCloseRepeat.startUndo(previous.getStart(), previous.getRepeatClose());
 					getSongManager().changeCloseRepeat(previous.getStart(), 1);
 					fireUpdate(previous.getNumber());

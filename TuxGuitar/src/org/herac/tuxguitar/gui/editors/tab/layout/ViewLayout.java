@@ -95,7 +95,7 @@ public abstract class ViewLayout {
 		this.playModeEnabled = false;
 		this.resources = new TGResources(this);
 		this.style = style;
-		if((this.style & DISPLAY_TABLATURE) == 0 && (this.style & DISPLAY_SCORE) == 0 ) {
+		if ((this.style & DISPLAY_TABLATURE) == 0 && (this.style & DISPLAY_SCORE) == 0 ) {
 			this.style |= DISPLAY_TABLATURE;
 		}
 		this.init( scale );
@@ -198,18 +198,18 @@ public abstract class ViewLayout {
 	 * Pinta las lineas
 	 */
 	public void paintLines(TGTrackImpl track, TGTrackSpacing ts, TGPainter painter, int x, int y, int width) {
-		if(width > 0) {
+		if (width > 0) {
 			setLineStyle(painter);
 			int tempX = ((x < 0)?0:x);
 			int tempY = y;
 			
 			//partitura
-			if( (this.style & DISPLAY_SCORE) != 0 ) {
+			if ( (this.style & DISPLAY_SCORE) != 0 ) {
 				int posY = tempY + ts.getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES);
 				
 				painter.initPath();
 				painter.setAntialias(false);
-				for(int i = 1;i <= 5;i ++) {
+				for (int i = 1;i <= 5;i ++) {
 					painter.moveTo(tempX, posY);
 					painter.lineTo(tempX + width, posY);
 					posY += getScoreLineSpacing();
@@ -217,12 +217,12 @@ public abstract class ViewLayout {
 				painter.closePath();
 			}
 			//tablatura
-			if((this.style & DISPLAY_TABLATURE) != 0) {
+			if ((this.style & DISPLAY_TABLATURE) != 0) {
 				tempY += ts.getPosition(TGTrackSpacing.POSITION_TABLATURE);
 				
 				painter.initPath();
 				painter.setAntialias(false);
-				for(int i = 0; i < track.stringCount();i++) {
+				for (int i = 0; i < track.stringCount();i++) {
 					painter.moveTo(tempX, tempY);
 					painter.lineTo(tempX + width, tempY);
 					tempY += getStringSpacing();
@@ -236,9 +236,9 @@ public abstract class ViewLayout {
 	 * Pinta el caret
 	 */
 	public void paintCaret(TGPainter painter) {
-		if(isCaretVisible() && ((this.style & (DISPLAY_TABLATURE | DISPLAY_SCORE) ) != 0 )) {
+		if (isCaretVisible() && ((this.style & (DISPLAY_TABLATURE | DISPLAY_SCORE) ) != 0 )) {
 			Caret caret = getTablature().getCaret();
-			if(!caret.getMeasure().isOutOfBounds()) {
+			if (!caret.getMeasure().isOutOfBounds()) {
 				caret.paintCaret(this, painter);
 			}
 		}
@@ -251,7 +251,7 @@ public abstract class ViewLayout {
 		this.playModeEnabled = true;
 		
 		//pinto el compas
-		if(paintMeasure) {
+		if (paintMeasure) {
 			measure.paintMeasure(this, painter);
 		}
 		//pinto el pulso
@@ -273,22 +273,22 @@ public abstract class ViewLayout {
 	protected void checkDefaultSpacing(TGTrackSpacing ts) {
 		int checkPosition = -1;
 		int minBufferSeparator = getMinBufferSeparator();
-		if( (this.style & DISPLAY_SCORE) != 0 ) {
+		if ( (this.style & DISPLAY_SCORE) != 0 ) {
 			int bufferSeparator = (ts.getPosition(TGTrackSpacing.POSITION_SCORE_UP_LINES) - ts.getPosition(TGTrackSpacing.POSITION_BUFFER_SEPARATOR));
-			if(bufferSeparator < minBufferSeparator ) {
+			if (bufferSeparator < minBufferSeparator ) {
 				ts.setSize(TGTrackSpacing.POSITION_BUFFER_SEPARATOR, minBufferSeparator - bufferSeparator);
 			}
 			checkPosition = ts.getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES);
 		}
-		else if((this.style & DISPLAY_TABLATURE) != 0) {
+		else if ((this.style & DISPLAY_TABLATURE) != 0) {
 			int bufferSeparator = (ts.getPosition(TGTrackSpacing.POSITION_TABLATURE) - ts.getPosition(TGTrackSpacing.POSITION_BUFFER_SEPARATOR));
-			if(bufferSeparator < minBufferSeparator ) {
+			if (bufferSeparator < minBufferSeparator ) {
 				ts.setSize(TGTrackSpacing.POSITION_BUFFER_SEPARATOR, minBufferSeparator - bufferSeparator);
 			}
 			checkPosition = ts.getPosition(TGTrackSpacing.POSITION_TABLATURE);
 		}
 		
-		if(checkPosition >= 0 && checkPosition < getMinTopSpacing()) {
+		if (checkPosition >= 0 && checkPosition < getMinTopSpacing()) {
 			ts.setSize(TGTrackSpacing.POSITION_TOP, (getMinTopSpacing() - checkPosition));
 		}
 	}
@@ -306,7 +306,7 @@ public abstract class ViewLayout {
 	 */
 	protected float getMinSpacing(TGDuration duration) {
 		float scale = getScale();
-		switch(duration.getValue()) {
+		switch (duration.getValue()) {
 			case TGDuration.WHOLE:
 				return (50.0f * scale);
 			case TGDuration.HALF:
@@ -326,8 +326,8 @@ public abstract class ViewLayout {
 	public float getBeatWidth(TGVoice voice) {
 		float scale = getScale();
 		TGDuration duration = voice.getDuration();
-		if(duration != null) {
-			switch(duration.getValue()) {
+		if (duration != null) {
+			switch (duration.getValue()) {
 				case TGDuration.WHOLE:
 					return (30.0f * scale);
 				case TGDuration.HALF:
@@ -353,8 +353,8 @@ public abstract class ViewLayout {
 	public float getVoiceWidth(TGVoiceImpl voice) {
 		float scale = getScale();
 		TGDuration duration = voice.getDuration();
-		if(duration != null) {
-			switch(duration.getValue()) {
+		if (duration != null) {
+			switch (duration.getValue()) {
 				case TGDuration.WHOLE:
 					return (30.0f * scale);
 				case TGDuration.HALF:
@@ -555,7 +555,7 @@ public abstract class ViewLayout {
 		if (note.isTiedNote()) {
 			noteAsString = "L";
 			noteAsString = (note.getEffect().isGhostNote())?"(" + noteAsString + ")":noteAsString;
-		}else if(note.getEffect().isDeadNote()) {
+		}else if (note.getEffect().isDeadNote()) {
 			noteAsString = "X";
 			noteAsString = (note.getEffect().isGhostNote())?"(" + noteAsString + ")":noteAsString;
 		}else {
@@ -788,10 +788,10 @@ public abstract class ViewLayout {
 	
 	public int getDefaultChordSpacing() {
 		int spacing = 0;
-		if( (this.style & DISPLAY_CHORD_DIAGRAM) != 0 ) {
+		if ( (this.style & DISPLAY_CHORD_DIAGRAM) != 0 ) {
 			spacing += ( (TGChordImpl.MAX_FRETS * getChordFretSpacing()) + getChordFretSpacing());
 		}
-		if( (this.style & DISPLAY_CHORD_NAME) != 0 ) {
+		if ( (this.style & DISPLAY_CHORD_NAME) != 0 ) {
 			spacing += Math.round( (15f * getScale()) );
 		}
 		return spacing;
@@ -807,7 +807,7 @@ public abstract class ViewLayout {
 	
 	public boolean hasLoopMarker(TGMeasure measure) {
 		MidiPlayerMode pm = TuxGuitar.instance().getPlayer().getMode();
-		if( pm.isLoop() && ( pm.getLoopSHeader() == measure.getNumber() || pm.getLoopEHeader() == measure.getNumber() ) ) {
+		if ( pm.isLoop() && ( pm.getLoopSHeader() == measure.getNumber() || pm.getLoopEHeader() == measure.getNumber() ) ) {
 			return true;
 		}
 		return false;
@@ -831,10 +831,10 @@ public abstract class ViewLayout {
 		int minorDistance = 0;
 		
 		Iterator it = this.trackPositions.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TrackPosition pos = (TrackPosition)it.next();
 			int distanceY = Math.min(Math.abs(y - (pos.getPosY())), Math.abs(y - (pos.getPosY() + pos.getHeight() - 10)));
-			if(trackPos == null || distanceY < minorDistance) {
+			if (trackPos == null || distanceY < minorDistance) {
 				trackPos = pos;
 				minorDistance = distanceY;
 			}

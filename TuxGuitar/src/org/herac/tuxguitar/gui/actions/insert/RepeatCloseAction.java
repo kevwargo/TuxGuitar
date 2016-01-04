@@ -125,7 +125,7 @@ public class RepeatCloseAction extends Action {
 	}
 	
 	protected void closeRepeat(TGMeasureImpl measure, int repeatClose) {
-		if(repeatClose >= 0) {
+		if (repeatClose >= 0) {
 			
 			//comienza el undoable
 			UndoableChangeCloseRepeat undoable = UndoableChangeCloseRepeat.startUndo();

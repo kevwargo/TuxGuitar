@@ -45,7 +45,7 @@ public class TremoloPickingEditor extends SelectionAdapter {
 		
 		//-----defaults-------------------------------------------------
 		int duration = TGDuration.EIGHTH;
-		if(note.getEffect().isTremoloPicking()) {
+		if (note.getEffect().isTremoloPicking()) {
 			duration = note.getEffect().getTremoloPicking().getDuration().getValue();
 		}
 		
@@ -135,11 +135,11 @@ public class TremoloPickingEditor extends SelectionAdapter {
 	
 	public TGEffectTremoloPicking getTremoloPicking() {
 		TGEffectTremoloPicking effect = TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloPicking();
-		if(this.thirtySecondButton.getSelection()) {
+		if (this.thirtySecondButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.THIRTY_SECOND);
-		}else if(this.sixTeenthButton.getSelection()) {
+		}else if (this.sixTeenthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.SIXTEENTH);
-		}else if(this.eighthButton.getSelection()) {
+		}else if (this.eighthButton.getSelection()) {
 			effect.getDuration().setValue(TGDuration.EIGHTH);
 		}else {
 			return null;

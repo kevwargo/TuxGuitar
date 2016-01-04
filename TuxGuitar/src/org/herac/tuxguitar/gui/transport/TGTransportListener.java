@@ -37,7 +37,7 @@ public class TGTransportListener implements MidiPlayerListener {
 	
 	public void notifyStopped() {
 		try {
-			if(!TuxGuitar.instance().getDisplay().isDisposed()) {
+			if (!TuxGuitar.instance().getDisplay().isDisposed()) {
 				TGSynchronizer.instance().runLater( TGTransportListener.this.stoppedRunnable );
 			}
 		} catch (Throwable throwable) {
@@ -52,7 +52,7 @@ public class TGTransportListener implements MidiPlayerListener {
 	private TGSynchronizer.TGRunnable getStartedRunnable() {
 		return new TGSynchronizer.TGRunnable() {
 			public void run() {
-				if(TuxGuitar.instance().getPlayer().isRunning()) {
+				if (TuxGuitar.instance().getPlayer().isRunning()) {
 					TuxGuitar.instance().redrawPlayingMode();
 				}
 			}

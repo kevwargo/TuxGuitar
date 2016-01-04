@@ -29,12 +29,12 @@ public class InsertNoteAction extends Action {
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		TGBeat beat = caret.getSelectedBeat();
-		if(beat != null) {
+		if (beat != null) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
 			
-			if(beat.getVoice(caret.getVoice()).isEmpty()) {
+			if (beat.getVoice(caret.getVoice()).isEmpty()) {
 				getSongManager().getMeasureManager().addSilence(beat, caret.getDuration().clone(getSongManager().getFactory()), caret.getVoice());
 			}
 			else {

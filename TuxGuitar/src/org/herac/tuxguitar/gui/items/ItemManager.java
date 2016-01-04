@@ -101,7 +101,7 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 		
 		this.layout_locked = true;
 		this.updateCoolBarWrapIndicesEnabled = true;
-		if( !initialized ) {
+		if ( !initialized ) {
 			FormData coolData = new FormData();
 			coolData.left = new FormAttachment(0);
 			coolData.right = new FormAttachment(100);
@@ -126,16 +126,16 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 		
 		this.layout_locked = false;
 		
-		if( initialized ) {
+		if ( initialized ) {
 			this.layoutCoolBar();
 		}
 	}
 	
 	public void toogleToolbarVisibility() {
-		if(this.coolBar != null && !this.coolBar.isDisposed()) {
+		if (this.coolBar != null && !this.coolBar.isDisposed()) {
 			this.layout_locked = true;
 			this.coolBar.setVisible( !this.coolbarVisible );
-			if( this.coolbarVisible ) {
+			if ( this.coolbarVisible ) {
 				this.clearCoolBar();
 			}else {
 				this.makeCoolItems();
@@ -148,14 +148,14 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	}
 	
 	private void clearCoolBar() {
-		if(this.coolBar != null && !this.coolBar.isDisposed()) {
+		if (this.coolBar != null && !this.coolBar.isDisposed()) {
 			this.loadedToolItems.clear();
 			CoolItem[] items = this.coolBar.getItems();
-			for(int i = 0;i < items.length; i ++) {
+			for (int i = 0;i < items.length; i ++) {
 				items[i].dispose();
 			}
 			Control[] controls = this.coolBar.getChildren();
-			for(int i = 0;i < controls.length; i ++) {
+			for (int i = 0;i < controls.length; i ++) {
 				controls[i].dispose();
 			}
 		}
@@ -169,12 +169,12 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 		List coolItemIndices = new ArrayList();
 		
 		CoolItem[] items = this.coolBar.getItems();
-		for(int i = 0;i < items.length; i ++) {
+		for (int i = 0;i < items.length; i ++) {
 			Point controlSise = items[i].getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT);
 			Point itemSize = items[i].computeSize(controlSise.x, controlSise.y);
 			
 			int nextCoolItemsWidth = ( coolItemsWidth + itemSize.x );
-			if( nextCoolItemsWidth > coolBarWidth ) {
+			if ( nextCoolItemsWidth > coolBarWidth ) {
 				coolItemIndices.add( new Integer( i ) );
 				nextCoolItemsWidth = itemSize.x;
 			}
@@ -182,7 +182,7 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 		}
 		
 		int[] coolItemIndicesArray = new int[ coolItemIndices.size() ];
-		for(int i = 0;i < coolItemIndicesArray.length; i ++) {
+		for (int i = 0;i < coolItemIndicesArray.length; i ++) {
 			coolItemIndicesArray[i] = ((Integer)coolItemIndices.get(i)).intValue();
 		}
 		
@@ -190,9 +190,9 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	}
 	
 	protected void layoutCoolBar() {
-		if(!this.layout_locked) {
+		if (!this.layout_locked) {
 			this.layout_locked = true;
-			if( this.updateCoolBarWrapIndicesEnabled ) {
+			if ( this.updateCoolBarWrapIndicesEnabled ) {
 				this.updateCoolBarWrapIndices();
 			}
 			this.layoutShellLater();
@@ -201,7 +201,7 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	}
 	
 	protected void layoutShell() {
-		if(!this.layout_locked) {
+		if (!this.layout_locked) {
 			this.layout_locked = true;
 			TuxGuitar.instance().getShell().layout(true, true);
 			this.layout_locked = false;
@@ -223,8 +223,8 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	public void makeCoolItems() {
 		this.clearCoolBar();
 		this.readToolBars();
-		for(int i = 0; i < this.toolItems.length; i ++) {
-			if(this.toolItems[i].isEnabled()) {
+		for (int i = 0; i < this.toolItems.length; i ++) {
+			if (this.toolItems[i].isEnabled()) {
 				this.makeToolBar(this.toolItems[i]);
 			}
 		}
@@ -248,11 +248,11 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	
 	public void createMenu() {
 		Shell shell = TuxGuitar.instance().getShell();
-		if(this.menu == null || this.menu.isDisposed()) {
+		if (this.menu == null || this.menu.isDisposed()) {
 			this.menu = new Menu(shell, SWT.BAR);
 		}
 		MenuItem[] items = this.menu.getItems();
-		for(int i = 0; i < items.length;i ++) {
+		for (int i = 0; i < items.length;i ++) {
 			items[i].dispose();
 		}
 		
@@ -274,11 +274,11 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	
 	public void createPopupMenu() {
 		Shell shell = TuxGuitar.instance().getShell();
-		if(this.popupMenu == null || this.popupMenu.isDisposed()) {
+		if (this.popupMenu == null || this.popupMenu.isDisposed()) {
 			this.popupMenu = new Menu(shell, SWT.POP_UP);
 		}
 		MenuItem[] items = this.popupMenu.getItems();
-		for(int i = 0; i < items.length;i ++) {
+		for (int i = 0; i < items.length;i ++) {
 			items[i].dispose();
 		}
 		this.loadedPopupMenuItems.clear();
@@ -294,14 +294,14 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	
 	private void showMenuItems(List items) {
 		Iterator it = items.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			MenuItems item = (MenuItems)it.next();
 			item.showItems();
 		}
 	}
 	
 	public void updateItems() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			updateItems(this.loadedToolItems);
 			updateItems(this.loadedMenuItems);
 			updateItems(this.loadedPopupMenuItems);
@@ -310,14 +310,14 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	
 	public void updateItems(List items) {
 		Iterator it = items.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			ItemBase item = (ItemBase)it.next();
 			item.update();
 		}
 	}
 	
 	public void loadProperties() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			loadProperties(this.loadedToolItems);
 			loadProperties(this.loadedMenuItems);
 			loadProperties(this.loadedPopupMenuItems);
@@ -326,7 +326,7 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	
 	public void loadProperties(List items) {
 		Iterator it = items.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			ItemBase item = (ItemBase)it.next();
 			item.loadProperties();
 		}
@@ -346,7 +346,7 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	
 	public void readToolBars() {
 		File file = new File(getCoolItemsFileName());
-		if(!file.exists()) {
+		if (!file.exists()) {
 			writeToolBars();
 		}
 		this.shouldReloadToolBars = false;
@@ -359,7 +359,7 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	}
 	
 	public void setToolBarStatus(String name, boolean enabled, int index) {
-		if(index >= 0 && index < this.toolItems.length) {
+		if (index >= 0 && index < this.toolItems.length) {
 			setToolBarPosition(name, index);
 			setToolBarEnabled(index, enabled);
 		}
@@ -372,17 +372,17 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	}
 	
 	public void setToolBarPosition(String name, int index) {
-		if(index >= 0 && index < this.toolItems.length) {
+		if (index >= 0 && index < this.toolItems.length) {
 			ToolItems element = this.toolItems[index];
-			if( ! element.getName().trim().toLowerCase().equals(name.trim().toLowerCase())) {
+			if ( ! element.getName().trim().toLowerCase().equals(name.trim().toLowerCase())) {
 				int oldIndex = -1;
-				for(int i = 0; i < this.toolItems.length; i ++) {
-					if(this.toolItems[i].getName().trim().toLowerCase().equals(name.trim().toLowerCase())) {
+				for (int i = 0; i < this.toolItems.length; i ++) {
+					if (this.toolItems[i].getName().trim().toLowerCase().equals(name.trim().toLowerCase())) {
 						oldIndex = i;
 						break;
 					}
 				}
-				if(oldIndex == -1) {
+				if (oldIndex == -1) {
 					return;
 				}
 				this.toolItems[index] = this.toolItems[oldIndex];
@@ -434,13 +434,13 @@ public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader
 	}
 
 	public void doUpdate(int type) {
-		if( type == TGUpdateListener.SELECTION ) {
+		if ( type == TGUpdateListener.SELECTION ) {
 			this.updateItems();
 		}
 	}
 	
 	public void disableUpdateCoolBarWrapIndices() {
-		if( this.updateCoolBarWrapIndicesEnabled ) {
+		if ( this.updateCoolBarWrapIndicesEnabled ) {
 			this.coolBar.setWrapIndices( null );
 		}
 		this.updateCoolBarWrapIndicesEnabled = false;

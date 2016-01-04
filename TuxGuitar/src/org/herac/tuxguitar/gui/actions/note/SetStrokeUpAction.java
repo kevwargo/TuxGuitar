@@ -29,16 +29,16 @@ public class SetStrokeUpAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		TGBeat beat = getEditor().getTablature().getCaret().getSelectedBeat();
-		if(beat != null && !beat.isRestBeat()) {
+		if (beat != null && !beat.isRestBeat()) {
 			StrokeEditor editor = new StrokeEditor();
 			editor.open(beat);
-			if( editor.getStatus() != StrokeEditor.STATUS_CANCEL ) {
+			if ( editor.getStatus() != StrokeEditor.STATUS_CANCEL ) {
 				int direction = ( editor.getStatus() == StrokeEditor.STATUS_CLEAN ? TGStroke.STROKE_NONE : TGStroke.STROKE_UP );
 				int value = editor.getValue();
 				
 				//comienza el undoable
 				UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
-				if(getSongManager().getMeasureManager().setStroke( beat.getMeasure(), beat.getStart(), value, direction ) ) {
+				if (getSongManager().getMeasureManager().setStroke( beat.getMeasure(), beat.getStart(), value, direction ) ) {
 					//termia el undoable
 					addUndoableEdit(undoable.endUndo());
 					TuxGuitar.instance().getFileHistory().setUnsavedFile();

@@ -25,7 +25,7 @@ public class TGTableCanvasPainter implements PaintListener {
 	}
 	
 	protected void paintTrack(TGPainter painter) {
-		if(!TuxGuitar.instance().isLocked()) {
+		if (!TuxGuitar.instance().isLocked()) {
 			TuxGuitar.instance().lock();
 			
 			int x = -this.viewer.getHScrollSelection();
@@ -45,9 +45,9 @@ public class TGTableCanvasPainter implements PaintListener {
 			painter.setForeground(trackColor);
 			
 			int count = this.track.countMeasures();
-			for(int j = 0;j < count;j++) {
+			for (int j = 0;j < count;j++) {
 				TGMeasureImpl measure = (TGMeasureImpl)this.track.getMeasure(j);
-				if(isRestMeasure(measure)) {
+				if (isRestMeasure(measure)) {
 					painter.initPath();
 					painter.setAntialias(false);
 					painter.addRectangle(x, y, size - 2, size - 1);
@@ -59,7 +59,7 @@ public class TGTableCanvasPainter implements PaintListener {
 					painter.closePath();
 				}
 				boolean hasCaret = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getMeasure().equals(measure);
-				if((playing && measure.isPlaying(this.viewer.getEditor().getTablature().getViewLayout())) || (!playing && hasCaret)) {
+				if ((playing && measure.isPlaying(this.viewer.getEditor().getTablature().getViewLayout())) || (!playing && hasCaret)) {
 					painter.setBackground(painter.getGC().getDevice().getSystemColor(SWT.COLOR_BLACK));
 					painter.initPath(TGPainter.PATH_FILL);
 					painter.setAntialias(false);
@@ -77,8 +77,8 @@ public class TGTableCanvasPainter implements PaintListener {
 	
 	private boolean isRestMeasure(TGMeasureImpl measure) {
 		int beatCount = measure.countBeats();
-		for(int i = 0; i < beatCount; i++) {
-			if( !measure.getBeat(i).isRestBeat() ) {
+		for (int i = 0; i < beatCount; i++) {
+			if ( !measure.getBeat(i).isRestBeat() ) {
 				return false;
 			}
 		}

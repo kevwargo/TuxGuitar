@@ -27,11 +27,11 @@ public class IncrementNoteSemitoneAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		TGNote note = getEditor().getTablature().getCaret().getSelectedNote();
-		if(note != null) {
+		if (note != null) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			
-			if(getSongManager().getMeasureManager().moveSemitoneUp(getEditor().getTablature().getCaret().getMeasure(), note.getVoice().getBeat().getStart(), note.getString())) {
+			if (getSongManager().getMeasureManager().moveSemitoneUp(getEditor().getTablature().getCaret().getMeasure(), note.getVoice().getBeat().getStart(), note.getString())) {
 				//termia el undoable
 				addUndoableEdit(undoable.endUndo());
 				TuxGuitar.instance().getFileHistory().setUnsavedFile();

@@ -47,7 +47,7 @@ public class MidiSequencerImpl implements MidiSequencer {
 	}
 	
 	public synchronized void sendEvent(MidiEvent event) throws MidiPlayerException {
-		if(!this.reset) {
+		if (!this.reset) {
 			this.midiEventDispacher.dispatch(event);
 		}
 	}
@@ -63,7 +63,7 @@ public class MidiSequencerImpl implements MidiSequencer {
 	
 	public synchronized void setRunning(boolean running) throws MidiPlayerException {
 		this.running = running;
-		if(this.running) {
+		if (this.running) {
 			this.setTempo(120);
 			this.setTickPosition( this.getTickPosition() );
 			new MidiTimer(this).start();
@@ -82,18 +82,18 @@ public class MidiSequencerImpl implements MidiSequencer {
 	
 	public synchronized void reset(boolean systemReset)  throws MidiPlayerException {
 		this.getTransmitter().sendAllNotesOff();
-		for(int channel = 0; channel < 16;channel ++) {
+		for (int channel = 0; channel < 16;channel ++) {
 			this.getTransmitter().sendPitchBend(channel, 64);
 		}
-		if( systemReset ) {
+		if ( systemReset ) {
 			this.getTransmitter().sendSystemReset();
 		}
 	}
 	
 	protected synchronized boolean process() throws MidiPlayerException {
 		boolean running = this.isRunning();
-		if(running) {
-			if(this.reset) {
+		if (running) {
+			if (this.reset) {
 				this.reset( false );
 				this.reset = false;
 				this.midiEventPlayer.reset();
@@ -101,11 +101,11 @@ public class MidiSequencerImpl implements MidiSequencer {
 			this.stopped = false;
 			this.midiTickPlayer.process();
 			this.midiEventPlayer.process();
-			if(this.getTickPosition() > this.getTickLength()) {
+			if (this.getTickPosition() > this.getTickLength()) {
 				this.stop();
 			}
 		}
-		else if( !this.stopped ) {
+		else if ( !this.stopped ) {
 			this.stopped = true;
 			this.midiEventPlayer.clearEvents();
 			this.midiTickPlayer.clearTick();
@@ -131,7 +131,7 @@ public class MidiSequencerImpl implements MidiSequencer {
 	}
 	
 	public synchronized void close() throws MidiPlayerException {
-		if(isRunning()) {
+		if (isRunning()) {
 			this.stop();
 		}
 	}
@@ -169,7 +169,7 @@ public class MidiSequencerImpl implements MidiSequencer {
 		public void run() {
 			try {
 				synchronized(this.sequencer) {
-					while( this.sequencer.process() ) {
+					while ( this.sequencer.process() ) {
 						this.sequencer.wait( TIMER_DELAY );
 					}
 				}

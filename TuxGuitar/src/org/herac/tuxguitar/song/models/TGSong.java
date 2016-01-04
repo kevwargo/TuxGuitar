@@ -184,7 +184,7 @@ public abstract class TGSong {
 	
 	public void clear() {
 		Iterator tracks = getTracks();
-		while(tracks.hasNext()) {
+		while (tracks.hasNext()) {
 			TGTrack track = (TGTrack)tracks.next();
 			track.clear();
 		}
@@ -210,12 +210,12 @@ public abstract class TGSong {
 		song.setTranscriber(getTranscriber());
 		song.setComments(getComments());
 		Iterator headers = getMeasureHeaders();
-		while(headers.hasNext()) {
+		while (headers.hasNext()) {
 			TGMeasureHeader header = (TGMeasureHeader)headers.next();
 			song.addMeasureHeader(header.clone(factory));
 		}
 		Iterator tracks = getTracks();
-		while(tracks.hasNext()) {
+		while (tracks.hasNext()) {
 			TGTrack track = (TGTrack)tracks.next();
 			song.addTrack(track.clone(factory, song));
 		}

@@ -44,14 +44,14 @@ public class MouseKit {
 	}
 	
 	public void tryBack() {
-		if(!TuxGuitar.instance().isLocked() && !ActionLock.isLocked() && !this.kit.getTablature().isPainting()) {
+		if (!TuxGuitar.instance().isLocked() && !ActionLock.isLocked() && !this.kit.getTablature().isPainting()) {
 			TGPainter painter = new TGPainter(new GC(this.kit.getTablature()));
-			if(this.back != null && !this.back.isDisposed()) {
+			if (this.back != null && !this.back.isDisposed()) {
 				painter.drawImage(this.back, this.lastx, this.lasty);
 			}
 			painter.dispose();
 		}
-		if(this.back != null) {
+		if (this.back != null) {
 			this.back.dispose();
 		}
 	}
@@ -62,13 +62,13 @@ public class MouseKit {
 	
 	public void mouseMove(MouseEvent e) {
 		this.tryBack();
-		if(!TuxGuitar.instance().isLocked() && !ActionLock.isLocked() && !this.kit.getTablature().isPainting()) {
+		if (!TuxGuitar.instance().isLocked() && !ActionLock.isLocked() && !this.kit.getTablature().isPainting()) {
 			
 			TGTrackImpl track = this.kit.findSelectedTrack(e.y);
 			if (track != null) {
 				TGMeasureImpl measure = this.kit.findSelectedMeasure(track, e.x, e.y);
 				
-				if(measure != null && measure.getTs() != null) {
+				if (measure != null && measure.getTs() != null) {
 					float scale = this.kit.getTablature().getViewLayout().getScale();
 					int minValue = track.getString(track.stringCount()).getValue();
 					int maxValue = track.getString(1).getValue() + 29; //Max frets = 29
@@ -83,15 +83,15 @@ public class MouseKit {
 					int y1 = (measure.getPosY() + measure.getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES));
 					int y2 = (y1 + (lineSpacing * 5));
 					
-					if(e.y < (y1 + 3) && e.y >= (y1 - topHeight)) {
+					if (e.y < (y1 + 3) && e.y >= (y1 - topHeight)) {
 						this.back = new Image(TuxGuitar.instance().getDisplay(), width + 1, topHeight + 1);
 						TGPainter painter = new TGPainter(new GC(this.kit.getTablature()));
 						painter.copyArea(this.back, x1, (y1 - topHeight));
 						painter.setForeground(this.kit.getTablature().getViewLayout().getResources().getLineColor());
-						for(int y = (y1 - lineSpacing); y >= (y1 - topHeight); y -= lineSpacing) {
+						for (int y = (y1 - lineSpacing); y >= (y1 - topHeight); y -= lineSpacing) {
 							tempValue += (TGMeasureImpl.ACCIDENTAL_NOTES[(tempValue + 1) % 12])?2:1;
 							tempValue += (TGMeasureImpl.ACCIDENTAL_NOTES[(tempValue + 1) % 12])?2:1;
-							if(y < e.y - 5 || tempValue > maxValue) {
+							if (y < e.y - 5 || tempValue > maxValue) {
 								break;
 							}
 							painter.initPath();
@@ -104,17 +104,17 @@ public class MouseKit {
 						
 						this.lastx = x1;
 						this.lasty = (y1 - topHeight);
-					}else if(e.y > (y2 - 3) && e.y  < y2 + bottomHeight) {
+					}else if (e.y > (y2 - 3) && e.y  < y2 + bottomHeight) {
 						this.back = new Image(TuxGuitar.instance().getDisplay(), width + 1, bottomHeight + 1);
 						TGPainter painter = new TGPainter(new GC(this.kit.getTablature()));
 						painter.copyArea(this.back, x1, y2);	
 						painter.setForeground(this.kit.getTablature().getViewLayout().getResources().getLineColor());
 						tempValue -= 14;
-						for(int y = y2; y <= (y2 + bottomHeight); y += lineSpacing) {
-							if(tempValue > 0) {
+						for (int y = y2; y <= (y2 + bottomHeight); y += lineSpacing) {
+							if (tempValue > 0) {
 								tempValue -= (TGMeasureImpl.ACCIDENTAL_NOTES[(tempValue - 1) % 12])?2:1;
 								tempValue -= (TGMeasureImpl.ACCIDENTAL_NOTES[(tempValue - 1) % 12])?2:1;
-								if(y > e.y + 5 || tempValue < minValue) {
+								if (y > e.y + 5 || tempValue < minValue) {
 									break;
 								}
 								painter.initPath();
@@ -135,14 +135,14 @@ public class MouseKit {
 	}
 	
 	public void mouseUp(MouseEvent e) {
-		if(!TuxGuitar.instance().isLocked() && !ActionLock.isLocked() && !this.kit.getTablature().isPainting()) {
+		if (!TuxGuitar.instance().isLocked() && !ActionLock.isLocked() && !this.kit.getTablature().isPainting()) {
 			ActionLock.lock();
 			
 			ViewLayout.TrackPosition pos = getTrackPosition(e.y) ;
-			if(pos != null) {
+			if (pos != null) {
 				TGTrackImpl track = this.kit.getTablature().getCaret().getTrack();
 				TGMeasureImpl measure = this.kit.getTablature().getCaret().getMeasure();
-				if(measure.getTs() != null) {
+				if (measure.getTs() != null) {
 					int minValue = track.getString(track.stringCount()).getValue();
 					int maxValue = track.getString(1).getValue() + 29; //Max frets = 29
 					
@@ -154,31 +154,31 @@ public class MouseKit {
 					int y1 = (pos.getPosY() + measure.getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES));
 					int y2 = (y1 + (lineSpacing * 5));
 					
-					if(e.y >= (y1 - topHeight) && e.y  < (y2 + bottomHeight)) {
+					if (e.y >= (y1 - topHeight) && e.y  < (y2 + bottomHeight)) {
 						
 						int value = 0;
 						int tempValue = FIRST_LINE_VALUES[measure.getClef() - 1];
 						double limit = (topHeight / (lineSpacing / 2.00));
-						for(int i = 0;i < limit;i ++) {
+						for (int i = 0;i < limit;i ++) {
 							tempValue += (TGMeasureImpl.ACCIDENTAL_NOTES[(tempValue + 1) % 12])?2:1;
 						}
 						
 						float minorDistance = 0;
-						for(float y = (y1 - topHeight); y <= (y2 + bottomHeight); y += (lineSpacing / 2.00)) {
-							if(tempValue > 0) {
+						for (float y = (y1 - topHeight); y <= (y2 + bottomHeight); y += (lineSpacing / 2.00)) {
+							if (tempValue > 0) {
 								float distanceY = Math.abs(e.y - y);
-								if(value == 0 || distanceY < minorDistance) {
+								if (value == 0 || distanceY < minorDistance) {
 									value = tempValue;
 									minorDistance = distanceY;
 								}
 								tempValue -= (TGMeasureImpl.ACCIDENTAL_NOTES[(tempValue - 1) % 12])?2:1;
 							}
 						}
-						if(value >= minValue && value <= maxValue) {
+						if (value >= minValue && value <= maxValue) {
 							TGVoiceImpl beat = findBestVoice(measure, e.x);
-							if(beat != null) {
+							if (beat != null) {
 								value = getRealValue(value);
-								if(!removeNote(value, beat)) {
+								if (!removeNote(value, beat)) {
 									makeNote(beat, getRealStart(beat, e.x), value);
 								}
 							}
@@ -192,7 +192,7 @@ public class MouseKit {
 	}
 	
 	private long getRealStart(TGVoiceImpl voice, int x) {
-		if(voice.isEmpty()) {
+		if (voice.isEmpty()) {
 			return voice.getBeat().getStart();
 		}
 		TGMeasureImpl measure = voice.getBeatImpl().getMeasureImpl();
@@ -200,7 +200,7 @@ public class MouseKit {
 		long beatStart = voice.getBeat().getStart();
 		long beatLength = voice.getDuration().getTime();
 		long beatEnd = ( beatStart + beatLength );
-		if(x > beatX) {
+		if (x > beatX) {
 			return Math.min( ( beatStart + ( (x - beatX) * beatLength / voice.getWidth() ) ), (beatEnd - 1 ) );
 		}
 		return beatStart;
@@ -209,21 +209,21 @@ public class MouseKit {
 	private int getRealValue(int value) {
 		int realValue = value;
 		int key = this.kit.getTablature().getCaret().getMeasure().getKeySignature();
-		if(key <= 7) {
-			if(TGMeasureImpl.KEY_SIGNATURES[key][TGMeasureImpl.ACCIDENTAL_SHARP_NOTES[realValue % 12]] == TGMeasureImpl.SHARP && this.kit.isNatural()) {
+		if (key <= 7) {
+			if (TGMeasureImpl.KEY_SIGNATURES[key][TGMeasureImpl.ACCIDENTAL_SHARP_NOTES[realValue % 12]] == TGMeasureImpl.SHARP && this.kit.isNatural()) {
 				realValue ++;
 			}
-			else if(TGMeasureImpl.KEY_SIGNATURES[key][TGMeasureImpl.ACCIDENTAL_SHARP_NOTES[realValue % 12]] != TGMeasureImpl.SHARP && !this.kit.isNatural()) {
-				if(TGMeasureImpl.ACCIDENTAL_NOTES[(realValue + 1) % 12]) {
+			else if (TGMeasureImpl.KEY_SIGNATURES[key][TGMeasureImpl.ACCIDENTAL_SHARP_NOTES[realValue % 12]] != TGMeasureImpl.SHARP && !this.kit.isNatural()) {
+				if (TGMeasureImpl.ACCIDENTAL_NOTES[(realValue + 1) % 12]) {
 					realValue ++;
 				}
 			}
-		}else if(key > 7 ) {
-			if(TGMeasureImpl.KEY_SIGNATURES[key][TGMeasureImpl.ACCIDENTAL_FLAT_NOTES[realValue % 12]] == TGMeasureImpl.FLAT && this.kit.isNatural()) {
+		}else if (key > 7 ) {
+			if (TGMeasureImpl.KEY_SIGNATURES[key][TGMeasureImpl.ACCIDENTAL_FLAT_NOTES[realValue % 12]] == TGMeasureImpl.FLAT && this.kit.isNatural()) {
 				realValue --;
 			}
-			else if(TGMeasureImpl.KEY_SIGNATURES[key][TGMeasureImpl.ACCIDENTAL_FLAT_NOTES[realValue % 12]] != TGMeasureImpl.FLAT && !this.kit.isNatural()) {
-				if(TGMeasureImpl.ACCIDENTAL_NOTES[(realValue - 1) % 12]) {
+			else if (TGMeasureImpl.KEY_SIGNATURES[key][TGMeasureImpl.ACCIDENTAL_FLAT_NOTES[realValue % 12]] != TGMeasureImpl.FLAT && !this.kit.isNatural()) {
+				if (TGMeasureImpl.ACCIDENTAL_NOTES[(realValue - 1) % 12]) {
 					realValue --;
 				}
 			}
@@ -258,7 +258,7 @@ public class MouseKit {
 		TGSongManager manager = this.kit.getTablature().getSongManager();
 		TGTrack track = caret.getTrack();
 		int string = findBestString(track, voice, value);
-		if(string > 0) {
+		if (string > 0) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			
@@ -291,27 +291,27 @@ public class MouseKit {
 	
 	private int findBestString(TGTrack track, TGVoice voice, int value) {
 		List strings = new ArrayList();
-		for(int number = 1;number <= track.stringCount();number++) {
+		for (int number = 1;number <= track.stringCount();number++) {
 			boolean used = false;
 			TGString string = track.getString(number);
 			Iterator it = voice.getNotes().iterator();
 			while (it.hasNext()) {
 				TGNote note = (TGNote) it.next();
-				if(note.getString() == string.getNumber()) {
+				if (note.getString() == string.getNumber()) {
 					used = true;
 				}
 			}
-			if(!used) {
+			if (!used) {
 				strings.add(string);
 			}
 		}
 		
 		int minFret = -1;
 		int stringForValue = 0;
-		for(int i = 0;i < strings.size();i++) {
+		for (int i = 0;i < strings.size();i++) {
 			TGString string = (TGString)strings.get(i);
 			int fret = value - string.getValue();
-			if((fret >= 0) && (minFret < 0 || fret < minFret)) {
+			if ((fret >= 0) && (minFret < 0 || fret < minFret)) {
 				stringForValue = string.getNumber();
 				minFret = fret;
 			}
@@ -326,28 +326,28 @@ public class MouseKit {
 		TGVoiceImpl bestVoice = null;
 		TGDuration duration = this.kit.getTablature().getCaret().getDuration();
 		Iterator it = measure.getBeats().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGBeatImpl beat = (TGBeatImpl)it.next();
 			TGVoiceImpl voice = beat.getVoiceImpl( voiceIndex );
-			if(!voice.isEmpty()) {
+			if (!voice.isEmpty()) {
 				int x1 = (beat.getPosX() + beat.getSpacing());
 				int x2 = (x1 + voice.getWidth());
 				long increment = voice.getWidth();
-				if(voice.isRestVoice()) {
+				if (voice.isRestVoice()) {
 					increment = (duration.getTime() * voice.getWidth() / voice.getDuration().getTime());
 				}
-				for( int beatX = x1 ; beatX < x2 ; beatX += increment ) {
+				for ( int beatX = x1 ; beatX < x2 ; beatX += increment ) {
 					int diff = Math.abs(x - (posX + beatX));
-					if(bestDiff == -1 || diff < bestDiff) {
+					if (bestDiff == -1 || diff < bestDiff) {
 						bestVoice = voice;
 						bestDiff = diff;
 					}
 				}
 			}
 		}
-		if( bestVoice == null ) {
+		if ( bestVoice == null ) {
 			TGBeat beat = this.kit.getTablature().getViewLayout().getSongManager().getMeasureManager().getFirstBeat(measure.getBeats());
-			if( beat != null ) {
+			if ( beat != null ) {
 				bestVoice = (TGVoiceImpl)beat.getVoice(voiceIndex);
 			}
 		}

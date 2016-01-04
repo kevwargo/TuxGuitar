@@ -130,16 +130,16 @@ public class PrinterViewLayout extends ViewLayout {
 		
 		TGTrackSpacing ts = new TGTrackSpacing(this) ;
 		TempLine line = getTempLines(track,( this.styles.getFromMeasure() - 1 ), ts);
-		while(!line.measures.isEmpty()) {
+		while (!line.measures.isEmpty()) {
 			
 			ts.setSize(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES, ((style & DISPLAY_SCORE) != 0?( (getScoreLineSpacing() * 5) ):0));
-			if((style & DISPLAY_SCORE) != 0) {
+			if ((style & DISPLAY_SCORE) != 0) {
 				ts.setSize(TGTrackSpacing.POSITION_SCORE_UP_LINES, Math.abs(line.minY));
-				if(line.maxY + getMinScoreTabSpacing() > getScoreSpacing()) {
+				if (line.maxY + getMinScoreTabSpacing() > getScoreSpacing()) {
 					ts.setSize(TGTrackSpacing.POSITION_SCORE_DOWN_LINES, (line.maxY - (getScoreLineSpacing() * 4)) );
 				}
 			}
-			if((style & DISPLAY_TABLATURE) != 0) {
+			if ((style & DISPLAY_TABLATURE) != 0) {
 				ts.setSize(TGTrackSpacing.POSITION_TABLATURE_TOP_SEPARATOR, ((style & DISPLAY_SCORE) != 0 ? getMinScoreTabSpacing() : Math.max(Math.abs(line.minY), getStringSpacing()) ));
 				ts.setSize(TGTrackSpacing.POSITION_TABLATURE, ((style & DISPLAY_SCORE) != 0 ?  track.getTabHeight() + getStringSpacing() + 1 : Math.max( line.maxY, track.getTabHeight() + getStringSpacing() + 1) ));
 			}
@@ -148,7 +148,7 @@ public class PrinterViewLayout extends ViewLayout {
 			
 			lineHeight = ts.getSize();
 			//Verifico si entra en la pagina actual
-			if((posY + lineHeight + getTrackSpacing()) > (this.document.getBounds().y + getMaxHeight())) {
+			if ((posY + lineHeight + getTrackSpacing()) > (this.document.getBounds().y + getMaxHeight())) {
 				this.paintFooter(painter);
 				this.closePage();
 				this.openPage();
@@ -168,17 +168,17 @@ public class PrinterViewLayout extends ViewLayout {
 	}
 	
 	public void paintHeader(TGPainter painter) {
-		if(this.document.isPaintable(this.page) ) {
+		if (this.document.isPaintable(this.page) ) {
 			int x = this.document.getBounds().x;
 			int y = this.document.getBounds().y;
 			String songName = getSongManager().getSong().getName();
 			String songAuthor = getSongManager().getSong().getAuthor();
 			String trackName = "(" + getSongManager().getTrack(this.styles.getTrackNumber()).getName() + ")";
 			
-			if(songName == null || songName.length() == 0) {
+			if (songName == null || songName.length() == 0) {
 				songName = TuxGuitar.getProperty("print-header.default-song-name");
 			}
-			if(songAuthor == null || songAuthor.length() == 0) {
+			if (songAuthor == null || songAuthor.length() == 0) {
 				songAuthor = TuxGuitar.getProperty("print-header.default-song-author");
 			}
 			painter.setFont(this.songNameFont);
@@ -191,7 +191,7 @@ public class PrinterViewLayout extends ViewLayout {
 	}
 	
 	private void paintFooter(TGPainter painter) {
-		if(this.document.isPaintable(this.page) ) {
+		if (this.document.isPaintable(this.page) ) {
 			int x = this.document.getBounds().x;
 			int y = this.document.getBounds().y;
 			String pageNumber = Integer.toString(this.page);
@@ -203,20 +203,20 @@ public class PrinterViewLayout extends ViewLayout {
 	}
 	
 	public void paintLine(TGTrackImpl track, TempLine line, TGPainter painter, int fromX, int fromY, TGTrackSpacing ts) {
-		if(this.document.isPaintable(this.page) ) {
+		if (this.document.isPaintable(this.page) ) {
 			int posX = fromX;
 			int posY = fromY;
 			int width = 0;
 			
 			int measureSpacing = 0;
-			if(line.fullLine) {
+			if (line.fullLine) {
 				int diff = ( getMaxWidth() - line.tempWith);
-				if(diff != 0 && line.measures.size() > 0) {
+				if (diff != 0 && line.measures.size() > 0) {
 					measureSpacing = diff / line.measures.size();
 				}
 			}
 			
-			for(int i = 0;i < line.measures.size();i ++) {
+			for (int i = 0;i < line.measures.size();i ++) {
 				int index = ((Integer)line.measures.get(i)).intValue();
 				TGMeasureImpl currMeasure = (TGMeasureImpl)track.getMeasure(index);
 				
@@ -242,13 +242,13 @@ public class PrinterViewLayout extends ViewLayout {
 	
 	private void openPage() {
 		this.page ++;
-		if(this.document.isPaintable(this.page)) {
+		if (this.document.isPaintable(this.page)) {
 			this.document.pageStart();
 		}
 	}
 	
 	private void closePage() {
-		if(this.document.isPaintable(this.page)) {
+		if (this.document.isPaintable(this.page)) {
 			this.document.pageFinish();
 		}
 	}
@@ -273,10 +273,10 @@ public class PrinterViewLayout extends ViewLayout {
 		int measureCount = track.countMeasures();
 		for (int measureIdx = fromIndex; measureIdx < measureCount; measureIdx++) {
 			TGMeasureImpl measure= (TGMeasureImpl) track.getMeasure(measureIdx);
-			if( measure.getNumber() >= this.styles.getFromMeasure() && measure.getNumber() <= this.styles.getToMeasure()) {
+			if ( measure.getNumber() >= this.styles.getFromMeasure() && measure.getNumber() <= this.styles.getToMeasure()) {
 				
 				//verifico si tengo que bajar de linea
-				if((line.tempWith + measure.getWidth(this)) >=  getMaxWidth() && !line.measures.isEmpty()) {
+				if ((line.tempWith + measure.getWidth(this)) >=  getMaxWidth() && !line.measures.isEmpty()) {
 					line.fullLine = true;
 					return line;
 				}

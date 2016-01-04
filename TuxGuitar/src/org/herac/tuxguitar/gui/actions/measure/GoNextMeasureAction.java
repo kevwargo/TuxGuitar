@@ -30,7 +30,7 @@ public class GoNextMeasureAction extends Action {
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		//si es el ultimo compas, agrego uno nuevo
-		if(getSongManager().getTrackManager().isLastMeasure(caret.getMeasure())) {
+		if (getSongManager().getTrackManager().isLastMeasure(caret.getMeasure())) {
 			int number = (getSongManager().getSong().countMeasureHeaders() + 1);
 			
 			//comienza el undoable
@@ -51,14 +51,14 @@ public class GoNextMeasureAction extends Action {
 	}
 	
 	private void moveToNext() {
-		if(TuxGuitar.instance().getPlayer().isRunning()) {
+		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoNext();
 		}
 		else {
 			Caret caret = getEditor().getTablature().getCaret();
 			TGTrackImpl track = caret.getTrack();
 			TGMeasure measure = getSongManager().getTrackManager().getNextMeasure(caret.getMeasure());
-			if(track != null && measure != null) {
+			if (track != null && measure != null) {
 				caret.update(track.getNumber(), measure.getStart(), caret.getSelectedString().getNumber());
 			}
 		}

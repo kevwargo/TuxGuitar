@@ -51,7 +51,7 @@ public class TGMixerTrackChannel {
 				TGChannel channel = getTrack().getChannel();
 				boolean[] usedChannels = TuxGuitar.instance().getSongManager().getUsedChannels();
 				int idx = TGMixerTrackChannel.this.normalChannels.getChannel(TGMixerTrackChannel.this.normalChannel.getSelectionIndex());
-				if(!usedChannels[idx]) {
+				if (!usedChannels[idx]) {
 					channel.setChannel((short)idx);
 					channel.setEffectChannel(channel.getChannel());
 				}else {
@@ -85,7 +85,7 @@ public class TGMixerTrackChannel {
 	}
 	
 	public void updateItems(boolean reload) {
-		if(reload) {
+		if (reload) {
 			this.updateNormalChannel();
 			this.updateEffectChannel();
 		}
@@ -99,24 +99,24 @@ public class TGMixerTrackChannel {
 		
 		boolean[] usedChannels = TuxGuitar.instance().getSongManager().getUsedChannels();
 		boolean[] usedEffectChannels = TuxGuitar.instance().getSongManager().getUsedEffectChannels();
-		if(getChannel().isPercussionChannel()) {
+		if (getChannel().isPercussionChannel()) {
 			this.normalChannel.add(Integer.toString(TGChannel.DEFAULT_PERCUSSION_CHANNEL));
 			this.normalChannel.select(0);
 			this.normalChannels.addChannel(0, 0);
 		}else {
 			int itemIndex = 0;
-			for(int i = 0;i < usedChannels.length;i++) {
-				if(!TGChannel.isPercussionChannel(i)) {
-					if(!usedEffectChannels[i] || (usedEffectChannels[i] && usedChannels[i]) || (getChannel().getChannel() == i && getChannel().getEffectChannel() == getChannel().getChannel())) {
+			for (int i = 0;i < usedChannels.length;i++) {
+				if (!TGChannel.isPercussionChannel(i)) {
+					if (!usedEffectChannels[i] || (usedEffectChannels[i] && usedChannels[i]) || (getChannel().getChannel() == i && getChannel().getEffectChannel() == getChannel().getChannel())) {
 						String itemName = new String();
-						if(usedChannels[i] && (getChannel().getChannel() != i || TuxGuitar.instance().getSongManager().countTracksForChannel(i) > 1)) {
+						if (usedChannels[i] && (getChannel().getChannel() != i || TuxGuitar.instance().getSongManager().countTracksForChannel(i) > 1)) {
 							itemName = i + " " + TuxGuitar.getProperty("mixer.channel.link");
 						}else {
 							itemName =  i + " " + TuxGuitar.getProperty("mixer.channel.free");
 						}
 						this.normalChannel.add(itemName);
 						
-						if(i == getChannel().getChannel()) {
+						if (i == getChannel().getChannel()) {
 							this.normalChannel.select(itemIndex);
 						}
 						this.normalChannels.addChannel(itemIndex, i);
@@ -133,18 +133,18 @@ public class TGMixerTrackChannel {
 		
 		boolean[] usedChannels = TuxGuitar.instance().getSongManager().getUsedChannels();
 		boolean[] usedEffectChannels = TuxGuitar.instance().getSongManager().getUsedEffectChannels();
-		if(getChannel().isPercussionChannel()) {
+		if (getChannel().isPercussionChannel()) {
 			this.effectChannel.add(Integer.toString(TGChannel.DEFAULT_PERCUSSION_CHANNEL));
 			this.effectChannel.select(0);
 			this.effectChannels.addChannel(0, 0);
 		}else {
 			int itemIndex = 0;
-			for(int i = 0;i < usedEffectChannels.length;i++) {
-				if(!TGChannel.isPercussionChannel(i)) {
-					if((!usedEffectChannels[i] || getChannel().getEffectChannel() == i) && (!usedChannels[i] || i == getChannel().getChannel())) {
+			for (int i = 0;i < usedEffectChannels.length;i++) {
+				if (!TGChannel.isPercussionChannel(i)) {
+					if ((!usedEffectChannels[i] || getChannel().getEffectChannel() == i) && (!usedChannels[i] || i == getChannel().getChannel())) {
 						this.effectChannel.add(Integer.toString(i));
 						
-						if(i == getChannel().getEffectChannel()) {
+						if (i == getChannel().getEffectChannel()) {
 							this.effectChannel.select(itemIndex);
 						}
 						this.effectChannels.addChannel(itemIndex, i);
@@ -174,7 +174,7 @@ public class TGMixerTrackChannel {
 			Iterator it = this.channelIndexs.iterator();
 			while (it.hasNext()) {
 				ChannelIndex channelIndex = (ChannelIndex) it.next();
-				if(index == channelIndex.getIndex()) {
+				if (index == channelIndex.getIndex()) {
 					return channelIndex.getChannel();
 				}
 			}

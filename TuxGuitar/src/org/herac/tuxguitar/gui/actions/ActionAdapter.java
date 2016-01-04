@@ -19,14 +19,14 @@ public abstract class ActionAdapter implements SelectionListener, MouseListener,
 	public abstract void process(TypedEvent e);
 	
 	public void widgetSelected(SelectionEvent e) {
-		if(e.widget != null && (e.widget.getStyle() & SWT.RADIO) != 0) {
-			if(e.widget instanceof Button && !((Button)e.widget).getSelection() ) {
+		if (e.widget != null && (e.widget.getStyle() & SWT.RADIO) != 0) {
+			if (e.widget instanceof Button && !((Button)e.widget).getSelection() ) {
 				return;
 			}
-			if(e.widget instanceof ToolItem && !((ToolItem)e.widget).getSelection() ) {
+			if (e.widget instanceof ToolItem && !((ToolItem)e.widget).getSelection() ) {
 				return;
 			}
-			if(e.widget instanceof MenuItem && !((MenuItem)e.widget).getSelection() ) {
+			if (e.widget instanceof MenuItem && !((MenuItem)e.widget).getSelection() ) {
 				return;
 			}
 		}

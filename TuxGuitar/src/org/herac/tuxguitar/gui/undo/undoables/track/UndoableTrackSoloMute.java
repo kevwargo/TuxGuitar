@@ -23,12 +23,12 @@ public class UndoableTrackSoloMute implements UndoableEdit {
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()) {
+		if (!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
 		TGTrack track = manager.getTrack( this.track );
-		if( track != null ) {
+		if ( track != null ) {
 			manager.getTrackManager().changeSolo(track, this.redoSolo );
 			manager.getTrackManager().changeMute(track, this.redoMute );
 		}
@@ -44,12 +44,12 @@ public class UndoableTrackSoloMute implements UndoableEdit {
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()) {
+		if (!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
 		TGTrack track = manager.getTrack( this.track );
-		if( track != null ) {
+		if ( track != null ) {
 			manager.getTrackManager().changeSolo(track, this.undoSolo );
 			manager.getTrackManager().changeMute(track, this.undoMute );
 		}

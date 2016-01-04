@@ -208,7 +208,7 @@ public class PianoConfig {
 		}
 		
 		protected void disposeColor() {
-			if(this.color != null && !this.color.isDisposed()) {
+			if (this.color != null && !this.color.isDisposed()) {
 				this.color.dispose();
 				this.color = null;
 			}

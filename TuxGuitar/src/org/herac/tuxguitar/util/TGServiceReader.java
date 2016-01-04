@@ -51,9 +51,9 @@ public class TGServiceReader {
 				try {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 					String line = null;
-					while((line = reader.readLine()) != null) {
+					while ((line = reader.readLine()) != null) {
 						String provider = uncommentLine(line).trim();
-						if(provider != null && provider.length() > 0) {
+						if (provider != null && provider.length() > 0) {
 							providers.add(provider);
 						}
 					}
@@ -68,7 +68,7 @@ public class TGServiceReader {
 		
 		private String uncommentLine(String line) {
 			int index = line.indexOf('#');
-			if(index >= 0) {
+			if (index >= 0) {
 				return (line.substring(0, index));
 			}
 			return line;
@@ -84,7 +84,7 @@ public class TGServiceReader {
 			}
 			try {
 				Object provider = this.loader.loadClass( (String)this.iterator.next() ).newInstance();
-				if(this.spi.isInstance(provider)) {
+				if (this.spi.isInstance(provider)) {
 					return provider;
 				}
 			} catch (Throwable throwable) {

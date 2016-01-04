@@ -27,7 +27,7 @@ public class AddMarkerAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(new MarkerEditor(getMarker()).open(getEditor().getTablature().getShell())) {
+		if (new MarkerEditor(getMarker()).open(getEditor().getTablature().getShell())) {
 			MarkerList.instance().update(true);
 		}
 		return 0;
@@ -37,7 +37,7 @@ public class AddMarkerAction extends Action {
 		TGMeasureImpl measure = getEditor().getTablature().getCaret().getMeasure();
 		if (measure != null) {
 			TGMarker marker = getSongManager().getMarker(measure.getNumber());
-			if(marker == null) {
+			if (marker == null) {
 				marker = getSongManager().getFactory().newMarker();
 				marker.setMeasure(measure.getNumber());
 			}

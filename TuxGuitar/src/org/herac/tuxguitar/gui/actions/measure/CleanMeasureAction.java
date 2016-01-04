@@ -86,9 +86,9 @@ public class CleanMeasureAction extends Action {
 					int fromSelection = fromSpinner.getSelection();
 					int toSelection = toSpinner.getSelection();
 					
-					if(fromSelection < minSelection) {
+					if (fromSelection < minSelection) {
 						fromSpinner.setSelection(minSelection);
-					}else if(fromSelection > toSelection) {
+					}else if (fromSelection > toSelection) {
 						fromSpinner.setSelection(toSelection);
 					}
 				}
@@ -97,9 +97,9 @@ public class CleanMeasureAction extends Action {
 				public void widgetSelected(SelectionEvent e) {
 					int toSelection = toSpinner.getSelection();
 					int fromSelection = fromSpinner.getSelection();
-					if(toSelection < fromSelection) {
+					if (toSelection < fromSelection) {
 						toSpinner.setSelection(fromSelection);
-					}else if(toSelection > maxSelection) {
+					}else if (toSelection > maxSelection) {
 						toSpinner.setSelection(maxSelection);
 					}
 				}
@@ -149,14 +149,14 @@ public class CleanMeasureAction extends Action {
 	}
 	
 	public void cleanMeasures(int m1, int m2) {
-		if(m1 > 0 && m1 <= m2) {
+		if (m1 > 0 && m1 <= m2) {
 			//comienza el undoable
 			UndoableJoined undoable = new UndoableJoined();
 			
 			Caret caret = getEditor().getTablature().getCaret();
-			for( int number = m1 ; number <= m2 ; number ++ ) {
+			for ( int number = m1 ; number <= m2 ; number ++ ) {
 				TGMeasure measure = getSongManager().getTrackManager().getMeasure( caret.getTrack() , number );
-				if( measure != null ) {
+				if ( measure != null ) {
 					//comienza el undoable
 					UndoableMeasureGeneric mUndoable = UndoableMeasureGeneric.startUndo( measure );
 					
@@ -168,7 +168,7 @@ public class CleanMeasureAction extends Action {
 			}
 			
 			//termia el undoable
-			if( ! undoable.isEmpty()) {
+			if ( ! undoable.isEmpty()) {
 				addUndoableEdit(undoable.endUndo());
 			}
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();

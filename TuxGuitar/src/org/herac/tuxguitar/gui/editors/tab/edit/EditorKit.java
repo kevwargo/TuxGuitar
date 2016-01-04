@@ -75,7 +75,7 @@ public class EditorKit implements MouseListener, MouseMoveListener, MouseTrackLi
 	public boolean select() {
 		int x = this.position.x;
 		int y = this.position.y;
-		if(x >= 0 && y >= 0) {
+		if (x >= 0 && y >= 0) {
 			TGTrackImpl track = findSelectedTrack(y);
 			if (track != null) {
 				TGMeasureImpl measure = findSelectedMeasure(track, x, y);
@@ -100,7 +100,7 @@ public class EditorKit implements MouseListener, MouseMoveListener, MouseTrackLi
 	public TGTrackImpl findSelectedTrack(int y) {
 		ViewLayout layout = getTablature().getViewLayout();
 		int number = layout.getTrackNumberAt(y);
-		if(number >= 0) {
+		if (number >= 0) {
 			return (TGTrackImpl)layout.getSongManager().getTrack(number);
 		}
 		return null;
@@ -111,14 +111,14 @@ public class EditorKit implements MouseListener, MouseMoveListener, MouseTrackLi
 		int minorDistance = 0;
 		
 		Iterator it = track.getMeasures();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGMeasureImpl m = (TGMeasureImpl)it.next();
-			if(!m.isOutOfBounds() && m.getTs() != null) {
+			if (!m.isOutOfBounds() && m.getTs() != null) {
 				boolean isAtX = (x >= m.getPosX() && x <= m.getPosX() + m.getWidth(getTablature().getViewLayout()) + m.getSpacing());
-				if(isAtX) {
+				if (isAtX) {
 					int measureHeight = m.getTs().getSize();
 					int distanceY = Math.min(Math.abs(y - (m.getPosY())), Math.abs(y - ( m.getPosY() + measureHeight - 10)));
-					if(measure == null || distanceY < minorDistance) {
+					if (measure == null || distanceY < minorDistance) {
 						measure = m;
 						minorDistance = distanceY;
 					}
@@ -134,17 +134,17 @@ public class EditorKit implements MouseListener, MouseMoveListener, MouseTrackLi
 		int bestDiff = -1;
 		TGBeatImpl bestBeat = null;
 		Iterator it = measure.getBeats().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGBeatImpl beat = (TGBeatImpl)it.next();
-			if(!beat.getVoice(voice).isEmpty()) {
+			if (!beat.getVoice(voice).isEmpty()) {
 				int diff = Math.abs(x - (posX + (beat.getPosX() + beat.getSpacing())));
-				if(bestDiff == -1 || diff < bestDiff) {
+				if (bestDiff == -1 || diff < bestDiff) {
 					bestBeat = beat;
 					bestDiff = diff;
 				}
 			}
 		}
-		if( bestBeat == null ) {
+		if ( bestBeat == null ) {
 			bestBeat = (TGBeatImpl)getTablature().getViewLayout().getSongManager().getMeasureManager().getFirstBeat(measure.getBeats());
 		}
 		return bestBeat;
@@ -157,10 +157,10 @@ public class EditorKit implements MouseListener, MouseMoveListener, MouseTrackLi
 		int firstStringY = measure.getPosY() + measure.getTs().getPosition(TGTrackSpacing.POSITION_TABLATURE);
 		
 		Iterator it = measure.getTrack().getStrings().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGString currString = (TGString)it.next();
 			int distanceX = Math.abs(y - (firstStringY + ((currString.getNumber() * stringSpacing) - stringSpacing)));
-			if(string == null || distanceX < minorDistance) {
+			if (string == null || distanceX < minorDistance) {
 				string = currString;
 				minorDistance = distanceX;
 			}
@@ -178,25 +178,25 @@ public class EditorKit implements MouseListener, MouseMoveListener, MouseTrackLi
 		this.position.x = e.x;
 		this.position.y = e.y;
 		this.tablature.setFocus();
-		if(select()) {
+		if (select()) {
 			TuxGuitar.instance().updateCache(true);
-			if(!this.menuOpen && e.button == 1 && !TuxGuitar.instance().getPlayer().isRunning() && isScoreEnabled() && getMouseMode() == MOUSE_MODE_EDITION) {
+			if (!this.menuOpen && e.button == 1 && !TuxGuitar.instance().getPlayer().isRunning() && isScoreEnabled() && getMouseMode() == MOUSE_MODE_EDITION) {
 				this.mouseKit.mouseUp(e);
 			}
 		}
 	}
 	
 	public void mouseMove(MouseEvent e) {
-		if(!this.menuOpen && !TuxGuitar.instance().getPlayer().isRunning()) {
-			if(isScoreEnabled() && getMouseMode() == MOUSE_MODE_EDITION) {
+		if (!this.menuOpen && !TuxGuitar.instance().getPlayer().isRunning()) {
+			if (isScoreEnabled() && getMouseMode() == MOUSE_MODE_EDITION) {
 				this.mouseKit.mouseMove(e);
 			}
 		}
 	}
 	
 	public void mouseExit(MouseEvent e) {
-		if(!this.menuOpen && !TuxGuitar.instance().getPlayer().isRunning()) {
-			if(isScoreEnabled() && getMouseMode() == MOUSE_MODE_EDITION) {
+		if (!this.menuOpen && !TuxGuitar.instance().getPlayer().isRunning()) {
+			if (isScoreEnabled() && getMouseMode() == MOUSE_MODE_EDITION) {
 				this.mouseKit.mouseExit();
 			}
 		}

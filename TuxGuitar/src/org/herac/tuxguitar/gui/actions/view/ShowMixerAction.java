@@ -24,7 +24,7 @@ public class ShowMixerAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getMixer().isDisposed()) {
+		if (TuxGuitar.instance().getMixer().isDisposed()) {
 			TuxGuitar.instance().getMixer().show();
 		}else {
 			TuxGuitar.instance().getMixer().dispose();

@@ -47,7 +47,7 @@ public class TGBrowserWriter {
 		Node listNode = document.createElement(ITEM_LIST_TAG);
 		
 		Iterator collections = manager.getCollections();
-		while(collections.hasNext()) {
+		while (collections.hasNext()) {
 			TGBrowserCollection collection = (TGBrowserCollection)collections.next();
 			
 			//chord tag

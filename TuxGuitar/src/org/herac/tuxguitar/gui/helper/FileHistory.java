@@ -75,15 +75,15 @@ public class FileHistory {
 	
 	public void setChooserPath(URL url) {
 		String path = getFilePath(url);
-		if( path != null ) {
+		if ( path != null ) {
 			this.setChooserPath( path );
 		}
 	}
 	
 	public String getCurrentFileName(String defaultName) {
-		if(!this.isNewFile()) {
+		if (!this.isNewFile()) {
 			URL url = getCurrentURL();
-			if(url != null) {
+			if (url != null) {
 				return decode(new File(url.getFile()).getName());
 			}
 		}
@@ -91,11 +91,11 @@ public class FileHistory {
 	}
 	
 	public String getCurrentFilePath() {
-		if(!this.isNewFile()) {
+		if (!this.isNewFile()) {
 			URL url = getCurrentURL();
-			if(url != null) {
+			if (url != null) {
 				String file = getFilePath(url);
-				if(file != null) {
+				if (file != null) {
 					return decode(file);
 				}
 			}
@@ -113,7 +113,7 @@ public class FileHistory {
 	}
 	
 	protected String getFilePath(URL url) {
-		if(isLocalFile(url)) {
+		if (isLocalFile(url)) {
 			return new File(url.getFile()).getParent();
 		}
 		return null;
@@ -130,7 +130,7 @@ public class FileHistory {
 	
 	protected boolean isLocalFile(URL url) {
 		try {
-			if(url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
+			if (url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
 				return true;
 			}
 		}catch(Throwable throwable) {
@@ -140,14 +140,14 @@ public class FileHistory {
 	}
 	
 	protected URL getCurrentURL() {
-		if(!this.urls.isEmpty()) {
+		if (!this.urls.isEmpty()) {
 			return (URL)this.urls.get(0);
 		}
 		return null;
 	}
 	
 	public void addURL(URL url) {
-		if(url != null) {
+		if (url != null) {
 			removeURL(url);
 			this.urls.add(0, url);
 			checkLimit();
@@ -161,15 +161,15 @@ public class FileHistory {
 	}
 	
 	private void checkLimit() {
-		while(this.urls.size() > URL_LIMIT) {
+		while (this.urls.size() > URL_LIMIT) {
 			this.urls.remove(this.urls.size() - 1);
 		}
 	}
 	
 	private void removeURL(URL url) {
-		for(int i = 0; i < this.urls.size(); i++) {
+		for (int i = 0; i < this.urls.size(); i++) {
 			URL old = (URL)this.urls.get(i);
-			if(old.toString().equals(url.toString())) {
+			if (old.toString().equals(url.toString())) {
 				this.urls.remove(i);
 				break;
 			}
@@ -187,7 +187,7 @@ public class FileHistory {
 	public void loadHistory() {
 		try {
 			this.urls.clear();
-			if(new File(getHistoryFileName()).exists()) {
+			if (new File(getHistoryFileName()).exists()) {
 				InputStream inputStream = new FileInputStream(getHistoryFileName());
 				Properties properties = new Properties();
 				properties.load(inputStream);
@@ -195,9 +195,9 @@ public class FileHistory {
 				this.chooserPath = (String)properties.get("history.path");
 				
 				int count = Integer.parseInt((String)properties.get("history.count"));
-				for(int i = 0; i < count;i ++) {
+				for (int i = 0; i < count;i ++) {
 					String url = (String)properties.get("history." + i);
-					if(URL_LIMIT > i && url != null && url.length() > 0) {
+					if (URL_LIMIT > i && url != null && url.length() > 0) {
 						this.urls.add(new URL(url));
 					}
 				}
@@ -215,11 +215,11 @@ public class FileHistory {
 			Properties properties = new Properties();
 			
 			int count = this.urls.size();
-			for(int i = 0;i < count;i ++) {
+			for (int i = 0;i < count;i ++) {
 				properties.put("history." + i, this.urls.get(i).toString());
 			}
 			properties.put("history.count", Integer.toString(count));
-			if(this.chooserPath != null) {
+			if (this.chooserPath != null) {
 				properties.put("history.path", this.chooserPath);
 			}
 			properties.store(new FileOutputStream(getHistoryFileName()),"History Files");

@@ -41,21 +41,21 @@ public class TGResourceBundle {
 		
 		// load language
 		bundleName += "_";
-		if(locale.getLanguage() != null && locale.getLanguage().length() > 0) {
+		if (locale.getLanguage() != null && locale.getLanguage().length() > 0) {
 			bundleName += locale.getLanguage();
 			TGResourceBundle.loadResources( (bundleName + bundleExtension ), properties);
 		}
 		
 		// load country
 		bundleName += "_";
-		if(locale.getCountry() != null && locale.getCountry().length() > 0) {
+		if (locale.getCountry() != null && locale.getCountry().length() > 0) {
 			bundleName += locale.getCountry();
 			TGResourceBundle.loadResources( (bundleName + bundleExtension ), properties);
 		}
 		
 		// load variant
 		bundleName += "_";
-		if(locale.getVariant() != null && locale.getVariant().length() > 0) {
+		if (locale.getVariant() != null && locale.getVariant().length() > 0) {
 			bundleName += locale.getVariant();
 			TGResourceBundle.loadResources( (bundleName + bundleExtension ), properties);
 		}

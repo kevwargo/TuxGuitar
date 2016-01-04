@@ -22,14 +22,14 @@ public class TGSplash {
 	}
 	
 	public static TGSplash instance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new TGSplash();
 		}
 		return instance;
 	}
 	
 	public void init() {
-		if(TuxGuitar.instance().getConfig().getBooleanConfigValue(TGConfigKeys.SHOW_SPLASH)) {
+		if (TuxGuitar.instance().getConfig().getBooleanConfigValue(TGConfigKeys.SHOW_SPLASH)) {
 			final Image image = TuxGuitar.instance().getIconManager().getAppSplash();
 			
 			this.shell = new Shell(TuxGuitar.instance().getDisplay(), SWT.NO_TRIM | SWT.NO_BACKGROUND);
@@ -50,7 +50,7 @@ public class TGSplash {
 	}
 	
 	public void finish() {
-		if(this.shell != null && !this.shell.isDisposed()) {
+		if (this.shell != null && !this.shell.isDisposed()) {
 			this.shell.close();
 			this.shell.dispose();
 		}

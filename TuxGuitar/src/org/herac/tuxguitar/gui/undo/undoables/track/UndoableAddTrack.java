@@ -18,7 +18,7 @@ public class UndoableAddTrack implements UndoableEdit {
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()) {
+		if (!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TuxGuitar.instance().getSongManager().addTrack(cloneTrack(this.redoableTrack));
@@ -30,7 +30,7 @@ public class UndoableAddTrack implements UndoableEdit {
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()) {
+		if (!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TuxGuitar.instance().getSongManager().removeTrack(cloneTrack(this.redoableTrack));

@@ -16,13 +16,13 @@ public class TGLock {
 		boolean lockSuccess = false;
 		
 		synchronized( this.lock ) {
-			if( ( lockSuccess = !this.isLocked( thread ) ) ) {
+			if ( ( lockSuccess = !this.isLocked( thread ) ) ) {
 				this.lockThread = thread;
 			}
 		}
 		
-		if( !lockSuccess ) {
-			while( isLocked(thread) ) {
+		if ( !lockSuccess ) {
+			while ( isLocked(thread) ) {
 				Thread.yield();
 			}
 			this.lock();

@@ -107,7 +107,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		//escribo las pistas
 		TGMeasureHeader lastHeader = null;
 		Iterator headers = song.getMeasureHeaders();
-		while(headers.hasNext()) {
+		while (headers.hasNext()) {
 			TGMeasureHeader header = (TGMeasureHeader)headers.next();
 			writeMeasureHeader(header, lastHeader);
 			lastHeader = header;
@@ -117,7 +117,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeByte(song.countTracks());
 		
 		//escribo las pistas
-		for(int i = 0;i < song.countTracks();i++) {
+		for (int i = 0;i < song.countTracks();i++) {
 			TGTrack track = song.getTrack(i);
 			writeTrack(track);
 		}
@@ -132,7 +132,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		if (track.isMute()) {
 			header |= TRACK_MUTE;
 		}
-		if(!track.getLyrics().isEmpty()) {
+		if (!track.getLyrics().isEmpty()) {
 			header |= TRACK_LYRICS;
 		}
 		writeHeader(header);
@@ -146,7 +146,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		//escribo los compases
 		TGMeasure lastMeasure = null;
 		Iterator measures  = track.getMeasures();
-		while(measures.hasNext()) {
+		while (measures.hasNext()) {
 			TGMeasure measure = (TGMeasure)measures.next();
 			writeMeasure(measure, lastMeasure);
 			lastMeasure = measure;
@@ -157,7 +157,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		
 		//escribo las cuerdas
 		Iterator stringIt  = track.getStrings().iterator();
-		while(stringIt.hasNext()) {
+		while (stringIt.hasNext()) {
 			TGString string = (TGString)stringIt.next();
 			writeInstrumentString(string);
 		}
@@ -169,17 +169,17 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeRGBColor(track.getColor());
 		
 		//escribo el lyrics
-		if(((header & TRACK_LYRICS) != 0)) {
+		if (((header & TRACK_LYRICS) != 0)) {
 			writeLyrics(track.getLyrics());
 		}
 	}
 	
 	private void writeMeasureHeader(TGMeasureHeader measureheader, TGMeasureHeader lastMeasureHeader) {
 		int header = 0;
-		if(lastMeasureHeader == null) {
+		if (lastMeasureHeader == null) {
 			header |= MEASURE_HEADER_TIMESIGNATURE;
 			header |= MEASURE_HEADER_TEMPO;
-			if(measureheader.getTripletFeel() != TGMeasureHeader.TRIPLET_FEEL_NONE) {
+			if (measureheader.getTripletFeel() != TGMeasureHeader.TRIPLET_FEEL_NONE) {
 				header |= MEASURE_HEADER_TRIPLET_FEEL;
 			}
 		}else {
@@ -188,15 +188,15 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 			int value = measureheader.getTimeSignature().getDenominator().getValue();
 			int prevNumerator = lastMeasureHeader.getTimeSignature().getNumerator();
 			int prevValue = lastMeasureHeader.getTimeSignature().getDenominator().getValue();
-			if(numerator != prevNumerator || value != prevValue) {
+			if (numerator != prevNumerator || value != prevValue) {
 				header |= MEASURE_HEADER_TIMESIGNATURE;
 			}
 			//Tempo
-			if(measureheader.getTempo().getValue() != lastMeasureHeader.getTempo().getValue()) {
+			if (measureheader.getTempo().getValue() != lastMeasureHeader.getTempo().getValue()) {
 				header |= MEASURE_HEADER_TEMPO;
 			}
 			//Triplet Feel
-			if(measureheader.getTripletFeel() != lastMeasureHeader.getTripletFeel()) {
+			if (measureheader.getTripletFeel() != lastMeasureHeader.getTripletFeel()) {
 				header |= MEASURE_HEADER_TRIPLET_FEEL;
 			}
 		}
@@ -208,48 +208,48 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeHeader(header);
 		
 		//escribo el timeSignature
-		if(((header & MEASURE_HEADER_TIMESIGNATURE) != 0)) {
+		if (((header & MEASURE_HEADER_TIMESIGNATURE) != 0)) {
 			writeTimeSignature(measureheader.getTimeSignature());
 		}
 		
 		//escribo el tempo
-		if(((header & MEASURE_HEADER_TEMPO) != 0)) {
+		if (((header & MEASURE_HEADER_TEMPO) != 0)) {
 			writeTempo(measureheader.getTempo());
 		}
 		
 		//escribo el numero de repeticiones
-		if(((header & MEASURE_HEADER_REPEAT_CLOSE) != 0)) {
+		if (((header & MEASURE_HEADER_REPEAT_CLOSE) != 0)) {
 			writeShort((short)measureheader.getRepeatClose());
 		}
 		
 		//escribo los finales alternativos
-		if(((header & MEASURE_HEADER_REPEAT_ALTERNATIVE) != 0)) {
+		if (((header & MEASURE_HEADER_REPEAT_ALTERNATIVE) != 0)) {
 			writeByte(measureheader.getRepeatAlternative());
 		}
 		
 		//escribo el marker
-		if(((header & MEASURE_HEADER_MARKER) != 0)) {
+		if (((header & MEASURE_HEADER_MARKER) != 0)) {
 			writeMarker(measureheader.getMarker());
 		}
 		
 		//escribo el triplet feel
-		if(((header & MEASURE_HEADER_TRIPLET_FEEL) != 0)) {
+		if (((header & MEASURE_HEADER_TRIPLET_FEEL) != 0)) {
 			writeByte(measureheader.getTripletFeel());
 		}
 	}
 	
 	private void writeMeasure(TGMeasure measure, TGMeasure lastMeasure) {
 		int header = 0;
-		if(lastMeasure == null) {
+		if (lastMeasure == null) {
 			header |= MEASURE_CLEF;
 			header |= MEASURE_KEYSIGNATURE;
 		}else {
 			//Clef
-			if(measure.getClef() != lastMeasure.getClef()) {
+			if (measure.getClef() != lastMeasure.getClef()) {
 				header |= MEASURE_CLEF;
 			}
 			//KeySignature
-			if(measure.getKeySignature() != lastMeasure.getKeySignature()) {
+			if (measure.getKeySignature() != lastMeasure.getKeySignature()) {
 				header |= MEASURE_KEYSIGNATURE;
 			}
 		}
@@ -261,12 +261,12 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeBeats(measure, data);
 		
 		//escribo la clave
-		if(((header & MEASURE_CLEF) != 0)) {
+		if (((header & MEASURE_CLEF) != 0)) {
 			writeByte(measure.getClef());
 		}
 		
 		//escribo el key signature
-		if(((header & MEASURE_KEYSIGNATURE) != 0)) {
+		if (((header & MEASURE_KEYSIGNATURE) != 0)) {
 			writeByte(measure.getKeySignature());
 		}
 	}
@@ -302,7 +302,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 	
 	private void writeBeats(TGMeasure measure, TGBeatData data) {
 		int count = measure.countBeats();
-		for(int i = 0; i < count; i ++) {
+		for (int i = 0; i < count; i ++) {
 			TGBeat beat = measure.getBeat(i);
 			writeBeat(beat, data, (i + 1 < count ));
 		}
@@ -312,25 +312,25 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		int header = hasNext ? BEAT_HAS_NEXT : 0;
 		
 		//Berifico si hay cambios en las voces
-		for(int i = 0 ; i < TGBeat.MAX_VOICES; i ++ ) {
+		for (int i = 0 ; i < TGBeat.MAX_VOICES; i ++ ) {
 			int shift = (i * 2 );
-			if(!beat.getVoice(i).isEmpty()) {
+			if (!beat.getVoice(i).isEmpty()) {
 				header |= ( BEAT_HAS_VOICE << shift ); 
 				
 				int flags = ( beat.getVoice(i).isRestVoice() ? 0 : VOICE_HAS_NOTES );
-				if(!beat.getVoice(i).getDuration().isEqual(data.getVoice(i).getDuration())) {
+				if (!beat.getVoice(i).getDuration().isEqual(data.getVoice(i).getDuration())) {
 					flags |= VOICE_NEXT_DURATION;
 					data.getVoice(i).setDuration(beat.getVoice(i).getDuration());
 				}
-				if(beat.getVoice(i).getDirection() != TGVoice.DIRECTION_NONE ) {
-					if(beat.getVoice(i).getDirection() == TGVoice.DIRECTION_UP ) {
+				if (beat.getVoice(i).getDirection() != TGVoice.DIRECTION_NONE ) {
+					if (beat.getVoice(i).getDirection() == TGVoice.DIRECTION_UP ) {
 						flags |= VOICE_DIRECTION_UP;
 					}
-					else if(beat.getVoice(i).getDirection() == TGVoice.DIRECTION_DOWN ) {
+					else if (beat.getVoice(i).getDirection() == TGVoice.DIRECTION_DOWN ) {
 						flags |= VOICE_DIRECTION_DOWN;
 					}
 				}
-				if( data.getVoice(i).getFlags() != flags ) {
+				if ( data.getVoice(i).getFlags() != flags ) {
 					header |= ( BEAT_HAS_VOICE_CHANGES << shift ); 
 					data.getVoice(i).setFlags( flags );
 				}
@@ -338,15 +338,15 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 			
 		}
 		//Berifico si tiene stroke
-		if(beat.getStroke().getDirection() != TGStroke.STROKE_NONE) {
+		if (beat.getStroke().getDirection() != TGStroke.STROKE_NONE) {
 			header |= BEAT_HAS_STROKE;
 		}
 		//Berifico si tiene acorde
-		if(beat.getChord() != null) {
+		if (beat.getChord() != null) {
 			header |= BEAT_HAS_CHORD;
 		}
 		//Berifico si tiene texto
-		if(beat.getText() != null) {
+		if (beat.getText() != null) {
 			header |= BEAT_HAS_TEXT;
 		}
 		
@@ -357,37 +357,37 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeVoices(header, beat, data);
 		
 		//escribo el stroke
-		if(((header & BEAT_HAS_STROKE) != 0)) {
+		if (((header & BEAT_HAS_STROKE) != 0)) {
 			writeStroke(beat.getStroke());
 		}
 		
 		//escribo el acorde
-		if(((header & BEAT_HAS_CHORD) != 0)) {
+		if (((header & BEAT_HAS_CHORD) != 0)) {
 			writeChord(beat.getChord());
 		}
 		
 		//escribo el texto
-		if(((header & BEAT_HAS_TEXT) != 0)) {
+		if (((header & BEAT_HAS_TEXT) != 0)) {
 			writeText(beat.getText());
 		}
 	}
 	
 	private void writeVoices(int header, TGBeat beat, TGBeatData data) {
-		for(int i = 0 ; i < TGBeat.MAX_VOICES; i ++ ) {
+		for (int i = 0 ; i < TGBeat.MAX_VOICES; i ++ ) {
 			int shift = (i * 2 );
-			if((( header & (BEAT_HAS_VOICE << shift)) != 0)) {
+			if ((( header & (BEAT_HAS_VOICE << shift)) != 0)) {
 				
-				if(((header & (BEAT_HAS_VOICE_CHANGES << shift)) != 0)) {
+				if (((header & (BEAT_HAS_VOICE_CHANGES << shift)) != 0)) {
 					writeHeader( data.getVoice(i).getFlags() );
 				}
 				
 				//escribo la duracion
-				if((( data.getVoice(i).getFlags() & VOICE_NEXT_DURATION) != 0)) {
+				if ((( data.getVoice(i).getFlags() & VOICE_NEXT_DURATION) != 0)) {
 					writeDuration(beat.getVoice(i).getDuration());
 				}
 				
 				//escribo las notas
-				if((( data.getVoice(i).getFlags() & VOICE_HAS_NOTES) != 0)) {
+				if ((( data.getVoice(i).getFlags() & VOICE_HAS_NOTES) != 0)) {
 					writeNotes(beat.getVoice(i), data);
 				}
 			}
@@ -395,12 +395,12 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 	}
 	
 	private void writeNotes(TGVoice voice, TGBeatData data) {
-		for( int i = 0 ; i < voice.countNotes() ; i ++) {
+		for ( int i = 0 ; i < voice.countNotes() ; i ++) {
 			TGNote note = voice.getNote(i);
 			
 			int header = ( i + 1 < voice.countNotes() ? NOTE_HAS_NEXT : 0 );
 			header = (note.isTiedNote())?header |= NOTE_TIED:header;
-			if(note.getVelocity() != data.getVoice(voice.getIndex()).getVelocity()) {
+			if (note.getVelocity() != data.getVoice(voice.getIndex()).getVelocity()) {
 				data.getVoice(voice.getIndex()).setVelocity(note.getVelocity());
 				header |= NOTE_VELOCITY;
 			}
@@ -420,12 +420,12 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeByte(note.getString());
 		
 		//escribo el velocity
-		if(((header & NOTE_VELOCITY) != 0)) {
+		if (((header & NOTE_VELOCITY) != 0)) {
 			writeByte(note.getVelocity());
 		}
 		
 		//escribo los efectos
-		if(((header & NOTE_EFFECT) != 0)) {
+		if (((header & NOTE_EFFECT) != 0)) {
 			writeNoteEffect(note.getEffect());
 		}
 	}
@@ -449,7 +449,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeByte(chord.getFirstFret());
 		
 		//escribo el valor de cada cuerda
-		for(int string = 0; string < chord.countStrings(); string ++) {
+		for (int string = 0; string < chord.countStrings(); string ++) {
 			writeByte(chord.getFretValue(string));
 		}
 	}
@@ -488,7 +488,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeByte(duration.getValue());
 		
 		//escribo el tipo de divisiones
-		if(((header & DURATION_NO_TUPLET) != 0)) {
+		if (((header & DURATION_NO_TUPLET) != 0)) {
 			writeDivisionType(duration.getDivision());
 		}
 	}
@@ -527,32 +527,32 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeHeader(header, 3);
 		
 		//escribo el bend
-		if(((header & EFFECT_BEND) != 0)) {
+		if (((header & EFFECT_BEND) != 0)) {
 			writeBendEffect(effect.getBend());
 		}
 		
 		//leo el tremolo bar
-		if(((header & EFFECT_TREMOLO_BAR) != 0)) {
+		if (((header & EFFECT_TREMOLO_BAR) != 0)) {
 			writeTremoloBarEffect(effect.getTremoloBar());
 		}
 		
 		//leo el harmonic
-		if(((header & EFFECT_HARMONIC) != 0)) {
+		if (((header & EFFECT_HARMONIC) != 0)) {
 			writeHarmonicEffect(effect.getHarmonic());
 		}
 		
 		//leo el grace
-		if(((header & EFFECT_GRACE) != 0)) {
+		if (((header & EFFECT_GRACE) != 0)) {
 			writeGraceEffect(effect.getGrace());
 		}
 		
 		//leo el trill
-		if(((header & EFFECT_TRILL) != 0)) {
+		if (((header & EFFECT_TRILL) != 0)) {
 			writeTrillEffect(effect.getTrill());
 		}
 		
 		//leo el tremolo picking
-		if(((header & EFFECT_TREMOLO_PICKING) != 0)) {
+		if (((header & EFFECT_TREMOLO_PICKING) != 0)) {
 			writeTremoloPickingEffect(effect.getTremoloPicking());
 		}
 	}
@@ -562,7 +562,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeByte(effect.getPoints().size());
 		
 		Iterator it = effect.getPoints().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGEffectBend.BendPoint point = (TGEffectBend.BendPoint)it.next();
 			
 			//escribo la posicion
@@ -578,7 +578,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeByte(effect.getPoints().size());
 		
 		Iterator it = effect.getPoints().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGEffectTremoloBar.TremoloBarPoint point = (TGEffectTremoloBar.TremoloBarPoint)it.next();
 			
 			//escribo la posicion
@@ -594,7 +594,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 		writeByte(effect.getType());
 		
 		//excribo la data
-		if(effect.getType() != TGEffectHarmonic.TYPE_NATURAL) {
+		if (effect.getType() != TGEffectHarmonic.TYPE_NATURAL) {
 			writeByte(effect.getData());
 		}
 	}
@@ -692,7 +692,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase {
 	}
 	
 	public void writeHeader(int v, int bCount) {
-		for(int i = bCount; i > 0; i --) {
+		for (int i = bCount; i > 0; i --) {
 			writeHeader( (v >>> ( (8 * i) - 8 ) )  &  0xFF);
 		}
 	}

@@ -33,17 +33,17 @@ public abstract class TGStroke {
 	
 	public int getIncrementTime( TGBeat beat ) {
 		long duration = 0;
-		if( this.value > 0 ) {
-			for(int v = 0; v < beat.countVoices(); v ++) {
+		if ( this.value > 0 ) {
+			for (int v = 0; v < beat.countVoices(); v ++) {
 				TGVoice voice = beat.getVoice( v );
-				if( !voice.isEmpty() ) {
+				if ( !voice.isEmpty() ) {
 					long currentDuration = voice.getDuration().getTime();
-					if(duration == 0 || currentDuration < duration) {
+					if (duration == 0 || currentDuration < duration) {
 						duration = ( currentDuration <= TGDuration.QUARTER_TIME ? currentDuration : TGDuration.QUARTER_TIME );
 					}
 				}
 			}
-			if( duration > 0 ) {
+			if ( duration > 0 ) {
 				return Math.round( ( ( duration / 8.0f ) * ( 4.0f / this.value ) ) );
 			}
 		}

@@ -35,10 +35,10 @@ public class TGFileUtils {
 	
 	public static InputStream getResourceAsStream(String resource) {
 		try {
-			if(TG_STATIC_SHARED_PATHS != null) {
-				for( int i = 0; i < TG_STATIC_SHARED_PATHS.length ; i ++ ) {
+			if (TG_STATIC_SHARED_PATHS != null) {
+				for ( int i = 0; i < TG_STATIC_SHARED_PATHS.length ; i ++ ) {
 					File file = new File(TG_STATIC_SHARED_PATHS[i] + File.separator + resource);
-					if( file.exists() ) {
+					if ( file.exists() ) {
 						return new FileInputStream( file );
 					}
 				}
@@ -52,10 +52,10 @@ public class TGFileUtils {
 	
 	public static URL getResourceUrl(String resource) {
 		try {
-			if(TG_STATIC_SHARED_PATHS != null) {
-				for( int i = 0; i < TG_STATIC_SHARED_PATHS.length ; i ++ ) {
+			if (TG_STATIC_SHARED_PATHS != null) {
+				for ( int i = 0; i < TG_STATIC_SHARED_PATHS.length ; i ++ ) {
 					File file = new File(TG_STATIC_SHARED_PATHS[i] + File.separator + resource);
-					if( file.exists() ) {
+					if ( file.exists() ) {
 						return file.toURI().toURL();
 					}
 				}
@@ -70,18 +70,18 @@ public class TGFileUtils {
 	public static Enumeration getResourceUrls(String resource) {
 		try {
 			Vector vector = new Vector();
-			if(TG_STATIC_SHARED_PATHS != null) {
-				for( int i = 0; i < TG_STATIC_SHARED_PATHS.length ; i ++ ) {
+			if (TG_STATIC_SHARED_PATHS != null) {
+				for ( int i = 0; i < TG_STATIC_SHARED_PATHS.length ; i ++ ) {
 					File file = new File(TG_STATIC_SHARED_PATHS[i] + File.separator + resource);
-					if( file.exists() ) {
+					if ( file.exists() ) {
 						vector.addElement( file.toURI().toURL() );
 					}
 				}
 			}
 			Enumeration resources = TGClassLoader.instance().getClassLoader().getResources(resource);
-			while( resources.hasMoreElements() ) {
+			while ( resources.hasMoreElements() ) {
 				URL url = (URL)resources.nextElement();
-				if( !vector.contains(url) ) {
+				if ( !vector.contains(url) ) {
 					vector.addElement( url );
 				}
 			}
@@ -94,16 +94,16 @@ public class TGFileUtils {
 	
 	private static String getResourcePath(String resource) {
 		try {
-			if(TG_STATIC_SHARED_PATHS != null) {
-				for( int i = 0; i < TG_STATIC_SHARED_PATHS.length ; i ++ ) {
+			if (TG_STATIC_SHARED_PATHS != null) {
+				for ( int i = 0; i < TG_STATIC_SHARED_PATHS.length ; i ++ ) {
 					File file = new File(TG_STATIC_SHARED_PATHS[i] + File.separator + resource);
-					if( file.exists() ) {
+					if ( file.exists() ) {
 						return file.getAbsolutePath() + File.separator;
 					}
 				}
 			}
 			URL url = TGClassLoader.instance().getClassLoader().getResource(resource);
-			if(url != null) {
+			if (url != null) {
 				return new File(URLDecoder.decode(url.getPath(), "UTF-8")).getAbsolutePath() + File.separator;
 			}
 		}catch(Throwable throwable) {
@@ -114,14 +114,14 @@ public class TGFileUtils {
 	
 	public static void loadClasspath() {
 		String plugins = getResourcePath("plugins");
-		if(plugins != null) {
+		if (plugins != null) {
 			TGClassLoader.instance().addPaths(new File(plugins));
 		}
 		
 		String custompath = System.getProperty(TG_CLASS_PATH);
-		if(custompath != null) {
+		if (custompath != null) {
 			String[] paths = custompath.split(File.pathSeparator);
-			for(int i = 0; i < paths.length; i++) {
+			for (int i = 0; i < paths.length; i++) {
 				TGClassLoader.instance().addPaths(new File(paths[i]));
 			}
 		}
@@ -129,11 +129,11 @@ public class TGFileUtils {
 	
 	public static void loadLibraries() {
 		String libraryPath = System.getProperty(TG_LIBRARY_PATH);
-		if(libraryPath != null) {
+		if (libraryPath != null) {
 			String[] libraryPaths = libraryPath.split(File.pathSeparator);
 			String libraryPrefix = System.getProperty(TG_LIBRARY_PREFIX);
 			String libraryExtension = System.getProperty(TG_LIBRARY_EXTENSION);
-			for(int i = 0; i < libraryPaths.length; i++) {
+			for (int i = 0; i < libraryPaths.length; i++) {
 				TGLibraryLoader.instance().loadLibraries(new File(libraryPaths[i]), libraryPrefix, libraryExtension);
 			}
 		}
@@ -142,18 +142,18 @@ public class TGFileUtils {
 	public static String[] getFileNames( String resource ) {
 		try {
 			String path = getResourcePath(resource);
-			if( path != null ) {
+			if ( path != null ) {
 				File file = new File( path );
-				if(file.exists() && file.isDirectory()) {
+				if (file.exists() && file.isDirectory()) {
 					return file.list();
 				}
 			}
 			InputStream stream = getResourceAsStream(resource + "/list.properties" );
-			if( stream != null ) {
+			if ( stream != null ) {
 				BufferedReader reader = new BufferedReader( new InputStreamReader(stream) );
 				List fileNameList = new ArrayList();
 				String fileName = null;
-				while( (fileName = reader.readLine()) != null ) {
+				while ( (fileName = reader.readLine()) != null ) {
 					fileNameList.add( fileName );
 				}
 				String[] fileNames = new String[ fileNameList.size() ];
@@ -175,7 +175,7 @@ public class TGFileUtils {
 	public static Image loadImage(String skin, String name) {
 		try {
 			InputStream stream = getResourceAsStream("skins/" + skin + "/" + name);
-			if(stream != null) {			
+			if (stream != null) {			
 				return new Image(TuxGuitar.instance().getDisplay(), new ImageData(stream));
 			}
 			System.err.println(name + ": not found");
@@ -187,7 +187,7 @@ public class TGFileUtils {
 	
 	public static boolean isLocalFile(URL url) {
 		try {
-			if(url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
+			if (url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
 				return true;
 			}
 		}catch(Throwable throwable) {
@@ -201,13 +201,13 @@ public class TGFileUtils {
 		String configPath = System.getProperty(TG_CONFIG_PATH);
 		
 		// Default System User Home
-		if(configPath == null) {
+		if (configPath == null) {
 			configPath = ( (System.getProperty("user.home") + File.separator + ".tuxguitar-" + TGVersion.CURRENT.getVersion()) ) ;
 		}
 		
 		// Check if the path exists
 		File file = new File(configPath);
-		if(!file.exists()) {
+		if (!file.exists()) {
 			file.mkdirs();
 		}
 		return configPath;
@@ -218,7 +218,7 @@ public class TGFileUtils {
 		
 		//Check if the path exists
 		File file = new File(configPluginsPath);
-		if(!file.exists()) {
+		if (!file.exists()) {
 			file.mkdirs();
 		}
 		
@@ -227,7 +227,7 @@ public class TGFileUtils {
 	
 	private static String[] getStaticSharedPaths() {
 		String staticSharedPaths = System.getProperty(TG_SHARE_PATH);
-		if( staticSharedPaths != null ) {
+		if ( staticSharedPaths != null ) {
 			return staticSharedPaths.split(File.pathSeparator);
 		}
 		return null;

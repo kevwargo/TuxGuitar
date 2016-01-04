@@ -40,7 +40,7 @@ public class TGPainter {
 	}
 	
 	public void init(GC gc) {
-		if(this.gc != null && !this.gc.isDisposed()) {
+		if (this.gc != null && !this.gc.isDisposed()) {
 			this.gc.dispose();
 		}
 		this.gc = gc;
@@ -58,11 +58,11 @@ public class TGPainter {
 	}
 	
 	public void closePath() {
-		if(! this.pathEmpty ) {
-			if( (this.style & PATH_DRAW) != 0) {
+		if (! this.pathEmpty ) {
+			if ( (this.style & PATH_DRAW) != 0) {
 				this.gc.drawPath(this.path);
 			}
-			if( (this.style & PATH_FILL) != 0) {
+			if ( (this.style & PATH_FILL) != 0) {
 				this.gc.fillPath(this.path);
 			}
 		}
@@ -182,13 +182,13 @@ public class TGPainter {
 	}
 	
 	public void setAntialias(boolean enabled) {
-		if( !TGPainterUtils.FORCE_OS_DEFAULTS ) {
+		if ( !TGPainterUtils.FORCE_OS_DEFAULTS ) {
 			this.gc.setAntialias(enabled ? SWT.ON : SWT.OFF );
 		}
 	}
 	
 	public void setAdvanced(boolean advanced) {
-		if( !TGPainterUtils.FORCE_OS_DEFAULTS ) {
+		if ( !TGPainterUtils.FORCE_OS_DEFAULTS ) {
 			this.gc.setAdvanced(advanced);
 		}
 	}

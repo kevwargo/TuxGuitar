@@ -24,7 +24,7 @@ public abstract class TGMidiSequencerProviderPlugin extends TGPluginAdapter {
 	}
 	
 	public void setEnabled(boolean enabled) throws TGPluginException {
-		if(enabled) {
+		if (enabled) {
 			addPlugin();
 		}else {
 			removePlugin();
@@ -32,7 +32,7 @@ public abstract class TGMidiSequencerProviderPlugin extends TGPluginAdapter {
 	}
 	
 	protected void addPlugin() throws TGPluginException {
-		if(!this.loaded) {
+		if (!this.loaded) {
 			try {
 				TuxGuitar.instance().getPlayer().addSequencerProvider(this.provider, TuxGuitar.instance().isInitialized());
 				this.loaded = true;
@@ -43,7 +43,7 @@ public abstract class TGMidiSequencerProviderPlugin extends TGPluginAdapter {
 	}
 	
 	protected void removePlugin() throws TGPluginException {
-		if(this.loaded) {
+		if (this.loaded) {
 			try {
 				TuxGuitar.instance().getPlayer().removeSequencerProvider(this.provider);
 				this.loaded = false;

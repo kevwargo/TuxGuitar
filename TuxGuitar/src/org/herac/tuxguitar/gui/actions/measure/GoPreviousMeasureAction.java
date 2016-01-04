@@ -27,14 +27,14 @@ public class GoPreviousMeasureAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getPlayer().isRunning()) {
+		if (TuxGuitar.instance().getPlayer().isRunning()) {
 			TuxGuitar.instance().getTransport().gotoPrevious();
 		}
 		else {
 			Caret caret = getEditor().getTablature().getCaret();
 			TGTrackImpl track = caret.getTrack();
 			TGMeasureImpl measure = (TGMeasureImpl)getSongManager().getTrackManager().getPrevMeasure(caret.getMeasure());
-			if(track != null && measure != null) {
+			if (track != null && measure != null) {
 				caret.update(track.getNumber(), measure.getStart(), caret.getSelectedString().getNumber());
 			}
 		}

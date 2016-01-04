@@ -28,13 +28,13 @@ public class RemoveUnusedVoiceAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
-		if( caret.getMeasure() != null) {
+		if ( caret.getMeasure() != null) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
 			
-			for( int v = 0 ; v < TGBeat.MAX_VOICES ; v ++ ) {
-				if( caret.getVoice() != v ) {
+			for ( int v = 0 ; v < TGBeat.MAX_VOICES ; v ++ ) {
+				if ( caret.getVoice() != v ) {
 					getSongManager().getMeasureManager().removeMeasureVoices( caret.getMeasure(), v );
 				}
 			}

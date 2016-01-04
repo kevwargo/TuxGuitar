@@ -21,7 +21,7 @@ public abstract class TGImporterPlugin extends TGPluginAdapter {
 	}
 	
 	public void setEnabled(boolean enabled) throws TGPluginException {
-		if(enabled) {
+		if (enabled) {
 			addPlugin();
 		}else {
 			removePlugin();
@@ -29,7 +29,7 @@ public abstract class TGImporterPlugin extends TGPluginAdapter {
 	}
 	
 	protected void addPlugin() throws TGPluginException {
-		if(!this.loaded) {
+		if (!this.loaded) {
 			TGFileFormatManager.instance().addImporter(this.importer);
 			TuxGuitar.instance().getItemManager().createMenu();
 			this.loaded = true;
@@ -37,7 +37,7 @@ public abstract class TGImporterPlugin extends TGPluginAdapter {
 	}
 	
 	protected void removePlugin() throws TGPluginException {
-		if(this.loaded) {
+		if (this.loaded) {
 			TGFileFormatManager.instance().removeImporter(this.importer);
 			TuxGuitar.instance().getItemManager().createMenu();
 			this.loaded = false;

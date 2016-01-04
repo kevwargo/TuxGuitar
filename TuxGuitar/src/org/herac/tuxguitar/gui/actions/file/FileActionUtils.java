@@ -45,7 +45,7 @@ public class FileActionUtils {
 			if (!isSupportedFormat(fileName)) {
 				fileName += TGFileFormatManager.DEFAULT_EXTENSION;
 			}
-			if(!canWrite(fileName)) {
+			if (!canWrite(fileName)) {
 				return null;
 			}
 		}
@@ -61,13 +61,13 @@ public class FileActionUtils {
 	}
 	
 	public static boolean isSupportedFormat(String path) {
-		if(path != null) {
+		if (path != null) {
 			int index = path.lastIndexOf(".");
-			if(index > 0) {
+			if (index > 0) {
 				Iterator it = TGFileFormatManager.instance().getOutputStreams();
-				while(it.hasNext()) {
+				while (it.hasNext()) {
 					TGOutputStreamBase writer = (TGOutputStreamBase)it.next();
-					if(writer.isSupportedExtension(path.substring(index))) {
+					if (writer.isSupportedExtension(path.substring(index))) {
 						return true;
 					}
 				}
@@ -164,7 +164,7 @@ public class FileActionUtils {
 	
 	private static boolean isLocalFile(URL url) {
 		try {
-			if(url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
+			if (url.getProtocol().equals( new File(url.getFile()).toURI().toURL().getProtocol() ) ) {
 				return true;
 			}
 		}catch(Throwable throwable) {
@@ -176,7 +176,7 @@ public class FileActionUtils {
 	private static InputStream getInputStream(InputStream in)throws Throwable {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		int read = 0;
-		while((read = in.read()) != -1) {
+		while ((read = in.read()) != -1) {
 			out.write(read);
 		}
 		byte[] bytes = out.toByteArray();

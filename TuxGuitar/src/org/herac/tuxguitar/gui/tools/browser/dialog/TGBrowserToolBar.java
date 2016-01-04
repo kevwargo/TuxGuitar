@@ -48,7 +48,7 @@ public class TGBrowserToolBar extends TGBrowserBar {
 		//---New Book----------------------------------------------------------
 		this.newBrowserMenu = new Menu(this.composite);
 		Iterator bookTypes = TGBrowserManager.instance().getFactories();
-		while(bookTypes.hasNext()) {
+		while (bookTypes.hasNext()) {
 			final TGBrowserFactory bookType = (TGBrowserFactory)bookTypes.next();
 			MenuItem item = new MenuItem(this.newBrowserMenu, SWT.PUSH);
 			item.setText(bookType.getName());
@@ -127,11 +127,11 @@ public class TGBrowserToolBar extends TGBrowserBar {
 		this.collections.removeAll();
 		
 		Iterator it = TGBrowserManager.instance().getCollections();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			TGBrowserCollection collection = (TGBrowserCollection)it.next();
-			if(collection.getData() != null) {
+			if (collection.getData() != null) {
 				this.collections.add(collection);
-				if(selection != null && selection.equals(collection)) {
+				if (selection != null && selection.equals(collection)) {
 					this.collections.select(index);
 				}
 				index ++;
@@ -157,7 +157,7 @@ public class TGBrowserToolBar extends TGBrowserBar {
 	
 	protected void updateCollection() {
 		TGBrowserCollection collection = this.collections.getSelection();
-		if(collection == null) {
+		if (collection == null) {
 			closeCollection();
 		}else {
 			openCollection(collection);
@@ -166,7 +166,7 @@ public class TGBrowserToolBar extends TGBrowserBar {
 	
 	private void disposeItems() {
 		Control[] controls = this.composite.getChildren();
-		for(int i = 0; i < controls.length; i ++) {
+		for (int i = 0; i < controls.length; i ++) {
 			controls[i].dispose();
 		}
 	}

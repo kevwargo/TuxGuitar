@@ -59,20 +59,20 @@ public class PianoEditor implements TGRedrawListener, TGExternalBeatViewerListen
 	}
 	
 	public void dispose() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			getPiano().getShell().dispose();
 			getPiano().dispose();
 		}
 	}
 	
 	public void redraw() {
-		if(!isDisposed() && !TuxGuitar.instance().isLocked()) {
+		if (!isDisposed() && !TuxGuitar.instance().isLocked()) {
 			getPiano().redraw();
 		}
 	}
 	
 	public void redrawPlayingMode() {
-		if(!isDisposed() && !TuxGuitar.instance().isLocked()) {
+		if (!isDisposed() && !TuxGuitar.instance().isLocked()) {
 			getPiano().redrawPlayingMode();
 		}
 	}
@@ -82,40 +82,40 @@ public class PianoEditor implements TGRedrawListener, TGExternalBeatViewerListen
 	}
 	
 	public void loadProperties() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			getPiano().loadProperties();
 			getPiano().getShell().setText(TuxGuitar.getProperty("piano.editor"));
 		}
 	}
 	
 	public void loadIcons() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			getPiano().loadIcons();
 		}
 	}
 	
 	public void loadScale() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			getPiano().loadScale();
 		}
 	}
 	
 	public void doRedraw(int type) {
-		if( type == TGRedrawListener.NORMAL ) {
+		if ( type == TGRedrawListener.NORMAL ) {
 			this.redraw();
-		}else if( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
+		}else if ( type == TGRedrawListener.PLAYING_NEW_BEAT ) {
 			this.redrawPlayingMode();
 		}
 	}
 	
 	public void showExternalBeat(TGBeat beat) {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			getPiano().setExternalBeat(beat);
 		}
 	}
 	
 	public void hideExternalBeat() {
-		if(!isDisposed()) {
+		if (!isDisposed()) {
 			getPiano().setExternalBeat(null);
 		}
 	}

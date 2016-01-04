@@ -26,7 +26,7 @@ public class ChangeVelocityAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(e.widget.getData() instanceof Integer) {
+		if (e.widget.getData() instanceof Integer) {
 			int velocity = ((Integer)e.widget.getData()).intValue();
 			
 			//comienza el undoable

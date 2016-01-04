@@ -32,7 +32,7 @@ public class TGBrowserCollectionCombo {
 	
 	public TGBrowserCollection getSelection() {
 		int index = ( this.combo.getSelectionIndex() - 1);
-		if(index >= 0 && index < this.collections.size()) {
+		if (index >= 0 && index < this.collections.size()) {
 			return ( (TGBrowserCollection)this.collections.get(index) );
 		}
 		return null;

@@ -91,9 +91,9 @@ public class TransportModeAction extends Action {
 		simpleAdapter.addControl(makeLabel(simpleGroup, TuxGuitar.getProperty("transport.mode.simple.tempo-percent"), SWT.LEFT, 1));
 		this.simplePercent = new Combo(simpleGroup, SWT.DROP_DOWN | SWT.READ_ONLY);
 		this.simplePercent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		for(int i = 0; i < DEFAULT_PERCENTS.length; i ++) {
+		for (int i = 0; i < DEFAULT_PERCENTS.length; i ++) {
 			this.simplePercent.add(Integer.toString(DEFAULT_PERCENTS[i]) + "%", i);
-			if(mode.getSimplePercent() == DEFAULT_PERCENTS[i]) {
+			if (mode.getSimplePercent() == DEFAULT_PERCENTS[i]) {
 				this.simplePercent.select(i);
 			}
 		}
@@ -261,7 +261,7 @@ public class TransportModeAction extends Action {
 		public void update() {
 			boolean enabled = this.control.getSelection();
 			Iterator it = this.controls.iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				Control control = (Control)it.next();
 				control.setEnabled(enabled);
 			}
@@ -285,20 +285,20 @@ public class TransportModeAction extends Action {
 		}
 		
 		public void widgetSelected(SelectionEvent e) {
-			if(e.widget.equals(this.from)) {
-				if(this.from.getSelection() < MIN_SELECTION) {
+			if (e.widget.equals(this.from)) {
+				if (this.from.getSelection() < MIN_SELECTION) {
 					this.from.setSelection(MIN_SELECTION);
-				}else if(this.from.getSelection() >= this.to.getSelection()) {
+				}else if (this.from.getSelection() >= this.to.getSelection()) {
 					this.from.setSelection(this.to.getSelection() - 1);
 				}
-			}else if(e.widget.equals(this.to)) {
-				if(this.to.getSelection() <= this.from.getSelection()) {
+			}else if (e.widget.equals(this.to)) {
+				if (this.to.getSelection() <= this.from.getSelection()) {
 					this.to.setSelection(this.from.getSelection() + 1);
-				}else if(this.to.getSelection() > MAX_SELECTION) {
+				}else if (this.to.getSelection() > MAX_SELECTION) {
 					this.to.setSelection(MAX_SELECTION);
 				}
 			}
-			if(this.increment.getSelection() > (this.to.getSelection() - this.from.getSelection())) {
+			if (this.increment.getSelection() > (this.to.getSelection() - this.from.getSelection())) {
 				this.increment.setSelection(this.to.getSelection() - this.from.getSelection());
 			}
 		}
@@ -331,15 +331,15 @@ public class TransportModeAction extends Action {
 		public void update() {
 			// Check enabled
 			this.enabled = this.customLoop.getSelection();
-			if( !this.enabled ) {
-				if( this.simpleMode.getSelection() ) {
+			if ( !this.enabled ) {
+				if ( this.simpleMode.getSelection() ) {
 					this.enabled = this.simpleLoop.getSelection();
 				}
 			}
 			
 			// Update controls
 			Iterator it = this.controls.iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				Control control = (Control)it.next();
 				control.setEnabled( this.enabled );
 			}
@@ -379,11 +379,11 @@ public class TransportModeAction extends Action {
 		}
 		
 		public void setValue( int value ) {
-			for( int index = 0 ; index < this.values.size() ; index++ ) {
+			for ( int index = 0 ; index < this.values.size() ; index++ ) {
 				Integer currentValue = (Integer) this.values.get( index );
-				if( currentValue != null && currentValue.intValue() == value ) {
+				if ( currentValue != null && currentValue.intValue() == value ) {
 					int currentIndex = this.combo.getSelectionIndex();
-					if( currentIndex != index ) {
+					if ( currentIndex != index ) {
 						this.combo.select( index );
 					}
 				}
@@ -392,9 +392,9 @@ public class TransportModeAction extends Action {
 		
 		public int getValue() {
 			int index = this.combo.getSelectionIndex();
-			if( index >= 0 && index < this.values.size() ) {
+			if ( index >= 0 && index < this.values.size() ) {
 				Integer value = (Integer) this.values.get( index );
-				if( value != null ) {
+				if ( value != null ) {
 					return value.intValue();
 				}
 			}
@@ -403,7 +403,7 @@ public class TransportModeAction extends Action {
 		
 		private String getItemText( TGMeasureHeader header ) {
 			String text = ("#" + header.getNumber());
-			if( header.hasMarker() ) {
+			if ( header.hasMarker() ) {
 				text += (" (" + header.getMarker().getTitle() + ")");
 			}
 			return text;
@@ -423,7 +423,7 @@ public class TransportModeAction extends Action {
 			TGSong song = TuxGuitar.instance().getSongManager().getSong();
 			this.loopSHeader.clear();
 			this.loopSHeader.addItem(TuxGuitar.getProperty("transport.mode.loop-range.from-default"), -1 );
-			for(int i = 0; i < song.countMeasureHeaders() ; i ++) {
+			for (int i = 0; i < song.countMeasureHeaders() ; i ++) {
 				TGMeasureHeader header = song.getMeasureHeader( i );
 				this.loopSHeader.addItem( header );
 			}
@@ -434,9 +434,9 @@ public class TransportModeAction extends Action {
 			TGSong song = TuxGuitar.instance().getSongManager().getSong();
 			this.loopEHeader.clear();
 			this.loopEHeader.addItem(TuxGuitar.getProperty("transport.mode.loop-range.to-default"), -1 );
-			for(int i = 0; i < song.countMeasureHeaders() ; i ++) {
+			for (int i = 0; i < song.countMeasureHeaders() ; i ++) {
 				TGMeasureHeader header = song.getMeasureHeader( i );
-				if( sHeader == -1 || header.getNumber() >= sHeader ) {
+				if ( sHeader == -1 || header.getNumber() >= sHeader ) {
 					this.loopEHeader.addItem( header );
 				}
 			}
@@ -446,7 +446,7 @@ public class TransportModeAction extends Action {
 		public void updateLoopEHeader() {
 			int sHeader = this.loopSHeader.getValue();
 			int eHeader = this.loopEHeader.getValue();
-			if( eHeader != -1 && sHeader > eHeader ) {
+			if ( eHeader != -1 && sHeader > eHeader ) {
 				eHeader = sHeader;
 			}
 			this.updateLoopEHeader( sHeader , eHeader );

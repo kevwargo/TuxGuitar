@@ -28,7 +28,7 @@ public class IncrementDurationAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		TGDuration duration = getEditor().getTablature().getCaret().getDuration();
-		if(duration.getValue() < TGDuration.SIXTY_FOURTH) {
+		if (duration.getValue() < TGDuration.SIXTY_FOURTH) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			

@@ -379,7 +379,7 @@ public class ChordEditor extends Composite {
 			this.composite.getVerticalBar().setSelection(this.fret);
 		}
 		
-		if(recognize) {
+		if (recognize) {
 			this.dialog.getRecognizer().recognize(getChord(), true, false);
 		}
 	}
@@ -412,7 +412,7 @@ public class ChordEditor extends Composite {
 			
 			this.previewChord(chord);
 			
-			if(name != null) {
+			if (name != null) {
 				this.setChordName( name );
 			}
 			

@@ -30,7 +30,7 @@ public class TGMeasureBuffer {
 	}
 	
 	public void disposeBuffer() {
-		if(this.buffer != null && !this.buffer.isDisposed()) {
+		if (this.buffer != null && !this.buffer.isDisposed()) {
 			this.buffer.dispose();
 		}
 	}
@@ -52,14 +52,14 @@ public class TGMeasureBuffer {
 	}
 	
 	public void disposePainter() {
-		if(this.painter != null && !this.painter.getGC().isDisposed()) {
+		if (this.painter != null && !this.painter.getGC().isDisposed()) {
 			this.painter.dispose();
 			this.painter = null;
 		}
 	}
 	
 	public TGPainter getPainter() {
-		if(this.painter == null || this.painter.getGC().isDisposed()) {
+		if (this.painter == null || this.painter.getGC().isDisposed()) {
 			this.createPainter();
 		}
 		return this.painter;

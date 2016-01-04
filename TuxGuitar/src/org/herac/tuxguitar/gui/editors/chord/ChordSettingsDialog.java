@@ -164,7 +164,7 @@ public class ChordSettingsDialog {
 	protected void checkMinimumFretValue() {
 		int maxSelection = this.maxFret.getSelection();
 		int minSelection = this.minFret.getSelection();
-		if(maxSelection < minSelection) {
+		if (maxSelection < minSelection) {
 			this.maxFret.setSelection(minSelection);
 		}
 	}
@@ -172,7 +172,7 @@ public class ChordSettingsDialog {
 	protected void checkMaximumFretValue() {
 		int maxSelection = this.maxFret.getSelection();
 		int minSelection = this.minFret.getSelection();
-		if(maxSelection < minSelection) {
+		if (maxSelection < minSelection) {
 			this.maxFret.setSelection(minSelection);
 		}
 	}
@@ -187,7 +187,7 @@ public class ChordSettingsDialog {
 	
 	protected void dispose(boolean updated) {
 		this.updated = updated;
-		if(this.updated) {
+		if (this.updated) {
 			this.update();
 		}
 		this.dialog.dispose();

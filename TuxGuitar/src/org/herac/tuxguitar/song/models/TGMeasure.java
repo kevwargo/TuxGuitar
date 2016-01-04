@@ -84,7 +84,7 @@ public abstract class TGMeasure {
 	}
 	
 	public TGBeat getBeat(int index) {
-		if(index >= 0 && index < countBeats()) {
+		if (index >= 0 && index < countBeats()) {
 			return (TGBeat)this.beats.get(index);
 		}
 		return null;
@@ -146,7 +146,7 @@ public abstract class TGMeasure {
 		this.clef = measure.getClef();
 		this.keySignature = measure.getKeySignature();
 		this.beats.clear();
-		for(int i = 0; i < measure.countBeats(); i ++) {
+		for (int i = 0; i < measure.countBeats(); i ++) {
 			TGBeat beat = measure.getBeat(i);
 			this.addBeat(beat);
 		}
@@ -156,7 +156,7 @@ public abstract class TGMeasure {
 		TGMeasure measure = factory.newMeasure(header);
 		measure.setClef(getClef());
 		measure.setKeySignature(getKeySignature());
-		for(int i = 0; i < countBeats(); i ++) {
+		for (int i = 0; i < countBeats(); i ++) {
 			TGBeat beat = (TGBeat)this.beats.get(i);
 			measure.addBeat(beat.clone(factory));
 		}

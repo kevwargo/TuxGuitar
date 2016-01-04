@@ -28,7 +28,7 @@ public class ClipBoard {
 	}
 	
 	public void insertTransfer() throws CannotInsertTransferException {
-		if(this.isEmpty()) {
+		if (this.isEmpty()) {
 			throw new CannotInsertTransferException();
 		}
 		this.transferable.insertTransfer();

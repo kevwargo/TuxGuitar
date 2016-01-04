@@ -95,7 +95,7 @@ public class DurationToolItems  extends ToolItems {
 		TGDuration duration = getEditor().getTablature().getCaret().getDuration();
 		boolean running = TuxGuitar.instance().getPlayer().isRunning();
 		int index = duration.getIndex();
-		for(int i = 0;i < this.durationItems.length;i++) {
+		for (int i = 0;i < this.durationItems.length;i++) {
 			this.durationItems[i].setSelection( (i == index) );
 			this.durationItems[i].setEnabled( !running );
 		}
@@ -215,7 +215,7 @@ public class DurationToolItems  extends ToolItems {
 				this.subMenu.setVisible(true);
 			}else {
 				TGDuration duration = getEditor().getTablature().getCaret().getDuration();
-				if(duration.getDivision().isEqual(TGDivisionType.NORMAL)) {
+				if (duration.getDivision().isEqual(TGDivisionType.NORMAL)) {
 					((TGDivisionType)this.divisionType.getData()).setEnters(3);
 					((TGDivisionType)this.divisionType.getData()).setTimes(2);
 				}else {
@@ -229,7 +229,7 @@ public class DurationToolItems  extends ToolItems {
 		public void update() {
 			TGDuration duration = getEditor().getTablature().getCaret().getDuration();
 			
-			for(int i = 0;i < this.subMenuItems.length;i++) {
+			for (int i = 0;i < this.subMenuItems.length;i++) {
 				TGDivisionType divisionType = (TGDivisionType)this.subMenuItems[i].getData();
 				this.subMenuItems[i].setSelection((divisionType.isEqual(duration.getDivision())));
 			}

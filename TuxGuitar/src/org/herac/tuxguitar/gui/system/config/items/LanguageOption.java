@@ -56,20 +56,20 @@ public class LanguageOption extends Option {
 		TableItem item = new TableItem(this.table, SWT.NONE);
 		item.setText(text);
 		item.setData(data);
-		if( selected ) {
+		if ( selected ) {
 			this.table.setSelection(item);
 		}
 	}
 	
 	protected List getLanguageItems(String[] languages) {
 		List list = new ArrayList();
-		if( languages != null ) {
-			for(int i = 0;i < languages.length; i ++) {
+		if ( languages != null ) {
+			for (int i = 0;i < languages.length; i ++) {
 				list.add( new LanguageItem(languages[i], TuxGuitar.getProperty("locale." + languages[i] ) ) );
 			}
 			Collections.sort(list, new Comparator() {
 				public int compare(Object o1, Object o2) {
-					if( o1 instanceof LanguageItem && o2 instanceof LanguageItem) {
+					if ( o1 instanceof LanguageItem && o2 instanceof LanguageItem) {
 						LanguageItem l1 = (LanguageItem)o1;
 						LanguageItem l2 = (LanguageItem)o2;
 						return l1.getValue().compareTo( l2.getValue() );
@@ -88,11 +88,11 @@ public class LanguageOption extends Option {
 				final List languages = getLanguageItems( TuxGuitar.instance().getLanguageManager().getLanguages() );
 				new SyncThread(new Runnable() {
 					public void run() {
-						if(!isDisposed()) {
+						if (!isDisposed()) {
 							// Load default item
 							loadTableItem(TuxGuitar.getProperty("locale.default"), new String(), true);
 							
-							for(int i = 0;i < languages.size(); i ++) {
+							for (int i = 0;i < languages.size(); i ++) {
 								LanguageItem item = (LanguageItem)languages.get( i );
 								loadTableItem(item.getValue(), item.getKey(),(language != null && item.getKey().equals( language )));
 							}
@@ -108,11 +108,11 @@ public class LanguageOption extends Option {
 	}
 	
 	public void updateConfig() {
-		if(this.initialized) {
+		if (this.initialized) {
 			String language = null;
-			if(this.table != null && !this.table.isDisposed()) {
+			if (this.table != null && !this.table.isDisposed()) {
 				int index = this.table.getSelectionIndex();
-				if(index >= 0 && index < this.table.getItemCount() ) {
+				if (index >= 0 && index < this.table.getItemCount() ) {
 					language = (String)this.table.getItem(index).getData();
 				}
 			}
@@ -121,22 +121,22 @@ public class LanguageOption extends Option {
 	}
 	
 	public void updateDefaults() {
-		if(this.initialized) {
+		if (this.initialized) {
 			getConfig().setProperty(TGConfigKeys.LANGUAGE, getDefaults().getProperty(TGConfigKeys.LANGUAGE));
 		}
 	}
 	
 	public void applyConfig(boolean force) {
-		if(force || this.initialized) {
+		if (force || this.initialized) {
 			boolean changed = force;
 			
-			if(!changed) {
+			if (!changed) {
 				String languageLoaded = TuxGuitar.instance().getLanguageManager().getLanguage();
 				String languageConfigured = getConfig().getStringConfigValue(TGConfigKeys.LANGUAGE);
-				if(languageLoaded == null && languageConfigured == null) {
+				if (languageLoaded == null && languageConfigured == null) {
 					changed = false;
 				}
-				else if(languageLoaded != null && languageConfigured != null) {
+				else if (languageLoaded != null && languageConfigured != null) {
 					changed = ( !languageLoaded.equals( languageConfigured ) );
 				}
 				else {
@@ -144,7 +144,7 @@ public class LanguageOption extends Option {
 				}
 			}
 			
-			if(changed) {
+			if (changed) {
 				addSyncThread(new Runnable() {
 					public void run() {
 						TuxGuitar.instance().loadLanguage();

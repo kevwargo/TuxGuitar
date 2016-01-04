@@ -16,7 +16,7 @@ public class TGClassLoader {
 	}
 	
 	public static TGClassLoader instance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new TGClassLoader();
 		}
 		return instance;
@@ -49,9 +49,9 @@ public class TGClassLoader {
 	}
 	
 	public void addPaths(File folder) {
-		if(folder != null && folder.exists() && folder.isDirectory()) {
+		if (folder != null && folder.exists() && folder.isDirectory()) {
 			String[] files = folder.list();
-			for(int i = 0;i < files.length;i++) {
+			for (int i = 0;i < files.length;i++) {
 				try {
 					this.addPath( (folder.getAbsolutePath() + File.separator + files[i]) );
 				} catch (Throwable throwable) {

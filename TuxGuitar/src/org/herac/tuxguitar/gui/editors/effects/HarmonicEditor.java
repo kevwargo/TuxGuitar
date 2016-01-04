@@ -143,24 +143,24 @@ public class HarmonicEditor extends SelectionAdapter {
 	
 	protected void initDefaults(TGNote note) {
 		int type = TGEffectHarmonic.TYPE_NATURAL;
-		if(note.getEffect().isHarmonic()) {
+		if (note.getEffect().isHarmonic()) {
 			type = note.getEffect().getHarmonic().getType();
 		}
 		else {
 			boolean naturalValid = false;
-			for(int i = 0;i < TGEffectHarmonic.NATURAL_FREQUENCIES.length;i ++) {
-				if((note.getValue() % 12) == (TGEffectHarmonic.NATURAL_FREQUENCIES[i][0] % 12)  ) {
+			for (int i = 0;i < TGEffectHarmonic.NATURAL_FREQUENCIES.length;i ++) {
+				if ((note.getValue() % 12) == (TGEffectHarmonic.NATURAL_FREQUENCIES[i][0] % 12)  ) {
 					naturalValid = true;
 					break;
 				}
 			}
-			if(!naturalValid) {
+			if (!naturalValid) {
 				this.typeButtons[0].setEnabled(false);
 				type = TGEffectHarmonic.TYPE_ARTIFICIAL;
 			}
 			
 		}
-		for(int i = 0; i < this.typeButtons.length; i ++) {
+		for (int i = 0; i < this.typeButtons.length; i ++) {
 			int data = ((Integer)this.typeButtons[i].getData()).intValue();
 			this.typeButtons[i].setSelection((data == type));
 		}
@@ -168,8 +168,8 @@ public class HarmonicEditor extends SelectionAdapter {
 	}
 	
 	protected int getSelectedType() {
-		for(int i = 0; i < this.typeButtons.length; i ++) {
-			if(this.typeButtons[i].getSelection()) {
+		for (int i = 0; i < this.typeButtons.length; i ++) {
+			if (this.typeButtons[i].getSelection()) {
 				return ((Integer)this.typeButtons[i].getData()).intValue();
 			}
 		}
@@ -180,9 +180,9 @@ public class HarmonicEditor extends SelectionAdapter {
 		TGEffectHarmonic h = note.getEffect().getHarmonic();
 		this.harmonicDataCombo.removeAll();
 		this.harmonicDataCombo.setEnabled(type != TGEffectHarmonic.TYPE_NATURAL);
-		if(type != TGEffectHarmonic.TYPE_NATURAL) {
+		if (type != TGEffectHarmonic.TYPE_NATURAL) {
 			String label = getTypeLabel(type);
-			for(int i = 0;i < TGEffectHarmonic.NATURAL_FREQUENCIES.length;i ++) {
+			for (int i = 0;i < TGEffectHarmonic.NATURAL_FREQUENCIES.length;i ++) {
 				this.harmonicDataCombo.add(label + "(" + Integer.toString(TGEffectHarmonic.NATURAL_FREQUENCIES[i][0]) + ")" );
 			}
 			this.harmonicDataCombo.select((h != null && h.getType() == type)?h.getData():0);
@@ -190,19 +190,19 @@ public class HarmonicEditor extends SelectionAdapter {
 	}
 	
 	private String getTypeLabel(int type) {
-		if(type == TGEffectHarmonic.TYPE_NATURAL) {
+		if (type == TGEffectHarmonic.TYPE_NATURAL) {
 			return TGEffectHarmonic.KEY_NATURAL;
 		}
-		if(type == TGEffectHarmonic.TYPE_ARTIFICIAL) {
+		if (type == TGEffectHarmonic.TYPE_ARTIFICIAL) {
 			return TGEffectHarmonic.KEY_ARTIFICIAL;
 		}
-		if(type == TGEffectHarmonic.TYPE_TAPPED) {
+		if (type == TGEffectHarmonic.TYPE_TAPPED) {
 			return TGEffectHarmonic.KEY_TAPPED;
 		}
-		if(type == TGEffectHarmonic.TYPE_PINCH) {
+		if (type == TGEffectHarmonic.TYPE_PINCH) {
 			return TGEffectHarmonic.KEY_PINCH;
 		}
-		if(type == TGEffectHarmonic.TYPE_SEMI) {
+		if (type == TGEffectHarmonic.TYPE_SEMI) {
 			return TGEffectHarmonic.KEY_SEMI;
 		}
 		return new String();
@@ -210,7 +210,7 @@ public class HarmonicEditor extends SelectionAdapter {
 	
 	public TGEffectHarmonic getHarmonic() {
 		int type = getSelectedType();
-		if(type > 0) {
+		if (type > 0) {
 			TGEffectHarmonic effect = TuxGuitar.instance().getSongManager().getFactory().newEffectHarmonic();
 			effect.setType(type);
 			effect.setData(this.harmonicDataCombo.getSelectionIndex());

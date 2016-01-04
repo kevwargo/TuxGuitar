@@ -27,12 +27,12 @@ public class ShiftNoteUpAction extends Action {
 	
 	protected int execute(TypedEvent e) {
 		TGNote note = getEditor().getTablature().getCaret().getSelectedNote();
-		if(note != null) {
+		if (note != null) {
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			
 			int nextString = getSongManager().getMeasureManager().shiftNoteUp(getEditor().getTablature().getCaret().getMeasure(), note.getVoice().getBeat().getStart(), note.getString());
-			if(nextString > 0) {
+			if (nextString > 0) {
 				getEditor().getTablature().getCaret().setStringNumber(nextString);
 				
 				//termia el undoable

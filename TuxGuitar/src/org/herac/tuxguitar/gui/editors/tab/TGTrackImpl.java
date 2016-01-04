@@ -62,9 +62,9 @@ public class TGTrackImpl extends TGTrack {
 	
 	public void clear() {
 		Iterator measures = getMeasures();
-		while(measures.hasNext()) {
+		while (measures.hasNext()) {
 			TGMeasureImpl measure = (TGMeasureImpl)measures.next();
-			if(!measure.isDisposed()) {
+			if (!measure.isDisposed()) {
 				measure.dispose();
 			}
 		}
@@ -73,7 +73,7 @@ public class TGTrackImpl extends TGTrack {
 	
 	public void removeMeasure(int index) {
 		TGMeasureImpl measure = (TGMeasureImpl)getMeasure(index);
-		if(!measure.isDisposed()) {
+		if (!measure.isDisposed()) {
 			measure.dispose();
 		}
 		super.removeMeasure(index);

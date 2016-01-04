@@ -33,23 +33,23 @@ public class ChangeDivisionTypeAction extends Action {
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		boolean isKeyEvent = false;
-		if(e instanceof KeyEvent) {
+		if (e instanceof KeyEvent) {
 			isKeyEvent = true;
 		}
-		if(!isKeyEvent) {
+		if (!isKeyEvent) {
 			TGDivisionType divisionType = defaultDivisionType();
-			if(e.widget.getData() != null && e.widget.getData() instanceof TGDivisionType) {
+			if (e.widget.getData() != null && e.widget.getData() instanceof TGDivisionType) {
 				divisionType = (TGDivisionType)e.widget.getData();
 			}
 			
-			if(getSelectedDuration().getDivision().isEqual(divisionType)) {
+			if (getSelectedDuration().getDivision().isEqual(divisionType)) {
 				setDivisionType(noTuplet());
 			}else {
 				setDivisionType(divisionType);
 			}
 		}
 		else {
-			if(getSelectedDuration().getDivision().isEqual(TGDivisionType.NORMAL)) {
+			if (getSelectedDuration().getDivision().isEqual(TGDivisionType.NORMAL)) {
 				setDivisionType(defaultDivisionType());
 			}else {
 				setDivisionType(noTuplet());

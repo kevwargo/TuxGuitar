@@ -23,7 +23,7 @@ public class UndoableChangeTimeSignature implements UndoableEdit {
 	}
 	
 	public void redo() throws CannotRedoException {
-		if(!canRedo()) {
+		if (!canRedo()) {
 			throw new CannotRedoException();
 		}
 		TuxGuitar.instance().getTablatureEditor().getTablature().getSongManager().changeTimeSignature(this.tsStart, this.ts, this.tsToEnd);
@@ -33,7 +33,7 @@ public class UndoableChangeTimeSignature implements UndoableEdit {
 	}
 	
 	public void undo() throws CannotUndoException {
-		if(!canUndo()) {
+		if (!canUndo()) {
 			throw new CannotUndoException();
 		}
 		TGFactory factory = TuxGuitar.instance().getTablatureEditor().getTablature().getSongManager().getFactory();

@@ -29,7 +29,7 @@ public class RemoveTrackAction extends Action {
 	protected int execute(TypedEvent e) {
 		Caret caret = getEditor().getTablature().getCaret();
 		
-		if(getSongManager().getSong().countTracks() <= 1) {
+		if (getSongManager().getSong().countTracks() <= 1) {
 			//TuxGuitar.instance().getAction(NewFileAction.NAME).process(e);
 			TuxGuitar.instance().newSong();
 			return 0;
@@ -40,14 +40,14 @@ public class RemoveTrackAction extends Action {
 		
 		TGTrackImpl track = caret.getTrack();
 		TGTrackImpl nextCaretTrack = (TGTrackImpl)getSongManager().getTrack(track.getNumber() + 1);
-		if(nextCaretTrack == null) {
+		if (nextCaretTrack == null) {
 			nextCaretTrack =  (TGTrackImpl)getSongManager().getTrack(track.getNumber() - 1);
 		}
 		getSongManager().removeTrack(track);
 		updateTablature();
 		
 		//move the caret to the next or previous track
-		if(nextCaretTrack != null) {
+		if (nextCaretTrack != null) {
 			caret.update(nextCaretTrack.getNumber(), getSongManager().getTrackManager().getMeasureAt(nextCaretTrack, caret.getMeasure().getStart()).getStart(), 1);
 		}
 		TuxGuitar.instance().getMixer().update();

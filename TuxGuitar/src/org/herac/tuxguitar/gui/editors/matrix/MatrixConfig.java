@@ -134,15 +134,15 @@ public class MatrixConfig {
 	}
 	
 	protected void dispose(Resource[] resources) {
-		if(resources != null) {
-			for(int i = 0; i < resources.length; i ++) {
+		if (resources != null) {
+			for (int i = 0; i < resources.length; i ++) {
 				dispose(resources[i]);
 			}
 		}
 	}
 	
 	protected void dispose(Resource resource) {
-		if(resource != null) {
+		if (resource != null) {
 			resource.dispose();
 		}
 	}
@@ -260,7 +260,7 @@ public class MatrixConfig {
 				FontDialog fontDialog = new FontDialog(parent.getShell());
 				fontDialog.setFontList(font.getFontData());
 				FontData fd = fontDialog.open();
-				if(fd != null) {
+				if (fd != null) {
 					selection.setName( fd.getName() );
 					selection.setHeight( fd.getHeight() );
 					selection.setStyle( fd.getStyle() );
@@ -309,7 +309,7 @@ public class MatrixConfig {
 		}
 		
 		protected void disposeColor() {
-			if(this.color != null && !this.color.isDisposed()) {
+			if (this.color != null && !this.color.isDisposed()) {
 				this.color.dispose();
 				this.color = null;
 			}

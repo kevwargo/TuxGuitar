@@ -91,11 +91,11 @@ public class AddMeasureAction extends Action {
 				public void widgetSelected(SelectionEvent arg0) {
 					int number = 0;
 					int count = countSpinner.getSelection();
-					if(beforePosition.getSelection()) {
+					if (beforePosition.getSelection()) {
 						number = (getEditor().getTablature().getCaret().getMeasure().getNumber());
-					}else if(afterPosition.getSelection()) {
+					}else if (afterPosition.getSelection()) {
 						number = (getEditor().getTablature().getCaret().getMeasure().getNumber() + 1);
-					}else if(atEnd.getSelection()) {
+					}else if (atEnd.getSelection()) {
 						number = (getSongManager().getSong().countMeasureHeaders() + 1);
 					}
 					addMeasure(number, count);
@@ -132,13 +132,13 @@ public class AddMeasureAction extends Action {
 	}
 	
 	private void addMeasure( final int number , final int count ) {
-		if(count > 0 && number > 0 && number <=  (getSongManager().getSong().countMeasureHeaders() + 1)) {
+		if (count > 0 && number > 0 && number <=  (getSongManager().getSong().countMeasureHeaders() + 1)) {
 			new Thread(new Runnable() {
 				public void run() {
 					new SyncThread(new Runnable() {
 						public void run() {
 							UndoableJoined undoable = new UndoableJoined();
-							for( int i = 0 ; i < count ; i ++ ) {
+							for ( int i = 0 ; i < count ; i ++ ) {
 								//comienza el undoable
 								UndoableAddMeasure mUndoable = UndoableAddMeasure.startUndo( ( number + i ) );
 								

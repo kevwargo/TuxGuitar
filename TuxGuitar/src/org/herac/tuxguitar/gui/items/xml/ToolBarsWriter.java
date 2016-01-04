@@ -61,7 +61,7 @@ public class ToolBarsWriter {
 		//chords tag
 		Node listNode = document.createElement(ITEM_LIST_TAG);
 		
-		for(int i = 0; i < items.length ; i ++) {
+		for (int i = 0; i < items.length ; i ++) {
 			
 			//chord tag
 			Node node = document.createElement(ITEM_TAG);

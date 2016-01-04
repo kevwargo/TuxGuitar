@@ -24,7 +24,7 @@ public class ShowPianoAction extends Action {
 	}
 	
 	protected int execute(TypedEvent e) {
-		if(TuxGuitar.instance().getPianoEditor().isDisposed()) {
+		if (TuxGuitar.instance().getPianoEditor().isDisposed()) {
 			TuxGuitar.instance().getPianoEditor().show();
 		}else {
 			TuxGuitar.instance().getPianoEditor().dispose();

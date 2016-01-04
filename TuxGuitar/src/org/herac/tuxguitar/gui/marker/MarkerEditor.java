@@ -177,7 +177,7 @@ public class MarkerEditor {
 	}
 	
 	protected void disposeButtonColor() {
-		if(this.colorButtonValue != null && !this.colorButtonValue.isDisposed()) {
+		if (this.colorButtonValue != null && !this.colorButtonValue.isDisposed()) {
 			this.colorButtonValue.dispose();
 			this.colorButtonValue = null;
 		}
@@ -194,7 +194,7 @@ public class MarkerEditor {
 		//comienza el undoable
 		UndoableJoined joinedUndoable = new UndoableJoined();
 		
-		if(this.status == STATUS_EDIT && oldMeasure != this.marker.getMeasure()) {
+		if (this.status == STATUS_EDIT && oldMeasure != this.marker.getMeasure()) {
 			UndoableChangeMarker undoable = UndoableChangeMarker.startUndo(manager.getMarker(oldMeasure));
 			TuxGuitar.instance().getSongManager().removeMarker(oldMeasure);
 			joinedUndoable.addUndoableEdit(undoable.endUndo(null));

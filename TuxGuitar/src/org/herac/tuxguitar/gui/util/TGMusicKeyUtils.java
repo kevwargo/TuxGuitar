@@ -34,7 +34,7 @@ public class TGMusicKeyUtils {
 	}
 	
 	protected static void loadKeyNames(String[] names, String prefix, boolean sharp) {
-		if(sharp) {
+		if (sharp) {
 			loadSharpKeyNames(names, prefix);
 		}else {
 			loadFlatKeyNames(names, prefix);

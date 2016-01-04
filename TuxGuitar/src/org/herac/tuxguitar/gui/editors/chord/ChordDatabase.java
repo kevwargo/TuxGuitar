@@ -101,7 +101,7 @@ public class ChordDatabase {
 		
 		public int[] cloneRequireds() {
 			int[] requiredNotes = new int[this.requiredNotes.length];
-			for(int i = 0; i < requiredNotes.length; i ++) {
+			for (int i = 0; i < requiredNotes.length; i ++) {
 				requiredNotes[i] = this.requiredNotes[i];
 			}
 			return requiredNotes;
