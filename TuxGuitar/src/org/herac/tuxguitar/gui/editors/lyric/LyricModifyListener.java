@@ -27,17 +27,17 @@ public class LyricModifyListener implements ModifyListener{
 				String value = text.getText();
 				int position = text.getCaretPosition();
 				
-				UndoableTrackLyric undoable = UndoableTrackLyric.startUndo(track,this.lastPosition);
+				UndoableTrackLyric undoable = UndoableTrackLyric.startUndo(track, this.lastPosition);
 				track.getLyrics().setLyrics(value);
-				TuxGuitar.instance().getUndoableManager().addEdit( undoable.endUndo(track,position) );
+				TuxGuitar.instance().getUndoableManager().addEdit( undoable.endUndo(track, position) );
 				TuxGuitar.instance().getFileHistory().setUnsavedFile();
 				
 				this.lastPosition = position;
 			}else if(e.widget instanceof Spinner){
 				TGTrack track = this.editor.getTrack();
-				UndoableTrackLyric undoable = UndoableTrackLyric.startUndo(track,this.lastPosition);
+				UndoableTrackLyric undoable = UndoableTrackLyric.startUndo(track, this.lastPosition);
 				track.getLyrics().setFrom(((Spinner)e.widget).getSelection());
-				TuxGuitar.instance().getUndoableManager().addEdit( undoable.endUndo(track,this.lastPosition) );
+				TuxGuitar.instance().getUndoableManager().addEdit( undoable.endUndo(track, this.lastPosition) );
 				TuxGuitar.instance().getFileHistory().setUnsavedFile();
 			}
 			

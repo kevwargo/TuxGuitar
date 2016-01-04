@@ -74,9 +74,9 @@ public abstract class TGMeasure {
 		this.beats.add(beat);
 	}
 	
-	public void moveBeat(int index,TGBeat beat){
+	public void moveBeat(int index, TGBeat beat){
 		this.beats.remove(beat);
-		this.beats.add(index,beat);
+		this.beats.add(index, beat);
 	}
 	
 	public void removeBeat(TGBeat beat){
@@ -152,7 +152,7 @@ public abstract class TGMeasure {
 		}
 	}
 	
-	public TGMeasure clone(TGFactory factory,TGMeasureHeader header){
+	public TGMeasure clone(TGFactory factory, TGMeasureHeader header){
 		TGMeasure measure = factory.newMeasure(header);
 		measure.setClef(getClef());
 		measure.setKeySignature(getKeySignature());

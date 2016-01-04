@@ -39,7 +39,7 @@ public class AboutContentReader {
 			int length = 0;
 			byte[] buffer = new byte[1024];
 			while((length = is.read(buffer)) != -1){
-				sb.append(new String(buffer,0,length));
+				sb.append(new String(buffer, 0, length));
 			}
 			is.close();
 		} catch (IOException e) {

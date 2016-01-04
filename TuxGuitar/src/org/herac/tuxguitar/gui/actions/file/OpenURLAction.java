@@ -116,26 +116,26 @@ public class OpenURLAction extends Action {
 			dialog.setLayout(new GridLayout());
 			dialog.setText(TuxGuitar.getProperty("file.open-url"));
 			
-			Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			group.setLayout(new GridLayout());
-			group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			group.setText(TuxGuitar.getProperty("file.open-url"));
 			
 			Composite composite = new Composite(group, SWT.NONE);
-			composite.setLayout(new GridLayout(2,false));
+			composite.setLayout(new GridLayout(2, false));
 			composite.setLayoutData(getMainData());
 			
-			final Label label = new Label(composite,SWT.LEFT);
+			final Label label = new Label(composite, SWT.LEFT);
 			label.setText(TuxGuitar.getProperty("url") + ":");
-			label.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,false,true));
+			label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, true));
 			
-			final Text url = new Text(composite,SWT.BORDER | SWT.SINGLE);
-			url.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			final Text url = new Text(composite, SWT.BORDER | SWT.SINGLE);
+			url.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -162,13 +162,13 @@ public class OpenURLAction extends Action {
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 			
 			return this.url;
 		}
 		
 		private GridData getMainData(){
-			GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+			GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 			data.minimumWidth = 450;
 			return data;
 		}

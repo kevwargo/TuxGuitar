@@ -56,9 +56,9 @@ public class ChangeKeySignatureAction extends Action{
 			dialog.setText(TuxGuitar.getProperty("composition.keysignature"));
 			
 			//-------key Signature-------------------------------------
-			Group keySignature = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			keySignature.setLayout(new GridLayout(2,false));
-			keySignature.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group keySignature = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			keySignature.setLayout(new GridLayout(2, false));
+			keySignature.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			keySignature.setText(TuxGuitar.getProperty("composition.keysignature"));
 			
 			Label numeratorLabel = new Label(keySignature, SWT.NULL);
@@ -84,9 +84,9 @@ public class ChangeKeySignatureAction extends Action{
 			keySignatures.select(measure.getKeySignature());
 			keySignatures.setLayoutData(getComboData());
 			//--------------------To End Checkbox-------------------------------
-			Group check = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group check = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			check.setLayout(new GridLayout());
-			check.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			check.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			check.setText(TuxGuitar.getProperty("options"));
 			
 			final Button toEnd = new Button(check, SWT.CHECK);
@@ -94,8 +94,8 @@ public class ChangeKeySignatureAction extends Action{
 			toEnd.setSelection(true);
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -111,7 +111,7 @@ public class ChangeKeySignatureAction extends Action{
 							public void run() throws Throwable {
 								ActionLock.lock();
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
-								setKeySignature(keySignature,toEndValue);
+								setKeySignature(keySignature, toEndValue);
 								TuxGuitar.instance().updateCache( true );
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 								ActionLock.unlock();
@@ -134,7 +134,7 @@ public class ChangeKeySignatureAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
@@ -146,18 +146,18 @@ public class ChangeKeySignatureAction extends Action{
 	}
 	
 	private GridData getComboData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
 	
-	protected void setKeySignature(int keySignature,boolean toEnd){
+	protected void setKeySignature(int keySignature, boolean toEnd){
 		//comienza el undoable
 		UndoableChangeKeySignature undoable = UndoableChangeKeySignature.startUndo();
 		
 		TGMeasure measure = getEditor().getTablature().getCaret().getMeasure();
 		TGTrack track = getEditor().getTablature().getCaret().getTrack();
-		getSongManager().getTrackManager().changeKeySignature(track,measure.getStart(),keySignature,toEnd);
+		getSongManager().getTrackManager().changeKeySignature(track, measure.getStart(), keySignature, toEnd);
 		
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		
@@ -165,7 +165,7 @@ public class ChangeKeySignatureAction extends Action{
 		updateTablature();
 		
 		//termia el undoable
-		addUndoableEdit(undoable.endUndo(keySignature,toEnd));
+		addUndoableEdit(undoable.endUndo(keySignature, toEnd));
 		
 	}
 }

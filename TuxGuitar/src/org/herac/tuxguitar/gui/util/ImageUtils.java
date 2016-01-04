@@ -15,10 +15,10 @@ public class ImageUtils {
 	 * @param outputStream
 	 * @param format
 	 */
-	public static void writeImage(ImageData data,OutputStream outputStream,int format){
+	public static void writeImage(ImageData data, OutputStream outputStream, int format){
 		ImageLoader loader = new ImageLoader();
 		loader.data = new ImageData[]{data};
-		loader.save(outputStream,format);
+		loader.save(outputStream, format);
 	}
 	
 	/**
@@ -27,9 +27,9 @@ public class ImageUtils {
 	 * @param format
 	 * @return
 	 */
-	public static byte[] imageToByteArray(ImageData data,int format){
+	public static byte[] imageToByteArray(ImageData data, int format){
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		writeImage(data,out,format);
+		writeImage(data, out, format);
 		return out.toByteArray();
 	}
 	
@@ -41,8 +41,8 @@ public class ImageUtils {
 	 * @param none
 	 * @return ImageData
 	 */
-	public static ImageData applyMask(ImageData src,RGB alpha,RGB none){
-		ImageData maskData = new ImageData(src.width,src.height,1,new PaletteData(new RGB[]{ none,alpha }  ));
+	public static ImageData applyMask(ImageData src, RGB alpha, RGB none){
+		ImageData maskData = new ImageData(src.width, src.height, 1, new PaletteData(new RGB[]{ none, alpha }  ));
 		for(int x = 0; x< maskData.width; x++) {
 			for(int y = 0; y < maskData.height; y++) {
 				RGB rgb = src.palette.getRGB(src.getPixel(x, y));

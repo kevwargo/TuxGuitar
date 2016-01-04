@@ -56,25 +56,25 @@ public class RepeatAlternativeAction extends Action{
 			dialog.setLayout(new GridLayout());
 			dialog.setText(TuxGuitar.getProperty("repeat.alternative.editor"));
 			
-			Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			group.setLayout(new GridLayout(4,true));
+			Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			group.setLayout(new GridLayout(4, true));
 			group.setLayoutData(getMainData());
 			group.setText(TuxGuitar.getProperty("repeat.alternative"));
 			
 			final Button[] selections = new Button[8];
 			for(int i = 0; i < selections.length; i ++){
 				boolean enabled = ((existentEndings & (1 << i)) == 0);
-				selections[i] = new Button(group,SWT.CHECK);
+				selections[i] = new Button(group, SWT.CHECK);
 				selections[i].setText(Integer.toString( i + 1 ));
-				selections[i].setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+				selections[i].setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				selections[i].setEnabled(enabled);
 				selections[i].setSelection(enabled && ((selectedEndings & (1 << i)) != 0)  );
 			}
 			
 			//----------------------BUTTONS--------------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(3,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(3, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -85,7 +85,7 @@ public class RepeatAlternativeAction extends Action{
 					for(int i = 0; i < selections.length; i ++){
 						values |=  (  (selections[i].getSelection()) ? (1 << i) : 0  );
 					}
-					update(measure,values);
+					update(measure, values);
 					dialog.dispose();
 				}
 			});
@@ -94,7 +94,7 @@ public class RepeatAlternativeAction extends Action{
 			buttonClean.setLayoutData(getButtonData());
 			buttonClean.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent arg0) {
-					update(measure,0);
+					update(measure, 0);
 					dialog.dispose();
 				}
 			});
@@ -109,12 +109,12 @@ public class RepeatAlternativeAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
 	private GridData getMainData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 350;
 		return data;
 	}
@@ -172,7 +172,7 @@ public class RepeatAlternativeAction extends Action{
 				//Agrego un cierre de repeticion al compaz anterior
 				TGMeasureHeader previous = getSongManager().getMeasureHeader( measure.getNumber() - 1);
 				if(previous != null && previous.getRepeatClose() == 0){
-					UndoableChangeCloseRepeat u2 = UndoableChangeCloseRepeat.startUndo(previous.getStart(),previous.getRepeatClose());
+					UndoableChangeCloseRepeat u2 = UndoableChangeCloseRepeat.startUndo(previous.getStart(), previous.getRepeatClose());
 					getSongManager().changeCloseRepeat(previous.getStart(), 1);
 					fireUpdate(previous.getNumber());
 					undoable.addUndoableEdit(u2.endUndo(1));

@@ -46,18 +46,18 @@ public class FileChooser {
 		return list;
 	}
 	
-	public String open(Shell parent,TGFileFormat format) {
+	public String open(Shell parent, TGFileFormat format) {
 		return open(parent, list(format));
 	}
 	
-	public String open(Shell parent,List formats) {
+	public String open(Shell parent, List formats) {
 		String currentPath = TuxGuitar.instance().getFileHistory().getCurrentFilePath();
 		String chooserPath = TuxGuitar.instance().getFileHistory().getOpenPath();
 		boolean localFile = TuxGuitar.instance().getFileHistory().isLocalFile();
 		boolean existentFile = (localFile && currentPath != null && chooserPath != null && currentPath.equals(chooserPath));
 		
 		FilterList filter = new FilterList(formats);
-		FileDialog dialog = new FileDialog(parent,SWT.OPEN);
+		FileDialog dialog = new FileDialog(parent, SWT.OPEN);
 		dialog.setFileName((existentFile ? getFileName(formats, DEFAULT_OPEN_FILENAME, false) : null ));
 		dialog.setFilterPath(chooserPath);
 		dialog.setFilterNames(filter.getFilterNames());
@@ -65,15 +65,15 @@ public class FileChooser {
 		return openDialog(dialog);
 	}
 	
-	public String save(Shell parent,TGFileFormat format) {
+	public String save(Shell parent, TGFileFormat format) {
 		return save(parent, list(format));
 	}
 	
-	public String save(Shell parent,List formats) {
+	public String save(Shell parent, List formats) {
 		String chooserPath = TuxGuitar.instance().getFileHistory().getSavePath();
 		
 		FilterList filter = new FilterList(formats);
-		FileDialog dialog = new FileDialog(parent,SWT.SAVE);
+		FileDialog dialog = new FileDialog(parent, SWT.SAVE);
 		dialog.setFileName(getFileName(formats, DEFAULT_SAVE_FILENAME, true));
 		dialog.setFilterPath(chooserPath);
 		dialog.setFilterNames(filter.getFilterNames());
@@ -101,7 +101,7 @@ public class FileChooser {
 		if(file != null && file.length() > 0){
 			int index = file.lastIndexOf('.');
 			if(index > 0){
-				String fileName = file.substring(0,index);
+				String fileName = file.substring(0, index);
 				String fileExtension = file.substring(index).toLowerCase();
 				Iterator it = formats.iterator();
 				while(it.hasNext()){

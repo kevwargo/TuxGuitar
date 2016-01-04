@@ -61,7 +61,7 @@ public class PrintAction extends Action{
 		return 0;
 	}
 	
-	public void print(final PrinterData printerData ,final PrintStyles data){
+	public void print(final PrinterData printerData , final PrintStyles data){
 		try{
 			new Thread(new Runnable() {
 				public void run() {
@@ -79,9 +79,9 @@ public class PrintAction extends Action{
 									Tablature tablature = new Tablature(shell);
 									tablature.setSongManager(manager);
 									
-									Rectangle bounds = getPrinterArea(printer,0.5);
+									Rectangle bounds = getPrinterArea(printer, 0.5);
 									
-									PrinterViewLayout layout = new PrinterViewLayout(tablature,data, getPrinterScale(printer));
+									PrinterViewLayout layout = new PrinterViewLayout(tablature, data, getPrinterScale(printer));
 									
 									print(printer, printerData, layout , bounds);
 								}catch(Throwable throwable ){
@@ -99,16 +99,16 @@ public class PrintAction extends Action{
 		}
 	}
 	
-	protected void print(final Printer printer,final PrinterData printerData ,final PrinterViewLayout layout, final Rectangle bounds){
+	protected void print(final Printer printer, final PrinterData printerData , final PrinterViewLayout layout, final Rectangle bounds){
 		new Thread(new Runnable() {
 			public void run() {
 				try{
 					layout.getTablature().updateTablature();
-					layout.makeDocument(new PrintDocumentImpl(layout,printer, printerData, bounds));
+					layout.makeDocument(new PrintDocumentImpl(layout, printer, printerData, bounds));
 					//new SyncThread(new Runnable() {
 					//	public void run() {
 					//		try{
-					//			layout.makeDocument(new PrintDocumentImpl(layout,printer, bounds));
+					//			layout.makeDocument(new PrintDocumentImpl(layout, printer, bounds));
 					//		}catch(Throwable throwable ){
 					//			MessageDialog.errorMessage(throwable);
 					//		}
@@ -121,7 +121,7 @@ public class PrintAction extends Action{
 		}).start();
 	}
 	
-	protected Rectangle getPrinterArea(Printer printer,double margin) {
+	protected Rectangle getPrinterArea(Printer printer, double margin) {
 		Rectangle clientArea = printer.getClientArea();
 		Rectangle trim = printer.computeTrim(0, 0, 0, 0);
 		Point dpi = printer.getDPI();
@@ -131,7 +131,7 @@ public class PrintAction extends Action{
 		int width = clientArea.width + trim.width - (int) (margin * dpi.x) - trim.x;
 		int height = clientArea.height + trim.height - (int) (margin * dpi.y) - trim.y;
 		
-		return new Rectangle(x,y,width,height);
+		return new Rectangle(x, y, width, height);
 	}
 	
 	protected float getPrinterScale(Printer printer) {
@@ -151,7 +151,7 @@ public class PrintAction extends Action{
 		private Rectangle bounds;
 		private boolean started;
 		
-		public PrintDocumentImpl(PrinterViewLayout layout, Printer printer,PrinterData printerData, Rectangle bounds){
+		public PrintDocumentImpl(PrinterViewLayout layout, Printer printer, PrinterData printerData, Rectangle bounds){
 			this.layout = layout;
 			this.printer = printer;
 			this.printerData = printerData;

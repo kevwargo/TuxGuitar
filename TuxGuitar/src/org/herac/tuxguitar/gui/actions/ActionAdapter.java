@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolItem;
 
-public abstract class ActionAdapter implements SelectionListener,MouseListener,MenuListener,ShellListener{
+public abstract class ActionAdapter implements SelectionListener, MouseListener, MenuListener, ShellListener{
 	
 	public abstract void process(TypedEvent e);
 	

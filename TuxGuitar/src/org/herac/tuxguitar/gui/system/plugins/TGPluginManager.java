@@ -24,7 +24,7 @@ public class TGPluginManager {
 	public void initPlugins(){
 		try{
 			//Search available providers
-			Iterator it = TGServiceReader.lookupProviders(TGPlugin.class,TGClassLoader.instance().getClassLoader());
+			Iterator it = TGServiceReader.lookupProviders(TGPlugin.class, TGClassLoader.instance().getClassLoader());
 			while(it.hasNext()){
 				try{
 					TGPlugin plugin = (TGPlugin)it.next();
@@ -33,11 +33,11 @@ public class TGPluginManager {
 				}catch(TGPluginException exception){
 					MessageDialog.errorMessage(exception);
 				}catch(Throwable throwable){
-					MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to init plugin",throwable));
+					MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to init plugin", throwable));
 				}
 			}
 		}catch(Throwable throwable){
-			MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to init plugin",throwable));
+			MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to init plugin", throwable));
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class TGPluginManager {
 			}catch(TGPluginException exception){
 				MessageDialog.errorMessage(exception);
 			}catch(Throwable throwable){
-				MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to close plugin",throwable));
+				MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to close plugin", throwable));
 			}
 		}
 	}
@@ -63,28 +63,28 @@ public class TGPluginManager {
 			}catch(TGPluginException exception){
 				MessageDialog.errorMessage(exception);
 			}catch(Throwable throwable){
-				MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to set plugin status",throwable));
+				MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to set plugin status", throwable));
 			}
 		}
 	}
 	
-	public void setEnabled(TGPlugin plugin,boolean enabled){
+	public void setEnabled(TGPlugin plugin, boolean enabled){
 		try{
-			TGPluginProperties.instance().setProperty(getEnabledProperty(plugin),enabled);
+			TGPluginProperties.instance().setProperty(getEnabledProperty(plugin), enabled);
 			TGPluginProperties.instance().save();
 			plugin.setEnabled(enabled);
 		}catch(TGPluginException exception){
 			MessageDialog.errorMessage(exception);
 		}catch(Throwable throwable){
-			MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to set plugin status",throwable));
+			MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to set plugin status", throwable));
 		}
 	}
 	
 	public boolean isEnabled(TGPlugin plugin){
 		try{
-			return TGPluginProperties.instance().getBooleanConfigValue(getEnabledProperty(plugin),true);
+			return TGPluginProperties.instance().getBooleanConfigValue(getEnabledProperty(plugin), true);
 		}catch(Throwable throwable){
-			MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to get plugin status",throwable));
+			MessageDialog.errorMessage(new TGPluginException("An error ocurred when trying to get plugin status", throwable));
 		}
 		return false;
 	}

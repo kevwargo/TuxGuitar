@@ -74,7 +74,7 @@ public class KeyBindingActionManager {
 	}
 	
 	public void saveKeyBindings(){
-		KeyBindingWriter.setBindings(getKeyBindingActions(),getUserFileName());
+		KeyBindingWriter.setBindings(getKeyBindingActions(), getUserFileName());
 	}
 	
 	public void appendListenersTo(Control control){

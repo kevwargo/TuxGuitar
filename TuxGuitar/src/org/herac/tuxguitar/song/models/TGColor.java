@@ -3,11 +3,11 @@ package org.herac.tuxguitar.song.models;
 import org.herac.tuxguitar.song.factory.TGFactory;
 
 public abstract class TGColor {
-	public static final TGColor RED = newColor(255,0,0);
-	public static final TGColor GREEN = newColor(0,255,0);
-	public static final TGColor BLUE = newColor(0,0,255);
-	public static final TGColor WHITE = newColor(255,255,255);
-	public static final TGColor BLACK = newColor(0,0,0);
+	public static final TGColor RED = newColor(255, 0, 0);
+	public static final TGColor GREEN = newColor(0, 255, 0);
+	public static final TGColor BLUE = newColor(0, 0, 255);
+	public static final TGColor WHITE = newColor(255, 255, 255);
+	public static final TGColor BLACK = newColor(0, 0, 0);
 	
 	private int r;
 	private int g;
@@ -59,7 +59,7 @@ public abstract class TGColor {
 		color.setB(getB());
 	}
 	
-	public static TGColor newColor(int r,int g,int b){
+	public static TGColor newColor(int r, int g, int b){
 		TGColor color = new TGFactory().newColor();
 		color.setR(r);
 		color.setG(g);

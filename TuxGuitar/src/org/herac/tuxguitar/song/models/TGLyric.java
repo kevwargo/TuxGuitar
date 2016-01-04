@@ -29,8 +29,8 @@ public abstract class TGLyric {
 	
 	public String[] getLyricBeats(){
 		String lyrics = getLyrics();
-		lyrics = lyrics.replaceAll("\n",REGEX);
-		lyrics = lyrics.replaceAll("\r",REGEX);
+		lyrics = lyrics.replaceAll("\n", REGEX);
+		lyrics = lyrics.replaceAll("\r", REGEX);
 		return lyrics.split(REGEX);
 	}
 	

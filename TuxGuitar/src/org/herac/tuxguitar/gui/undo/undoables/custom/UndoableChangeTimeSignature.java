@@ -26,7 +26,7 @@ public class UndoableChangeTimeSignature implements UndoableEdit{
 		if(!canRedo()){
 			throw new CannotRedoException();
 		}
-		TuxGuitar.instance().getTablatureEditor().getTablature().getSongManager().changeTimeSignature(this.tsStart,this.ts,this.tsToEnd);
+		TuxGuitar.instance().getTablatureEditor().getTablature().getSongManager().changeTimeSignature(this.tsStart, this.ts, this.tsToEnd);
 		TuxGuitar.instance().fireUpdate();
 		this.redoCaret.update();
 		this.doAction = UNDO_ACTION;
@@ -62,7 +62,7 @@ public class UndoableChangeTimeSignature implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableChangeTimeSignature endUndo(TGTimeSignature timeSignature,long start, boolean toEnd){
+	public UndoableChangeTimeSignature endUndo(TGTimeSignature timeSignature, long start, boolean toEnd){
 		this.ts = timeSignature;
 		this.tsStart = start;
 		this.tsToEnd = toEnd;

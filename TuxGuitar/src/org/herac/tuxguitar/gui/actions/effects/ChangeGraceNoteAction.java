@@ -41,7 +41,7 @@ public class ChangeGraceNoteAction extends Action{
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
-		getSongManager().getMeasureManager().changeGraceNote(caret.getMeasure(),caret.getPosition(),caret.getSelectedString().getNumber(),effect);
+		getSongManager().getMeasureManager().changeGraceNote(caret.getMeasure(), caret.getPosition(), caret.getSelectedString().getNumber(), effect);
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		updateTablature();
 		

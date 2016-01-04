@@ -36,14 +36,14 @@ public class TGBrowserToolBar extends TGBrowserBar{
 	}
 	
 	public void init(Shell shell){
-		this.composite = new Composite(shell,SWT.NONE);
+		this.composite = new Composite(shell, SWT.NONE);
 		this.composite.setLayout(getLayout());
-		this.composite.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,false));
+		this.composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		this.initItems();
 	}
 	
 	public void initItems(){
-		this.toolBar = new ToolBar(this.composite,SWT.FLAT | SWT.WRAP);
+		this.toolBar = new ToolBar(this.composite, SWT.FLAT | SWT.WRAP);
 		
 		//---New Book----------------------------------------------------------
 		this.newBrowserMenu = new Menu(this.composite);
@@ -59,7 +59,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 				}
 			});
 		}
-		this.newBrowser = new ToolItem(this.toolBar,SWT.DROP_DOWN);
+		this.newBrowser = new ToolItem(this.toolBar, SWT.DROP_DOWN);
 		this.newBrowser.setImage(TuxGuitar.instance().getIconManager().getBrowserNew());
 		this.newBrowser.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
@@ -75,7 +75,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		
 		new ToolItem(this.toolBar, SWT.SEPARATOR);
 		//---Root Folder------------------------------------------------------
-		this.root = new ToolItem(this.toolBar,SWT.PUSH);
+		this.root = new ToolItem(this.toolBar, SWT.PUSH);
 		this.root.setImage(TuxGuitar.instance().getIconManager().getBrowserRoot());
 		this.root.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -84,7 +84,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		});
 		
 		//---Back Folder------------------------------------------------------
-		this.back = new ToolItem(this.toolBar,SWT.PUSH);
+		this.back = new ToolItem(this.toolBar, SWT.PUSH);
 		this.back.setImage(TuxGuitar.instance().getIconManager().getBrowserBack());
 		this.back.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -93,7 +93,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		});
 		
 		//---Refresh Folder------------------------------------------------------
-		this.refresh = new ToolItem(this.toolBar,SWT.PUSH);
+		this.refresh = new ToolItem(this.toolBar, SWT.PUSH);
 		this.refresh.setImage(TuxGuitar.instance().getIconManager().getBrowserRefresh());
 		this.refresh.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -106,7 +106,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		
 		//---Collections-------------------------------------------------------------
 		this.collections = new TGBrowserCollectionCombo(this.composite, SWT.READ_ONLY);
-		this.collections.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,true,true));
+		this.collections.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true));
 		this.collections.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				updateCollection();
@@ -144,7 +144,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 		this.initItems();
 		this.loadProperties();
 		this.updateItems();
-		this.composite.layout(true,true);
+		this.composite.layout(true, true);
 	}
 	
 	public void loadProperties(){
@@ -172,7 +172,7 @@ public class TGBrowserToolBar extends TGBrowserBar{
 	}
 	
 	private GridLayout getLayout(){
-		GridLayout layout = new GridLayout(2,false);
+		GridLayout layout = new GridLayout(2, false);
 		layout.marginWidth = 0;
 		layout.marginHeight = 0;
 		return layout;

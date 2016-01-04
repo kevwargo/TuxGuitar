@@ -35,9 +35,9 @@ import org.herac.tuxguitar.song.models.TGTrack;
 public class TGTableViewer implements TGRedrawListener, TGUpdateListener, LanguageLoader{
 	
 	public static final Color[] BACKGROUNDS = new Color[]{
-		new Color(TuxGuitar.instance().getDisplay(),255,255,255),
-		new Color(TuxGuitar.instance().getDisplay(),238,238,238),
-		new Color(TuxGuitar.instance().getDisplay(),192,192,192)
+		new Color(TuxGuitar.instance().getDisplay(), 255, 255, 255),
+		new Color(TuxGuitar.instance().getDisplay(), 238, 238, 238),
+		new Color(TuxGuitar.instance().getDisplay(), 192, 192, 192)
 	};
 	
 	private Composite composite;
@@ -58,7 +58,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 	}
 	
 	public void init(Composite parent){
-		this.composite = new Composite(parent,SWT.H_SCROLL);
+		this.composite = new Composite(parent, SWT.H_SCROLL);
 		this.addLayout();
 		this.addTable();
         this.addMiniMixer();
@@ -134,7 +134,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 		int width = (getEditor().getTablature().getCaret().getTrack().countMeasures() * this.table.getRowHeight());
 		this.hSroll.setIncrement(this.table.getScrollIncrement());
 		this.hSroll.setMaximum(width);
-		this.hSroll.setThumb(Math.min(width ,this.table.getColumnCanvas().getControl().getClientArea().width));
+		this.hSroll.setThumb(Math.min(width , this.table.getColumnCanvas().getControl().getClientArea().width));
 	}
 	
 	public TGTable getTable(){
@@ -219,13 +219,13 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 								TGMeasureImpl measure = (TGMeasureImpl)track.getMeasure(index);
 								TGBeat beat = TuxGuitar.instance().getSongManager().getMeasureManager().getFirstBeat(measure.getBeats());
 								if(beat != null){
-									getEditor().getTablature().getCaret().moveTo((TGTrackImpl)track,measure,beat,1);
+									getEditor().getTablature().getCaret().moveTo((TGTrackImpl)track, measure, beat, 1);
 									TuxGuitar.instance().updateCache(true);
 								}
 							}
 						}
 					});
-					row.setPaintListenerCanvas(new TGTableCanvasPainter(this,track));
+					row.setPaintListenerCanvas(new TGTableCanvasPainter(this, track));
 				}
 			}
 			this.table.update();

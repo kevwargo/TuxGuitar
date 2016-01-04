@@ -37,7 +37,7 @@ import org.herac.tuxguitar.io.base.TGFileFormatException;
 import org.herac.tuxguitar.io.base.TGFileFormatManager;
 import org.herac.tuxguitar.song.models.TGSong;
 
-public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnectionHandler,IconLoader,LanguageLoader{
+public class TGBrowserDialog implements TGBrowserFactoryHandler, TGBrowserConnectionHandler, IconLoader, LanguageLoader{
 	
 	private static final int SHELL_WIDTH = 500;
 	private static final int SHELL_HEIGHT = 350;
@@ -88,7 +88,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 	}
 	
 	public void show(){
-		this.dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(),SWT.DIALOG_TRIM | SWT.RESIZE);
+		this.dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM | SWT.RESIZE);
 		this.dialog.setLayout(new GridLayout());
 		this.dialog.setImage(TuxGuitar.instance().getIconManager().getAppIcon());
 		
@@ -97,7 +97,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 		this.initTable(this.dialog);
 		this.updateCollections(null);
 		this.updateTable();
-		this.dialog.setSize(SHELL_WIDTH,SHELL_HEIGHT);
+		this.dialog.setSize(SHELL_WIDTH, SHELL_HEIGHT);
 		this.dialog.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {
 				exit();
@@ -115,7 +115,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 	
 	private void initTable(Composite parent){
 		this.table = new Table(parent, SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION);
-		this.table.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.table.setLinesVisible(TuxGuitar.instance().getConfig().getBooleanConfigValue(TGConfigKeys.BROWSER_LINES_VISIBLE));
 		this.table.setHeaderVisible(false);
 		
@@ -206,7 +206,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 	protected void openCollection(){
 		if(!isDisposed() && getCollection() != null){
 			TGBrowserFactory factory = TGBrowserManager.instance().getFactory(getCollection().getType());
-			getConnection().open(CALL_OPEN,factory.newTGBrowser(getCollection().getData()));
+			getConnection().open(CALL_OPEN, factory.newTGBrowser(getCollection().getData()));
 		}
 	}
 	
@@ -230,7 +230,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 	public void openElement(){
 		TGBrowserElement element = getSelection(this.table.getSelectionIndex());
 		if(element != null){
-			this.getConnection().openStream(CALL_ELEMENT,element);
+			this.getConnection().openStream(CALL_ELEMENT, element);
 		}
 	}
 	
@@ -267,11 +267,11 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 		}
 	}
 	
-	public void notifyError(int callId,Throwable throwable){
+	public void notifyError(int callId, Throwable throwable){
 		if(!isDisposed()){
 			this.updateTable();
 			this.getConnection().release();
-			MessageDialog.errorMessage(getShell(),throwable);
+			MessageDialog.errorMessage(getShell(), throwable);
 		}
 	}
 	
@@ -282,7 +282,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 		}
 	}
 	
-	public void notifyElements(int callId,List elements) {
+	public void notifyElements(int callId, List elements) {
 		if(!isDisposed()){
 			this.addElements(elements);
 			this.updateTable();
@@ -290,7 +290,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 		}
 	}
 	
-	public void notifyStream(int callId,final InputStream stream,final TGBrowserElement element) {
+	public void notifyStream(int callId, final InputStream stream, final TGBrowserElement element) {
 		if(!isDisposed()){
 			ActionLock.lock();
 			new SyncThread(new Runnable() {
@@ -320,7 +320,7 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 											new SyncThread(new Runnable() {
 												public void run() {
 													if(!TuxGuitar.isDisposed()){
-														openStream(stream,element);
+														openStream(stream, element);
 													}
 												}
 											}).start();
@@ -330,23 +330,23 @@ public class TGBrowserDialog implements TGBrowserFactoryHandler,TGBrowserConnect
 								return;
 							}
 						}
-						openStream(stream,element);
+						openStream(stream, element);
 					}
 				}
 			}).start();
 		}
 	}
 	
-	protected void openStream(final InputStream stream,final TGBrowserElement element){
+	protected void openStream(final InputStream stream, final TGBrowserElement element){
 		new Thread(new Runnable() {
 			public void run() {
 				if(!TuxGuitar.isDisposed()){
 					try {
-						TGSong song = TGFileFormatManager.instance().getLoader().load(TuxGuitar.instance().getSongManager().getFactory(),stream);
-						TuxGuitar.instance().fireNewSong(song,null);
+						TGSong song = TGFileFormatManager.instance().getLoader().load(TuxGuitar.instance().getSongManager().getFactory(), stream);
+						TuxGuitar.instance().fireNewSong(song, null);
 					}catch (Throwable throwable) {
 						TuxGuitar.instance().newSong();
-						MessageDialog.errorMessage(getShell(),new TGFileFormatException(TuxGuitar.getProperty("file.open.error", new String[]{element.getName()}),throwable));
+						MessageDialog.errorMessage(getShell(), new TGFileFormatException(TuxGuitar.getProperty("file.open.error", new String[]{element.getName()}), throwable));
 					}
 					getConnection().release();
 					ActionLock.unlock();

@@ -52,6 +52,6 @@ public class MidiTickPlayer {
 	}
 	
 	public void notifyTick(long tick){
-		this.tickLength = Math.max(this.tickLength,tick);
+		this.tickLength = Math.max(this.tickLength, tick);
 	}
 }

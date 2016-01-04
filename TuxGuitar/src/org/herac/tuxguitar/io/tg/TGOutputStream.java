@@ -54,7 +54,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		return (extension.toLowerCase().equals(TG_FORMAT_EXTENSION));
 	}
 	
-	public void init(TGFactory factory,OutputStream stream) {
+	public void init(TGFactory factory, OutputStream stream) {
 		this.dataOutputStream = new DataOutputStream(stream);
 	}
 	
@@ -109,7 +109,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		Iterator headers = song.getMeasureHeaders();
 		while(headers.hasNext()){
 			TGMeasureHeader header = (TGMeasureHeader)headers.next();
-			writeMeasureHeader(header,lastHeader);
+			writeMeasureHeader(header, lastHeader);
 			lastHeader = header;
 		}
 		
@@ -148,7 +148,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		Iterator measures  = track.getMeasures();
 		while(measures.hasNext()){
 			TGMeasure measure = (TGMeasure)measures.next();
-			writeMeasure(measure,lastMeasure);
+			writeMeasure(measure, lastMeasure);
 			lastMeasure = measure;
 		}
 		
@@ -174,7 +174,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		}
 	}
 	
-	private void writeMeasureHeader(TGMeasureHeader measureheader,TGMeasureHeader lastMeasureHeader){
+	private void writeMeasureHeader(TGMeasureHeader measureheader, TGMeasureHeader lastMeasureHeader){
 		int header = 0;
 		if(lastMeasureHeader == null){
 			header |= MEASURE_HEADER_TIMESIGNATURE;
@@ -238,7 +238,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		}
 	}
 	
-	private void writeMeasure(TGMeasure measure,TGMeasure lastMeasure){
+	private void writeMeasure(TGMeasure measure, TGMeasure lastMeasure){
 		int header = 0;
 		if(lastMeasure == null){
 			header |= MEASURE_CLEF;
@@ -300,15 +300,15 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		writeByte(channel.getTremolo());
 	}
 	
-	private void writeBeats(TGMeasure measure,TGBeatData data){
+	private void writeBeats(TGMeasure measure, TGBeatData data){
 		int count = measure.countBeats();
 		for(int i = 0; i < count; i ++){
 			TGBeat beat = measure.getBeat(i);
-			writeBeat(beat,data, (i + 1 < count ));
+			writeBeat(beat, data, (i + 1 < count ));
 		}
 	}
 	
-	private void writeBeat(TGBeat beat,TGBeatData data, boolean hasNext){
+	private void writeBeat(TGBeat beat, TGBeatData data, boolean hasNext){
 		int header = hasNext ? BEAT_HAS_NEXT : 0;
 		
 		//Berifico si hay cambios en las voces
@@ -372,7 +372,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		}
 	}
 	
-	private void writeVoices(int header, TGBeat beat,TGBeatData data){
+	private void writeVoices(int header, TGBeat beat, TGBeatData data){
 		for(int i = 0 ; i < TGBeat.MAX_VOICES; i ++ ){
 			int shift = (i * 2 );
 			if((( header & (BEAT_HAS_VOICE << shift)) != 0)){
@@ -394,7 +394,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		}
 	}
 	
-	private void writeNotes(TGVoice voice,TGBeatData data){
+	private void writeNotes(TGVoice voice, TGBeatData data){
 		for( int i = 0 ; i < voice.countNotes() ; i ++){
 			TGNote note = voice.getNote(i);
 			
@@ -408,11 +408,11 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 			
 			writeHeader(header);
 			
-			writeNote(header,note);
+			writeNote(header, note);
 		}
 	}
 	
-	private void writeNote(int header,TGNote note){
+	private void writeNote(int header, TGNote note){
 		//escribo el valor
 		writeByte(note.getValue());
 		
@@ -524,7 +524,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		header = (effect.isPopping())?header |= EFFECT_POPPING:header;
 		header = (effect.isFadeIn())?header |= EFFECT_FADE_IN:header;
 		
-		writeHeader(header,3);
+		writeHeader(header, 3);
 		
 		//escribo el bend
 		if(((header & EFFECT_BEND) != 0)){
@@ -691,7 +691,7 @@ public class TGOutputStream extends TGStream implements TGOutputStreamBase{
 		}
 	}
 	
-	public void writeHeader(int v,int bCount){
+	public void writeHeader(int v, int bCount){
 		for(int i = bCount; i > 0; i --){
 			writeHeader( (v >>> ( (8 * i) - 8 ) )  &  0xFF);
 		}

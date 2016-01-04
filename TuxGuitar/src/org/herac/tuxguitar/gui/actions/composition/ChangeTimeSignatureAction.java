@@ -57,9 +57,9 @@ public class ChangeTimeSignatureAction extends Action{
 			dialog.setText(TuxGuitar.getProperty("composition.timesignature"));
 			
 			//-------------TIME SIGNATURE-----------------------------------------------
-			Group timeSignature = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			timeSignature.setLayout(new GridLayout(2,false));
-			timeSignature.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group timeSignature = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			timeSignature.setLayout(new GridLayout(2, false));
+			timeSignature.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			timeSignature.setText(TuxGuitar.getProperty("composition.timesignature"));
 			
 			TGTimeSignature currentTimeSignature = measure.getTimeSignature();
@@ -83,18 +83,18 @@ public class ChangeTimeSignatureAction extends Action{
 			denominator.setLayoutData(getComboData());
 			
 			//--------------------To End Checkbox-------------------------------
-			Group check = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group check = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			check.setLayout(new GridLayout());
 			check.setText(TuxGuitar.getProperty("options"));
-			check.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			check.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			
 			final Button toEnd = new Button(check, SWT.CHECK);
 			toEnd.setText(TuxGuitar.getProperty("composition.timesignature.to-the-end"));
 			toEnd.setSelection(true);
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOk = new Button(buttons, SWT.PUSH);
 			buttonOk.setText(TuxGuitar.getProperty("ok"));
@@ -114,7 +114,7 @@ public class ChangeTimeSignatureAction extends Action{
 								TGTimeSignature timeSignature = getSongManager().getFactory().newTimeSignature();
 								timeSignature.setNumerator(numeratorValue);
 								timeSignature.getDenominator().setValue(denominatorValue);
-								setTimeSignature(timeSignature,toEndValue);
+								setTimeSignature(timeSignature, toEndValue);
 								TuxGuitar.instance().updateCache( true );
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 								ActionLock.unlock();
@@ -137,7 +137,7 @@ public class ChangeTimeSignatureAction extends Action{
 			
 			dialog.setDefaultButton( buttonOk );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
@@ -149,19 +149,19 @@ public class ChangeTimeSignatureAction extends Action{
 	}
 	
 	private GridData getComboData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
 	
-	protected void setTimeSignature(TGTimeSignature timeSignature,boolean toEnd){
+	protected void setTimeSignature(TGTimeSignature timeSignature, boolean toEnd){
 		//comienza el undoable
 		UndoableChangeTimeSignature undoable = UndoableChangeTimeSignature.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
 		TGMeasureImpl measure = caret.getMeasure();
 		
-		getSongManager().changeTimeSignature(measure.getStart(),timeSignature,toEnd);
+		getSongManager().changeTimeSignature(measure.getStart(), timeSignature, toEnd);
 		
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		
@@ -169,7 +169,7 @@ public class ChangeTimeSignatureAction extends Action{
 		updateTablature();
 		
 		//termia el undoable
-		addUndoableEdit(undoable.endUndo(timeSignature,measure.getStart(),toEnd));
+		addUndoableEdit(undoable.endUndo(timeSignature, measure.getStart(), toEnd));
 	}
 	
 	public TGSongManager getSongManager(){

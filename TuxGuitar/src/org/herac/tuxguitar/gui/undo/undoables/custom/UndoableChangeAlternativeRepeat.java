@@ -26,8 +26,8 @@ public class UndoableChangeAlternativeRepeat implements UndoableEdit{
 			throw new CannotRedoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
-		manager.changeAlternativeRepeat(this.position,this.redoRepeatAlternative);
-		TGMeasure measure = manager.getTrackManager().getMeasureAt(manager.getFirstTrack(),this.position);
+		manager.changeAlternativeRepeat(this.position, this.redoRepeatAlternative);
+		TGMeasure measure = manager.getTrackManager().getMeasureAt(manager.getFirstTrack(), this.position);
 		TuxGuitar.instance().getTablatureEditor().getTablature().getViewLayout().fireUpdate(measure.getNumber());
 		this.redoCaret.update();
 		
@@ -39,8 +39,8 @@ public class UndoableChangeAlternativeRepeat implements UndoableEdit{
 			throw new CannotUndoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
-		manager.changeAlternativeRepeat(this.position,this.undoRepeatAlternative);
-		TGMeasure measure = manager.getTrackManager().getMeasureAt(manager.getFirstTrack(),this.position);
+		manager.changeAlternativeRepeat(this.position, this.undoRepeatAlternative);
+		TGMeasure measure = manager.getTrackManager().getMeasureAt(manager.getFirstTrack(), this.position);
 		TuxGuitar.instance().getTablatureEditor().getTablature().getViewLayout().fireUpdate(measure.getNumber());
 		this.undoCaret.update();
 		

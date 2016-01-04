@@ -14,7 +14,7 @@ public class TGTableCanvasPainter implements PaintListener{
 	private TGTableViewer viewer;
 	private TGTrack track;
 	
-	public TGTableCanvasPainter(TGTableViewer viewer,TGTrack track){
+	public TGTableCanvasPainter(TGTableViewer viewer, TGTrack track){
 		this.viewer = viewer;
 		this.track = track;
 	}
@@ -37,10 +37,10 @@ public class TGTableCanvasPainter implements PaintListener{
 			painter.setBackground(painter.getGC().getDevice().getSystemColor(SWT.COLOR_GRAY));
 			painter.initPath(TGPainter.PATH_FILL);
 			painter.setAntialias(false);
-			painter.addRectangle(0,y,width,size);
+			painter.addRectangle(0, y, width, size);
 			painter.closePath();
 			
-			Color trackColor = new Color(painter.getGC().getDevice(),this.track.getColor().getR(),this.track.getColor().getG(),this.track.getColor().getB());
+			Color trackColor = new Color(painter.getGC().getDevice(), this.track.getColor().getR(), this.track.getColor().getG(), this.track.getColor().getB());
 			painter.setBackground(trackColor);
 			painter.setForeground(trackColor);
 			
@@ -50,12 +50,12 @@ public class TGTableCanvasPainter implements PaintListener{
 				if(isRestMeasure(measure)){
 					painter.initPath();
 					painter.setAntialias(false);
-					painter.addRectangle(x,y,size - 2,size - 1);
+					painter.addRectangle(x, y, size - 2, size - 1);
 					painter.closePath();
 				}else{
 					painter.initPath(TGPainter.PATH_FILL);
 					painter.setAntialias(false);
-					painter.addRectangle(x,y,size - 1,size );
+					painter.addRectangle(x, y, size - 1, size );
 					painter.closePath();
 				}
 				boolean hasCaret = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getMeasure().equals(measure);
@@ -63,7 +63,7 @@ public class TGTableCanvasPainter implements PaintListener{
 					painter.setBackground(painter.getGC().getDevice().getSystemColor(SWT.COLOR_BLACK));
 					painter.initPath(TGPainter.PATH_FILL);
 					painter.setAntialias(false);
-					painter.addRectangle(x + 4,y + 4,size - 9,size - 8);
+					painter.addRectangle(x + 4, y + 4, size - 9, size - 8);
 					painter.closePath();
 					painter.setBackground(trackColor);
 				}

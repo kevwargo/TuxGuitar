@@ -55,9 +55,9 @@ public class CopyMeasureAction extends Action{
 			dialog.setText(TuxGuitar.getProperty("edit.copy"));
 			
 			//----------------------------------------------------------------------
-			Group range = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			range.setLayout(new GridLayout(2,false));
-			range.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group range = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			range.setLayout(new GridLayout(2, false));
+			range.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			range.setText(TuxGuitar.getProperty("edit.copy"));
 			
 			int measureCount = getSongManager().getSong().countMeasureHeaders();
@@ -107,12 +107,12 @@ public class CopyMeasureAction extends Action{
 			//----------------------------------------------------------------------
 			this.copyAllTracks = true;
 			if(getSongManager().getSong().countTracks() > 1){
-				Group checkComposites = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+				Group checkComposites = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 				checkComposites.setLayout(new GridLayout());
-				checkComposites.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+				checkComposites.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				checkComposites.setText(TuxGuitar.getProperty("options"));
 				
-				final Button allTracks = new Button(checkComposites,SWT.CHECK);
+				final Button allTracks = new Button(checkComposites, SWT.CHECK);
 				allTracks.setText(TuxGuitar.getProperty("edit.all-tracks"));
 				allTracks.setSelection(this.copyAllTracks);
 				allTracks.addSelectionListener(new SelectionAdapter() {
@@ -123,15 +123,15 @@ public class CopyMeasureAction extends Action{
 			}
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
 			buttonOK.setLayoutData(getButtonData());
 			buttonOK.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent arg0) {
-					copyMeasures(fromSpinner.getSelection(),toSpinner.getSelection(),CopyMeasureAction.this.copyAllTracks);
+					copyMeasures(fromSpinner.getSelection(), toSpinner.getSelection(), CopyMeasureAction.this.copyAllTracks);
 					dialog.dispose();
 				}
 			});
@@ -147,7 +147,7 @@ public class CopyMeasureAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
@@ -159,14 +159,14 @@ public class CopyMeasureAction extends Action{
 	}
 	
 	protected GridData getSpinnerData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 180;
 		return data;
 	}
 	
-	protected void copyMeasures(int m1,int m2,boolean allTracks){
+	protected void copyMeasures(int m1, int m2, boolean allTracks){
 		if(m1 > 0 && m1 <= m2){
-			MeasureTransferable transferable = new MeasureTransferable(getEditor(),m1,m2,allTracks);
+			MeasureTransferable transferable = new MeasureTransferable(getEditor(), m1, m2, allTracks);
 			getEditor().getClipBoard().addTransferable(transferable);
 		}
 	}

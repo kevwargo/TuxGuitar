@@ -26,8 +26,8 @@ public class UndoableChangeCloseRepeat implements UndoableEdit{
 			throw new CannotRedoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
-		manager.changeCloseRepeat(this.position,this.redoRepeatClose);
-		TGMeasure measure = manager.getTrackManager().getMeasureAt(manager.getFirstTrack(),this.position);
+		manager.changeCloseRepeat(this.position, this.redoRepeatClose);
+		TGMeasure measure = manager.getTrackManager().getMeasureAt(manager.getFirstTrack(), this.position);
 		TuxGuitar.instance().getTablatureEditor().getTablature().getViewLayout().fireUpdate(measure.getNumber());
 		this.redoCaret.update();
 		
@@ -39,8 +39,8 @@ public class UndoableChangeCloseRepeat implements UndoableEdit{
 			throw new CannotUndoException();
 		}
 		TGSongManager manager = TuxGuitar.instance().getSongManager();
-		manager.changeCloseRepeat(this.position,this.undoRepeatClose);
-		TGMeasure measure = manager.getTrackManager().getMeasureAt(manager.getFirstTrack(),this.position);
+		manager.changeCloseRepeat(this.position, this.undoRepeatClose);
+		TGMeasure measure = manager.getTrackManager().getMeasureAt(manager.getFirstTrack(), this.position);
 		TuxGuitar.instance().getTablatureEditor().getTablature().getViewLayout().fireUpdate(measure.getNumber());
 		this.undoCaret.update();
 		
@@ -57,10 +57,10 @@ public class UndoableChangeCloseRepeat implements UndoableEdit{
 	
 	public static UndoableChangeCloseRepeat startUndo(){
 		Caret caret = getCaret();
-		return startUndo(caret.getPosition(),caret.getMeasure().getRepeatClose());
+		return startUndo(caret.getPosition(), caret.getMeasure().getRepeatClose());
 	}
 	
-	public static UndoableChangeCloseRepeat startUndo(long position,int repeatClose){
+	public static UndoableChangeCloseRepeat startUndo(long position, int repeatClose){
 		UndoableChangeCloseRepeat undoable = new UndoableChangeCloseRepeat();
 		undoable.doAction = UNDO_ACTION;
 		undoable.undoCaret = new UndoableCaretHelper();

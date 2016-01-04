@@ -25,8 +25,8 @@ public class ToolBarsOption extends Option{
 	protected Button moveUp;
 	protected Button moveDown;
 	
-	public ToolBarsOption(TGConfigEditor configEditor,ToolBar toolBar,final Composite parent){
-		super(configEditor,toolBar,parent,TuxGuitar.getProperty("settings.config.toolbars"), SWT.FILL,SWT.FILL);
+	public ToolBarsOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent){
+		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.toolbars"), SWT.FILL, SWT.FILL);
 		this.initialized = false;
 	}
 	
@@ -35,14 +35,14 @@ public class ToolBarsOption extends Option{
 		getToolItem().setImage(TuxGuitar.instance().getIconManager().getOptionToolbars());
 		getToolItem().addSelectionListener(this);
 		
-		showLabel(getComposite(),SWT.FILL, SWT.TOP, true, false, SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("settings.config.toolbars.tip"));
+		showLabel(getComposite(), SWT.FILL, SWT.TOP, true, false, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("settings.config.toolbars.tip"));
 		
-		Composite composite = new Composite(getComposite(),SWT.NONE);
+		Composite composite = new Composite(getComposite(), SWT.NONE);
 		composite.setLayout(new GridLayout());
 		composite.setLayoutData(getTabbedData(SWT.FILL, SWT.FILL));
 		
 		this.table = new Table(composite, SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION | SWT.CHECK | SWT.H_SCROLL | SWT.V_SCROLL);
-		this.table.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.table.setHeaderVisible(true);
 		this.table.setLinesVisible(false);
 		
@@ -51,10 +51,10 @@ public class ToolBarsOption extends Option{
 		this.column.pack();
 		
 		Composite buttons = new Composite(getComposite(), SWT.NONE);
-		buttons.setLayout(new GridLayout(2,false));
-		buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.BOTTOM,true,false));
+		buttons.setLayout(new GridLayout(2, false));
+		buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, true, false));
 		
-		this.moveUp = new Button(buttons,SWT.PUSH);
+		this.moveUp = new Button(buttons, SWT.PUSH);
 		this.moveUp.setLayoutData(getButtonData());
 		this.moveUp.setText(TuxGuitar.getProperty("settings.config.toolbars.move-up"));
 		this.moveUp.addSelectionListener(new SelectionAdapter() {
@@ -63,7 +63,7 @@ public class ToolBarsOption extends Option{
 			}
 		});
 		
-		this.moveDown = new Button(buttons,SWT.PUSH);
+		this.moveDown = new Button(buttons, SWT.PUSH);
 		this.moveDown.setLayoutData(getButtonData());
 		this.moveDown.setText(TuxGuitar.getProperty("settings.config.toolbars.move-down"));
 		this.moveDown.addSelectionListener(new SelectionAdapter() {
@@ -89,7 +89,7 @@ public class ToolBarsOption extends Option{
 			if(index > 0 && index < count){
 				TableItem item1 = this.table.getItem(index);
 				TableItem item2 = this.table.getItem(index - 1);
-				this.swapItems(item1,item2);
+				this.swapItems(item1, item2);
 				this.table.setSelection(index - 1);
 			}
 		}
@@ -102,7 +102,7 @@ public class ToolBarsOption extends Option{
 			if(index >= 0 && index < ( count - 1 ) ){
 				TableItem item1 = this.table.getItem(index);
 				TableItem item2 = this.table.getItem(index + 1);
-				this.swapItems(item1,item2);
+				this.swapItems(item1, item2);
 				this.table.setSelection(index + 1);
 			}
 		}
@@ -170,6 +170,6 @@ public class ToolBarsOption extends Option{
 	}
 	
 	public Point computeSize(){
-		return this.computeSize(SWT.DEFAULT,SWT.NONE);
+		return this.computeSize(SWT.DEFAULT, SWT.NONE);
 	}
 }

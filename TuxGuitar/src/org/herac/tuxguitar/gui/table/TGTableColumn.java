@@ -17,12 +17,12 @@ public class TGTableColumn {
 	private CLabel column;
 	private List controls;
 	
-	public TGTableColumn(TGTable table,int align){
+	public TGTableColumn(TGTable table, int align){
 		this.table = table;
 		this.controls = new ArrayList();
-		this.column = new CLabel(this.table.getColumnControl(),align | SWT.SHADOW_OUT);
+		this.column = new CLabel(this.table.getColumnControl(), align | SWT.SHADOW_OUT);
 		this.column.setLayout(new GridLayout());
-		this.column.addListener(SWT.Resize,new Listener() {
+		this.column.addListener(SWT.Resize, new Listener() {
 			public void handleEvent(Event arg0) {
 				layout();
 			}
@@ -55,7 +55,7 @@ public class TGTableColumn {
 		for(int i = 0; i < this.controls.size(); i ++){
 			Control control = (Control)this.controls.get(i);
 			if(!control.isDisposed()){
-				control.setSize(size.x,this.table.getRowHeight());
+				control.setSize(size.x, this.table.getRowHeight());
 				control.setLocation(location.x, 0);
 			}
 		}

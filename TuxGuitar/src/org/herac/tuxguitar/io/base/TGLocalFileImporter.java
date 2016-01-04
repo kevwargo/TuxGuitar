@@ -10,6 +10,6 @@ public interface TGLocalFileImporter extends TGRawImporter {
 	
 	public boolean configure(boolean setDefaults);
 	
-	public void init(TGFactory factory,InputStream stream);
+	public void init(TGFactory factory, InputStream stream);
 	
 }

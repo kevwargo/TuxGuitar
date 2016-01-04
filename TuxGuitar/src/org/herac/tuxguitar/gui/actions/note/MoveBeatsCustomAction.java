@@ -83,9 +83,9 @@ public class MoveBeatsCustomAction extends Action{
 		dialog.setText(TuxGuitar.getProperty("beat.move-custom.dialog.title"));
 		
 		//-------direction-------------------------------------
-		Group direction = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-		direction.setLayout(new GridLayout(2,false));
-		direction.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Group direction = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+		direction.setLayout(new GridLayout(2, false));
+		direction.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		direction.setText(TuxGuitar.getProperty("beat.move-custom.dialog.direction-tip"));
 		
 		Label directionLabel = new Label(direction, SWT.RIGHT);
@@ -101,13 +101,13 @@ public class MoveBeatsCustomAction extends Action{
 		//-------move 1------------------------------------------
 		final List move1Controls = new ArrayList();
 		
-		Group move1 = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-		move1.setLayout(new GridLayout(2,false));
-		move1.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Group move1 = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+		move1.setLayout(new GridLayout(2, false));
+		move1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		move1.setText(TuxGuitar.getProperty("beat.move-custom.dialog.move-1.tip"));
 		
 		Label count1Label = new Label(move1, SWT.RIGHT);
-		count1Label.setLayoutData(new GridData(SWT.RIGHT,SWT.CENTER,true,true));
+		count1Label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		count1Label.setText(TuxGuitar.getProperty("beat.move-custom.dialog.count") + ":");
 		
 		final Spinner count1Spinner = new Spinner(move1 , SWT.BORDER );
@@ -123,7 +123,7 @@ public class MoveBeatsCustomAction extends Action{
 		});
 		
 		Label duration1Label = new Label(move1, SWT.RIGHT);
-		duration1Label.setLayoutData(new GridData(SWT.RIGHT,SWT.CENTER,true,true));
+		duration1Label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		duration1Label.setText(TuxGuitar.getProperty("beat.move-custom.dialog.duration") + ":");
 		move1Controls.add( duration1Label );
 		
@@ -139,13 +139,13 @@ public class MoveBeatsCustomAction extends Action{
 		//-------move 2------------------------------------------
 		final List move2Controls = new ArrayList();
 		
-		Group move2 = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-		move2.setLayout(new GridLayout(2,false));
-		move2.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Group move2 = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+		move2.setLayout(new GridLayout(2, false));
+		move2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		move2.setText(TuxGuitar.getProperty("beat.move-custom.dialog.move-2.tip"));
 		
 		Label count2Label = new Label(move2, SWT.RIGHT);
-		count2Label.setLayoutData(new GridData(SWT.RIGHT,SWT.CENTER,true,true));
+		count2Label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		count2Label.setText(TuxGuitar.getProperty("beat.move-custom.dialog.count") + ":");
 		
 		final Spinner count2Spinner = new Spinner(move2 , SWT.BORDER );
@@ -158,7 +158,7 @@ public class MoveBeatsCustomAction extends Action{
 		});
 		
 		Label duration2Label = new Label(move2, SWT.RIGHT);
-		duration2Label.setLayoutData(new GridData(SWT.RIGHT,SWT.CENTER,true,true));
+		duration2Label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		duration2Label.setText(TuxGuitar.getProperty("beat.move-custom.dialog.duration") + ":");
 		move2Controls.add( duration2Label );
 		
@@ -171,7 +171,7 @@ public class MoveBeatsCustomAction extends Action{
 		move2Controls.add( duration2Combo );
 		
 		Label type2Label = new Label(move2, SWT.RIGHT);
-		type2Label.setLayoutData(new GridData(SWT.RIGHT,SWT.CENTER,true,true));
+		type2Label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		type2Label.setText(TuxGuitar.getProperty("beat.move-custom.dialog.duration.type") + ":");
 		move2Controls.add( type2Label );
 		
@@ -184,7 +184,7 @@ public class MoveBeatsCustomAction extends Action{
 		move2Controls.add( type2Combo );
 		
 		Label division2Label = new Label(move2, SWT.RIGHT);
-		division2Label.setLayoutData(new GridData(SWT.RIGHT,SWT.CENTER,true,true));
+		division2Label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		division2Label.setText(TuxGuitar.getProperty("beat.move-custom.dialog.duration.division-type") + ":");
 		move2Controls.add( division2Label );
 		
@@ -199,8 +199,8 @@ public class MoveBeatsCustomAction extends Action{
 		updateControls( 0, move2Controls );
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(2,false));
-		buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+		buttons.setLayout(new GridLayout(2, false));
+		buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -209,7 +209,7 @@ public class MoveBeatsCustomAction extends Action{
 			public void widgetSelected(SelectionEvent arg0) {
 				final int directionValue = getDirection( directionCombo.getSelectionIndex() );
 				final long duration1 = getDuration1(duration1Combo.getSelectionIndex(), count1Spinner.getSelection());
-				final long duration2 = getDuration2(duration2Combo.getSelectionIndex(),type2Combo.getSelectionIndex(),division2Combo.getSelectionIndex(), count2Spinner.getSelection());
+				final long duration2 = getDuration2(duration2Combo.getSelectionIndex(), type2Combo.getSelectionIndex(), division2Combo.getSelectionIndex(), count2Spinner.getSelection());
 				final long duration = ( ( duration1 + duration2 ) * directionValue );
 				
 				dialog.dispose();
@@ -241,7 +241,7 @@ public class MoveBeatsCustomAction extends Action{
 		
 		dialog.setDefaultButton( buttonOK );
 		
-		DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
 	protected GridData getButtonData(){

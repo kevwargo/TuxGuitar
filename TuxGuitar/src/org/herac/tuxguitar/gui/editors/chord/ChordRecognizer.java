@@ -39,9 +39,9 @@ public class ChordRecognizer extends Composite {
 	// this var keep a control to running threads.
 	private long runningProcess;
 	
-	public ChordRecognizer(ChordDialog dialog, Composite parent,int style) {
-		super(parent,style);
-		this.setLayout(dialog.gridLayout(1,false,0,0));
+	public ChordRecognizer(ChordDialog dialog, Composite parent, int style) {
+		super(parent, style);
+		this.setLayout(dialog.gridLayout(1, false, 0, 0));
 		this.setLayoutData(makeGridData());
 		this.runningProcess = 0;
 		this.dialog = dialog;
@@ -49,20 +49,20 @@ public class ChordRecognizer extends Composite {
 	}
 	
 	public GridData makeGridData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 180;
 		return data;
 	}
 	
 	public void init(){
-		Composite composite = new Composite(this,SWT.NONE);
+		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		this.proposalParameters = new ArrayList();
 		
-		this.proposalList = new List(composite,SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		this.proposalList.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.proposalList = new List(composite, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		this.proposalList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.proposalList.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				if(getDialog().getEditor() != null){
@@ -101,7 +101,7 @@ public class ChordRecognizer extends Composite {
 	 *  @param redecorate is the Chord Editor in editing mode, or it is just changed by ChordSelector
 	 */
 	
-	public void recognize(final TGChord chord,final boolean redecorate,final boolean setChordName) {
+	public void recognize(final TGChord chord, final boolean redecorate, final boolean setChordName) {
 		
 		final long processId = (++ this.runningProcess);
 		final boolean sharp = this.dialog.getSelector().getSharpButton().getSelection();
@@ -112,7 +112,7 @@ public class ChordRecognizer extends Composite {
 			public void run() {
 				if(!getDialog().isDisposed() && isValidProcess(processId)){
 					
-					final int params[] = makeProposals(processId, chord,sharp);
+					final int params[] = makeProposals(processId, chord, sharp);
 					
 					if (params == null) { // could not recognize anything!?
 						if (isValidProcess(processId) && setChordName) {
@@ -131,7 +131,7 @@ public class ChordRecognizer extends Composite {
 						return;
 					}
 					
-					final String chordName = getChordName(params,sharp);
+					final String chordName = getChordName(params, sharp);
 					
 					// Sets all the ChordSelector fields into recognized chord (tonic, bass, chord, alterations)
 					if (isValidProcess(processId) && redecorate) {
@@ -170,7 +170,7 @@ public class ChordRecognizer extends Composite {
 	 * @param chord TGChord to be recognized
 	 * @return parameters for adjustWidgets and getChordName methods 
 	 */
-	protected int[] makeProposals(final long processId, TGChord chord,final boolean sharp) {
+	protected int[] makeProposals(final long processId, TGChord chord, final boolean sharp) {
 		
 		int[] tuning = this.dialog.getSelector().getTuning();
 		java.util.List notesInside = new ArrayList();
@@ -329,7 +329,7 @@ public class ChordRecognizer extends Composite {
 			
 		}
 		// first, sort by DontHaveGrade
-		shellsort(unsortedProposals,1);
+		shellsort(unsortedProposals, 1);
 		
 		int cut=-1;
 		int howManyIncomplete = ChordSettings.instance().getIncompleteChords();
@@ -342,7 +342,7 @@ public class ChordRecognizer extends Composite {
 		// cut the search
 		unsortedProposals=unsortedProposals.subList(0, (cut>0 && cut<unsortedProposals.size() ? cut : unsortedProposals.size()));
 		// sort by unusualGrade
-		shellsort(unsortedProposals,2);
+		shellsort(unsortedProposals, 2);
 		
 		int firstNegative = 0;
 		for (int i=0; i<unsortedProposals.size(); i++) {
@@ -355,7 +355,7 @@ public class ChordRecognizer extends Composite {
 					TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 						public void run() {
 							if(!getDialog().isDisposed() && isValidProcess(processId)){
-								addProposal(current.params, getChordName(current.params,sharp)+" ("+Math.round(100+current.dontHaveGrade*7/10)+"%)" );
+								addProposal(current.params, getChordName(current.params, sharp)+" ("+Math.round(100+current.dontHaveGrade*7/10)+"%)" );
 							}
 						}
 					});
@@ -556,8 +556,8 @@ public class ChordRecognizer extends Composite {
 		int missingCount;
 		int[] missingNotes;
 		
-		boolean filled[]={false,false,false,false};
-		int plusminusValue[]={0,0,0};
+		boolean filled[]={false, false, false, false};
+		int plusminusValue[]={0, 0, 0};
 		
 		private Proposal() {
 			super();

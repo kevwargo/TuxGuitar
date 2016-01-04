@@ -46,19 +46,19 @@ public class AboutDialog {
 	}
 	
 	public void open(Shell shell) {
-		final Shell dialog = DialogUtils.newDialog(shell,SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+		final Shell dialog = DialogUtils.newDialog(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		dialog.setLayout(new GridLayout());
 		dialog.setText(TuxGuitar.getProperty("help.about"));
 		
 		//--------------------HEADER----------------------------------
-		Composite header = new Composite(dialog,SWT.NONE);
-		header.setLayout(new GridLayout(2,false));
-		header.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true ,true));
+		Composite header = new Composite(dialog, SWT.NONE);
+		header.setLayout(new GridLayout(2, false));
+		header.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true , true));
 		
 		this.image = TuxGuitar.instance().getIconManager().getAboutDescription();
 		
-		this.imageComposite = new Composite(header,SWT.NONE);
-		this.imageComposite.setLayoutData(new GridData(IMAGE_WIDTH,IMAGE_HEIGHT));
+		this.imageComposite = new Composite(header, SWT.NONE);
+		this.imageComposite.setLayoutData(new GridData(IMAGE_WIDTH, IMAGE_HEIGHT));
 		this.imageComposite.addPaintListener(new PaintListener() {
 			public void paintControl(PaintEvent e) {
 				Rectangle bounds = AboutDialog.this.image.getBounds();
@@ -67,9 +67,9 @@ public class AboutDialog {
 			}
 		});
 		
-		final Font titleFont = new Font(dialog.getDisplay(),TuxGuitar.instance().getConfig().getFontDataConfigValue(TGConfigKeys.FONT_ABOUT_DIALOG_TITLE));
-		Label title = new Label(header,SWT.NONE);
-		title.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true ,true));
+		final Font titleFont = new Font(dialog.getDisplay(), TuxGuitar.instance().getConfig().getFontDataConfigValue(TGConfigKeys.FONT_ABOUT_DIALOG_TITLE));
+		Label title = new Label(header, SWT.NONE);
+		title.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true , true));
 		title.setFont(titleFont);
 		title.setForeground(dialog.getDisplay().getSystemColor(SWT.COLOR_GRAY));
 		title.setText(RELEASE_NAME);
@@ -82,17 +82,17 @@ public class AboutDialog {
 		//-------------------TABS-----------------------
 		Composite tabs = new Composite(dialog, SWT.NONE);
 		tabs.setLayout(new GridLayout());
-		tabs.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		tabs.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		final TabFolder tabFolder = new TabFolder(tabs, SWT.NONE);
-		tabFolder.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		tabFolder.setLayout(new FormLayout());
 		
 		AboutContentReader docReader = new AboutContentReader();
 		
-		makeTabItem(tabFolder,AboutContentReader.DESCRIPTION,docReader.read(AboutContentReader.DESCRIPTION).toString());
-		makeTabItem(tabFolder,AboutContentReader.AUTHORS,docReader.read(AboutContentReader.AUTHORS).toString());
-		makeTabItem(tabFolder,AboutContentReader.LICENSE,docReader.read(AboutContentReader.LICENSE).toString());
+		makeTabItem(tabFolder, AboutContentReader.DESCRIPTION, docReader.read(AboutContentReader.DESCRIPTION).toString());
+		makeTabItem(tabFolder, AboutContentReader.AUTHORS, docReader.read(AboutContentReader.AUTHORS).toString());
+		makeTabItem(tabFolder, AboutContentReader.LICENSE, docReader.read(AboutContentReader.LICENSE).toString());
 		
 		tabFolder.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -110,7 +110,7 @@ public class AboutDialog {
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
 		buttons.setLayout(new GridLayout());
-		buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+		buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 		
 		Button buttonClose = new Button(buttons, SWT.PUSH);
 		buttonClose.setLayoutData(getButtonData());
@@ -125,7 +125,7 @@ public class AboutDialog {
 		
 		dialog.setDefaultButton( buttonClose );
 		
-		DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
+		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
 	}
 	
 	private GridData getButtonData(){
@@ -135,13 +135,13 @@ public class AboutDialog {
 		return data;
 	}
 	
-	private void makeTabItem(TabFolder tabFolder,String itemName,String itemText){
+	private void makeTabItem(TabFolder tabFolder, String itemName, String itemText){
 		Composite control = new Composite(tabFolder, SWT.NONE);
 		control.setLayout(new GridLayout());
-		control.setLayoutData(new FormData(TAB_ITEM_WIDTH,TAB_ITEM_HEIGHT));
+		control.setLayoutData(new FormData(TAB_ITEM_WIDTH, TAB_ITEM_HEIGHT));
 		
-		Text text = new Text(control,SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
-		text.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Text text = new Text(control, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		text.setBackground(TuxGuitar.instance().getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		text.setEditable(false);
 		text.append(itemText);

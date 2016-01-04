@@ -29,14 +29,14 @@ public class TGSongLoader {
 	 * @return TGSong
 	 * @throws TGFileFormatException
 	 */
-	public TGSong load(TGFactory factory,InputStream is) throws TGFileFormatException{
+	public TGSong load(TGFactory factory, InputStream is) throws TGFileFormatException{
 		try{
 			BufferedInputStream stream = new BufferedInputStream(is);
 			stream.mark(1);
 			Iterator it = TGFileFormatManager.instance().getInputStreams();
 			while(it.hasNext()){
 				TGInputStreamBase reader = (TGInputStreamBase)it.next();
-				reader.init(factory,stream);
+				reader.init(factory, stream);
 				if(reader.isSupportedVersion()){
 					return reader.readSong();
 				}

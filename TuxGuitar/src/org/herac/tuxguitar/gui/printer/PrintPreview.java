@@ -43,13 +43,13 @@ public class PrintPreview{
 	protected List pages;
 	protected int currentPage;
 	
-	public PrintPreview(List pages,Rectangle bounds){
+	public PrintPreview(List pages, Rectangle bounds){
 		this.pages = pages;
 		this.bounds = bounds;
 	}
 	
 	public void showPreview(Shell parent){
-		this.dialog = DialogUtils.newDialog(parent,SWT.SHELL_TRIM | SWT.APPLICATION_MODAL );
+		this.dialog = DialogUtils.newDialog(parent, SWT.SHELL_TRIM | SWT.APPLICATION_MODAL );
 		this.dialog.setLayout(new GridLayout());
 		this.dialog.setText(TuxGuitar.getProperty("print.preview"));
 		
@@ -61,17 +61,17 @@ public class PrintPreview{
 	}
 	
 	private void initToolBar(){
-		Composite composite = new Composite(this.dialog,SWT.NONE);
-		composite.setLayout(new GridLayout(5,false));
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+		Composite composite = new Composite(this.dialog, SWT.NONE);
+		composite.setLayout(new GridLayout(5, false));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 		
-		this.previous = new Button(composite,SWT.ARROW | SWT.LEFT);
-		this.currentText = new Text(composite,SWT.BORDER);
-		this.currentText.setLayoutData(new GridData(25,SWT.DEFAULT));
-		this.next = new Button(composite,SWT.ARROW | SWT.RIGHT);
-		Label maxPages = new Label(composite,SWT.NONE);
+		this.previous = new Button(composite, SWT.ARROW | SWT.LEFT);
+		this.currentText = new Text(composite, SWT.BORDER);
+		this.currentText.setLayoutData(new GridData(25, SWT.DEFAULT));
+		this.next = new Button(composite, SWT.ARROW | SWT.RIGHT);
+		Label maxPages = new Label(composite, SWT.NONE);
 		
-		Button close = new Button(composite,SWT.PUSH);
+		Button close = new Button(composite, SWT.PUSH);
 		close.setLayoutData(getButtonData());
 		
 		this.currentText.addKeyListener(new KeyAdapter() {
@@ -117,12 +117,12 @@ public class PrintPreview{
 	}
 	
 	private void initPreviewComposite(){
-		this.previewComposite = new Composite(this.dialog,SWT.BORDER | SWT.V_SCROLL);
+		this.previewComposite = new Composite(this.dialog, SWT.BORDER | SWT.V_SCROLL);
 		this.previewComposite.setLayout(new GridLayout());
-		this.previewComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.previewComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.previewComposite.setBackground(this.previewComposite.getDisplay().getSystemColor(SWT.COLOR_GRAY));
 		this.previewComposite.setFocus();
-		this.pageComposite = new Composite(this.previewComposite,SWT.BORDER | SWT.DOUBLE_BUFFERED);
+		this.pageComposite = new Composite(this.previewComposite, SWT.BORDER | SWT.DOUBLE_BUFFERED);
 		this.pageComposite.setLayout(new GridLayout());
 		this.pageComposite.setBackground(this.previewComposite.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		this.pageComposite.addPaintListener(new PaintListener() {
@@ -133,7 +133,7 @@ public class PrintPreview{
 					int vScroll = PrintPreview.this.previewComposite.getVerticalBar().getSelection();
 					
 					TGPainter painter = new TGPainter(e.gc);
-					painter.drawImage((Image)PrintPreview.this.pages.get(PrintPreview.this.currentPage),MARGIN_LEFT,MARGIN_TOP - vScroll);
+					painter.drawImage((Image)PrintPreview.this.pages.get(PrintPreview.this.currentPage), MARGIN_LEFT, MARGIN_TOP - vScroll);
 				}
 			}
 		});

@@ -15,7 +15,7 @@ public class TGBrowserCollectionCombo {
 	private List collections;
 	
 	public TGBrowserCollectionCombo(Composite parent, int style){
-		this.combo = new Combo(parent,style);
+		this.combo = new Combo(parent, style);
 		this.collections = new ArrayList();
 		this.addFirstElement();
 	}

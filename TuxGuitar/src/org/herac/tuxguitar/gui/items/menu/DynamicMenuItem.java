@@ -34,7 +34,7 @@ public class DynamicMenuItem extends MenuItems{
 	private MenuItem fortissimo;
 	private MenuItem forteFortissimo;
 	
-	public DynamicMenuItem(Shell shell,Menu parent, int style) {
+	public DynamicMenuItem(Shell shell, Menu parent, int style) {
 		this.dynamicMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}

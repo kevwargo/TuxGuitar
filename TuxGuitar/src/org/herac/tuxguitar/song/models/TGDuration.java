@@ -114,21 +114,21 @@ public abstract class TGDuration {
 		return this.divisionType.convertTime(time);
 	}
 	
-	public static TGDuration fromTime(TGFactory factory,long time){
+	public static TGDuration fromTime(TGFactory factory, long time){
 		TGDuration duration = factory.newDuration();
 		duration.setValue(TGDuration.SIXTY_FOURTH);
 		duration.setDotted(false);
 		duration.setDoubleDotted(false);
 		duration.getDivision().setEnters(3);
 		duration.getDivision().setTimes(2);
-		return fromTime(factory,time,duration);
+		return fromTime(factory, time, duration);
 	}
 	
-	public static TGDuration fromTime(TGFactory factory,long time,TGDuration minDuration){
+	public static TGDuration fromTime(TGFactory factory, long time, TGDuration minDuration){
 		return fromTime(factory, time, minDuration, 10);
 	}
 	
-	public static TGDuration fromTime(TGFactory factory,long time,TGDuration minimum, int diff){
+	public static TGDuration fromTime(TGFactory factory, long time, TGDuration minimum, int diff){
 		TGDuration duration = minimum.clone(factory);
 		TGDuration tmpDuration = factory.newDuration();
 		tmpDuration.setValue(TGDuration.WHOLE);

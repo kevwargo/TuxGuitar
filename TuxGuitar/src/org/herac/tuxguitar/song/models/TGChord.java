@@ -35,7 +35,7 @@ public abstract class TGChord {
 		this.beat = beat;
 	}
 	
-	public void addFretValue(int string,int fret){
+	public void addFretValue(int string, int fret){
 		if(string >= 0 && string < this.strings.length){
 			this.strings[string] = fret;
 		}

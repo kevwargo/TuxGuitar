@@ -24,8 +24,8 @@ public class LanguageOption extends Option{
 	protected Table table;
 	protected TableColumn column;
 	
-	public LanguageOption(TGConfigEditor configEditor,ToolBar toolBar,final Composite parent){
-		super(configEditor,toolBar,parent,TuxGuitar.getProperty("settings.config.language"), SWT.FILL, SWT.FILL);
+	public LanguageOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent){
+		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.language"), SWT.FILL, SWT.FILL);
 		this.initialized = false;
 	}
 	
@@ -34,14 +34,14 @@ public class LanguageOption extends Option{
 		getToolItem().setImage(TuxGuitar.instance().getIconManager().getOptionLanguage());
 		getToolItem().addSelectionListener(this);
 		
-		showLabel(getComposite(),SWT.FILL,SWT.TOP, true, false,SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("settings.config.language.choose"));
+		showLabel(getComposite(), SWT.FILL, SWT.TOP, true, false, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("settings.config.language.choose"));
 		
-		Composite composite = new Composite(getComposite(),SWT.NONE);
+		Composite composite = new Composite(getComposite(), SWT.NONE);
 		composite.setLayout(new GridLayout());
 		composite.setLayoutData(getTabbedData(SWT.FILL, SWT.FILL));
 		
 		this.table = new Table(composite, SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
-		this.table.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.table.setHeaderVisible(true);
 		this.table.setLinesVisible(false);
 		
@@ -65,7 +65,7 @@ public class LanguageOption extends Option{
 		List list = new ArrayList();
 		if( languages != null ){
 			for(int i = 0;i < languages.length; i ++){
-				list.add( new LanguageItem(languages[i],TuxGuitar.getProperty("locale." + languages[i] ) ) );
+				list.add( new LanguageItem(languages[i], TuxGuitar.getProperty("locale." + languages[i] ) ) );
 			}
 			Collections.sort(list, new Comparator() {
 				public int compare(Object o1, Object o2) {
@@ -94,7 +94,7 @@ public class LanguageOption extends Option{
 							
 							for(int i = 0;i < languages.size(); i ++){
 								LanguageItem item = (LanguageItem)languages.get( i );
-								loadTableItem(item.getValue(),item.getKey(),(language != null && item.getKey().equals( language )));
+								loadTableItem(item.getValue(), item.getKey(),(language != null && item.getKey().equals( language )));
 							}
 							
 							LanguageOption.this.initialized = true;
@@ -122,7 +122,7 @@ public class LanguageOption extends Option{
 	
 	public void updateDefaults(){
 		if(this.initialized){
-			getConfig().setProperty(TGConfigKeys.LANGUAGE,getDefaults().getProperty(TGConfigKeys.LANGUAGE));
+			getConfig().setProperty(TGConfigKeys.LANGUAGE, getDefaults().getProperty(TGConfigKeys.LANGUAGE));
 		}
 	}
 	
@@ -155,7 +155,7 @@ public class LanguageOption extends Option{
 	}
 	
 	public Point computeSize(){
-		return this.computeSize(SWT.DEFAULT,SWT.NONE);
+		return this.computeSize(SWT.DEFAULT, SWT.NONE);
 	}
 	
 	private class LanguageItem {

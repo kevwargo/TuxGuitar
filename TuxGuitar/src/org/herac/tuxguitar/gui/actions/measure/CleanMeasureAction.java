@@ -55,9 +55,9 @@ public class CleanMeasureAction extends Action{
 			dialog.setText(TuxGuitar.getProperty("measure.clean"));
 			
 			//----------------------------------------------------------------------
-			Group range = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			range.setLayout(new GridLayout(2,false));
-			range.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group range = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			range.setLayout(new GridLayout(2, false));
+			range.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			range.setText(TuxGuitar.getProperty("measure.clean"));
 			
 			int measureCount = getSongManager().getSong().countMeasureHeaders();
@@ -107,15 +107,15 @@ public class CleanMeasureAction extends Action{
 			
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
 			buttonOK.setLayoutData(getButtonData());
 			buttonOK.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent arg0) {
-					cleanMeasures(fromSpinner.getSelection(),toSpinner.getSelection());
+					cleanMeasures(fromSpinner.getSelection(), toSpinner.getSelection());
 					dialog.dispose();
 				}
 			});
@@ -131,7 +131,7 @@ public class CleanMeasureAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
@@ -143,12 +143,12 @@ public class CleanMeasureAction extends Action{
 	}
 	
 	protected GridData getSpinnerData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 180;
 		return data;
 	}
 	
-	public void cleanMeasures(int m1,int m2){
+	public void cleanMeasures(int m1, int m2){
 		if(m1 > 0 && m1 <= m2){
 			//comienza el undoable
 			UndoableJoined undoable = new UndoableJoined();

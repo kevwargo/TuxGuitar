@@ -5,7 +5,7 @@ public class KeyBindingAction {
 	private String action;
 	private KeyBinding keyBinding;
 	
-	public KeyBindingAction(String action,KeyBinding keyBinding){
+	public KeyBindingAction(String action, KeyBinding keyBinding){
 		this.action = action;
 		this.keyBinding = keyBinding;
 	}

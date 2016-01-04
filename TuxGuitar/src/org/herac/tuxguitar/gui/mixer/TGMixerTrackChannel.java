@@ -37,11 +37,11 @@ public class TGMixerTrackChannel {
 	
 	public void init(Composite parent){
 		this.normalChannels = new ChannelList();
-		this.normalChannel = new Combo(parent,SWT.DROP_DOWN | SWT.READ_ONLY);
+		this.normalChannel = new Combo(parent, SWT.DROP_DOWN | SWT.READ_ONLY);
 		this.normalChannel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
 		this.effectChannels = new ChannelList();
-		this.effectChannel = new Combo(parent,SWT.DROP_DOWN | SWT.READ_ONLY);
+		this.effectChannel = new Combo(parent, SWT.DROP_DOWN | SWT.READ_ONLY);
 		this.effectChannel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
 		this.normalChannel.addSelectionListener(new SelectionAdapter() {
@@ -102,7 +102,7 @@ public class TGMixerTrackChannel {
 		if(getChannel().isPercussionChannel()){
 			this.normalChannel.add(Integer.toString(TGChannel.DEFAULT_PERCUSSION_CHANNEL));
 			this.normalChannel.select(0);
-			this.normalChannels.addChannel(0,0);
+			this.normalChannels.addChannel(0, 0);
 		}else{
 			int itemIndex = 0;
 			for(int i = 0;i < usedChannels.length;i++){
@@ -119,7 +119,7 @@ public class TGMixerTrackChannel {
 						if(i == getChannel().getChannel()){
 							this.normalChannel.select(itemIndex);
 						}
-						this.normalChannels.addChannel(itemIndex,i);
+						this.normalChannels.addChannel(itemIndex, i);
 						itemIndex ++;
 					}
 				}
@@ -136,7 +136,7 @@ public class TGMixerTrackChannel {
 		if(getChannel().isPercussionChannel()){
 			this.effectChannel.add(Integer.toString(TGChannel.DEFAULT_PERCUSSION_CHANNEL));
 			this.effectChannel.select(0);
-			this.effectChannels.addChannel(0,0);
+			this.effectChannels.addChannel(0, 0);
 		}else{
 			int itemIndex = 0;
 			for(int i = 0;i < usedEffectChannels.length;i++){
@@ -147,7 +147,7 @@ public class TGMixerTrackChannel {
 						if(i == getChannel().getEffectChannel()){
 							this.effectChannel.select(itemIndex);
 						}
-						this.effectChannels.addChannel(itemIndex,i);
+						this.effectChannels.addChannel(itemIndex, i);
 						itemIndex ++;
 					}
 				}
@@ -156,7 +156,7 @@ public class TGMixerTrackChannel {
 	}
 	
 	public void fireChannelChange(TGChannel channel){
-		this.mixer.getMixer().fireChanges(channel,TGMixer.CHANNEL);
+		this.mixer.getMixer().fireChanges(channel, TGMixer.CHANNEL);
 	}
 	
 	private class ChannelList{
@@ -166,8 +166,8 @@ public class TGMixerTrackChannel {
 			this.channelIndexs = new ArrayList();
 		}
 		
-		public void addChannel(int index,int channel){
-			this.channelIndexs.add(new ChannelIndex(index,channel));
+		public void addChannel(int index, int channel){
+			this.channelIndexs.add(new ChannelIndex(index, channel));
 		}
 		
 		public int getChannel(int index){
@@ -190,7 +190,7 @@ public class TGMixerTrackChannel {
 		private int index;
 		private int channel;
 		
-		public ChannelIndex(int index,int channel){
+		public ChannelIndex(int index, int channel){
 			this.index = index;
 			this.channel = channel;
 		}

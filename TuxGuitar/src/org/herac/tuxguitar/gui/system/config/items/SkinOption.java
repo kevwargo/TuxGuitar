@@ -35,8 +35,8 @@ public class SkinOption extends Option{
 	protected Image preview;
 	protected Composite previewArea;
 	
-	public SkinOption(TGConfigEditor configEditor,ToolBar toolBar,final Composite parent){
-		super(configEditor,toolBar,parent,TuxGuitar.getProperty("settings.config.skin"), SWT.FILL,SWT.FILL);
+	public SkinOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent){
+		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.skin"), SWT.FILL, SWT.FILL);
 		this.initialized = false;
 	}
 	
@@ -45,32 +45,32 @@ public class SkinOption extends Option{
 		getToolItem().setImage(TuxGuitar.instance().getIconManager().getOptionSkin());
 		getToolItem().addSelectionListener(this);
 		
-		showLabel(getComposite(),SWT.FILL,SWT.TOP,true, false, SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("settings.config.skin.choose"));
+		showLabel(getComposite(), SWT.FILL, SWT.TOP, true, false, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("settings.config.skin.choose"));
 		
-		Composite composite = new Composite(getComposite(),SWT.NONE);
+		Composite composite = new Composite(getComposite(), SWT.NONE);
 		composite.setLayout(new GridLayout());
 		composite.setLayoutData(getTabbedData(SWT.FILL, SWT.FILL, true, false));
 		
-		this.combo = new Combo(composite,SWT.DROP_DOWN | SWT.READ_ONLY);
-		this.combo.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.combo = new Combo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
+		this.combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		Composite skinInfoComposite = new Composite(getComposite(),SWT.NONE);
-		skinInfoComposite.setLayout(new GridLayout(2,false));
+		Composite skinInfoComposite = new Composite(getComposite(), SWT.NONE);
+		skinInfoComposite.setLayout(new GridLayout(2, false));
 		skinInfoComposite.setLayoutData(getTabbedData(SWT.FILL, SWT.FILL, true, false));
-		showLabel(skinInfoComposite,SWT.FILL,SWT.CENTER,false,true,SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("name") + ": ");
-		this.nameLabel = showLabel(skinInfoComposite,SWT.FILL,SWT.CENTER,SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.NONE,0,"");
-		showLabel(skinInfoComposite,SWT.FILL,SWT.CENTER,false,true,SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("author")+": ");
-		this.authorLabel = showLabel(skinInfoComposite,SWT.FILL,SWT.CENTER,SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.NONE,0,"");
-		showLabel(skinInfoComposite,SWT.FILL,SWT.CENTER,false,true,SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("version")+": ");
-		this.versionLabel = showLabel(skinInfoComposite,SWT.FILL,SWT.CENTER,SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.NONE,0,"");
-		showLabel(skinInfoComposite,SWT.FILL,SWT.CENTER,false,true,SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("description")+": ");
-		this.descriptionLabel = showLabel(skinInfoComposite,SWT.FILL,SWT.CENTER,SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.NONE,0,"");
+		showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, false, true, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("name") + ": ");
+		this.nameLabel = showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.NONE, 0,"");
+		showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, false, true, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("author")+": ");
+		this.authorLabel = showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.NONE, 0,"");
+		showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, false, true, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("version")+": ");
+		this.versionLabel = showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.NONE, 0,"");
+		showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, false, true, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("description")+": ");
+		this.descriptionLabel = showLabel(skinInfoComposite, SWT.FILL, SWT.CENTER, SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.NONE, 0,"");
 		
-		Composite skinPreviewComposite = new Composite(getComposite(),SWT.NONE);
+		Composite skinPreviewComposite = new Composite(getComposite(), SWT.NONE);
 		skinPreviewComposite.setLayout(new GridLayout());
-		skinPreviewComposite.setLayoutData(getTabbedData(SWT.FILL, SWT.FILL ,true, true));
+		skinPreviewComposite.setLayoutData(getTabbedData(SWT.FILL, SWT.FILL , true, true));
 		
-		this.previewArea = new Composite(skinPreviewComposite,SWT.DOUBLE_BUFFERED);
+		this.previewArea = new Composite(skinPreviewComposite, SWT.DOUBLE_BUFFERED);
 		this.previewArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.previewArea.addPaintListener(new PaintListener() {
 			public void paintControl(PaintEvent e) {
@@ -100,12 +100,12 @@ public class SkinOption extends Option{
 							throwable.printStackTrace();
 						}
 						SkinInfo info = new SkinInfo(skinNames[i]);
-						info.setName(properties.getProperty("name",info.getSkin()));
+						info.setName(properties.getProperty("name", info.getSkin()));
 						info.setAuthor(properties.getProperty("author","Not available."));
 						info.setVersion(properties.getProperty("version","Not available."));
 						info.setDescription(properties.getProperty("description","Not available."));
-						info.setDate(properties.getProperty("date",null));
-						info.setPreview(properties.getProperty("preview",null));
+						info.setDate(properties.getProperty("date", null));
+						info.setPreview(properties.getProperty("preview", null));
 						SkinOption.this.skins.add(info);
 					}
 				}
@@ -152,7 +152,7 @@ public class SkinOption extends Option{
 					SkinOption.this.descriptionLabel.setText(info.getDescription());
 					SkinOption.this.versionLabel.setText((info.getDate() == null)?info.getVersion():info.getVersion() + " (" + info.getDate() + ")");
 					if(info.getPreview() != null){
-						SkinOption.this.preview = TGFileUtils.loadImage(info.getSkin(),info.getPreview());
+						SkinOption.this.preview = TGFileUtils.loadImage(info.getSkin(), info.getPreview());
 					}
 					SkinOption.this.previewArea.redraw();
 					loadCursor(SWT.CURSOR_ARROW);
@@ -166,14 +166,14 @@ public class SkinOption extends Option{
 			int selection = this.combo.getSelectionIndex();
 			if(selection >= 0 && selection < this.skins.size()){
 				SkinInfo info = (SkinInfo)this.skins.get(selection);
-				getConfig().setProperty(TGConfigKeys.SKIN,info.getSkin());
+				getConfig().setProperty(TGConfigKeys.SKIN, info.getSkin());
 			}
 		}
 	}
 	
 	public void updateDefaults(){
 		if(this.initialized){
-			getConfig().setProperty(TGConfigKeys.SKIN,getDefaults().getProperty(TGConfigKeys.SKIN));
+			getConfig().setProperty(TGConfigKeys.SKIN, getDefaults().getProperty(TGConfigKeys.SKIN));
 		}
 	}
 	

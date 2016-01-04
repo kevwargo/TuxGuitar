@@ -32,7 +32,7 @@ public class CleanBeatAction extends Action{
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
 			
-			//getSongManager().getMeasureManager().removeAllComponentsAt(caret.getMeasure(),caret.getSelectedComponent().getStart());
+			//getSongManager().getMeasureManager().removeAllComponentsAt(caret.getMeasure(), caret.getSelectedComponent().getStart());
 			getSongManager().getMeasureManager().cleanBeat(beat);
 			
 			//termia el undoable

@@ -31,7 +31,7 @@ public class ChangeBendNoteAction extends Action{
 	protected int execute(TypedEvent e){
 		TGNote note = getEditor().getTablature().getCaret().getSelectedNote();
 		if(note != null){
-			changeBend(new BendEditor().show(getEditor().getTablature().getShell(),note));
+			changeBend(new BendEditor().show(getEditor().getTablature().getShell(), note));
 		}
 		return 0;
 	}
@@ -41,7 +41,7 @@ public class ChangeBendNoteAction extends Action{
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
-		getSongManager().getMeasureManager().changeBendNote(caret.getMeasure(),caret.getPosition(),caret.getSelectedString().getNumber(),effect);
+		getSongManager().getMeasureManager().changeBendNote(caret.getMeasure(), caret.getPosition(), caret.getSelectedString().getNumber(), effect);
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		updateTablature();
 		

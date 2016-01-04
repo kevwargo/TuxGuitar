@@ -31,7 +31,7 @@ public class ChangeTremoloBarAction extends Action{
 	protected int execute(TypedEvent e){
 		TGNote note = getEditor().getTablature().getCaret().getSelectedNote();
 		if(note != null){
-			changeTremoloBar(new TremoloBarEditor().show(getEditor().getTablature().getShell(),note));
+			changeTremoloBar(new TremoloBarEditor().show(getEditor().getTablature().getShell(), note));
 		}
 		return 0;
 	}
@@ -41,7 +41,7 @@ public class ChangeTremoloBarAction extends Action{
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
-		getSongManager().getMeasureManager().changeTremoloBar(caret.getMeasure(),caret.getPosition(),caret.getSelectedString().getNumber(),effect);
+		getSongManager().getMeasureManager().changeTremoloBar(caret.getMeasure(), caret.getPosition(), caret.getSelectedString().getNumber(), effect);
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		updateTablature();
 		

@@ -51,29 +51,29 @@ public class Caret {
 	
 	public synchronized void update(){
 		int trackNumber = (this.selectedTrack != null)?this.selectedTrack.getNumber():1;
-		update(trackNumber,this.position,this.string);
+		update(trackNumber, this.position, this.string);
 	}
 	
 	public synchronized void update(int trackNumber){
-		update(trackNumber,this.position,this.string);
+		update(trackNumber, this.position, this.string);
 	}
 	
-	public synchronized void update(int trackNumber,long position,int string){
-		update(trackNumber, position, string,getVelocity());
+	public synchronized void update(int trackNumber, long position, int string){
+		update(trackNumber, position, string, getVelocity());
 	}
 	
-	public synchronized void update(int trackNumber,long position,int string,int velocity) {
+	public synchronized void update(int trackNumber, long position, int string, int velocity) {
 		long realPosition = ((TuxGuitar.instance().getPlayer().isRunning())?MidiTickUtil.getStart(TuxGuitar.instance().getPlayer().getTickPosition()):position);
 		TGTrackImpl track = findTrack(trackNumber); 
-		TGMeasureImpl measure = findMeasure(realPosition,track);
-		TGBeat beat = findBeat(realPosition,measure);
+		TGMeasureImpl measure = findMeasure(realPosition, track);
+		TGBeat beat = findBeat(realPosition, measure);
 		if(track != null && measure != null && beat != null){
-			moveTo(track, measure, beat,string);
+			moveTo(track, measure, beat, string);
 		}
 		setVelocity(velocity);
 	}
 	
-	public void moveTo(TGTrackImpl selectedTrack, TGMeasureImpl selectedMeasure, TGBeat selectedBeat,int string) {
+	public void moveTo(TGTrackImpl selectedTrack, TGMeasureImpl selectedMeasure, TGBeat selectedBeat, int string) {
 		this.selectedTrack = selectedTrack;
 		this.selectedMeasure = selectedMeasure;
 		this.selectedBeat = selectedBeat;
@@ -95,10 +95,10 @@ public class Caret {
 		return track;
 	}
 	
-	private TGMeasureImpl findMeasure(long position,TGTrackImpl track){
+	private TGMeasureImpl findMeasure(long position, TGTrackImpl track){
 		TGMeasureImpl measure = null;
 		if(track != null){
-			measure = (TGMeasureImpl)getSongManager().getTrackManager().getMeasureAt(track,position);
+			measure = (TGMeasureImpl)getSongManager().getTrackManager().getMeasureAt(track, position);
 			if(measure == null){
 				measure = (TGMeasureImpl)getSongManager().getTrackManager().getFirstMeasure(track);
 			}
@@ -106,7 +106,7 @@ public class Caret {
 		return measure;
 	}
 	
-	private TGBeat findBeat(long position,TGMeasureImpl measure){
+	private TGBeat findBeat(long position, TGMeasureImpl measure){
 		TGBeat beat = null;
 		if(measure != null){
 			TGMeasureManager manager = getSongManager().getMeasureManager();
@@ -123,11 +123,11 @@ public class Caret {
 	
 	public synchronized void goToTickPosition(){
 		long start = MidiTickUtil.getStart(TuxGuitar.instance().getPlayer().getTickPosition());
-		this.update(this.selectedTrack.getNumber(),start,this.string);
+		this.update(this.selectedTrack.getNumber(), start, this.string);
 		this.setChanges(true);
 	}
 	
-	public void paintCaret(ViewLayout layout,TGPainter painter) {
+	public void paintCaret(ViewLayout layout, TGPainter painter) {
 		if(!TuxGuitar.instance().getPlayer().isRunning()){
 			if (this.selectedMeasure != null && this.selectedBeat instanceof TGBeatImpl) {
 				TGBeatImpl beat = (TGBeatImpl)this.selectedBeat;
@@ -170,7 +170,7 @@ public class Caret {
 	public boolean moveRight() {
 		if (getSelectedBeat() != null) {
 			TGMeasureImpl measure = getMeasure();
-			TGVoice voice = getSongManager().getMeasureManager().getNextVoice(measure.getBeats(),getSelectedBeat(), getVoice());
+			TGVoice voice = getSongManager().getMeasureManager().getNextVoice(measure.getBeats(), getSelectedBeat(), getVoice());
 			TGBeat beat = (voice != null ? voice.getBeat() : null );
 			if (beat == null){
 				//si no habia mas componentes. busco el siguiente compas
@@ -194,7 +194,7 @@ public class Caret {
 	public void moveLeft() {
 		if (getSelectedBeat() != null) {
 			TGMeasureImpl measure = getMeasure();
-			TGVoice voice = getSongManager().getMeasureManager().getPreviousVoice(measure.getBeats(),getSelectedBeat(), getVoice());
+			TGVoice voice = getSongManager().getMeasureManager().getPreviousVoice(measure.getBeats(), getSelectedBeat(), getVoice());
 			TGBeat beat = (voice != null ? voice.getBeat() : null );
 			if (beat == null) {
 				//si no habia mas componentes. busco el compas anterior
@@ -277,7 +277,7 @@ public class Caret {
 	}
 	
 	public void changeDuration(TGDuration duration){
-		getSongManager().getMeasureManager().changeDuration(getMeasure(),getSelectedBeat(),duration,getVoice(), true);
+		getSongManager().getMeasureManager().changeDuration(getMeasure(), getSelectedBeat(), duration, getVoice(), true);
 		setChanges(true);
 	}
 	
@@ -316,7 +316,7 @@ public class Caret {
 		
 		TGString string = getSelectedString();
 		if( string != null ){
-			this.selectedNote = getSongManager().getMeasureManager().getNote(getMeasure(),getPosition(),string.getNumber());
+			this.selectedNote = getSongManager().getMeasureManager().getNote(getMeasure(), getPosition(), string.getNumber());
 		}
 	}
 	

@@ -41,7 +41,7 @@ public class ChangeHarmonicNoteAction extends Action{
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
-		getSongManager().getMeasureManager().changeHarmonicNote(caret.getMeasure(),caret.getPosition(),caret.getSelectedString().getNumber(),effect);
+		getSongManager().getMeasureManager().changeHarmonicNote(caret.getMeasure(), caret.getPosition(), caret.getSelectedString().getNumber(), effect);
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		updateTablature();
 		

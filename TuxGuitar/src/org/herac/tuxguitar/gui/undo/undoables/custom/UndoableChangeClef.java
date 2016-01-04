@@ -32,7 +32,7 @@ public class UndoableChangeClef implements UndoableEdit{
 		if(!canRedo()){
 			throw new CannotRedoException();
 		}
-		TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track,this.position,this.redoableClef,this.toEnd);
+		TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track, this.position, this.redoableClef, this.toEnd);
 		TuxGuitar.instance().fireUpdate();
 		this.redoCaret.update();
 		
@@ -43,12 +43,12 @@ public class UndoableChangeClef implements UndoableEdit{
 		if(!canUndo()){
 			throw new CannotUndoException();
 		}
-		TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track,this.position,this.undoableClef,this.toEnd);
+		TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track, this.position, this.undoableClef, this.toEnd);
 		if(this.toEnd){
 			Iterator it = this.nextClefPositions.iterator();
 			while(it.hasNext()){
 				ClefPosition ksp = (ClefPosition)it.next();
-				TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track,ksp.getPosition(),ksp.getClef(),true);
+				TuxGuitar.instance().getSongManager().getTrackManager().changeClef(this.track, ksp.getPosition(), ksp.getClef(), true);
 			}
 		}
 		TuxGuitar.instance().fireUpdate();
@@ -82,7 +82,7 @@ public class UndoableChangeClef implements UndoableEdit{
 			if(measure.getStart() > undoable.position){
 				int currClef = measure.getClef();
 				if(prevClef != currClef){
-					ClefPosition tsp = undoable.new ClefPosition(measure.getStart(),currClef);
+					ClefPosition tsp = undoable.new ClefPosition(measure.getStart(), currClef);
 					undoable.nextClefPositions.add(tsp);
 				}
 				prevClef = currClef;
@@ -92,7 +92,7 @@ public class UndoableChangeClef implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableChangeClef endUndo(int clef,boolean toEnd){
+	public UndoableChangeClef endUndo(int clef, boolean toEnd){
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoableClef = clef;
 		this.toEnd = toEnd;
@@ -107,7 +107,7 @@ public class UndoableChangeClef implements UndoableEdit{
 		private long position;
 		private int clef;
 		
-		public ClefPosition(long position,int clef) {
+		public ClefPosition(long position, int clef) {
 			this.position = position;
 			this.clef = clef;
 		}

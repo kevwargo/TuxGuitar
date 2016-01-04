@@ -64,7 +64,7 @@ public class TGClassLoader{
 	private class URLClassLoaderImpl extends URLClassLoader{
 		
 		public URLClassLoaderImpl(){
-			super(new URL[]{},TGClassLoader.class.getClassLoader());
+			super(new URL[]{}, TGClassLoader.class.getClassLoader());
 		}
 		
 		public void addURL(URL url){

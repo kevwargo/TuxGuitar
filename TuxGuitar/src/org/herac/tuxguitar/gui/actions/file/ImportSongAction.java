@@ -79,7 +79,7 @@ public class ImportSongAction extends Action {
 	}
 	
 	private void processLocalFileImporter(final TGLocalFileImporter importer){
-		final String path = FileChooser.instance().open(TuxGuitar.instance().getShell(),importer.getFileFormat());
+		final String path = FileChooser.instance().open(TuxGuitar.instance().getShell(), importer.getFileFormat());
 		if(!isValidFile(path) || !importer.configure(false)){
 			ActionLock.unlock();
 			return;

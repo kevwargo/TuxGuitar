@@ -43,7 +43,7 @@ public class MeasureMenuItem extends MenuItems{
 	private MenuItem copyMeasure;
 	private MenuItem pasteMeasure;
 	
-	public MeasureMenuItem(Shell shell,Menu parent, int style) {
+	public MeasureMenuItem(Shell shell, Menu parent, int style) {
 		this.measureMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}

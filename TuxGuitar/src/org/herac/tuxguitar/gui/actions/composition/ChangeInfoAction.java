@@ -54,12 +54,12 @@ public class ChangeInfoAction extends Action{
 			final Shell dialog = DialogUtils.newDialog(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 			
 			dialog.setLayout(new GridLayout());
-			dialog.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			dialog.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			dialog.setText(TuxGuitar.getProperty("composition.properties"));
 			
-			Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			group.setLayout(makeGroupLayout(5));
-			group.setLayoutData(new GridData(GROUP_WIDTH,GROUP_HEIGHT));
+			group.setLayoutData(new GridData(GROUP_WIDTH, GROUP_HEIGHT));
 			group.setText(TuxGuitar.getProperty("composition.properties"));
 			
 			//-------NAME------------------------------------
@@ -138,8 +138,8 @@ public class ChangeInfoAction extends Action{
 			
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -162,7 +162,7 @@ public class ChangeInfoAction extends Action{
 							public void run() throws Throwable {
 								ActionLock.lock();
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
-								setProperties(name,artist,album,author,date,copyright,writer,transcriber,comments);
+								setProperties(name, artist, album, author, date, copyright, writer, transcriber, comments);
 								TuxGuitar.instance().updateCache( true );
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 								ActionLock.unlock();
@@ -185,12 +185,12 @@ public class ChangeInfoAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
 	private GridLayout makeGroupLayout(int spacing){
-		GridLayout layout = new GridLayout(2,false);
+		GridLayout layout = new GridLayout(2, false);
 		layout.marginTop = spacing;
 		layout.marginBottom = spacing;
 		layout.marginLeft = spacing;
@@ -211,7 +211,7 @@ public class ChangeInfoAction extends Action{
 	}
 	
 	private GridData makeLabelData(){
-		return new GridData(SWT.RIGHT,SWT.CENTER,false,true);
+		return new GridData(SWT.RIGHT, SWT.CENTER, false, true);
 	}
 	
 	private GridData getButtonData(){
@@ -221,11 +221,11 @@ public class ChangeInfoAction extends Action{
 		return data;
 	}
 	
-	protected void setProperties(String name,String artist,String album,String author,String date,String copyright,String writer,String transcriber,String comments){
+	protected void setProperties(String name, String artist, String album, String author, String date, String copyright, String writer, String transcriber, String comments){
 		//comienza el undoable
 		UndoableChangeInfo undoable = UndoableChangeInfo.startUndo();
 		
-		getSongManager().setProperties(name,artist,album,author,date,copyright,writer,transcriber,comments);
+		getSongManager().setProperties(name, artist, album, author, date, copyright, writer, transcriber, comments);
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		TuxGuitar.instance().showTitle();
 		

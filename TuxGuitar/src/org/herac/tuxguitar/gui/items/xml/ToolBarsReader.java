@@ -19,10 +19,10 @@ public class ToolBarsReader {
 	private static final String ATTR_NAME = "name";
 	private static final String ATTR_ENABLED = "enabled";
 	
-	public static void loadToolBars(ItemManager manager,File file){
+	public static void loadToolBars(ItemManager manager, File file){
 		try {
 			if (file.exists()){
-				loadToolBars(manager,getDocument(file).getFirstChild());
+				loadToolBars(manager, getDocument(file).getFirstChild());
 			}
 		} catch (Throwable throwable) {
 			throwable.printStackTrace();
@@ -36,7 +36,7 @@ public class ToolBarsReader {
 		return document;
 	}
 	
-	private static void loadToolBars(ItemManager manager,Node node){
+	private static void loadToolBars(ItemManager manager, Node node){
 		NodeList listNode = node.getChildNodes();
 		int index = 0;
 		for (int i = 0; i < listNode.getLength(); i++) {
@@ -53,7 +53,7 @@ public class ToolBarsReader {
 					System.err.println("Invalid ToolBar Attributes.");
 					continue;
 				}
-				manager.setToolBarStatus(name.getNodeValue(),Boolean.valueOf(enabled.getNodeValue().trim()).booleanValue(), index ++);
+				manager.setToolBarStatus(name.getNodeValue(), Boolean.valueOf(enabled.getNodeValue().trim()).booleanValue(), index ++);
 			}
 		}
 	}

@@ -32,17 +32,17 @@ public class TGBrowserWriter {
 	private static final String ATTRIBUTE_TYPE = "type";
 	private static final String ATTRIBUTE_DATA = "data";
 	
-	public void saveCollections(TGBrowserManager manager,String fileName) {
+	public void saveCollections(TGBrowserManager manager, String fileName) {
 		try{
 			Document doc = createDocument();
-			saveCollections(manager,doc);
-			saveDocument(doc,new File(fileName));
+			saveCollections(manager, doc);
+			saveDocument(doc, new File(fileName));
 		}catch(Throwable throwable){
 			throwable.printStackTrace();
 		}
 	}
 	
-	private static void saveCollections(TGBrowserManager manager,Document document){
+	private static void saveCollections(TGBrowserManager manager, Document document){
 		//chords tag
 		Node listNode = document.createElement(ITEM_LIST_TAG);
 		
@@ -81,7 +81,7 @@ public class TGBrowserWriter {
 		return document;
 	}
 	
-	public static void saveDocument(Document document,File file) {
+	public static void saveDocument(Document document, File file) {
 		try {
 			FileOutputStream fs = new FileOutputStream(file);
 			

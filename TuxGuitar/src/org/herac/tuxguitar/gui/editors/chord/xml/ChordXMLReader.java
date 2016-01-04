@@ -25,7 +25,7 @@ public class ChordXMLReader {
 			File file = new File(fileName);
 			if (file.exists()){
 				Document doc = getDocument(file);
-				loadChords(doc.getFirstChild(),chords);
+				loadChords(doc.getFirstChild(), chords);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class ChordXMLReader {
 	 * @param shortcutsNode
 	 * @return
 	 */
-	private static void loadChords(Node chordsNode,List chords){
+	private static void loadChords(Node chordsNode, List chords){
 		try{
 			NodeList chordList = chordsNode.getChildNodes();
 			for (int i = 0; i < chordList.getLength(); i++) {
@@ -80,7 +80,7 @@ public class ChordXMLReader {
 							String number = stringAttributes.getNamedItem(ChordXML.STRING_NUMBER_ATTRIBUTE).getNodeValue();
 							String fret = stringAttributes.getNamedItem(ChordXML.STRING_FRET_ATTRIBUTE).getNodeValue();
 							
-							chord.addFretValue(Integer.parseInt(number),Integer.parseInt(fret));
+							chord.addFretValue(Integer.parseInt(number), Integer.parseInt(fret));
 						}
 					}
 					chords.add(chord);

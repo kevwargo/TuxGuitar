@@ -82,7 +82,7 @@ public class UndoableChangeTempo implements UndoableEdit{
 		}
 		for(int i =0; i < length; i ++){
 			TGTempo tempo = ((TGTempo)tempos.get(i)).clone(TuxGuitar.instance().getSongManager().getFactory());
-			TuxGuitar.instance().getSongManager().changeTempo(TuxGuitar.instance().getSongManager().getMeasureHeader(i + 1),tempo);
+			TuxGuitar.instance().getSongManager().changeTempo(TuxGuitar.instance().getSongManager().getMeasureHeader(i + 1), tempo);
 		}
 		TuxGuitar.instance().fireUpdate();
 	}

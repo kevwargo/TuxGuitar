@@ -54,8 +54,8 @@ public class StylesOption extends Option{
 	protected ButtonColor playNoteColorButton;
 	protected ButtonColor linesColorButton;
 	
-	public StylesOption(TGConfigEditor configEditor,ToolBar toolBar,final Composite parent){
-		super(configEditor,toolBar,parent,TuxGuitar.getProperty("settings.config.styles"));
+	public StylesOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent){
+		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.styles"));
 		this.initialized = false;
 		this.defaultFontData = new FontData();
 		this.noteFontData = new FontData();
@@ -75,80 +75,80 @@ public class StylesOption extends Option{
 		getToolItem().addSelectionListener(this);
 		
 		//=================================================== EDITOR STYLES ===================================================//
-		showLabel(getComposite(),SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("settings.config.styles.general"));
+		showLabel(getComposite(), SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("settings.config.styles.general"));
 		
-		Composite composite = new Composite(getComposite(),SWT.NONE);
-		composite.setLayout(new GridLayout(2,false));
+		Composite composite = new Composite(getComposite(), SWT.NONE);
+		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(getTabbedData());
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.default"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.default"));
 		this.defaultFontButton = new Button(composite, SWT.PUSH);
 		this.defaultFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.defaultFontButton,this.defaultFontData);
+		this.addFontButtonListeners(this.defaultFontButton, this.defaultFontData);
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.note"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.note"));
 		this.noteFontButton = new Button(composite, SWT.PUSH);
 		this.noteFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.noteFontButton,this.noteFontData);
+		this.addFontButtonListeners(this.noteFontButton, this.noteFontData);
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.lyric"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.lyric"));
 		this.lyricFontButton = new Button(composite, SWT.PUSH);
 		this.lyricFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.lyricFontButton,this.lyricFontData);
+		this.addFontButtonListeners(this.lyricFontButton, this.lyricFontData);
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.text"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.text"));
 		this.textFontButton = new Button(composite, SWT.PUSH);
 		this.textFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.textFontButton,this.textFontData);
+		this.addFontButtonListeners(this.textFontButton, this.textFontData);
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.time-signature"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.time-signature"));
 		this.timeSignatureFontButton = new Button(composite, SWT.PUSH);
 		this.timeSignatureFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.timeSignatureFontButton,this.timeSignatureFontData);
+		this.addFontButtonListeners(this.timeSignatureFontButton, this.timeSignatureFontData);
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.color.score-note"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.color.score-note"));
 		this.scoreNoteColorButton = new ButtonColor(composite, SWT.PUSH, makeButtonData(), TuxGuitar.getProperty("choose"));
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.color.tab-note"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.color.tab-note"));
 		this.tabNoteColorButton = new ButtonColor(composite, SWT.PUSH, makeButtonData(), TuxGuitar.getProperty("choose"));
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.color.play-note"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.color.play-note"));
 		this.playNoteColorButton = new ButtonColor(composite, SWT.PUSH, makeButtonData(), TuxGuitar.getProperty("choose"));
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.color.lines"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.color.lines"));
 		this.linesColorButton = new ButtonColor(composite, SWT.PUSH, makeButtonData(), TuxGuitar.getProperty("choose"));
 		
 		//=================================================== PRINTER STYLES ===================================================//
-		showLabel(getComposite(),SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("settings.config.styles.printer"));
+		showLabel(getComposite(), SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("settings.config.styles.printer"));
 		
-		composite = new Composite(getComposite(),SWT.NONE);
-		composite.setLayout(new GridLayout(2,false));
+		composite = new Composite(getComposite(), SWT.NONE);
+		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(getTabbedData());
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.default"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.default"));
 		this.printerDefaultFontButton = new Button(composite, SWT.PUSH);
 		this.printerDefaultFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.printerDefaultFontButton,this.printerDefaultFontData);
+		this.addFontButtonListeners(this.printerDefaultFontButton, this.printerDefaultFontData);
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.note"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.note"));
 		this.printerNoteFontButton = new Button(composite, SWT.PUSH);
 		this.printerNoteFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.printerNoteFontButton,this.printerNoteFontData);
+		this.addFontButtonListeners(this.printerNoteFontButton, this.printerNoteFontData);
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.lyric"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.lyric"));
 		this.printerLyricFontButton = new Button(composite, SWT.PUSH);
 		this.printerLyricFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.printerLyricFontButton,this.printerLyricFontData);
+		this.addFontButtonListeners(this.printerLyricFontButton, this.printerLyricFontData);
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.text"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.text"));
 		this.printerTextFontButton = new Button(composite, SWT.PUSH);
 		this.printerTextFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.printerTextFontButton,this.printerTextFontData);
+		this.addFontButtonListeners(this.printerTextFontButton, this.printerTextFontData);
 		
-		showLabel(composite,SWT.FILL,SWT.CENTER,SWT.LEFT | SWT.WRAP,SWT.NORMAL,0,TuxGuitar.getProperty("settings.config.styles.font.time-signature"));
+		showLabel(composite, SWT.FILL, SWT.CENTER, SWT.LEFT | SWT.WRAP, SWT.NORMAL, 0, TuxGuitar.getProperty("settings.config.styles.font.time-signature"));
 		this.printerTSFontButton = new Button(composite, SWT.PUSH);
 		this.printerTSFontButton.setLayoutData(makeButtonData());
-		this.addFontButtonListeners(this.printerTSFontButton,this.printerTSFontData);
+		this.addFontButtonListeners(this.printerTSFontButton, this.printerTSFontData);
 		
 		this.loadConfig();
 	}
@@ -157,14 +157,14 @@ public class StylesOption extends Option{
 		button.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				if(StylesOption.this.initialized){
-					Font font = new Font(getDisplay(),fontData);
+					Font font = new Font(getDisplay(), fontData);
 					FontData[] fontDataList = font.getFontData();
 					font.dispose();
 					FontDialog fontDialog = new FontDialog(getShell());
 					fontDialog.setFontList(fontDataList);
 					FontData result = fontDialog.open();
 					if(result != null){
-						loadFontData(result, fontData,button);
+						loadFontData(result, fontData, button);
 					}
 				}
 			}
@@ -180,7 +180,7 @@ public class StylesOption extends Option{
 		button.loadColor(rgb);
 	}
 	
-	protected void setButtonFontData(Button button,FontData fontData) {
+	protected void setButtonFontData(Button button, FontData fontData) {
 		String text = fontData.getName();
 		if( (fontData.getStyle() & SWT.BOLD) != 0 ){
 			text += " Bold";
@@ -224,16 +224,16 @@ public class StylesOption extends Option{
 				new SyncThread(new Runnable() {
 					public void run() {
 						if(!isDisposed()){
-							loadFontData(defaultFontData,StylesOption.this.defaultFontData,StylesOption.this.defaultFontButton);
-							loadFontData(noteFontData,StylesOption.this.noteFontData,StylesOption.this.noteFontButton);
-							loadFontData(timeSignatureFontData,StylesOption.this.timeSignatureFontData,StylesOption.this.timeSignatureFontButton);
-							loadFontData(textFontData,StylesOption.this.textFontData,StylesOption.this.textFontButton);
-							loadFontData(lyricFontData,StylesOption.this.lyricFontData,StylesOption.this.lyricFontButton);
-							loadFontData(printerDefaultFontData,StylesOption.this.printerDefaultFontData,StylesOption.this.printerDefaultFontButton);
-							loadFontData(printerNoteFontData,StylesOption.this.printerNoteFontData,StylesOption.this.printerNoteFontButton);
-							loadFontData(printerTSFontData,StylesOption.this.printerTSFontData,StylesOption.this.printerTSFontButton);
-							loadFontData(printerTextFontData,StylesOption.this.printerTextFontData,StylesOption.this.printerTextFontButton);
-							loadFontData(printerLyricFontData,StylesOption.this.printerLyricFontData,StylesOption.this.printerLyricFontButton);
+							loadFontData(defaultFontData, StylesOption.this.defaultFontData, StylesOption.this.defaultFontButton);
+							loadFontData(noteFontData, StylesOption.this.noteFontData, StylesOption.this.noteFontButton);
+							loadFontData(timeSignatureFontData, StylesOption.this.timeSignatureFontData, StylesOption.this.timeSignatureFontButton);
+							loadFontData(textFontData, StylesOption.this.textFontData, StylesOption.this.textFontButton);
+							loadFontData(lyricFontData, StylesOption.this.lyricFontData, StylesOption.this.lyricFontButton);
+							loadFontData(printerDefaultFontData, StylesOption.this.printerDefaultFontData, StylesOption.this.printerDefaultFontButton);
+							loadFontData(printerNoteFontData, StylesOption.this.printerNoteFontData, StylesOption.this.printerNoteFontButton);
+							loadFontData(printerTSFontData, StylesOption.this.printerTSFontData, StylesOption.this.printerTSFontButton);
+							loadFontData(printerTextFontData, StylesOption.this.printerTextFontData, StylesOption.this.printerTextFontButton);
+							loadFontData(printerLyricFontData, StylesOption.this.printerLyricFontData, StylesOption.this.printerLyricFontButton);
 							StylesOption.this.scoreNoteColorButton.loadColor(scoreNoteRGB);
 							StylesOption.this.tabNoteColorButton.loadColor(tabNoteRGB);
 							StylesOption.this.playNoteColorButton.loadColor(playNoteRGB);
@@ -256,39 +256,39 @@ public class StylesOption extends Option{
 	
 	public void updateConfig(){
 		if(this.initialized){
-			getConfig().setProperty(TGConfigKeys.FONT_DEFAULT,this.defaultFontData);
-			getConfig().setProperty(TGConfigKeys.FONT_NOTE,this.noteFontData);
-			getConfig().setProperty(TGConfigKeys.FONT_TIME_SIGNATURE,this.timeSignatureFontData);
-			getConfig().setProperty(TGConfigKeys.FONT_TEXT,this.textFontData);
-			getConfig().setProperty(TGConfigKeys.FONT_LYRIC,this.lyricFontData);
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_DEFAULT,this.printerDefaultFontData);
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_NOTE,this.printerNoteFontData);
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_TIME_SIGNATURE,this.printerTSFontData);
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_TEXT,this.printerTextFontData);
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_LYRIC,this.printerLyricFontData);
-			getConfig().setProperty(TGConfigKeys.COLOR_SCORE_NOTE,this.scoreNoteColorButton.getValue());
-			getConfig().setProperty(TGConfigKeys.COLOR_TAB_NOTE,this.tabNoteColorButton.getValue());
-			getConfig().setProperty(TGConfigKeys.COLOR_PLAY_NOTE,this.playNoteColorButton.getValue());
-			getConfig().setProperty(TGConfigKeys.COLOR_LINE,this.linesColorButton.getValue());
+			getConfig().setProperty(TGConfigKeys.FONT_DEFAULT, this.defaultFontData);
+			getConfig().setProperty(TGConfigKeys.FONT_NOTE, this.noteFontData);
+			getConfig().setProperty(TGConfigKeys.FONT_TIME_SIGNATURE, this.timeSignatureFontData);
+			getConfig().setProperty(TGConfigKeys.FONT_TEXT, this.textFontData);
+			getConfig().setProperty(TGConfigKeys.FONT_LYRIC, this.lyricFontData);
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_DEFAULT, this.printerDefaultFontData);
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_NOTE, this.printerNoteFontData);
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_TIME_SIGNATURE, this.printerTSFontData);
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_TEXT, this.printerTextFontData);
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_LYRIC, this.printerLyricFontData);
+			getConfig().setProperty(TGConfigKeys.COLOR_SCORE_NOTE, this.scoreNoteColorButton.getValue());
+			getConfig().setProperty(TGConfigKeys.COLOR_TAB_NOTE, this.tabNoteColorButton.getValue());
+			getConfig().setProperty(TGConfigKeys.COLOR_PLAY_NOTE, this.playNoteColorButton.getValue());
+			getConfig().setProperty(TGConfigKeys.COLOR_LINE, this.linesColorButton.getValue());
 		}
 	}
 	
 	public void updateDefaults(){
 		if(this.initialized){
-			getConfig().setProperty(TGConfigKeys.FONT_DEFAULT,getDefaults().getProperty(TGConfigKeys.FONT_DEFAULT));
-			getConfig().setProperty(TGConfigKeys.FONT_NOTE,getDefaults().getProperty(TGConfigKeys.FONT_NOTE));
-			getConfig().setProperty(TGConfigKeys.FONT_TIME_SIGNATURE,getDefaults().getProperty(TGConfigKeys.FONT_TIME_SIGNATURE));
-			getConfig().setProperty(TGConfigKeys.FONT_TEXT,getDefaults().getProperty(TGConfigKeys.FONT_TEXT));
-			getConfig().setProperty(TGConfigKeys.FONT_LYRIC,getDefaults().getProperty(TGConfigKeys.FONT_LYRIC));
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_DEFAULT,getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_DEFAULT));
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_NOTE,getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_NOTE));
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_TIME_SIGNATURE,getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_TIME_SIGNATURE));
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_TEXT,getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_TEXT));
-			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_LYRIC,getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_LYRIC));
-			getConfig().setProperty(TGConfigKeys.COLOR_SCORE_NOTE,getDefaults().getProperty(TGConfigKeys.COLOR_SCORE_NOTE));
-			getConfig().setProperty(TGConfigKeys.COLOR_TAB_NOTE,getDefaults().getProperty(TGConfigKeys.COLOR_TAB_NOTE));
-			getConfig().setProperty(TGConfigKeys.COLOR_PLAY_NOTE,getDefaults().getProperty(TGConfigKeys.COLOR_PLAY_NOTE));
-			getConfig().setProperty(TGConfigKeys.COLOR_LINE,getDefaults().getProperty(TGConfigKeys.COLOR_LINE));
+			getConfig().setProperty(TGConfigKeys.FONT_DEFAULT, getDefaults().getProperty(TGConfigKeys.FONT_DEFAULT));
+			getConfig().setProperty(TGConfigKeys.FONT_NOTE, getDefaults().getProperty(TGConfigKeys.FONT_NOTE));
+			getConfig().setProperty(TGConfigKeys.FONT_TIME_SIGNATURE, getDefaults().getProperty(TGConfigKeys.FONT_TIME_SIGNATURE));
+			getConfig().setProperty(TGConfigKeys.FONT_TEXT, getDefaults().getProperty(TGConfigKeys.FONT_TEXT));
+			getConfig().setProperty(TGConfigKeys.FONT_LYRIC, getDefaults().getProperty(TGConfigKeys.FONT_LYRIC));
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_DEFAULT, getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_DEFAULT));
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_NOTE, getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_NOTE));
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_TIME_SIGNATURE, getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_TIME_SIGNATURE));
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_TEXT, getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_TEXT));
+			getConfig().setProperty(TGConfigKeys.FONT_PRINTER_LYRIC, getDefaults().getProperty(TGConfigKeys.FONT_PRINTER_LYRIC));
+			getConfig().setProperty(TGConfigKeys.COLOR_SCORE_NOTE, getDefaults().getProperty(TGConfigKeys.COLOR_SCORE_NOTE));
+			getConfig().setProperty(TGConfigKeys.COLOR_TAB_NOTE, getDefaults().getProperty(TGConfigKeys.COLOR_TAB_NOTE));
+			getConfig().setProperty(TGConfigKeys.COLOR_PLAY_NOTE, getDefaults().getProperty(TGConfigKeys.COLOR_PLAY_NOTE));
+			getConfig().setProperty(TGConfigKeys.COLOR_LINE, getDefaults().getProperty(TGConfigKeys.COLOR_LINE));
 		}
 	}
 	
@@ -308,7 +308,7 @@ public class StylesOption extends Option{
 		protected RGB value;
 		
 		public ButtonColor(Composite parent, int style, Object layoutData, String text){
-			this.value = new RGB(0,0,0);
+			this.value = new RGB(0, 0, 0);
 			this.button = new Button(parent, style);
 			this.button.setLayoutData(layoutData);
 			this.button.setText(text);

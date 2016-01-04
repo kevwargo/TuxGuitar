@@ -146,7 +146,7 @@ public class DurationToolItems  extends ToolItems{
 		public DivisionTypeMenuItem() {
 			this.divisionType = new ToolItem(DurationToolItems.this.toolBar, SWT.DROP_DOWN);
 			this.divisionType.addSelectionListener(this);
-			this.divisionType.setData(newDivisionType(3,2));
+			this.divisionType.setData(newDivisionType(3, 2));
 			this.subMenu = new Menu(this.divisionType.getParent().getShell());
 		}
 		
@@ -167,42 +167,42 @@ public class DurationToolItems  extends ToolItems{
 			
 			this.subMenuItems[0] = new MenuItem(this.subMenu, SWT.CHECK);
 			this.subMenuItems[0].setText("3");
-			this.subMenuItems[0].setData(newDivisionType(3,2));
+			this.subMenuItems[0].setData(newDivisionType(3, 2));
 			this.subMenuItems[0].addSelectionListener(TuxGuitar.instance().getAction(ChangeDivisionTypeAction.NAME));
 			
 			this.subMenuItems[1] = new MenuItem(this.subMenu, SWT.CHECK);
 			this.subMenuItems[1].setText("5");
-			this.subMenuItems[1].setData(newDivisionType(5,4));
+			this.subMenuItems[1].setData(newDivisionType(5, 4));
 			this.subMenuItems[1].addSelectionListener(TuxGuitar.instance().getAction(ChangeDivisionTypeAction.NAME));
 			
 			this.subMenuItems[2] = new MenuItem(this.subMenu, SWT.CHECK);
 			this.subMenuItems[2].setText("6");
-			this.subMenuItems[2].setData(newDivisionType(6,4));
+			this.subMenuItems[2].setData(newDivisionType(6, 4));
 			this.subMenuItems[2].addSelectionListener(TuxGuitar.instance().getAction(ChangeDivisionTypeAction.NAME));
 			
 			this.subMenuItems[3] = new MenuItem(this.subMenu, SWT.CHECK);
 			this.subMenuItems[3].setText("7");
-			this.subMenuItems[3].setData(newDivisionType(7,4));
+			this.subMenuItems[3].setData(newDivisionType(7, 4));
 			this.subMenuItems[3].addSelectionListener(TuxGuitar.instance().getAction(ChangeDivisionTypeAction.NAME));
 			
 			this.subMenuItems[4] = new MenuItem(this.subMenu, SWT.CHECK);
 			this.subMenuItems[4].setText("9");
-			this.subMenuItems[4].setData(newDivisionType(9,8));
+			this.subMenuItems[4].setData(newDivisionType(9, 8));
 			this.subMenuItems[4].addSelectionListener(TuxGuitar.instance().getAction(ChangeDivisionTypeAction.NAME));
 			
 			this.subMenuItems[5] = new MenuItem(this.subMenu, SWT.CHECK);
 			this.subMenuItems[5].setText("10");
-			this.subMenuItems[5].setData(newDivisionType(10,8));
+			this.subMenuItems[5].setData(newDivisionType(10, 8));
 			this.subMenuItems[5].addSelectionListener(TuxGuitar.instance().getAction(ChangeDivisionTypeAction.NAME));
 			
 			this.subMenuItems[6] = new MenuItem(this.subMenu, SWT.CHECK);
 			this.subMenuItems[6].setText("11");
-			this.subMenuItems[6].setData(newDivisionType(11,8));
+			this.subMenuItems[6].setData(newDivisionType(11, 8));
 			this.subMenuItems[6].addSelectionListener(TuxGuitar.instance().getAction(ChangeDivisionTypeAction.NAME));
 			
 			this.subMenuItems[7] = new MenuItem(this.subMenu, SWT.CHECK);
 			this.subMenuItems[7].setText("12");
-			this.subMenuItems[7].setData(newDivisionType(12,8));
+			this.subMenuItems[7].setData(newDivisionType(12, 8));
 			this.subMenuItems[7].addSelectionListener(TuxGuitar.instance().getAction(ChangeDivisionTypeAction.NAME));
 		}
 		
@@ -235,7 +235,7 @@ public class DurationToolItems  extends ToolItems{
 			}
 		}
 		
-		private TGDivisionType newDivisionType(int enters,int times){
+		private TGDivisionType newDivisionType(int enters, int times){
 			TGDivisionType divisionType = TuxGuitar.instance().getSongManager().getFactory().newDivisionType();
 			divisionType.setEnters(enters);
 			divisionType.setTimes(times);

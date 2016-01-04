@@ -20,7 +20,7 @@ import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 import org.herac.tuxguitar.song.models.TGBeat;
 import org.herac.tuxguitar.song.models.TGString;
 
-public class EditorKit implements MouseListener,MouseMoveListener,MouseTrackListener,MenuListener{
+public class EditorKit implements MouseListener, MouseMoveListener, MouseTrackListener, MenuListener{
 	
 	public static final int MOUSE_MODE_SELECTION = 1;
 	public static final int MOUSE_MODE_EDITION = 2;
@@ -35,7 +35,7 @@ public class EditorKit implements MouseListener,MouseMoveListener,MouseTrackList
 	public EditorKit(Tablature tablature){
 		this.tablature = tablature;
 		this.mouseKit = new MouseKit(this);
-		this.position = new Point(0,0);
+		this.position = new Point(0, 0);
 		this.menuOpen = false;
 		this.tablature.addMouseListener(this);
 		this.tablature.addMouseMoveListener(this);
@@ -44,8 +44,8 @@ public class EditorKit implements MouseListener,MouseMoveListener,MouseTrackList
 	}
 	
 	private void setDefaults(){
-		this.setMouseMode(TuxGuitar.instance().getConfig().getIntConfigValue(TGConfigKeys.EDITOR_MOUSE_MODE,MOUSE_MODE_EDITION));
-		this.setNatural(TuxGuitar.instance().getConfig().getBooleanConfigValue(TGConfigKeys.EDITOR_NATURAL_KEY_MODE,true));
+		this.setMouseMode(TuxGuitar.instance().getConfig().getIntConfigValue(TGConfigKeys.EDITOR_MOUSE_MODE, MOUSE_MODE_EDITION));
+		this.setNatural(TuxGuitar.instance().getConfig().getBooleanConfigValue(TGConfigKeys.EDITOR_NATURAL_KEY_MODE, true));
 	}
 	
 	public int getMouseMode() {
@@ -106,7 +106,7 @@ public class EditorKit implements MouseListener,MouseMoveListener,MouseTrackList
 		return null;
 	}
 	
-	public TGMeasureImpl findSelectedMeasure(TGTrackImpl track,int x,int y){
+	public TGMeasureImpl findSelectedMeasure(TGTrackImpl track, int x, int y){
 		TGMeasureImpl measure = null;
 		int minorDistance = 0;
 		
@@ -117,7 +117,7 @@ public class EditorKit implements MouseListener,MouseMoveListener,MouseTrackList
 				boolean isAtX = (x >= m.getPosX() && x <= m.getPosX() + m.getWidth(getTablature().getViewLayout()) + m.getSpacing());
 				if(isAtX){
 					int measureHeight = m.getTs().getSize();
-					int distanceY = Math.min(Math.abs(y - (m.getPosY())),Math.abs(y - ( m.getPosY() + measureHeight - 10)));
+					int distanceY = Math.min(Math.abs(y - (m.getPosY())), Math.abs(y - ( m.getPosY() + measureHeight - 10)));
 					if(measure == null || distanceY < minorDistance){
 						measure = m;
 						minorDistance = distanceY;
@@ -150,7 +150,7 @@ public class EditorKit implements MouseListener,MouseMoveListener,MouseTrackList
 		return bestBeat;
 	}
 	
-	public TGString findSelectedString(TGMeasureImpl measure,int y) {
+	public TGString findSelectedString(TGMeasureImpl measure, int y) {
 		TGString string = null;
 		int stringSpacing = getTablature().getViewLayout().getStringSpacing();
 		int minorDistance = 0;

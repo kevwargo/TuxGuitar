@@ -41,34 +41,34 @@ public class TransportToolItems  extends ToolItems{
 	}
 	
 	public void showItems(ToolBar toolBar){
-		this.first = new ToolItem(toolBar,SWT.PUSH);
+		this.first = new ToolItem(toolBar, SWT.PUSH);
 		this.first.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				TuxGuitar.instance().getTransport().gotoFirst();
 			}
 		});
 		
-		this.previous = new ToolItem(toolBar,SWT.PUSH);
+		this.previous = new ToolItem(toolBar, SWT.PUSH);
 		this.previous.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				TuxGuitar.instance().getTransport().gotoPrevious();
 			}
 		});
 		
-		this.stop = new ToolItem(toolBar,SWT.PUSH);
+		this.stop = new ToolItem(toolBar, SWT.PUSH);
 		this.stop.addSelectionListener(TuxGuitar.instance().getAction(TransportStopAction.NAME));
 		
-		this.play = new ToolItem(toolBar,SWT.PUSH);
+		this.play = new ToolItem(toolBar, SWT.PUSH);
 		this.play.addSelectionListener(TuxGuitar.instance().getAction(TransportPlayAction.NAME));
 		
-		this.next = new ToolItem(toolBar,SWT.PUSH);
+		this.next = new ToolItem(toolBar, SWT.PUSH);
 		this.next.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				TuxGuitar.instance().getTransport().gotoNext();
 			}
 		});
 		
-		this.last = new ToolItem(toolBar,SWT.PUSH);
+		this.last = new ToolItem(toolBar, SWT.PUSH);
 		this.last.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				TuxGuitar.instance().getTransport().gotoLast();

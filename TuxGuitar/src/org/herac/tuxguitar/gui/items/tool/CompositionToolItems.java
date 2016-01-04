@@ -39,7 +39,7 @@ public class CompositionToolItems extends ToolItems{
 	private ToolItem repeatOpen;
 	private ToolItem repeatClose;
 	private ToolItem repeatAlternative;
-    protected static final int[] DEFAULT_PERCENTS = new int[]{25,50,75,100,125,150,175,200};
+    protected static final int[] DEFAULT_PERCENTS = new int[]{25, 50, 75, 100, 125, 150, 175, 200};
 	
 	public CompositionToolItems(){
 		super(NAME);

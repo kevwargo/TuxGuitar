@@ -41,9 +41,9 @@ public class TrillEditor extends SelectionAdapter{
 		dialog.setText(TuxGuitar.getProperty("effects.trill-editor"));
 		
 		
-		Composite composite = new Composite(dialog,SWT.NONE);
+		Composite composite = new Composite(dialog, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		int horizontalSpan = 2;
 		
@@ -57,34 +57,34 @@ public class TrillEditor extends SelectionAdapter{
 		//---------------------------------------------------
 		//------------------NOTE-----------------------------
 		//---------------------------------------------------
-		Group noteGroup = makeGroup(composite,horizontalSpan, TuxGuitar.getProperty("note"));
-		noteGroup.setLayout(new GridLayout(2,false));
+		Group noteGroup = makeGroup(composite, horizontalSpan, TuxGuitar.getProperty("note"));
+		noteGroup.setLayout(new GridLayout(2, false));
 		
-		Label fretLabel = new Label(noteGroup,SWT.NONE);
+		Label fretLabel = new Label(noteGroup, SWT.NONE);
 		
 		fretLabel.setText(TuxGuitar.getProperty("fret") + ": ");
 		
-		this.fretSpinner = new Spinner(noteGroup,SWT.BORDER);
+		this.fretSpinner = new Spinner(noteGroup, SWT.BORDER);
 		this.fretSpinner.setLayoutData(makeGridData(1));
 		this.fretSpinner.setSelection(fret);
 		
 		//---------------------------------------------------
 		//------------------DURATION-------------------------
 		//---------------------------------------------------
-		Group durationGroup = makeGroup(composite,horizontalSpan, TuxGuitar.getProperty("duration"));
-		durationGroup.setLayout(new GridLayout(3,false));
+		Group durationGroup = makeGroup(composite, horizontalSpan, TuxGuitar.getProperty("duration"));
+		durationGroup.setLayout(new GridLayout(3, false));
 		
-		this.sixtyFourthButton = new Button(durationGroup,SWT.RADIO);
+		this.sixtyFourthButton = new Button(durationGroup, SWT.RADIO);
 		this.sixtyFourthButton.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.SIXTY_FOURTH));
 		this.sixtyFourthButton.setLayoutData(makeGridData(1));
 		this.sixtyFourthButton.setSelection(duration == TGDuration.SIXTY_FOURTH);
 		
-		this.thirtySecondButton = new Button(durationGroup,SWT.RADIO);
+		this.thirtySecondButton = new Button(durationGroup, SWT.RADIO);
 		this.thirtySecondButton.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.THIRTY_SECOND));
 		this.thirtySecondButton.setLayoutData(makeGridData(1));
 		this.thirtySecondButton.setSelection(duration == TGDuration.THIRTY_SECOND);
 		
-		this.sixTeenthButton = new Button(durationGroup,SWT.RADIO);
+		this.sixTeenthButton = new Button(durationGroup, SWT.RADIO);
 		this.sixTeenthButton.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.SIXTEENTH));
 		this.sixTeenthButton.setLayoutData(makeGridData(1));
 		this.sixTeenthButton.setSelection(duration == TGDuration.SIXTEENTH);
@@ -93,8 +93,8 @@ public class TrillEditor extends SelectionAdapter{
 		//------------------BUTTONS--------------------------
 		//---------------------------------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(3,false));
-		buttons.setLayoutData(new GridData(SWT.END,SWT.BOTTOM,true,true));
+		buttons.setLayout(new GridLayout(3, false));
+		buttons.setLayoutData(new GridData(SWT.END, SWT.BOTTOM, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -132,7 +132,7 @@ public class TrillEditor extends SelectionAdapter{
 		return this.result;
 	}
 	
-	private Group makeGroup(Composite parent,int horizontalSpan,String text){
+	private Group makeGroup(Composite parent, int horizontalSpan, String text){
 		Group group = new Group(parent, SWT.SHADOW_ETCHED_IN);
 		group.setLayoutData(makeGridData(horizontalSpan));
 		group.setText(text);
@@ -148,7 +148,7 @@ public class TrillEditor extends SelectionAdapter{
 	}
 	
 	private GridData makeGridData(int horizontalSpan){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.horizontalSpan = horizontalSpan;
 		return data;
 	}

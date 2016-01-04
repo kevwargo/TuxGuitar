@@ -26,7 +26,7 @@ public class SetPageLayoutAction extends Action{
 	
 	protected int execute(TypedEvent e){
 		Tablature tablature = getEditor().getTablature();
-		tablature.setViewLayout(new PageViewLayout(tablature,tablature.getViewLayout().getStyle()));
+		tablature.setViewLayout(new PageViewLayout(tablature, tablature.getViewLayout().getStyle()));
 		updateTablature();
 		return 0;
 	}

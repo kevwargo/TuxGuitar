@@ -87,9 +87,9 @@ public abstract class TGVoice {
 		this.setEmpty(false);
 	}
 	
-	public void moveNote(int index,TGNote note){
+	public void moveNote(int index, TGNote note){
 		getNotes().remove(note);
-		getNotes().add(index,note);
+		getNotes().add(index, note);
 	}
 	
 	public void removeNote(TGNote note){

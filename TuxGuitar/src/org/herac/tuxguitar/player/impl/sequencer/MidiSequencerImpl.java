@@ -137,14 +137,14 @@ public class MidiSequencerImpl implements MidiSequencer{
 	}
 	
 	public synchronized MidiSequenceHandler createSequence(int tracks) throws MidiPlayerException{
-		return new MidiSequenceHandlerImpl(this,tracks);
+		return new MidiSequenceHandlerImpl(this, tracks);
 	}
 	
-	public synchronized void setSolo(int index,boolean solo) throws MidiPlayerException{
+	public synchronized void setSolo(int index, boolean solo) throws MidiPlayerException{
 		this.getMidiTrackController().setSolo(index, solo);
 	}
 	
-	public synchronized void setMute(int index,boolean mute) throws MidiPlayerException{
+	public synchronized void setMute(int index, boolean mute) throws MidiPlayerException{
 		this.getMidiTrackController().setMute(index, mute);
 	}
 	

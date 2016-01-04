@@ -103,7 +103,7 @@ public class FretBoard extends Composite {
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(100, 0);
-		data.top = new FormAttachment(0,0);
+		data.top = new FormAttachment(0, 0);
 		
 		GridLayout layout = new GridLayout();
 		layout.makeColumnsEqualWidth = false;
@@ -172,7 +172,7 @@ public class FretBoard extends Composite {
 		this.settings = new Button(this.toolComposite, SWT.PUSH);
 		this.settings.setImage(TuxGuitar.instance().getIconManager().getSettings());
 		this.settings.setToolTipText(TuxGuitar.getProperty("settings"));
-		this.settings.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+		this.settings.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 		this.settings.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				configure();
@@ -184,17 +184,17 @@ public class FretBoard extends Composite {
 	}
 	
 	private void makeToolSeparator(Composite parent){
-		Label separator = new Label(parent,SWT.SEPARATOR);
-		separator.setLayoutData(new GridData(20,20));
+		Label separator = new Label(parent, SWT.SEPARATOR);
+		separator.setLayoutData(new GridData(20, 20));
 	}
 	
 	private void initEditor() {
-		this.lastSize = new Point(0,0);
+		this.lastSize = new Point(0, 0);
 		
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(100, 0);
-		data.top = new FormAttachment(this.toolComposite,0);
+		data.top = new FormAttachment(this.toolComposite, 0);
 		data.bottom = new FormAttachment(100, 0);
 		
 		this.fretBoardComposite = new Composite(this, SWT.BORDER | SWT.DOUBLE_BUFFERED);
@@ -304,7 +304,7 @@ public class FretBoard extends Composite {
 	
 	private void paintFretBoard(TGPainter painter){
 		if(this.fretBoard == null || this.fretBoard.isDisposed()){
-			this.fretBoard = new Image(getDisplay(),getClientArea().width,((STRING_SPACING) * (this.strings.length - 1)) + TOP_SPACING + BOTTOM_SPACING);
+			this.fretBoard = new Image(getDisplay(), getClientArea().width,((STRING_SPACING) * (this.strings.length - 1)) + TOP_SPACING + BOTTOM_SPACING);
 			
 			TGPainter painterBuffer = new TGPainter(new GC(this.fretBoard));
 			
@@ -319,11 +319,11 @@ public class FretBoard extends Composite {
 			Image fretImage = TuxGuitar.instance().getIconManager().getFretboardFret();
 			Image firstFretImage = TuxGuitar.instance().getIconManager().getFretboardFirstFret();
 			
-			painterBuffer.drawImage(firstFretImage,0,0,firstFretImage.getBounds().width,firstFretImage.getBounds().height,this.frets[0] - 5,this.strings[0] - 5,firstFretImage.getBounds().width,this.strings[this.strings.length - 1] );
+			painterBuffer.drawImage(firstFretImage, 0, 0, firstFretImage.getBounds().width, firstFretImage.getBounds().height, this.frets[0] - 5, this.strings[0] - 5, firstFretImage.getBounds().width, this.strings[this.strings.length - 1] );
 			
-			paintFretPoints(painterBuffer,0);
+			paintFretPoints(painterBuffer, 0);
 			for (int i = 1; i < this.frets.length; i++) {
-				painterBuffer.drawImage(fretImage,0,0,fretImage.getBounds().width,fretImage.getBounds().height,this.frets[i],this.strings[0] - 5,fretImage.getBounds().width,this.strings[this.strings.length - 1] );
+				painterBuffer.drawImage(fretImage, 0, 0, fretImage.getBounds().width, fretImage.getBounds().height, this.frets[i], this.strings[0] - 5, fretImage.getBounds().width, this.strings[this.strings.length - 1] );
 				paintFretPoints(painterBuffer, i);
 			}
 			
@@ -345,7 +345,7 @@ public class FretBoard extends Composite {
 			
 			painterBuffer.dispose();
 		}
-		painter.drawImage(this.fretBoard,0,0);
+		painter.drawImage(this.fretBoard, 0, 0);
 	}
 	
 	private void paintFretPoints(TGPainter painter, int fretIndex) {
@@ -367,7 +367,7 @@ public class FretBoard extends Composite {
 				int x = this.frets[fretIndex] + ((this.frets[fretIndex + 1] - this.frets[fretIndex]) / 2);
 				int y = this.strings[0] + ((this.strings[this.strings.length - 1] - this.strings[0]) / 2);
 				painter.initPath(TGPainter.PATH_FILL);
-				painter.addOval(x - (size / 2),y - (size / 2),size, size);
+				painter.addOval(x - (size / 2), y - (size / 2), size, size);
 				painter.closePath();
 			}
 			painter.setLineWidth(1);
@@ -390,10 +390,10 @@ public class FretBoard extends Composite {
 					int y = this.strings[i];
 					
 					if( (this.config.getStyle() & FretBoardConfig.DISPLAY_TEXT_SCALE) != 0 ){
-						paintKeyText(painter,this.config.getColorScale(),x,y,NOTE_NAMES[noteIndex]);
+						paintKeyText(painter, this.config.getColorScale(), x, y, NOTE_NAMES[noteIndex]);
 					}
 					else{
-						paintKeyOval(painter,this.config.getColorScale(),x,y);
+						paintKeyOval(painter, this.config.getColorScale(), x, y);
 					}
 				}
 			}
@@ -422,10 +422,10 @@ public class FretBoard extends Composite {
 						
 						if( (this.config.getStyle() & FretBoardConfig.DISPLAY_TEXT_NOTE) != 0 ){
 							int realValue = track.getString(note.getString()).getValue() + note.getValue();
-							paintKeyText(painter,this.config.getColorNote(), x, y, NOTE_NAMES[ (realValue % 12) ]);
+							paintKeyText(painter, this.config.getColorNote(), x, y, NOTE_NAMES[ (realValue % 12) ]);
 						}
 						else{
-							paintKeyOval(painter,this.config.getColorNote(), x, y);
+							paintKeyOval(painter, this.config.getColorNote(), x, y);
 						}
 					}
 				}
@@ -434,24 +434,24 @@ public class FretBoard extends Composite {
 		}
 	}
 	
-	private void paintKeyOval(TGPainter painter,Color background,int x, int y) {
+	private void paintKeyOval(TGPainter painter, Color background, int x, int y) {
 		int size = getOvalSize();
 		painter.setBackground(background);
 		painter.initPath(TGPainter.PATH_FILL);
-		painter.moveTo(x - (size / 2),y - (size / 2));
-		painter.addOval(x - (size / 2),y - (size / 2),size, size);
+		painter.moveTo(x - (size / 2), y - (size / 2));
+		painter.addOval(x - (size / 2), y - (size / 2), size, size);
 		painter.closePath();
 	}
 	
-	private void paintKeyText(TGPainter painter,Color foreground,int x, int y,String text) {
+	private void paintKeyText(TGPainter painter, Color foreground, int x, int y, String text) {
 		painter.setBackground(getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		painter.setForeground(foreground);
 		painter.setFont(this.config.getFont());
 		Point size = painter.getStringExtent(text);
 		painter.initPath(TGPainter.PATH_FILL);
-		painter.addRectangle(x - (size.x / 2),y - (size.y / 2),size.x, size.y);
+		painter.addRectangle(x - (size.x / 2), y - (size.y / 2), size.x, size.y);
 		painter.closePath();
-		painter.drawString(text,x - (size.x / 2),y - (size.y / 2),true);
+		painter.drawString(text, x - (size.x / 2), y - (size.y / 2), true);
 	}
 	
 	protected void paintEditor(TGPainter painter) {
@@ -578,7 +578,7 @@ public class FretBoard extends Composite {
 		TGDuration duration = manager.getFactory().newDuration();
 		caret.getDuration().copy(duration);
 		
-		manager.getMeasureManager().addNote(caret.getMeasure(),caret.getPosition(),note,duration, caret.getVoice());
+		manager.getMeasureManager().addNote(caret.getMeasure(), caret.getPosition(), note, duration, caret.getVoice());
 		
 		//termia el undoable
 		TuxGuitar.instance().getUndoableManager().addEdit(undoable.endUndo());
@@ -647,13 +647,13 @@ public class FretBoard extends Composite {
 		this.scale.setText(TuxGuitar.getProperty("scale"));
 		this.loadScaleName();
 		this.setChanges(true);
-		this.layout(true,true);
+		this.layout(true, true);
 	}
 	
 	public void loadIcons(){
 		this.settings.setImage(TuxGuitar.instance().getIconManager().getSettings());
 		this.loadDurationImage(true);
-		this.layout(true,true);
+		this.layout(true, true);
 		this.layout(getClientArea().width);
 	}
 	
@@ -696,7 +696,7 @@ public class FretBoard extends Composite {
 		return this.fretBoardComposite;
 	}
 	
-	private class FretBoardListener implements PaintListener,MouseListener {
+	private class FretBoardListener implements PaintListener, MouseListener {
 		
 		public FretBoardListener(){
 			super();

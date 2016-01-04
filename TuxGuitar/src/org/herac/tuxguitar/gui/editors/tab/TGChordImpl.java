@@ -221,7 +221,7 @@ public class TGChordImpl extends TGChord {
 		this.setPosY(getPaintPosition(TGTrackSpacing.POSITION_CHORD));
 		this.setEditing(false);
 		this.update(painter, layout.isBufferEnabled());
-		this.paint(painter,getBeatImpl().getSpacing() + fromX + Math.round(4f * layout.getScale()), fromY);
+		this.paint(painter, getBeatImpl().getSpacing() + fromX + Math.round(4f * layout.getScale()), fromY);
 	}
 	
 	public void paint(TGPainter painter, int fromX, int fromY){
@@ -229,16 +229,16 @@ public class TGChordImpl extends TGChord {
 		int y = (fromY + getPosY());
 		if( (this.style & ViewLayout.DISPLAY_CHORD_DIAGRAM) != 0 ){
 			if(this.diagram != null){
-				painter.drawImage(this.diagram,x - ( (this.diagramWidth - getFirstFretSpacing()) / 2) - getFirstFretSpacing() ,y);
+				painter.drawImage(this.diagram, x - ( (this.diagramWidth - getFirstFretSpacing()) / 2) - getFirstFretSpacing() , y);
 			}else{
-				paintDiagram(painter,x - ( (this.diagramWidth - getFirstFretSpacing()) / 2) - getFirstFretSpacing() ,y);
+				paintDiagram(painter, x - ( (this.diagramWidth - getFirstFretSpacing()) / 2) - getFirstFretSpacing() , y);
 			}
 		}
 		if( (this.style & ViewLayout.DISPLAY_CHORD_NAME) != 0 && getName() != null && getName().length() > 0){
 			painter.setFont(getFont());
 			painter.setForeground(getForegroundColor());
 			painter.setBackground(getBackgroundColor());
-			painter.drawString(getName(),x - (this.nameWidth / 2) , y + (this.height - this.nameHeight ) );
+			painter.drawString(getName(), x - (this.nameWidth / 2) , y + (this.height - this.nameHeight ) );
 		}
 	}
 	
@@ -250,12 +250,12 @@ public class TGChordImpl extends TGChord {
 		}
 		if( (this.style & ViewLayout.DISPLAY_CHORD_NAME) != 0 ){
 			this.updateName(painter);
-			this.width = Math.max(this.width,this.nameWidth);
+			this.width = Math.max(this.width, this.nameWidth);
 			this.height += this.nameHeight;
 		}
 		if( (this.style & ViewLayout.DISPLAY_CHORD_DIAGRAM) != 0 ){
 			this.updateDiagram( (makeBuffer ? painter.getGC().getDevice() : null ) );
-			this.width = Math.max(this.width,this.diagramWidth);
+			this.width = Math.max(this.width, this.diagramWidth);
 			this.height += this.diagramHeight;
 		}
 	}
@@ -277,7 +277,7 @@ public class TGChordImpl extends TGChord {
 		this.diagramWidth = getStringSpacing() + (getStringSpacing() * countStrings()) + ((font != null)?getFirstFretSpacing():0);
 		this.diagramHeight = getFretSpacing() + (getFretSpacing() * MAX_FRETS);
 		if(device != null && (this.diagram == null || this.diagram.isDisposed())){
-			this.diagram = new Image(device,this.diagramWidth,this.diagramHeight);
+			this.diagram = new Image(device, this.diagramWidth, this.diagramHeight);
 			TGPainter painter = new TGPainter(new GC(this.diagram));
 			paintDiagram(painter, 0, 0);
 			painter.dispose();
@@ -300,7 +300,7 @@ public class TGChordImpl extends TGChord {
 			String firstFretString = Integer.toString(getFirstFret());
 			painter.setFont(font);
 			Point size = painter.getStringExtent(firstFretString);
-			painter.drawString(firstFretString,fromX + (getFirstFretSpacing() - size.x),Math.round(y + ((getFretSpacing() / 2f) - (size.y / 2f))));
+			painter.drawString(firstFretString, fromX + (getFirstFretSpacing() - size.x), Math.round(y + ((getFretSpacing() / 2f) - (size.y / 2f))));
 			x += getFirstFretSpacing();
 		}
 		
@@ -311,8 +311,8 @@ public class TGChordImpl extends TGChord {
 			int x2 = x + (i * getStringSpacing());
 			int y1 = y;
 			int y2 = y + ((getFretSpacing() * (MAX_FRETS - 1)));
-			painter.moveTo(x1,y1);
-			painter.lineTo(x2,y2);
+			painter.moveTo(x1, y1);
+			painter.lineTo(x2, y2);
 		}
 		painter.closePath();
 		
@@ -324,8 +324,8 @@ public class TGChordImpl extends TGChord {
 			int x2 = x + ((getStringSpacing() * (countStrings() - 1)));
 			int y1 = y + (i * getFretSpacing());
 			int y2 = y + (i * getFretSpacing());
-			painter.moveTo(x1,y1);
-			painter.lineTo(x2,y2);
+			painter.moveTo(x1, y1);
+			painter.lineTo(x2, y2);
 		}
 		painter.closePath();
 		
@@ -344,7 +344,7 @@ public class TGChordImpl extends TGChord {
 			}
 			else if(fret == 0){
 				painter.initPath();
-				painter.addOval(noteX - (getNoteSize() / 2),fromY,getNoteSize(),getNoteSize());
+				painter.addOval(noteX - (getNoteSize() / 2), fromY, getNoteSize(), getNoteSize());
 				painter.closePath();
 			}
 			else{
@@ -352,7 +352,7 @@ public class TGChordImpl extends TGChord {
 				painter.initPath(TGPainter.PATH_FILL);
 				fret -= (getFirstFret() - 1);
 				int noteY = y + ((getFretSpacing() * fret) - (getFretSpacing() / 2 ));
-				painter.addOval(noteX - (getNoteSize() / 2),noteY - (getNoteSize() / 2),(getNoteSize() + 1),(getNoteSize() + 1));
+				painter.addOval(noteX - (getNoteSize() / 2), noteY - (getNoteSize() / 2),(getNoteSize() + 1),(getNoteSize() + 1));
 				painter.closePath();
 			}
 		}
@@ -366,12 +366,12 @@ public class TGChordImpl extends TGChord {
 			int fretValue = getFretValue(i);
 			zero = (zero || fretValue == 0);
 			if(fretValue > 0){
-				minimum = (minimum < 0)?fretValue:Math.min(minimum,fretValue);
-				maximum = (Math.max(maximum,fretValue));
+				minimum = (minimum < 0)?fretValue:Math.min(minimum, fretValue);
+				maximum = (Math.max(maximum, fretValue));
 			}
 		}
 		int firstFret = (zero && maximum < MAX_FRETS)?1:minimum;
-		setFirstFret( Math.max(firstFret,1) );
+		setFirstFret( Math.max(firstFret, 1) );
 	}
 	
 	private int getStringValue(int number){
@@ -432,7 +432,7 @@ public class TGChordImpl extends TGChord {
 		return false;
 	}
 	
-	public void addFretValue(int string,int fret){
+	public void addFretValue(int string, int fret){
 		if(!isDisposed() && this.getFretValue(string) != fret){
 			this.dispose();
 		}

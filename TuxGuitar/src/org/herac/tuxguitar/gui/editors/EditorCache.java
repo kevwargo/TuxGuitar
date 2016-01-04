@@ -94,7 +94,7 @@ public class EditorCache {
 					this.playChanges = true;
 					
 					if(this.playMeasure == null || !this.playMeasure.hasTrack(track.getNumber())  || !isPlaying(this.playMeasure)){
-						this.playMeasure = (TGMeasureImpl)manager.getTrackManager().getMeasureAt(track,start);
+						this.playMeasure = (TGMeasureImpl)manager.getTrackManager().getMeasureAt(track, start);
 					}
 					if (this.playMeasure != null) {
 						this.playBeat = (TGBeatImpl)manager.getMeasureManager().getBeatIn(this.playMeasure, start);
@@ -138,7 +138,7 @@ public class EditorCache {
 		return (TuxGuitar.instance().getPlayer().isRunning() && this.playMeasure != null && measure.equals(this.playMeasure));
 	}
 	
-	public boolean isPlaying(TGMeasure measure,TGBeat b){
+	public boolean isPlaying(TGMeasure measure, TGBeat b){
 		return (isPlaying(measure) && this.playBeat != null && this.playBeat.getStart() == b.getStart());
 	}
 }

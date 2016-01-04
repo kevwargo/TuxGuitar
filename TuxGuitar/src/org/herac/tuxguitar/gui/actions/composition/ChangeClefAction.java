@@ -56,9 +56,9 @@ public class ChangeClefAction extends Action{
 			dialog.setText(TuxGuitar.getProperty("composition.clef"));
 			
 			//-------clef-------------------------------------
-			Group clef = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			clef.setLayout(new GridLayout(2,false));
-			clef.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group clef = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			clef.setLayout(new GridLayout(2, false));
+			clef.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			clef.setText(TuxGuitar.getProperty("composition.clef"));
 			
 			Label numeratorLabel = new Label(clef, SWT.NULL);
@@ -74,9 +74,9 @@ public class ChangeClefAction extends Action{
 			clefs.setLayoutData(getComboData());
 			
 			//--------------------To End Checkbox-------------------------------
-			Group check = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group check = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			check.setLayout(new GridLayout());
-			check.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			check.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			check.setText(TuxGuitar.getProperty("options"));
 			
 			final Button toEnd = new Button(check, SWT.CHECK);
@@ -84,8 +84,8 @@ public class ChangeClefAction extends Action{
 			toEnd.setSelection(true);
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -101,7 +101,7 @@ public class ChangeClefAction extends Action{
 							public void run() throws Throwable {
 								ActionLock.lock();
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
-								setClef(clef,toEndValue);
+								setClef(clef, toEndValue);
 								TuxGuitar.instance().updateCache( true );
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 								ActionLock.unlock();
@@ -124,12 +124,12 @@ public class ChangeClefAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
 	private GridData getComboData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
@@ -141,13 +141,13 @@ public class ChangeClefAction extends Action{
 		return data;
 	}
 	
-	protected void setClef(int clef,boolean toEnd){
+	protected void setClef(int clef, boolean toEnd){
 		//comienza el undoable
 		UndoableChangeClef undoable = UndoableChangeClef.startUndo();
 		
 		TGMeasure measure = getEditor().getTablature().getCaret().getMeasure();
 		TGTrack track = getEditor().getTablature().getCaret().getTrack();
-		getSongManager().getTrackManager().changeClef(track,measure.getStart(),clef,toEnd);
+		getSongManager().getTrackManager().changeClef(track, measure.getStart(), clef, toEnd);
 		
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		
@@ -155,6 +155,6 @@ public class ChangeClefAction extends Action{
 		updateTablature();
 		
 		//termia el undoable
-		addUndoableEdit(undoable.endUndo(clef,toEnd));
+		addUndoableEdit(undoable.endUndo(clef, toEnd));
 	}
 }

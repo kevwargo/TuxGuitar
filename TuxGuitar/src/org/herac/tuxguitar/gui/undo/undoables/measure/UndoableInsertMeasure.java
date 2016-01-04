@@ -33,7 +33,7 @@ public class UndoableInsertMeasure implements UndoableEdit{
 			throw new CannotRedoException();
 		}
 		TGSongSegmentHelper helper = new TGSongSegmentHelper(TuxGuitar.instance().getSongManager());
-		helper.insertMeasures(this.tracksMeasures.clone(TuxGuitar.instance().getSongManager().getFactory()),this.fromNumber,this.theMove,this.toTrack);
+		helper.insertMeasures(this.tracksMeasures.clone(TuxGuitar.instance().getSongManager().getFactory()), this.fromNumber, this.theMove, this.toTrack);
 		TuxGuitar.instance().fireUpdate();
 		this.redoCaret.update();
 		
@@ -61,7 +61,7 @@ public class UndoableInsertMeasure implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public UndoableInsertMeasure endUndo(TGSongSegment tracksMeasures,int copyCount,int fromNumber,long theMove){
+	public UndoableInsertMeasure endUndo(TGSongSegment tracksMeasures, int copyCount, int fromNumber, long theMove){
 		this.redoCaret = new UndoableCaretHelper();
 		this.copyCount = copyCount;
 		this.tracksMeasures = tracksMeasures;

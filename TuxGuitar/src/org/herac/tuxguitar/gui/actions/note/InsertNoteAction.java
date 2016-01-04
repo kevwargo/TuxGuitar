@@ -40,7 +40,7 @@ public class InsertNoteAction extends Action{
 			else{
 				long start = beat.getStart();
 				long length = beat.getVoice(caret.getVoice()).getDuration().getTime();
-				getSongManager().getMeasureManager().moveVoices(caret.getMeasure(),start,length,caret.getVoice(),beat.getVoice(caret.getVoice()).getDuration());
+				getSongManager().getMeasureManager().moveVoices(caret.getMeasure(), start, length, caret.getVoice(), beat.getVoice(caret.getVoice()).getDuration());
 			}
 			//termia el undoable
 			addUndoableEdit(undoable.endUndo());

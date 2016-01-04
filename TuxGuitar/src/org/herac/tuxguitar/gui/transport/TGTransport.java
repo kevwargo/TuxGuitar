@@ -48,7 +48,7 @@ import org.herac.tuxguitar.song.models.TGMeasureHeader;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoader,LanguageLoader{
+public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoader, LanguageLoader{
 	private static final int PLAY_MODE_DELAY = 250;
 	
 	public static final int STATUS_STOPPED = 1;
@@ -109,49 +109,49 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 	}
 	
 	private void initComposites(){
-		GridLayout layout = new GridLayout(2,false);
+		GridLayout layout = new GridLayout(2, false);
 		layout.marginWidth = 0;
 		layout.marginHeight = 0;
 		layout.horizontalSpacing = 0;
 		layout.verticalSpacing = 0;
 		
-		Composite composite = new Composite(this.dialog,SWT.BORDER);
+		Composite composite = new Composite(this.dialog, SWT.BORDER);
 		composite.setLayout(layout);
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		initOptions(composite);
 		initProgress(composite);
 	}
 	
 	private void initOptions(Composite parent){
-		Composite composite = new Composite(parent,SWT.NONE);
+		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true));
 		
-		this.metronome = new Button(composite,SWT.TOGGLE);
-		this.metronome.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.metronome = new Button(composite, SWT.TOGGLE);
+		this.metronome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.metronome.addSelectionListener(TuxGuitar.instance().getAction(TransportMetronomeAction.NAME));
 		
-		this.mode = new Button(composite,SWT.PUSH);
-		this.mode.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.mode = new Button(composite, SWT.PUSH);
+		this.mode.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.mode.addSelectionListener(TuxGuitar.instance().getAction(TransportModeAction.NAME));
 		
 		this.loadOptionIcons();
 	}
 	
 	private void initProgress(Composite parent){
-		Composite composite = new Composite(parent,SWT.NONE);
+		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		initLabel(composite);
 		initScale(composite);
 	}
 	
 	private void initLabel(Composite parent){
-		final Font font = new Font(parent.getDisplay(),"Minisystem",36,SWT.NORMAL);
-		this.label = new Label(parent,SWT.RIGHT);
-		this.label.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		final Font font = new Font(parent.getDisplay(),"Minisystem", 36, SWT.NORMAL);
+		this.label = new Label(parent, SWT.RIGHT);
+		this.label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.label.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		this.label.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_BLUE));
 		this.label.setFont(font);
@@ -163,7 +163,7 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 	}
 	
 	private void initScale(Composite parent){
-		GridData data = new GridData(SWT.FILL,SWT.CENTER,true,false);
+		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		data.heightHint = 10;
 		
 		this.tickProgress = new ProgressBar(parent, SWT.BORDER | SWT.HORIZONTAL | SWT.SMOOTH);
@@ -176,7 +176,7 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 				updateProgressBar(e.x);
 			}
 			public void mouseUp(MouseEvent e) {
-				gotoMeasure(getSongManager().getMeasureHeaderAt(TGTransport.this.tickProgress.getSelection()),true);
+				gotoMeasure(getSongManager().getMeasureHeaderAt(TGTransport.this.tickProgress.getSelection()), true);
 				setEditingTickScale(false);
 			}
 		});
@@ -190,7 +190,7 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 	protected void updateProgressBar(int x){
 		if(isEditingTickScale()){
 			int selection = (this.tickProgress.getMinimum() + (( x * (this.tickProgress.getMaximum() - this.tickProgress.getMinimum())) / this.tickProgress.getSize().x) );
-			this.tickProgress.setSelection(Math.max((int)TGDuration.QUARTER_TIME,selection));
+			this.tickProgress.setSelection(Math.max((int)TGDuration.QUARTER_TIME, selection));
 			this.redraw();
 		}
 	}
@@ -199,44 +199,44 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 		if(this.toolBar != null){
 			this.toolBar.dispose();
 		}
-		this.toolBar = new ToolBar(this.dialog,SWT.FLAT);
+		this.toolBar = new ToolBar(this.dialog, SWT.FLAT);
 		
-		this.first = new ToolItem(this.toolBar,SWT.PUSH);
+		this.first = new ToolItem(this.toolBar, SWT.PUSH);
 		this.first.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				gotoFirst();
 			}
 		});
 		
-		this.previous = new ToolItem(this.toolBar,SWT.PUSH);
+		this.previous = new ToolItem(this.toolBar, SWT.PUSH);
 		this.previous.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				gotoPrevious();
 			}
 		});
 		
-		this.stop = new ToolItem(this.toolBar,SWT.PUSH);
+		this.stop = new ToolItem(this.toolBar, SWT.PUSH);
 		this.stop.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				stop();
 			}
 		});
 		
-		this.play = new ToolItem(this.toolBar,SWT.PUSH);
+		this.play = new ToolItem(this.toolBar, SWT.PUSH);
 		this.play.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				play();
 			}
 		});
 		
-		this.next = new ToolItem(this.toolBar,SWT.PUSH);
+		this.next = new ToolItem(this.toolBar, SWT.PUSH);
 		this.next.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				gotoNext();
 			}
 		});
 		
-		this.last = new ToolItem(this.toolBar,SWT.PUSH);
+		this.last = new ToolItem(this.toolBar, SWT.PUSH);
 		this.last.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				gotoLast();
@@ -363,18 +363,18 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 	}
 	
 	public void gotoFirst(){
-		gotoMeasure(getSongManager().getFirstMeasureHeader(),true);
+		gotoMeasure(getSongManager().getFirstMeasureHeader(), true);
 	}
 	
 	public void gotoLast(){
-		gotoMeasure(getSongManager().getLastMeasureHeader(),true) ;
+		gotoMeasure(getSongManager().getLastMeasureHeader(), true) ;
 	}
 	
 	public void gotoNext(){
 		MidiPlayer player = TuxGuitar.instance().getPlayer();
 		TGMeasureHeader header = getSongManager().getMeasureHeaderAt(MidiTickUtil.getStart(player.getTickPosition()));
 		if(header != null){
-			gotoMeasure(getSongManager().getNextMeasureHeader(header),true);
+			gotoMeasure(getSongManager().getNextMeasureHeader(header), true);
 		}
 	}
 	
@@ -382,15 +382,15 @@ public class TGTransport implements TGRedrawListener, TGUpdateListener, IconLoad
 		MidiPlayer player = TuxGuitar.instance().getPlayer();
 		TGMeasureHeader header = getSongManager().getMeasureHeaderAt(MidiTickUtil.getStart(player.getTickPosition()));
 		if(header != null){
-			gotoMeasure(getSongManager().getPrevMeasureHeader(header),true);
+			gotoMeasure(getSongManager().getPrevMeasureHeader(header), true);
 		}
 	}
 	
 	public void gotoMeasure(TGMeasureHeader header){
-		gotoMeasure(header,false);
+		gotoMeasure(header, false);
 	}
 	
-	public void gotoMeasure(TGMeasureHeader header,boolean moveCaret){
+	public void gotoMeasure(TGMeasureHeader header, boolean moveCaret){
 		if(header != null){
 			TGMeasure playingMeasure = null;
 			if( TuxGuitar.instance().getPlayer().isRunning() ){

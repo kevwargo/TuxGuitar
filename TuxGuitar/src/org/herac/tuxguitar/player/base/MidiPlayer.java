@@ -229,7 +229,7 @@ public class MidiPlayer{
 		}catch (Throwable throwable) {
 			this.setStarting(false);
 			this.reset();
-			throw new MidiPlayerException(throwable.getMessage(),throwable);
+			throw new MidiPlayerException(throwable.getMessage(), throwable);
 		}finally{
 			this.lock.unlock();
 		}
@@ -394,7 +394,7 @@ public class MidiPlayer{
 	 */
 	public void addSequence() {
 		try{
-			MidiSequenceParser parser = new MidiSequenceParser(this.songManager,MidiSequenceParser.DEFAULT_PLAY_FLAGS,getMode().getCurrentPercent(),0);		
+			MidiSequenceParser parser = new MidiSequenceParser(this.songManager, MidiSequenceParser.DEFAULT_PLAY_FLAGS, getMode().getCurrentPercent(), 0);		
 			MidiSequenceHandler sequence = getSequencer().createSequence(this.songManager.getSong().countTracks() + 2);
 			parser.setSHeader( getLoopSHeader() );
 			parser.setEHeader( getLoopEHeader() );
@@ -409,10 +409,10 @@ public class MidiPlayer{
 	private void updateDefaultControllers(){
 		try{
 			for(int channel = 0; channel < MAX_CHANNELS;channel ++){
-				getOutputTransmitter().sendControlChange(channel,MidiControllers.RPN_MSB,0);
-				getOutputTransmitter().sendControlChange(channel,MidiControllers.RPN_LSB,0);
-				getOutputTransmitter().sendControlChange(channel,MidiControllers.DATA_ENTRY_MSB,12);
-				getOutputTransmitter().sendControlChange(channel,MidiControllers.DATA_ENTRY_LSB, 0);
+				getOutputTransmitter().sendControlChange(channel, MidiControllers.RPN_MSB, 0);
+				getOutputTransmitter().sendControlChange(channel, MidiControllers.RPN_LSB, 0);
+				getOutputTransmitter().sendControlChange(channel, MidiControllers.DATA_ENTRY_MSB, 12);
+				getOutputTransmitter().sendControlChange(channel, MidiControllers.DATA_ENTRY_LSB, 0);
 			}
 		}
 		catch (MidiPlayerException e) {
@@ -425,9 +425,9 @@ public class MidiPlayer{
 			Iterator it = this.songManager.getSong().getTracks();
 			while(it.hasNext()){
 				TGTrack track = (TGTrack)it.next();
-				getOutputTransmitter().sendProgramChange(track.getChannel().getChannel(),track.getChannel().getInstrument());
+				getOutputTransmitter().sendProgramChange(track.getChannel().getChannel(), track.getChannel().getInstrument());
 				if(track.getChannel().getChannel() != track.getChannel().getEffectChannel()){
-					getOutputTransmitter().sendProgramChange(track.getChannel().getEffectChannel(),track.getChannel().getInstrument());
+					getOutputTransmitter().sendProgramChange(track.getChannel().getEffectChannel(), track.getChannel().getInstrument());
 				}
 			}
 		}catch (MidiPlayerException e) {
@@ -452,7 +452,7 @@ public class MidiPlayer{
 			int reverb = TGChannel.DEFAULT_REVERB;
 			int phaser = TGChannel.DEFAULT_PHASER;
 			int tremolo = TGChannel.DEFAULT_TREMOLO;
-			updateController(TGChannel.DEFAULT_PERCUSSION_CHANNEL,volume,balance,chorus,reverb,phaser,tremolo,127);
+			updateController(TGChannel.DEFAULT_PERCUSSION_CHANNEL, volume, balance, chorus, reverb, phaser, tremolo, 127);
 		}
 		this.afterUpdate();
 	}
@@ -466,26 +466,26 @@ public class MidiPlayer{
 			int phaser = track.getChannel().getPhaser();
 			int tremolo = track.getChannel().getTremolo();
 			
-			updateController(track.getChannel().getChannel(),volume,balance,chorus,reverb,phaser,tremolo,127);
+			updateController(track.getChannel().getChannel(), volume, balance, chorus, reverb, phaser, tremolo, 127);
 			if(track.getChannel().getChannel() != track.getChannel().getEffectChannel()){
-				updateController(track.getChannel().getEffectChannel(),volume,balance,chorus,reverb,phaser,tremolo,127);
+				updateController(track.getChannel().getEffectChannel(), volume, balance, chorus, reverb, phaser, tremolo, 127);
 			}
-			getSequencer().setMute(track.getNumber(),track.isMute());
-			getSequencer().setSolo(track.getNumber(),track.isSolo());
+			getSequencer().setMute(track.getNumber(), track.isMute());
+			getSequencer().setSolo(track.getNumber(), track.isSolo());
 		}catch (MidiPlayerException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void updateController(int channel,int volume,int balance,int chorus, int reverb,int phaser, int tremolo, int expression) {
+	private void updateController(int channel, int volume, int balance, int chorus, int reverb, int phaser, int tremolo, int expression) {
 		try{
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.VOLUME,volume);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.BALANCE,balance);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.CHORUS,chorus);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.REVERB,reverb);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.PHASER,phaser);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.TREMOLO,tremolo);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.EXPRESSION,expression);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.VOLUME, volume);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.BALANCE, balance);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.CHORUS, chorus);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.REVERB, reverb);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.PHASER, phaser);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.TREMOLO, tremolo);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.EXPRESSION, expression);
 		}catch (MidiPlayerException e) {
 			e.printStackTrace();
 		}
@@ -493,7 +493,7 @@ public class MidiPlayer{
 	
 	private void afterUpdate(){
 		try{
-			getSequencer().setSolo(this.infoTrack,this.anySolo);
+			getSequencer().setSolo(this.infoTrack, this.anySolo);
 			getSequencer().setSolo(this.metronomeTrack,(isMetronomeEnabled() && this.anySolo));
 		}catch (MidiPlayerException e) {
 			e.printStackTrace();
@@ -514,7 +514,7 @@ public class MidiPlayer{
 		}
 	}
 	
-	public void playBeat(final TGTrack track,final List notes) {
+	public void playBeat(final TGTrack track, final List notes) {
 		int channel = track.getChannel().getChannel();
 		int program = track.getChannel().getInstrument();
 		int volume = (int)((this.getVolume() / 10.00) * track.getChannel().getVolume());
@@ -530,32 +530,32 @@ public class MidiPlayer{
 			beat[i][0] = track.getOffset() + (note.getValue() + ((TGString)track.getStrings().get(note.getString() - 1)).getValue());
 			beat[i][1] = note.getVelocity();
 		}
-		playBeat(channel,program,volume,balance,chorus,reverb,phaser,tremolo,beat);
+		playBeat(channel, program, volume, balance, chorus, reverb, phaser, tremolo, beat);
 	}
 	
-	public void playBeat(int channel,int program,int volume,int balance,int chorus, int reverb,int phaser,int tremolo,int[][] beat) {
-		playBeat(channel, program, volume, balance, chorus, reverb, phaser, tremolo, beat,500,0);
+	public void playBeat(int channel, int program, int volume, int balance, int chorus, int reverb, int phaser, int tremolo, int[][] beat) {
+		playBeat(channel, program, volume, balance, chorus, reverb, phaser, tremolo, beat, 500, 0);
 	}
 	
-	public void playBeat(int channel,int program,int volume,int balance,int chorus, int reverb,int phaser,int tremolo,int[][] beat,long duration,int interval) {
+	public void playBeat(int channel, int program, int volume, int balance, int chorus, int reverb, int phaser, int tremolo, int[][] beat, long duration, int interval) {
 		try {
-			getOutputTransmitter().sendProgramChange(channel,program);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.VOLUME,volume);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.BALANCE,balance);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.CHORUS,chorus);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.REVERB,reverb);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.PHASER,phaser);
-			getOutputTransmitter().sendControlChange(channel,MidiControllers.TREMOLO,tremolo);
+			getOutputTransmitter().sendProgramChange(channel, program);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.VOLUME, volume);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.BALANCE, balance);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.CHORUS, chorus);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.REVERB, reverb);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.PHASER, phaser);
+			getOutputTransmitter().sendControlChange(channel, MidiControllers.TREMOLO, tremolo);
 				
 			for(int i = 0; i < beat.length; i ++){
-				getOutputTransmitter().sendNoteOn(channel,beat[i][0], beat[i][1]);
+				getOutputTransmitter().sendNoteOn(channel, beat[i][0], beat[i][1]);
 				if(interval > 0){
 					Thread.sleep(interval);
 				}
 			}
 			Thread.sleep(duration);
 			for(int i = 0; i < beat.length; i ++){
-				getOutputTransmitter().sendNoteOff(channel,beat[i][0], beat[i][1]);
+				getOutputTransmitter().sendNoteOff(channel, beat[i][0], beat[i][1]);
 			}
 		} catch (Throwable throwable) {
 			throwable.printStackTrace();
@@ -625,7 +625,7 @@ public class MidiPlayer{
 	
 	public void openOutputPort(String key, boolean tryFirst) {
 		this.outputPortKey = key;
-		this.openOutputPort(listOutputPorts(),tryFirst);
+		this.openOutputPort(listOutputPorts(), tryFirst);
 	}
 	
 	public void openOutputPort(List ports, boolean tryFirst) {
@@ -656,13 +656,13 @@ public class MidiPlayer{
 	public void openSequencer(String key, boolean tryFirst) {
 		try{
 			this.sequencerKey = key;
-			this.openSequencer(listSequencers(),tryFirst);
+			this.openSequencer(listSequencers(), tryFirst);
 		}catch(Throwable throwable){
 			throwable.printStackTrace();
 		}
 	}
 	
-	public void openSequencer(List sequencers ,boolean tryFirst) throws MidiPlayerException {
+	public void openSequencer(List sequencers , boolean tryFirst) throws MidiPlayerException {
 		try{
 			if(this.sequencerKey != null && !this.isSequencerOpen(this.sequencerKey)){
 				this.closeSequencer();
@@ -681,7 +681,7 @@ public class MidiPlayer{
 			}
 			
 		}catch(Throwable throwable){
-			throw new MidiPlayerException(throwable.getMessage(),throwable);
+			throw new MidiPlayerException(throwable.getMessage(), throwable);
 		}
 	}
 	
@@ -725,7 +725,7 @@ public class MidiPlayer{
 			}
 			this.lock.unlock();
 		}catch(Throwable throwable){
-			throw new MidiPlayerException(throwable.getMessage(),throwable);
+			throw new MidiPlayerException(throwable.getMessage(), throwable);
 		}
 	}
 	
@@ -774,7 +774,7 @@ public class MidiPlayer{
 	
 	public void addOutputPortProvider(MidiOutputPortProvider provider, boolean tryFirst) throws MidiPlayerException {
 		this.outputPortProviders.add(provider);
-		this.openOutputPort(provider.listPorts(),tryFirst);
+		this.openOutputPort(provider.listPorts(), tryFirst);
 	}
 	
 	public void addSequencerProvider(MidiSequencerProvider provider) throws MidiPlayerException {

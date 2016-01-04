@@ -59,11 +59,11 @@ public class EditPluginsAction extends Action{
 		final Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		
 		dialog.setLayout(new GridLayout());
-		dialog.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		dialog.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		dialog.setText(TuxGuitar.getProperty("plugins"));
 		
 		final Table table = new Table(dialog, SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION | SWT.CHECK | SWT.H_SCROLL | SWT.V_SCROLL);
-		table.setLayoutData(new GridData(TABLE_WIDTH,TABLE_HEIGHT));
+		table.setLayoutData(new GridData(TABLE_WIDTH, TABLE_HEIGHT));
 		table.setHeaderVisible(true);
 		
 		final TableColumn columnEnabled = new TableColumn(table, SWT.LEFT);
@@ -84,8 +84,8 @@ public class EditPluginsAction extends Action{
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(3,false));
-		buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+		buttons.setLayout(new GridLayout(3, false));
+		buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 		
 		final Button buttonSetup = new Button(buttons, SWT.PUSH);
 		buttonSetup.setText(TuxGuitar.getProperty("configure"));
@@ -137,9 +137,9 @@ public class EditPluginsAction extends Action{
 				if(event.item instanceof TableItem && event.item.getData() instanceof TGPlugin){
 					final TableItem item = (TableItem)event.item;
 					if(event.detail == SWT.CHECK){
-						TuxGuitar.instance().loadCursor(dialog,SWT.CURSOR_WAIT);
-						TuxGuitar.instance().getPluginManager().setEnabled((TGPlugin)item.getData(),item.getChecked());
-						TuxGuitar.instance().loadCursor(dialog,SWT.CURSOR_ARROW);
+						TuxGuitar.instance().loadCursor(dialog, SWT.CURSOR_WAIT);
+						TuxGuitar.instance().getPluginManager().setEnabled((TGPlugin)item.getData(), item.getChecked());
+						TuxGuitar.instance().loadCursor(dialog, SWT.CURSOR_ARROW);
 						table.setSelection(item);
 					}
 					buttonInfo.setEnabled(true);
@@ -150,27 +150,27 @@ public class EditPluginsAction extends Action{
 		
 		dialog.setDefaultButton( buttonInfo );
 		
-		DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
+		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
 	}
 	
-	public void showInfo(Shell parent,TGPlugin plugin) {
+	public void showInfo(Shell parent, TGPlugin plugin) {
 		final Shell dialog = DialogUtils.newDialog(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		dialog.setLayout(new GridLayout());
-		dialog.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		dialog.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		dialog.setText(TuxGuitar.getProperty("plugins"));
 		
-		Composite info = new Composite(dialog,SWT.NONE);
-		info.setLayout(new GridLayout(2,false));
+		Composite info = new Composite(dialog, SWT.NONE);
+		info.setLayout(new GridLayout(2, false));
 		
-		showInfoString(info,TuxGuitar.getProperty("name") + ":",plugin.getName());
-		showInfoString(info,TuxGuitar.getProperty("version") + ":",plugin.getVersion());
-		showInfoString(info,TuxGuitar.getProperty("author") + ":",plugin.getAuthor());
-		showInfoString(info,TuxGuitar.getProperty("description") + ":",plugin.getDescription());
+		showInfoString(info, TuxGuitar.getProperty("name") + ":", plugin.getName());
+		showInfoString(info, TuxGuitar.getProperty("version") + ":", plugin.getVersion());
+		showInfoString(info, TuxGuitar.getProperty("author") + ":", plugin.getAuthor());
+		showInfoString(info, TuxGuitar.getProperty("description") + ":", plugin.getDescription());
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
 		buttons.setLayout(new GridLayout());
-		buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+		buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 		
 		Button buttonExit = new Button(buttons, SWT.PUSH);
 		buttonExit.setText(TuxGuitar.getProperty("exit"));
@@ -186,11 +186,11 @@ public class EditPluginsAction extends Action{
 		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
 	}
 	
-	private void showInfoString(Composite parent,String key,String value){
-		Label labelKey = new Label(parent,SWT.LEFT);
-		Label labelValue = new Label(parent,SWT.LEFT | SWT.WRAP);
-		labelKey.setLayoutData(new GridData(SWT.LEFT,SWT.TOP,false,true));
-		labelValue.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,true));
+	private void showInfoString(Composite parent, String key, String value){
+		Label labelKey = new Label(parent, SWT.LEFT);
+		Label labelValue = new Label(parent, SWT.LEFT | SWT.WRAP);
+		labelKey.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true));
+		labelValue.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
 		setBold(labelKey);
 		labelKey.setText(key);
 		labelValue.setText( (value != null && value.length() > 0)?value:TuxGuitar.getProperty("plugin.unknown-value"));
@@ -199,7 +199,7 @@ public class EditPluginsAction extends Action{
 	private void setBold(Label label){
 		FontData[] fontDatas = label.getFont().getFontData();
 		if(fontDatas.length > 0){
-			final Font font = new Font(label.getDisplay(),fontDatas[0].getName(),(fontDatas[0].getHeight()),SWT.BOLD);
+			final Font font = new Font(label.getDisplay(), fontDatas[0].getName(),(fontDatas[0].getHeight()), SWT.BOLD);
 			label.setFont(font);
 			label.addDisposeListener(new DisposeListener() {
 				public void widgetDisposed(DisposeEvent e) {

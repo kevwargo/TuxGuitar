@@ -51,12 +51,12 @@ public class ChangeTiedNoteAction extends Action{
 			TGDuration duration = getSongManager().getFactory().newDuration();
 			caret.getDuration().copy(duration);
 			
-			setTiedNoteValue(note,caret);
+			setTiedNoteValue(note, caret);
 			
 			//comienza el undoable
 			UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 			
-			getSongManager().getMeasureManager().addNote(caret.getSelectedBeat(),note,duration, caret.getVoice());
+			getSongManager().getMeasureManager().addNote(caret.getSelectedBeat(), note, duration, caret.getVoice());
 			
 			//termia el undoable
 			addUndoableEdit(undoable.endUndo());
@@ -66,7 +66,7 @@ public class ChangeTiedNoteAction extends Action{
 		return 0;
 	}
 	
-	private void setTiedNoteValue(TGNote note,Caret caret){
+	private void setTiedNoteValue(TGNote note, Caret caret){
 		TGMeasure measure = caret.getMeasure();
 		TGVoice voice = getSongManager().getMeasureManager().getPreviousVoice( measure.getBeats(), caret.getSelectedBeat(), caret.getVoice());
 		while( measure != null){

@@ -38,7 +38,7 @@ public class UndoableChangeInfo implements UndoableEdit{
 		if(!canRedo()){
 			throw new CannotRedoException();
 		}
-		TuxGuitar.instance().getSongManager().setProperties(this.redoName,this.redoArtist,this.redoAlbum,this.redoAuthor,this.redoDate,this.redoCopyright,this.redoWriter,this.redoTranscriber,this.redoComments);
+		TuxGuitar.instance().getSongManager().setProperties(this.redoName, this.redoArtist, this.redoAlbum, this.redoAuthor, this.redoDate, this.redoCopyright, this.redoWriter, this.redoTranscriber, this.redoComments);
 		TuxGuitar.instance().showTitle();
 		this.redoCaret.update();
 		
@@ -49,7 +49,7 @@ public class UndoableChangeInfo implements UndoableEdit{
 		if(!canUndo()){
 			throw new CannotUndoException();
 		}
-		TuxGuitar.instance().getSongManager().setProperties(this.undoName,this.undoArtist,this.undoAlbum,this.undoAuthor,this.undoDate,this.undoCopyright,this.undoWriter,this.undoTranscriber,this.undoComments);
+		TuxGuitar.instance().getSongManager().setProperties(this.undoName, this.undoArtist, this.undoAlbum, this.undoAuthor, this.undoDate, this.undoCopyright, this.undoWriter, this.undoTranscriber, this.undoComments);
 		TuxGuitar.instance().showTitle();
 		this.undoCaret.update();
 		

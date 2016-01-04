@@ -37,7 +37,7 @@ public abstract class Option extends SelectionAdapter{
 	private Composite composite;
 	private ToolItem toolItem;
 	
-	public Option(TGConfigEditor configEditor,ToolBar toolBar,final Composite parent,String text, int horizontalAlignment,int verticalAlignment){
+	public Option(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent, String text, int horizontalAlignment, int verticalAlignment){
 		this.configEditor = configEditor;
 		this.toolBar = toolBar;
 		this.toolItem = new ToolItem(toolBar, SWT.RADIO);
@@ -47,11 +47,11 @@ public abstract class Option extends SelectionAdapter{
 		this.group.setText(text);
 		this.composite = new Composite(this.group, SWT.SHADOW_ETCHED_IN);
 		this.composite.setLayout(new GridLayout());
-		this.composite.setLayoutData(new GridData(horizontalAlignment,verticalAlignment,true ,true));
+		this.composite.setLayoutData(new GridData(horizontalAlignment, verticalAlignment, true , true));
 	}
 	
-	public Option(TGConfigEditor configEditor,ToolBar toolBar, Composite parent,String text){
-		this(configEditor, toolBar, parent, text, SWT.FILL,SWT.TOP);
+	public Option(TGConfigEditor configEditor, ToolBar toolBar, Composite parent, String text){
+		this(configEditor, toolBar, parent, text, SWT.FILL, SWT.TOP);
 	}
 	
 	public abstract void createOption();
@@ -73,22 +73,22 @@ public abstract class Option extends SelectionAdapter{
 		//Override me
 	}
 	
-	protected Label showLabel(Composite parent,int labelStyle,int fontStyle,int fontScale,String text){
-		return showLabel(parent,SWT.FILL,SWT.CENTER, labelStyle, fontStyle, fontScale, text);
+	protected Label showLabel(Composite parent, int labelStyle, int fontStyle, int fontScale, String text){
+		return showLabel(parent, SWT.FILL, SWT.CENTER, labelStyle, fontStyle, fontScale, text);
 	}
 	
-	protected Label showLabel(Composite parent,int hAlign,int vAlign,int labelStyle,int fontStyle,int fontScale,String text){
+	protected Label showLabel(Composite parent, int hAlign, int vAlign, int labelStyle, int fontStyle, int fontScale, String text){
 		return showLabel(parent, hAlign, vAlign, true, true, labelStyle, fontStyle, fontScale, text);
 	}
 	
-	protected Label showLabel(Composite parent,int hAlign,int vAlign,boolean grabExcessHSpace,boolean grabExcessVSpace,int labelStyle,int fontStyle,int fontScale,String text){
-		Label label = new Label(parent,labelStyle);
+	protected Label showLabel(Composite parent, int hAlign, int vAlign, boolean grabExcessHSpace, boolean grabExcessVSpace, int labelStyle, int fontStyle, int fontScale, String text){
+		Label label = new Label(parent, labelStyle);
 		label.setText(text);
-		label.setLayoutData(new GridData(hAlign,vAlign,grabExcessHSpace,grabExcessVSpace));
+		label.setLayoutData(new GridData(hAlign, vAlign, grabExcessHSpace, grabExcessVSpace));
 		
 		FontData[] fontDatas = label.getFont().getFontData();
 		if(fontDatas.length > 0){
-			final Font font = new Font(label.getDisplay(),fontDatas[0].getName(),(fontDatas[0].getHeight() + fontScale),fontStyle);
+			final Font font = new Font(label.getDisplay(), fontDatas[0].getName(),(fontDatas[0].getHeight() + fontScale), fontStyle);
 			label.setFont(font);
 			label.addDisposeListener(new DisposeListener() {
 				public void widgetDisposed(DisposeEvent arg0) {
@@ -99,18 +99,18 @@ public abstract class Option extends SelectionAdapter{
 		return label;
 	}
 	
-	protected Label showImageLabel(Composite parent,int labelStyle,Image image){
-		Label label = new Label(parent,labelStyle);
+	protected Label showImageLabel(Composite parent, int labelStyle, Image image){
+		Label label = new Label(parent, labelStyle);
 		label.setImage(image);
 		return label;
 	}
 	
 	protected FormData getGroupData(){
 		FormData data = new FormData();
-		data.top = new FormAttachment(0,0);
-		data.bottom = new FormAttachment(100,0);
-		data.left = new FormAttachment(0,0);
-		data.right = new FormAttachment(100,0);
+		data.top = new FormAttachment(0, 0);
+		data.bottom = new FormAttachment(100, 0);
+		data.left = new FormAttachment(0, 0);
+		data.right = new FormAttachment(100, 0);
 		return data;
 	}
 	
@@ -127,10 +127,10 @@ public abstract class Option extends SelectionAdapter{
 	}
 	
 	public Point computeSize(){
-		return this.computeSize(SWT.DEFAULT,SWT.DEFAULT);
+		return this.computeSize(SWT.DEFAULT, SWT.DEFAULT);
 	}
 	
-	protected Point computeSize(int wHint,int hHint){
+	protected Point computeSize(int wHint, int hHint){
 		return this.group.computeSize(wHint, hHint);
 	}
 	
@@ -158,27 +158,27 @@ public abstract class Option extends SelectionAdapter{
 		return (this.toolBar.isDisposed() || this.toolBar.getShell().isDisposed());
 	}
 	
-	public  GridData makeGridData(int with,int height,int minWith,int minHeight){
+	public  GridData makeGridData(int with, int height, int minWith, int minHeight){
 		return this.configEditor.makeGridData(with, height, minWith, minHeight);
 	}
 	
 	protected GridData getTabbedData(){
-		return getTabbedData(DEFAULT_INDENT,SWT.FILL,SWT.CENTER);
+		return getTabbedData(DEFAULT_INDENT, SWT.FILL, SWT.CENTER);
 	}
 	
-	protected GridData getTabbedData(int horizontalAlignment,int verticalAlignment, boolean grabExcessHorizontalSpace, boolean grabExcessVerticalSpace){
-		return getTabbedData(DEFAULT_INDENT,horizontalAlignment,verticalAlignment,grabExcessHorizontalSpace,grabExcessVerticalSpace);
+	protected GridData getTabbedData(int horizontalAlignment, int verticalAlignment, boolean grabExcessHorizontalSpace, boolean grabExcessVerticalSpace){
+		return getTabbedData(DEFAULT_INDENT, horizontalAlignment, verticalAlignment, grabExcessHorizontalSpace, grabExcessVerticalSpace);
 	}
 	
-	protected GridData getTabbedData(int horizontalAlignment,int verticalAlignment){
-		return getTabbedData(DEFAULT_INDENT,horizontalAlignment,verticalAlignment);
+	protected GridData getTabbedData(int horizontalAlignment, int verticalAlignment){
+		return getTabbedData(DEFAULT_INDENT, horizontalAlignment, verticalAlignment);
 	}
 	
-	protected GridData getTabbedData(int indent,int horizontalAlignment,int verticalAlignment){
+	protected GridData getTabbedData(int indent, int horizontalAlignment, int verticalAlignment){
 		return getTabbedData(indent, horizontalAlignment, verticalAlignment, true, true);
 	}
 	
-	protected GridData getTabbedData(int indent,int horizontalAlignment,int verticalAlignment, boolean grabExcessHorizontalSpace, boolean grabExcessVerticalSpace){
+	protected GridData getTabbedData(int indent, int horizontalAlignment, int verticalAlignment, boolean grabExcessHorizontalSpace, boolean grabExcessVerticalSpace){
 		GridData data = new GridData();
 		data.horizontalAlignment = horizontalAlignment;
 		data.grabExcessHorizontalSpace = grabExcessHorizontalSpace;
@@ -218,7 +218,7 @@ public abstract class Option extends SelectionAdapter{
 	}
 	
 	public void loadCursor(int style){
-		TuxGuitar.instance().loadCursor(this.configEditor.getDialog(),style);
+		TuxGuitar.instance().loadCursor(this.configEditor.getDialog(), style);
 	}
 	
 	protected void addSyncThread(Runnable runnable){

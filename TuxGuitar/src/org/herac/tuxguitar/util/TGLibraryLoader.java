@@ -18,7 +18,7 @@ public class TGLibraryLoader {
 		return instance;
 	}
 	
-	public void loadLibraries(File folder,final String prefix,final  String extension){
+	public void loadLibraries(File folder, final String prefix, final  String extension){
 		if(folder != null && folder.exists()){
 			FilenameFilter filter = new FilenameFilter() {
 				public boolean accept(File dir, String name) {

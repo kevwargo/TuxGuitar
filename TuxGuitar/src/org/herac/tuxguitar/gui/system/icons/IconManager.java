@@ -301,7 +301,7 @@ public class IconManager {
 	}
 	
 	private Image loadIcon(String name){
-		Image image = TGFileUtils.loadImage(this.theme,name);
+		Image image = TGFileUtils.loadImage(this.theme, name);
 		this.disposableIcons.add(image);
 		return image;
 	}

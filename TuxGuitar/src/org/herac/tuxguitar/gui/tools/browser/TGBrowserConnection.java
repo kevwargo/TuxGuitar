@@ -38,7 +38,7 @@ public class TGBrowserConnection {
 		return (getBrowser() != null);
 	}
 	
-	public void open(final int callId,final TGBrowser browser){
+	public void open(final int callId, final TGBrowser browser){
 		if(!isLocked()){
 			this.close(callId);
 			this.lock();
@@ -53,7 +53,7 @@ public class TGBrowserConnection {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
-						notifyError(callId,e);
+						notifyError(callId, e);
 						e.printStackTrace();
 					}
 				}
@@ -76,7 +76,7 @@ public class TGBrowserConnection {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
-						notifyError(callId,e);
+						notifyError(callId, e);
 						e.printStackTrace();
 					}
 				}
@@ -97,7 +97,7 @@ public class TGBrowserConnection {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
-						notifyError(callId,e);
+						notifyError(callId, e);
 						e.printStackTrace();
 					}
 				}
@@ -118,7 +118,7 @@ public class TGBrowserConnection {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
-						notifyError(callId,e);
+						notifyError(callId, e);
 						e.printStackTrace();
 					}
 				}
@@ -126,7 +126,7 @@ public class TGBrowserConnection {
 		}
 	}
 	
-	public void cd(final int callId,final TGBrowserElement element){
+	public void cd(final int callId, final TGBrowserElement element){
 		if(!isLocked()){
 			this.lock();
 			new Thread(new Runnable() {
@@ -139,7 +139,7 @@ public class TGBrowserConnection {
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
-						notifyError(callId,e);
+						notifyError(callId, e);
 						e.printStackTrace();
 					}
 				}
@@ -155,12 +155,12 @@ public class TGBrowserConnection {
 					try {
 						if(isOpen()){
 							List elements = getBrowser().listElements();
-							notifyElements(callId,elements);
+							notifyElements(callId, elements);
 						}else{
 							notifyClosed(callId);
 						}
 					} catch (TGBrowserException e) {
-						notifyError(callId,e);
+						notifyError(callId, e);
 						e.printStackTrace();
 					}
 				}
@@ -168,7 +168,7 @@ public class TGBrowserConnection {
 		}
 	}
 	
-	public void openStream(final int callId,final TGBrowserElement element){
+	public void openStream(final int callId, final TGBrowserElement element){
 		if(!isLocked()){
 			this.lock();
 			new Thread(new Runnable() {
@@ -180,14 +180,14 @@ public class TGBrowserConnection {
 						}
 						if(element.isFolder()){
 							release();
-							cd(callId,element);
+							cd(callId, element);
 						}
 						else{
 							InputStream stream = element.getInputStream();
-							notifyStream(callId,stream,element);
+							notifyStream(callId, stream, element);
 						}
 					} catch (TGBrowserException e) {
-						notifyError(callId,e);
+						notifyError(callId, e);
 						e.printStackTrace();
 					}
 				}
@@ -207,19 +207,19 @@ public class TGBrowserConnection {
 		this.handler.notifyClosed(callId);
 	}
 	
-	public void notifyElements(final int callId,List elements) {
-		this.handler.notifyElements(callId,elements);
+	public void notifyElements(final int callId, List elements) {
+		this.handler.notifyElements(callId, elements);
 	}
 	
-	public void notifyError(final int callId,Throwable throwable) {
-		this.handler.notifyError(callId,throwable);
+	public void notifyError(final int callId, Throwable throwable) {
+		this.handler.notifyError(callId, throwable);
 	}
 	
 	public void notifyOpened(final int callId) {
 		this.handler.notifyOpened(callId);
 	}
 	
-	public void notifyStream(final int callId,InputStream stream, TGBrowserElement element) {
-		this.handler.notifyStream(callId,stream,element);
+	public void notifyStream(final int callId, InputStream stream, TGBrowserElement element) {
+		this.handler.notifyStream(callId, stream, element);
 	}
 }

@@ -43,13 +43,13 @@ public class TransportMenuItem extends MenuItems{
 	
 	private int status;
 	
-	public TransportMenuItem(Shell shell,Menu parent, int style) {
+	public TransportMenuItem(Shell shell, Menu parent, int style) {
 		this.transportMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
 	
 	public void showItems(){
-		this.play = new MenuItem(this.menu,SWT.PUSH);
+		this.play = new MenuItem(this.menu, SWT.PUSH);
 		this.play.addSelectionListener(TuxGuitar.instance().getAction(TransportPlayAction.NAME));
 		
 		this.stop = new MenuItem(this.menu, SWT.PUSH);

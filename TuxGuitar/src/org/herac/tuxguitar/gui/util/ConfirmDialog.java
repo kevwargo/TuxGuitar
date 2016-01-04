@@ -38,7 +38,7 @@ public class ConfirmDialog {
 		//========================================================================
 		Composite labelComposite = new Composite(this.dialog, SWT.NONE);
 		labelComposite.setLayout(new GridLayout(2, false));
-		labelComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		labelComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		Label icon = new Label(labelComposite, SWT.NONE);
 		Label message = new Label(labelComposite, SWT.NONE);
@@ -47,21 +47,21 @@ public class ConfirmDialog {
 		
 		
 		//========================================================================
-		GridLayout buttonsLayout = new GridLayout(0,false);
+		GridLayout buttonsLayout = new GridLayout(0, false);
 		Composite buttonsComposite = new Composite(this.dialog, SWT.NONE);
 		buttonsComposite.setLayout(buttonsLayout);
-		buttonsComposite.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+		buttonsComposite.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 		
 		if((style & BUTTON_YES)!= 0){
-			addCloseButton(TuxGuitar.getProperty("yes"),STATUS_YES,buttonsComposite, (defaultButton == BUTTON_YES) );
+			addCloseButton(TuxGuitar.getProperty("yes"), STATUS_YES, buttonsComposite, (defaultButton == BUTTON_YES) );
 			buttonsLayout.numColumns ++;
 		}
 		if((style & BUTTON_NO)!= 0){
-			addCloseButton(TuxGuitar.getProperty("no"),STATUS_NO,buttonsComposite, (defaultButton == BUTTON_NO) );
+			addCloseButton(TuxGuitar.getProperty("no"), STATUS_NO, buttonsComposite, (defaultButton == BUTTON_NO) );
 			buttonsLayout.numColumns ++;
 		}
 		if((style & BUTTON_CANCEL)!= 0){
-			addCloseButton(TuxGuitar.getProperty("cancel"),STATUS_CANCEL,buttonsComposite, (defaultButton == BUTTON_CANCEL) );
+			addCloseButton(TuxGuitar.getProperty("cancel"), STATUS_CANCEL, buttonsComposite, (defaultButton == BUTTON_CANCEL) );
 			buttonsLayout.numColumns ++;
 		}
 		
@@ -70,7 +70,7 @@ public class ConfirmDialog {
 		return this.status;
 	}
 	
-	private void addCloseButton(String text,final int value,Composite parent, boolean defaultButton){
+	private void addCloseButton(String text, final int value, Composite parent, boolean defaultButton){
 		Button button = new Button(parent, SWT.PUSH);
 		button.setLayoutData(getButtonData());
 		button.setText(text);
@@ -86,7 +86,7 @@ public class ConfirmDialog {
 	}
 	
 	private GridData getButtonData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 80;
 		data.minimumHeight = 25;
 		return data;

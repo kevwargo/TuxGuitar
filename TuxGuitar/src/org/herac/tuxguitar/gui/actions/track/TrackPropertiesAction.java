@@ -95,29 +95,29 @@ public class TrackPropertiesAction extends Action {
 			this.initTempStrings(track.getStrings());
 			
 			this.dialog = DialogUtils.newDialog(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-			this.dialog.setLayout(new GridLayout(2,false));
+			this.dialog.setLayout(new GridLayout(2, false));
 			this.dialog.setText(TuxGuitar.getProperty("track.properties"));
 			
-			Composite left = new Composite(this.dialog,SWT.NONE);
+			Composite left = new Composite(this.dialog, SWT.NONE);
 			left.setLayout(new GridLayout());
-			left.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			left.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			
-			Composite right = new Composite(this.dialog,SWT.NONE);
+			Composite right = new Composite(this.dialog, SWT.NONE);
 			right.setLayout(new GridLayout());
-			right.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			right.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			
 			Composite bottom = new Composite(this.dialog, SWT.NONE);
-			bottom.setLayout(new GridLayout(2,false));
-			bottom.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true,2,1));
+			bottom.setLayout(new GridLayout(2, false));
+			bottom.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true, 2, 1));
 			
 			//GENERAL
-			initTrackInfo(makeGroup(left,1,TuxGuitar.getProperty("track.properties.general")), track);
+			initTrackInfo(makeGroup(left, 1, TuxGuitar.getProperty("track.properties.general")), track);
 			
 			//INSTRUMENT
-			initInstrumentFields(makeGroup(left,1,TuxGuitar.getProperty("instrument.instrument")), track);
+			initInstrumentFields(makeGroup(left, 1, TuxGuitar.getProperty("instrument.instrument")), track);
 			
 			//TUNING
-			initTuningInfo(makeGroup(right,2,TuxGuitar.getProperty("tuning")), track);
+			initTuningInfo(makeGroup(right, 2, TuxGuitar.getProperty("tuning")), track);
 			
 			//BUTTONS
 			initButtons(bottom);
@@ -128,7 +128,7 @@ public class TrackPropertiesAction extends Action {
 		}
 	}
 	
-	private Group makeGroup(Composite parent,int horizontalSpan,String text){
+	private Group makeGroup(Composite parent, int horizontalSpan, String text){
 		Group group = new Group(parent, SWT.SHADOW_ETCHED_IN);
 		group.setLayoutData(makeGridData(horizontalSpan));
 		group.setText(text);
@@ -137,43 +137,43 @@ public class TrackPropertiesAction extends Action {
 	}
 	
 	private GridData makeGridData(int horizontalSpan){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.horizontalSpan = horizontalSpan;
 		return data;
 	}
 	
 	public GridData getButtonsData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = MINIMUM_BUTTON_WIDTH;
 		data.minimumHeight = MINIMUM_BUTTON_HEIGHT;
 		return data;
 	}
 	
-	private void initTrackInfo(Composite composite,TGTrackImpl track) {
-		composite.setLayout(new GridLayout(/*2,false*/));
+	private void initTrackInfo(Composite composite, TGTrackImpl track) {
+		composite.setLayout(new GridLayout(/*2, false*/));
 		Composite top = new Composite(composite, SWT.NONE);
-		top.setLayout(new GridLayout(/*2,false*/));
-		top.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,true));
+		top.setLayout(new GridLayout(/*2, false*/));
+		top.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
 		Composite bottom = new Composite(composite, SWT.NONE);
-		bottom.setLayout(new GridLayout(/*2,false*/));
-		bottom.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,true));
+		bottom.setLayout(new GridLayout(/*2, false*/));
+		bottom.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, true));
 		
 		//-----------------------NAME---------------------------------
 		Label nameLabel = new Label(top, SWT.NONE);
-		nameLabel.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,true,true));
+		nameLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true));
 		nameLabel.setText(TuxGuitar.getProperty("track.name") + ":");
 		
 		this.nameText = new Text(top, SWT.BORDER);
-		this.nameText.setLayoutData(getAlignmentData(MINIMUM_LEFT_CONTROLS_WIDTH,SWT.FILL));
+		this.nameText.setLayoutData(getAlignmentData(MINIMUM_LEFT_CONTROLS_WIDTH, SWT.FILL));
 		this.nameText.setText(track.getName());
 		
 		//-----------------------COLOR---------------------------------
 		Label colorLabel = new Label(bottom, SWT.NONE);
 		colorLabel.setText(TuxGuitar.getProperty("track.color") + ":");
-		colorLabel.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,true,true));
+		colorLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true));
 		
 		final Button colorButton = new Button(bottom, SWT.PUSH);
-		colorButton.setLayoutData(getAlignmentData(MINIMUM_LEFT_CONTROLS_WIDTH,SWT.FILL));
+		colorButton.setLayoutData(getAlignmentData(MINIMUM_LEFT_CONTROLS_WIDTH, SWT.FILL));
 		colorButton.setText(TuxGuitar.getProperty("choose"));
 		colorButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
@@ -197,9 +197,9 @@ public class TrackPropertiesAction extends Action {
 		this.setButtonColor(colorButton);
 	}
 	
-	private void initTuningInfo(Composite composite,TGTrackImpl track) {
-		composite.setLayout(new GridLayout(2,false));
-		initTuningData(composite,track);
+	private void initTuningInfo(Composite composite, TGTrackImpl track) {
+		composite.setLayout(new GridLayout(2, false));
+		initTuningData(composite, track);
 		initTuningCombos(composite);
 		//initTuningOptions(composite);
 	}
@@ -207,7 +207,7 @@ public class TrackPropertiesAction extends Action {
 	private void initTuningCombos(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(/*MAX_STRINGS, false*/));
-		composite.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,false,true));
+		composite.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, true));
 		String[] tuningTexts = getAllValueNames();
 		for (int i = 0; i < MAX_STRINGS; i++) {
 			this.stringCombos[i] = new Combo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
@@ -215,31 +215,31 @@ public class TrackPropertiesAction extends Action {
 		}
 	}
 	
-	private void initTuningData(Composite parent,TGTrackImpl track) {
+	private void initTuningData(Composite parent, TGTrackImpl track) {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
 		
 		Composite top = new Composite(composite, SWT.NONE);
 		top.setLayout(new GridLayout());
-		top.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,true));
+		top.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
 		
 		Composite middle = new Composite(composite, SWT.NONE);
 		middle.setLayout(new GridLayout());
-		middle.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,true));
+		middle.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
 		
 		Composite bottom = new Composite( composite , SWT.NONE );
 		bottom.setLayout( new GridLayout() );
-		bottom.setLayoutData( new GridData(SWT.FILL,SWT.TOP,true,true) );
+		bottom.setLayoutData( new GridData(SWT.FILL, SWT.TOP, true, true) );
 		
 		//---------------------------------STRING--------------------------------
 		Label stringCountLabel = new Label(top, SWT.NONE);
 		stringCountLabel.setText(TuxGuitar.getProperty("tuning.strings") + ":");
-		stringCountLabel.setLayoutData(new GridData(SWT.LEFT,SWT.CENTER,true,true));
+		stringCountLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true));
 		
 		this.stringCountSpinner = new Spinner(top, SWT.BORDER);
-		this.stringCountSpinner.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,true));
-		//this.stringCountSpinner.setLayoutData(getAlignmentData(80,SWT.FILL));
+		this.stringCountSpinner.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
+		//this.stringCountSpinner.setLayoutData(getAlignmentData(80, SWT.FILL));
 		this.stringCountSpinner.setMinimum(MIN_STRINGS);
 		this.stringCountSpinner.setMaximum(MAX_STRINGS);
 		this.stringCountSpinner.setSelection(this.stringCount);
@@ -254,11 +254,11 @@ public class TrackPropertiesAction extends Action {
 		//---------------------------------OFFSET--------------------------------
 		Label offsetLabel = new Label(middle, SWT.NONE);
 		offsetLabel.setText(TuxGuitar.getProperty("tuning.offset") + ":");
-		offsetLabel.setLayoutData(new GridData(SWT.LEFT,SWT.CENTER,true,true));
+		offsetLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true));
 		
 		this.offsetCombo = new Combo(middle, SWT.DROP_DOWN | SWT.READ_ONLY);
-		//this.offsetCombo.setLayoutData(getAlignmentData(80,SWT.LEFT));
-		this.offsetCombo.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,true));
+		//this.offsetCombo.setLayoutData(getAlignmentData(80, SWT.LEFT));
+		this.offsetCombo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
 		for(int i = TGTrack.MIN_OFFSET;i <= TGTrack.MAX_OFFSET;i ++){
 			this.offsetCombo.add(Integer.toString(i));
 			if(i == track.getOffset()){
@@ -268,17 +268,17 @@ public class TrackPropertiesAction extends Action {
 		
 		//---------------------------------OPTIONS----------------------------------
 		this.stringTransposition = new Button( bottom , SWT.CHECK );
-		this.stringTransposition.setLayoutData( new GridData(SWT.FILL,SWT.CENTER,true,true) );
+		this.stringTransposition.setLayoutData( new GridData(SWT.FILL, SWT.CENTER, true, true) );
 		this.stringTransposition.setText(TuxGuitar.getProperty("tuning.strings.transpose"));
 		this.stringTransposition.setSelection( true );
 		
 		this.stringTranspositionApplyToChords = new Button( bottom , SWT.CHECK );
-		this.stringTranspositionApplyToChords.setLayoutData( new GridData(SWT.FILL,SWT.CENTER,true,true) );
+		this.stringTranspositionApplyToChords.setLayoutData( new GridData(SWT.FILL, SWT.CENTER, true, true) );
 		this.stringTranspositionApplyToChords.setText(TuxGuitar.getProperty("tuning.strings.transpose.apply-to-chords"));
 		this.stringTranspositionApplyToChords.setSelection( true );
 		
 		this.stringTranspositionTryKeepString = new Button( bottom , SWT.CHECK );
-		this.stringTranspositionTryKeepString.setLayoutData( new GridData(SWT.FILL,SWT.CENTER,true,true) );
+		this.stringTranspositionTryKeepString.setLayoutData( new GridData(SWT.FILL, SWT.CENTER, true, true) );
 		this.stringTranspositionTryKeepString.setText(TuxGuitar.getProperty("tuning.strings.transpose.try-keep-strings"));
 		this.stringTranspositionTryKeepString.setSelection( true );
 		
@@ -293,7 +293,7 @@ public class TrackPropertiesAction extends Action {
 		});
 	}
 	
-	private GridData getAlignmentData(int minimumWidth,int horizontalAlignment){
+	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment){
 		GridData data = new GridData();
 		data.minimumWidth = minimumWidth;
 		data.horizontalAlignment = horizontalAlignment;
@@ -326,24 +326,24 @@ public class TrackPropertiesAction extends Action {
 		this.dialog.setDefaultButton( buttonOK );
 	}
 	
-	private void initInstrumentFields(Composite composite,TGTrackImpl track) {
+	private void initInstrumentFields(Composite composite, TGTrackImpl track) {
 		composite.setLayout(new GridLayout());
 		
 		Composite top = new Composite(composite, SWT.NONE);
 		top.setLayout(new GridLayout());
-		top.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,true));
+		top.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
 		
 		Composite bottom = new Composite(composite, SWT.NONE);
 		bottom.setLayout(new GridLayout());
-		bottom.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,true));
+		bottom.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, true));
 		
 		//------------Instrument Combo-------------------------------------
 		Label instrumentLabel = new Label(top, SWT.NONE);
 		instrumentLabel.setText(TuxGuitar.getProperty("instrument.instrument") + ":");
-		instrumentLabel.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,true,true));
+		instrumentLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true));
 		
 		this.instrumentCombo = new Combo(top, SWT.DROP_DOWN | SWT.READ_ONLY);
-		this.instrumentCombo.setLayoutData(getAlignmentData(MINIMUM_LEFT_CONTROLS_WIDTH,SWT.FILL));
+		this.instrumentCombo.setLayoutData(getAlignmentData(MINIMUM_LEFT_CONTROLS_WIDTH, SWT.FILL));
 		MidiInstrument[] instruments = TuxGuitar.instance().getPlayer().getInstruments();
 		if (instruments != null) {
 			int count = instruments.length;
@@ -360,7 +360,7 @@ public class TrackPropertiesAction extends Action {
 		//--------------------Precusion CheckBox-------------------------------
 		this.percussionCheckBox = new Button(bottom, SWT.CHECK);
 		this.percussionCheckBox.setText(TuxGuitar.getProperty("instrument.percussion-track"));
-		this.percussionCheckBox.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,true,true));
+		this.percussionCheckBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true));
 		if (instruments != null) {
 			this.percussionCheckBox.setSelection(track.isPercussionTrack());
 			this.percussionCheckBox.addSelectionListener(new SelectionAdapter() {
@@ -392,9 +392,9 @@ public class TrackPropertiesAction extends Action {
 		final int instrument = ((this.instrumentCombo.getSelectionIndex() >= 0)?this.instrumentCombo.getSelectionIndex():0);
 		
 		final TGColor trackColor = this.trackColor;
-		final boolean infoChanges = hasInfoChanges(track,trackName,trackColor,offset);
-		final boolean tuningChanges = hasTuningChanges(track,strings);
-		final boolean instrumentChanges = hasInstrumentChanges(track,instrument,percussion);
+		final boolean infoChanges = hasInfoChanges(track, trackName, trackColor, offset);
+		final boolean tuningChanges = hasTuningChanges(track, strings);
+		final boolean instrumentChanges = hasInstrumentChanges(track, instrument, percussion);
 		final boolean transposeStrings = (this.stringTransposition.getSelection() && !percussion && !track.isPercussionTrack() );
 		final boolean transposeApplyToChords = (transposeStrings && this.stringTranspositionApplyToChords.getSelection());
 		final boolean transposeTryKeepString = (transposeStrings && this.stringTranspositionTryKeepString.getSelection());
@@ -421,7 +421,7 @@ public class TrackPropertiesAction extends Action {
 									if(!tuningChanges){
 										undoableInfo = UndoableTrackInfo.startUndo(track);
 									}
-									getSongManager().getTrackManager().changeInfo(track,trackName,trackColor,offset);
+									getSongManager().getTrackManager().changeInfo(track, trackName, trackColor, offset);
 									if(!tuningChanges && undoableInfo != null){
 										undoable.addUndoableEdit(undoableInfo.endUndo(track));
 									}
@@ -436,7 +436,7 @@ public class TrackPropertiesAction extends Action {
 									if(!tuningChanges){
 										undoableInstrument = UndoableTrackInstrument.startUndo(track);
 									}
-									getSongManager().getTrackManager().changeInstrument(track,instrument,percussion);
+									getSongManager().getTrackManager().changeInstrument(track, instrument, percussion);
 									if(!tuningChanges && undoableInstrument != null){
 										undoable.addUndoableEdit(undoableInstrument.endUndo(track));
 									}
@@ -469,7 +469,7 @@ public class TrackPropertiesAction extends Action {
 		}
 	}
 	
-	protected boolean hasInfoChanges(TGTrackImpl track,String name,TGColor color,int offset){
+	protected boolean hasInfoChanges(TGTrackImpl track, String name, TGColor color, int offset){
 		if(!name.equals(track.getName())){
 			return true;
 		}
@@ -482,11 +482,11 @@ public class TrackPropertiesAction extends Action {
 		return false;
 	}
 	
-	protected boolean hasInstrumentChanges(TGTrackImpl track,int instrument,boolean percussion){
+	protected boolean hasInstrumentChanges(TGTrackImpl track, int instrument, boolean percussion){
 		return ((track.getChannel().getInstrument() != instrument) || (track.isPercussionTrack() != percussion));
 	}
 	
-	protected boolean hasTuningChanges(TGTrackImpl track,List newStrings){
+	protected boolean hasTuningChanges(TGTrackImpl track, List newStrings){
 		List oldStrings = track.getStrings();
 		//check the number of strings
 		if(oldStrings.size() != newStrings.size()){
@@ -511,7 +511,7 @@ public class TrackPropertiesAction extends Action {
 	
 	protected void updateTrackTunings(TGTrackImpl track, List strings, boolean transposeStrings , boolean transposeTryKeepString , boolean transposeApplyToChords ){
 		int[] transpositions = getStringTranspositions(track, strings);
-		getSongManager().getTrackManager().changeInstrumentStrings(track,strings);
+		getSongManager().getTrackManager().changeInstrumentStrings(track, strings);
 		if( transposeStrings ){
 			getSongManager().getTrackManager().transposeNotes(track, transpositions, transposeTryKeepString, transposeApplyToChords );
 		}
@@ -594,44 +594,44 @@ public class TrackPropertiesAction extends Action {
 		this.tempStrings.clear();
 		if (this.percussionCheckBox.getSelection()) {
 			for (int i = 1; i <= this.stringCount; i++) {
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),i, 0));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), i, 0));
 			}
 		}
 		else {
 			switch (this.stringCount) {
 			case 7:
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),1, 64));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),2, 59));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),3, 55));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),4, 50));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),5, 45));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),6, 40));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),7, 35));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 1, 64));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 2, 59));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 3, 55));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 4, 50));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 5, 45));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 6, 40));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 7, 35));
 				break;
 			case 6:
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),1, 64));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),2, 59));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),3, 55));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),4, 50));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),5, 45));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),6, 40));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 1, 64));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 2, 59));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 3, 55));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 4, 50));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 5, 45));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 6, 40));
 				break;
 			case 5:
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),1, 43));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),2, 38));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),3, 33));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),4, 28));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),5, 23));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 1, 43));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 2, 38));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 3, 33));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 4, 28));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 5, 23));
 				break;
 			case 4:
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),1, 43));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),2, 38));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),3, 33));
-				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),4, 28));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 1, 43));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 2, 38));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 3, 33));
+				this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), 4, 28));
 				break;
 			default:
 				for( int i = 1 ; i <= this.stringCount ; i ++ ){
-					this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(),i,0));
+					this.tempStrings.add(TGSongManager.newString(getSongManager().getFactory(), i, 0));
 				}
 				break;
 			}

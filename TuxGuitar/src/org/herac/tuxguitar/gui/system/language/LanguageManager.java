@@ -86,7 +86,7 @@ public class LanguageManager {
 		return false;
 	}
 	
-	public String getProperty(String key,String value) {
+	public String getProperty(String key, String value) {
 		try {
 			String property = this.resources.getString(key);
 			return (property == null ? value : property );
@@ -96,15 +96,15 @@ public class LanguageManager {
 	}
 	
 	public String getProperty(String key) {
-		return this.getProperty(key,key);
+		return this.getProperty(key, key);
 	}
 	
 	public String getProperty(String key, Object[] arguments) {
-		return getProperty(key,key,arguments);
+		return getProperty(key, key, arguments);
 	}
 	
-	public String getProperty(String key,String value, Object[] arguments) {
-		String property = this.getProperty(key,value);
+	public String getProperty(String key, String value, Object[] arguments) {
+		String property = this.getProperty(key, value);
 		return ( arguments != null ? MessageFormat.format(property, arguments) : property );
 	}
 	

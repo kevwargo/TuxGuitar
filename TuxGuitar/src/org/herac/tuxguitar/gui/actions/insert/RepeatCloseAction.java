@@ -59,9 +59,9 @@ public class RepeatCloseAction extends Action{
 				currentRepeatClose = 1;
 			}
 			
-			Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			group.setLayout(new GridLayout(2,false));
-			group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			group.setLayout(new GridLayout(2, false));
+			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			group.setText(TuxGuitar.getProperty("repeat.close"));
 			
 			Label repeatCloseLabel = new Label(group, SWT.NULL);
@@ -75,15 +75,15 @@ public class RepeatCloseAction extends Action{
 			
 			//----------------------BUTTONS--------------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(3,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(3, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
 			buttonOK.setLayoutData(getButtonData());
 			buttonOK.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent arg0) {
-					closeRepeat(measure,repeatClose.getSelection());
+					closeRepeat(measure, repeatClose.getSelection());
 					dialog.dispose();
 				}
 			});
@@ -92,7 +92,7 @@ public class RepeatCloseAction extends Action{
 			buttonClean.setLayoutData(getButtonData());
 			buttonClean.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent arg0) {
-					closeRepeat(measure,0);
+					closeRepeat(measure, 0);
 					dialog.dispose();
 				}
 			});
@@ -107,7 +107,7 @@ public class RepeatCloseAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
@@ -119,7 +119,7 @@ public class RepeatCloseAction extends Action{
 	}
 	
 	protected GridData getSpinnerData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 100;
 		return data;
 	}

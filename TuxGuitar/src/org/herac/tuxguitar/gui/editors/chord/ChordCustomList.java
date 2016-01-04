@@ -33,28 +33,28 @@ public class ChordCustomList extends Composite {
 	private ChordDialog dialog;
 	private List chords;
 	
-	public ChordCustomList(ChordDialog dialog,Composite parent,int style,int height) {
-		super(parent,style);
-		this.setLayout(dialog.gridLayout(1,false,0,0));
+	public ChordCustomList(ChordDialog dialog, Composite parent, int style, int height) {
+		super(parent, style);
+		this.setLayout(dialog.gridLayout(1, false, 0, 0));
 		this.setLayoutData(makeGridData(height));
 		this.dialog = dialog;
 		this.init();
 	}
 	
 	public GridData makeGridData(int height){
-		GridData data = new GridData(SWT.FILL,SWT.TOP,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.TOP, true, true);
 		data.heightHint = height;
 		
 		return data;
 	}
 	
 	public void init(){
-		Composite composite = new Composite(this,SWT.NONE);
+		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		this.chords = new List(composite,SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		this.chords.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.chords = new List(composite, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		this.chords.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.chords.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				if(getDialog().getEditor() != null){
@@ -64,10 +64,10 @@ public class ChordCustomList extends Composite {
 		});
 		
 		//-------------BUTTONS-----------------------------
-		Composite buttons = new Composite(this,SWT.NONE);
-		buttons.setLayout(new GridLayout(3,false));
+		Composite buttons = new Composite(this, SWT.NONE);
+		buttons.setLayout(new GridLayout(3, false));
 		
-		Button add = new Button(buttons,SWT.PUSH);
+		Button add = new Button(buttons, SWT.PUSH);
 		add.setText(TuxGuitar.getProperty("add"));
 		add.addSelectionListener(new SelectionAdapter(){
 			public void widgetSelected(SelectionEvent e) {
@@ -75,7 +75,7 @@ public class ChordCustomList extends Composite {
 			}
 		});
 		
-		Button rename = new Button(buttons,SWT.PUSH);
+		Button rename = new Button(buttons, SWT.PUSH);
 		rename.setText(TuxGuitar.getProperty("rename"));
 		rename.addSelectionListener(new SelectionAdapter(){
 			public void widgetSelected(SelectionEvent e) {
@@ -83,7 +83,7 @@ public class ChordCustomList extends Composite {
 			}
 		});
 		
-		Button remove = new Button(buttons,SWT.PUSH);
+		Button remove = new Button(buttons, SWT.PUSH);
 		remove.setText(TuxGuitar.getProperty("remove"));
 		remove.addSelectionListener(new SelectionAdapter(){
 			public void widgetSelected(SelectionEvent e) {
@@ -127,11 +127,11 @@ public class ChordCustomList extends Composite {
 			String name = nDialog.open();
 			if(name != null){
 				if(name.length() == 0){
-					MessageDialog.errorMessage(getShell(),TuxGuitar.getProperty("chord.custom.name-empty-error"));
+					MessageDialog.errorMessage(getShell(), TuxGuitar.getProperty("chord.custom.name-empty-error"));
 					return;
 				}
 				if(TuxGuitar.instance().getCustomChordManager().existOtherEqualCustomChord(name,-1)){
-					MessageDialog.errorMessage(getShell(),TuxGuitar.getProperty("chord.custom.name-exist-error"));
+					MessageDialog.errorMessage(getShell(), TuxGuitar.getProperty("chord.custom.name-exist-error"));
 					return;
 				}
 				chord.setName(name);
@@ -147,14 +147,14 @@ public class ChordCustomList extends Composite {
 			String name = new NameDialog(chord.getName()).open();
 			if(name != null){
 				if(name.length() == 0){
-					MessageDialog.errorMessage(getShell(),TuxGuitar.getProperty("chord.custom.name-empty-error"));
+					MessageDialog.errorMessage(getShell(), TuxGuitar.getProperty("chord.custom.name-empty-error"));
 					return;
 				}
-				if(TuxGuitar.instance().getCustomChordManager().existOtherEqualCustomChord(name,index)){
-					MessageDialog.errorMessage(getShell(),TuxGuitar.getProperty("chord.custom.name-exist-error"));
+				if(TuxGuitar.instance().getCustomChordManager().existOtherEqualCustomChord(name, index)){
+					MessageDialog.errorMessage(getShell(), TuxGuitar.getProperty("chord.custom.name-exist-error"));
 					return;
 				}
-				TuxGuitar.instance().getCustomChordManager().renameChord(index,name);
+				TuxGuitar.instance().getCustomChordManager().renameChord(index, name);
 				loadChords();
 			}
 		}
@@ -191,27 +191,27 @@ public class ChordCustomList extends Composite {
 			dialog.setLayout(new GridLayout());
 			dialog.setText(TuxGuitar.getProperty("chord.custom"));
 			
-			Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			group.setLayout(new GridLayout());
-			group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			group.setText(TuxGuitar.getProperty("chord.custom"));
 			
 			Composite composite = new Composite(group, SWT.NONE);
-			composite.setLayout(new GridLayout(2,false));
+			composite.setLayout(new GridLayout(2, false));
 			composite.setLayoutData(getMainData());
 			
-			final Label label = new Label(composite,SWT.LEFT);
+			final Label label = new Label(composite, SWT.LEFT);
 			label.setText(TuxGuitar.getProperty("chord.name") + ":");
-			label.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,false,true));
+			label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, true));
 			
-			final Text text = new Text(composite,SWT.BORDER | SWT.SINGLE);
-			text.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			final Text text = new Text(composite, SWT.BORDER | SWT.SINGLE);
+			text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			text.setText(this.name);
 			
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -235,13 +235,13 @@ public class ChordCustomList extends Composite {
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 			
 			return this.name;
 		}
 		
 		private GridData getMainData(){
-			GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+			GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 			data.minimumWidth = 300;
 			return data;
 		}

@@ -28,12 +28,12 @@ public class KeyBindingWriter {
 	private static final String SHORTCUT_ATTRIBUTE_KEY = "key";
 	private static final String SHORTCUT_ATTRIBUTE_MASK = "mask";
 	
-	public static void setBindings(List list,String fileName) {
+	public static void setBindings(List list, String fileName) {
 		try{
 			File file = new File(fileName);
 			Document doc = createDocument();
-			setBindings(list,doc);
-			saveDocument(doc,file);
+			setBindings(list, doc);
+			saveDocument(doc, file);
 		}catch(Throwable throwable){
 			throwable.printStackTrace();
 		}
@@ -51,7 +51,7 @@ public class KeyBindingWriter {
 		return null;
 	}
 	
-	public static void saveDocument(Document document,File file) {
+	public static void saveDocument(Document document, File file) {
 		try {
 			FileOutputStream fs = new FileOutputStream(file);
 			
@@ -73,7 +73,7 @@ public class KeyBindingWriter {
 	 * @param shortcutsNode
 	 * @return
 	 */
-	private static void setBindings(List list,Document document){
+	private static void setBindings(List list, Document document){
 		Node shortcutsNode = document.createElement(SHORTCUT_ROOT);
 		
 		Iterator it = list.iterator();

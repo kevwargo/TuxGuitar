@@ -42,7 +42,7 @@ public class CompositionMenuItem extends MenuItems{
 	
 	private MenuItem properties;
 	
-	public CompositionMenuItem(Shell shell,Menu parent, int style) {
+	public CompositionMenuItem(Shell shell, Menu parent, int style) {
 		this.compositionMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}

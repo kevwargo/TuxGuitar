@@ -2,13 +2,13 @@ package org.herac.tuxguitar.util;
 
 public class TGVersion {
 	
-	public static final TGVersion CURRENT = new TGVersion(1,2,0);
+	public static final TGVersion CURRENT = new TGVersion(1, 2, 0);
 	
 	private int major;
 	private int minor;
 	private int revision;
 	
-	public TGVersion(int major,int minor, int revision){
+	public TGVersion(int major, int minor, int revision){
 		this.major = major;
 		this.minor = minor;
 		this.revision = revision;

@@ -65,9 +65,9 @@ public abstract class TGTrack {
 		this.measures.add(measure);
 	}
 	
-	public void addMeasure(int index,TGMeasure measure){
+	public void addMeasure(int index, TGMeasure measure){
 		measure.setTrack(this);
-		this.measures.add(index,measure);
+		this.measures.add(index, measure);
 	}
 	
 	public TGMeasure getMeasure(int index){
@@ -184,13 +184,13 @@ public abstract class TGTrack {
 		this.measures.clear();
 	}
 	
-	public TGTrack clone(TGFactory factory,TGSong song){
+	public TGTrack clone(TGFactory factory, TGSong song){
 		TGTrack track = factory.newTrack();
 		copy(factory, song, track);
 		return track;
 	}
 	
-	public void copy(TGFactory factory,TGSong song,TGTrack track){
+	public void copy(TGFactory factory, TGSong song, TGTrack track){
 		track.clear();
 		track.setNumber(getNumber());
 		track.setName(getName());
@@ -204,7 +204,7 @@ public abstract class TGTrack {
 		}
 		for (int i = 0; i < countMeasures(); i++) {
 			TGMeasure measure = getMeasure(i);
-			track.addMeasure(measure.clone(factory,song.getMeasureHeader(i)));
+			track.addMeasure(measure.clone(factory, song.getMeasureHeader(i)));
 		}
 	}
 	

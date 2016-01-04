@@ -30,7 +30,7 @@ public class ChangeStaccatoAction extends Action{
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
-		getSongManager().getMeasureManager().changeStaccato(caret.getMeasure(),caret.getPosition(),caret.getSelectedString().getNumber());
+		getSongManager().getMeasureManager().changeStaccato(caret.getMeasure(), caret.getPosition(), caret.getSelectedString().getNumber());
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		updateTablature();
 		

@@ -56,7 +56,7 @@ public class ViewMenuItem extends MenuItems{
 	private MenuItem chordName;
 	private MenuItem chordDiagram;
 	
-	public ViewMenuItem(Shell shell,Menu parent, int style) {
+	public ViewMenuItem(Shell shell, Menu parent, int style) {
 		this.layoutMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
@@ -111,7 +111,7 @@ public class ViewMenuItem extends MenuItems{
 		new MenuItem(this.menu, SWT.SEPARATOR);
 		
 		//--CHORD STYLE
-		this.chordMenuItem = new MenuItem(this.menu,SWT.CASCADE);
+		this.chordMenuItem = new MenuItem(this.menu, SWT.CASCADE);
 		this.chordMenu = new Menu(this.menu.getShell(), SWT.DROP_DOWN);
 		
 		this.chordName = new MenuItem(this.chordMenu, SWT.CHECK);

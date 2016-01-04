@@ -64,7 +64,7 @@ public class PrintPreviewAction extends Action{
 					manager.setFactory(new TGFactoryImpl());
 					manager.setSong(getSongManager().getSong().clone(manager.getFactory()));
 				
-					printPreview(manager,data);
+					printPreview(manager, data);
 				}catch(Throwable throwable){
 					MessageDialog.errorMessage(throwable);
 				}
@@ -79,7 +79,7 @@ public class PrintPreviewAction extends Action{
 					Tablature tablature = new Tablature(TuxGuitar.instance().getShell());
 					tablature.setSongManager(manager);
 					
-					PrinterViewLayout layout = new PrinterViewLayout(tablature,data, 1f);
+					PrinterViewLayout layout = new PrinterViewLayout(tablature, data, 1f);
 					
 					printPreview( layout );
 				}catch(Throwable throwable){
@@ -94,10 +94,10 @@ public class PrintPreviewAction extends Action{
 			public void run() {
 				try{
 					layout.getTablature().updateTablature();
-					layout.makeDocument(new PrintDocumentImpl(layout, new Rectangle(0,0,850,1050)));
+					layout.makeDocument(new PrintDocumentImpl(layout, new Rectangle(0, 0, 850, 1050)));
 					//new SyncThread(new Runnable() {
 					//	public void run() {
-					//		layout.makeDocument(new PrintDocumentImpl(layout, new Rectangle(0,0,850,1050)));
+					//		layout.makeDocument(new PrintDocumentImpl(layout, new Rectangle(0, 0, 850, 1050)));
 					//	}
 					//}).start();
 				}catch(Throwable throwable){
@@ -130,7 +130,7 @@ public class PrintPreviewAction extends Action{
 		}
 		
 		public void pageStart() {
-			Image page = new Image(this.layout.getTablature().getDisplay(),this.bounds.width - this.bounds.x, this.bounds.height - this.bounds.y);
+			Image page = new Image(this.layout.getTablature().getDisplay(), this.bounds.width - this.bounds.x, this.bounds.height - this.bounds.y);
 			this.painter.init( page );
 			this.pages.add( page );
 		}
@@ -151,7 +151,7 @@ public class PrintPreviewAction extends Action{
 				TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable(){
 					public void run() {
 						tablature.dispose();
-						PrintPreview preview = new PrintPreview(pages,bounds);
+						PrintPreview preview = new PrintPreview(pages, bounds);
 						preview.showPreview(getEditor().getTablature().getShell());
 						Iterator it = pages.iterator();
 						while(it.hasNext()){

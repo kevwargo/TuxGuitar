@@ -25,7 +25,7 @@ public abstract class TGSpacing {
 		}
 	}
 	
-	public void setSize(int index,int size){
+	public void setSize(int index, int size){
 		if( size > this.spacing[ this.positions [this.flags -1] [index] ] ){
 			this.spacing[ this.positions [this.flags -1] [index] ] = size;
 		}

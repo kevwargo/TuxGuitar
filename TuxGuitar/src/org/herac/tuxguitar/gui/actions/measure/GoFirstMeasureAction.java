@@ -35,7 +35,7 @@ public class GoFirstMeasureAction extends Action{
 			TGTrackImpl track = caret.getTrack();
 			TGMeasureImpl measure = (TGMeasureImpl)getSongManager().getTrackManager().getFirstMeasure(track);
 			if(track != null && measure != null){
-				caret.update(track.getNumber(),measure.getStart(),caret.getSelectedString().getNumber());
+				caret.update(track.getNumber(), measure.getStart(), caret.getSelectedString().getNumber());
 			}
 		}
 		return 0;

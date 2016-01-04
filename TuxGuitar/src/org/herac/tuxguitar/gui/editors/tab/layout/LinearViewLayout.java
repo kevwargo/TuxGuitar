@@ -24,15 +24,15 @@ import org.herac.tuxguitar.gui.editors.tab.Tablature;
  */
 public class LinearViewLayout extends ViewLayout{
 
-    public LinearViewLayout(Tablature tablature,int style){
-        super(tablature,style);
+    public LinearViewLayout(Tablature tablature, int style){
+        super(tablature, style);
     }
 
     public int getMode(){
         return MODE_LINEAR;
     }
 
-    public void paintSong(TGPainter painter,Rectangle clientArea,int fromX,int fromY) {
+    public void paintSong(TGPainter painter, Rectangle clientArea, int fromX, int fromY) {
         this.setWidth(0);
         this.setHeight(0);
         this.clearTrackPositions();
@@ -70,7 +70,7 @@ public class LinearViewLayout extends ViewLayout{
                     TGMeasureImpl measure = (TGMeasureImpl)measures.next();
                     maxY = (measure.getMaxY() > maxY)?measure.getMaxY():maxY;
                     minY = (measure.getMinY() < minY)?measure.getMinY():minY;
-                    measure.registerSpacing(this,ts);
+                    measure.registerSpacing(this, ts);
                 }
                 ts.setSize(TGTrackSpacing.POSITION_SCORE_UP_LINES, ( (style & DISPLAY_SCORE) != 0 ?Math.abs(minY):0));
                 if((style & DISPLAY_SCORE) != 0 && maxY + getMinScoreTabSpacing() > getScoreSpacing()){
@@ -81,15 +81,15 @@ public class LinearViewLayout extends ViewLayout{
                     ts.setSize(TGTrackSpacing.POSITION_TABLATURE_TOP_SEPARATOR, ((style & DISPLAY_SCORE) != 0 ? getMinScoreTabSpacing() : Math.max(Math.abs(minY), getStringSpacing()) ));
                     ts.setSize(TGTrackSpacing.POSITION_TABLATURE, ((style & DISPLAY_SCORE) != 0 ?  track.getTabHeight() + getStringSpacing() + 1 : Math.max(maxY, track.getTabHeight() + getStringSpacing() + 1) ));
                 }
-                ts.setSize(TGTrackSpacing.POSITION_LYRIC,10);
+                ts.setSize(TGTrackSpacing.POSITION_LYRIC, 10);
                 checkDefaultSpacing(ts);
 
                 //----------------------------------------------------
-                paintMeasures(track,painter,fromX,posY,ts,clientArea);
-                paintLines(track,ts,painter,fromX + (getWidth() + 2),posY,(clientArea.width - (fromX + getWidth()) ));
+                paintMeasures(track, painter, fromX, posY, ts, clientArea);
+                paintLines(track, ts, painter, fromX + (getWidth() + 2), posY,(clientArea.width - (fromX + getWidth()) ));
 
                 trackHeight = ts.getSize();
-                addTrackPosition(track.getNumber(),posY,trackHeight);
+                addTrackPosition(track.getNumber(), posY, trackHeight);
 
                 posY += trackHeight + getTrackSpacing();
                 height += trackHeight + getTrackSpacing();
@@ -103,7 +103,7 @@ public class LinearViewLayout extends ViewLayout{
         this.paintCaret(painter);
     }
 
-    public void paintMeasures(TGTrackImpl track,TGPainter painter,int fromX, int fromY,TGTrackSpacing ts,Rectangle clientArea) {
+    public void paintMeasures(TGTrackImpl track, TGPainter painter, int fromX, int fromY, TGTrackSpacing ts, Rectangle clientArea) {
         int posX = (fromX + getFirstMeasureSpacing());
         int posY = fromY;
         int width = getFirstMeasureSpacing();
@@ -123,8 +123,8 @@ public class LinearViewLayout extends ViewLayout{
             boolean isAtX = ((posX + measure.getWidth(this)) > clientArea.x - 100 && posX < clientArea.x + clientArea.width + measure.getWidth(this) + 100);
             boolean isAtY = (posY + ts.getSize() > clientArea.y && posY < clientArea.y + clientArea.height + 80);
             if(isAtX && isAtY){
-                paintMeasure(measure,painter,0);
-                ((TGLyricImpl)track.getLyrics()).paintCurrentNoteBeats(painter,this,measure,posX, posY);
+                paintMeasure(measure, painter, 0);
+                ((TGLyricImpl)track.getLyrics()).paintCurrentNoteBeats(painter, this, measure, posX, posY);
             }else{
                 measure.setOutOfBounds(true);
             }
@@ -133,6 +133,6 @@ public class LinearViewLayout extends ViewLayout{
             posX += measureWidth;
             width += measureWidth;
         }
-        this.setWidth(Math.max(getWidth(),width));
+        this.setWidth(Math.max(getWidth(), width));
     }
 }

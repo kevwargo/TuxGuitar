@@ -67,29 +67,29 @@ public class TremoloBarEditor{
 		}
 	}
 	
-	public TGEffectTremoloBar show(Shell shell,final TGNote note){
+	public TGEffectTremoloBar show(Shell shell, final TGNote note){
 		final Shell dialog = DialogUtils.newDialog(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		
 		dialog.setLayout(new GridLayout());
 		dialog.setText(TuxGuitar.getProperty("effects.tremolo-bar-editor"));
 		
 		//----------------------------------------------------------------------
-		Composite composite = new Composite(dialog,SWT.NONE);
-		composite.setLayout(new GridLayout(2,false));
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Composite composite = new Composite(dialog, SWT.NONE);
+		composite.setLayout(new GridLayout(2, false));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		Composite leftComposite = new Composite(composite,SWT.NONE);
+		Composite leftComposite = new Composite(composite, SWT.NONE);
 		leftComposite.setLayout(new GridLayout());
-		leftComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		leftComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		Composite rightComposite = new Composite(composite,SWT.NONE);
+		Composite rightComposite = new Composite(composite, SWT.NONE);
 		rightComposite.setLayout(new GridLayout());
-		rightComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		rightComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		//-------------EDITOR---------------------------------------------------
 		this.editor = new Composite(leftComposite, SWT.BORDER | SWT.DOUBLE_BUFFERED);
 		this.editor.setBackground(this.editor.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		this.editor.setLayoutData(resizeData(new GridData(SWT.FILL,SWT.FILL,true,true) , getWidth() + (X_SPACING * 2),getHeight() + (Y_SPACING * 2))  );
+		this.editor.setLayoutData(resizeData(new GridData(SWT.FILL, SWT.FILL, true, true) , getWidth() + (X_SPACING * 2), getHeight() + (Y_SPACING * 2))  );
 		this.editor.addPaintListener(new PaintListener() {
 			public void paintControl(PaintEvent e) {
 				TGPainter painter = new TGPainter(e.gc);
@@ -98,19 +98,19 @@ public class TremoloBarEditor{
 		});
 		this.editor.addMouseListener(new MouseAdapter() {
 			public void mouseUp(org.eclipse.swt.events.MouseEvent e) {
-				checkPoint(e.x,e.y);
+				checkPoint(e.x, e.y);
 				TremoloBarEditor.this.editor.redraw();
 			}
 		});
 		
 		//-------------DEFAULT BEND LIST---------------------------------------------------
 		this.resetDefaultTremoloBars();
-		final org.eclipse.swt.widgets.List defaultTremoloBarList = new org.eclipse.swt.widgets.List(rightComposite,SWT.BORDER);
+		final org.eclipse.swt.widgets.List defaultTremoloBarList = new org.eclipse.swt.widgets.List(rightComposite, SWT.BORDER);
 		for(int i = 0;i < this.defaultTremoloBars.length;i++){
 			defaultTremoloBarList.add(this.defaultTremoloBars[i].getName());
 		}
 		defaultTremoloBarList.select(0);
-		defaultTremoloBarList.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		defaultTremoloBarList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		defaultTremoloBarList.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				int index = defaultTremoloBarList.getSelectionIndex();
@@ -123,7 +123,7 @@ public class TremoloBarEditor{
 		
 		//------------------BUTTONS--------------------------
 		Button buttonClean = new Button(rightComposite, SWT.PUSH);
-		buttonClean.setLayoutData(resizeData(new GridData(SWT.FILL,SWT.BOTTOM,true,true), 80,25));
+		buttonClean.setLayoutData(resizeData(new GridData(SWT.FILL, SWT.BOTTOM, true, true), 80, 25));
 		buttonClean.setText(TuxGuitar.getProperty("clean"));
 		buttonClean.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -132,7 +132,7 @@ public class TremoloBarEditor{
 			}
 		});
 		Button buttonOK = new Button(rightComposite, SWT.PUSH);
-		buttonOK.setLayoutData(resizeData(new GridData(SWT.FILL,SWT.BOTTOM,true,false), 80,25));
+		buttonOK.setLayoutData(resizeData(new GridData(SWT.FILL, SWT.BOTTOM, true, false), 80, 25));
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
 		buttonOK.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -141,7 +141,7 @@ public class TremoloBarEditor{
 			}
 		});
 		Button buttonCancel = new Button(rightComposite, SWT.PUSH);
-		buttonCancel.setLayoutData(resizeData(new GridData(SWT.FILL,SWT.BOTTOM,true,false), 80,25));
+		buttonCancel.setLayoutData(resizeData(new GridData(SWT.FILL, SWT.BOTTOM, true, false), 80, 25));
 		buttonCancel.setText(TuxGuitar.getProperty("cancel"));
 		buttonCancel.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -163,7 +163,7 @@ public class TremoloBarEditor{
 		return this.result;
 	}
 	
-	private GridData resizeData(GridData data,int minimumWidth,int minimumHeight){
+	private GridData resizeData(GridData data, int minimumWidth, int minimumHeight){
 		data.minimumWidth = minimumWidth;
 		data.minimumHeight = minimumHeight;
 		return data;
@@ -171,19 +171,19 @@ public class TremoloBarEditor{
 	
 	protected void paintEditor(TGPainter painter){
 		for(int i = 0;i < this.x.length;i++){
-			this.setStyleX(painter,i);
+			this.setStyleX(painter, i);
 			painter.initPath();
 			painter.setAntialias(false);
-			painter.moveTo(this.x[i],Y_SPACING);
-			painter.lineTo(this.x[i],Y_SPACING + this.height);
+			painter.moveTo(this.x[i], Y_SPACING);
+			painter.lineTo(this.x[i], Y_SPACING + this.height);
 			painter.closePath();
 		}
 		for(int i = 0;i < this.y.length;i++){
-			this.setStyleY(painter,i);
+			this.setStyleY(painter, i);
 			painter.initPath();
 			painter.setAntialias(false);
-			painter.moveTo(X_SPACING,this.y[i]);
-			painter.lineTo(X_SPACING + this.width,this.y[i]);
+			painter.moveTo(X_SPACING, this.y[i]);
+			painter.lineTo(X_SPACING + this.width, this.y[i]);
 			painter.closePath();
 		}
 		
@@ -197,8 +197,8 @@ public class TremoloBarEditor{
 			Point point = (Point)it.next();
 			if(prevPoint != null){
 				painter.initPath();
-				painter.moveTo(prevPoint.x,prevPoint.y);
-				painter.lineTo(point.x,point.y);
+				painter.moveTo(prevPoint.x, prevPoint.y);
+				painter.lineTo(point.x, point.y);
 				painter.closePath();
 			}
 			prevPoint = point;
@@ -211,13 +211,13 @@ public class TremoloBarEditor{
 			Point point = (Point)it.next();
 			painter.initPath();
 			painter.setAntialias(false);
-			painter.addRectangle(point.x - 2,point.y - 2,5,5);
+			painter.addRectangle(point.x - 2, point.y - 2, 5, 5);
 			painter.closePath();
 		}
 		painter.setLineWidth(1);
 	}
 	
-	private void setStyleX(TGPainter painter,int i){
+	private void setStyleX(TGPainter painter, int i){
 		painter.setLineStyle(SWT.LINE_SOLID);
 		if(i == 0 || i == (X_LENGTH - 1)){
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
@@ -229,7 +229,7 @@ public class TremoloBarEditor{
 		}
 	}
 	
-	private void setStyleY(TGPainter painter,int i){
+	private void setStyleY(TGPainter painter, int i){
 		painter.setLineStyle(SWT.LINE_SOLID);
 		if(i == 0 || i == (Y_LENGTH - 1)){
 			painter.setForeground(this.editor.getDisplay().getSystemColor(SWT.COLOR_BLACK));
@@ -245,8 +245,8 @@ public class TremoloBarEditor{
 		}
 	}
 	
-	protected void checkPoint(int x,int y){
-		Point point = new Point(this.getX(x),this.getY(y));
+	protected void checkPoint(int x, int y){
+		Point point = new Point(this.getX(x), this.getY(y));
 		if(!this.removePoint(point)){
 			this.removePointsAtXLine(point.x);
 			this.addPoint(point);
@@ -276,7 +276,7 @@ public class TremoloBarEditor{
 				}
 			}
 			this.points.remove(minPoint);
-			this.points.add(i,minPoint);
+			this.points.add(i, minPoint);
 		}
 	}
 	
@@ -337,14 +337,14 @@ public class TremoloBarEditor{
 			Iterator it = this.points.iterator();
 			while(it.hasNext()){
 				Point point = (Point)it.next();
-				addTremoloBarPoint(tremoloBar,point);
+				addTremoloBarPoint(tremoloBar, point);
 			}
 			return tremoloBar;
 		}
 		return null;
 	}
 	
-	private void addTremoloBarPoint(TGEffectTremoloBar effect,Point point){
+	private void addTremoloBarPoint(TGEffectTremoloBar effect, Point point){
 		int position = 0;
 		int value = 0;
 		for(int i=0;i<this.x.length;i++){
@@ -357,7 +357,7 @@ public class TremoloBarEditor{
 				value = (TGEffectTremoloBar.MAX_VALUE_LENGTH - i);
 			}
 		}
-		effect.addPoint(position,value);
+		effect.addPoint(position, value);
 	}
 	
 	public void setTremoloBar(TGEffectTremoloBar effect){
@@ -373,7 +373,7 @@ public class TremoloBarEditor{
 		int indexX = tremoloBarPoint.getPosition();
 		int indexY = ( (this.y.length - TGEffectTremoloBar.MAX_VALUE_LENGTH) - tremoloBarPoint.getValue()) - 1;
 		if(indexX >= 0 && indexX < this.x.length && indexY >= 0 && indexY < this.y.length){
-			Point point = new Point(0,0);
+			Point point = new Point(0, 0);
 			point.x = this.x[indexX];
 			point.y = this.y[indexY];
 			this.points.add(point);
@@ -391,42 +391,42 @@ public class TremoloBarEditor{
 	private void resetDefaultTremoloBars(){
 		this.defaultTremoloBars = new DefaultTremoloBar[6];
 		
-		this.defaultTremoloBars[0] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.dip"),TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
-		this.defaultTremoloBars[0].getTremoloBar().addPoint(0,0);
+		this.defaultTremoloBars[0] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.dip"), TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
+		this.defaultTremoloBars[0].getTremoloBar().addPoint(0, 0);
 		this.defaultTremoloBars[0].getTremoloBar().addPoint(6,-2);
-		this.defaultTremoloBars[0].getTremoloBar().addPoint(12,0);
+		this.defaultTremoloBars[0].getTremoloBar().addPoint(12, 0);
 		
-		this.defaultTremoloBars[1] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.dive"),TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
-		this.defaultTremoloBars[1].getTremoloBar().addPoint(0,0);
+		this.defaultTremoloBars[1] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.dive"), TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
+		this.defaultTremoloBars[1].getTremoloBar().addPoint(0, 0);
 		this.defaultTremoloBars[1].getTremoloBar().addPoint(9,-2);
 		this.defaultTremoloBars[1].getTremoloBar().addPoint(12,-2);
 		
-		this.defaultTremoloBars[2] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.release-up"),TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
+		this.defaultTremoloBars[2] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.release-up"), TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
 		this.defaultTremoloBars[2].getTremoloBar().addPoint(0,-2);
 		this.defaultTremoloBars[2].getTremoloBar().addPoint(9,-2);
-		this.defaultTremoloBars[2].getTremoloBar().addPoint(12,0);
+		this.defaultTremoloBars[2].getTremoloBar().addPoint(12, 0);
 		
-		this.defaultTremoloBars[3] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.inverted-dip"),TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
-		this.defaultTremoloBars[3].getTremoloBar().addPoint(0,0);
-		this.defaultTremoloBars[3].getTremoloBar().addPoint(6,2);
-		this.defaultTremoloBars[3].getTremoloBar().addPoint(12,0);
+		this.defaultTremoloBars[3] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.inverted-dip"), TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
+		this.defaultTremoloBars[3].getTremoloBar().addPoint(0, 0);
+		this.defaultTremoloBars[3].getTremoloBar().addPoint(6, 2);
+		this.defaultTremoloBars[3].getTremoloBar().addPoint(12, 0);
 		
-		this.defaultTremoloBars[4] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.return"),TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
-		this.defaultTremoloBars[4].getTremoloBar().addPoint(0,0);
-		this.defaultTremoloBars[4].getTremoloBar().addPoint(9,2);
-		this.defaultTremoloBars[4].getTremoloBar().addPoint(12,2);
+		this.defaultTremoloBars[4] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.return"), TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
+		this.defaultTremoloBars[4].getTremoloBar().addPoint(0, 0);
+		this.defaultTremoloBars[4].getTremoloBar().addPoint(9, 2);
+		this.defaultTremoloBars[4].getTremoloBar().addPoint(12, 2);
 		
-		this.defaultTremoloBars[5] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.release-down"),TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
-		this.defaultTremoloBars[5].getTremoloBar().addPoint(0,2);
-		this.defaultTremoloBars[5].getTremoloBar().addPoint(9,2);
-		this.defaultTremoloBars[5].getTremoloBar().addPoint(12,0);
+		this.defaultTremoloBars[5] = new DefaultTremoloBar(TuxGuitar.getProperty("effects.tremolo-bar.release-down"), TuxGuitar.instance().getSongManager().getFactory().newEffectTremoloBar());
+		this.defaultTremoloBars[5].getTremoloBar().addPoint(0, 2);
+		this.defaultTremoloBars[5].getTremoloBar().addPoint(9, 2);
+		this.defaultTremoloBars[5].getTremoloBar().addPoint(12, 0);
 	}
 	
 	private class DefaultTremoloBar{
 		private String name;
 		private TGEffectTremoloBar tremoloBar;
 		
-		public DefaultTremoloBar(String name,TGEffectTremoloBar tremoloBar){
+		public DefaultTremoloBar(String name, TGEffectTremoloBar tremoloBar){
 			this.name = name;
 			this.tremoloBar = tremoloBar;
 		}

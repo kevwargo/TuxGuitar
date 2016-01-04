@@ -25,12 +25,12 @@ public class UndoableReplaceMeasures implements UndoableEdit{
 	private int freeSpace;
 	private long theMove;
 	
-	public UndoableReplaceMeasures(int p1,int p2,int toTrack){
+	public UndoableReplaceMeasures(int p1, int p2, int toTrack){
 		this.doAction = UNDO_ACTION;
 		this.toTrack = toTrack;
 		this.undoCaret = new UndoableCaretHelper();
 		this.undoMarkers = new UndoMarkers();
-		this.undoTrackMeasures = new TGSongSegmentHelper(TuxGuitar.instance().getSongManager()).copyMeasures(p1,p2);
+		this.undoTrackMeasures = new TGSongSegmentHelper(TuxGuitar.instance().getSongManager()).copyMeasures(p1, p2);
 	}
 	
 	public void redo() throws CannotRedoException {
@@ -40,7 +40,7 @@ public class UndoableReplaceMeasures implements UndoableEdit{
 		for(int i = this.freeSpace;i < this.count;i ++){
 			TuxGuitar.instance().getSongManager().addNewMeasureBeforeEnd();
 		}
-		new TGSongSegmentHelper(TuxGuitar.instance().getSongManager()).replaceMeasures(this.redoTrackMeasures.clone(TuxGuitar.instance().getSongManager().getFactory()),this.theMove,this.toTrack);
+		new TGSongSegmentHelper(TuxGuitar.instance().getSongManager()).replaceMeasures(this.redoTrackMeasures.clone(TuxGuitar.instance().getSongManager().getFactory()), this.theMove, this.toTrack);
 		
 		TuxGuitar.instance().fireUpdate();
 		this.redoCaret.update();
@@ -56,7 +56,7 @@ public class UndoableReplaceMeasures implements UndoableEdit{
 		for(int i = this.freeSpace;i < this.count;i ++){
 			TuxGuitar.instance().getSongManager().removeLastMeasure();
 		}
-		new TGSongSegmentHelper(TuxGuitar.instance().getSongManager()).replaceMeasures(this.undoTrackMeasures.clone(TuxGuitar.instance().getSongManager().getFactory()),0,0);
+		new TGSongSegmentHelper(TuxGuitar.instance().getSongManager()).replaceMeasures(this.undoTrackMeasures.clone(TuxGuitar.instance().getSongManager().getFactory()), 0, 0);
 		
 		TuxGuitar.instance().fireUpdate();
 		this.undoMarkers.undo();
@@ -73,7 +73,7 @@ public class UndoableReplaceMeasures implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public UndoableReplaceMeasures endUndo(TGSongSegment tracksMeasures,int count,int freeSpace,long theMove){
+	public UndoableReplaceMeasures endUndo(TGSongSegment tracksMeasures, int count, int freeSpace, long theMove){
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoTrackMeasures = tracksMeasures;
 		this.count = count;

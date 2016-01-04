@@ -28,8 +28,8 @@ public abstract class TGEffectTremoloBar {
 		this.points = new ArrayList();
 	}
 	
-	public void addPoint(int position,int value){
-		this.points.add(new TremoloBarPoint(position,value));
+	public void addPoint(int position, int value){
+		this.points.add(new TremoloBarPoint(position, value));
 	}
 	
 	public List getPoints(){
@@ -41,7 +41,7 @@ public abstract class TGEffectTremoloBar {
 		Iterator it = getPoints().iterator();
 		while(it.hasNext()){
 			TremoloBarPoint point = (TremoloBarPoint)it.next();
-			effect.addPoint(point.getPosition(),point.getValue());
+			effect.addPoint(point.getPosition(), point.getValue());
 		}
 		
 		return effect;
@@ -51,7 +51,7 @@ public abstract class TGEffectTremoloBar {
 		private int position;
 		private int value;
 		
-		public TremoloBarPoint(int position,int value){
+		public TremoloBarPoint(int position, int value){
 			this.position = position;
 			this.value = value;
 		}
@@ -69,7 +69,7 @@ public abstract class TGEffectTremoloBar {
 		}
 		
 		public Object clone(){
-			return new TremoloBarPoint(getPosition(),getValue());
+			return new TremoloBarPoint(getPosition(), getValue());
 		}
 	}
 	

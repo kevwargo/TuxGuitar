@@ -27,12 +27,12 @@ import org.w3c.dom.Node;
 
 public class ChordXMLWriter {
 	
-	public static void setChords(List chords,String fileName) {
+	public static void setChords(List chords, String fileName) {
 		File file = new File(fileName);
 		
 		Document doc = createDocument();
-		setChords(chords,doc);
-		saveDocument(doc,file);
+		setChords(chords, doc);
+		saveDocument(doc, file);
 	}
 	
 	public static Document createDocument() {
@@ -47,7 +47,7 @@ public class ChordXMLWriter {
 		return document;
 	}
 	
-	public static void saveDocument(Document document,File file) {
+	public static void saveDocument(Document document, File file) {
 		try {
 			FileOutputStream fs = new FileOutputStream(file);
 			
@@ -72,7 +72,7 @@ public class ChordXMLWriter {
 	/**
 	 * Write chords to xml file
 	 */
-	private static void setChords(List chords,Document document){
+	private static void setChords(List chords, Document document){
 		//chords tag
 		Node chordsNode = document.createElement(ChordXML.CHORD_LIST_TAG);
 		

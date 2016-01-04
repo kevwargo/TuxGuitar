@@ -136,7 +136,7 @@ public class TGFileFormatManager {
 		return formats;
 	}
 	
-	private boolean existsFormat(TGFileFormat format,List formats){
+	private boolean existsFormat(TGFileFormat format, List formats){
 		Iterator it = formats.iterator();
 		while(it.hasNext()){
 			TGFileFormat comparator = (TGFileFormat)it.next();

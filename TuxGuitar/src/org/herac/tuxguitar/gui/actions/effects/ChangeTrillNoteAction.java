@@ -41,7 +41,7 @@ public class ChangeTrillNoteAction extends Action{
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
-		getSongManager().getMeasureManager().changeTrillNote(caret.getMeasure(),caret.getPosition(),caret.getSelectedString().getNumber(),effect);
+		getSongManager().getMeasureManager().changeTrillNote(caret.getMeasure(), caret.getPosition(), caret.getSelectedString().getNumber(), effect);
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		updateTablature();
 		

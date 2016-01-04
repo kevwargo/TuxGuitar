@@ -17,7 +17,7 @@ public abstract class TGScale {
 		return this.key;
 	}
 	
-	public void setNote(int note,boolean on){
+	public void setNote(int note, boolean on){
 		this.notes[note] = on;
 	}
 	
@@ -28,7 +28,7 @@ public abstract class TGScale {
 	public void clear(){
 		this.setKey(0);
 		for(int i = 0; i < this.notes.length; i++){
-			this.setNote(i,false);
+			this.setNote(i, false);
 		}
 	}
 	

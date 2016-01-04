@@ -30,7 +30,7 @@ public class UndoableChangeTripletFeel implements UndoableEdit{
 		if(!canRedo()){
 			throw new CannotRedoException();
 		}
-		TuxGuitar.instance().getSongManager().changeTripletFeel(this.position,this.redoableTripletFeel,this.toEnd);
+		TuxGuitar.instance().getSongManager().changeTripletFeel(this.position, this.redoableTripletFeel, this.toEnd);
 		TuxGuitar.instance().fireUpdate();
 		this.redoCaret.update();
 		
@@ -41,12 +41,12 @@ public class UndoableChangeTripletFeel implements UndoableEdit{
 		if(!canUndo()){
 			throw new CannotUndoException();
 		}
-		TuxGuitar.instance().getSongManager().changeTripletFeel(this.position,this.undoableTripletFeel,this.toEnd);
+		TuxGuitar.instance().getSongManager().changeTripletFeel(this.position, this.undoableTripletFeel, this.toEnd);
 		if(this.toEnd){
 			Iterator it = this.nextTripletFeelPositions.iterator();
 			while(it.hasNext()){
 				TripletFeelPosition tfp = (TripletFeelPosition)it.next();
-				TuxGuitar.instance().getSongManager().changeTripletFeel(tfp.getPosition(),tfp.getTripletFeel(),true);
+				TuxGuitar.instance().getSongManager().changeTripletFeel(tfp.getPosition(), tfp.getTripletFeel(), true);
 			}
 		}
 		TuxGuitar.instance().fireUpdate();
@@ -79,7 +79,7 @@ public class UndoableChangeTripletFeel implements UndoableEdit{
 			if(measure.getStart() > undoable.position){
 				int currTripletFeel = measure.getTripletFeel();
 				if(prevTripletFeel != currTripletFeel){
-					TripletFeelPosition tfp = undoable.new TripletFeelPosition(measure.getStart(),currTripletFeel);
+					TripletFeelPosition tfp = undoable.new TripletFeelPosition(measure.getStart(), currTripletFeel);
 					undoable.nextTripletFeelPositions.add(tfp);
 				}
 				prevTripletFeel = currTripletFeel;
@@ -88,7 +88,7 @@ public class UndoableChangeTripletFeel implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableChangeTripletFeel endUndo(int tripletFeel,boolean toEnd){
+	public UndoableChangeTripletFeel endUndo(int tripletFeel, boolean toEnd){
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoableTripletFeel = tripletFeel;
 		this.toEnd = toEnd;
@@ -104,7 +104,7 @@ public class UndoableChangeTripletFeel implements UndoableEdit{
 		private long position;
 		private int tripletFeel;
 		
-		public TripletFeelPosition(long position,int tripletFeel) {
+		public TripletFeelPosition(long position, int tripletFeel) {
 			this.position = position;
 			this.tripletFeel = tripletFeel;
 		}

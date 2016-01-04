@@ -29,7 +29,7 @@ import org.herac.tuxguitar.gui.undo.undoables.custom.UndoableChangeMarker;
 import org.herac.tuxguitar.gui.util.DialogUtils;
 import org.herac.tuxguitar.song.models.TGMarker;
 
-public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
+public class MarkerList implements TGUpdateListener, IconLoader, LanguageLoader{
 	
 	private static MarkerList instance;
 	
@@ -61,15 +61,15 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 	
 	public void show() {
 		this.dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM);
-		this.dialog.setLayout(new GridLayout(2,false));
-		this.dialog.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.dialog.setLayout(new GridLayout(2, false));
+		this.dialog.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		// ----------------------------------------------------------------------
 		this.compositeTable = new Composite(this.dialog, SWT.NONE);
 		this.compositeTable.setLayout(new GridLayout());
 		this.compositeTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		this.table = new Table(this.compositeTable, SWT.BORDER | SWT.FULL_SELECTION);
-		this.table.setLayoutData(new GridData(250,200));
+		this.table.setLayoutData(new GridData(250, 200));
 		this.table.setHeaderVisible(true);
 		this.table.addListener (SWT.MouseDoubleClick, new Listener() {
 			public void handleEvent (Event event) {
@@ -87,11 +87,11 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 		
 		// ------------------BUTTONS--------------------------
 		this.compositeButtons = new Composite(this.dialog, SWT.NONE);
-		this.compositeButtons.setLayout(new GridLayout(1,false));
-		this.compositeButtons.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.compositeButtons.setLayout(new GridLayout(1, false));
+		this.compositeButtons.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		this.buttonAdd = new Button(this.compositeButtons, SWT.PUSH);
-		this.buttonAdd.setLayoutData(makeGridData(SWT.FILL, SWT.TOP,false));
+		this.buttonAdd.setLayoutData(makeGridData(SWT.FILL, SWT.TOP, false));
 		this.buttonAdd.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				if(!ActionLock.isLocked() && !TuxGuitar.instance().isLocked()){
@@ -99,7 +99,7 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 					Caret caret = TuxGuitar.instance().getTablatureEditor().getTablature().getCaret();
 					TGMarker marker = TuxGuitar.instance().getSongManager().getFactory().newMarker();
 					marker.setMeasure(caret.getMeasure().getNumber());
-					if(new MarkerEditor(marker,MarkerEditor.STATUS_NEW).open(MarkerList.this.dialog)){
+					if(new MarkerEditor(marker, MarkerEditor.STATUS_NEW).open(MarkerList.this.dialog)){
 						TuxGuitar.instance().updateCache(true);
 						loadTableItems(true);
 					}
@@ -109,14 +109,14 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 		});
 		
 		this.buttonEdit = new Button(this.compositeButtons, SWT.PUSH);
-		this.buttonEdit.setLayoutData(makeGridData(SWT.FILL, SWT.TOP,false));
+		this.buttonEdit.setLayoutData(makeGridData(SWT.FILL, SWT.TOP, false));
 		this.buttonEdit.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				if(!ActionLock.isLocked() && !TuxGuitar.instance().isLocked()){
 					ActionLock.lock();
 					TGMarker marker = getSelectedMarker();
 					if(marker != null){
-						if(new MarkerEditor(marker,MarkerEditor.STATUS_EDIT).open(MarkerList.this.dialog)){
+						if(new MarkerEditor(marker, MarkerEditor.STATUS_EDIT).open(MarkerList.this.dialog)){
 							TuxGuitar.instance().updateCache(true);
 							loadTableItems(true);
 						}
@@ -127,7 +127,7 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 		});
 		
 		this.buttonDelete = new Button(this.compositeButtons, SWT.PUSH);
-		this.buttonDelete.setLayoutData(makeGridData(SWT.FILL, SWT.TOP,false));
+		this.buttonDelete.setLayoutData(makeGridData(SWT.FILL, SWT.TOP, false));
 		this.buttonDelete.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				if(!ActionLock.isLocked() && !TuxGuitar.instance().isLocked()){
@@ -149,7 +149,7 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 		});
 		
 		this.buttonGo = new Button(this.compositeButtons, SWT.PUSH);
-		this.buttonGo.setLayoutData(makeGridData(SWT.FILL, SWT.BOTTOM,true));
+		this.buttonGo.setLayoutData(makeGridData(SWT.FILL, SWT.BOTTOM, true));
 		this.buttonGo.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				if(!ActionLock.isLocked() && !TuxGuitar.instance().isLocked()){
@@ -162,7 +162,7 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 		});
 		
 		this.buttonClose = new Button(this.compositeButtons, SWT.PUSH);
-		this.buttonClose.setLayoutData(makeGridData(SWT.FILL, SWT.BOTTOM,false));
+		this.buttonClose.setLayoutData(makeGridData(SWT.FILL, SWT.BOTTOM, false));
 		this.buttonClose.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				MarkerList.this.dialog.dispose();
@@ -180,7 +180,7 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 		});
 		this.dialog.setDefaultButton( this.buttonGo );
 		
-		DialogUtils.openDialog(this.dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
+		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
 	}
 	
 	public void addListeners(){
@@ -217,7 +217,7 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 		}
 	}
 	
-	private GridData makeGridData(int horizontalAlignment,int verticalAlignment,boolean grabExcessVerticalSpace){
+	private GridData makeGridData(int horizontalAlignment, int verticalAlignment, boolean grabExcessVerticalSpace){
 		GridData data = new GridData();
 		data.horizontalAlignment = horizontalAlignment;
 		data.verticalAlignment = verticalAlignment;
@@ -240,7 +240,7 @@ public class MarkerList implements TGUpdateListener, IconLoader,LanguageLoader{
 			TGMarker marker = (TGMarker) it.next();
 			
 			TableItem item = new TableItem(this.table, SWT.NONE);
-			item.setText(new String[] { Integer.toString(marker.getMeasure()),marker.getTitle() });
+			item.setText(new String[] { Integer.toString(marker.getMeasure()), marker.getTitle() });
 		}
 		
 		if(itemSelected >= 0 && itemSelected < this.markers.size()){

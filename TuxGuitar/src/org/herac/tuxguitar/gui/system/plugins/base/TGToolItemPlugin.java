@@ -19,7 +19,7 @@ public abstract class TGToolItemPlugin extends TGPluginAdapter{
 	
 	public void init() throws TGPluginException {
 		String name = getItemName();
-		this.tool = new TGCustomTool(name,name);
+		this.tool = new TGCustomTool(name, name);
 		this.toolAction = new TGCustomToolAction(this.tool.getName());
 	}
 	

@@ -31,7 +31,7 @@ public class MidiSequencerEmpty implements MidiSequencer{
 				// Not implemented
 			}
 			
-			public void addProgramChange(long tick, int track, int channel,int instrument) {
+			public void addProgramChange(long tick, int track, int channel, int instrument) {
 				// Not implemented
 			}
 			
@@ -39,15 +39,15 @@ public class MidiSequencerEmpty implements MidiSequencer{
 				// Not implemented
 			}
 			
-			public void addNoteOn(long tick, int track, int channel, int note,int velocity) {
+			public void addNoteOn(long tick, int track, int channel, int note, int velocity) {
 				// Not implemented
 			}
 			
-			public void addNoteOff(long tick, int track, int channel, int note,int velocity) {
+			public void addNoteOff(long tick, int track, int channel, int note, int velocity) {
 				// Not implemented
 			}
 			
-			public void addControlChange(long tick, int track, int channel,int controller, int value) {
+			public void addControlChange(long tick, int track, int channel, int controller, int value) {
 				// Not implemented
 			}
 		};

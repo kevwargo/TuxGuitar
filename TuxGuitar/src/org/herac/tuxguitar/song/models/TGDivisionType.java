@@ -15,7 +15,7 @@ import org.herac.tuxguitar.song.factory.TGFactory;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public abstract class TGDivisionType {
-	public static final TGDivisionType NORMAL = newDivisionType(1,1);
+	public static final TGDivisionType NORMAL = newDivisionType(1, 1);
 	
 	/**
 	 * Cantidad de Duraciones que entran en los tiempos
@@ -66,7 +66,7 @@ public abstract class TGDivisionType {
 		divisionType.setTimes(this.times);
 	}
 	
-	private static TGDivisionType newDivisionType(int enters,int times){
+	private static TGDivisionType newDivisionType(int enters, int times){
 		TGDivisionType divisionType = new TGFactory().newDivisionType();
 		divisionType.setEnters(enters);
 		divisionType.setTimes(times);

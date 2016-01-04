@@ -43,7 +43,7 @@ public class DurationMenuItem  extends MenuItems{
 	private MenuItem doubleDotted;
 	private MenuItem division;
 	
-	public DurationMenuItem(Shell shell,Menu parent, int style) {
+	public DurationMenuItem(Shell shell, Menu parent, int style) {
 		this.durationMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}

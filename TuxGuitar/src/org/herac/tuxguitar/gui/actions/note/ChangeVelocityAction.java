@@ -35,7 +35,7 @@ public class ChangeVelocityAction extends Action{
 			
 			Caret caret = getEditor().getTablature().getCaret();
 			caret.setVelocity(velocity);
-			getSongManager().getMeasureManager().changeVelocity(velocity,caret.getMeasure(),caret.getPosition(),caret.getSelectedString().getNumber());
+			getSongManager().getMeasureManager().changeVelocity(velocity, caret.getMeasure(), caret.getPosition(), caret.getSelectedString().getNumber());
 			updateTablature();
 			
 			//termia el undoable

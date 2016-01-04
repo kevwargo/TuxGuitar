@@ -36,15 +36,15 @@ public class PageViewLayout extends ViewLayout{
 	private int marginLeft;
 	private int marginRight;
 	
-	public PageViewLayout(Tablature tablature,int style){
-		super(tablature,style);
+	public PageViewLayout(Tablature tablature, int style){
+		super(tablature, style);
 	}
 	
 	public int getMode(){
 		return MODE_PAGE;
 	}
 	
-	public void paintSong(TGPainter painter,Rectangle clientArea,int fromX,int fromY) {
+	public void paintSong(TGPainter painter, Rectangle clientArea, int fromX, int fromY) {
 		this.maximumWidth = STATIC_WIDTH;
 		this.marginLeft = getFirstMeasureSpacing();
 		this.marginRight = 10;
@@ -75,7 +75,7 @@ public class PageViewLayout extends ViewLayout{
 						((TGLyricImpl)track.getLyrics()).start();
 					}
 					
-					line = getTempLines(track,nextMeasureIndex,ts);
+					line = getTempLines(track, nextMeasureIndex, ts);
 					if( (style & DISPLAY_SCORE) != 0 ){
 						ts.setSize(TGTrackSpacing.POSITION_SCORE_UP_LINES, Math.abs(line.minY));
 						if(line.maxY + getMinScoreTabSpacing() > getScoreSpacing()){
@@ -86,13 +86,13 @@ public class PageViewLayout extends ViewLayout{
 						ts.setSize(TGTrackSpacing.POSITION_TABLATURE_TOP_SEPARATOR, ((style & DISPLAY_SCORE) != 0 ? getMinScoreTabSpacing() : Math.max(Math.abs(line.minY), getStringSpacing()) ));
 						ts.setSize(TGTrackSpacing.POSITION_TABLATURE, ((style & DISPLAY_SCORE) != 0 ?  track.getTabHeight() + getStringSpacing() + 1 : Math.max( line.maxY, track.getTabHeight() + getStringSpacing() + 1) ));
 					}
-					ts.setSize(TGTrackSpacing.POSITION_LYRIC,10);
+					ts.setSize(TGTrackSpacing.POSITION_LYRIC, 10);
 					checkDefaultSpacing(ts);
 					
-					paintLine(track,line,painter,fromX,posY,ts,clientArea);
+					paintLine(track, line, painter, fromX, posY, ts, clientArea);
 					
 					lineHeight = ts.getSize();
-					addTrackPosition(track.getNumber(),posY,lineHeight);
+					addTrackPosition(track.getNumber(), posY, lineHeight);
 					
 					int emptyX = (this.marginLeft + fromX + line.tempWith + 2);
 					int emptyWith = ( getMaxWidth() - emptyX );
@@ -100,7 +100,7 @@ public class PageViewLayout extends ViewLayout{
 						if(emptyX < (clientArea.x + clientArea.width)){
 							emptyX = (emptyX < clientArea.x ? clientArea.x :emptyX);
 							emptyWith = ( emptyWith > clientArea.width ? clientArea.width : emptyWith );
-							paintLines(track,ts,painter, emptyX ,posY, emptyWith);
+							paintLines(track, ts, painter, emptyX , posY, emptyWith);
 						}
 					}
 					
@@ -118,7 +118,7 @@ public class PageViewLayout extends ViewLayout{
 		this.paintCaret(painter);
 	}
 	
-	public void paintLine(TGTrackImpl track,TempLine line,TGPainter painter,int fromX, int fromY,TGTrackSpacing ts,Rectangle clientArea) {
+	public void paintLine(TGTrackImpl track, TempLine line, TGPainter painter, int fromX, int fromY, TGTrackSpacing ts, Rectangle clientArea) {
 		int posX = (this.marginLeft + fromX);
 		int posY = fromY;
 		int width = this.marginLeft;
@@ -150,8 +150,8 @@ public class PageViewLayout extends ViewLayout{
 			int measureWidth = ( currMeasure.getWidth(this) + measureSpacing );
 			boolean isAtX = ( posX + measureWidth > clientArea.x && posX < clientArea.x + clientArea.width);
 			if(isAtX && isAtY){
-				paintMeasure(currMeasure,painter,measureSpacing);
-				((TGLyricImpl)track.getLyrics()).paintCurrentNoteBeats(painter,this,currMeasure,posX, posY);
+				paintMeasure(currMeasure, painter, measureSpacing);
+				((TGLyricImpl)track.getLyrics()).paintCurrentNoteBeats(painter, this, currMeasure, posX, posY);
 			}else{
 				currMeasure.setOutOfBounds(true);
 			}
@@ -159,10 +159,10 @@ public class PageViewLayout extends ViewLayout{
 			posX += measureWidth;
 			width += measureWidth;
 		}
-		this.setWidth(Math.max(getWidth(),width));
+		this.setWidth(Math.max(getWidth(), width));
 	}
 	
-	public TempLine getTempLines(TGTrack track,int fromIndex,TGTrackSpacing ts) {
+	public TempLine getTempLines(TGTrack track, int fromIndex, TGTrackSpacing ts) {
 		int style = getStyle();
 		
 		TempLine line = new TempLine();
@@ -189,7 +189,7 @@ public class PageViewLayout extends ViewLayout{
 			line.minY = (measure.getMinY() < line.minY)?measure.getMinY():line.minY;
 			
 			line.addMeasure(measureIdx);
-			measure.registerSpacing(this,ts);
+			measure.registerSpacing(this, ts);
 		}
 		
 		return line;

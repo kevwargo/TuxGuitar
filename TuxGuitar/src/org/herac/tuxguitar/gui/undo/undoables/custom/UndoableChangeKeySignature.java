@@ -32,7 +32,7 @@ public class UndoableChangeKeySignature implements UndoableEdit{
 		if(!canRedo()){
 			throw new CannotRedoException();
 		}
-		TuxGuitar.instance().getSongManager().getTrackManager().changeKeySignature(this.track,this.position,this.redoableKeySignature,this.toEnd);
+		TuxGuitar.instance().getSongManager().getTrackManager().changeKeySignature(this.track, this.position, this.redoableKeySignature, this.toEnd);
 		TuxGuitar.instance().fireUpdate();
 		this.redoCaret.update();
 		
@@ -43,12 +43,12 @@ public class UndoableChangeKeySignature implements UndoableEdit{
 		if(!canUndo()){
 			throw new CannotUndoException();
 		}
-		TuxGuitar.instance().getSongManager().getTrackManager().changeKeySignature(this.track,this.position,this.undoableKeySignature,this.toEnd);
+		TuxGuitar.instance().getSongManager().getTrackManager().changeKeySignature(this.track, this.position, this.undoableKeySignature, this.toEnd);
 		if(this.toEnd){
 			Iterator it = this.nextKeySignaturePositions.iterator();
 			while(it.hasNext()){
 				KeySignaturePosition ksp = (KeySignaturePosition)it.next();
-				TuxGuitar.instance().getSongManager().getTrackManager().changeKeySignature(this.track,ksp.getPosition(),ksp.getKeySignature(),true);
+				TuxGuitar.instance().getSongManager().getTrackManager().changeKeySignature(this.track, ksp.getPosition(), ksp.getKeySignature(), true);
 			}
 		}
 		TuxGuitar.instance().fireUpdate();
@@ -82,7 +82,7 @@ public class UndoableChangeKeySignature implements UndoableEdit{
 			if(measure.getStart() > undoable.position){
 				int currKeySignature = measure.getKeySignature();
 				if(prevKeySignature != currKeySignature){
-					KeySignaturePosition tsp = undoable.new KeySignaturePosition(measure.getStart(),currKeySignature);
+					KeySignaturePosition tsp = undoable.new KeySignaturePosition(measure.getStart(), currKeySignature);
 					undoable.nextKeySignaturePositions.add(tsp);
 				}
 				prevKeySignature = currKeySignature;
@@ -92,7 +92,7 @@ public class UndoableChangeKeySignature implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableChangeKeySignature endUndo(int keySignature,boolean toEnd){
+	public UndoableChangeKeySignature endUndo(int keySignature, boolean toEnd){
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoableKeySignature = keySignature;
 		this.toEnd = toEnd;
@@ -107,7 +107,7 @@ public class UndoableChangeKeySignature implements UndoableEdit{
 		private long position;
 		private int keySignature;
 		
-		public KeySignaturePosition(long position,int keySignature) {
+		public KeySignaturePosition(long position, int keySignature) {
 			this.position = position;
 			this.keySignature = keySignature;
 		}

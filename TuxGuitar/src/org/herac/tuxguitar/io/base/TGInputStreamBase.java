@@ -8,11 +8,11 @@ import org.herac.tuxguitar.song.models.TGSong;
 
 public interface TGInputStreamBase {
 	
-	public void init(TGFactory factory,InputStream stream);
+	public void init(TGFactory factory, InputStream stream);
 	
 	public boolean isSupportedVersion();
 	
 	public TGFileFormat getFileFormat();
 	
-	public TGSong readSong() throws TGFileFormatException,IOException;
+	public TGSong readSong() throws TGFileFormatException, IOException;
 }

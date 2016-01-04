@@ -26,7 +26,7 @@ public class PianoEditor implements TGRedrawListener, TGExternalBeatViewerListen
 		dialog.setLayout(new GridLayout());
 		dialog.setText(TuxGuitar.getProperty("piano.editor"));
 		
-		this.piano = new Piano(dialog,SWT.NONE);
+		this.piano = new Piano(dialog, SWT.NONE);
 		
 		this.addListeners();
 		dialog.addDisposeListener(new DisposeListener() {

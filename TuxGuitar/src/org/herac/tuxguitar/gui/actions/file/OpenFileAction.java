@@ -104,7 +104,7 @@ public class OpenFileAction extends Action {
 				TuxGuitar.instance().getFileHistory().setChooserPath( (URL)data );
 				return (URL)data;
 			}
-			String path = FileChooser.instance().open(TuxGuitar.instance().getShell(),TGFileFormatManager.instance().getInputFormats());
+			String path = FileChooser.instance().open(TuxGuitar.instance().getShell(), TGFileFormatManager.instance().getInputFormats());
 			if(path != null){
 				File file = new File(path);
 				if( file.exists() && file.isFile() ){

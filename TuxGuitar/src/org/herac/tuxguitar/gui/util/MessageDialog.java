@@ -25,7 +25,7 @@ public class MessageDialog {
 	private String name;
 	private String message;
 	
-	protected MessageDialog(String name,String message,int style){
+	protected MessageDialog(String name, String message, int style){
 		this.name = name;
 		this.message = message;
 		this.style = style;
@@ -38,25 +38,25 @@ public class MessageDialog {
 		messageBox.open();
 	}
 	
-	public static void infoMessage(final String title,final String message){
+	public static void infoMessage(final String title, final String message){
 		MessageDialog.infoMessage(TuxGuitar.instance().getShell(), title, message);
 	}
 	
-	public static void infoMessage(final Shell shell,final String title,final String message){
+	public static void infoMessage(final Shell shell, final String title, final String message){
 		new SyncThread(new Runnable() {
 			public void run() {
 				if(!shell.isDisposed()){
-					new MessageDialog(title,message,SWT.ICON_INFORMATION).show(shell);
+					new MessageDialog(title, message, SWT.ICON_INFORMATION).show(shell);
 				}
 			}
 		}).start();
 	}
 	
 	public static void errorMessage(final Throwable throwable){
-		MessageDialog.errorMessage(TuxGuitar.instance().getShell(),throwable);
+		MessageDialog.errorMessage(TuxGuitar.instance().getShell(), throwable);
 	}
 	
-	public static void errorMessage(final Shell shell,final Throwable throwable){
+	public static void errorMessage(final Shell shell, final Throwable throwable){
 		MessageDialog.errorMessage(shell, (throwable.getMessage() != null ? throwable.getMessage() : throwable.getClass().getName() ));
 		new Thread(new Runnable() {
 			public void run() {
@@ -65,7 +65,7 @@ public class MessageDialog {
 		}).start();
 	}
 	
-	public static void errorMessage(final Shell shell,final String message){
+	public static void errorMessage(final Shell shell, final String message){
 		if(!shell.isDisposed()){
 			new SyncThread(new Runnable() {
 				public void run() {
@@ -73,7 +73,7 @@ public class MessageDialog {
 						ActionLock.unlock();
 						TuxGuitar.instance().unlock();
 						shell.setCursor(shell.getDisplay().getSystemCursor(SWT.CURSOR_ARROW));
-						new MessageDialog(TuxGuitar.getProperty("error"),message,SWT.ICON_ERROR).show(shell);
+						new MessageDialog(TuxGuitar.getProperty("error"), message, SWT.ICON_ERROR).show(shell);
 					}
 				}
 			}).start();

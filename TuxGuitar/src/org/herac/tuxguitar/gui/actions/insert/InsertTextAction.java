@@ -49,41 +49,41 @@ public class InsertTextAction extends Action {
 		fireUpdate(getEditor().getTablature().getCaret().getMeasure().getNumber());
 	}
 	
-	public void showInsertDialog(final TGBeat beat,String value) {
+	public void showInsertDialog(final TGBeat beat, String value) {
 		final Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		
 		
 		dialog.setLayout(new GridLayout());
 		dialog.setText(TuxGuitar.getProperty("text.editor"));
 		
-		Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+		Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 		group.setLayout(new GridLayout());
-		group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setText(TuxGuitar.getProperty("text.insert"));
 		
 		Composite composite = new Composite(group, SWT.NONE);
-		composite.setLayout(new GridLayout(2,false));
+		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(getMainData());  
 		
-		final Label label = new Label(composite,SWT.LEFT);
+		final Label label = new Label(composite, SWT.LEFT);
 		label.setText(TuxGuitar.getProperty("text.text") + ":");
-		label.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,false,true));
+		label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, true));
 		
-		final Text text = new Text(composite,SWT.BORDER | SWT.SINGLE);
-		text.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		final Text text = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		text.setText(value);
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(3,false));
-		buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+		buttons.setLayout(new GridLayout(3, false));
+		buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
 		buttonOK.setLayoutData(getButtonData());
 		buttonOK.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
-				insertText(beat,text.getText());
+				insertText(beat, text.getText());
 				dialog.dispose();
 			}
 		});
@@ -109,11 +109,11 @@ public class InsertTextAction extends Action {
 		
 		dialog.setDefaultButton( buttonOK );
 		
-		DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
 	private GridData getMainData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 300;
 		return data;
 	}
@@ -125,7 +125,7 @@ public class InsertTextAction extends Action {
 		return data;
 	}
 	
-	protected void insertText(TGBeat beat,String value) {
+	protected void insertText(TGBeat beat, String value) {
 		//comienza el undoable
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		

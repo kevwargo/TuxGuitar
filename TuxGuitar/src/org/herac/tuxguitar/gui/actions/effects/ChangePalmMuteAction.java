@@ -30,7 +30,7 @@ public class ChangePalmMuteAction extends Action{
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
-		getSongManager().getMeasureManager().changePalmMute(caret.getMeasure(),caret.getPosition(),caret.getSelectedString().getNumber());
+		getSongManager().getMeasureManager().changePalmMute(caret.getMeasure(), caret.getPosition(), caret.getSelectedString().getNumber());
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		updateTablature();
 		

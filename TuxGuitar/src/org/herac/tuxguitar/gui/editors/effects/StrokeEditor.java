@@ -55,40 +55,40 @@ public class StrokeEditor extends SelectionAdapter{
 		//------------------DURATION-------------------------
 		//---------------------------------------------------
 		Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
-		group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		group.setLayout(new GridLayout(5,false));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		group.setLayout(new GridLayout(5, false));
 		group.setText( TuxGuitar.getProperty("duration") );
 		
-		this.duration64 = new Button(group,SWT.RADIO);
+		this.duration64 = new Button(group, SWT.RADIO);
 		this.duration64.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.SIXTY_FOURTH));
-		this.duration64.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.duration64.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.duration64.setSelection(duration == TGDuration.SIXTY_FOURTH);
 		
-		this.duration32 = new Button(group,SWT.RADIO);
+		this.duration32 = new Button(group, SWT.RADIO);
 		this.duration32.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.THIRTY_SECOND));
-		this.duration32.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.duration32.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.duration32.setSelection(duration == TGDuration.THIRTY_SECOND);
 		
-		this.duration16 = new Button(group,SWT.RADIO);
+		this.duration16 = new Button(group, SWT.RADIO);
 		this.duration16.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.SIXTEENTH));
-		this.duration16.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.duration16.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.duration16.setSelection(duration == TGDuration.SIXTEENTH);
 		
-		this.duration8 = new Button(group,SWT.RADIO);
+		this.duration8 = new Button(group, SWT.RADIO);
 		this.duration8.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.EIGHTH));
-		this.duration8.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.duration8.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.duration8.setSelection(duration == TGDuration.EIGHTH);
 		
-		this.duration4 = new Button(group,SWT.RADIO);
+		this.duration4 = new Button(group, SWT.RADIO);
 		this.duration4.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.QUARTER));
-		this.duration4.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.duration4.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.duration4.setSelection(duration == TGDuration.QUARTER);
 		//---------------------------------------------------
 		//------------------BUTTONS--------------------------
 		//---------------------------------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(3,false));
-		buttons.setLayoutData(new GridData(SWT.END,SWT.BOTTOM,true,true));
+		buttons.setLayout(new GridLayout(3, false));
+		buttons.setLayoutData(new GridData(SWT.END, SWT.BOTTOM, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));

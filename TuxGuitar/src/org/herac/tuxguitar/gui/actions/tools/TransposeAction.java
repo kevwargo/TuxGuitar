@@ -62,15 +62,15 @@ public class TransposeAction extends Action{
 		dialog.setText(TuxGuitar.getProperty("tools.transpose"));
 		
 		//-----------------TEMPO------------------------
-		Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-		group.setLayout(new GridLayout(2,false));
-		group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+		group.setLayout(new GridLayout(2, false));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setText(TuxGuitar.getProperty("tools.transpose"));
 		
 		
 		Label transpositionLabel = new Label(group, SWT.NULL);
 		transpositionLabel.setText(TuxGuitar.getProperty("tools.transpose.semitones"));
-		transpositionLabel.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,false,true));
+		transpositionLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, true));
 		
 		final Combo transpositionCombo = new Combo(group, SWT.DROP_DOWN | SWT.READ_ONLY );
 		transpositionCombo.setLayoutData( new GridData(SWT.FILL, SWT.FILL, true , true) );
@@ -80,9 +80,9 @@ public class TransposeAction extends Action{
 		transpositionCombo.select( ( transpositions.length / 2 ) );
 		
 		//------------------OPTIONS--------------------------
-		Group options = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+		Group options = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 		options.setLayout(new GridLayout());
-		options.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		options.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		options.setText(TuxGuitar.getProperty("options"));
 		
 		final Button applyToAllMeasuresButton = new Button(options, SWT.RADIO);
@@ -106,8 +106,8 @@ public class TransposeAction extends Action{
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(2,false));
-		buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+		buttons.setLayout(new GridLayout(2, false));
+		buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -154,7 +154,7 @@ public class TransposeAction extends Action{
 		
 		dialog.setDefaultButton( buttonOK );
 		
-		DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
 	private GridData getButtonData(){

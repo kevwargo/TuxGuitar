@@ -123,12 +123,12 @@ public abstract class TGSong {
 	}
 	
 	public void addMeasureHeader(TGMeasureHeader measureHeader){
-		this.addMeasureHeader(countMeasureHeaders(),measureHeader);
+		this.addMeasureHeader(countMeasureHeaders(), measureHeader);
 	}
 	
-	public void addMeasureHeader(int index,TGMeasureHeader measureHeader){
+	public void addMeasureHeader(int index, TGMeasureHeader measureHeader){
 		measureHeader.setSong(this);
-		this.measureHeaders.add(index,measureHeader);
+		this.measureHeaders.add(index, measureHeader);
 	}
 	
 	public void removeMeasureHeader(int index){
@@ -152,17 +152,17 @@ public abstract class TGSong {
 	}
 	
 	public void addTrack(TGTrack track){
-		this.addTrack(countTracks(),track);
+		this.addTrack(countTracks(), track);
 	}
 	
-	public void addTrack(int index,TGTrack track){
+	public void addTrack(int index, TGTrack track){
 		track.setSong(this);
-		this.tracks.add(index,track);
+		this.tracks.add(index, track);
 	}
 	
-	public void moveTrack(int index,TGTrack track){
+	public void moveTrack(int index, TGTrack track){
 		this.tracks.remove(track);
-		this.tracks.add(index,track);
+		this.tracks.add(index, track);
 	}
 	
 	public void removeTrack(TGTrack track){
@@ -194,11 +194,11 @@ public abstract class TGSong {
 	
 	public TGSong clone(TGFactory factory){
 		TGSong song = factory.newSong();
-		copy(factory,song);
+		copy(factory, song);
 		return song;
 	}
 	
-	public void copy(TGFactory factory,TGSong song){
+	public void copy(TGFactory factory, TGSong song){
 		song.clear();
 		song.setName(getName());
 		song.setArtist(getArtist());

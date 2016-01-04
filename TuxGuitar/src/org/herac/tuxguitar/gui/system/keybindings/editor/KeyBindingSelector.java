@@ -33,30 +33,30 @@ public class KeyBindingSelector {
 	protected KeyBinding keyBinding;
 	protected String action;
 	
-	public KeyBindingSelector(KeyBindingEditor editor,KeyBindingAction keyBindingAction){
+	public KeyBindingSelector(KeyBindingEditor editor, KeyBindingAction keyBindingAction){
 		this.editor = editor;
 		this.keyBinding = keyBindingAction.getKeyBinding();
 		this.action = keyBindingAction.getAction();
 	}
 	
 	public KeyBinding select(Shell parent){
-		this.dialog = DialogUtils.newDialog(parent,SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+		this.dialog = DialogUtils.newDialog(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
 		this.dialog.setLayout(new GridLayout());
-		this.dialog.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.dialog.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.dialog.setText(TuxGuitar.getProperty("key-bindings-editor"));
 		
-		Group group = new Group(this.dialog,SWT.SHADOW_ETCHED_IN);
+		Group group = new Group(this.dialog, SWT.SHADOW_ETCHED_IN);
 		group.setLayout(new GridLayout());
-		group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setText(TuxGuitar.getProperty(this.action));
 		
-		final Composite composite = new Composite(group,SWT.NONE);
-		composite.setLayout(new GridLayout(2,false));
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		final Composite composite = new Composite(group, SWT.NONE);
+		composite.setLayout(new GridLayout(2, false));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		composite.setFocus();
 		composite.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
-				KeyBinding kb = new KeyBinding(e.keyCode,e.stateMask);
+				KeyBinding kb = new KeyBinding(e.keyCode, e.stateMask);
 				if(kb.isSameAs(KeyBindingSelector.this.keyBinding) || isValid(kb)){
 					if(KeyBindingSelector.this.keyBinding == null){
 						KeyBindingSelector.this.keyBinding = new KeyBinding();
@@ -70,15 +70,15 @@ public class KeyBindingSelector {
 		
 		Label iconLabel = new Label(composite, SWT.CENTER );
 		iconLabel.setImage(iconLabel.getDisplay().getSystemImage(SWT.ICON_INFORMATION));
-		iconLabel.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,false,true));
+		iconLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, true));
 		
-		Label textLabel = new Label(composite,SWT.CENTER);
-		textLabel.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,false,true));
+		Label textLabel = new Label(composite, SWT.CENTER);
+		textLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, true));
 		textLabel.setText(TuxGuitar.getProperty("key-bindings-editor-push-a-key"));
 		
 		FontData[] fd = textLabel.getFont().getFontData();
 		if(fd != null && fd.length > 0){
-			final Font font = new Font(textLabel.getDisplay(),new FontData( fd[0].getName(), 14 , SWT.BOLD) );
+			final Font font = new Font(textLabel.getDisplay(), new FontData( fd[0].getName(), 14 , SWT.BOLD) );
 			textLabel.setFont(font);
 			textLabel.addDisposeListener(new DisposeListener() {
 				public void widgetDisposed(DisposeEvent arg0) {
@@ -89,8 +89,8 @@ public class KeyBindingSelector {
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(this.dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(2,false));
-		buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+		buttons.setLayout(new GridLayout(2, false));
+		buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 		
 		final Button buttonClean = new Button(buttons, SWT.PUSH);
 		buttonClean.setText(TuxGuitar.getProperty("clean"));
@@ -138,7 +138,7 @@ public class KeyBindingSelector {
 			if(!this.editor.isDisposed()){
 				String title = TuxGuitar.getProperty("key-bindings-editor-reserved-title");
 				String message = TuxGuitar.getProperty("key-bindings-editor-reserved-message");
-				MessageDialog.infoMessage(this.editor.getDialog(),title,message);
+				MessageDialog.infoMessage(this.editor.getDialog(), title, message);
 			}
 			return false;
 		}

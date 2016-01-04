@@ -25,8 +25,8 @@ public class PrintStylesDialog {
 		dialog.setText(TuxGuitar.getProperty("options"));
 		
 		//------------------TRACK SELECTION------------------
-		Group track = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-		track.setLayout(new GridLayout(2,false));
+		Group track = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+		track.setLayout(new GridLayout(2, false));
 		track.setLayoutData(getGroupData());
 		track.setText(TuxGuitar.getProperty("track"));
 		
@@ -34,15 +34,15 @@ public class PrintStylesDialog {
 		trackLabel.setText(TuxGuitar.getProperty("track"));
 		
 		final Combo tracks = new Combo(track, SWT.DROP_DOWN | SWT.READ_ONLY);
-		tracks.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		tracks.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		for(int number = 1; number <= TuxGuitar.instance().getSongManager().getSong().countTracks(); number ++){
 			tracks.add(TuxGuitar.instance().getSongManager().getTrack(number).getName());
 		}
 		tracks.select(TuxGuitar.instance().getTablatureEditor().getTablature().getCaret().getTrack().getNumber() - 1);
 		
 		//------------------MEASURE RANGE------------------
-		Group range = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-		range.setLayout(new GridLayout(2,false));
+		Group range = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+		range.setLayout(new GridLayout(2, false));
 		range.setLayoutData(getGroupData());
 		range.setText(TuxGuitar.getProperty("print.range"));
 		
@@ -89,28 +89,28 @@ public class PrintStylesDialog {
 			}
 		});
 		//------------------CHECK OPTIONS--------------------
-		Group options = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+		Group options = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 		options.setLayout(new GridLayout());
 		options.setLayoutData(getGroupData());
 		options.setText(TuxGuitar.getProperty("options"));
 		
-		final Button tablatureEnabled = new Button(options,SWT.CHECK);
+		final Button tablatureEnabled = new Button(options, SWT.CHECK);
 		tablatureEnabled.setText(TuxGuitar.getProperty("export.tablature-enabled"));
 		tablatureEnabled.setSelection(true);
 		
-		final Button scoreEnabled = new Button(options,SWT.CHECK);
+		final Button scoreEnabled = new Button(options, SWT.CHECK);
 		scoreEnabled.setText(TuxGuitar.getProperty("export.score-enabled"));
 		scoreEnabled.setSelection(true);
 		
-		final Button chordNameEnabled = new Button(options,SWT.CHECK);
+		final Button chordNameEnabled = new Button(options, SWT.CHECK);
 		chordNameEnabled.setText(TuxGuitar.getProperty("export.chord-name-enabled"));
 		chordNameEnabled.setSelection(true);
 		
-		final Button chordDiagramEnabled = new Button(options,SWT.CHECK);
+		final Button chordDiagramEnabled = new Button(options, SWT.CHECK);
 		chordDiagramEnabled.setText(TuxGuitar.getProperty("export.chord-diagram-enabled"));
 		chordDiagramEnabled.setSelection(true);
 		
-		final Button blackAndWhite = new Button(options,SWT.CHECK);
+		final Button blackAndWhite = new Button(options, SWT.CHECK);
 		blackAndWhite.setText(TuxGuitar.getProperty("export.black-and-white"));
 		blackAndWhite.setSelection(true);
 		
@@ -131,8 +131,8 @@ public class PrintStylesDialog {
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(2,false));
-		buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+		buttons.setLayout(new GridLayout(2, false));
+		buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -177,13 +177,13 @@ public class PrintStylesDialog {
 	}
 	
 	private static GridData getSpinnerData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 60;
 		return data;
 	}
 	
 	private static GridData getGroupData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 300;
 		return data;
 	}

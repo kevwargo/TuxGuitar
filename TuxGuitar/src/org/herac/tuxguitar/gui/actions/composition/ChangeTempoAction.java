@@ -41,7 +41,7 @@ public class ChangeTempoAction extends Action{
 	private static final int MIN_TEMPO = 30;
 	private static final int MAX_TEMPO = 320;
 	
-	protected static final int[] DEFAULT_PERCENTS = new int[]{25,50,75,100,125,150,175,200};
+	protected static final int[] DEFAULT_PERCENTS = new int[]{25, 50, 75, 100, 125, 150, 175, 200};
 	
 	public ChangeTempoAction() {
 		super(NAME, AUTO_LOCK | AUTO_UNLOCK | AUTO_UPDATE | DISABLE_ON_PLAYING | KEY_BINDING_AVAILABLE);
@@ -61,9 +61,9 @@ public class ChangeTempoAction extends Action{
 			dialog.setText(TuxGuitar.getProperty("composition.tempo"));
 			
 			//-----------------TEMPO------------------------
-			Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			group.setLayout(new GridLayout(2,false));
-			group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			group.setLayout(new GridLayout(2, false));
+			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			group.setText(TuxGuitar.getProperty("composition.tempo"));
 			
 			TGTempo currentTempo = measure.getTempo();
@@ -77,9 +77,9 @@ public class ChangeTempoAction extends Action{
 			tempo.setSelection(currentTempo.getValue());
 			
 			//------------------OPTIONS--------------------------
-			Group options = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group options = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			options.setLayout(new GridLayout());
-			options.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			options.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			options.setText(TuxGuitar.getProperty("options"));
 			
 			final Button applyToAllMeasures = new Button(options, SWT.RADIO);
@@ -94,8 +94,8 @@ public class ChangeTempoAction extends Action{
 			applyToAllMeasures.setSelection(true);
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -135,7 +135,7 @@ public class ChangeTempoAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
@@ -147,12 +147,12 @@ public class ChangeTempoAction extends Action{
 	}
 	
 	private GridData getSpinnerData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
 	
-	protected void setTempo(int tempoValue,boolean applyToAllMeasures,boolean applyToEnd){
+	protected void setTempo(int tempoValue, boolean applyToAllMeasures, boolean applyToEnd){
 		if(tempoValue >= MIN_TEMPO && MAX_TEMPO <= 320){
 			TGTempo tempo = getSongManager().getFactory().newTempo();
 			tempo.setValue(tempoValue);
@@ -163,7 +163,7 @@ public class ChangeTempoAction extends Action{
 			//comienza el undoable
 			UndoableChangeTempo undoable = UndoableChangeTempo.startUndo();
 			
-			getSongManager().changeTempos(start,tempo,toEnd);
+			getSongManager().changeTempos(start, tempo, toEnd);
 			
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
 			

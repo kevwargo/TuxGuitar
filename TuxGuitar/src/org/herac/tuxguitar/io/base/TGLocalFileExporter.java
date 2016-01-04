@@ -10,6 +10,6 @@ public interface TGLocalFileExporter extends TGRawExporter {
 	
 	public boolean configure(boolean setDefaults);
 	
-	public void init(TGFactory factory,OutputStream stream);
+	public void init(TGFactory factory, OutputStream stream);
 	
 }

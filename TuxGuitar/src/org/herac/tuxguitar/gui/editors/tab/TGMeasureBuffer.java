@@ -21,9 +21,9 @@ public class TGMeasureBuffer {
 		this.device = device;
 	}
 	
-	public void createBuffer(int width,int height,Color background){
+	public void createBuffer(int width, int height, Color background){
 		this.dispose();
-		this.buffer = new Image(this.device,width,height);
+		this.buffer = new Image(this.device, width, height);
 		this.width = width;
 		this.height = height;
 		this.fillBuffer(background);
@@ -38,12 +38,12 @@ public class TGMeasureBuffer {
 	private void fillBuffer(Color background){
 		getPainter().setBackground(background);
 		getPainter().initPath(TGPainter.PATH_FILL);
-		getPainter().addRectangle(0,0,this.width,this.height);
+		getPainter().addRectangle(0, 0, this.width, this.height);
 		getPainter().closePath();
 	}
 	
-	public void paintBuffer(TGPainter painter,int x,int y,int srcY){
-		painter.drawImage(this.buffer,0,srcY, this.width, (this.height - srcY), x, (y + srcY), this.width, (this.height - srcY));
+	public void paintBuffer(TGPainter painter, int x, int y, int srcY){
+		painter.drawImage(this.buffer, 0, srcY, this.width, (this.height - srcY), x, (y + srcY), this.width, (this.height - srcY));
 	}
 	
 	public void createPainter(){

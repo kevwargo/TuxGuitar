@@ -218,14 +218,14 @@ public class TGResources {
 		return this.tripletFeelNone16;
 	}
 	
-	public Image getScoreNote(int value,boolean playing) {
+	public Image getScoreNote(int value, boolean playing) {
 		int index = 0;
 		index += ((playing)?1:0);
 		index += ((value >= TGDuration.QUARTER)?2:0);
 		return this.scoreNotes[index];
 	}
 	
-	public Image getHarmonicNote(int value,boolean playing) {
+	public Image getHarmonicNote(int value, boolean playing) {
 		int index = 0;
 		index += ((playing)?1:0);
 		index += ((value >= TGDuration.QUARTER)?2:0);
@@ -274,16 +274,16 @@ public class TGResources {
 	
 	private void initImages(){
 		this.scoreNotes = new Image[4];
-		this.scoreNotes[SCORE_NOTE_EMPTY_NORMAL_MODE] = getScoreNoteImage( getScoreNoteColor(),false);
-		this.scoreNotes[SCORE_NOTE_EMPTY_PLAY_MODE] = getScoreNoteImage( getPlayNoteColor(),false);
-		this.scoreNotes[SCORE_NOTE_FULL_NORMAL_MODE] = getScoreNoteImage( getScoreNoteColor(),true);
-		this.scoreNotes[SCORE_NOTE_FULL_PLAY_MODE] = getScoreNoteImage( getPlayNoteColor(),true);
+		this.scoreNotes[SCORE_NOTE_EMPTY_NORMAL_MODE] = getScoreNoteImage( getScoreNoteColor(), false);
+		this.scoreNotes[SCORE_NOTE_EMPTY_PLAY_MODE] = getScoreNoteImage( getPlayNoteColor(), false);
+		this.scoreNotes[SCORE_NOTE_FULL_NORMAL_MODE] = getScoreNoteImage( getScoreNoteColor(), true);
+		this.scoreNotes[SCORE_NOTE_FULL_PLAY_MODE] = getScoreNoteImage( getPlayNoteColor(), true);
 		
 		this.harmonicNotes = new Image[4];
-		this.harmonicNotes[SCORE_NOTE_EMPTY_NORMAL_MODE] = getHarmonicImage( getScoreNoteColor(),false);
-		this.harmonicNotes[SCORE_NOTE_EMPTY_PLAY_MODE] = getHarmonicImage( getPlayNoteColor(),false);
-		this.harmonicNotes[SCORE_NOTE_FULL_NORMAL_MODE] = getHarmonicImage( getScoreNoteColor(),true);
-		this.harmonicNotes[SCORE_NOTE_FULL_PLAY_MODE] = getHarmonicImage( getPlayNoteColor(),true);
+		this.harmonicNotes[SCORE_NOTE_EMPTY_NORMAL_MODE] = getHarmonicImage( getScoreNoteColor(), false);
+		this.harmonicNotes[SCORE_NOTE_EMPTY_PLAY_MODE] = getHarmonicImage( getPlayNoteColor(), false);
+		this.harmonicNotes[SCORE_NOTE_FULL_NORMAL_MODE] = getHarmonicImage( getScoreNoteColor(), true);
+		this.harmonicNotes[SCORE_NOTE_FULL_PLAY_MODE] = getHarmonicImage( getPlayNoteColor(), true);
 		
 		this.tempoImage = getTempoImage(this.getColorBlack());
 		
@@ -302,7 +302,7 @@ public class TGResources {
 		
 		data.setHeight( ( height > 1 ? Math.round(height) : 1 ) );
 		
-		Font font = new Font(TuxGuitar.instance().getDisplay(),data);
+		Font font = new Font(TuxGuitar.instance().getDisplay(), data);
 		this.resources.add( font );
 		return font;
 	}
@@ -310,14 +310,14 @@ public class TGResources {
 	private Color getColor(String key){
 		RGB rgb = TuxGuitar.instance().getConfig().getRGBConfigValue(key);
 		if(rgb == null){
-			rgb = new RGB(0,0,0);
+			rgb = new RGB(0, 0, 0);
 		}
-		Color color = new Color(TuxGuitar.instance().getDisplay(),rgb);
+		Color color = new Color(TuxGuitar.instance().getDisplay(), rgb);
 		this.resources.add( color );
 		return color;
 	}
 	
-	private Image getScoreNoteImage(Color color,boolean full) {
+	private Image getScoreNoteImage(Color color, boolean full) {
 		float scale = (full ? getLayout().getScoreLineSpacing() + 1 : getLayout().getScoreLineSpacing() ) - 2;
 		int width = Math.round(scale * 1.33f);
 		int height = Math.round(scale * 1.0f);
@@ -327,7 +327,7 @@ public class TGResources {
 		painter.setBackground(color);
 		painter.setForeground(color);
 		painter.initPath( (full ? TGPainter.PATH_FILL : TGPainter.PATH_DRAW) );
-		TGNotePainter.paintNote(painter,0,1, scale );
+		TGNotePainter.paintNote(painter, 0, 1, scale );
 		painter.closePath();
 		painter.dispose();
 		
@@ -336,7 +336,7 @@ public class TGResources {
 		return getImageMask(image, getBackgroundColor().getRGB(), color.getRGB());
 	}
 	
-	private Image getHarmonicImage(Color color,boolean full) {
+	private Image getHarmonicImage(Color color, boolean full) {
 		int size = getLayout().getScoreLineSpacing();
 		
 		int x = 0;
@@ -344,7 +344,7 @@ public class TGResources {
 		int width = getScoreNoteWidth() - 1;
 		int height = size - 2;
 		
-		Image image = getImage(x + width + 2,y + height + 2);
+		Image image = getImage(x + width + 2, y + height + 2);
 		TGPainter painter = new TGPainter(new GC(image));
 		painter.setForeground(color);
 		painter.setBackground(color);
@@ -365,7 +365,7 @@ public class TGResources {
 		TGPainter painter = new TGPainter(new GC(image));
 		painter.setBackground(color);
 		painter.setForeground(color);
-		TGTempoPainter.paintTempo(painter,0,0, scale);
+		TGTempoPainter.paintTempo(painter, 0, 0, scale);
 		painter.dispose();
 		
 		return getImageMask(image, getBackgroundColor().getRGB(), color.getRGB());
@@ -386,7 +386,7 @@ public class TGResources {
 		TGPainter painter = new TGPainter(new GC(image));
 		painter.setBackground(color);
 		painter.setForeground(color);
-		TGTripletFeelPainter.paintTripletFeelNone8(painter,0,0, scale);
+		TGTripletFeelPainter.paintTripletFeelNone8(painter, 0, 0, scale);
 		painter.dispose();
 		
 		return getImageMask(image, getBackgroundColor().getRGB(), color.getRGB());
@@ -407,7 +407,7 @@ public class TGResources {
 		TGPainter painter = new TGPainter(new GC(image));
 		painter.setBackground(color);
 		painter.setForeground(color);
-		TGTripletFeelPainter.paintTripletFeel8(painter,0,0, scale);
+		TGTripletFeelPainter.paintTripletFeel8(painter, 0, 0, scale);
 		painter.dispose();
 		
 		return getImageMask(image, getBackgroundColor().getRGB(), color.getRGB());
@@ -428,7 +428,7 @@ public class TGResources {
 		TGPainter painter = new TGPainter(new GC(image));
 		painter.setBackground(color);
 		painter.setForeground(color);
-		TGTripletFeelPainter.paintTripletFeelNone16(painter,0,0, scale);
+		TGTripletFeelPainter.paintTripletFeelNone16(painter, 0, 0, scale);
 		painter.dispose();
 		
 		return getImageMask(image, getBackgroundColor().getRGB(), color.getRGB());
@@ -449,28 +449,28 @@ public class TGResources {
 		TGPainter painter = new TGPainter(new GC(image));
 		painter.setBackground(color);
 		painter.setForeground(color);
-		TGTripletFeelPainter.paintTripletFeel16(painter,0,0, scale);
+		TGTripletFeelPainter.paintTripletFeel16(painter, 0, 0, scale);
 		painter.dispose();
 		
 		return getImageMask(image, getBackgroundColor().getRGB(), color.getRGB());
 	}
 	
 	private Image getImage(int width, int height){
-		Image image = new Image(getLayout().getTablature().getDisplay(),width, height);
+		Image image = new Image(getLayout().getTablature().getDisplay(), width, height);
 		TGPainter painter = new TGPainter(new GC(image));
 		painter.setBackground( getBackgroundColor());
 		painter.initPath(TGPainter.PATH_FILL);
-		painter.addRectangle(0,0,width, height);
+		painter.addRectangle(0, 0, width, height);
 		painter.closePath();
 		painter.dispose();
 		return image;
 	}
 	
-	private Image getImageMask(Image src,RGB alpha,RGB none){
+	private Image getImageMask(Image src, RGB alpha, RGB none){
 		ImageData srcData = src.getImageData();
 		ImageData maskData = ImageUtils.applyMask(srcData, alpha , none);
 		src.dispose();
-		Image image = new Image(getLayout().getTablature().getDisplay(),srcData,maskData);
+		Image image = new Image(getLayout().getTablature().getDisplay(), srcData, maskData);
 		this.resources.add(image);
 		return image;
 	}

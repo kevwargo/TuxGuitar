@@ -64,7 +64,7 @@ public class BeatMenuItem extends MenuItems{
 	private NoteEffectsMenuItem effectMenuItem;
 	private DynamicMenuItem dynamicMenuItem;
 	
-	public BeatMenuItem(Shell shell,Menu parent, int style) {
+	public BeatMenuItem(Shell shell, Menu parent, int style) {
 		this.noteMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
@@ -83,19 +83,19 @@ public class BeatMenuItem extends MenuItems{
 		this.removeVoice.addSelectionListener(TuxGuitar.instance().getAction(RemoveUnusedVoiceAction.NAME));
 		
 		//--Duration--
-		this.durationMenuItem = new DurationMenuItem(this.menu.getShell(),this.menu,SWT.CASCADE);
+		this.durationMenuItem = new DurationMenuItem(this.menu.getShell(), this.menu, SWT.CASCADE);
 		this.durationMenuItem.showItems();
 		
 		//--Chord--
-		this.chordMenuItem = new ChordMenuItem(this.menu.getShell(),this.menu,SWT.CASCADE);
+		this.chordMenuItem = new ChordMenuItem(this.menu.getShell(), this.menu, SWT.CASCADE);
 		this.chordMenuItem.showItems();
 		
 		//--Effects--
-		this.effectMenuItem = new NoteEffectsMenuItem(this.menu.getShell(),this.menu,SWT.CASCADE);
+		this.effectMenuItem = new NoteEffectsMenuItem(this.menu.getShell(), this.menu, SWT.CASCADE);
 		this.effectMenuItem.showItems();
 		
 		//--Dynamic--
-		this.dynamicMenuItem = new DynamicMenuItem(this.menu.getShell(),this.menu,SWT.CASCADE);
+		this.dynamicMenuItem = new DynamicMenuItem(this.menu.getShell(), this.menu, SWT.CASCADE);
 		this.dynamicMenuItem.showItems();
 		
 		//--SEPARATOR--

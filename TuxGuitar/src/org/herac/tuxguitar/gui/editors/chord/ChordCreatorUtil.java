@@ -90,7 +90,7 @@ public class ChordCreatorUtil {
 	/** current tunning */
 	private int[] tuning;
 	
-	private ChordCreatorUtil(long processId,ChordCreatorListener listener){
+	private ChordCreatorUtil(long processId, ChordCreatorListener listener){
 		this.processId = processId;
 		this.listener = listener;
 	}
@@ -168,7 +168,7 @@ public class ChordCreatorUtil {
 		if (this.alteration!=0) {
 			if (add) {
 				this.expandingNotes = new int[1];
-				this.expandingNotes[0]= getAddNote(this.alteration-1,plusMinus);
+				this.expandingNotes[0]= getAddNote(this.alteration-1, plusMinus);
 			}
 			else { // not just add...
 				// 9+- = 7b !9(+-)    (index=1)
@@ -176,7 +176,7 @@ public class ChordCreatorUtil {
 				// 13+- = 7b !13(+-) 9(+-) 11(+-) (index=3)
 				this.expandingNotes = new int[1+this.alteration];
 				this.expandingNotes[0] = 11; //7b
-				this.expandingNotes[1] = getAddNote(this.alteration-1,plusMinus); //this.alteration+-
+				this.expandingNotes[1] = getAddNote(this.alteration-1, plusMinus); //this.alteration+-
 				
 				// rest
 				for (int i=2; i<=this.alteration; i++)
@@ -305,7 +305,7 @@ public class ChordCreatorUtil {
 	 * @return true if the note is needed for chord formation
 	 * 
 	 */
-	private void find(int stringTone, int stringIndex, int fret,List stringList){
+	private void find(int stringTone, int stringIndex, int fret, List stringList){
 		if(!isValidProcess()){
 			return;
 		}
@@ -325,7 +325,7 @@ public class ChordCreatorUtil {
 				if ((stringTone+fret)%12==(this.chordTonic+this.expandingNotes[i]-1)%12) {
 					if (!bassAlreadyIn && (stringTone + fret) % 12 == this.bassTonic)
 						bassAlreadyIn=true;
-					stringList.add(new StringValue(stringIndex,fret,(i<2 ? this.ESSENTIAL_INDEX : this.NOT_ESSENTIAL_INDEX)));
+					stringList.add(new StringValue(stringIndex, fret,(i<2 ? this.ESSENTIAL_INDEX : this.NOT_ESSENTIAL_INDEX)));
 				}
 			}
 		}
@@ -461,8 +461,8 @@ public class ChordCreatorUtil {
 				
 				lastLevelCombination = makeStringValueCombination(lastLevelCombination,(ArrayList)potentialNotes.get(currentString));
 				
-				// the structure of combinations is AL { AL(StringValue,SV,SV),
-				// AL(SV), AL(SV,SV),AL(SV,SV,SV,SV,SV,SV) }
+				// the structure of combinations is AL { AL(StringValue, SV, SV),
+				// AL(SV), AL(SV, SV), AL(SV, SV, SV, SV, SV, SV) }
 				
 			}
 			
@@ -480,8 +480,8 @@ public class ChordCreatorUtil {
 	 * @param lastLevelCombination
 	 *            structure to be expanded by current level
 	 * 
-	 * @return structure of stringCombination is AL { AL(0), AL(0,1),
-	 *         AL(0,2),AL(0,1,3,4),AL(0,1,2,3,4,5) }
+	 * @return structure of stringCombination is AL { AL(0), AL(0, 1),
+	 *         AL(0, 2), AL(0, 1, 3, 4), AL(0, 1, 2, 3, 4, 5) }
 	 */
 	private ArrayList makeStringCombination(ArrayList lastLevelCombinationRef){
 		if(!isValidProcess()){
@@ -540,7 +540,7 @@ public class ChordCreatorUtil {
 	 *            notes that can be considered into making a chord
 	 * 
 	 * @return structure of StringValue combinations : AL {
-	 *         AL(StringValue,SV,SV), AL(SV), AL(SV,SV),AL(SV,SV,SV,SV,SV,SV) }
+	 *         AL(StringValue, SV, SV), AL(SV), AL(SV, SV), AL(SV, SV, SV, SV, SV, SV) }
 	 * 
 	 */
 	private ArrayList makeStringValueCombination(ArrayList lastLevelCombination, ArrayList notes) {
@@ -968,7 +968,7 @@ public class ChordCreatorUtil {
 		// TODO: what to do with e.g. chord -35556 (C7)
 		// ... it can be held with capo on 5th fret, but very hard :)
 		// ... This is the same as with "capo after", I didn't consider that (e.g. chord -35555)
-		ArrayList[] fingers={new ArrayList(2),new ArrayList(2),new ArrayList(2),new ArrayList(2)};
+		ArrayList[] fingers={new ArrayList(2), new ArrayList(2), new ArrayList(2), new ArrayList(2)};
 		// TODO: still no thumb, sorry :)
 		
 		// STRUCTURE: ArrayList consists of Integers - first is fret

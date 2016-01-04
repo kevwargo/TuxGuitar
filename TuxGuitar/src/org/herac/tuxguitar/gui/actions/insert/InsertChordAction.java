@@ -52,7 +52,7 @@ public class InsertChordAction extends Action {
 				Shell shell = TuxGuitar.instance().getShell();
 				ChordDialog dialog = new ChordDialog();
 				
-				int result = dialog.open(shell, measure,beat, caret.getPosition());
+				int result = dialog.open(shell, measure, beat, caret.getPosition());
 				if( result == ChordDialog.RESULT_SAVE ){
 					insertChord(dialog.getChord(), track, measure, beat, caret.getVoice());
 				}
@@ -90,7 +90,7 @@ public class InsertChordAction extends Action {
 						TGDuration duration = getSongManager().getFactory().newDuration();
 						voice.getDuration().copy(duration);
 						
-						getSongManager().getMeasureManager().addNote(beat,note,duration,voice.getIndex());
+						getSongManager().getMeasureManager().addNote(beat, note, duration, voice.getIndex());
 					}
 				}
 			}

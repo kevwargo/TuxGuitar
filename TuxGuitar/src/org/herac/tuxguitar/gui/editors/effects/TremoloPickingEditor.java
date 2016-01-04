@@ -37,9 +37,9 @@ public class TremoloPickingEditor extends SelectionAdapter{
 		dialog.setLayout(new GridLayout());
 		dialog.setText(TuxGuitar.getProperty("effects.tremolo-picking-editor"));
 		
-		Composite composite = new Composite(dialog,SWT.NONE);
+		Composite composite = new Composite(dialog, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		int horizontalSpan = 2;
 		
@@ -52,20 +52,20 @@ public class TremoloPickingEditor extends SelectionAdapter{
 		//---------------------------------------------------
 		//------------------DURATION-------------------------
 		//---------------------------------------------------
-		Group durationGroup = makeGroup(composite,horizontalSpan, TuxGuitar.getProperty("duration"));
-		durationGroup.setLayout(new GridLayout(3,false));
+		Group durationGroup = makeGroup(composite, horizontalSpan, TuxGuitar.getProperty("duration"));
+		durationGroup.setLayout(new GridLayout(3, false));
 		
-		this.thirtySecondButton = new Button(durationGroup,SWT.RADIO);
+		this.thirtySecondButton = new Button(durationGroup, SWT.RADIO);
 		this.thirtySecondButton.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.THIRTY_SECOND));
 		this.thirtySecondButton.setLayoutData(makeGridData(1));
 		this.thirtySecondButton.setSelection(duration == TGDuration.THIRTY_SECOND);
 		
-		this.sixTeenthButton = new Button(durationGroup,SWT.RADIO);
+		this.sixTeenthButton = new Button(durationGroup, SWT.RADIO);
 		this.sixTeenthButton.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.SIXTEENTH));
 		this.sixTeenthButton.setLayoutData(makeGridData(1));
 		this.sixTeenthButton.setSelection(duration == TGDuration.SIXTEENTH);
 		
-		this.eighthButton = new Button(durationGroup,SWT.RADIO);
+		this.eighthButton = new Button(durationGroup, SWT.RADIO);
 		this.eighthButton.setImage(TuxGuitar.instance().getIconManager().getDuration(TGDuration.EIGHTH));
 		this.eighthButton.setLayoutData(makeGridData(1));
 		this.eighthButton.setSelection(duration == TGDuration.EIGHTH);
@@ -73,8 +73,8 @@ public class TremoloPickingEditor extends SelectionAdapter{
 		//------------------BUTTONS--------------------------
 		//---------------------------------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(3,false));
-		buttons.setLayoutData(new GridData(SWT.END,SWT.BOTTOM,true,true));
+		buttons.setLayout(new GridLayout(3, false));
+		buttons.setLayoutData(new GridData(SWT.END, SWT.BOTTOM, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -112,7 +112,7 @@ public class TremoloPickingEditor extends SelectionAdapter{
 		return this.result;
 	}
 	
-	private Group makeGroup(Composite parent,int horizontalSpan,String text){
+	private Group makeGroup(Composite parent, int horizontalSpan, String text){
 		Group group = new Group(parent, SWT.SHADOW_ETCHED_IN);
 		group.setLayoutData(makeGridData(horizontalSpan));
 		group.setText(text);
@@ -128,7 +128,7 @@ public class TremoloPickingEditor extends SelectionAdapter{
 	}
 	
 	private GridData makeGridData(int horizontalSpan){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.horizontalSpan = horizontalSpan;
 		return data;
 	}

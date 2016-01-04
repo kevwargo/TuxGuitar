@@ -42,20 +42,20 @@ public class ChordSettingsDialog {
 		this.dialog.setLayout(new GridLayout());
 		this.dialog.setText(TuxGuitar.getProperty("settings"));
 		this.init();
-		DialogUtils.openDialog(this.dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		
 		return this.updated;
 	}
 	
 	protected void init() {
-		Group group = new Group(this.dialog,SWT.SHADOW_ETCHED_IN);
+		Group group = new Group(this.dialog, SWT.SHADOW_ETCHED_IN);
 		group.setLayout(new GridLayout());
-		group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setText(TuxGuitar.getProperty("chord.settings.tip"));
 		
-		Composite composite = new Composite(group,SWT.NONE);
-		composite.setLayout(new GridLayout(2,false));
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Composite composite = new Composite(group, SWT.NONE);
+		composite.setLayout(new GridLayout(2, false));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		initTypeCombo(composite);
 		initChordsToDisplay(composite);
@@ -64,8 +64,8 @@ public class ChordSettingsDialog {
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(this.dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(2,false));
-		buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+		buttons.setLayout(new GridLayout(2, false));
+		buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -96,16 +96,16 @@ public class ChordSettingsDialog {
 	}
 	
 	private GridData getGridData(){
-		return getGridData(125,0);
+		return getGridData(125, 0);
 	}
 	
 	private GridData getButtonData(){
-		return getGridData(80,25);
+		return getGridData(80, 25);
 	}
 	
-	private Spinner makeSpinner(Composite parent,String label,int value, int min, int max){
-		this.newLabel(parent,label);
-		Spinner spinner = new Spinner(parent,SWT.BORDER);
+	private Spinner makeSpinner(Composite parent, String label, int value, int min, int max){
+		this.newLabel(parent, label);
+		Spinner spinner = new Spinner(parent, SWT.BORDER);
 		spinner.setMinimum(min);
 		spinner.setMaximum(max);
 		spinner.setSelection(value);
@@ -113,15 +113,15 @@ public class ChordSettingsDialog {
 		return spinner;
 	}
 	
-	private Label newLabel(Composite parent,String text){
-		Label label = new Label(parent,SWT.HORIZONTAL);
+	private Label newLabel(Composite parent, String text){
+		Label label = new Label(parent, SWT.HORIZONTAL);
 		label.setText(text);
 		return label;
 	}
 	
 	private void initTypeCombo(Composite parent) {
 		this.newLabel(parent, TuxGuitar.getProperty("chord.settings.type"));
-		this.typeCombo = new Combo(parent,SWT.DROP_DOWN | SWT.READ_ONLY);
+		this.typeCombo = new Combo(parent, SWT.DROP_DOWN | SWT.READ_ONLY);
 		this.typeCombo.setLayoutData(getGridData());
 		this.typeCombo.add(TuxGuitar.getProperty("chord.settings.type.most-common"));
 		this.typeCombo.add(TuxGuitar.getProperty("chord.settings.type.inversions"));
@@ -131,24 +131,24 @@ public class ChordSettingsDialog {
 	}
 	
 	private void initChordsToDisplay(Composite parent) {
-		this.chordsToDisplay = makeSpinner(parent,TuxGuitar.getProperty("chord.settings.chords-to-display"),ChordSettings.instance().getChordsToDisplay(),1,100);
+		this.chordsToDisplay = makeSpinner(parent, TuxGuitar.getProperty("chord.settings.chords-to-display"), ChordSettings.instance().getChordsToDisplay(), 1, 100);
 	}
 	
 	private void initEmptyStringChords(Composite parent) {
-		this.emptyStringChords = new Button(parent,SWT.CHECK);
+		this.emptyStringChords = new Button(parent, SWT.CHECK);
 		this.emptyStringChords.setSelection(ChordSettings.instance().isEmptyStringChords());
 		this.emptyStringChords.setText(TuxGuitar.getProperty("chord.settings.open-chords"));
-		this.emptyStringChords.setSize(100,20);
-		this.emptyStringChords.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true,2,1));
+		this.emptyStringChords.setSize(100, 20);
+		this.emptyStringChords.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 	}
 	
 	private void initFretSearch(Composite parent) {
-		Group group = new Group(parent,SWT.SHADOW_ETCHED_IN);
-		group.setLayout(new GridLayout(4,false));
-		group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true,2,1));
+		Group group = new Group(parent, SWT.SHADOW_ETCHED_IN);
+		group.setLayout(new GridLayout(4, false));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		group.setText(TuxGuitar.getProperty("chord.settings.search-frets"));
-		this.minFret = makeSpinner(group,TuxGuitar.getProperty("chord.settings.minimum-fret"),ChordSettings.instance().getFindChordsMin(),0,15);
-		this.maxFret = makeSpinner(group,TuxGuitar.getProperty("chord.settings.maximum-fret"),ChordSettings.instance().getFindChordsMax(),2,25);
+		this.minFret = makeSpinner(group, TuxGuitar.getProperty("chord.settings.minimum-fret"), ChordSettings.instance().getFindChordsMin(), 0, 15);
+		this.maxFret = makeSpinner(group, TuxGuitar.getProperty("chord.settings.maximum-fret"), ChordSettings.instance().getFindChordsMax(), 2, 25);
 		this.minFret.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				checkMinimumFretValue();

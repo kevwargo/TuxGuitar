@@ -38,10 +38,10 @@ public class RemoveNoteAction extends Action{
 		if( beat.isTextBeat() && beat.isRestBeat() ){
 			getSongManager().getMeasureManager().removeText(beat);
 		}else if(voice.isRestVoice()){
-			getSongManager().getMeasureManager().removeVoice(voice ,true);
+			getSongManager().getMeasureManager().removeVoice(voice , true);
 		}else{
 			int string = caret.getSelectedString().getNumber();
-			getSongManager().getMeasureManager().removeNote(caret.getMeasure(),beat.getStart(), caret.getVoice(), string);
+			getSongManager().getMeasureManager().removeNote(caret.getMeasure(), beat.getStart(), caret.getVoice(), string);
 		}
 		
 		//termia el undoable

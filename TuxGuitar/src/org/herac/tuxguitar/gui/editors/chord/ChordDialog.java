@@ -58,7 +58,7 @@ public class ChordDialog {
 		super();
 	}
 	
-	public int open(Shell shell,final TGMeasureImpl measure,TGBeat beat, long start) {
+	public int open(Shell shell, final TGMeasureImpl measure, TGBeat beat, long start) {
 		this.setResult(RESULT_CANCEL);
 		
 		this.dialog = DialogUtils.newDialog(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
@@ -71,17 +71,17 @@ public class ChordDialog {
 		});
 		
 		Composite topComposite = new Composite(this.dialog, SWT.NONE);
-		topComposite.setLayout(new GridLayout(4,false));
-		topComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		topComposite.setLayout(new GridLayout(4, false));
+		topComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		Composite bottomComposite = new Composite(this.dialog, SWT.NONE);  
 		bottomComposite.setLayout(new GridLayout());
-		bottomComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		bottomComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		int[] tuning = findCurrentTuning(measure.getTrack());
 		
 		//---------------SELECTOR--------------------------------
-		this.selector = new ChordSelector(this,topComposite,DEFAULT_STYLE, tuning);
+		this.selector = new ChordSelector(this, topComposite, DEFAULT_STYLE, tuning);
 		this.selector.pack();
 		
 		//---------------EDITOR--------------------------------
@@ -94,18 +94,18 @@ public class ChordDialog {
 		this.recognizer = new ChordRecognizer(this, topComposite, DEFAULT_STYLE);
 		
 		//---------------CUSTOM CHORDS---------------------------------
-		new ChordCustomList(this, topComposite, DEFAULT_STYLE,Math.max(this.selector.getBounds().height,this.editor.getBounds().height));
+		new ChordCustomList(this, topComposite, DEFAULT_STYLE, Math.max(this.selector.getBounds().height, this.editor.getBounds().height));
 		
 		//---------------LIST--------------------------------
 		Composite listComposite = new Composite(bottomComposite, SWT.NONE);
-		listComposite.setLayout(gridLayout(1,false,0,0));
-		listComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		this.list = new ChordList(this,listComposite,beat);
+		listComposite.setLayout(gridLayout(1, false, 0, 0));
+		listComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		this.list = new ChordList(this, listComposite, beat);
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(this.dialog, SWT.NONE);
-		buttons.setLayout(gridLayout(3,false,0,0));
-		buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+		buttons.setLayout(gridLayout(3, false, 0, 0));
+		buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -142,7 +142,7 @@ public class ChordDialog {
 		
 		this.dialog.setDefaultButton( buttonOK );
 		
-		DialogUtils.openDialog(this.dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		
 		return getResult();
 	}
@@ -187,7 +187,7 @@ public class ChordDialog {
 		return this.dialog;
 	}
 	
-	public GridLayout gridLayout(int numColumns,boolean makeColumnsEqualWidth,int marginWidth,int marginHeight){
+	public GridLayout gridLayout(int numColumns, boolean makeColumnsEqualWidth, int marginWidth, int marginHeight){
 		GridLayout layout = new GridLayout();
 		layout.numColumns = numColumns;
 		layout.makeColumnsEqualWidth = makeColumnsEqualWidth;

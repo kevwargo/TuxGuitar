@@ -55,7 +55,7 @@ public class PrinterViewLayout extends ViewLayout{
 	private Font trackNameFont;
 	private Font songAuthorFont;
 	
-	public PrinterViewLayout(Tablature tablature,PrintStyles styles, float scale){
+	public PrinterViewLayout(Tablature tablature, PrintStyles styles, float scale){
 		super(tablature,( styles.getStyle() | DISPLAY_COMPACT ), scale );
 		this.styles = styles;
 	}
@@ -89,9 +89,9 @@ public class PrinterViewLayout extends ViewLayout{
 		
 		FontData[] fd = this.getResources().getPrinterDefaultFont().getFontData();
 		String fontName = (fd != null && fd.length > 0 ? fd[0].getName() : new String());
-		this.songNameFont = new Font(getTablature().getDisplay(),fontName,Math.round(16.0f * getFontScale()), SWT.BOLD | SWT.CENTER);
-		this.trackNameFont = new Font(getTablature().getDisplay(),fontName,Math.round(8.0f * getFontScale()), SWT.BOLD | SWT.CENTER);
-		this.songAuthorFont = new Font(getTablature().getDisplay(),fontName,Math.round(8.0f * getFontScale()), SWT.BOLD | SWT.CENTER);
+		this.songNameFont = new Font(getTablature().getDisplay(), fontName, Math.round(16.0f * getFontScale()), SWT.BOLD | SWT.CENTER);
+		this.trackNameFont = new Font(getTablature().getDisplay(), fontName, Math.round(8.0f * getFontScale()), SWT.BOLD | SWT.CENTER);
+		this.songAuthorFont = new Font(getTablature().getDisplay(), fontName, Math.round(8.0f * getFontScale()), SWT.BOLD | SWT.CENTER);
 	}
 	
 	public int getMode(){
@@ -109,14 +109,14 @@ public class PrinterViewLayout extends ViewLayout{
 		
 		this.openPage();
 		paintHeader(this.document.getPainter());
-		paintSong(this.document.getPainter(),null,this.document.getBounds().x, ( this.document.getBounds().y + Math.round(80.0f * getFontScale() ) ) );
+		paintSong(this.document.getPainter(), null, this.document.getBounds().x, ( this.document.getBounds().y + Math.round(80.0f * getFontScale() ) ) );
 		paintFooter(this.document.getPainter());
 		this.closePage();
 		
 		this.document.finish();
 	}
 	
-	public void paintSong(TGPainter painter,Rectangle clientArea,int fromX,int fromY) {
+	public void paintSong(TGPainter painter, Rectangle clientArea, int fromX, int fromY) {
 		this.setWidth(0);
 		this.setHeight(0);
 		
@@ -129,7 +129,7 @@ public class PrinterViewLayout extends ViewLayout{
 		((TGLyricImpl)track.getLyrics()).start(getSkippedBeats(track));
 		
 		TGTrackSpacing ts = new TGTrackSpacing(this) ;
-		TempLine line = getTempLines(track,( this.styles.getFromMeasure() - 1 ),ts);
+		TempLine line = getTempLines(track,( this.styles.getFromMeasure() - 1 ), ts);
 		while(!line.measures.isEmpty()){
 			
 			ts.setSize(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES, ((style & DISPLAY_SCORE) != 0?( (getScoreLineSpacing() * 5) ):0));
@@ -143,7 +143,7 @@ public class PrinterViewLayout extends ViewLayout{
 				ts.setSize(TGTrackSpacing.POSITION_TABLATURE_TOP_SEPARATOR, ((style & DISPLAY_SCORE) != 0 ? getMinScoreTabSpacing() : Math.max(Math.abs(line.minY), getStringSpacing()) ));
 				ts.setSize(TGTrackSpacing.POSITION_TABLATURE, ((style & DISPLAY_SCORE) != 0 ?  track.getTabHeight() + getStringSpacing() + 1 : Math.max( line.maxY, track.getTabHeight() + getStringSpacing() + 1) ));
 			}
-			ts.setSize(TGTrackSpacing.POSITION_LYRIC,10);
+			ts.setSize(TGTrackSpacing.POSITION_LYRIC, 10);
 			checkDefaultSpacing(ts);
 			
 			lineHeight = ts.getSize();
@@ -156,13 +156,13 @@ public class PrinterViewLayout extends ViewLayout{
 			}
 			
 			//pinto la linea
-			paintLine(track,line,painter,fromX,posY,ts);
+			paintLine(track, line, painter, fromX, posY, ts);
 			
 			posY += lineHeight + getTrackSpacing();
 			height += lineHeight + getTrackSpacing();
 			
 			ts = new TGTrackSpacing(this) ;
-			line = getTempLines(track,( line.lastIndex + 1 ),ts);
+			line = getTempLines(track,( line.lastIndex + 1 ), ts);
 		}
 		this.setHeight(height);
 	}
@@ -182,11 +182,11 @@ public class PrinterViewLayout extends ViewLayout{
 				songAuthor = TuxGuitar.getProperty("print-header.default-song-author");
 			}
 			painter.setFont(this.songNameFont);
-			painter.drawString(songName,(x + getCenter(painter,songName)),y);
+			painter.drawString(songName,(x + getCenter(painter, songName)), y);
 			painter.setFont(this.trackNameFont);
-			painter.drawString(trackName,(x + getCenter(painter,trackName)),(y + Math.round(30.0f * getFontScale())));
+			painter.drawString(trackName,(x + getCenter(painter, trackName)),(y + Math.round(30.0f * getFontScale())));
 			painter.setFont(this.songAuthorFont);
-			painter.drawString(songAuthor,(x + getRight(painter,songAuthor)),(y + Math.round(50.0f * getFontScale())));
+			painter.drawString(songAuthor,(x + getRight(painter, songAuthor)),(y + Math.round(50.0f * getFontScale())));
 		}
 	}
 	
@@ -198,11 +198,11 @@ public class PrinterViewLayout extends ViewLayout{
 			
 			painter.setBackground(getResources().getColorWhite());
 			painter.setForeground(getResources().getColorBlack());
-			painter.drawString(pageNumber,(x + getRight(painter,pageNumber)),(y + getBottom(painter,pageNumber)));
+			painter.drawString(pageNumber,(x + getRight(painter, pageNumber)),(y + getBottom(painter, pageNumber)));
 		}
 	}
 	
-	public void paintLine(TGTrackImpl track,TempLine line,TGPainter painter,int fromX, int fromY,TGTrackSpacing ts) {
+	public void paintLine(TGTrackImpl track, TempLine line, TGPainter painter, int fromX, int fromY, TGTrackSpacing ts) {
 		if(this.document.isPaintable(this.page) ){
 			int posX = fromX;
 			int posY = fromY;
@@ -229,14 +229,14 @@ public class PrinterViewLayout extends ViewLayout{
 				
 				currMeasure.setFirstOfLine(i == 0);
 				
-				paintMeasure(currMeasure,painter,measureSpacing);
-				((TGLyricImpl)track.getLyrics()).paintCurrentNoteBeats(painter,this,currMeasure,posX, posY);
+				paintMeasure(currMeasure, painter, measureSpacing);
+				((TGLyricImpl)track.getLyrics()).paintCurrentNoteBeats(painter, this, currMeasure, posX, posY);
 				
 				int measureWidth = ( currMeasure.getWidth(this) + currMeasure.getSpacing() );
 				posX += measureWidth;
 				width += measureWidth;
 			}
-			this.setWidth(Math.max(getWidth(),width));
+			this.setWidth(Math.max(getWidth(), width));
 		}
 	}
 	
@@ -253,22 +253,22 @@ public class PrinterViewLayout extends ViewLayout{
 		}
 	}
 	
-	private int getCenter(TGPainter painter,String text){
+	private int getCenter(TGPainter painter, String text){
 		int textWidth = painter.getStringExtent(text).x;
 		return ((getMaxWidth() - textWidth) / 2);
 	}
 	
-	private int getRight(TGPainter painter,String text){
+	private int getRight(TGPainter painter, String text){
 		int textWidth = painter.getStringExtent(text).x;
 		return ((getMaxWidth() - textWidth));
 	}
 	
-	private int getBottom(TGPainter painter,String text){
+	private int getBottom(TGPainter painter, String text){
 		int textHeight = painter.getStringExtent(text).y;
 		return ((getMaxHeight() - textHeight));
 	}
 	
-	private TempLine getTempLines(TGTrack track,int fromIndex,TGTrackSpacing ts) {
+	private TempLine getTempLines(TGTrack track, int fromIndex, TGTrackSpacing ts) {
 		TempLine line = new TempLine();
 		int measureCount = track.countMeasures();
 		for (int measureIdx = fromIndex; measureIdx < measureCount; measureIdx++) {
@@ -285,7 +285,7 @@ public class PrinterViewLayout extends ViewLayout{
 				line.minY = (measure.getMinY() < line.minY)?measure.getMinY():line.minY;
 				
 				line.addMeasure(measureIdx);
-				measure.registerSpacing(this,ts);
+				measure.registerSpacing(this, ts);
 			}
 		}
 		
@@ -342,7 +342,7 @@ public class PrinterViewLayout extends ViewLayout{
 		painter.setBackground( ( fontStyle ? getResources().getColorWhite() : getResources().getColorBlack() ));
 	}
 	
-	public void setTabNoteStyle(TGPainter painter,boolean playMode){
+	public void setTabNoteStyle(TGPainter painter, boolean playMode){
 		painter.setBackground( getResources().getColorWhite() );
 		painter.setForeground( getDarkColor(getResources().getTabNoteColor()) );
 		painter.setFont(getResources().getPrinterNoteFont());
@@ -358,7 +358,7 @@ public class PrinterViewLayout extends ViewLayout{
 		painter.setBackground( getDarkColor(getResources().getTabNoteColor()));
 	}
 	
-	public void setScoreNoteStyle(TGPainter painter,boolean playing){
+	public void setScoreNoteStyle(TGPainter painter, boolean playing){
 		painter.setBackground( getDarkColor(getResources().getScoreNoteColor()) );
 		painter.setForeground( getDarkColor(getResources().getScoreNoteColor()) );
 	}
@@ -385,7 +385,7 @@ public class PrinterViewLayout extends ViewLayout{
 		painter.setForeground( getDarkColor(getResources().getTabNoteColor()) );
 	}
 	
-	public void setLyricStyle(TGPainter painter,boolean playMode){
+	public void setLyricStyle(TGPainter painter, boolean playMode){
 		painter.setFont(getResources().getPrinterLyricFont());
 		painter.setBackground( getResources().getColorWhite() );
 		painter.setForeground(getResources().getColorBlack());
@@ -461,7 +461,7 @@ public class PrinterViewLayout extends ViewLayout{
 	}
 	
 	private int getScaledValue(float scale, int value){
-		return getScaledValue(scale, value,1);
+		return getScaledValue(scale, value, 1);
 	}
 	
 	private int getScaledValue(float scale, int value, int minimum){

@@ -18,7 +18,7 @@ public class TablatureUtil {
 	/**
 	 * Calcula la posicion inicial de una nota, dependiendo de el spacing
 	 */
-	public static final int getStartPosition(TGMeasure measure,long start,int spacing){
+	public static final int getStartPosition(TGMeasure measure, long start, int spacing){
 		double newStart = (double)start - (double)measure.getStart();
 		double displayPosition = 0.0;
 		if(newStart > 0){

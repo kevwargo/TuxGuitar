@@ -48,7 +48,7 @@ public class RemoveTrackAction extends Action{
 		
 		//move the caret to the next or previous track
 		if(nextCaretTrack != null){
-			caret.update(nextCaretTrack.getNumber(),getSongManager().getTrackManager().getMeasureAt(nextCaretTrack, caret.getMeasure().getStart()).getStart(),1);
+			caret.update(nextCaretTrack.getNumber(), getSongManager().getTrackManager().getMeasureAt(nextCaretTrack, caret.getMeasure().getStart()).getStart(), 1);
 		}
 		TuxGuitar.instance().getMixer().update();
 		

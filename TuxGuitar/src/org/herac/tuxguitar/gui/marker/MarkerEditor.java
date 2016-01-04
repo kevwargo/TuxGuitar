@@ -43,10 +43,10 @@ public class MarkerEditor {
 	protected boolean accepted;
 	
 	public MarkerEditor(TGMarker marker) {
-		this(marker,STATUS_NEW);
+		this(marker, STATUS_NEW);
 	}
 	
-	public MarkerEditor(TGMarker marker,int status) {
+	public MarkerEditor(TGMarker marker, int status) {
 		this.marker = marker.clone(TuxGuitar.instance().getSongManager().getFactory());
 		this.status = status;
 	}
@@ -59,7 +59,7 @@ public class MarkerEditor {
 		this.dialog.setText(TuxGuitar.getProperty("marker"));
 		
 		// ----------------------------------------------------------------------
-		Group group = new Group(this.dialog,SWT.SHADOW_ETCHED_IN);
+		Group group = new Group(this.dialog, SWT.SHADOW_ETCHED_IN);
 		group.setLayout(new GridLayout(2, false));
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setText(TuxGuitar.getProperty("marker"));
@@ -67,11 +67,11 @@ public class MarkerEditor {
 		// Measure Number
 		final int measureCount = TuxGuitar.instance().getSongManager().getSong().countMeasureHeaders();
 		Label measureLabel = new Label(group, SWT.NULL);
-		measureLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true,true));
+		measureLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		measureLabel.setText(TuxGuitar.getProperty("measure"));
 		
 		this.measureSpinner = new Spinner(group, SWT.BORDER);
-		this.measureSpinner.setLayoutData(getAlignmentData(MINIMUM_CONTROL_WIDTH,SWT.FILL));
+		this.measureSpinner.setLayoutData(getAlignmentData(MINIMUM_CONTROL_WIDTH, SWT.FILL));
 		this.measureSpinner.setMinimum(1);
 		this.measureSpinner.setMaximum(measureCount);
 		this.measureSpinner.setSelection(this.marker.getMeasure());
@@ -91,7 +91,7 @@ public class MarkerEditor {
 		titleLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		titleLabel.setText(TuxGuitar.getProperty("title"));
 		this.titleText = new Text(group, SWT.BORDER);
-		this.titleText.setLayoutData(getAlignmentData(MINIMUM_CONTROL_WIDTH,SWT.FILL));
+		this.titleText.setLayoutData(getAlignmentData(MINIMUM_CONTROL_WIDTH, SWT.FILL));
 		this.titleText.setText(this.marker.getTitle());
 		
 		// Color
@@ -99,7 +99,7 @@ public class MarkerEditor {
 		colorLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		colorLabel.setText(TuxGuitar.getProperty("color"));
 		this.colorButton = new Button(group, SWT.PUSH);
-		this.colorButton.setLayoutData(getAlignmentData(MINIMUM_CONTROL_WIDTH,SWT.FILL));
+		this.colorButton.setLayoutData(getAlignmentData(MINIMUM_CONTROL_WIDTH, SWT.FILL));
 		this.colorButton.setText(TuxGuitar.getProperty("choose"));
 		this.colorButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
@@ -153,12 +153,12 @@ public class MarkerEditor {
 		
 		this.dialog.setDefaultButton( buttonOK );
 		
-		DialogUtils.openDialog(this.dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		
 		return this.accepted;
 	}
 	
-	private GridData getAlignmentData(int minimumWidth,int horizontalAlignment){
+	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment){
 		GridData data = new GridData();
 		data.minimumWidth = minimumWidth;
 		data.horizontalAlignment = horizontalAlignment;

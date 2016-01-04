@@ -42,7 +42,7 @@ public class TransportModeAction extends Action {
 	
 	protected static final int MIN_SELECTION = 1;
 	protected static final int MAX_SELECTION = 500;
-	protected static final int[] DEFAULT_PERCENTS = new int[]{25,50,75,100,125,150,175,200};
+	protected static final int[] DEFAULT_PERCENTS = new int[]{25, 50, 75, 100, 125, 150, 175, 200};
 	
 	protected Button simple;
 	protected Button simpleLoop;
@@ -65,7 +65,7 @@ public class TransportModeAction extends Action {
 		return 0;
 	}
 	
-	public void showDialog(final Shell parent,final MidiPlayerMode mode) {
+	public void showDialog(final Shell parent, final MidiPlayerMode mode) {
 		final Shell dialog = DialogUtils.newDialog(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		dialog.setLayout(new GridLayout());
 		dialog.setText(TuxGuitar.getProperty("transport.mode"));
@@ -83,16 +83,16 @@ public class TransportModeAction extends Action {
 		RadioSelectionAdapter simpleAdapter = new RadioSelectionAdapter(this.simple);
 		
 		Group simpleGroup = new Group(radios, SWT.SHADOW_ETCHED_IN);
-		simpleGroup.setLayout(new GridLayout(2,false));
+		simpleGroup.setLayout(new GridLayout(2, false));
 		simpleGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		simpleGroup.setText(TuxGuitar.getProperty("transport.mode.simple"));
 		simpleAdapter.addControl(simpleGroup);
 		
-		simpleAdapter.addControl(makeLabel(simpleGroup, TuxGuitar.getProperty("transport.mode.simple.tempo-percent"),SWT.LEFT,1));
+		simpleAdapter.addControl(makeLabel(simpleGroup, TuxGuitar.getProperty("transport.mode.simple.tempo-percent"), SWT.LEFT, 1));
 		this.simplePercent = new Combo(simpleGroup, SWT.DROP_DOWN | SWT.READ_ONLY);
-		this.simplePercent.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.simplePercent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		for(int i = 0; i < DEFAULT_PERCENTS.length; i ++){
-			this.simplePercent.add(Integer.toString(DEFAULT_PERCENTS[i]) + "%",i);
+			this.simplePercent.add(Integer.toString(DEFAULT_PERCENTS[i]) + "%", i);
 			if(mode.getSimplePercent() == DEFAULT_PERCENTS[i]){
 				this.simplePercent.select(i);
 			}
@@ -104,7 +104,7 @@ public class TransportModeAction extends Action {
 		this.simpleLoop.setSelection(mode.isLoop());
 		simpleAdapter.addControl(this.simpleLoop);
 		
-		GridData loopedData = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData loopedData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		loopedData.horizontalSpan = 2;
 		this.simpleLoop.setLayoutData(loopedData);
 		
@@ -115,48 +115,48 @@ public class TransportModeAction extends Action {
 		RadioSelectionAdapter customAdapter = new RadioSelectionAdapter(this.custom);
 		
 		Group trainerGroup = new Group(radios, SWT.SHADOW_ETCHED_IN);
-		trainerGroup.setLayout(new GridLayout(6,false));
+		trainerGroup.setLayout(new GridLayout(6, false));
 		trainerGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		trainerGroup.setText(TuxGuitar.getProperty("transport.mode.trainer"));
 		customAdapter.addControl(trainerGroup);
 		
-		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("composition.tempo"),SWT.LEFT,1));
-		this.customFrom = new Spinner(trainerGroup,SWT.BORDER);
+		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("composition.tempo"), SWT.LEFT, 1));
+		this.customFrom = new Spinner(trainerGroup, SWT.BORDER);
 		this.customFrom.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.customFrom.setMinimum(MIN_SELECTION);
 		this.customFrom.setMaximum(MAX_SELECTION);
 		this.customFrom.setSelection(mode.getCustomPercentFrom());
 		customAdapter.addControl(this.customFrom);
-		customAdapter.addControl(makeLabel(trainerGroup, "%",SWT.LEFT,1));
+		customAdapter.addControl(makeLabel(trainerGroup, "%", SWT.LEFT, 1));
 		
-		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("edit.to"),SWT.RIGHT,1));
-		this.customTo = new Spinner(trainerGroup,SWT.BORDER);
+		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("edit.to"), SWT.RIGHT, 1));
+		this.customTo = new Spinner(trainerGroup, SWT.BORDER);
 		this.customTo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.customTo.setMinimum(MIN_SELECTION);
 		this.customTo.setMaximum(MAX_SELECTION);
 		this.customTo.setSelection(mode.getCustomPercentTo());
 		customAdapter.addControl(this.customTo);
-		customAdapter.addControl(makeLabel(trainerGroup, "%",SWT.LEFT,1));
+		customAdapter.addControl(makeLabel(trainerGroup, "%", SWT.LEFT, 1));
 		
-		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("transport.mode.trainer.increment-description"),SWT.LEFT,4));
-		this.customIncrement = new Spinner(trainerGroup,SWT.BORDER);
+		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("transport.mode.trainer.increment-description"), SWT.LEFT, 4));
+		this.customIncrement = new Spinner(trainerGroup, SWT.BORDER);
 		this.customIncrement.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.customIncrement.setMinimum(MIN_SELECTION);
 		this.customIncrement.setMaximum(MAX_SELECTION);
 		this.customIncrement.setSelection(mode.getCustomPercentIncrement());
 		customAdapter.addControl(this.customIncrement);
-		customAdapter.addControl(makeLabel(trainerGroup, "%",SWT.LEFT,1));
+		customAdapter.addControl(makeLabel(trainerGroup, "%", SWT.LEFT, 1));
 		
-		SpinnerSelectionAdapter spinnerAdapter = new SpinnerSelectionAdapter(this.customFrom,this.customTo,this.customIncrement);
+		SpinnerSelectionAdapter spinnerAdapter = new SpinnerSelectionAdapter(this.customFrom, this.customTo, this.customIncrement);
 		this.customFrom.addSelectionListener(spinnerAdapter);
 		this.customTo.addSelectionListener(spinnerAdapter);
 		this.customIncrement.addSelectionListener(spinnerAdapter);
 		
 		//--- Loop Range ---
-		MHeaderRangeStatus mHeaderRangeStatus = new MHeaderRangeStatus(this.simple,this.simpleLoop,this.custom);
+		MHeaderRangeStatus mHeaderRangeStatus = new MHeaderRangeStatus(this.simple, this.simpleLoop, this.custom);
 		
 		Group rangeGroup = new Group(radios, SWT.SHADOW_ETCHED_IN);
-		rangeGroup.setLayout(new GridLayout(2,false));
+		rangeGroup.setLayout(new GridLayout(2, false));
 		rangeGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		rangeGroup.setText(TuxGuitar.getProperty("transport.mode.loop-range"));
 		mHeaderRangeStatus.addControl( rangeGroup );
@@ -203,7 +203,7 @@ public class TransportModeAction extends Action {
 		
 		dialog.setDefaultButton( buttonOK );
 		
-		DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
 	private GridData getMainData(){
@@ -219,10 +219,10 @@ public class TransportModeAction extends Action {
 		return data;
 	}
 	
-	private Label makeLabel(Composite parent,String text,int aligment,int horizontalSpan){
-		Label label = new Label(parent,SWT.CENTER | aligment);
+	private Label makeLabel(Composite parent, String text, int aligment, int horizontalSpan){
+		Label label = new Label(parent, SWT.CENTER | aligment);
 		label.setText(text);
-		GridData data = new GridData(SWT.FILL,SWT.CENTER,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, true);
 		data.horizontalSpan = horizontalSpan;
 		label.setLayoutData(data);
 		return label;
@@ -278,7 +278,7 @@ public class TransportModeAction extends Action {
 		private Spinner from;
 		private Spinner increment;
 		
-		public SpinnerSelectionAdapter(Spinner from,Spinner to, Spinner increment) {
+		public SpinnerSelectionAdapter(Spinner from, Spinner to, Spinner increment) {
 			this.from = from;
 			this.to = to;
 			this.increment = increment;
@@ -357,7 +357,7 @@ public class TransportModeAction extends Action {
 		public MHeaderCombo( Composite parent ){
 			this.values = new ArrayList();
 			this.combo = new Combo( parent, SWT.DROP_DOWN | SWT.READ_ONLY );
-			this.combo.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			this.combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		}
 		
 		public Combo getControl(){

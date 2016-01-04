@@ -62,7 +62,7 @@ public class FileMenuItem extends MenuItems {
 	private List importItems;
 	private List exportItems;
 	
-	public FileMenuItem(Shell shell,Menu parent, int style) {
+	public FileMenuItem(Shell shell, Menu parent, int style) {
 		this.fileMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 		this.importItems = new ArrayList();
@@ -99,7 +99,7 @@ public class FileMenuItem extends MenuItems {
 			//--IMPORT--
 			this.importItems.clear();
 			if( countImporters > 0 ){
-				this.importItem = new MenuItem(this.menu,SWT.CASCADE);
+				this.importItem = new MenuItem(this.menu, SWT.CASCADE);
 				this.importMenu = new Menu(this.menu.getShell(), SWT.DROP_DOWN);
 				this.addImporters();
 			}
@@ -107,7 +107,7 @@ public class FileMenuItem extends MenuItems {
 			//--EXPORT--
 			this.exportItems.clear();
 			if( countExporters > 0 ){
-				this.exportItem = new MenuItem(this.menu,SWT.CASCADE);
+				this.exportItem = new MenuItem(this.menu, SWT.CASCADE);
 				this.exportMenu = new Menu(this.menu.getShell(), SWT.DROP_DOWN);
 				this.addExporters();
 			}
@@ -126,7 +126,7 @@ public class FileMenuItem extends MenuItems {
 		new MenuItem(this.menu, SWT.SEPARATOR);
 		
 		//--HISTORY--
-		this.historyItem = new MenuItem(this.menu,SWT.CASCADE);
+		this.historyItem = new MenuItem(this.menu, SWT.CASCADE);
 		this.historyMenu = new Menu(this.menu.getShell(), SWT.DROP_DOWN);
 		this.updateHistoryFiles();
 		//--SEPARATOR--

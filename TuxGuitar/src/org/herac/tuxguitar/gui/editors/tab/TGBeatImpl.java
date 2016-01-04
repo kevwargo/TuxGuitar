@@ -156,7 +156,7 @@ public class TGBeatImpl extends TGBeat{
 	}
 	
 	public boolean isPlaying(ViewLayout layout){
-		return (getMeasureImpl().isPlaying(layout) && TuxGuitar.instance().getEditorCache().isPlaying(getMeasure(),this));
+		return (getMeasureImpl().isPlaying(layout) && TuxGuitar.instance().getEditorCache().isPlaying(getMeasure(), this));
 	}
 	
 	public TGVoiceImpl getVoiceImpl(int index){
@@ -199,7 +199,7 @@ public class TGBeatImpl extends TGBeat{
 		this.trill = false;
 	}
 	
-	public void updateEffectsSpacing(ViewLayout layout,TGNoteEffect effect){
+	public void updateEffectsSpacing(ViewLayout layout, TGNoteEffect effect){
 		if(effect.isAccentuatedNote()){
 			this.accentuated = true;
 		}
@@ -234,34 +234,34 @@ public class TGBeatImpl extends TGBeat{
 	
 	public int getEffectsSpacing(ViewLayout layout){
 		if(this.accentuated){
-			this.bs.setSize(TGBeatSpacing.POSITION_ACCENTUATED_EFFECT,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_ACCENTUATED_EFFECT, layout.getEffectSpacing());
 		}
 		if(this.heavyAccentuated){
-			this.bs.setSize(TGBeatSpacing.POSITION_HEAVY_ACCENTUATED_EFFECT,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_HEAVY_ACCENTUATED_EFFECT, layout.getEffectSpacing());
 		}
 		if(this.harmonic){
-			this.bs.setSize(TGBeatSpacing.POSITION_HARMONIC_EFFEC,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_HARMONIC_EFFEC, layout.getEffectSpacing());
 		}
 		if(this.tapping){
-			this.bs.setSize(TGBeatSpacing.POSITION_TAPPING_EFFEC,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_TAPPING_EFFEC, layout.getEffectSpacing());
 		}
 		if(this.slapping){
-			this.bs.setSize(TGBeatSpacing.POSITION_SLAPPING_EFFEC,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_SLAPPING_EFFEC, layout.getEffectSpacing());
 		}
 		if(this.popping){
-			this.bs.setSize(TGBeatSpacing.POSITION_POPPING_EFFEC,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_POPPING_EFFEC, layout.getEffectSpacing());
 		}
 		if(this.palmMute){
-			this.bs.setSize(TGBeatSpacing.POSITION_PALM_MUTE_EFFEC,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_PALM_MUTE_EFFEC, layout.getEffectSpacing());
 		}
 		if(this.fadeIn){
-			this.bs.setSize(TGBeatSpacing.POSITION_FADE_IN,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_FADE_IN, layout.getEffectSpacing());
 		}
 		if(this.vibrato){
-			this.bs.setSize(TGBeatSpacing.POSITION_VIBRATO_EFFEC,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_VIBRATO_EFFEC, layout.getEffectSpacing());
 		}
 		if(this.trill){
-			this.bs.setSize(TGBeatSpacing.POSITION_TRILL_EFFEC,layout.getEffectSpacing());
+			this.bs.setSize(TGBeatSpacing.POSITION_TRILL_EFFEC, layout.getEffectSpacing());
 		}
 		return this.bs.getSize();
 	}
@@ -274,15 +274,15 @@ public class TGBeatImpl extends TGBeat{
 					for( int v = 0; v < countVoices(); v ++){
 						notes.addAll( getVoice(v).getNotes() );
 					}
-					TuxGuitar.instance().getPlayer().playBeat(getMeasure().getTrack(),notes);
+					TuxGuitar.instance().getPlayer().playBeat(getMeasure().getTrack(), notes);
 				}
 			}).start();
 		}
 	}
 	
-	public void paint(ViewLayout layout,TGPainter painter, int fromX, int fromY/*,boolean playMode*/) {
+	public void paint(ViewLayout layout, TGPainter painter, int fromX, int fromY/*, boolean playMode*/) {
 		if(!layout.isPlayModeEnabled() && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0 ){
-			paintExtraLines(painter, layout,fromX, fromY);
+			paintExtraLines(painter, layout, fromX, fromY);
 		}
 		for(int v = 0; v < TGBeat.MAX_VOICES; v ++){
 			getVoiceImpl(v).paint(layout, painter, fromX, fromY);
@@ -290,7 +290,7 @@ public class TGBeatImpl extends TGBeat{
 		if(!layout.isPlayModeEnabled()){
 			if(isChordBeat()){
 				TGChordImpl chord = (TGChordImpl)getChord();
-				chord.paint(layout,painter,fromX,fromY);
+				chord.paint(layout, painter, fromX, fromY);
 			}
 			if(getStroke().getDirection() != TGStroke.STROKE_NONE){
 				paintStroke(layout, painter, fromX, fromY);
@@ -298,15 +298,15 @@ public class TGBeatImpl extends TGBeat{
 		}
 	}
 	
-	public void paintExtraLines(TGPainter painter,ViewLayout layout,int fromX, int fromY){
+	public void paintExtraLines(TGPainter painter, ViewLayout layout, int fromX, int fromY){
 		if(!isRestBeat()){
 			int scoreY = (fromY + getMeasureImpl().getTs().getPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES));
-			paintExtraLines(painter,layout,getMinNote(), fromX, scoreY);
-			paintExtraLines(painter,layout,getMaxNote(), fromX, scoreY);
+			paintExtraLines(painter, layout, getMinNote(), fromX, scoreY);
+			paintExtraLines(painter, layout, getMaxNote(), fromX, scoreY);
 		}
 	}
 	
-	private void paintExtraLines(TGPainter painter,ViewLayout layout,TGNoteImpl note,int fromX,int fromY){
+	private void paintExtraLines(TGPainter painter, ViewLayout layout, TGNoteImpl note, int fromX, int fromY){
 		float scale = layout.getScale();
 		int y = fromY + note.getScorePosY();
 		int x = fromX + getPosX() + getSpacing();
@@ -320,22 +320,22 @@ public class TGBeatImpl extends TGBeat{
 			for(int i = fromY;i > y;i -= scoreLineSpacing){
 				painter.initPath();
 				painter.setAntialias(false);
-				painter.moveTo(x1,i);
-				painter.lineTo(x2,i);
+				painter.moveTo(x1, i);
+				painter.lineTo(x2, i);
 				painter.closePath();
 			}
 		}else if(y > (fromY + (scoreLineSpacing * 4))){
 			for(int i = (fromY +(scoreLineSpacing * 5));i < (y + scoreLineSpacing);i += scoreLineSpacing){
 				painter.initPath();
 				painter.setAntialias(false);
-				painter.moveTo(x1,i);
-				painter.lineTo(x2,i);
+				painter.moveTo(x1, i);
+				painter.lineTo(x2, i);
 				painter.closePath();
 			}
 		}
 	}
 	
-	public void paintStroke(ViewLayout layout,TGPainter painter, int fromX, int fromY){
+	public void paintStroke(ViewLayout layout, TGPainter painter, int fromX, int fromY){
 		int style = layout.getStyle();
 		float scale = layout.getScale();
 		float x = (fromX + getPosX() + getSpacing() + ( 12f * scale ));

@@ -45,24 +45,24 @@ public class TGTableRow {
 		MouseListener mouseListenerCanvas = new MouseListenerCanvas();
 		PaintListener paintListenerCanvas = new PaintListenerCanvas();
 
-		this.row = new Composite(this.table.getRowControl(),SWT.NONE );
-		this.row.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,false));
+		this.row = new Composite(this.table.getRowControl(), SWT.NONE );
+		this.row.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		
-		this.number = new CLabel(this.row,SWT.LEFT);
+		this.number = new CLabel(this.row, SWT.LEFT);
 		this.number.addMouseListener(mouseListenerLabel);
-		this.table.addRowItem(this.table.getColumnNumber(),this.number,true);
+		this.table.addRowItem(this.table.getColumnNumber(), this.number, true);
 
         this.visibleInMultitrackCheckbox = new Button(this.row, SWT.CHECK | SWT.NO_FOCUS);
         this.table.addRowItem(this.table.getColumnVIMT(),
                               this.visibleInMultitrackCheckbox, true);
 		
-		this.name = new CLabel(this.row,SWT.LEFT);
+		this.name = new CLabel(this.row, SWT.LEFT);
 		this.name.addMouseListener(mouseListenerLabel);
-		this.table.addRowItem(this.table.getColumnName(),this.name,true);
+		this.table.addRowItem(this.table.getColumnName(), this.name, true);
 		
-		this.instrument = new CLabel(this.row,SWT.LEFT);
+		this.instrument = new CLabel(this.row, SWT.LEFT);
 		this.instrument.addMouseListener(mouseListenerLabel);
-		this.table.addRowItem(this.table.getColumnInstrument(),this.instrument,true);
+		this.table.addRowItem(this.table.getColumnInstrument(), this.instrument, true);
 
         this.volumeControl = new Spinner(this.row, SWT.CENTER);
         this.table.addRowItem(this.table.getColumnVolume(), this.volumeControl, true);
@@ -73,10 +73,10 @@ public class TGTableRow {
         this.muteCheckbox = new Button(this.row, SWT.CHECK | SWT.NO_FOCUS);
         this.table.addRowItem(this.table.getColumnMute(), this.muteCheckbox, true);
 		
-		this.painter = new Composite(this.row,SWT.DOUBLE_BUFFERED);
+		this.painter = new Composite(this.row, SWT.DOUBLE_BUFFERED);
 		this.painter.addMouseListener(mouseListenerCanvas);
 		this.painter.addPaintListener(paintListenerCanvas);
-		this.table.addRowItem(this.table.getColumnCanvas(),this.painter,false);
+		this.table.addRowItem(this.table.getColumnCanvas(), this.painter, false);
 
 		this.row.pack();
 	}

@@ -26,7 +26,7 @@ public class SetLinearLayoutAction extends Action{
 	
 	protected int execute(TypedEvent e){
 		Tablature tablature = getEditor().getTablature();
-		tablature.setViewLayout(new LinearViewLayout(tablature,tablature.getViewLayout().getStyle()));
+		tablature.setViewLayout(new LinearViewLayout(tablature, tablature.getViewLayout().getStyle()));
 		updateTablature();
 		return 0;
 	}

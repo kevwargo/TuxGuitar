@@ -7,9 +7,9 @@ import org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout;
 import org.herac.tuxguitar.song.models.TGVoice;
 
 public class TGBeatGroup {
-	private static final int SCORE_MIDDLE_KEYS[] = new int[]{55,40,40,50};
-	private static final int SCORE_SHARP_POSITIONS[] = new int[]{7,7,6,6,5,4,4,3,3,2,2,1};
-	private static final int SCORE_FLAT_POSITIONS[] = new int[]{7,6,6,5,5,4,3,3,2,2,1,1};
+	private static final int SCORE_MIDDLE_KEYS[] = new int[]{55, 40, 40, 50};
+	private static final int SCORE_SHARP_POSITIONS[] = new int[]{7, 7, 6, 6, 5, 4, 4, 3, 3, 2, 2, 1};
+	private static final int SCORE_FLAT_POSITIONS[] = new int[]{7, 6, 6, 5, 5, 4, 3, 3, 2, 2, 1, 1};
 	
 	public static final int DIRECTION_NOT_SETTED = 0;
 	public static final int DIRECTION_UP = 1;
@@ -121,7 +121,7 @@ public class TGBeatGroup {
 		return this.voices;
 	}
 	
-	public int getY1(ViewLayout layout,TGNoteImpl note,int key,int clef){
+	public int getY1(ViewLayout layout, TGNoteImpl note, int key, int clef){
 		double scale = (layout.getScoreLineSpacing() / 2.00);
 		int noteValue = note.getRealValue();
 		
@@ -137,20 +137,20 @@ public class TGBeatGroup {
 		return scoreLineY;
 	}
 	
-	public int getY2(ViewLayout layout,int x,int key,int clef){
+	public int getY2(ViewLayout layout, int x, int key, int clef){
 		int maxDistance = 10;
 		float upOffset = TGBeatGroup.getUpOffset(layout);
 		float downOffset = TGBeatGroup.getDownOffset(layout);
 		if(this.direction == DIRECTION_DOWN){
 			if(this.minNote != this.firstMinNote && this.minNote != this.lastMinNote){
-				return (int) (getY1(layout,this.minNote,key,clef) + downOffset);
+				return (int) (getY1(layout, this.minNote, key, clef) + downOffset);
 			}
 			
 			int y = 0;
 			int x1 = this.firstMinNote.getPosX() + this.firstMinNote.getBeatImpl().getSpacing();
 			int x2 = this.lastMinNote.getPosX() + this.lastMinNote.getBeatImpl().getSpacing();
-			int y1 =  (int) (getY1(layout,this.firstMinNote,key,clef) +  downOffset);
-			int y2 =  (int) (getY1(layout,this.lastMinNote,key,clef) +  downOffset);
+			int y1 =  (int) (getY1(layout, this.firstMinNote, key, clef) +  downOffset);
+			int y2 =  (int) (getY1(layout, this.lastMinNote, key, clef) +  downOffset);
 			
 			if(y1 > y2 && (y1 - y2) > maxDistance) y2 = (y1 - maxDistance);
 			if(y2 > y1 && (y2 - y1) > maxDistance) y1 = (y2 - maxDistance);
@@ -161,13 +161,13 @@ public class TGBeatGroup {
 			}
 			return y1 - y;
 		}else if(this.maxNote != this.firstMaxNote && this.maxNote != this.lastMaxNote){
-			return (int)(getY1(layout,this.maxNote,key,clef) - upOffset);
+			return (int)(getY1(layout, this.maxNote, key, clef) - upOffset);
 		}else{
 			int y = 0;
 			int x1 = this.firstMaxNote.getPosX() + this.firstMaxNote.getBeatImpl().getSpacing();
 			int x2 = this.lastMaxNote.getPosX() + this.lastMaxNote.getBeatImpl().getSpacing();
-			int y1 = (int)(getY1(layout,this.firstMaxNote,key,clef) - upOffset);
-			int y2 = (int)(getY1(layout,this.lastMaxNote,key,clef) - upOffset);
+			int y1 = (int)(getY1(layout, this.firstMaxNote, key, clef) - upOffset);
+			int y2 = (int)(getY1(layout, this.lastMaxNote, key, clef) - upOffset);
 			
 			if(y1 < y2 && (y2 - y1) > maxDistance) y2 = (y1 + maxDistance);
 			if(y2 < y1 && (y1 - y2) > maxDistance) y1 = (y2 + maxDistance);

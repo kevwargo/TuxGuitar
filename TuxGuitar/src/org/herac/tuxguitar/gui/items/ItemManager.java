@@ -63,7 +63,7 @@ import org.herac.tuxguitar.util.TGSynchronizer;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
+public class ItemManager implements TGUpdateListener, IconLoader, LanguageLoader{
 	
 	private Menu menu;
 	private Menu popupMenu;
@@ -105,9 +105,9 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 			FormData coolData = new FormData();
 			coolData.left = new FormAttachment(0);
 			coolData.right = new FormAttachment(100);
-			coolData.top = new FormAttachment(0,0);
+			coolData.top = new FormAttachment(0, 0);
 			
-			this.coolBar = new CoolBar(TuxGuitar.instance().getShell(),SWT.HORIZONTAL | SWT.FLAT);
+			this.coolBar = new CoolBar(TuxGuitar.instance().getShell(), SWT.HORIZONTAL | SWT.FLAT);
 			this.coolBar.setLayoutData(coolData);
 			this.coolBar.addListener(SWT.Resize, new Listener() {
 				public void handleEvent(Event event) {
@@ -203,7 +203,7 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 	protected void layoutShell(){
 		if(!this.layout_locked){
 			this.layout_locked = true;
-			TuxGuitar.instance().getShell().layout(true,true);
+			TuxGuitar.instance().getShell().layout(true, true);
 			this.layout_locked = false;
 		}
 	}
@@ -232,7 +232,7 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 	}
 	
 	private void makeToolBar(ToolItems item){
-		ToolBar toolBar = new ToolBar(this.coolBar,SWT.HORIZONTAL | SWT.FLAT );
+		ToolBar toolBar = new ToolBar(this.coolBar, SWT.HORIZONTAL | SWT.FLAT );
 		item.showItems(toolBar);
 		makeCoolItem(toolBar); 
 		this.loadedToolItems.add(item);
@@ -257,17 +257,17 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 		}
 		
 		this.loadedMenuItems.clear();
-		this.loadedMenuItems.add(new FileMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new EditMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new ViewMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new CompositionMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new TrackMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new MeasureMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new BeatMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new MarkerMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new TransportMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new ToolMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new HelpMenuItem(shell,this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new FileMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new EditMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new ViewMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new CompositionMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new TrackMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new MeasureMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new BeatMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new MarkerMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new TransportMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new ToolMenuItem(shell, this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new HelpMenuItem(shell, this.menu, SWT.CASCADE));
 		this.showMenuItems(this.loadedMenuItems);
 		shell.setMenuBar(this.menu);
 	}
@@ -282,13 +282,13 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 			items[i].dispose();
 		}
 		this.loadedPopupMenuItems.clear();
-		this.loadedPopupMenuItems.add(new EditMenuItem(shell,this.popupMenu, SWT.CASCADE));
-		this.loadedPopupMenuItems.add(new CompositionMenuItem(shell,this.popupMenu, SWT.CASCADE));
-		this.loadedPopupMenuItems.add(new TrackMenuItem(shell,this.popupMenu, SWT.CASCADE));
-		this.loadedPopupMenuItems.add(new MeasureMenuItem(shell,this.popupMenu, SWT.CASCADE));
-		this.loadedPopupMenuItems.add(new BeatMenuItem(shell,this.popupMenu, SWT.CASCADE)); 
-		this.loadedPopupMenuItems.add(new MarkerMenuItem(shell,this.popupMenu, SWT.CASCADE));
-		this.loadedPopupMenuItems.add(new TransportMenuItem(shell,this.popupMenu, SWT.CASCADE));
+		this.loadedPopupMenuItems.add(new EditMenuItem(shell, this.popupMenu, SWT.CASCADE));
+		this.loadedPopupMenuItems.add(new CompositionMenuItem(shell, this.popupMenu, SWT.CASCADE));
+		this.loadedPopupMenuItems.add(new TrackMenuItem(shell, this.popupMenu, SWT.CASCADE));
+		this.loadedPopupMenuItems.add(new MeasureMenuItem(shell, this.popupMenu, SWT.CASCADE));
+		this.loadedPopupMenuItems.add(new BeatMenuItem(shell, this.popupMenu, SWT.CASCADE)); 
+		this.loadedPopupMenuItems.add(new MarkerMenuItem(shell, this.popupMenu, SWT.CASCADE));
+		this.loadedPopupMenuItems.add(new TransportMenuItem(shell, this.popupMenu, SWT.CASCADE));
 		this.showMenuItems(this.loadedPopupMenuItems);
 	}
 	
@@ -350,7 +350,7 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 			writeToolBars();
 		}
 		this.shouldReloadToolBars = false;
-		ToolBarsReader.loadToolBars(this,file);
+		ToolBarsReader.loadToolBars(this, file);
 	}
 	
 	public void writeToolBars(){

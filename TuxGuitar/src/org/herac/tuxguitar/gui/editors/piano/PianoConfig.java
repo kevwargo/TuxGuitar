@@ -57,27 +57,27 @@ public class PianoConfig {
 	public void load(){
 		Display display = TuxGuitar.instance().getDisplay();
 		TGConfigManager config = TuxGuitar.instance().getConfig();
-		this.colorNatural = new Color(display,config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_KEY_NATURAL));
-		this.colorNotNatural = new Color(display,config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_KEY_NOT_NATURAL));
-		this.colorNote = new Color(display,config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_NOTE));
-		this.colorScale = new Color(display,config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_SCALE));
+		this.colorNatural = new Color(display, config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_KEY_NATURAL));
+		this.colorNotNatural = new Color(display, config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_KEY_NOT_NATURAL));
+		this.colorNote = new Color(display, config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_NOTE));
+		this.colorScale = new Color(display, config.getRGBConfigValue(TGConfigKeys.PIANO_COLOR_SCALE));
 	}
 	
 	public void defaults(){
 		TGConfigManager config = TuxGuitar.instance().getConfig();
 		Properties defaults = config.getDefaults();
-		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NATURAL,defaults.getProperty(TGConfigKeys.PIANO_COLOR_KEY_NATURAL));
-		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NOT_NATURAL,defaults.getProperty(TGConfigKeys.PIANO_COLOR_KEY_NOT_NATURAL));
-		config.setProperty(TGConfigKeys.PIANO_COLOR_NOTE,defaults.getProperty(TGConfigKeys.PIANO_COLOR_NOTE));
-		config.setProperty(TGConfigKeys.PIANO_COLOR_SCALE,defaults.getProperty(TGConfigKeys.PIANO_COLOR_SCALE));
+		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NATURAL, defaults.getProperty(TGConfigKeys.PIANO_COLOR_KEY_NATURAL));
+		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NOT_NATURAL, defaults.getProperty(TGConfigKeys.PIANO_COLOR_KEY_NOT_NATURAL));
+		config.setProperty(TGConfigKeys.PIANO_COLOR_NOTE, defaults.getProperty(TGConfigKeys.PIANO_COLOR_NOTE));
+		config.setProperty(TGConfigKeys.PIANO_COLOR_SCALE, defaults.getProperty(TGConfigKeys.PIANO_COLOR_SCALE));
 	}
 	
-	public void save(RGB rgbNatural,RGB rgbNotNatural,RGB rgbNote,RGB rgbScale){
+	public void save(RGB rgbNatural, RGB rgbNotNatural, RGB rgbNote, RGB rgbScale){
 		TGConfigManager config = TuxGuitar.instance().getConfig();
-		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NATURAL,rgbNatural);
-		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NOT_NATURAL,rgbNotNatural);
-		config.setProperty(TGConfigKeys.PIANO_COLOR_NOTE,rgbNote);
-		config.setProperty(TGConfigKeys.PIANO_COLOR_SCALE,rgbScale);
+		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NATURAL, rgbNatural);
+		config.setProperty(TGConfigKeys.PIANO_COLOR_KEY_NOT_NATURAL, rgbNotNatural);
+		config.setProperty(TGConfigKeys.PIANO_COLOR_NOTE, rgbNote);
+		config.setProperty(TGConfigKeys.PIANO_COLOR_SCALE, rgbScale);
 	}
 	
 	public void dispose(){
@@ -93,16 +93,16 @@ public class PianoConfig {
 		dialog.setText(TuxGuitar.getProperty("piano.settings"));
 		
 		// ----------------------------------------------------------------------
-		Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+		Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 		group.setLayout(new GridLayout(2, false));
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setText(TuxGuitar.getProperty("piano.settings"));
 		
 		// Color
-		final RGB rgbNatural = getColorChooser(group,TuxGuitar.getProperty("piano.natural-key-color"), this.colorNatural.getRGB());
-		final RGB rgbNotNatural = getColorChooser(group,TuxGuitar.getProperty("piano.not-natural-key-color"), this.colorNotNatural.getRGB());
-		final RGB rgbNote = getColorChooser(group,TuxGuitar.getProperty("piano.note-color"), this.colorNote.getRGB());
-		final RGB rgbScale = getColorChooser(group,TuxGuitar.getProperty("piano.scale-note-color"), this.colorScale.getRGB());
+		final RGB rgbNatural = getColorChooser(group, TuxGuitar.getProperty("piano.natural-key-color"), this.colorNatural.getRGB());
+		final RGB rgbNotNatural = getColorChooser(group, TuxGuitar.getProperty("piano.not-natural-key-color"), this.colorNotNatural.getRGB());
+		final RGB rgbNote = getColorChooser(group, TuxGuitar.getProperty("piano.note-color"), this.colorNote.getRGB());
+		final RGB rgbScale = getColorChooser(group, TuxGuitar.getProperty("piano.scale-note-color"), this.colorScale.getRGB());
 		
 		// ------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
@@ -127,7 +127,7 @@ public class PianoConfig {
 			public void widgetSelected(SelectionEvent arg0) {
 				dialog.dispose();
 				
-				save(rgbNatural, rgbNotNatural,rgbNote, rgbScale);
+				save(rgbNatural, rgbNotNatural, rgbNote, rgbScale);
 				applyChanges();
 			}
 		});
@@ -143,7 +143,7 @@ public class PianoConfig {
 		
 		dialog.setDefaultButton( buttonOK );
 		
-		DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 	}
 	
 	protected void applyChanges(){
@@ -151,19 +151,19 @@ public class PianoConfig {
 		this.load();
 	}
 	
-	private RGB getColorChooser(final Composite parent,String title,RGB rgb){
+	private RGB getColorChooser(final Composite parent, String title, RGB rgb){
 		Label label = new Label(parent, SWT.NULL);
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true));
 		label.setText(title);
 		
 		ButtonColor button = new ButtonColor(parent, SWT.PUSH, TuxGuitar.getProperty("choose"));
-		button.setLayoutData(getAlignmentData(MINIMUM_CONTROL_WIDTH,SWT.FILL));
+		button.setLayoutData(getAlignmentData(MINIMUM_CONTROL_WIDTH, SWT.FILL));
 		button.loadColor(rgb);
 		
 		return button.getValue();
 	}
 	
-	private GridData getAlignmentData(int minimumWidth,int horizontalAlignment){
+	private GridData getAlignmentData(int minimumWidth, int horizontalAlignment){
 		GridData data = new GridData();
 		data.minimumWidth = minimumWidth;
 		data.horizontalAlignment = horizontalAlignment;
@@ -186,7 +186,7 @@ public class PianoConfig {
 		protected RGB value;
 		
 		public ButtonColor(Composite parent, int style, String text){
-			this.value = new RGB(0,0,0);
+			this.value = new RGB(0, 0, 0);
 			this.button = new Button(parent, style);			
 			this.button.setText(text);
 			this.addListeners();

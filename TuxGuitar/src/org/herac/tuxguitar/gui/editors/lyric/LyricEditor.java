@@ -29,13 +29,13 @@ import org.herac.tuxguitar.gui.system.language.LanguageLoader;
 import org.herac.tuxguitar.gui.util.DialogUtils;
 import org.herac.tuxguitar.song.models.TGTrack;
 
-public class LyricEditor implements TGUpdateListener,IconLoader,LanguageLoader{
+public class LyricEditor implements TGUpdateListener, IconLoader, LanguageLoader{
 	private static int EDITOR_WIDTH = 450;
 	private static int EDITOR_HEIGHT = 200;
 	
 	protected static final KeyBindingAction KB_ACTIONS[] = new KeyBindingAction[]{
-		new KeyBindingAction(UndoAction.NAME,new KeyBinding(122,KeyBindingConstants.CONTROL)),
-		new KeyBindingAction(RedoAction.NAME,new KeyBinding(121,KeyBindingConstants.CONTROL)),
+		new KeyBindingAction(UndoAction.NAME, new KeyBinding(122, KeyBindingConstants.CONTROL)),
+		new KeyBindingAction(RedoAction.NAME, new KeyBinding(121, KeyBindingConstants.CONTROL)),
 	};
 	
 	private TGTrack track;
@@ -62,7 +62,7 @@ public class LyricEditor implements TGUpdateListener,IconLoader,LanguageLoader{
 	public void show() {
 		this.dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.DIALOG_TRIM | SWT.RESIZE);
 		this.dialog.setLayout(getDialogLayout());
-		this.dialog.setSize(EDITOR_WIDTH,EDITOR_HEIGHT);
+		this.dialog.setSize(EDITOR_WIDTH, EDITOR_HEIGHT);
 		this.dialog.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {
 				onDispose();
@@ -75,7 +75,7 @@ public class LyricEditor implements TGUpdateListener,IconLoader,LanguageLoader{
 		this.loadIcons();
 		this.updateItems();
 		this.addListeners();
-		DialogUtils.openDialog(this.dialog,DialogUtils.OPEN_STYLE_CENTER);
+		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER);
 	}
 	
 	public void addListeners(){
@@ -113,22 +113,22 @@ public class LyricEditor implements TGUpdateListener,IconLoader,LanguageLoader{
 	}
 	
 	private void loadToolBar(Composite parent){
-		final Composite composite = new Composite(parent,SWT.NONE);
-		composite.setLayout(new GridLayout(5,false));
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,false));
+		final Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayout(new GridLayout(5, false));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		
 		this.previous = new Button(composite, SWT.ARROW | SWT.LEFT);
 		this.next = new Button(composite, SWT.ARROW | SWT.RIGHT);
 		
-		this.label = new Label(composite,SWT.NONE);
+		this.label = new Label(composite, SWT.NONE);
 		this.label.setText(this.track.getName());
-		this.label.setLayoutData(new GridData(SWT.FILL,SWT.CENTER,true,true));
+		this.label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true));
 		
-		this.fromLabel = new Label(composite,SWT.NONE);
-		this.fromLabel.setLayoutData(new GridData(SWT.RIGHT,SWT.CENTER,false,true));
+		this.fromLabel = new Label(composite, SWT.NONE);
+		this.fromLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, true));
 		
-		this.from = new Spinner(composite,SWT.BORDER);
-		this.from.setLayoutData(new GridData(50,SWT.DEFAULT));
+		this.from = new Spinner(composite, SWT.BORDER);
+		this.from.setLayoutData(new GridData(50, SWT.DEFAULT));
 		
 		this.from.setMinimum(1);
 		this.from.setMaximum(this.track.countMeasures());
@@ -151,12 +151,12 @@ public class LyricEditor implements TGUpdateListener,IconLoader,LanguageLoader{
 	}
 	
 	private void loadLyricText(Composite parent){
-		Composite composite = new Composite(parent,SWT.NONE);
+		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		this.text = new Text(composite,SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
-		this.text.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.text = new Text(composite, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
+		this.text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.text.setFocus();
 		this.text.setText(this.track.getLyrics().getLyrics());
 		this.text.addModifyListener(this.listener);

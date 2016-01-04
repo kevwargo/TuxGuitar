@@ -262,60 +262,60 @@ public class TuxGuitar {
 	
 	public void createComposites(Composite composite) {
 		FormData data = new FormData();
-		data.left = new FormAttachment(0,0);
-		data.right = new FormAttachment(100,0);
-		data.top = new FormAttachment(getItemManager().getCoolbar(),MARGIN_WIDTH);
-		data.bottom = new FormAttachment(100,0);
-		this.sashComposite = new Composite(composite,SWT.NONE);
+		data.left = new FormAttachment(0, 0);
+		data.right = new FormAttachment(100, 0);
+		data.top = new FormAttachment(getItemManager().getCoolbar(), MARGIN_WIDTH);
+		data.bottom = new FormAttachment(100, 0);
+		this.sashComposite = new Composite(composite, SWT.NONE);
 		this.sashComposite.setLayout(new FormLayout());
 		this.sashComposite.setLayoutData(data);
 		
 		data = new FormData();
-		data.left = new FormAttachment(0,0);
-		data.right = new FormAttachment(100,0);
+		data.left = new FormAttachment(0, 0);
+		data.right = new FormAttachment(100, 0);
 		data.bottom = new FormAttachment(100,-150);
 		data.height = MARGIN_WIDTH;
 		this.sash = new Sash(this.sashComposite, SWT.HORIZONTAL);
 		this.sash.setLayoutData(data);
 		
 		data = new FormData();
-		data.left = new FormAttachment(0,0);
-		data.right = new FormAttachment(100,0);
-		data.top = new FormAttachment(0,0);
+		data.left = new FormAttachment(0, 0);
+		data.right = new FormAttachment(100, 0);
+		data.top = new FormAttachment(0, 0);
 		data.bottom = new FormAttachment(this.sash, 0);
 		getTablatureEditor().showTablature(this.sashComposite);
 		getTablatureEditor().getTablature().setLayoutData(data);
 		
 		data = new FormData();
-		data.left = new FormAttachment(0,0);
-		data.right = new FormAttachment(100,0);
-		data.top = new FormAttachment(this.sash,0);
-		data.bottom = new FormAttachment(100,0);
+		data.left = new FormAttachment(0, 0);
+		data.right = new FormAttachment(100, 0);
+		data.top = new FormAttachment(this.sash, 0);
+		data.bottom = new FormAttachment(100, 0);
 		getTable().init(this.sashComposite);
 		getTable().getComposite().setLayoutData(data);
 		
 		data = new FormData();
-		data.left = new FormAttachment(0,0);
-		data.right = new FormAttachment(100,0);
-		data.top = new FormAttachment(this.sashComposite,0);
-		data.bottom = new FormAttachment(100,0);
+		data.left = new FormAttachment(0, 0);
+		data.right = new FormAttachment(100, 0);
+		data.top = new FormAttachment(this.sashComposite, 0);
+		data.bottom = new FormAttachment(100, 0);
 		
-		Composite footer = new Composite(composite,SWT.NONE);
+		Composite footer = new Composite(composite, SWT.NONE);
 		footer.setLayout(new FormLayout());
 		footer.setLayoutData(data);
 		getFretBoardEditor().showFretBoard(footer);
 		
 		this.sash.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
-				TuxGuitar.this.sashComposite.layout(true,true);
+				TuxGuitar.this.sashComposite.layout(true, true);
 			}
 		});
 		this.sash.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				int maximumHeight = (TuxGuitar.this.sashComposite.getBounds().height - TuxGuitar.this.sash.getBounds().height);
 				int height = (maximumHeight - event.y);
-				height = Math.max(height,0);
-				height = Math.min(height,maximumHeight);
+				height = Math.max(height, 0);
+				height = Math.min(height, maximumHeight);
 				((FormData) TuxGuitar.this.sash.getLayoutData()).bottom = new FormAttachment(100, -height);
 			}
 		});
@@ -346,10 +346,10 @@ public class TuxGuitar {
 			int width = config.getIntConfigValue(TGConfigKeys.WIDTH);
 			int height = config.getIntConfigValue(TGConfigKeys.HEIGHT);
 			if(width > 0 && height > 0){
-				getShell().setSize(width,height);
+				getShell().setSize(width, height);
 			}
 		}
-		getShell().setMinimumSize(640,480);
+		getShell().setMinimumSize(640, 480);
 		//---Fretboard---
 		if(config.getBooleanConfigValue(TGConfigKeys.SHOW_FRETBOARD)){
 			getFretBoardEditor().showFretBoard();
@@ -403,17 +403,17 @@ public class TuxGuitar {
 		int sashHeight = this.sash.getBounds().height;
 		int maximumHeight = (this.sashComposite.getBounds().height - sashHeight);
 		int height = (value + offset);
-		height = Math.max( height,0);
-		height = Math.min( height,maximumHeight);
+		height = Math.max( height, 0);
+		height = Math.min( height, maximumHeight);
 		((FormData) TuxGuitar.this.sash.getLayoutData()).bottom = new FormAttachment(100, -height);
-		this.sashComposite.layout(true,true);
+		this.sashComposite.layout(true, true);
 	}
 	
-	public void updateShellFooter(int offset,int minimumWith,int minimumHeight){
+	public void updateShellFooter(int offset, int minimumWith, int minimumHeight){
 		FormData data = ((FormData)this.sashComposite.getLayoutData());
 		data.bottom.offset = -offset;
-		getShell().setMinimumSize(Math.max(640,minimumWith),Math.max(480,minimumHeight));
-		getShell().layout(true,true);
+		getShell().setMinimumSize(Math.max(640, minimumWith), Math.max(480, minimumHeight));
+		getShell().layout(true, true);
 		getShell().redraw();
 	}
 	
@@ -690,8 +690,8 @@ public class TuxGuitar {
 		return TuxGuitar.instance().getLanguageManager().getProperty(key);
 	}
 	
-	public static String getProperty(String key,String[] arguments) {
-		return  TuxGuitar.instance().getLanguageManager().getProperty(key,arguments);
+	public static String getProperty(String key, String[] arguments) {
+		return  TuxGuitar.instance().getLanguageManager().getProperty(key, arguments);
 	}
 	
 	public static boolean isDisposed(){
@@ -731,10 +731,10 @@ public class TuxGuitar {
 	}
 	
 	public void newSong(){
-		TuxGuitar.instance().fireNewSong(TuxGuitar.instance().getSongManager().newSong(),null);
+		TuxGuitar.instance().fireNewSong(TuxGuitar.instance().getSongManager().newSong(), null);
 	}
 	
-	public void fireNewSong(TGSong song,URL url){
+	public void fireNewSong(TGSong song, URL url){
 		this.lock();
 		
 		TuxGuitar.instance().getSongManager().setSong(song);
@@ -773,10 +773,10 @@ public class TuxGuitar {
 	}
 	
 	public void loadCursor(int style){
-		this.loadCursor(getShell(),style);
+		this.loadCursor(getShell(), style);
 	}
 	
-	public void loadCursor(final Control control,final int style){
+	public void loadCursor(final Control control, final int style){
 		try {
 			TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 				public void run() throws Throwable {

@@ -35,7 +35,7 @@ public class AddTrackAction extends Action{
 		
 		TGTrack track = getSongManager().createTrack();
 		updateTablature();
-		caret.update(track.getNumber(),caret.getPosition(),1);
+		caret.update(track.getNumber(), caret.getPosition(), 1);
 		TuxGuitar.instance().getMixer().update();
 		
 		//termia el undoable

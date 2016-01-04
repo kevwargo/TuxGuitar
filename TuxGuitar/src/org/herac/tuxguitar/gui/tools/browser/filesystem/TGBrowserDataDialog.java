@@ -36,30 +36,30 @@ public class TGBrowserDataDialog {
 		dialog.setLayout(new GridLayout());
 		dialog.setText(TuxGuitar.getProperty("browser.collection.fs.editor-title"));
 		
-		Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+		Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 		group.setLayout(new GridLayout());
-		group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setText(TuxGuitar.getProperty("browser.collection.fs.editor-tip"));
 		
-		Composite composite = new Composite(group,SWT.NONE);
-		composite.setLayout(new GridLayout(3,false));
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Composite composite = new Composite(group, SWT.NONE);
+		composite.setLayout(new GridLayout(3, false));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		final Label titleLabel = new Label(composite,SWT.LEFT);
+		final Label titleLabel = new Label(composite, SWT.LEFT);
 		titleLabel.setText(TuxGuitar.getProperty("browser.collection.fs.name"));
-		titleLabel.setLayoutData(new GridData(SWT.LEFT,SWT.CENTER,true,true));
+		titleLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true));
 		
-		final Text titleValue = new Text(composite,SWT.BORDER);
+		final Text titleValue = new Text(composite, SWT.BORDER);
 		titleValue.setLayoutData(getTextData(2));
 		
-		final Label pathLabel = new Label(composite,SWT.LEFT);
+		final Label pathLabel = new Label(composite, SWT.LEFT);
 		pathLabel.setText(TuxGuitar.getProperty("browser.collection.fs.path"));
-		pathLabel.setLayoutData(new GridData(SWT.LEFT,SWT.CENTER,true,true));
+		pathLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true));
 		
-		final Text pathValue = new Text(composite,SWT.BORDER);
+		final Text pathValue = new Text(composite, SWT.BORDER);
 		pathValue.setLayoutData(getTextData(1));
 		
-		final Button pathChooser = new Button(composite,SWT.PUSH);
+		final Button pathChooser = new Button(composite, SWT.PUSH);
 		pathChooser.setImage(TuxGuitar.instance().getIconManager().getFileOpen());
 		pathChooser.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -73,8 +73,8 @@ public class TGBrowserDataDialog {
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(2,false));
-		buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+		buttons.setLayout(new GridLayout(2, false));
+		buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 		
 		final Button buttonOK = new Button(buttons, SWT.PUSH);
 		buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -84,13 +84,13 @@ public class TGBrowserDataDialog {
 				String selectedTitle = titleValue.getText();
 				String selectedPath = pathValue.getText();
 				if(!isValidPath(selectedPath)){
-					MessageDialog.errorMessage(dialog,TuxGuitar.getProperty("browser.collection.fs.invalid-path"));
+					MessageDialog.errorMessage(dialog, TuxGuitar.getProperty("browser.collection.fs.invalid-path"));
 					return;
 				}
 				if(isBlank(selectedTitle)){
 					selectedTitle = selectedPath;
 				}
-				setData(new TGBrowserDataImpl(selectedTitle,selectedPath));
+				setData(new TGBrowserDataImpl(selectedTitle, selectedPath));
 				dialog.dispose();
 			}
 		});
@@ -106,7 +106,7 @@ public class TGBrowserDataDialog {
 		
 		dialog.setDefaultButton( buttonOK );
 		
-		DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		
 		return getData();
 	}
@@ -119,7 +119,7 @@ public class TGBrowserDataDialog {
 	}
 	
 	private GridData getTextData(int span){
-		GridData data = new GridData(SWT.LEFT, SWT.CENTER, true, true,span,1);
+		GridData data = new GridData(SWT.LEFT, SWT.CENTER, true, true, span, 1);
 		data.minimumWidth = 350;
 		return data;
 	}

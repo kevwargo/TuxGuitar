@@ -17,15 +17,15 @@ public class TGServiceReader {
 	private static final String SERVICE_PATH = new String("META-INF/services/");
 	
 	public static Iterator lookupProviders(Class spi){
-		return TGServiceReader.lookupProviders(spi,TGClassLoader.instance().getClassLoader());
+		return TGServiceReader.lookupProviders(spi, TGClassLoader.instance().getClassLoader());
 	}
 	
-	public static Iterator lookupProviders(Class spi,ClassLoader loader){
+	public static Iterator lookupProviders(Class spi, ClassLoader loader){
 		try{
 			if (spi == null || loader == null){
 				throw new IllegalArgumentException();
 			}
-			return new IteratorImpl(spi,loader,loader.getResources(SERVICE_PATH + spi.getName()));
+			return new IteratorImpl(spi, loader, loader.getResources(SERVICE_PATH + spi.getName()));
 		}catch (IOException ioex){
 			return Collections.EMPTY_LIST.iterator();
 		}
@@ -37,7 +37,7 @@ public class TGServiceReader {
 		private Enumeration urls;
 		private Iterator iterator;
 		
-		public IteratorImpl(Class spi,ClassLoader loader,Enumeration urls){
+		public IteratorImpl(Class spi, ClassLoader loader, Enumeration urls){
 			this.spi = spi;
 			this.loader = loader;
 			this.urls = urls;
@@ -69,7 +69,7 @@ public class TGServiceReader {
 		private String uncommentLine(String line){
 			int index = line.indexOf('#');
 			if(index >= 0){
-				return (line.substring(0,index));
+				return (line.substring(0, index));
 			}
 			return line;
 		}

@@ -64,15 +64,15 @@ public class TGConfigEditor{
 		this.dialog.setText(TuxGuitar.getProperty("settings.config"));
 		
 		//-------main-------------------------------------
-		Composite mainComposite = new Composite(this.dialog,SWT.NONE);
-		mainComposite.setLayout(new GridLayout(2,false));
+		Composite mainComposite = new Composite(this.dialog, SWT.NONE);
+		mainComposite.setLayout(new GridLayout(2, false));
 		mainComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true , true));
 		createComposites(mainComposite);
 		
 		//-------buttons-------------------------------------
-		Composite buttonComposite = new Composite(this.dialog,SWT.NONE);
-		buttonComposite.setLayout(new GridLayout(3,true));
-		buttonComposite.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+		Composite buttonComposite = new Composite(this.dialog, SWT.NONE);
+		buttonComposite.setLayout(new GridLayout(3, true));
+		buttonComposite.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 		
 		Button buttonDefaults = new Button(buttonComposite, SWT.PUSH);
 		buttonDefaults.setLayoutData(getButtonData()); 
@@ -127,7 +127,7 @@ public class TGConfigEditor{
 		
 		this.dialog.setDefaultButton( buttonOK );
 		
-		DialogUtils.openDialog(this.dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		
 		if(!this.accepted){
 			ActionLock.unlock();
@@ -138,27 +138,27 @@ public class TGConfigEditor{
 		ToolBar toolBar = new ToolBar(parent, SWT.VERTICAL | SWT.FLAT | SWT.WRAP);
 		toolBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true , true));
 		
-		Composite option = new Composite(parent,SWT.NONE);
+		Composite option = new Composite(parent, SWT.NONE);
 		option.setLayout(new FormLayout());
 		
-		initOptions(toolBar,option);
+		initOptions(toolBar, option);
 		
-		Point optionSize = computeOptionsSize( 0 , toolBar.computeSize(SWT.DEFAULT,SWT.DEFAULT).y );
-		option.setLayoutData(new GridData(optionSize.x,optionSize.y));
+		Point optionSize = computeOptionsSize( 0 , toolBar.computeSize(SWT.DEFAULT, SWT.DEFAULT).y );
+		option.setLayoutData(new GridData(optionSize.x, optionSize.y));
 		
 		if(this.options.size() > 0){
 			select((Option)this.options.get(0));
 		}
 	}
 	
-	private void initOptions(ToolBar toolBar,Composite parent){
+	private void initOptions(ToolBar toolBar, Composite parent){
 		this.options = new ArrayList();
-		this.options.add(new MainOption(this,toolBar,parent));
-		this.options.add(new StylesOption(this,toolBar,parent));
-		this.options.add(new LanguageOption(this,toolBar,parent));
-		this.options.add(new ToolBarsOption(this,toolBar,parent));
-		this.options.add(new SkinOption(this,toolBar,parent));
-		this.options.add(new SoundOption(this,toolBar,parent));
+		this.options.add(new MainOption(this, toolBar, parent));
+		this.options.add(new StylesOption(this, toolBar, parent));
+		this.options.add(new LanguageOption(this, toolBar, parent));
+		this.options.add(new ToolBarsOption(this, toolBar, parent));
+		this.options.add(new SkinOption(this, toolBar, parent));
+		this.options.add(new SoundOption(this, toolBar, parent));
 		
 		Iterator it = this.options.iterator();
 		while(it.hasNext()){
@@ -196,7 +196,7 @@ public class TGConfigEditor{
 		return data;
 	}
 	
-	public GridData makeGridData(int with,int height,int minWith,int minHeight){
+	public GridData makeGridData(int with, int height, int minWith, int minHeight){
 		GridData data = new GridData();
 		data.minimumWidth = minWith;
 		data.minimumHeight = minHeight;

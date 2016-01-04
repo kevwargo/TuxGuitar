@@ -149,7 +149,7 @@ public class FileHistory {
 	public void addURL(URL url){
 		if(url != null){
 			removeURL(url);
-			this.urls.add(0,url);
+			this.urls.add(0, url);
 			checkLimit();
 			setChanged(true);
 		}
@@ -216,11 +216,11 @@ public class FileHistory {
 			
 			int count = this.urls.size();
 			for(int i = 0;i < count;i ++){
-				properties.put("history." + i,this.urls.get(i).toString());
+				properties.put("history." + i, this.urls.get(i).toString());
 			}
-			properties.put("history.count",Integer.toString(count));
+			properties.put("history.count", Integer.toString(count));
 			if(this.chooserPath != null){
-				properties.put("history.path",this.chooserPath);
+				properties.put("history.path", this.chooserPath);
 			}
 			properties.store(new FileOutputStream(getHistoryFileName()),"History Files");
 		} catch (FileNotFoundException e1) {

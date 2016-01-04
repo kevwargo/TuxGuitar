@@ -54,7 +54,7 @@ public class ScaleManager {
 		}
 	}
 		
-	public void selectScale(int index,int key){
+	public void selectScale(int index, int key){
 		if(index == NONE_SELECTION){
 			getScale().clear();
 		}
@@ -65,7 +65,7 @@ public class ScaleManager {
 			for (int i = 0; i < keys.length; i ++){
 				int note = (Integer.parseInt(keys[i]) - 1);
 				if(note >= 0 && note < 12){
-					getScale().setNote(note,true);
+					getScale().setNote(note, true);
 				}
 			}
 			getScale().setKey(key);

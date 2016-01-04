@@ -29,8 +29,8 @@ public abstract class TGEffectBend {
 		this.points = new ArrayList();
 	}
 	
-	public void addPoint(int position,int value){
-		this.points.add(new BendPoint(position,value));
+	public void addPoint(int position, int value){
+		this.points.add(new BendPoint(position, value));
 	}
 	
 	public List getPoints(){
@@ -42,7 +42,7 @@ public abstract class TGEffectBend {
 		Iterator it = getPoints().iterator();
 		while(it.hasNext()){
 			BendPoint point = (BendPoint)it.next();
-			effect.addPoint(point.getPosition(),point.getValue());
+			effect.addPoint(point.getPosition(), point.getValue());
 		}
 		return effect;
 	}
@@ -51,7 +51,7 @@ public abstract class TGEffectBend {
 		private int position;
 		private int value;
 		
-		public BendPoint(int position,int value){
+		public BendPoint(int position, int value){
 			this.position = position;
 			this.value = value;
 		}
@@ -69,7 +69,7 @@ public abstract class TGEffectBend {
 		}
 		
 		public Object clone(){
-			return new BendPoint(getPosition(),getValue());
+			return new BendPoint(getPosition(), getValue());
 		}
 	}
 	

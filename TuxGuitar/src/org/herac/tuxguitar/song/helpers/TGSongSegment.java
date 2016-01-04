@@ -23,8 +23,8 @@ public class TGSongSegment {
 		return this.tracks;
 	}
 	
-	public void addTrack(int track,List measures){
-		this.tracks.add(new TGTrackSegment(track,measures));
+	public void addTrack(int track, List measures){
+		this.tracks.add(new TGTrackSegment(track, measures));
 	}
 	
 	public boolean isEmpty(){
@@ -39,7 +39,7 @@ public class TGSongSegment {
 		}
 		for(int i = 0;i < getTracks().size();i++){
 			TGTrackSegment trackMeasure = (TGTrackSegment)getTracks().get(i);
-			segment.getTracks().add(trackMeasure.clone(factory,segment.getHeaders()));
+			segment.getTracks().add(trackMeasure.clone(factory, segment.getHeaders()));
 		}
 		return segment;
 	}

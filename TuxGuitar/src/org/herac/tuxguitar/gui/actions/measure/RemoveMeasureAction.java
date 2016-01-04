@@ -42,11 +42,11 @@ public class RemoveMeasureAction extends Action{
 	}
 	
 	protected int execute(TypedEvent e){
-		showDialog(getEditor().getTablature().getShell()/*,e*/);
+		showDialog(getEditor().getTablature().getShell()/*, e*/);
 		return 0;
 	}
 	
-	public void showDialog(Shell shell/*,final TypedEvent event*/) {
+	public void showDialog(Shell shell/*, final TypedEvent event*/) {
 		TGTrackImpl track = getEditor().getTablature().getCaret().getTrack();
 		TGMeasureImpl measure = getEditor().getTablature().getCaret().getMeasure();
 		if (measure != null) {
@@ -55,9 +55,9 @@ public class RemoveMeasureAction extends Action{
 			dialog.setText(TuxGuitar.getProperty("edit.delete"));
 			
 			//----------------------------------------------------------------------
-			Group range = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			range.setLayout(new GridLayout(2,false));
-			range.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group range = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			range.setLayout(new GridLayout(2, false));
+			range.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			range.setText(TuxGuitar.getProperty("edit.delete"));
 			
 			int measureCount = getSongManager().getSong().countMeasureHeaders();
@@ -106,15 +106,15 @@ public class RemoveMeasureAction extends Action{
 			});
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
 			buttonOK.setLayoutData(getButtonData());
 			buttonOK.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent arg0) {
-					removeMeasures(fromSpinner.getSelection(),toSpinner.getSelection()/*,event*/);
+					removeMeasures(fromSpinner.getSelection(), toSpinner.getSelection()/*, event*/);
 					dialog.dispose();
 				}
 			});
@@ -130,7 +130,7 @@ public class RemoveMeasureAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
@@ -142,12 +142,12 @@ public class RemoveMeasureAction extends Action{
 	}
 	
 	protected GridData getSpinnerData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 180;
 		return data;
 	}
 	
-	protected void removeMeasures(int m1,int m2/*,TypedEvent event*/){
+	protected void removeMeasures(int m1, int m2/*, TypedEvent event*/){
 		if(m1 > 0 && m1 <= m2 && m2 <= getSongManager().getSong().countMeasureHeaders()){
 			Caret caret = getEditor().getTablature().getCaret();
 			
@@ -157,19 +157,19 @@ public class RemoveMeasureAction extends Action{
 				return;
 			}
 			//comienza el undoable
-			UndoableRemoveMeasure undoable = new UndoableRemoveMeasure(m1,m2);
+			UndoableRemoveMeasure undoable = new UndoableRemoveMeasure(m1, m2);
 			TuxGuitar.instance().getFileHistory().setUnsavedFile();
 			
 			//borro los compases
-			getSongManager().removeMeasureHeaders(m1,m2);
+			getSongManager().removeMeasureHeaders(m1, m2);
 			
 			updateTablature();
 			
 			int measureCount = getSongManager().getSong().countMeasureHeaders();
 			if(caret.getMeasure().getNumber() > measureCount){
 				TGTrack track = getSongManager().getTrack(caret.getTrack().getNumber());
-				TGMeasure measure = getSongManager().getTrackManager().getMeasure(track,measureCount);
-				caret.update(track.getNumber(),measure.getStart(),1);
+				TGMeasure measure = getSongManager().getTrackManager().getMeasure(track, measureCount);
+				caret.update(track.getNumber(), measure.getStart(), 1);
 			}
 			
 			//termia el undoable

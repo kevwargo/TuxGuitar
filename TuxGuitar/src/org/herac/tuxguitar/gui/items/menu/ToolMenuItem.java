@@ -38,7 +38,7 @@ public class ToolMenuItem extends MenuItems {
 	private MenuItem config;
 	private MenuItem keyBindings;
 	
-	public ToolMenuItem(Shell shell,Menu parent, int style) {
+	public ToolMenuItem(Shell shell, Menu parent, int style) {
 		this.settingsMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}

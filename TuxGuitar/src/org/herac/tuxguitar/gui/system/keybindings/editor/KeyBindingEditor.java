@@ -40,23 +40,23 @@ public class KeyBindingEditor {
 	}
 	
 	public void show(Shell parent){
-		this.dialog = DialogUtils.newDialog(parent,SWT.DIALOG_TRIM |SWT.APPLICATION_MODAL);
+		this.dialog = DialogUtils.newDialog(parent, SWT.DIALOG_TRIM |SWT.APPLICATION_MODAL);
 		this.dialog.setText(TuxGuitar.getProperty("key-bindings-editor"));
 		this.dialog.setLayout(new GridLayout());
 		
-		Composite composite = new Composite(this.dialog,SWT.NONE);
+		Composite composite = new Composite(this.dialog, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.FILL,SWT.NONE,true,true));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		
 		this.table = new Table(composite, SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION);
-		this.table.setLayoutData(new GridData((ACTION_WIDTH + SHORTCUT_WIDTH) ,250));
+		this.table.setLayoutData(new GridData((ACTION_WIDTH + SHORTCUT_WIDTH) , 250));
 		this.table.setHeaderVisible(true);
 		this.table.addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent e) {
 				TableItem item = getSelectedItem();
 				if(item != null){
 					KeyBindingAction itemData = (KeyBindingAction)item.getData();
-					KeyBindingSelector selector = new KeyBindingSelector(KeyBindingEditor.this,itemData);
+					KeyBindingSelector selector = new KeyBindingSelector(KeyBindingEditor.this, itemData);
 					KeyBinding kb = selector.select(KeyBindingEditor.this.dialog.getShell());
 					removeKeyBindingAction(kb);
 					itemData.setKeyBinding(kb);
@@ -76,10 +76,10 @@ public class KeyBindingEditor {
 		
 		//------------------BUTTONS--------------------------
 		Composite buttons = new Composite(this.dialog, SWT.NONE);
-		buttons.setLayout(new GridLayout(2,false));
-		buttons.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,true,true));
+		buttons.setLayout(new GridLayout(2, false));
+		buttons.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true));
 		
-		Button defaults = new Button(buttons,SWT.PUSH);
+		Button defaults = new Button(buttons, SWT.PUSH);
 		defaults.setText(TuxGuitar.getProperty("defaults"));
 		defaults.setLayoutData(getButtonData());
 		defaults.addSelectionListener(new SelectionAdapter() {
@@ -88,7 +88,7 @@ public class KeyBindingEditor {
 			}
 		});
 		
-		Button close = new Button(buttons,SWT.PUSH);
+		Button close = new Button(buttons, SWT.PUSH);
 		close.setText(TuxGuitar.getProperty("close"));
 		close.setLayoutData(getButtonData());
 		close.addSelectionListener(new SelectionAdapter() {
@@ -103,11 +103,11 @@ public class KeyBindingEditor {
 			}
 		});
 		
-		this.table.setLayoutData(new GridData( (adjustWidth(actionColumn,ACTION_WIDTH) + adjustWidth(shortcutColumn,SHORTCUT_WIDTH)) ,250) );
+		this.table.setLayoutData(new GridData( (adjustWidth(actionColumn, ACTION_WIDTH) + adjustWidth(shortcutColumn, SHORTCUT_WIDTH)) , 250) );
 		
 		this.dialog.setDefaultButton( close );
 		
-		DialogUtils.openDialog(this.dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
+		DialogUtils.openDialog(this.dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK);
 	}
 	
 	protected int adjustWidth(TableColumn column, int defaultWidth){
@@ -132,7 +132,7 @@ public class KeyBindingEditor {
 			KeyBindingAction actionkeyBinding = (KeyBindingAction)item.getData();
 			String action = actionkeyBinding.getAction();
 			String shortcut = (actionkeyBinding.getKeyBinding() != null)?actionkeyBinding.getKeyBinding().toString():"";
-			item.setText(new String[] { TuxGuitar.getProperty(action),shortcut});
+			item.setText(new String[] { TuxGuitar.getProperty(action), shortcut});
 		}
 	}
 	
@@ -143,7 +143,7 @@ public class KeyBindingEditor {
 		while (it.hasNext()) {
 			String action = (String) it.next();
 			TableItem item = new TableItem(this.table, SWT.NONE);
-			item.setData(new KeyBindingAction(action,null));
+			item.setData(new KeyBindingAction(action, null));
 			this.items.add(item);
 		}
 	}

@@ -66,10 +66,10 @@ public class ChordList extends Composite {
 	private Composite composite;
 	private Font font;
 	
-	public ChordList(ChordDialog dialog,Composite parent,TGBeat beat) {
+	public ChordList(ChordDialog dialog, Composite parent, TGBeat beat) {
 		super(parent, SWT.NONE);
-		this.setLayout(dialog.gridLayout(1,false,0,0));
-		this.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.setLayout(dialog.gridLayout(1, false, 0, 0));
+		this.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.graphicChords = new ArrayList();
 		this.dialog = dialog;
 		this.beat = beat;
@@ -77,7 +77,7 @@ public class ChordList extends Composite {
 	}
 	
 	private void init(){
-		this.composite = new Composite(this,SWT.BORDER | SWT.V_SCROLL | SWT.DOUBLE_BUFFERED);
+		this.composite = new Composite(this, SWT.BORDER | SWT.V_SCROLL | SWT.DOUBLE_BUFFERED);
 		this.composite.setBackground(this.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		this.composite.addPaintListener(new PaintListener() {
 			public void paintControl(PaintEvent e) {
@@ -88,7 +88,7 @@ public class ChordList extends Composite {
 		this.composite.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
 				getComposite().setFocus();
-				getDialog().getEditor().setChord(getChord(e.x, e.y,true));
+				getDialog().getEditor().setChord(getChord(e.x, e.y, true));
 				redraw();
 			}
 		});
@@ -107,7 +107,7 @@ public class ChordList extends Composite {
 			}
 		});
 		
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumHeight = MIN_HEIGHT;
 		this.composite.setLayoutData(data);
 		this.addDisposeListener(new DisposeListener() {
@@ -151,10 +151,10 @@ public class ChordList extends Composite {
 			chord.setEditing(true);
 			chord.setPosX( fromX );
 			chord.setPosY( fromY - vScroll);
-			chord.paint(painter,(chord.getWidth() / 2),0);
+			chord.paint(painter,(chord.getWidth() / 2), 0);
 			
 			fromX += chord.getWidth() + 10;
-			maxHeight = Math.max(maxHeight,chord.getHeight());
+			maxHeight = Math.max(maxHeight, chord.getHeight());
 		}
 		this.height = (fromY + maxHeight + 10);
 		this.updateScroll();
@@ -188,13 +188,13 @@ public class ChordList extends Composite {
 			}
 			FontData[] datas = available.getFontData();
 			if(datas.length > 0){
-				this.font = new Font(getDisplay(),datas[0].getName(),Math.min(7,datas[0].getHeight()),SWT.BOLD);
+				this.font = new Font(getDisplay(), datas[0].getName(), Math.min(7, datas[0].getHeight()), SWT.BOLD);
 			}
 		}
 		return this.font;
 	}
 	
-	protected TGChordImpl getChord(int x, int y,boolean setAsSelected) {
+	protected TGChordImpl getChord(int x, int y, boolean setAsSelected) {
 		Iterator it = this.graphicChords.iterator();
 		while (it.hasNext()) {
 			TGChordImpl chord = (TGChordImpl) it.next();

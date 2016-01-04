@@ -52,12 +52,12 @@ public class ChangeTripletFeelAction extends Action{
 			
 			dialog.setLayout(new GridLayout());
 			dialog.setText(TuxGuitar.getProperty("composition.tripletfeel"));
-			dialog.setMinimumSize(300,0);
+			dialog.setMinimumSize(300, 0);
 			
 			//-------------TIME SIGNATURE-----------------------------------------------
-			Group tripletFeel = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group tripletFeel = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			tripletFeel.setLayout(new GridLayout());
-			tripletFeel.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			tripletFeel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			tripletFeel.setText(TuxGuitar.getProperty("composition.tripletfeel"));
 			
 			//none
@@ -74,9 +74,9 @@ public class ChangeTripletFeelAction extends Action{
 			tripletFeelSixteenth.setSelection(measure.getTripletFeel() == TGMeasureHeader.TRIPLET_FEEL_SIXTEENTH);
 			
 			//--------------------To End Checkbox-------------------------------
-			Group check = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group check = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			check.setLayout(new GridLayout());
-			check.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			check.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			check.setText(TuxGuitar.getProperty("options"));
 			
 			final Button toEnd = new Button(check, SWT.CHECK);
@@ -84,8 +84,8 @@ public class ChangeTripletFeelAction extends Action{
 			toEnd.setSelection(true);
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOk = new Button(buttons, SWT.PUSH);
 			buttonOk.setText(TuxGuitar.getProperty("ok"));
@@ -101,7 +101,7 @@ public class ChangeTripletFeelAction extends Action{
 							public void run() throws Throwable {
 								ActionLock.lock();
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_WAIT);
-								setTripletFeel(tripletFeel,toEndValue);
+								setTripletFeel(tripletFeel, toEndValue);
 								TuxGuitar.instance().updateCache( true );
 								TuxGuitar.instance().loadCursor(SWT.CURSOR_ARROW);
 								ActionLock.unlock();
@@ -124,7 +124,7 @@ public class ChangeTripletFeelAction extends Action{
 			
 			dialog.setDefaultButton( buttonOk );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
@@ -135,7 +135,7 @@ public class ChangeTripletFeelAction extends Action{
 		return data;
 	}
 	
-	protected int getSelectedTripletFeel(Button tripletFeelNone,Button tripletFeelEighth, Button tripletFeelSixteenth){
+	protected int getSelectedTripletFeel(Button tripletFeelNone, Button tripletFeelEighth, Button tripletFeelSixteenth){
 		if(tripletFeelNone.getSelection()){
 			return TGMeasureHeader.TRIPLET_FEEL_NONE;
 		}else if(tripletFeelEighth.getSelection()){
@@ -146,14 +146,14 @@ public class ChangeTripletFeelAction extends Action{
 		return TGMeasureHeader.TRIPLET_FEEL_NONE;
 	}
 	
-	protected void setTripletFeel(int tripletFeel,boolean toEnd){
+	protected void setTripletFeel(int tripletFeel, boolean toEnd){
 		//comienza el undoable
 		UndoableChangeTripletFeel undoable = UndoableChangeTripletFeel.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
 		TGMeasureImpl measure = caret.getMeasure();
 		
-		getSongManager().changeTripletFeel(measure.getStart(),tripletFeel,toEnd);
+		getSongManager().changeTripletFeel(measure.getStart(), tripletFeel, toEnd);
 		
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		
@@ -161,6 +161,6 @@ public class ChangeTripletFeelAction extends Action{
 		updateTablature();
 		
 		//termia el undoable
-		addUndoableEdit(undoable.endUndo(tripletFeel,toEnd));
+		addUndoableEdit(undoable.endUndo(tripletFeel, toEnd));
 	}
 }

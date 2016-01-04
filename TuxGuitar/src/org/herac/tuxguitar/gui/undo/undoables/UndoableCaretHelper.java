@@ -26,7 +26,7 @@ public class UndoableCaretHelper {
 	}
 	
 	public void update(){
-		getCaret().update(this.track,this.position,this.string,this.velocity);
+		getCaret().update(this.track, this.position, this.string, this.velocity);
 		getCaret().setSelectedDuration(this.duration.clone(TuxGuitar.instance().getSongManager().getFactory()));
 	}
 	

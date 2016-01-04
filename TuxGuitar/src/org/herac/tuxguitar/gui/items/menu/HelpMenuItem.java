@@ -27,7 +27,7 @@ public class HelpMenuItem extends MenuItems{
 	private MenuItem doc;
 	private MenuItem about;
 	
-	public HelpMenuItem(Shell shell,Menu parent, int style) {
+	public HelpMenuItem(Shell shell, Menu parent, int style) {
 		this.helpMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}

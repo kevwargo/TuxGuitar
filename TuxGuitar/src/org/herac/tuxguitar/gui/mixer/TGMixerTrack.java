@@ -42,7 +42,7 @@ public class TGMixerTrack {
 	private Label volumeValueLabel;
 	private Label volumeValueTitleLabel;
 	
-	public TGMixerTrack(TGMixer mixer,TGTrack track){
+	public TGMixerTrack(TGMixer mixer, TGTrack track){
 		this.mixer = mixer;
 		this.track = track;
 	}
@@ -50,42 +50,42 @@ public class TGMixerTrack {
 	public void init(final Composite parent) {
 		final Composite composite = new Composite(parent, SWT.BORDER);
 		composite.setLayout(new GridLayout(1, true));
-		composite.setLayoutData(new GridData(SWT.CENTER,SWT.FILL,true,true));
+		composite.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
 		
 		this.mixerChannel = new TGMixerTrackChannel(this);
 		this.mixerChannel.init(composite);
 		
-		this.checkSolo = new Button(composite,SWT.CHECK);
+		this.checkSolo = new Button(composite, SWT.CHECK);
 		this.checkSolo.setSelection(TGMixerTrack.this.track.isSolo());
 		this.checkSolo.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				TGTrack track = TGMixerTrack.this.track;
 				
 				UndoableTrackSoloMute undoable = UndoableTrackSoloMute.startUndo(track);
-				TuxGuitar.instance().getSongManager().getTrackManager().changeSolo(track,TGMixerTrack.this.checkSolo.getSelection());
-				TGMixerTrack.this.mixer.fireChanges(track.getChannel(),TGMixer.SOLO);
+				TuxGuitar.instance().getSongManager().getTrackManager().changeSolo(track, TGMixerTrack.this.checkSolo.getSelection());
+				TGMixerTrack.this.mixer.fireChanges(track.getChannel(), TGMixer.SOLO);
 				TuxGuitar.instance().getUndoableManager().addEdit(undoable.endUndo(track));
 				TuxGuitar.instance().updateCache(true);
 			}
 		});
-		this.checkMute = new Button(composite,SWT.CHECK);
+		this.checkMute = new Button(composite, SWT.CHECK);
 		this.checkMute.setSelection(TGMixerTrack.this.track.isMute());
 		this.checkMute.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				TGTrack track = TGMixerTrack.this.track;
 				
 				UndoableTrackSoloMute undoable = UndoableTrackSoloMute.startUndo(track);
-				TuxGuitar.instance().getSongManager().getTrackManager().changeMute(track,TGMixerTrack.this.checkMute.getSelection());
-				TGMixerTrack.this.mixer.fireChanges(track.getChannel(),TGMixer.MUTE);
+				TuxGuitar.instance().getSongManager().getTrackManager().changeMute(track, TGMixerTrack.this.checkMute.getSelection());
+				TGMixerTrack.this.mixer.fireChanges(track.getChannel(), TGMixer.MUTE);
 				TuxGuitar.instance().getUndoableManager().addEdit(undoable.endUndo(track));
 				TuxGuitar.instance().updateCache(true);
 			}
 		});
 		
-		new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR).setLayoutData(new GridData(SWT.FILL,SWT.CENTER,true,false));
+		new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR).setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		
 		Composite effects = new Composite(composite, SWT.NONE);
-		effects.setLayout(new GridLayout(4,false));
+		effects.setLayout(new GridLayout(4, false));
 		effects.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		this.scaleChorus = new TGMixerScalePopup(effects, SWT.VERTICAL, 64, TGMixer.CHORUS, getVerticalScaleData());
@@ -100,19 +100,19 @@ public class TGMixerTrack {
 		this.scaleTremolo = new TGMixerScalePopup(effects, SWT.VERTICAL, 64, TGMixer.TREMOLO, getVerticalScaleData());
 		this.scaleTremolo.setSelection(  this.track.getChannel().getTremolo());
 		
-		new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR).setLayoutData(new GridData(SWT.FILL,SWT.CENTER,true,false));
+		new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR).setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		
 		this.scaleBalance = new TGMixerScale(composite, SWT.HORIZONTAL, 64, TGMixer.BALANCE, getHorizontalScaleData());
 		this.scaleBalance.setSelection(this.track.getChannel().getBalance());
 		
-		this.scaleVolume = new TGMixerScale(composite, SWT.VERTICAL, 16, TGMixer.VOLUME, new GridData(SWT.CENTER,SWT.FILL,true,true));
+		this.scaleVolume = new TGMixerScale(composite, SWT.VERTICAL, 16, TGMixer.VOLUME, new GridData(SWT.CENTER, SWT.FILL, true, true));
 		this.scaleVolume.setSelection(  this.track.getChannel().getVolume());
 		
 		Label separator = new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR);
-		separator.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,false));
+		separator.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false));
 		
 		Composite volumeValueComposite = new Composite(composite, SWT.NONE);
-		volumeValueComposite.setLayout(new GridLayout(2,false));
+		volumeValueComposite.setLayout(new GridLayout(2, false));
 		
 		this.volumeValueTitleLabel = new Label(volumeValueComposite, SWT.LEFT);
 		this.volumeValueLabel = new Label(volumeValueComposite, SWT.CENTER);
@@ -121,19 +121,19 @@ public class TGMixerTrack {
 	}
 	
 	private GridData getHorizontalScaleData(){
-		GridData data = new GridData(SWT.CENTER,SWT.NONE,false,true);
+		GridData data = new GridData(SWT.CENTER, SWT.NONE, false, true);
 		data.widthHint = 80;
 		return data;
 	}
 	
 	private GridData getVerticalScaleData(){
-		GridData data = new GridData(SWT.CENTER,SWT.FILL,false,true);
+		GridData data = new GridData(SWT.CENTER, SWT.FILL, false, true);
 		data.heightHint = 65;
 		return data;
 	}
 	
 	private GridData getVolumeValueLabelData(){
-		GridData data = new GridData(SWT.CENTER,SWT.NONE,true,false);
+		GridData data = new GridData(SWT.CENTER, SWT.NONE, true, false);
 		data.minimumWidth = 40;
 		return data;
 	}
@@ -370,7 +370,7 @@ public class TGMixerTrack {
 		public void setText(String text){
 			super.setText(text);
 			if(this.getText() != null && this.getText().length() > 0){
-				this.item.setText( this.getText().substring(0,1) );
+				this.item.setText( this.getText().substring(0, 1) );
 			}
 		}
 		

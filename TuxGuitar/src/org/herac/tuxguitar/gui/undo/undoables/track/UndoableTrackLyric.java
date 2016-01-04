@@ -57,7 +57,7 @@ public class UndoableTrackLyric implements UndoableEdit{
 		return (this.doAction == UNDO_ACTION);
 	}
 	
-	public static UndoableTrackLyric startUndo(TGTrack track,int undoCaretPosition){
+	public static UndoableTrackLyric startUndo(TGTrack track, int undoCaretPosition){
 		UndoableTrackLyric undoable = new UndoableTrackLyric();
 		undoable.doAction = UNDO_ACTION;
 		undoable.trackNumber = track.getNumber();
@@ -67,7 +67,7 @@ public class UndoableTrackLyric implements UndoableEdit{
 		return undoable;
 	}
 	
-	public UndoableTrackLyric endUndo(TGTrack track,int redoCaretPosition){
+	public UndoableTrackLyric endUndo(TGTrack track, int redoCaretPosition){
 		this.redoCaret = new UndoableCaretHelper();
 		this.redoCaretPosition = redoCaretPosition;
 		track.getLyrics().copy( this.redoLyric );

@@ -22,7 +22,7 @@ public class TGDocumentation {
 	public void display() throws Throwable{
 		URL url = getIndexUrl();
 		if( url != null ){
-			Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(),SWT.SHELL_TRIM);
+			Shell dialog = DialogUtils.newDialog(TuxGuitar.instance().getShell(), SWT.SHELL_TRIM);
 			dialog.setLayout(new FillLayout());
 			
 			Browser browser = new Browser(dialog, SWT.BORDER);

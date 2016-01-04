@@ -13,7 +13,7 @@ public class TGBrowserElementImpl extends TGBrowserElement{
 	private TGBrowserElementImpl parent;
 	private File file;
 	
-	public TGBrowserElementImpl(TGBrowserElementImpl parent,File file) {
+	public TGBrowserElementImpl(TGBrowserElementImpl parent, File file) {
 		super(file.getName());
 		this.parent = parent;
 		this.file = file;

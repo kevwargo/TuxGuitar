@@ -134,7 +134,7 @@ public class TGMeasureHeaderImpl extends TGMeasureHeader{
 	
 	public int getFirstNoteSpacing(ViewLayout layout, TGMeasureImpl measure){
 		int topSpacing = getTempoSpacing(layout) + getTripletFeelSpacing(layout);
-		int middleSpacing = getClefSpacing(layout,measure) + getKeySignatureSpacing(layout,measure) + getTimeSignatureSpacing(layout);
+		int middleSpacing = getClefSpacing(layout, measure) + getKeySignatureSpacing(layout, measure) + getTimeSignatureSpacing(layout);
 		
 		return Math.round(Math.max( topSpacing , middleSpacing) + (10f * layout.getScale()));
 	}

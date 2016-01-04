@@ -53,10 +53,10 @@ public class Tablature extends Composite {
 	private boolean painting;
 	
 	public Tablature(final Composite parent) {
-		this(parent,SWT.NONE);
+		this(parent, SWT.NONE);
 	}
 	
-	public Tablature(final Composite parent,int style) {
+	public Tablature(final Composite parent, int style) {
 		super(parent, style);
 		this.editorKit = new EditorKit(this);
 	}
@@ -104,7 +104,7 @@ public class Tablature extends Composite {
 	}
 	
 	public void initCaret(){
-		this.caret.update(1,TGDuration.QUARTER_TIME,1);
+		this.caret.update(1, TGDuration.QUARTER_TIME, 1);
 	}
 	
 	public synchronized void paintTablature(TGPainter painter){
@@ -121,7 +121,7 @@ public class Tablature extends Composite {
 				this.scrollX = xScroll.getSelection();
 				this.scrollY = yScroll.getSelection();
 				
-				this.getViewLayout().paint(painter,area,-this.scrollX,-this.scrollY);
+				this.getViewLayout().paint(painter, area,-this.scrollX,-this.scrollY);
 				
 				this.width = this.viewLayout.getWidth();
 				this.height = this.viewLayout.getHeight();
@@ -129,7 +129,7 @@ public class Tablature extends Composite {
 				this.updateScroll();
 				
 				if(TuxGuitar.instance().getPlayer().isRunning()){
-					redrawPlayingMode(painter,true);
+					redrawPlayingMode(painter, true);
 				}
 				// Si no estoy reproduciendo y hay cambios
 				// muevo el scroll al compas que tiene el caret
@@ -138,7 +138,7 @@ public class Tablature extends Composite {
 					// por eso es importante desmarcar los cambios antes de hacer el moveScrollTo
 					getCaret().setChanges(false);
 					
-					moveScrollTo(getCaret().getMeasure(), xScroll, yScroll,area);
+					moveScrollTo(getCaret().getMeasure(), xScroll, yScroll, area);
 				}
 			}catch(Throwable throwable){
 				throwable.printStackTrace();
@@ -172,10 +172,10 @@ public class Tablature extends Composite {
 	}
 	
 	public boolean moveScrollTo(TGMeasureImpl measure){
-		return moveScrollTo(measure,getHorizontalBar(),getVerticalBar(),getClientArea());
+		return moveScrollTo(measure, getHorizontalBar(), getVerticalBar(), getClientArea());
 	}
 	
-	public boolean moveScrollTo(TGMeasureImpl measure,ScrollBar xScroll,ScrollBar yScroll,Rectangle area){
+	public boolean moveScrollTo(TGMeasureImpl measure, ScrollBar xScroll, ScrollBar yScroll, Rectangle area){
 		boolean success = false;
 		if(measure != null && measure.getTs() != null){
 			int mX = measure.getPosX();
@@ -230,7 +230,7 @@ public class Tablature extends Composite {
 				this.setPainting(true);
 				
 				TGPainter painter = new TGPainter(new GC(this));
-				redrawPlayingMode(painter,false);
+				redrawPlayingMode(painter, false);
 				painter.dispose();
 				
 				this.setPainting(false);
@@ -239,7 +239,7 @@ public class Tablature extends Composite {
 		}
 	}
 	
-	private void redrawPlayingMode(TGPainter painter,boolean force){
+	private void redrawPlayingMode(TGPainter painter, boolean force){
 		if(!super.isDisposed() && !TuxGuitar.instance().isLocked()){
 			try{
 				TGMeasureImpl measure = TuxGuitar.instance().getEditorCache().getPlayMeasure();
@@ -248,10 +248,10 @@ public class Tablature extends Composite {
 					if(!moveScrollTo(measure) || force){
 						boolean paintMeasure = (force || this.playedMeasure == null || !this.playedMeasure.equals(measure));
 						if(this.playedMeasure != null && this.playedBeat != null && !this.playedMeasure.isOutOfBounds() && this.playedMeasure.hasTrack(getCaret().getTrack().getNumber())){
-							getViewLayout().paintPlayMode(painter, this.playedMeasure, this.playedBeat,paintMeasure);
+							getViewLayout().paintPlayMode(painter, this.playedMeasure, this.playedBeat, paintMeasure);
 						}
 						if(!measure.isOutOfBounds()){
-							getViewLayout().paintPlayMode(painter, measure, beat,paintMeasure);
+							getViewLayout().paintPlayMode(painter, measure, beat, paintMeasure);
 						}
 						this.playedBeat = beat;
 						this.playedMeasure =  measure;
@@ -321,10 +321,10 @@ public class Tablature extends Composite {
 	private void loadViewLayout( int style, int mode ){
 		switch(mode){
 			case ViewLayout.MODE_PAGE:
-				setViewLayout(new PageViewLayout(this,style));
+				setViewLayout(new PageViewLayout(this, style));
 			break;
 			case ViewLayout.MODE_LINEAR:
-				setViewLayout(new LinearViewLayout(this,style));
+				setViewLayout(new LinearViewLayout(this, style));
 			break;
 			default:
 				if( mode != ViewLayout.DEFAULT_MODE ){

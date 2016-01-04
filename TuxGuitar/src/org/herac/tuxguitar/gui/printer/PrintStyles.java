@@ -15,10 +15,10 @@ public class PrintStyles {
 	private boolean blackAndWhite;
 	
 	public PrintStyles() {
-		this(-1,-1,-1,ViewLayout.DISPLAY_TABLATURE, true);
+		this(-1,-1,-1, ViewLayout.DISPLAY_TABLATURE, true);
 	}
 	
-	public PrintStyles(int trackNumber,int fromMeasure, int toMeasure, int style , boolean blackAndWhite) {
+	public PrintStyles(int trackNumber, int fromMeasure, int toMeasure, int style , boolean blackAndWhite) {
 		this.trackNumber = trackNumber;
 		this.fromMeasure = fromMeasure;
 		this.toMeasure = toMeasure;

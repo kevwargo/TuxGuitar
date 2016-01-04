@@ -35,7 +35,7 @@ public class MarkerMenuItem extends MenuItems{
 	private MenuItem next;
 	private MenuItem previous;
 	
-	public MarkerMenuItem(Shell shell,Menu parent, int style) {
+	public MarkerMenuItem(Shell shell, Menu parent, int style) {
 		this.markerMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}

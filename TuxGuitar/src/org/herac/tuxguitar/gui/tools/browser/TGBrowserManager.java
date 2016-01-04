@@ -141,13 +141,13 @@ public class TGBrowserManager {
 	}
 	
 	public void readCollections(){
-		new TGBrowserReader().loadCollections(this,new File(getCollectionsFileName()));
+		new TGBrowserReader().loadCollections(this, new File(getCollectionsFileName()));
 		this.changes = false;
 	}
 	
 	public void writeCollections(){
 		if(this.changes){
-			new TGBrowserWriter().saveCollections(this,getCollectionsFileName());
+			new TGBrowserWriter().saveCollections(this, getCollectionsFileName());
 		}
 		this.changes = false;
 	}

@@ -147,13 +147,13 @@ public class TGPainter {
 		this.pathEmpty = false;
 	}
 	
-	public void addRectangle(float x,float y,float width,float height) {
+	public void addRectangle(float x, float y, float width, float height) {
 		this.path.addRectangle(x, y, width, height);
 		this.pathEmpty = false;
 	}
 	
 	public void addRectangle(Rectangle rectangle) {
-		this.path.addRectangle(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
+		this.path.addRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 		this.pathEmpty = false;
 	}
 	

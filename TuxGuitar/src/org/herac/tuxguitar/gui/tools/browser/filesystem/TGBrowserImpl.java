@@ -46,11 +46,11 @@ public class TGBrowserImpl extends TGBrowser{
 		if(file.exists() && file.isDirectory()){
 			File[] files = file.listFiles();
 			for(int i = 0; i < files.length;i ++){
-				elements.add(new TGBrowserElementImpl(this.element,files[i]));
+				elements.add(new TGBrowserElementImpl(this.element, files[i]));
 			}
 		}
 		if( !elements.isEmpty() ){
-			Collections.sort(elements,new TGBrowserElementComparator());
+			Collections.sort(elements, new TGBrowserElementComparator());
 		}
 		return elements;
 	}

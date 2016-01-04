@@ -59,7 +59,7 @@ public class GoNextMeasureAction extends Action{
 			TGTrackImpl track = caret.getTrack();
 			TGMeasure measure = getSongManager().getTrackManager().getNextMeasure(caret.getMeasure());
 			if(track != null && measure != null){
-				caret.update(track.getNumber(),measure.getStart(),caret.getSelectedString().getNumber());
+				caret.update(track.getNumber(), measure.getStart(), caret.getSelectedString().getNumber());
 			}
 		}
 	}

@@ -28,11 +28,11 @@ public class ToolBarsWriter {
 	private static final String ATTR_NAME = "name";
 	private static final String ATTR_ENABLED = "enabled";
 	
-	public static void saveToolBars(ToolItems[] items,File file) {
+	public static void saveToolBars(ToolItems[] items, File file) {
 		try {
 			Document doc = createDocument();
-			setToolBars(items,doc);
-			saveDocument(doc,file);
+			setToolBars(items, doc);
+			saveDocument(doc, file);
 		} catch (Throwable throwable) {
 			throwable.printStackTrace();
 		}
@@ -45,7 +45,7 @@ public class ToolBarsWriter {
 		return document;
 	}
 	
-	public static void saveDocument(Document document,File file) throws FileNotFoundException, TransformerException {
+	public static void saveDocument(Document document, File file) throws FileNotFoundException, TransformerException {
 		FileOutputStream fs = new FileOutputStream(file);
 		
 		// Write it out again
@@ -57,7 +57,7 @@ public class ToolBarsWriter {
 		idTransform.transform(input, output);
 	}
 	
-	private static void setToolBars(ToolItems[] items,Document document){
+	private static void setToolBars(ToolItems[] items, Document document){
 		//chords tag
 		Node listNode = document.createElement(ITEM_LIST_TAG);
 		

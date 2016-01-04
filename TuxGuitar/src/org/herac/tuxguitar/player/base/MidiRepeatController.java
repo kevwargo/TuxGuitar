@@ -92,7 +92,7 @@ public class MidiRepeatController {
 		
 		//antes de ejecutar una posible repeticion
 		//guardo el indice del ultimo compas tocado 
-		this.lastIndex = Math.max(this.lastIndex,this.index);
+		this.lastIndex = Math.max(this.lastIndex, this.index);
 		
 		//si hay una repeticion la hago
 		if (this.repeatOpen && header.getRepeatClose() > 0) {

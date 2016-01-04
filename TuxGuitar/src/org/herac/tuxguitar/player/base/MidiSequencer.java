@@ -19,8 +19,8 @@ public interface MidiSequencer extends MidiDevice{
 	
 	public MidiSequenceHandler createSequence(int tracks) throws MidiPlayerException;
 	
-	public void setSolo(int index,boolean solo) throws MidiPlayerException;
+	public void setSolo(int index, boolean solo) throws MidiPlayerException;
 	
-	public void setMute(int index,boolean mute) throws MidiPlayerException;
+	public void setMute(int index, boolean mute) throws MidiPlayerException;
 	
 }

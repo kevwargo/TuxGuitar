@@ -4,7 +4,7 @@ public class ScaleInfo {
 	private String name;
 	private String keys;
 	
-	public ScaleInfo(String name,String keys){
+	public ScaleInfo(String name, String keys){
 		this.name = name;
 		this.keys = keys;
 	}

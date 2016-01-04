@@ -24,14 +24,14 @@ public class MidiEventPlayer{
 		this.tick = this.sequencer.getTickPosition();
 		for(int i = 0;i < this.events.size();i ++){
 			MidiEvent event = (MidiEvent)this.events.get(i);
-			if(shouldSend(event,this.tick,this.lastTick)){
+			if(shouldSend(event, this.tick, this.lastTick)){
 				this.sequencer.sendEvent(event);
 			}
 		}
 		this.reset = false;
 	}
 	
-	private boolean shouldSend(MidiEvent event,long tick,long lastTick){
+	private boolean shouldSend(MidiEvent event, long tick, long lastTick){
 		if(event.getTick() > tick){
 			return false;
 		}

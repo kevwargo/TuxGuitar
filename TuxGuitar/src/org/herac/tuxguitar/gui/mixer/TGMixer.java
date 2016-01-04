@@ -37,7 +37,7 @@ import org.herac.tuxguitar.song.models.TGTrack;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
+public class TGMixer implements TGUpdateListener, IconLoader, LanguageLoader{
 	
 	public static final int MUTE = 0x01;
 	public static final int SOLO = 0x02;
@@ -95,13 +95,13 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 		Iterator it = TuxGuitar.instance().getSongManager().getSong().getTracks();
 		while (it.hasNext()) {
 			TGTrack track = (TGTrack) it.next();
-			TGMixerTrack trackMixer = new TGMixerTrack(this,track);
+			TGMixerTrack trackMixer = new TGMixerTrack(this, track);
 			trackMixer.init(this.dialog);
 			this.tracks.add(trackMixer);
 		}
 		Composite composite = new Composite(this.dialog, SWT.BORDER);
 		composite.setLayout(new GridLayout());
-		composite.setLayoutData(new GridData(SWT.CENTER,SWT.FILL,true,true));
+		composite.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
 		
 		this.volumeValue = -1;
 		
@@ -110,13 +110,13 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 		this.volumeScale.setMinimum(0);
 		this.volumeScale.setIncrement(1);
 		this.volumeScale.setPageIncrement(1);
-		this.volumeScale.setLayoutData(new GridData(SWT.CENTER,SWT.FILL,true,true));
+		this.volumeScale.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
 		
 		Label separator = new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR);
-		separator.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,false));
+		separator.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false));
 		
 		Composite volumeValueComposite = new Composite(composite, SWT.NONE);
-		volumeValueComposite.setLayout(new GridLayout(2,false));
+		volumeValueComposite.setLayout(new GridLayout(2, false));
 		
 		this.volumeValueTitleLabel = new Label(volumeValueComposite, SWT.NONE);
 		
@@ -141,7 +141,7 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 		this.metronomeVolumeScale.setMinimum(0);
 		this.metronomeVolumeScale.setIncrement(1);
 		this.metronomeVolumeScale.setPageIncrement(1);
-		this.metronomeVolumeScale.setLayoutData(new GridData(SWT.CENTER,SWT.FILL,true,true));
+		this.metronomeVolumeScale.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
         this.metronomeVolumeScale.addListener(SWT.Selection, new Listener() {
                 public void handleEvent(Event event) {
                     changeMetronomeVolume();
@@ -183,7 +183,7 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 	}
 	
 	private GridData getVolumeValueLabelData(){
-		GridData data = new GridData(SWT.CENTER,SWT.NONE,true,false);
+		GridData data = new GridData(SWT.CENTER, SWT.NONE, true, false);
 		data.minimumWidth = 40;
 		return data;
 	}
@@ -199,7 +199,7 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 		return (this.dialog == null || this.dialog.isDisposed());
 	}
 	
-	public synchronized void fireChanges(TGChannel channel,int type){
+	public synchronized void fireChanges(TGChannel channel, int type){
 		Iterator it = this.tracks.iterator();
 		while(it.hasNext()){
 			TGMixerTrack mixer = (TGMixerTrack)it.next();
@@ -230,7 +230,7 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 			this.dialog.setText(TuxGuitar.getProperty("mixer"));
 			if( pack ){
 				this.dialog.pack();
-				this.dialog.layout(true,true);
+				this.dialog.layout(true, true);
 				this.dialog.redraw();
 			}
 		}
@@ -271,7 +271,7 @@ public class TGMixer implements TGUpdateListener,IconLoader,LanguageLoader{
 					if(!isDisposed()){
 						TGMixer.this.clear();
 						TGMixer.this.loadData();
-						TGMixer.this.dialog.layout(true,true);
+						TGMixer.this.dialog.layout(true, true);
 						TGMixer.this.dialog.redraw();
 					}
 				}

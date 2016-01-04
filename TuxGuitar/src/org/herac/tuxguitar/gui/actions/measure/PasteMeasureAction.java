@@ -52,9 +52,9 @@ public class PasteMeasureAction extends Action{
 			dialog.setText(TuxGuitar.getProperty("edit.paste"));
 			
 			//-----------------COUNT------------------------
-			Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			group.setLayout(new GridLayout(2,false));
-			group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			group.setLayout(new GridLayout(2, false));
+			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			group.setText(TuxGuitar.getProperty("edit.paste"));
 			
 			Label countLabel = new Label(group, SWT.NULL);
@@ -67,22 +67,22 @@ public class PasteMeasureAction extends Action{
 			countSpinner.setSelection( 1 );
 			
 			//----------------------------------------------------------------------
-			Group options = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group options = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			options.setLayout(new GridLayout());
-			options.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			options.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			options.setText(TuxGuitar.getProperty("options"));
 			
-			final Button replace = new Button(options,SWT.RADIO);
+			final Button replace = new Button(options, SWT.RADIO);
 			replace.setText(TuxGuitar.getProperty("edit.paste.replace-mode"));
 			replace.setSelection(true);
 			
-			final Button insert = new Button(options,SWT.RADIO);
+			final Button insert = new Button(options, SWT.RADIO);
 			insert.setText(TuxGuitar.getProperty("edit.paste.insert-mode"));
 			
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -113,12 +113,12 @@ public class PasteMeasureAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
 	private GridData getSpinnerData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}

@@ -51,10 +51,10 @@ public class ChordSelector extends Composite{
 	
 	private boolean refresh;
 	
-	public ChordSelector(ChordDialog dialog,Composite parent,int style,int[] tuning) {
-		super(parent,style);
-		this.setLayout(new GridLayout(3,false));
-		this.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+	public ChordSelector(ChordDialog dialog, Composite parent, int style, int[] tuning) {
+		super(parent, style);
+		this.setLayout(new GridLayout(3, false));
+		this.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		this.dialog = dialog;
 		this.tuning = tuning;
 		
@@ -64,33 +64,33 @@ public class ChordSelector extends Composite{
 	
 	
 	public void init(){
-		Composite tonicComposite = new Composite(this,SWT.NONE);
-		tonicComposite.setLayout(this.dialog.gridLayout(1,false,0,0));
-		tonicComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Composite tonicComposite = new Composite(this, SWT.NONE);
+		tonicComposite.setLayout(this.dialog.gridLayout(1, false, 0, 0));
+		tonicComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		this.tonicList = new List(tonicComposite,SWT.BORDER);
-		this.tonicList.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.tonicList = new List(tonicComposite, SWT.BORDER);
+		this.tonicList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		// sharp & flat buttons
-		Composite buttonsComposite = new Composite(tonicComposite,SWT.NONE);
-		buttonsComposite.setLayout(this.dialog.gridLayout(2,true,0,0));
-		GridData buttonGd = new GridData(SWT.FILL,SWT.TOP,true,false);
+		Composite buttonsComposite = new Composite(tonicComposite, SWT.NONE);
+		buttonsComposite.setLayout(this.dialog.gridLayout(2, true, 0, 0));
+		GridData buttonGd = new GridData(SWT.FILL, SWT.TOP, true, false);
 		buttonGd.heightHint = 28;
 		buttonGd.widthHint = 28;
-		this.sharpButton = new Button(buttonsComposite,SWT.TOGGLE);
+		this.sharpButton = new Button(buttonsComposite, SWT.TOGGLE);
 		this.sharpButton.setLayoutData(buttonGd);
-		this.flatButton = new Button(buttonsComposite,SWT.TOGGLE);
+		this.flatButton = new Button(buttonsComposite, SWT.TOGGLE);
 		this.flatButton.setLayoutData(buttonGd);
-		// TODO: maybe put an image instead of #,b
+		// TODO: maybe put an image instead of #, b
 		this.sharpButton.setText("#");
 		this.flatButton.setText("b");
-		this.chordList = new List(this,SWT.BORDER);
-		this.chordList.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.chordList = new List(this, SWT.BORDER);
+		this.chordList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		Label separator = new Label(tonicComposite,SWT.SEPARATOR | SWT.HORIZONTAL);
-		separator.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,true));
-		Button customizeButton = new Button(tonicComposite,SWT.PUSH);
-		customizeButton.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,false));
+		Label separator = new Label(tonicComposite, SWT.SEPARATOR | SWT.HORIZONTAL);
+		separator.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, true));
+		Button customizeButton = new Button(tonicComposite, SWT.PUSH);
+		customizeButton.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false));
 		customizeButton.setText(TuxGuitar.getProperty("settings"));
 		
 		customizeButton.addSelectionListener(new SelectionAdapter() {
@@ -273,49 +273,49 @@ public class ChordSelector extends Composite{
 	}
 	
 	protected void initChordWidgets() {
-		Composite alterationComposite = new Composite(this,SWT.NONE);
-		alterationComposite.setLayout(this.dialog.gridLayout(1,true,0,0));
-		alterationComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		Composite aboveComposite = new Composite(alterationComposite,SWT.NONE);
-		aboveComposite.setLayout(this.dialog.gridLayout(2,true,0,0));
-		aboveComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		Composite firstComposite = new Composite(aboveComposite,SWT.NONE);
-		firstComposite.setLayout(this.dialog.gridLayout(1,false,0,0));
-		firstComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		this.alterationList = new List(firstComposite,SWT.BORDER);
-		this.alterationList.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		this.plusMinusList = new List(firstComposite,SWT.BORDER);
-		this.plusMinusList.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Composite alterationComposite = new Composite(this, SWT.NONE);
+		alterationComposite.setLayout(this.dialog.gridLayout(1, true, 0, 0));
+		alterationComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		Composite aboveComposite = new Composite(alterationComposite, SWT.NONE);
+		aboveComposite.setLayout(this.dialog.gridLayout(2, true, 0, 0));
+		aboveComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		Composite firstComposite = new Composite(aboveComposite, SWT.NONE);
+		firstComposite.setLayout(this.dialog.gridLayout(1, false, 0, 0));
+		firstComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		this.alterationList = new List(firstComposite, SWT.BORDER);
+		this.alterationList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		this.plusMinusList = new List(firstComposite, SWT.BORDER);
+		this.plusMinusList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		Composite secondComposite = new Composite(aboveComposite,SWT.NONE);
-		secondComposite.setLayout(this.dialog.gridLayout(1,false,0,0));
-		secondComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		this._5List = new List(secondComposite,SWT.BORDER);
-		this._5List.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		Composite secondComposite = new Composite(aboveComposite, SWT.NONE);
+		secondComposite.setLayout(this.dialog.gridLayout(1, false, 0, 0));
+		secondComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		this._5List = new List(secondComposite, SWT.BORDER);
+		this._5List.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		this._9List = new List(secondComposite,SWT.BORDER);
-		this._9List.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this._9List = new List(secondComposite, SWT.BORDER);
+		this._9List.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		this._11List = new List(secondComposite,SWT.BORDER);
-		this._11List.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this._11List = new List(secondComposite, SWT.BORDER);
+		this._11List.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		Composite bassComposite = new Composite(alterationComposite,SWT.NONE);
-		bassComposite.setLayout(this.dialog.gridLayout(1,true,0,0));
-		bassComposite.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,true));
+		Composite bassComposite = new Composite(alterationComposite, SWT.NONE);
+		bassComposite.setLayout(this.dialog.gridLayout(1, true, 0, 0));
+		bassComposite.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, true));
 		this.addCheck = new Button(bassComposite, SWT.CHECK | SWT.LEFT);
 		this.addCheck.setText("add");
 		//this.addCheck.setSelection(false);
 		//this.addCheck.setEnabled(false);
-		this.addCheck.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,true));
+		this.addCheck.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, true));
 		
-		Label separator = new Label(bassComposite,SWT.SEPARATOR | SWT.HORIZONTAL );
-		separator.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,true));
+		Label separator = new Label(bassComposite, SWT.SEPARATOR | SWT.HORIZONTAL );
+		separator.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, true));
 		
-		Label bText = new Label(bassComposite,SWT.LEFT);
-		bText.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,false));
+		Label bText = new Label(bassComposite, SWT.LEFT);
+		bText.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false));
 		bText.setText(TuxGuitar.getProperty("chord.bass"));
 		this.bassCombo = new Combo(bassComposite, SWT.DROP_DOWN | SWT.READ_ONLY);
-		this.bassCombo.setLayoutData(new GridData(SWT.FILL,SWT.BOTTOM,true,false));
+		this.bassCombo.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false));
 	}
 	
 	protected void insertTonicNames(boolean sharp){
@@ -364,15 +364,15 @@ public class ChordSelector extends Composite{
 	}
 	
 	protected void showChord(){
-		TuxGuitar.instance().loadCursor(getShell(),SWT.CURSOR_WAIT);
+		TuxGuitar.instance().loadCursor(getShell(), SWT.CURSOR_WAIT);
 		ChordCreatorListener listener = new ChordCreatorListener() {
-			public void notifyChords(final ChordCreatorUtil instance,final java.util.List chords) {
+			public void notifyChords(final ChordCreatorUtil instance, final java.util.List chords) {
 				try {
 					TGSynchronizer.instance().addRunnable(new TGSynchronizer.TGRunnable() {
 						public void run() {
 							if(instance.isValidProcess() && !getDialog().isDisposed()){
 								getDialog().getList().setChords(chords);
-								TuxGuitar.instance().loadCursor(getShell(),SWT.CURSOR_ARROW);
+								TuxGuitar.instance().loadCursor(getShell(), SWT.CURSOR_ARROW);
 							}
 						}
 					});
@@ -437,24 +437,24 @@ public class ChordSelector extends Composite{
 	protected void adjustWidgetAvailability() {
 		String chordName = ChordDatabase.get(getChordList().getSelectionIndex()).getName();
 		if (chordName.equals("dim") || chordName.equals("dim7") || chordName.equals("aug") || chordName.equals("5") ) {
-			updateWidget(getAlterationList(),false);
-			updateWidget(getAddCheck(),false);
-			updateWidget(get_9List(),false);
-			updateWidget(get_11List(),false);
-			updateWidget(getPlusMinusList(),false);
+			updateWidget(getAlterationList(), false);
+			updateWidget(getAddCheck(), false);
+			updateWidget(get_9List(), false);
+			updateWidget(get_11List(), false);
+			updateWidget(getPlusMinusList(), false);
 			
 			if (!chordName.equals("5")){
-				updateWidget(get_5List(),false);//disableWidget(get_5List());
+				updateWidget(get_5List(), false);//disableWidget(get_5List());
 			}else{
-				updateWidget(get_5List(),true);
+				updateWidget(get_5List(), true);
 			}
 		}
 		else {
 			// enable and don't change the selection index
 			//getAlterationList().setEnabled(true);
 			//get_5List().setEnabled(true);
-			updateWidget(getAlterationList(),true);
-			updateWidget(get_5List(),true);
+			updateWidget(getAlterationList(), true);
+			updateWidget(get_5List(), true);
 		}
 		
 		if(this.alterationList.isEnabled()){

@@ -28,8 +28,8 @@ public class SoundOption extends Option{
 	protected List mpList;
 	protected Combo mpCombo;
 	
-	public SoundOption(TGConfigEditor configEditor,ToolBar toolBar,final Composite parent){
-		super(configEditor,toolBar,parent,TuxGuitar.getProperty("settings.config.sound"));
+	public SoundOption(TGConfigEditor configEditor, ToolBar toolBar, final Composite parent){
+		super(configEditor, toolBar, parent, TuxGuitar.getProperty("settings.config.sound"));
 		this.initialized = false;
 	}
 	
@@ -39,24 +39,24 @@ public class SoundOption extends Option{
 		getToolItem().addSelectionListener(this);
 		
 		//---Midi Sequencer---//
-		showLabel(getComposite(),SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("midi.sequencer"));
+		showLabel(getComposite(), SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("midi.sequencer"));
 		
-		Composite msComposite = new Composite(getComposite(),SWT.NONE);
+		Composite msComposite = new Composite(getComposite(), SWT.NONE);
 		msComposite.setLayout(new GridLayout());
 		msComposite.setLayoutData(getTabbedData());
 		
 		this.msCombo = new Combo(msComposite, SWT.DROP_DOWN | SWT.READ_ONLY);
-		this.msCombo.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.msCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		//---Midi Port---//
-		showLabel(getComposite(),SWT.TOP | SWT.LEFT | SWT.WRAP,SWT.BOLD,0,TuxGuitar.getProperty("midi.port"));
+		showLabel(getComposite(), SWT.TOP | SWT.LEFT | SWT.WRAP, SWT.BOLD, 0, TuxGuitar.getProperty("midi.port"));
 		
-		Composite mpComposite = new Composite(getComposite(),SWT.NONE);
+		Composite mpComposite = new Composite(getComposite(), SWT.NONE);
 		mpComposite.setLayout(new GridLayout());
 		mpComposite.setLayoutData(getTabbedData());
 		
 		this.mpCombo = new Combo(mpComposite, SWT.DROP_DOWN | SWT.READ_ONLY);
-		this.mpCombo.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		this.mpCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		this.loadConfig();
 	}
@@ -136,8 +136,8 @@ public class SoundOption extends Option{
 	
 	public void updateDefaults(){
 		if(this.initialized){
-			getConfig().setProperty(TGConfigKeys.MIDI_PORT,getDefaults().getProperty(TGConfigKeys.MIDI_PORT));
-			getConfig().setProperty(TGConfigKeys.MIDI_SEQUENCER,getDefaults().getProperty(TGConfigKeys.MIDI_SEQUENCER));
+			getConfig().setProperty(TGConfigKeys.MIDI_PORT, getDefaults().getProperty(TGConfigKeys.MIDI_PORT));
+			getConfig().setProperty(TGConfigKeys.MIDI_SEQUENCER, getDefaults().getProperty(TGConfigKeys.MIDI_SEQUENCER));
 		}
 	}
 	

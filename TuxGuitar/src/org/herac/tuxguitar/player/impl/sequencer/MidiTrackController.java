@@ -40,24 +40,24 @@ public class MidiTrackController {
 		}
 	}
 	
-	public void setSolo(int index,boolean solo) throws MidiPlayerException{
+	public void setSolo(int index, boolean solo) throws MidiPlayerException{
 		if(index >= 0 && index < this.tracks.size()){
 			MidiTrack track = (MidiTrack)this.tracks.get(index);
 			track.setSolo(solo);
 			checkAnySolo();
 			if(track.isSolo()){
-				setMute(index,false);
+				setMute(index, false);
 				this.sequencer.getTransmitter().sendAllNotesOff();
 			}
 		}
 	}
 	
-	public void setMute(int index,boolean mute) throws MidiPlayerException{
+	public void setMute(int index, boolean mute) throws MidiPlayerException{
 		if(index >= 0 && index < this.tracks.size()){
 			MidiTrack track = (MidiTrack)this.tracks.get(index);
 			track.setMute(mute);
 			if(track.isMute()){
-				setSolo(index,false);
+				setSolo(index, false);
 				this.sequencer.getTransmitter().sendAllNotesOff();
 			}
 		}

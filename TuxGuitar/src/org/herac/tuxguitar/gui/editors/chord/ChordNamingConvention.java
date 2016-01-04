@@ -20,7 +20,7 @@ public class ChordNamingConvention {
 		
 		StringBuffer sb = new StringBuffer();
 		
-		sb.append(getTonic(chordTonic,sharp));
+		sb.append(getTonic(chordTonic, sharp));
 		
 		//String chordName = ((ChordInfo)ChordCreatorUtil.getChordData().getChords().get(chordIndex)).getName();
 		String chordName = ChordDatabase.get(chordIndex).getName();
@@ -38,26 +38,26 @@ public class ChordNamingConvention {
 				sb.append("/");
 			
 			switch (alteration) {
-				case 1 : sb.append( getAdd("9",plusMinus));
+				case 1 : sb.append( getAdd("9", plusMinus));
 					break;
-				case 2 : sb.append( getAdd("11",plusMinus));
+				case 2 : sb.append( getAdd("11", plusMinus));
 					break;
-				case 3 : sb.append( getAdd("13",plusMinus));
+				case 3 : sb.append( getAdd("13", plusMinus));
 					break;
 			}
 			
 		}
 		
 		if (add5!=0)
-			sb.append("/").append(getAdd("5",add5));
+			sb.append("/").append(getAdd("5", add5));
 		if (add9!=0)
-			sb.append("/").append(getAdd("9",add9));
+			sb.append("/").append(getAdd("9", add9));
 		if (add11!=0)
-			sb.append("/").append(getAdd("11",add11));
+			sb.append("/").append(getAdd("11", add11));
 		
 		if (chordTonic!=bassTonic) {
 			sb.append(" \\");
-			sb.append(getTonic(bassTonic,sharp));
+			sb.append(getTonic(bassTonic, sharp));
 		}
 		return sb.toString();
 	}

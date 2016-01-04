@@ -55,7 +55,7 @@ public class MidiPercussion {
 	private int value;
 	private String name;
 	
-	public MidiPercussion(int value,String name){
+	public MidiPercussion(int value, String name){
 		this.value = value;
 		this.name = name;
 	}

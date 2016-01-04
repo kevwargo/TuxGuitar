@@ -30,7 +30,7 @@ public class ChangeSlappingAction extends Action{
 		UndoableMeasureGeneric undoable = UndoableMeasureGeneric.startUndo();
 		
 		Caret caret = getEditor().getTablature().getCaret();
-		getSongManager().getMeasureManager().changeSlapping(caret.getMeasure(),caret.getPosition(),caret.getSelectedString().getNumber());
+		getSongManager().getMeasureManager().changeSlapping(caret.getMeasure(), caret.getPosition(), caret.getSelectedString().getNumber());
 		TuxGuitar.instance().getFileHistory().setUnsavedFile();
 		updateTablature();
 		

@@ -30,7 +30,7 @@ public class FretBoardEditor implements TGRedrawListener, TGExternalBeatViewerLi
 		getFretBoard().setVisible(this.visible);
 		TuxGuitar.instance().getEditorManager().removeRedrawListener(this);
 		TuxGuitar.instance().getEditorManager().removeBeatViewerListener(this);
-		TuxGuitar.instance().updateShellFooter(0,0,0);
+		TuxGuitar.instance().updateShellFooter(0, 0, 0);
 	}
 	
 	public void showFretBoard(){
@@ -38,15 +38,15 @@ public class FretBoardEditor implements TGRedrawListener, TGExternalBeatViewerLi
 		getFretBoard().setVisible(this.visible);
 		TuxGuitar.instance().getEditorManager().addRedrawListener(this);
 		TuxGuitar.instance().getEditorManager().addBeatViewerListener(this);
-		TuxGuitar.instance().updateShellFooter(getFretBoard().getHeight(), 730,520);
+		TuxGuitar.instance().updateShellFooter(getFretBoard().getHeight(), 730, 520);
 	}
 	
 	public void showFretBoard(Composite parent) {
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(100, 0);
-		data.top = new FormAttachment(0,0);
-		data.bottom = new FormAttachment(100,0);
+		data.top = new FormAttachment(0, 0);
+		data.bottom = new FormAttachment(100, 0);
 		
 		this.fretBoard = new FretBoard(parent);
 		this.fretBoard.setLayoutData(data);

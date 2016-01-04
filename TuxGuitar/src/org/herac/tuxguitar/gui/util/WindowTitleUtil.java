@@ -34,13 +34,13 @@ public class WindowTitleUtil {
 					}
 					if((startIndex >= 0) && endIndex > (startIndex + VAR_START.length()) ){
 						if(startIndex > pos){
-							result += src.substring(pos,startIndex );
+							result += src.substring(pos, startIndex );
 						}
 						String var = src.substring(startIndex,(endIndex + 1));
 						result += parseVar(var);
 						pos = endIndex;
 					}else{
-						result += src.substring(pos,src.length() );
+						result += src.substring(pos, src.length() );
 						break;
 					}
 				}

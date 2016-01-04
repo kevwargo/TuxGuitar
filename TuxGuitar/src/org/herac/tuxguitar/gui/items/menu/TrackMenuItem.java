@@ -46,7 +46,7 @@ public class TrackMenuItem extends MenuItems{
 	private MenuItem lyrics;
 	private MenuItem properties;
 	
-	public TrackMenuItem(Shell shell,Menu parent, int style) {
+	public TrackMenuItem(Shell shell, Menu parent, int style) {
 		this.trackMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}

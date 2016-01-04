@@ -50,9 +50,9 @@ public class AddMeasureAction extends Action{
 			dialog.setText(TuxGuitar.getProperty("measure.add"));
 			
 			//-----------------COUNT------------------------
-			Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);
-			group.setLayout(new GridLayout(2,false));
-			group.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			Group group = new Group(dialog, SWT.SHADOW_ETCHED_IN);
+			group.setLayout(new GridLayout(2, false));
+			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			group.setText(TuxGuitar.getProperty("measure.add"));
 			
 			Label countLabel = new Label(group, SWT.NULL);
@@ -65,24 +65,24 @@ public class AddMeasureAction extends Action{
 			countSpinner.setSelection( 1 );
 			
 			//----------------------------------------------------------------------
-			Group options = new Group(dialog,SWT.SHADOW_ETCHED_IN);
+			Group options = new Group(dialog, SWT.SHADOW_ETCHED_IN);
 			options.setLayout(new GridLayout());
-			options.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			options.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			options.setText(TuxGuitar.getProperty("options"));
 			
-			final Button beforePosition = new Button(options,SWT.RADIO);
+			final Button beforePosition = new Button(options, SWT.RADIO);
 			beforePosition.setText(TuxGuitar.getProperty("measure.add-before-current-position"));
 			
-			final Button afterPosition = new Button(options,SWT.RADIO);
+			final Button afterPosition = new Button(options, SWT.RADIO);
 			afterPosition.setText(TuxGuitar.getProperty("measure.add-after-current-position"));
 			
-			final Button atEnd = new Button(options,SWT.RADIO);
+			final Button atEnd = new Button(options, SWT.RADIO);
 			atEnd.setText(TuxGuitar.getProperty("measure.add-at-end"));
 			atEnd.setSelection(true);
 			//------------------BUTTONS--------------------------
 			Composite buttons = new Composite(dialog, SWT.NONE);
-			buttons.setLayout(new GridLayout(2,false));
-			buttons.setLayoutData(new GridData(SWT.END,SWT.FILL,true,true));
+			buttons.setLayout(new GridLayout(2, false));
+			buttons.setLayoutData(new GridData(SWT.END, SWT.FILL, true, true));
 			
 			final Button buttonOK = new Button(buttons, SWT.PUSH);
 			buttonOK.setText(TuxGuitar.getProperty("ok"));
@@ -114,12 +114,12 @@ public class AddMeasureAction extends Action{
 			
 			dialog.setDefaultButton( buttonOK );
 			
-			DialogUtils.openDialog(dialog,DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
+			DialogUtils.openDialog(dialog, DialogUtils.OPEN_STYLE_CENTER | DialogUtils.OPEN_STYLE_PACK | DialogUtils.OPEN_STYLE_WAIT);
 		}
 	}
 	
 	private GridData getSpinnerData(){
-		GridData data = new GridData(SWT.FILL,SWT.FILL,true,true);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.minimumWidth = 150;
 		return data;
 	}
@@ -153,7 +153,7 @@ public class AddMeasureAction extends Action{
 							int trackNumber = getEditor().getTablature().getCaret().getTrack().getNumber();
 							int stringNumber = getEditor().getTablature().getCaret().getStringNumber();
 							long start = getSongManager().getMeasureHeader(number).getStart();
-							getEditor().getTablature().getCaret().update(trackNumber,start,stringNumber);
+							getEditor().getTablature().getCaret().update(trackNumber, start, stringNumber);
 							
 							//termia el undoable
 							addUndoableEdit( undoable.endUndo() );

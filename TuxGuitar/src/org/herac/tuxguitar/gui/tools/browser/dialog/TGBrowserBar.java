@@ -34,11 +34,11 @@ public abstract class TGBrowserBar implements LanguageLoader{
 		}
 	}
 	
-	protected TGBrowserCollection addCollection(TGBrowserFactory factory,String data){
-		return this.addCollection(factory,factory.parseData(data),false);
+	protected TGBrowserCollection addCollection(TGBrowserFactory factory, String data){
+		return this.addCollection(factory, factory.parseData(data), false);
 	}
 	
-	protected TGBrowserCollection addCollection(TGBrowserFactory factory,TGBrowserData data,boolean reload){
+	protected TGBrowserCollection addCollection(TGBrowserFactory factory, TGBrowserData data, boolean reload){
 		TGBrowserCollection collection = new TGBrowserCollection();
 		collection.setType(factory.getType());
 		collection.setData(data);

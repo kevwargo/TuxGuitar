@@ -67,7 +67,7 @@ public class NoteEffectsMenuItem extends MenuItems{
 	
 	private MenuItem fadeIn;
 	
-	public NoteEffectsMenuItem(Shell shell,Menu parent, int style) {
+	public NoteEffectsMenuItem(Shell shell, Menu parent, int style) {
 		this.noteEffectsMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}

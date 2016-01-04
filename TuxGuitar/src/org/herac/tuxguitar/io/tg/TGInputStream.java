@@ -57,7 +57,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		super();
 	}
 	
-	public void init(TGFactory factory,InputStream stream) {
+	public void init(TGFactory factory, InputStream stream) {
 		this.factory = factory;
 		this.dataInputStream = new DataInputStream(stream);
 		this.version = null;
@@ -136,7 +136,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		TGMeasureHeader lastHeader = null;
 		long headerStart = TGDuration.QUARTER_TIME;
 		for(int i = 0;i < headerCount;i++){
-			TGMeasureHeader header = readMeasureHeader(i + 1,headerStart,lastHeader);
+			TGMeasureHeader header = readMeasureHeader(i + 1, headerStart, lastHeader);
 			song.addMeasureHeader(header);
 			headerStart += header.getLength();
 			lastHeader = header;
@@ -147,13 +147,13 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		
 		//leo las pistas
 		for(int i = 0;i < trackCount;i++){
-			song.addTrack(readTrack(i + 1,song));
+			song.addTrack(readTrack(i + 1, song));
 		}
 		
 		return song;
 	}
 	
-	private TGTrack readTrack(int number,TGSong song){
+	private TGTrack readTrack(int number, TGSong song){
 		//header
 		int header = readHeader();
 		
@@ -179,7 +179,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		//leo los compases
 		TGMeasure lastMeasure = null;
 		for(int i = 0;i < measureCount;i++){
-			TGMeasure measure = readMeasure(song.getMeasureHeader(i),lastMeasure);
+			TGMeasure measure = readMeasure(song.getMeasureHeader(i), lastMeasure);
 			track.addMeasure(measure);
 			lastMeasure = measure;
 		}
@@ -206,7 +206,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		return track;
 	}
 	
-	private TGMeasureHeader readMeasureHeader(int number,long start,TGMeasureHeader lastMeasureHeader){
+	private TGMeasureHeader readMeasureHeader(int number, long start, TGMeasureHeader lastMeasureHeader){
 		int header = readHeader();
 		
 		TGMeasureHeader measureHeader = this.factory.newHeader();
@@ -253,7 +253,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		return measureHeader;
 	}
 	
-	private TGMeasure readMeasure(TGMeasureHeader measureHeader,TGMeasure lastMeasure){
+	private TGMeasure readMeasure(TGMeasureHeader measureHeader, TGMeasure lastMeasure){
 		int header = readHeader();
 		
 		TGMeasure measure = this.factory.newMeasure(measureHeader);
@@ -306,7 +306,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		channel.setTremolo(readByte());
 	}
 	
-	private void readBeats(TGMeasure measure,TGBeatData data){
+	private void readBeats(TGMeasure measure, TGBeatData data){
 		int header = BEAT_HAS_NEXT;
 		while(((header & BEAT_HAS_NEXT) != 0)){
 			header = readHeader();
@@ -314,7 +314,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		}
 	}
 	
-	private void readBeat(int header, TGMeasure measure,TGBeatData data){
+	private void readBeat(int header, TGMeasure measure, TGBeatData data){
 		TGBeat beat = this.factory.newBeat();
 		
 		beat.setStart(data.getCurrentStart());
@@ -377,7 +377,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		}
 	}
 	
-	private void readNotes(TGVoice voice,TGBeatData data){
+	private void readNotes(TGVoice voice, TGBeatData data){
 		int header = NOTE_HAS_NEXT;
 		while(((header & NOTE_HAS_NEXT) != 0)){
 			header = readHeader();
@@ -385,7 +385,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 		}
 	}
 	
-	private void readNote(int header,TGVoice voice,TGBeatData data){
+	private void readNote(int header, TGVoice voice, TGBeatData data){
 		TGNote note = this.factory.newNote();
 		
 		//leo el valor
@@ -584,7 +584,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 			int value = readByte();
 			
 			//agrego el punto
-			bend.addPoint(position,value);
+			bend.addPoint(position, value);
 		}
 		return bend;
 	}
@@ -603,7 +603,7 @@ public class TGInputStream extends TGStream implements TGInputStreamBase{
 			int value =  (readByte() - TGEffectTremoloBar.MAX_VALUE_LENGTH);
 			
 			//agrego el punto
-			tremoloBar.addPoint(position,value);
+			tremoloBar.addPoint(position, value);
 		}
 		return tremoloBar;
 	}

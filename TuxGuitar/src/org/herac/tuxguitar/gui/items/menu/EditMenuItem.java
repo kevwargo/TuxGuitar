@@ -39,7 +39,7 @@ public class EditMenuItem extends MenuItems{
 	private MenuItem voice1;
 	private MenuItem voice2;
 	
-	public EditMenuItem(Shell shell,Menu parent, int style) {
+	public EditMenuItem(Shell shell, Menu parent, int style) {
 		this.editMenuItem = new MenuItem(parent, style);
 		this.menu = new Menu(shell, SWT.DROP_DOWN);
 	}
