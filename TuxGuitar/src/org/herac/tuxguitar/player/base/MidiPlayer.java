@@ -12,6 +12,7 @@ import org.herac.tuxguitar.song.models.TGNote;
 import org.herac.tuxguitar.song.models.TGString;
 import org.herac.tuxguitar.song.models.TGTrack;
 import org.herac.tuxguitar.util.TGLock;
+import org.herac.tuxguitar.util.TGLogger;
 
 public class MidiPlayer {
 
@@ -164,7 +165,7 @@ public class MidiPlayer {
 	 */
 	public synchronized void play() throws MidiPlayerException {
 		try {
-			final boolean notifyStarted = (!this.isRunning());
+			boolean notifyStarted = !this.isRunning();
 			this.setStarting(true);
 			this.stop();
 			this.lock.lock();
@@ -179,53 +180,7 @@ public class MidiPlayer {
 			this.changeTickPosition();
 			this.setRunning(true);
 			this.getSequencer().start();
-			new Thread(new Runnable() {
-				public synchronized void run() {
-					try {
-						MidiPlayer.this.lock.lock();
-
-						MidiPlayer.this.setStarting(false);
-
-						if ( notifyStarted ) {
-							MidiPlayer.this.notifyStarted();
-						}
-
-						MidiPlayer.this.tickLength = getSequencer().getTickLength();
-						MidiPlayer.this.tickPosition = getSequencer().getTickPosition();
-
-						Object sequencerLock = new Object();
-						while (getSequencer().isRunning() && isRunning()) {
-							synchronized(sequencerLock) {
-								if (isChangeTickPosition()) {
-									changeTickPosition();
-								}
-								MidiPlayer.this.tickPosition = getSequencer().getTickPosition();
-
-								sequencerLock.wait( TIMER_DELAY );
-							}
-						}
-
-						//FINISH
-						if (isRunning()) {
-							if (MidiPlayer.this.tickPosition >= (MidiPlayer.this.tickLength - (TGDuration.QUARTER_TIME / 2) )) {
-								finish();
-							} else {
-								stop(isPaused());
-							}
-						}
-
-						if ( !isRunning() ) {
-							MidiPlayer.this.notifyStopped();
-						}
-					} catch (Throwable throwable) {
-						setStarting(false);
-						reset();
-						throwable.printStackTrace();
-					} finally {
-						MidiPlayer.this.lock.unlock();
-					}
-				}
-			}).start();
+			new MidiPlayerThread(this, notifyStarted, false).start();
 		} catch (Throwable throwable) {
 			this.setStarting(false);
 			this.reset();
@@ -831,6 +786,7 @@ public class MidiPlayer {
 	}
 
 	public void notifyStarted() {
+		TGLogger.log("notify started()");
 		Iterator it = this.listeners.iterator();
 		while ( it.hasNext() ) {
 			MidiPlayerListener listener = (MidiPlayerListener) it.next();
@@ -853,4 +809,65 @@ public class MidiPlayer {
 			listener.notifyLoop();
 		}
 	}
+
+
+	private class MidiPlayerThread extends Thread {
+
+		private MidiPlayer player;
+		private boolean notifyStarted;
+		private boolean countdown;
+
+
+		public MidiPlayerThread(MidiPlayer player, boolean notifyStarted, boolean countdown) {
+			super();
+			this.player = player;
+			this.notifyStarted = notifyStarted;
+			this.countdown = countdown;
+			TGLogger.log(notifyStarted ? "true" : "false");
+		}
+
+		public void run() {
+			try {
+				player.lock.lock();
+
+				player.setStarting(false);
+
+				if (this.notifyStarted) {
+					player.notifyStarted();
+				}
+
+				player.tickLength = player.getSequencer().getTickLength();
+				player.tickPosition = player.getSequencer().getTickPosition();
+
+				while (player.getSequencer().isRunning() && player.isRunning()) {
+					if (player.isChangeTickPosition()) {
+						player.changeTickPosition();
+					}
+					player.tickPosition = player.getSequencer().getTickPosition();
+					Thread.sleep(TIMER_DELAY);
+				}
+
+				//FINISH
+				if (player.isRunning()) {
+					if (player.tickPosition >= (player.tickLength - (TGDuration.QUARTER_TIME / 2) )) {
+						player.finish();
+					} else {
+						player.stop(player.isPaused());
+					}
+				}
+
+				if (!player.isRunning()) {
+					player.notifyStopped();
+				}
+			} catch (Throwable throwable) {
+				player.setStarting(false);
+				player.reset();
+				throwable.printStackTrace();
+			} finally {
+				player.lock.unlock();
+			}
+		}
+
+	}
+
 }
