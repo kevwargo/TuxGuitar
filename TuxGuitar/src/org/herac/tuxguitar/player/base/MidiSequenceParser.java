@@ -18,12 +18,14 @@ import org.herac.tuxguitar.song.models.TGNote;
 import org.herac.tuxguitar.song.models.TGString;
 import org.herac.tuxguitar.song.models.TGStroke;
 import org.herac.tuxguitar.song.models.TGTempo;
+import org.herac.tuxguitar.song.models.TGTimeSignature;
 import org.herac.tuxguitar.song.models.TGTrack;
 import org.herac.tuxguitar.song.models.TGVelocities;
 import org.herac.tuxguitar.song.models.TGVoice;
 import org.herac.tuxguitar.song.models.effects.TGEffectBend;
 import org.herac.tuxguitar.song.models.effects.TGEffectHarmonic;
 import org.herac.tuxguitar.song.models.effects.TGEffectTremoloBar;
+import org.herac.tuxguitar.util.TGLogger;
 
 /**
  * @author julian
@@ -62,6 +64,8 @@ public class MidiSequenceParser {
 	 * asignando este flag, es posible crear el primer tick en cero.
 	 */
 	public static final int ADD_FIRST_TICK_MOVE = 0x08;
+
+	public static final int COUNTDOWN_FLAG = 0x10;
 
 	public static final int DEFAULT_PLAY_FLAGS = (ADD_METRONOME);
 
@@ -154,20 +158,30 @@ public class MidiSequenceParser {
 
 		addBend(sequence, track.getNumber(), TGDuration.QUARTER_TIME, DEFAULT_BEND, track.getChannel().getChannel());
 		makeChannel(sequence, track.getChannel(), track.getNumber());
+		long countdownLength = 0;
+		if ((this.flags & COUNTDOWN_FLAG) != 0) {
+			TGTimeSignature time = track.getMeasure(controller.getIndex()).getHeader().getTimeSignature();
+			countdownLength = time.getDenominator().getTime() * time.getNumerator();
+			if (track.getNumber() == 1) {
+				addMetronome(sequence, track.getMeasure(controller.getIndex()).getHeader(), controller.getRepeatMove());
+			}
+		}
 		while (!controller.finished()) {
 			TGMeasure measure = track.getMeasure(controller.getIndex());
 			int index = controller.getIndex();
-			long move = controller.getRepeatMove();
+			long move = controller.getRepeatMove() + countdownLength;
 			controller.process();
 			if (controller.shouldPlay()) {
 				if (track.getNumber() == 1) {
 					addTimeSignature(sequence, measure, previous, move);
 					addTempo(sequence, measure, previous, move);
-					addMetronome(sequence, measure.getHeader(), move);
+					{
+						addMetronome(sequence, measure.getHeader(), move);
+					}
 				}
 				//agrego los pulsos
 				makeBeats(sequence, track, measure, index, move);
-
+				TGLogger.log("move: " + move);
 				previous = measure;
 			}
 		}
@@ -466,16 +480,14 @@ public class MidiSequenceParser {
 		return ((velocity > 127)?127:velocity);
 	}
 
-	public void addMetronome(MidiSequenceHandler sequence, TGMeasureHeader header, long startMove) {
-		if ( (this.flags & ADD_METRONOME) != 0) {
-
-			long start = (startMove + header.getStart());
-			long length = header.getTimeSignature().getDenominator().getTime();
-			for (int i = 1; i <= header.getTimeSignature().getNumerator();i ++) {
-				makeNote(sequence, getMetronomeTrack(), DEFAULT_METRONOME_KEY, start, length, TGVelocities.DEFAULT, 9);
-				start += length;
-			}
+	public long addMetronome(MidiSequenceHandler sequence, TGMeasureHeader header, long startMove) {
+		long start = (startMove + header.getStart());
+		long length = header.getTimeSignature().getDenominator().getTime();
+		for (int i = 1; i <= header.getTimeSignature().getNumerator();i ++) {
+			makeNote(sequence, getMetronomeTrack(), DEFAULT_METRONOME_KEY, start, length, TGVelocities.DEFAULT, 9);
+			start += length;
 		}
+		return start;
 	}
 
 	public void addDefaultMessages(MidiSequenceHandler sequence) {

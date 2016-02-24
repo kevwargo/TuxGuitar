@@ -158,12 +158,16 @@ public class MidiPlayer {
 		this.stop(true);
 	}
 
+	public void play() throws MidiPlayerException {
+		this.play(true);
+	}
+
 	/**
 	 * Inicia la reproduccion
 	 * @throws MidiPlayerException
 	 * @throws MidiUnavailableException
 	 */
-	public synchronized void play() throws MidiPlayerException {
+	public synchronized void play(boolean countdown) throws MidiPlayerException {
 		try {
 			boolean notifyStarted = !this.isRunning();
 			this.setStarting(true);
@@ -172,7 +176,7 @@ public class MidiPlayer {
 			this.checkDevices();
 			this.updateLoop( true );
 			this.systemReset();
-			this.addSequence();
+			this.addSequence(countdown);
 			this.updatePrograms();
 			this.updateControllers();
 			this.updateDefaultControllers();
@@ -197,7 +201,7 @@ public class MidiPlayer {
 				this.reset();
 				this.getMode().notifyLoop();
 				this.notifyLoop();
-				this.play();
+				this.play(false);
 				return;
 			}
 			this.reset();
@@ -347,9 +351,13 @@ public class MidiPlayer {
 	 * Agrega la Secuencia
 	 * @throws MidiUnavailableException
 	 */
-	public void addSequence() {
+	public void addSequence(boolean countdown) {
 		try {
-			MidiSequenceParser parser = new MidiSequenceParser(this.songManager, MidiSequenceParser.DEFAULT_PLAY_FLAGS, getMode().getCurrentPercent(), 0);
+			MidiSequenceParser parser = new MidiSequenceParser(
+					this.songManager,
+					MidiSequenceParser.DEFAULT_PLAY_FLAGS | (countdown ? MidiSequenceParser.COUNTDOWN_FLAG : 0),
+					getMode().getCurrentPercent(),
+					0);
 			MidiSequenceHandler sequence = getSequencer().createSequence(this.songManager.getSong().countTracks() + 2);
 			parser.setSHeader( getLoopSHeader() );
 			parser.setEHeader( getLoopEHeader() );
@@ -786,7 +794,7 @@ public class MidiPlayer {
 	}
 
 	public void notifyStarted() {
-		TGLogger.log("notify started()");
+		// TGLogger.log("notify started()");
 		Iterator it = this.listeners.iterator();
 		while ( it.hasNext() ) {
 			MidiPlayerListener listener = (MidiPlayerListener) it.next();
@@ -823,7 +831,7 @@ public class MidiPlayer {
 			this.player = player;
 			this.notifyStarted = notifyStarted;
 			this.countdown = countdown;
-			TGLogger.log(notifyStarted ? "true" : "false");
+			// TGLogger.log(notifyStarted ? "true" : "false");
 		}
 
 		public void run() {
